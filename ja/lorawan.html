@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | NoliLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <meta name="description" content="Connect your Loko GPS tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking." />
+  <link rel="canonical" href="https://nolilab.com/lorawan.html" />
+  <link rel="alternate" hreflang="en" href="https://nolilab.com/lorawan.html" />
+  <link rel="alternate" hreflang="ja" href="https://nolilab.com/ja/lorawan.html" />
+  <link rel="alternate" hreflang="es" href="https://nolilab.com/es/lorawan.html" />
+  <link rel="alternate" hreflang="ru" href="https://nolilab.com/ru/lorawan.html" />
+  <link rel="alternate" hreflang="zh" href="https://nolilab.com/zh/lorawan.html" />
+  <link rel="alternate" hreflang="x-default" href="https://nolilab.com/lorawan.html" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | NoliLab" />
+  <meta property="og:description" content="Connect your Loko GPS tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking." />
+  <meta property="og:url" content="https://nolilab.com/lorawan.html" />
+  <meta property="og:image" content="https://nolilab.com/images/optimized/loco_Red_transparent.png" />
+  <meta property="og:site_name" content="NoliLab" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | NoliLab" />
+  <meta name="twitter:description" content="Connect your Loko GPS tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking." />
+  <meta name="twitter:image" content="https://nolilab.com/images/optimized/loco_Red_transparent.png" />
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    /* Header Navigation */
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: var(--spacing-xs);
+      align-items: center;
+      margin-left: var(--spacing-sm);
+      flex-shrink: 0;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .social-icon:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-secondary);
+      transform: translateY(-1px);
+    }
+
+    .social-icon:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .social-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .social-icon i {
+      font-size: 16px;
+    }
+
+    /* Main Content */
+    .lorawan-container {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-primary);
+    }
+
+    .lorawan-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+      padding: 0 var(--spacing-md);
+    }
+
+    .lorawan-header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-md);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .lorawan-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .lorawan-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+
+    .setup-step {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .step-number {
+      background: var(--accent);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .step-description {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .step-description ul {
+      margin: var(--spacing-sm) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .step-description li {
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .step-image {
+      width: 100%;
+      border-radius: var(--radius-md);
+      margin-top: var(--spacing-md);
+      box-shadow: var(--shadow-md);
+    }
+
+    .note {
+      background: rgba(35, 134, 54, 0.1);
+      border-left: 3px solid var(--accent);
+      padding: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .note-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .note-content {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px 1.5rem 1.5rem;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .social-icons {
+        display: none;
+      }
+
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .lorawan-header h1 {
+        font-size: 2rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* Language Selector */
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--accent);
+    }
+
+    .language-btn .fa-globe {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .current-lang {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: background 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+    }
+
+    .lang-code {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .lang-name {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 1024px) {
+      .language-selector {
+        position: static;
+      }
+
+      .language-dropdown {
+        position: fixed;
+        top: auto;
+        right: 1rem;
+        left: 1rem;
+        bottom: 1rem;
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <a href="../nolilab.html" class="logo">nolilab</a>
+      <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+           <a href="./index.html#shop" class="nav-link">Shop</a>
+              <a href="./specifications.html" class="nav-link">Specs</a>
+        <a href="./software.html" class="nav-link">Software</a>
+        <a href="./setup-guides.html" class="nav-link">Setup Guides</a>
+        <a href="./lorawan.html" class="nav-link">LoRaWAN</a>
+        <a href="./index.html#faq" class="nav-link">FAQ</a>
+        <a href="./blog.html" class="nav-link">Blog</a>
+        <a href="./firmware.html" class="nav-link">Firmware</a>
+        <a href="./gps.html" class="nav-link">GPS & LoRa</a>
+        <a href="./contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="language-selector" style="flex-shrink: 0; position: relative;">
+        <button class="language-btn" aria-label="Select language">
+          <i class="fas fa-globe"></i>
+          <span class="current-lang">EN</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="language-dropdown">
+          <a href="#" class="language-option" data-lang="en">
+            <span class="lang-code">EN</span>
+            <span class="lang-name">English</span>
+          </a>
+          <a href="#" class="language-option" data-lang="ru">
+            <span class="lang-code">RU</span>
+            <span class="lang-name">Русский</span>
+          </a>
+          <a href="#" class="language-option" data-lang="ja">
+            <span class="lang-code">JA</span>
+            <span class="lang-name">日本語</span>
+          </a>
+          <a href="#" class="language-option" data-lang="zh">
+            <span class="lang-code">ZH</span>
+            <span class="lang-name">中文</span>
+          </a>
+          <a href="#" class="language-option" data-lang="fr">
+            <span class="lang-code">FR</span>
+            <span class="lang-name">Français</span>
+          </a>
+          <a href="#" class="language-option" data-lang="es">
+            <span class="lang-code">ES</span>
+            <span class="lang-name">Español</span>
+          </a>
+        </div>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="lorawan-container">
+    <div class="lorawan-header">
+      <h1>LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration</h1>
+      <p class="lorawan-subtitle">Connect your Loko GPS tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking.</p>
+    </div>
+
+    <div class="lorawan-content">
+      <!-- Steps 1-7: Initial Setup -->
+      <div class="setup-step">
+        <div class="step-header">
+          <div class="step-number">1-7</div>
+          <h2 class="step-title">Initial Gateway Setup</h2>
+        </div>
+        <div class="step-description">
+          <p><strong>Step 1:</strong> Create an account on The Things Network website.</p>
+          <p><strong>Step 2:</strong> Navigate to the Console via the Profile Icon.</p>
+          <p><strong>Step 3:</strong> Select the appropriate region for your location.</p>
+          <p><strong>Step 4:</strong> Set up your gateway according to the manufacturer's specifications.</p>
+          <p><strong>Step 5:</strong> Register your gateway with the correct frequency plan for your region.</p>
+          <p><strong>Step 6:</strong> Use the Gateway ID from your manufacturer setup.</p>
+          <p><strong>Step 7:</strong> Complete the gateway registration process.</p>
+        </div>
+        <div class="note">
+          <div class="note-title">Important:</div>
+          <div class="note-content">Make sure to choose the appropriate frequency plan according to your region to ensure proper connectivity.</div>
+        </div>
+      </div>
+
+      <!-- Step 8: Create Application -->
+      <div class="setup-step">
+        <div class="step-header">
+          <div class="step-number">8</div>
+          <h2 class="step-title">Create Application</h2>
+        </div>
+        <div class="step-description">
+          <p>Click on the "Create Application" button and give a Name/ID to your application.</p>
+        </div>
+        <img src="https://nolilab.com/cdn/shop/files/photo_2024-05-29_03.01.10.jpg?v=1716937292&width=1500" alt="Create Application" class="step-image">
+      </div>
+
+      <!-- Step 9: Register End Device -->
+      <div class="setup-step">
+        <div class="step-header">
+          <div class="step-number">9</div>
+          <h2 class="step-title">Register End Device Manually</h2>
+        </div>
+        <div class="step-description">
+          <p>Register an end device manually. For the JoinEUI you can put anything. It corresponds to APP-EUI settings on the Loko Configuration Tools app.</p>
+        </div>
+        <img src="https://nolilab.com/cdn/shop/files/photo_2024-05-26_19.30.30.jpg?v=1716737493&width=1500" alt="Register End Device" class="step-image">
+      </div>
+
+      <!-- Step 10: Generate Device Credentials -->
+      <div class="setup-step">
+        <div class="step-header">
+          <div class="step-number">10</div>
+          <h2 class="step-title">Generate Device Credentials</h2>
+        </div>
+        <div class="step-description">
+          <p>Click on the Confirm button. Then more settings will appear. You can just press the generate buttons in order to create Dev-EUI and App-Key.</p>
+        </div>
+        <img src="https://nolilab.com/cdn/shop/files/photo_2024-05-26_19.33.14.jpg?v=1716737617&width=1500" alt="Generate Credentials" class="step-image">
+      </div>
+
+      <!-- Step 11: Retrieve Device Parameters -->
+      <div class="setup-step">
+        <div class="step-header">
+          <div class="step-number">11</div>
+          <h2 class="step-title">Retrieve Activation Parameters</h2>
+        </div>
+        <div class="step-description">
+          <p>Retrieve device parameters from the overview. You'll need these activation parameters for configuring your Loko Air unit:</p>
+          <ul>
+            <li>AppEUI (JoinEUI)</li>
+            <li>DevEUI</li>
+            <li>AppKey</li>
+          </ul>
+        </div>
+        <img src="https://nolilab.com/cdn/shop/files/photo_2024-05-29_02.52.22.jpg?v=1716936769&width=1500" alt="Device Parameters" class="step-image">
+      </div>
+
+      <!-- Step 12: Configure Payload Formatter -->
+      <div class="setup-step">
+        <div class="step-header">
+          <div class="step-number">12</div>
+          <h2 class="step-title">Configure Payload Formatter</h2>
+        </div>
+        <div class="step-description">
+          <p>Go to payload formatters and choose CayenneLPP for the uplink.</p>
+        </div>
+        <img src="https://nolilab.com/cdn/shop/files/photo_2024-05-26_19.35.39.jpg?v=1716737760&width=1500" alt="Payload Formatter Selection" class="step-image">
+        <img src="https://nolilab.com/cdn/shop/files/photo_2024-05-29_02.56.49.jpg?v=1716937063&width=1500" alt="CayenneLPP Configuration" class="step-image">
+      </div>
+
+      <!-- Steps 13-15: Configure Loko Device -->
+      <div class="setup-step">
+        <div class="step-header">
+          <div class="step-number">13-15</div>
+          <h2 class="step-title">Configure Loko Device</h2>
+        </div>
+        <div class="step-description">
+          <p><strong>Step 13:</strong> Open the Loko Configuration Tool app on your device.</p>
+          <p><strong>Step 14:</strong> Read the current settings, then enable LoRaWAN feature.</p>
+          <p><strong>Step 15:</strong> Fill in the three required parameters from TTN's end device activation information:</p>
+          <ul>
+            <li>AppEUI (from TTN)</li>
+            <li>DevEUI (from TTN)</li>
+            <li>AppKey (from TTN)</li>
+          </ul>
+          <p>Press send to upload the configuration, then restart your Loko Air unit.</p>
+        </div>
+        <div class="note">
+          <div class="note-title">Note:</div>
+          <div class="note-content">Make sure to copy the parameters exactly as they appear in The Things Network console to avoid connection issues.</div>
+        </div>
+      </div>
+
+      <!-- Step 16: Monitor Device -->
+      <div class="setup-step">
+        <div class="step-header">
+          <div class="step-number">16</div>
+          <h2 class="step-title">Monitor Live Data</h2>
+        </div>
+        <div class="step-description">
+          <p>Monitor the End Device page on The Things Network to view live data and the Loko Air unit's location on the map once the gateway receives information.</p>
+          <p>You should see data transmission and be able to track your device's location in real-time.</p>
+        </div>
+        <img src="https://nolilab.com/cdn/shop/files/photo_2024-05-29_02.59.11.jpg?v=1716937175&width=1500" alt="Live Data Monitoring" class="step-image">
+      </div>
+
+      <div class="note">
+        <div class="note-title">Need Help?</div>
+        <div class="note-content">
+          If you encounter any issues during setup, please check our <a href="./index.html#faq" style="color: var(--accent);">FAQ section</a> or contact our support team. We're here to help you get connected!
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <a href="./index.html" class="footer-logo">nolilab</a>
+      <div class="footer-links">
+        <a href="./index.html" class="footer-link">Home</a>
+        <a href="./index.html#shop" class="footer-link">Shop</a>
+        <a href="./software.html" class="footer-link">Software</a>
+        <a href="./setup-guides.html" class="footer-link">Setup Guides</a>
+        <a href="./lorawan.html" class="footer-link">LoRaWAN</a>
+        <a href="./index.html#faq" class="footer-link">FAQ</a>
+        <a href="./blog.html" class="footer-link">Blog</a>
+        <a href="./firmware.html" class="footer-link">Firmware</a>
+        <a href="./gps.html" class="footer-link">GPS & LoRa</a>
+        <a href="./contact.html" class="footer-link">Contact</a>
+        <a href="./privacy.html" class="footer-link">Privacy</a>
+       </div>
+       <div class="social-icons" style="display: flex; gap: var(--spacing-md); justify-content: center; margin: var(--spacing-lg) 0;">
+         <a href="https://twitter.com/nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+           <i class="fab fa-twitter"></i>
+         </a>
+         <a href="https://instagram.com/nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+           <i class="fab fa-instagram"></i>
+         </a>
+         <a href="https://linkedin.com/company/nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+           <i class="fab fa-linkedin"></i>
+         </a>
+         <a href="https://youtube.com/@nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+           <i class="fab fa-youtube"></i>
+         </a>
+       </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+      });
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (document.body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // Set light theme
+    document.documentElement.setAttribute('data-theme', 'light');
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const langCode = option.dataset.lang;
+        const langText = option.querySelector('.lang-code').textContent;
+
+        // Update current language display
+        document.querySelector('.current-lang').textContent = langText;
+
+        // Store selected language
+        localStorage.setItem('selectedLanguage', langCode);
+
+        // Here you would typically redirect to the language-specific version
+        // For now, just log it
+        console.log('Selected language:', langCode);
+
+        // You can add language switching logic here
+        // For example: window.location.href = `/${langCode}/index.html`;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      document.querySelector('.current-lang').textContent = langMap[savedLang] || 'EN';
+    }
+  </script>
+</body>
+</html>

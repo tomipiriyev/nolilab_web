@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Loko GPS Tracker Technical Specifications | NoliLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <meta name="description" content="Complete technical specifications for Loko GPS tracker. Dimensions: 28.5x20.5x5.9mm, 20km LoRa range, 12-month battery, GPS/GLONASS/Galileo/BeiDou support. No subscription required." />
+  <link rel="canonical" href="https://nolilab.com/specifications.html" />
+  <link rel="alternate" hreflang="en" href="https://nolilab.com/specifications.html" />
+  <link rel="alternate" hreflang="ja" href="https://nolilab.com/ja/specifications.html" />
+  <link rel="alternate" hreflang="es" href="https://nolilab.com/es/specifications.html" />
+  <link rel="alternate" hreflang="ru" href="https://nolilab.com/ru/specifications.html" />
+  <link rel="alternate" hreflang="zh" href="https://nolilab.com/zh/specifications.html" />
+  <link rel="alternate" hreflang="x-default" href="https://nolilab.com/specifications.html" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Loko GPS Tracker Technical Specifications | NoliLab" />
+  <meta property="og:description" content="Complete technical specifications for Loko GPS tracker. Dimensions: 28.5x20.5x5.9mm, 20km LoRa range, 12-month battery, GPS/GLONASS/Galileo/BeiDou support. No subscription required." />
+  <meta property="og:url" content="https://nolilab.com/specifications.html" />
+  <meta property="og:image" content="https://nolilab.com/images/optimized/loco_Red_transparent.png" />
+  <meta property="og:site_name" content="NoliLab" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Loko GPS Tracker Technical Specifications | NoliLab" />
+  <meta name="twitter:description" content="Complete technical specifications for Loko GPS tracker. Dimensions: 28.5x20.5x5.9mm, 20km LoRa range, 12-month battery, GPS/GLONASS/Galileo/BeiDou support. No subscription required." />
+  <meta name="twitter:image" content="https://nolilab.com/images/optimized/loco_Red_transparent.png" />
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #0d1117;
+      --text-secondary: #656d76;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --text-primary: #f0f6fc;
+      --text-secondary: #8b949e;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #30363d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-weight: 400;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    /* Header Navigation */
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: var(--spacing-xs);
+      align-items: center;
+      margin-left: var(--spacing-sm);
+      flex-shrink: 0;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .social-icon:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-secondary);
+      transform: translateY(-1px);
+    }
+
+    .social-icon i {
+      font-size: 16px;
+    }
+
+    /* Specifications Section */
+    .specs-main {
+      padding: 2rem 0;
+    }
+
+    .specs-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 0 var(--spacing-md);
+    }
+
+    .specs-header h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .specs-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .specs-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+
+    .spec-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .spec-section h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .spec-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+    }
+
+    .spec-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+
+    .spec-item:last-child {
+      border-bottom: none;
+    }
+
+    .spec-label {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .spec-value {
+      color: var(--text-primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* Comparison Table */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .comparison-table thead {
+      background: var(--bg-primary);
+    }
+
+    .comparison-table th {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .comparison-table td {
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .comparison-table tbody tr:hover {
+      background: var(--bg-primary);
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      padding: 1.5rem 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-copyright {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-family: var(--font-mono);
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px 1.5rem 1.5rem;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .social-icons {
+        display: none;
+      }
+
+      .specs-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .specs-main {
+        padding: 1.5rem 0;
+      }
+
+      .specs-header {
+        margin-bottom: 1.5rem;
+      }
+
+      .spec-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .spec-section h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .spec-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+
+      .spec-card {
+        padding: 0.875rem;
+      }
+
+      .comparison-table {
+        font-size: 0.75rem;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 0.4rem 0.5rem;
+      }
+    }
+
+    /* Language Selector */
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--accent);
+    }
+
+    .language-btn .fa-globe {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .current-lang {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: background 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+    }
+
+    .lang-code {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .lang-name {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 1024px) {
+      .language-selector {
+        position: static;
+      }
+
+      .language-dropdown {
+        position: fixed;
+        top: auto;
+        right: 1rem;
+        left: 1rem;
+        bottom: 1rem;
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+       <a href="../nolilab.html" class="logo">nolilab</a>
+       <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+         <a href="./index.html#shop" class="nav-link">Shop</a>
+            <a href="./specifications.html" class="nav-link">Specs</a>
+         <a href="./software.html" class="nav-link">Software</a>
+         <a href="./setup-guides.html" class="nav-link">Setup Guides</a>
+         <a href="./lorawan.html" class="nav-link">LoRaWAN</a>
+         <a href="#faq" class="nav-link">FAQ</a>
+         <a href="./blog.html" class="nav-link">Blog</a>
+         <a href="./firmware.html" class="nav-link">Firmware</a>
+         <a href="./gps.html" class="nav-link">GPS & LoRa</a>
+         <a href="./contact.html" class="nav-link">Contact</a>
+       </div>
+       <div class="language-selector" style="flex-shrink: 0; position: relative;">
+        <button class="language-btn" aria-label="Select language">
+          <i class="fas fa-globe"></i>
+          <span class="current-lang">EN</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="language-dropdown">
+          <a href="#" class="language-option" data-lang="en">
+            <span class="lang-code">EN</span>
+            <span class="lang-name">English</span>
+          </a>
+          <a href="#" class="language-option" data-lang="ru">
+            <span class="lang-code">RU</span>
+            <span class="lang-name">Русский</span>
+          </a>
+          <a href="#" class="language-option" data-lang="ja">
+            <span class="lang-code">JA</span>
+            <span class="lang-name">日本語</span>
+          </a>
+          <a href="#" class="language-option" data-lang="zh">
+            <span class="lang-code">ZH</span>
+            <span class="lang-name">中文</span>
+          </a>
+          <a href="#" class="language-option" data-lang="fr">
+            <span class="lang-code">FR</span>
+            <span class="lang-name">Français</span>
+          </a>
+          <a href="#" class="language-option" data-lang="es">
+            <span class="lang-code">ES</span>
+            <span class="lang-name">Español</span>
+          </a>
+        </div>
+       </div>
+       <button class="mobile-menu-toggle" aria-label="Toggle menu">
+         <span></span>
+         <span></span>
+         <span></span>
+       </button>
+      </div>
+    </header>
+
+  <main class="specs-main">
+    <div class="container">
+      <div class="specs-header">
+        <h1>Loko GPS Tracker Technical Specifications</h1>
+        <p class="specs-subtitle">Comprehensive hardware and software specifications for the world's smallest offline GPS tracker using LoRa P2P technology. No subscription required.</p>
+      </div>
+
+      <div class="specs-content">
+
+        <!-- Key Features -->
+        <section class="spec-section">
+          <h2>Key Features</h2>
+          <div class="spec-grid">
+            <div class="spec-card">
+              <h3>Core Features</h3>
+              <div class="spec-item">
+                <span class="spec-label">Subscription Model</span>
+                <span class="spec-value">None - P2P LoRa</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">LoRa Range</span>
+                <span class="spec-value">+20 km LOS</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Battery Life</span>
+                <span class="spec-value">Up to 12 months</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Multi-Tracking</span>
+                <span class="spec-value">Up to 30 trackers</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Data Logger</span>
+                <span class="spec-value">6,500 GPS points</span>
+              </div>
+            </div>
+
+            <div class="spec-card">
+              <h3>Software</h3>
+              <div class="spec-item">
+                <span class="spec-label">Mobile App</span>
+                <span class="spec-value">iOS, Android, LineageOS</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Offline Maps</span>
+                <span class="spec-value">Full support</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Geofencing</span>
+                <span class="spec-value">Yes</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Firmware</span>
+                <span class="spec-value">Open-source</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">API Access</span>
+                <span class="spec-value">Available</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Communication -->
+        <section class="spec-section">
+          <h2>Communication</h2>
+          <div class="spec-grid">
+            <div class="spec-card">
+              <h3>LoRa Parameters</h3>
+              <div class="spec-item">
+                <span class="spec-label">Protocol</span>
+                <span class="spec-value">LoRa P2P | LoRaWAN</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Frequency</span>
+                <span class="spec-value">868 MHz / 915 MHz</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Max Output Power</span>
+                <span class="spec-value">22 dBm</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Sensitivity</span>
+                <span class="spec-value">-137 dBm</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Spreading Factor</span>
+                <span class="spec-value">SF7 - SF12</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Bandwidth</span>
+                <span class="spec-value">125 kHz / 250 kHz</span>
+              </div>
+            </div>
+
+            <div class="spec-card">
+              <h3>Update Settings</h3>
+              <div class="spec-item">
+                <span class="spec-label">Update Rate</span>
+                <span class="spec-value">1 sec - 24 hours</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Configuration</span>
+                <span class="spec-value">Fully configurable</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">LoRaWAN Class</span>
+                <span class="spec-value">Class A</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Data Rate</span>
+                <span class="spec-value">0.3 - 50 kbps</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GNSS & Positioning -->
+        <section class="spec-section">
+          <h2>GNSS & Positioning</h2>
+          <div class="spec-grid">
+            <div class="spec-card">
+              <h3>Satellite Systems</h3>
+              <div class="spec-item">
+                <span class="spec-label">Constellations</span>
+                <span class="spec-value">GPS, GLONASS, Galileo, BeiDou</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Accuracy</span>
+                <span class="spec-value">2.5m CEP</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Channels</span>
+                <span class="spec-value">72 acquisition</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Cold Start</span>
+                <span class="spec-value">&lt; 26s</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Hot Start</span>
+                <span class="spec-value">&lt; 1s</span>
+              </div>
+            </div>
+
+            <div class="spec-card">
+              <h3>Performance</h3>
+              <div class="spec-item">
+                <span class="spec-label">Tracking Sensitivity</span>
+                <span class="spec-value">-167 dBm</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Max Update Rate</span>
+                <span class="spec-value">10 Hz</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Max Altitude</span>
+                <span class="spec-value">50,000 m</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Max Velocity</span>
+                <span class="spec-value">500 m/s</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Power & Battery -->
+        <section class="spec-section">
+          <h2>Power & Battery</h2>
+          <div class="spec-grid">
+            <div class="spec-card">
+              <h3>Battery Specifications</h3>
+              <div class="spec-item">
+                <span class="spec-label">Type</span>
+                <span class="spec-value">Li-ion rechargeable</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Capacity</span>
+                <span class="spec-value">240 mAh</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Voltage</span>
+                <span class="spec-value">3.7V</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Charging Interface</span>
+                <span class="spec-value">USB-C</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Charging Time</span>
+                <span class="spec-value">~60 minutes</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Battery Life</span>
+                <span class="spec-value">30 days - 12 months</span>
+              </div>
+            </div>
+
+            <div class="spec-card">
+              <h3>Power Consumption</h3>
+              <div class="spec-item">
+                <span class="spec-label">Sleep Mode</span>
+                <span class="spec-value">&lt; 5 μA</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">GPS Active</span>
+                <span class="spec-value">~25 mA</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">LoRa TX (22dBm)</span>
+                <span class="spec-value">~120 mA</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">LoRa RX</span>
+                <span class="spec-value">~15 mA</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Physical Specifications -->
+        <section class="spec-section">
+          <h2>Physical Specifications</h2>
+          <div class="spec-grid">
+            <div class="spec-card">
+              <h3>Dimensions & Weight</h3>
+              <div class="spec-item">
+                <span class="spec-label">Dimensions (L×W×H)</span>
+                <span class="spec-value">28.5 × 20.5 × 5.9 mm</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Weight</span>
+                <span class="spec-value">14 g (0.5 oz)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Form Factor</span>
+                <span class="spec-value">Ultra-compact</span>
+              </div>
+            </div>
+
+            <div class="spec-card">
+              <h3>Environmental</h3>
+              <div class="spec-item">
+                <span class="spec-label">Operating Temp</span>
+                <span class="spec-value">-10°C to +65°C</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Storage Temp</span>
+                <span class="spec-value">-20°C to +70°C</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Humidity</span>
+                <span class="spec-value">5% - 95% RH</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Water Resistance</span>
+                <span class="spec-value">Splash resistant</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Product Comparison -->
+        <section class="spec-section">
+          <h2>Product Comparison</h2>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Loko Starter Kit</th>
+                <th>Loko Air Only</th>
+                <th>Loko Station</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Price</strong></td>
+                <td class="highlight">$59</td>
+                <td class="highlight">$149</td>
+                <td class="highlight">$99</td>
+              </tr>
+              <tr>
+                <td>GPS Tracker (Air Unit)</td>
+                <td>✓ 1x included</td>
+                <td>✓ 1x included</td>
+                <td>✗ Not included</td>
+              </tr>
+              <tr>
+                <td>Ground Station</td>
+                <td>✓ 1x included</td>
+                <td>✗ Not included</td>
+                <td>✓ 1x included</td>
+              </tr>
+              <tr>
+                <td>LoRa Range</td>
+                <td>20+ km</td>
+                <td>20+ km</td>
+                <td>20+ km</td>
+              </tr>
+              <tr>
+                <td>Battery Life (Air)</td>
+                <td>30 days - 12 months</td>
+                <td>30 days - 12 months</td>
+                <td>N/A</td>
+              </tr>
+              <tr>
+                <td>Data Logger</td>
+                <td>6,500 points</td>
+                <td>6,500 points</td>
+                <td>N/A</td>
+              </tr>
+              <tr>
+                <td>Multi-Tracking</td>
+                <td>Up to 30 trackers</td>
+                <td>Requires Ground Station</td>
+                <td>Up to 30 trackers</td>
+              </tr>
+              <tr>
+                <td>Best For</td>
+                <td>Complete setup, beginners</td>
+                <td>Expanding existing system</td>
+                <td>Base station upgrade</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Certifications & Compliance -->
+        <section class="spec-section">
+          <h2>Certifications & Compliance</h2>
+          <div class="spec-grid">
+            <div class="spec-card">
+              <h3>Regulatory</h3>
+              <div class="spec-item">
+                <span class="spec-label">CE Marking</span>
+                <span class="spec-value">Compliant</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">FCC</span>
+                <span class="spec-value">Part 15</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">RoHS</span>
+                <span class="spec-value">Compliant</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">REACH</span>
+                <span class="spec-value">Compliant</span>
+              </div>
+            </div>
+
+            <div class="spec-card">
+              <h3>Standards</h3>
+              <div class="spec-item">
+                <span class="spec-label">LoRaWAN</span>
+                <span class="spec-value">v1.0.3</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">License</span>
+                <span class="spec-value">Open-source</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Region Support</span>
+                <span class="spec-value">EU868, US915, AS923</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <a href="./index.html" class="footer-logo">nolilab</a>
+      <div class="footer-links">
+        <a href="./index.html" class="footer-link">Home</a>
+        <a href="./index.html#shop" class="footer-link">Shop</a>
+        <a href="./software.html" class="footer-link">Software</a>
+        <a href="./setup-guides.html" class="footer-link">Setup Guides</a>
+        <a href="./lorawan.html" class="footer-link">LoRaWAN</a>
+        <a href="./index.html#faq" class="footer-link">FAQ</a>
+        <a href="./blog.html" class="footer-link">Blog</a>
+        <a href="./firmware.html" class="footer-link">Firmware</a>
+        <a href="./gps.html" class="footer-link">GPS & LoRa</a>
+        <a href="./contact.html" class="footer-link">Contact</a>
+        <a href="./privacy.html" class="footer-link">Privacy</a>
+       </div>
+       <div class="social-icons" style="display: flex; gap: var(--spacing-md); justify-content: center; margin: var(--spacing-lg) 0;">
+         <a href="https://twitter.com/nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+           <i class="fab fa-twitter"></i>
+         </a>
+         <a href="https://instagram.com/nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+           <i class="fab fa-instagram"></i>
+         </a>
+         <a href="https://linkedin.com/company/nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+           <i class="fab fa-linkedin"></i>
+         </a>
+         <a href="https://youtube.com/@nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+           <i class="fab fa-youtube"></i>
+         </a>
+       </div>
+       <div class="footer-copyright">© 2025 nolilab. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+      });
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (document.body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // Set light theme
+    document.documentElement.setAttribute('data-theme', 'light');
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const langCode = option.dataset.lang;
+        const langText = option.querySelector('.lang-code').textContent;
+
+        // Update current language display
+        document.querySelector('.current-lang').textContent = langText;
+
+        // Store selected language
+        localStorage.setItem('selectedLanguage', langCode);
+
+        // Here you would typically redirect to the language-specific version
+        // For now, just log it
+        console.log('Selected language:', langCode);
+
+        // You can add language switching logic here
+        // For example: window.location.href = `/${langCode}/index.html`;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      document.querySelector('.current-lang').textContent = langMap[savedLang] || 'EN';
+    }
+  </script>
+</body>
+</html>
