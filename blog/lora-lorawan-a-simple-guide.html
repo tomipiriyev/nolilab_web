@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoRa & LoRaWAN: A Simple Guide | nolilab Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta name="description" content="A wireless communication technology designed for long-range, low-power, and reliable data transmission with strong interference resistance.">
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content h4 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: var(--spacing-md) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .article-content img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-md);
+      margin: var(--spacing-lg) 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .article-content code {
+      background: var(--bg-secondary);
+      padding: 0.2em 0.4em;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    .references {
+      margin-top: var(--spacing-xl);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--border);
+    }
+
+    .references h3 {
+      font-size: 1.125rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .references ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .references li {
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .references a {
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .references a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <a href="../nolilab-redesigned.html" class="logo">nolilab</a>
+      <div class="nav-links">
+        <a href="../nolilab-redesigned.html#shop" class="nav-link">Shop</a>
+        <a href="../software.html" class="nav-link">Software</a>
+        <a href="../blog.html" class="nav-link">Blog</a>
+        <a href="../nolilab-redesigned.html#faq" class="nav-link">FAQ</a>
+      </div>
+    </div>
+  </header>
+
+  <article>
+    <a href="../blog.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Back to Blog
+    </a>
+
+    <div class="article-header">
+      <div class="article-meta">
+        <span><i class="far fa-calendar"></i> March 26, 2025</span>
+        <span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+      </div>
+      <h1 class="article-title">LoRa & LoRaWAN: A Simple Guide</h1>
+    </div>
+
+    <img src="https://nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&width=1920" alt="LoRa Spreading Factor" class="article-image">
+
+    <div class="article-content">
+      <h2>Radio Interface LoRa / LoraWAN. Modulation</h2>
+      <p>LoRa (Long Range) represents a wireless communication technology designed for long-range, low-power, and reliable data transmission with strong interference resistance, making it suitable for IoT applications and low-power wide-area networks.</p>
+
+      <p><strong>AM</strong> - Amplitude Modulation<br>
+      <strong>FM</strong> - Frequency Modulation</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Amfm3-en-de.gif?v=1743011265" alt="AM/FM Modulation Animation">
+
+      <p><strong>Modulation:</strong> The process involves encoding information onto a carrier signal by varying its frequency, amplitude, or phase, allowing the transmission of useful signals over a distance.</p>
+
+      <p><strong>Amplitude Modulation (AM):</strong> The amplitude of the carrier signal is varied in proportion to the information signal while the frequency and phase remain constant.</p>
+
+      <p><strong>Frequency Modulation (FM):</strong> The frequency of the carrier signal is varied in proportion to the information signal while its amplitude remains constant.</p>
+
+      <p>LoRa employs a combined modulation technique based on linear frequency modulation (chirp spread spectrum, CSS), where signal frequency continuously increases or decreases within a defined range.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora2.png?v=1743011098" alt="LoRa Modulation Diagram - Linear Frequency Modulation">
+
+      <p>LoRaWAN modulation utilizes LFM (linear frequency modulation) or CSS (chirp spread spectrum).</p>
+
+      <h2>Radio Interface Lora / LoraWAN. Modulation</h2>
+      <p>Chirp modulation in LoRa consists of irregular cycle breaks, meaning the cycle can stop at any point rather than at equal time intervals. This creates time shifts, enhancing robustness and noise resistance.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora1.png?v=1743011137" alt="LoRa Signal Chirp - Cycle Breaking and Time Shifts">
+
+      <p>LoRaWAN modulation occurs by "breaking" the cycle at intermediate points, interpreted as time shifts.</p>
+
+      <h2>Radio Interface. Spreading Factor</h2>
+      <p><strong>Spreading Factor (SF):</strong> Represents the "speed" of frequency change in LFM signals. Higher SF values indicate slower frequency changes.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sf.png?v=1743010750" alt="Spreading Factor Comparison">
+
+      <p>Changing the SF by one unit means doubling the cycle (Chirp) time. For SF=7 and 125 kHz bandwidth, the chirp duration is 1.024 milliseconds.</p>
+
+      <p>The length of the chirp affects signal noise, enhancing signal recognition at the output. This allows signal detection with lower energy and reduced RSSI levels.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/1_RdkCF2t6XsG7LA8nKLeGGg.webp?v=1743011173" alt="LoRa Signal Preamble Examples">
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Preamble-1_jpg.webp?v=1743011201" alt="LoRa Preamble Technical Diagram">
+
+      <p>The concept is simplified: <strong>Think of SF as a 'zoom lens'—higher SF 'zooms in' for longer range but sends data slower.</strong></p>
+
+      <p><strong>Key principle:</strong> Higher Spreading Factor = Longer Range but Slower Data.</p>
+
+      <h2>Data Encoding</h2>
+      <p><strong>Coding:</strong> Adding redundant (control) information to the transmitted user data to increase the probability of successful reception.</p>
+
+      <p>The level of redundancy is determined by the coderate (CR) ratio, such as 4/5, which means that for every 5 transmitted bits, 4 bits are useful data, and 1 bit is a control (redundant) bit.</p>
+
+      <p>LoRaWAN employs Coderate from 4/5 to 4/8.</p>
+
+      <p>Data transmission rates (bps) for 125 kHz channel bandwidth depend on Spreading Factor (SF) and CodeRate (CR).</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Screenshot_2025-03-26_at_19.52.36.png?v=1743011226" alt="Data Transmission Rate Chart - bps for 125 kHz Channel">
+
+      <h2>LoRa Signal Sample</h2>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Example-of-LoRa-Signal.jpg?v=1743011304" alt="Example of LoRa Signal Waveform">
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sensors-20-04034-g001-550.jpg?v=1743011334" alt="LoRa Signal Analysis">
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/maxresdefault.jpg?v=1743011354" alt="LoRa Modulation Educational Material">
+
+      <h2>The Interdependence of Data Rate and Propagation Distance</h2>
+      <p>The relationship between spreading factor, data rate, and propagation distance is fundamental to LoRa performance. Higher spreading factors enable longer range communication but at the cost of reduced data transmission rates.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm.png?v=1743011384" alt="Spreading Factor vs Data Rate and Range">
+
+      <h2>Conclusion</h2>
+      <p>LoRa and LoRaWAN technologies provide powerful solutions for long-range, low-power wireless communication. Understanding the key concepts of modulation, spreading factors, and data encoding is essential for optimizing your LoRa deployments and achieving the best balance between range, power consumption, and data throughput.</p>
+
+      <div class="references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Signal_modulation" target="_blank">Wikipedia: Signal Modulation</a></li>
+          <li><a href="https://www.researchgate.net/figure/Example-of-LoRa-Signal_fig2_348345539" target="_blank">ResearchGate: Example of LoRa Signal</a></li>
+          <li><a href="https://www.youtube.com/watch?v=yHocu_n2udI" target="_blank">YouTube: LoRa Tutorial</a></li>
+          <li><a href="https://www.researchgate.net/figure/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless_fig7_324043563" target="_blank">ResearchGate: LoRa Spreading Factor, SF, Bitrates and Time on Air</a></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <footer>
+    <div class="footer-container">
+      <a href="../nolilab-redesigned.html" class="footer-logo">nolilab</a>
+      <div class="footer-links">
+        <a href="../nolilab-redesigned.html" class="footer-link">Home</a>
+        <a href="../specifications.html" class="footer-link">Specs</a>
+        <a href="../software.html" class="footer-link">Software</a>
+        <a href="../blog.html" class="footer-link">Blog</a>
+        <a href="../nolilab-redesigned.html#faq" class="footer-link">FAQ</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

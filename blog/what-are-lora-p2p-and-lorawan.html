@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What are LoRa P2P and LoRaWAN? | nolilab Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta name="description" content="Long-range IoT communication requires technologies that enable devices to transmit data across vast distances. Learn about LoRa P2P and LoRaWAN.">
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <a href="../nolilab-redesigned.html" class="logo">nolilab</a>
+      <div class="nav-links">
+        <a href="../nolilab-redesigned.html#shop" class="nav-link">Shop</a>
+        <a href="../software.html" class="nav-link">Software</a>
+        <a href="../blog.html" class="nav-link">Blog</a>
+        <a href="../nolilab-redesigned.html#faq" class="nav-link">FAQ</a>
+      </div>
+    </div>
+  </header>
+
+  <article>
+    <a href="../blog.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Back to Blog
+    </a>
+
+    <div class="article-header">
+      <div class="article-meta">
+        <span><i class="far fa-calendar"></i> November 21, 2023</span>
+      </div>
+      <h1 class="article-title">What are LoRa P2P and LoRaWAN?</h1>
+    </div>
+
+    <img src="https://nolilab.com/cdn/shop/articles/tmp_2d771d17-142f-4ef3-90a8-b50b826612c5.png?v=1700563147&width=1920" alt="LoRa P2P and LoRaWAN" class="article-image">
+
+    <div class="article-content">
+      <h2>Introduction</h2>
+      <p>Long-range IoT communication requires technologies that enable devices to transmit data across vast distances. LoRa, LoRa P2P, and LoRaWAN are radio technologies designed to facilitate such communication, offering low-power, long-range solutions. The Loko GPS Tracker exemplifies practical application of these technologies for tracking and asset management.</p>
+
+      <h2>Understanding LoRa Technology</h2>
+      <p>LoRa functions as an RF modulation technology for low-power, wide-area networks. Its foundation rests on Chirp Spread Spectrum modulation, which delivers long-range communication, low power consumption, and robust resistance to interference. Battery-operated devices utilizing LoRa can operate for up to a decade while maintaining reliable urban and rural connectivity.</p>
+
+      <h2>LoRa P2P vs. LoRaWAN: The Basics</h2>
+      <p><strong>LoRa P2P</strong> enables direct device-to-device transmission without centralized infrastructure, supporting real-time data exchange with minimal latency. Conversely, <strong>LoRaWAN</strong> operates as an open protocol based on LoRa technology that supports large-scale networks and deep in-building communication.</p>
+
+      <p><strong>Key differences include:</strong></p>
+      <ul>
+        <li>Network structure varies (peer-to-peer versus hierarchical)</li>
+        <li>Scalability differs (smaller applications versus expansive deployments)</li>
+        <li>Use cases depend on device quantity, range requirements, and architecture preferences</li>
+      </ul>
+
+      <h2>LoRaWAN Network Components</h2>
+      <p>LoRaWAN systems comprise six essential elements:</p>
+      <ol>
+        <li><strong>End devices:</strong> Sensors and actuators transmitting/receiving data</li>
+        <li><strong>Gateways:</strong> Intermediaries receiving and transmitting LoRa RF messages</li>
+        <li><strong>Network servers:</strong> Managing parameters and ensuring message authenticity</li>
+        <li><strong>Application servers:</strong> Processing sensor data and generating device payloads</li>
+        <li><strong>Join servers:</strong> Managing device activation procedures</li>
+        <li><strong>Device classes (A, B, C):</strong> Offering varying power consumption and communication flexibility</li>
+      </ol>
+
+      <h2>Benefits of LoRa P2P Communication</h2>
+      <p>LoRa P2P delivers three primary advantages: extending LoRaWAN coverage to remote areas, reducing infrastructure costs through eliminating centralized servers, and offering flexible network design without maintenance complexity.</p>
+
+      <h2>Security in LoRaWAN Networks</h2>
+      <p>LoRaWAN employs two critical security mechanisms: mutual authentication during device joining ensures only authorized devices connect, and message authentication prevents data tampering and unauthorized modifications.</p>
+
+      <h2>Loko GPS Tracker: Real-World Application</h2>
+      <p>This device demonstrates practical LoRa implementation with:</p>
+      <ul>
+        <li>Multi-satellite compatibility (GPS, GLONASS, GALILEO)</li>
+        <li>Water, dust, and crash resistance</li>
+        <li>Over 5-kilometer range with 30+ day battery life</li>
+        <li>Compact 12-gram design (30 x 23 mm)</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>Understanding LoRa P2P and LoRaWAN distinctions helps organizations select appropriate communication solutions for specific IoT requirements.</p>
+    </div>
+  </article>
+
+  <footer>
+    <div class="footer-container">
+      <a href="../nolilab-redesigned.html" class="footer-logo">nolilab</a>
+      <div class="footer-links">
+        <a href="../nolilab-redesigned.html" class="footer-link">Home</a>
+        <a href="../specifications.html" class="footer-link">Specs</a>
+        <a href="../software.html" class="footer-link">Software</a>
+        <a href="../blog.html" class="footer-link">Blog</a>
+        <a href="../nolilab-redesigned.html#faq" class="footer-link">FAQ</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
