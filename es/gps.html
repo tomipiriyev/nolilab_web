@@ -1001,7 +1001,7 @@
     <!-- Header -->
     <header>
       <div class="container nav-container">
-        <a href="../nolilab" class="logo">nolilab</a>
+        <a href="../" class="logo">nolilab</a>
         <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
            <a href="./index#shop" class="nav-link">Shop</a>
               <a href="./specifications" class="nav-link">Especificaciones</a>
@@ -1121,7 +1121,7 @@
         </div>
 
         <div class="doc-hub-footer">
-          <p>Para especificaciones completas ver<a href="../nolilab#specifications">Especificaciones técnicas del rastreador GPS Loko</a>— Parámetros RF, Parámetros GNSS y Configuración avanzada.</p>
+          <p>Para especificaciones completas ver<a href="../#specifications">Especificaciones técnicas del rastreador GPS Loko</a>— Parámetros RF, Parámetros GNSS y Configuración avanzada.</p>
         </div>
 
       </div>
@@ -1220,17 +1220,17 @@
         }
 
         if (currentLang === 'en') {
-          currentPage = pathParts[pathParts.length - 1] || 'nolilab';
+          currentPage = pathParts[pathParts.length - 1] || '';
         }
 
-        if (currentPage === 'nolilab' || currentPage === '') {
+        if (currentPage === '' || currentPage === '') {
           currentPage = 'index';
         }
 
         let redirectUrl;
         if (targetLang === 'en') {
           if (currentLang === 'en') {
-            redirectUrl = './nolilab';
+            redirectUrl = './';
           } else {
             redirectUrl = currentPage === 'index' ? '../nolilab' : `../${currentPage}`;
           }

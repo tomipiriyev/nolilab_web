@@ -602,7 +602,7 @@
 <body>
   <header>
     <div class="container nav-container">
-       <a href="../nolilab" class="logo">nolilab</a>
+       <a href="../" class="logo">nolilab</a>
        <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
          <a href="./index#shop" class="nav-link">Shop</a>
             <a href="./specifications" class="nav-link">规格</a>
@@ -979,17 +979,17 @@
         }
 
         if (currentLang === 'en') {
-          currentPage = pathParts[pathParts.length - 1] || 'nolilab';
+          currentPage = pathParts[pathParts.length - 1] || '';
         }
 
-        if (currentPage === 'nolilab' || currentPage === '') {
+        if (currentPage === '' || currentPage === '') {
           currentPage = 'index';
         }
 
         let redirectUrl;
         if (targetLang === 'en') {
           if (currentLang === 'en') {
-            redirectUrl = './nolilab';
+            redirectUrl = './';
           } else {
             redirectUrl = currentPage === 'index' ? '../nolilab' : `../${currentPage}`;
           }
