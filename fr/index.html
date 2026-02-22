@@ -9,8 +9,13 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" /></noscript>
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/fa-subset.css" />
     <meta name="description" content="Le traceur GPS Loko est le plus petit GPS au monde avec 28,5 x 20,5 x 5,9 mm. Fonctionne hors ligne avec une portée LoRa de 20 km. Aucun abonnement requis. Suivez les drones, les animaux, l'équipement agricole et les objets de valeur." />
     <meta name="theme-color" content="#ffffff" />
     
@@ -285,7 +290,7 @@
       }
 
       body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         background-color: var(--bg-primary);
         color: var(--text-primary);
         line-height: 1.6;
@@ -724,22 +729,34 @@
         right: 0;
         display: flex;
         justify-content: center;
-        gap: var(--spacing-xs);
+        gap: 0;
         z-index: 10;
       }
 
       .slider-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #8b949e;
+        width: 44px;
+        height: 44px;
+        background: transparent;
         border: none;
         padding: 0;
         cursor: pointer;
-        transition: background 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .slider-dot.active {
+      .slider-dot::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #8b949e;
+        transition: background 0.3s ease, transform 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      .slider-dot.active::after {
         background: #238636;
         transform: scale(1.2);
       }
@@ -851,27 +868,40 @@
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        gap: var(--spacing-xs);
+        gap: 0;
         z-index: 10;
       }
 
       .app-slider-dot {
-        width: 12px;
-        height: 12px;
+        width: 44px;
+        height: 44px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .app-slider-dot::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
         border: 2px solid rgba(255, 255, 255, 0.5);
         background: transparent;
-        cursor: pointer;
         transition: all 0.3s ease;
-        padding: 0;
+        flex-shrink: 0;
       }
 
-      .app-slider-dot:hover {
+      .app-slider-dot:hover::after {
         border-color: var(--accent);
         background: rgba(35, 134, 54, 0.3);
       }
 
-      .app-slider-dot.active {
+      .app-slider-dot.active::after {
         background: var(--accent);
         border-color: var(--accent);
       }
@@ -1869,7 +1899,7 @@
         flex: 1;
         padding: var(--spacing-md);
         font-size: 1rem;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         border: 1px solid var(--border);
         border-radius: var(--radius-md);
         background: var(--bg-primary);
@@ -2133,32 +2163,14 @@
           gap: var(--spacing-sm);
         }
 
-        .slider-dot {
-          width: 16px;
-          height: 16px;
-          min-width: 16px;
-          min-height: 16px;
-        }
-
-        .slider-dot.active {
-          transform: scale(1.3);
-        }
+        /* slider-dot touch target already 44px, no override needed */
 
         .app-slider-dots {
           bottom: var(--spacing-md);
           gap: var(--spacing-sm);
         }
 
-        .app-slider-dot {
-          width: 16px;
-          height: 16px;
-          min-width: 16px;
-          min-height: 16px;
-        }
-
-        .app-slider-dot.active {
-          transform: scale(1.3);
-        }
+        /* app-slider-dot touch target already 44px, no override needed */
 
         .mobile-app-wrapper {
           grid-template-columns: 1fr;
@@ -2599,7 +2611,17 @@
 
 
      </style>
-  </head>
+  <style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</head>
 
   <body>
     <header>
@@ -2657,6 +2679,7 @@
          </button>
         </div>
       </header>
+    <main>
       <section class="hero">
         <div class="container hero-container">
           <div class="hero-content">
@@ -2697,9 +2720,9 @@
                 <img src="../images/optimized/Loko_Station_solar_transparent.png" alt="Loko Solar-Powered GPS Station" width="533" height="800" loading="lazy">
               </div>
               <div class="slider-dots">
-                <button class="slider-dot active" data-slide="0"></button>
-                <button class="slider-dot" data-slide="1"></button>
-                <button class="slider-dot" data-slide="2"></button>
+                <button class="slider-dot active" data-slide="0" aria-label="Go to slide 1: Loko GPS Tracker" aria-current="true"></button>
+                <button class="slider-dot" data-slide="1" aria-label="Go to slide 2: Loko App"></button>
+                <button class="slider-dot" data-slide="2" aria-label="Go to slide 3: Loko Solar Station"></button>
               </div>
             </div>
           </div>
@@ -2771,7 +2794,7 @@
                 </p>
               </div>
               <div style="background: var(--bg-primary); padding: var(--spacing-xs); border-radius: var(--radius-md); border: 2px solid var(--border);">
-                <img src="../images/optimized/Lora_p2p.svg" alt="P2P Communication Flow - Loko Air to Ground Unit to Phone" style="width: 100%; height: auto; display: block;">
+                <img src="../images/optimized/Lora_p2p.svg" alt="P2P Communication Flow - Loko Air to Ground Unit to Phone" width="960" height="720" style="width: 100%; height: auto; display: block;">
                 <p style="text-align: center; margin-top: var(--spacing-md); color: var(--text-secondary); font-size: 0.875rem; font-style: italic;">
                   Le traceur communique avec le récepteur via LoRa P2P (jusqu'à 20 km), puis le récepteur se connecte à votre téléphone via Bluetooth
                 </p>
@@ -2792,7 +2815,7 @@
                 </p>
               </div>
               <div style="background: var(--bg-primary); padding: var(--spacing-xs); border-radius: var(--radius-md); border: 2px solid var(--border);">
-                <img src="../images/Lorawan.svg" alt="LoRaWAN Network Flow - Loko Air to Gateway to Cloud" style="width: 100%; height: auto; display: block;">
+                <img src="../images/Lorawan.svg" alt="LoRaWAN Network Flow - Loko Air to Gateway to Cloud" width="960" height="720" style="width: 100%; height: auto; display: block;">
                 <p style="text-align: center; margin-top: var(--spacing-md); color: var(--text-secondary); font-size: 0.875rem; font-style: italic;">
                   Loko Air envoie les données à la passerelle LoRaWAN, la passerelle les transmet au serveur cloud, votre téléphone accède aux données depuis le cloud
                 </p>
@@ -3484,6 +3507,8 @@
       </div>
     </section>
 
+    </main>
+
     <footer>
       <div class="footer-container">
         <a href="./index" class="footer-logo">nolilab</a>
@@ -3626,11 +3651,12 @@
         async function showSlide(index) {
           // Remove active classes
           slides.forEach(slide =>slide.classList.remove('active'));
-          dots.forEach(dot => dot.classList.remove('active'));
+          dots.forEach(dot => { dot.classList.remove('active'); dot.removeAttribute('aria-current'); });
           
           // Ajouter des classes actives
           slides[index].classList.add('active');
           points[index].classList.add('active');
+          points[index].setAttribute('aria-current', 'true');
           
           // Changer le titre avec l'animation de frappe
           wait typeWriter(headlines[index], headlineText);

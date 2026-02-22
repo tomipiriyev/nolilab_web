@@ -6,8 +6,13 @@
   <title>How Does the Change in Ionosphere Altitude Throughout the Day Impact GPS Signal Quality | nolilab Blog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/fa-subset.css">
   <meta name="description" content="Explore how ionospheric altitude variations throughout the day affect GPS signal quality and navigation accuracy.">
   <style>
     :root {
@@ -36,7 +41,7 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: var(--bg-primary);
       color: var(--text-primary);
       line-height: 1.6;
@@ -273,6 +278,16 @@
   }
 }
 </script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
 </head>
 <body>
   <header>
@@ -286,6 +301,7 @@
       </div>
     </div>
   </header>
+    <main>
 
   <article>
     <a href="../blog" class="back-link">
@@ -374,6 +390,8 @@
       <p>For users of GPS tracking systems like the Loko GPS Tracker, the combination of multi-satellite integration and advanced signal processing ensures reliable location data even when ionospheric conditions fluctuate throughout the day. This resilience makes modern GPS technology dependable for applications from outdoor recreation to commercial fleet management.</p>
     </div>
   </article>
+
+  </main>
 
   <footer>
     <div class="footer-container">
