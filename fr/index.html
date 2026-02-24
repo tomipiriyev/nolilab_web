@@ -46,13 +46,14 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://nolilab.com/" />
+    <link rel="canonical" href="https://nolilab.com/fr/" />
 
     <!-- Hreflang Tags for Multilingual SEO -->
     <link rel="alternate" hreflang="en" href="https://nolilab.com/" />
     <link rel="alternate" hreflang="ja" href="https://nolilab.com/ja/" />
     <link rel="alternate" hreflang="es" href="https://nolilab.com/es/" />
     <link rel="alternate" hreflang="ru" href="https://nolilab.com/ru/" />
+    <link rel="alternate" hreflang="fr" href="https://nolilab.com/fr/" />
     <link rel="alternate" hreflang="zh" href="https://nolilab.com/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://nolilab.com/" />
     
@@ -3543,29 +3544,30 @@
       </div>
     </footer>
 
-    <script>// Basculement du menu mobile
+    <script>
+      // Mobile Menu Toggle
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
       const body = document.body;
 
-      si (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('clic', () => {
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
           mobileMenuToggle.classList.toggle('active');
           navLinks.classList.toggle('active');
           body.classList.toggle('menu-open');
         });
 
-        // Ferme le menu en cliquant sur un lien
+        // Close menu when clicking on a link
         document.querySelectorAll('.nav-link').forEach(link => {
-          link.addEventListener('clic', () => {
+          link.addEventListener('click', () => {
             mobileMenuToggle.classList.remove('active');
             navLinks.classList.remove('active');
             body.classList.remove('menu-open');
           });
         });
 
-        // Ferme le menu en cliquant sur la superposition
-        document.addEventListener('cliquez', (e) => {
+        // Close menu when clicking overlay
+        document.addEventListener('click', (e) => {
           if (body.classList.contains('menu-open') &&
               !navLinks.contains(e.target) &&
               !mobileMenuToggle.contains(e.target)) {
@@ -3576,65 +3578,65 @@
         });
       }
 
-      // Défilement fluide des liens de navigation
+      // Smooth scroll for navigation links
       document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('clic', (e) => {
-          const href = lien.getAttribute('href');
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
           if (href.startsWith('#')) {
             e.preventDefault();
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
-            si (élémentcible) {
+            if (targetElement) {
               window.scrollTo({
-                en haut : targetElement.offsetTop - 80,
-                comportement : "doux"
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
               });
             }
           }
         });
       });
 
-      // Gestionnaire de formulaire de newsletter
+      // Newsletter Form Handler
       const newsletterForm = document.getElementById('newsletterForm');
       if (newsletterForm) {
         newsletterForm.addEventListener('submit', (e) => {
           e.preventDefault();
           const emailInput = newsletterForm.querySelector('.newsletter-input');
-          const email = emailInput.value ;
+          const email = emailInput.value;
 
-          // Ici, vous enverriez normalement l'e-mail à votre backend
-          // Pour l'instant, nous allons juste afficher une simple confirmation
+          // Here you would normally send the email to your backend
+          // For now, we'll just show a simple confirmation
           alert(`Merci de vous être abonné ! Nous enverrons les mises à jour à ${email}`);
           emailInput.value = '';
         });
       }
 
-      // Fonctionnalité du curseur d'image
+      // Image Slider Functionality
       document.addEventListener('DOMContentLoaded', () => {
         const slides = document.querySelectorAll('.slide');
-        const points = document.querySelectorAll('.slider-dot');
+        const dots = document.querySelectorAll('.slider-dot');
         const headlineText = document.querySelector('.headline-text');
-        laissez currentSlide = 0 ;
-        soit isTyping = false; // Empêche les animations qui se chevauchent
-        const slideInterval = 5000 ; // 5 secondes (augmentées pour permettre la fin de la saisie)
+        let currentSlide = 0;
+        let isTyping = false; // Prevent overlapping animations
+        const slideInterval = 5000; // 5 seconds (increased to allow typing to complete)
         
-        // Titres correspondant à chaque slide
-        titres const = [
+        // Headlines corresponding to each slide
+        const headlines = [
           'Loko - Traceur GPS Hors Ligne Longue Portée',
           'Suivez Tout, Partout',
           'Plateforme de Gestion de Données IOT',
         ];
 
-        function typeWriter (texte, élément, vitesse = 50) {
-          if (isTyping) return Promise.resolve(); // Ignorer si vous tapez déjà
+        function typeWriter(text, element, speed = 50) {
+          if (isTyping) return Promise.resolve(); // Skip if already typing
           
-          renvoyer une nouvelle promesse ((résoudre) => {
-            isTyping = vrai ;
+          return new Promise((resolve) => {
+            isTyping = true;
             element.textContent = '';
-            soit je = 0 ;
+            let i = 0;
             
-            type de fonction() {
-              si (je< text.length) {
+            function type() {
+              if (i < text.length) {
                 element.textContent += text.charAt(i);
                 i++;
                 setTimeout(type, speed);
@@ -3650,51 +3652,51 @@
 
         async function showSlide(index) {
           // Remove active classes
-          slides.forEach(slide =>slide.classList.remove('active'));
+          slides.forEach(slide => slide.classList.remove('active'));
           dots.forEach(dot => { dot.classList.remove('active'); dot.removeAttribute('aria-current'); });
           
-          // Ajouter des classes actives
+          // Add active classes
           slides[index].classList.add('active');
-          points[index].classList.add('active');
-          points[index].setAttribute('aria-current', 'true');
+          dots[index].classList.add('active');
+          dots[index].setAttribute('aria-current', 'true');
           
-          // Changer le titre avec l'animation de frappe
-          wait typeWriter(headlines[index], headlineText);
-          currentSlide = index ;
+          // Change headline with typing animation
+          await typeWriter(headlines[index], headlineText);
+          currentSlide = index;
         }
 
-        fonction nextSlide() {
-          soit next = currentSlide + 1 ;
-          if (suivant >= slides.length) suivant = 0 ;
-          showSlide (suivant);
+        function nextSlide() {
+          let next = currentSlide + 1;
+          if (next >= slides.length) next = 0;
+          showSlide(next);
         }
 
-        // Initialise la première animation de titre
-        typeWriter(titres[0], titreText);
+        // Initialize first headline animation
+        typeWriter(headlines[0], headlineText);
 
-        // Démarre le curseur automatique une fois la saisie initiale terminée
+        // Start automatic slider after initial typing completes
         setTimeout(() => {
-          laissez slideTimer = setInterval(nextSlide, slideInterval);
+          let slideTimer = setInterval(nextSlide, slideInterval);
 
-          // Ajouter des événements de clic aux points
-          points.forEach((point, index) => {
-            dot.addEventListener('clic', () => {
+          // Add click events to dots
+          dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
               clearInterval(slideTimer);
               showSlide(index);
               slideTimer = setInterval(nextSlide, slideInterval);
             });
           });
 
-          // Pause au survol
+          // Pause on hover
           const slider = document.getElementById('slider');
-          si (curseur) {
+          if (slider) {
             slider.addEventListener('mouseenter', () => clearInterval(slideTimer));
             slider.addEventListener('mouseleave', () => {
               slideTimer = setInterval(nextSlide, slideInterval);
             });
           }
 
-          // Ajoutez des événements de survol aux fonctionnalités de l'application pour modifier le curseur
+          // Add hover events to app features to change slider
           const appFeatures = document.querySelectorAll('.app-feature');
           appFeatures.forEach(feature => {
             feature.addEventListener('mouseenter', () => {
@@ -3707,26 +3709,29 @@
               slideTimer = setInterval(nextSlide, slideInterval);
             });
           });
-        }, titres[0].length * 50 + 500); // Attend la fin de la première animation
+        }, headlines[0].length * 50 + 500); // Wait for first animation to complete
        });
 
-      // FAQ Accordéon
+      // FAQ Accordion
       document.querySelectorAll('.faq-question').forEach(button => {
-        bouton.addEventListener('clic', () => {
-          const item = bouton.parentElement;
+        button.addEventListener('click', () => {
+          const item = button.parentElement;
           const isActive = item.classList.contains('active');
           
-          // Ferme tous les autres éléments
+          // Close all other items
           document.querySelectorAll('.faq-item').forEach(otherItem => {
             otherItem.classList.remove('active');
           });
           
-          // Bascule l'élément actuel s'il n'était pas actif
-          si (!isActive) {
+          // Toggle current item if it wasn't active
+          if (!isActive) {
             item.classList.add('active');
           }
         });
-      });</script>
+      });
+
+
+    </script>
     <script>
       // Interactive Visualization Functionality
       document.addEventListener("DOMContentLoaded", function() {

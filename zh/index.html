@@ -47,13 +47,14 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://nolilab.com/" />
+    <link rel="canonical" href="https://nolilab.com/zh/" />
 
     <!-- Hreflang Tags for Multilingual SEO -->
     <link rel="alternate" hreflang="en" href="https://nolilab.com/" />
     <link rel="alternate" hreflang="ja" href="https://nolilab.com/ja/" />
     <link rel="alternate" hreflang="es" href="https://nolilab.com/es/" />
     <link rel="alternate" hreflang="ru" href="https://nolilab.com/ru/" />
+    <link rel="alternate" hreflang="fr" href="https://nolilab.com/fr/" />
     <link rel="alternate" hreflang="zh" href="https://nolilab.com/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://nolilab.com/" />
     
@@ -3536,98 +3537,99 @@
       </div>
     </footer>
 
-    <script>// 移动菜单切换
+    <script>
+      // Mobile Menu Toggle
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
       const body = document.body;
 
-      如果（移动菜单切换）{
-        mobileMenuToggle.addEventListener('点击', () => {
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
           mobileMenuToggle.classList.toggle('active');
-          navLinks.classList.toggle('活动');
-          body.classList.toggle('菜单打开');
+          navLinks.classList.toggle('active');
+          body.classList.toggle('menu-open');
         });
 
-        // 点击链接时关闭菜单
+        // Close menu when clicking on a link
         document.querySelectorAll('.nav-link').forEach(link => {
-          link.addEventListener('点击', () => {
+          link.addEventListener('click', () => {
             mobileMenuToggle.classList.remove('active');
             navLinks.classList.remove('active');
-            body.classList.remove('菜单打开');
+            body.classList.remove('menu-open');
           });
         });
 
-        // 点击覆盖时关闭菜单
-        document.addEventListener('点击', (e) => {
-          if (body.classList.contains('菜单打开') &&
+        // Close menu when clicking overlay
+        document.addEventListener('click', (e) => {
+          if (body.classList.contains('menu-open') &&
               !navLinks.contains(e.target) &&
               !mobileMenuToggle.contains(e.target)) {
             mobileMenuToggle.classList.remove('active');
             navLinks.classList.remove('active');
-            body.classList.remove('菜单打开');
+            body.classList.remove('menu-open');
           }
         });
       }
 
-      // 导航链接平滑滚动
+      // Smooth scroll for navigation links
       document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('点击', (e) => {
+        link.addEventListener('click', (e) => {
           const href = link.getAttribute('href');
           if (href.startsWith('#')) {
             e.preventDefault();
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
-            if (目标元素) {
-              窗口.scrollTo({
-                顶部：targetElement.offsetTop - 80，
-                行为：“平稳”
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
               });
             }
           }
         });
       });
 
-      // 时事通讯表单处理程序
+      // Newsletter Form Handler
       const newsletterForm = document.getElementById('newsletterForm');
-      if (时事通讯表格) {
-        newsletterForm.addEventListener('提交', (e) => {
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
           e.preventDefault();
           const emailInput = newsletterForm.querySelector('.newsletter-input');
           const email = emailInput.value;
 
-          // 在这里您通常会将电子邮件发送到您的后端
-          // 现在，我们只显示一个简单的确认
+          // Here you would normally send the email to your backend
+          // For now, we'll just show a simple confirmation
           alert(`感谢您的订阅！我们将向${email}发送更新信息`);
           emailInput.value = '';
         });
       }
 
-      // 图像滑块功能
+      // Image Slider Functionality
       document.addEventListener('DOMContentLoaded', () => {
-        const Slides = document.querySelectorAll('.slide');
-        constdots = document.querySelectorAll('.slider-dot');
-        const headerText = document.querySelector('.headline-text');
-        让当前幻灯片 = 0;
-        让 isTyping = false; // 防止动画重叠
-        常量幻灯片间隔 = 5000; // 5 秒（增加以允许输入完成）
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const headlineText = document.querySelector('.headline-text');
+        let currentSlide = 0;
+        let isTyping = false; // Prevent overlapping animations
+        const slideInterval = 5000; // 5 seconds (increased to allow typing to complete)
         
-        // 每张幻灯片对应的标题
-        常量标题 = [
+        // Headlines corresponding to each slide
+        const headlines = [
           'Loko - 远程离线GPS追踪器',
           '随时随地追踪任何物品',
           '物联网数据管理平台',
         ];
 
-        函数 typeWriter(文本、元素、速度 = 50) {
-          if (isTyping) 返回 Promise.resolve(); // 如果已经输入则跳过
+        function typeWriter(text, element, speed = 50) {
+          if (isTyping) return Promise.resolve(); // Skip if already typing
           
-          返回新的 Promise((resolve) => {
-            正在打字=真；
-            元素.textContent = '';
-            让我= 0;
+          return new Promise((resolve) => {
+            isTyping = true;
+            element.textContent = '';
+            let i = 0;
             
-            函数类型() {
-              如果（我< text.length) {
+            function type() {
+              if (i < text.length) {
                 element.textContent += text.charAt(i);
                 i++;
                 setTimeout(type, speed);
@@ -3643,203 +3645,207 @@
 
         async function showSlide(index) {
           // Remove active classes
-          slides.forEach(slide =>Slide.classList.remove('active'));
+          slides.forEach(slide => slide.classList.remove('active'));
           dots.forEach(dot => { dot.classList.remove('active'); dot.removeAttribute('aria-current'); });
           
-          // 添加活动类
-          幻灯片[index].classList.add('active');
-          点[index].classList.add('active');
-          点[index].setAttribute('aria-current', 'true');
+          // Add active classes
+          slides[index].classList.add('active');
+          dots[index].classList.add('active');
+          dots[index].setAttribute('aria-current', 'true');
           
-          // 使用打字动画更改标题
-          等待 typeWriter(headlines[index], headerText);
-          当前幻灯片=索引；
+          // Change headline with typing animation
+          await typeWriter(headlines[index], headlineText);
+          currentSlide = index;
         }
 
-        函数 nextSlide() {
-          让下一个 = 当前幻灯片 + 1；
-          if (下一个>=幻灯片长度)下一个= 0;
-          显示幻灯片（下一个）；
+        function nextSlide() {
+          let next = currentSlide + 1;
+          if (next >= slides.length) next = 0;
+          showSlide(next);
         }
 
-        // 初始化第一个标题动画
-        typeWriter(标题[0], headerText);
+        // Initialize first headline animation
+        typeWriter(headlines[0], headlineText);
 
-        // 初始输入完成后启动自动滑块
-        设置超时（（）=> {
-          让slideTimer = setInterval（nextSlide，slideInterval）;
+        // Start automatic slider after initial typing completes
+        setTimeout(() => {
+          let slideTimer = setInterval(nextSlide, slideInterval);
 
-          // 为圆点添加点击事件
-          dots.forEach((点，索引) => {
-            dot.addEventListener('点击', () => {
-              清除间隔（幻灯片定时器）；
-              显示幻灯片（索引）；
-              SlideTimer = setInterval（nextSlide，slideInterval）;
+          // Add click events to dots
+          dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+              clearInterval(slideTimer);
+              showSlide(index);
+              slideTimer = setInterval(nextSlide, slideInterval);
             });
           });
 
-          // 悬停时暂停
+          // Pause on hover
           const slider = document.getElementById('slider');
-          如果（滑块）{
-            slider.addEventListener('mouseenter', () =>clearInterval(slideTimer));
+          if (slider) {
+            slider.addEventListener('mouseenter', () => clearInterval(slideTimer));
             slider.addEventListener('mouseleave', () => {
-              SlideTimer = setInterval（nextSlide，slideInterval）;
+              slideTimer = setInterval(nextSlide, slideInterval);
             });
           }
 
-          // 将悬停事件添加到应用程序功能以更改滑块
+          // Add hover events to app features to change slider
           const appFeatures = document.querySelectorAll('.app-feature');
-          appFeatures.forEach(功能=> {
+          appFeatures.forEach(feature => {
             feature.addEventListener('mouseenter', () => {
-              清除间隔（幻灯片定时器）；
-              const SlideIndex = parseInt(feature.getAttribute('data-slide'));
-              显示幻灯片（幻灯片索引）；
+              clearInterval(slideTimer);
+              const slideIndex = parseInt(feature.getAttribute('data-slide'));
+              showSlide(slideIndex);
             });
 
             feature.addEventListener('mouseleave', () => {
-              SlideTimer = setInterval（nextSlide，slideInterval）;
+              slideTimer = setInterval(nextSlide, slideInterval);
             });
           });
-        }, 头条新闻[0].length * 50 + 500); // 等待第一个动画完成
+        }, headlines[0].length * 50 + 500); // Wait for first animation to complete
        });
 
-      // 手风琴常见问题解答
+      // FAQ Accordion
       document.querySelectorAll('.faq-question').forEach(button => {
-        Button.addEventListener('点击', () => {
+        button.addEventListener('click', () => {
           const item = button.parentElement;
           const isActive = item.classList.contains('active');
           
-          // 关闭所有其他项目
+          // Close all other items
           document.querySelectorAll('.faq-item').forEach(otherItem => {
             otherItem.classList.remove('active');
           });
           
-          // 如果当前项目未处于活动状态，则切换当前项目
-          如果（！isActive）{
+          // Toggle current item if it wasn't active
+          if (!isActive) {
             item.classList.add('active');
           }
         });
-      });</script>
-    <script>// 交互式可视化功能
+      });
+
+
+    </script>
+    <script>
+      // Interactive Visualization Functionality
       document.addEventListener("DOMContentLoaded", function() {
-        const sceneBtns = document.querySelectorAll(".scenario-btn");
+        const scenarioBtns = document.querySelectorAll(".scenario-btn");
         const infoContents = document.querySelectorAll(".info-content");
         
-        sceneBtns.forEach(btn => {
-          btn.addEventListener("点击", () => {
-            const 场景 = btn.getAttribute("数据场景");
+        scenarioBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            const scenario = btn.getAttribute("data-scenario");
             
-            // 更新活动按钮
-            sceneBtns.forEach(b => b.classList.remove("active"));
-            btn.classList.add(“活动”);
+            // Update active button
+            scenarioBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
             
-            // 更新活动内容
-            infoContents.forEach(内容 => {
-              content.classList.remove("活动");
-              if(content.getAttribute("数据场景") === 场景) {
-                content.classList.add("活动");
+            // Update active content
+            infoContents.forEach(content => {
+              content.classList.remove("active");
+              if(content.getAttribute("data-scenario") === scenario) {
+                content.classList.add("active");
               }
             });
             
-            // 移动跟踪点来模拟运动
-            moveTrackingPoints（场景）；
+            // Move tracking points to simulate movement
+            moveTrackingPoints(scenario);
           });
         });
         
-        函数 moveTrackingPoints(场景) {
-          const 点 = document.querySelectorAll(".point");
-          点.forEach(点=> {
-            // 重置动画
-            point.style.animation = "无";
-            设置超时（（）=> {
-              point.style.animation = "脉冲2s无限";
+        function moveTrackingPoints(scenario) {
+          const points = document.querySelectorAll(".point");
+          points.forEach(point => {
+            // Reset animation
+            point.style.animation = "none";
+            setTimeout(() => {
+              point.style.animation = "pulse 2s infinite";
             }, 10);
           });
           
-          // 根据场景移动点
-          常量位置 = {
-            宠物：{顶部：“25％”，左侧：“15％”}，
-            无人机：{顶部：“40％”，左侧：“30％”}，
-            农场: { 顶部: "60%", 左侧: "20%" },
-            军事：{顶部：“35％”，左侧：“60％”}，
-            户外：{ 顶部：“55%”，左侧：“70%” },
-            气球：{ 顶部：“15%”，左侧：“50%” }
+          // Move points based on scenario
+          const positions = {
+            pet: { top: "25%", left: "15%" },
+            drone: { top: "40%", left: "30%" },
+            farm: { top: "60%", left: "20%" },
+            military: { top: "35%", left: "60%" },
+            outdoor: { top: "55%", left: "70%" },
+            balloon: { top: "15%", left: "50%" }
           };
           
           const targetPoint = document.querySelector(`.point.${scenario}-tracking`);
-          如果（目标点）{
-            targetPoint.style.transition = "全 1 轻松";
-            targetPoint.style.top = 位置[场景].top;
-            targetPoint.style.left = 位置[场景].left;
+          if(targetPoint) {
+            targetPoint.style.transition = "all 1s ease";
+            targetPoint.style.top = positions[scenario].top;
+            targetPoint.style.left = positions[scenario].left;
           }
         }
         
-        // 初始化宠物追踪
-        moveTrackingPoints(“宠物”);
+        // Initialize with pet tracking
+        moveTrackingPoints("pet");
       });
 
-      // 应用程序滑块功能
+      // App Slider Functionality
       document.addEventListener('DOMContentLoaded', () => {
         const appSlider = document.getElementById('appSlider');
-        如果（！appSlider）返回；
+        if (!appSlider) return;
 
-        const Slides = appSlider.querySelectorAll('.app-slide');
-        constdots = appSlider.querySelectorAll('.app-slider-dot');
+        const slides = appSlider.querySelectorAll('.app-slide');
+        const dots = appSlider.querySelectorAll('.app-slider-dot');
         const prevBtn = appSlider.querySelector('.app-slider-prev');
         const nextBtn = appSlider.querySelector('.app-slider-next');
         
-        让当前幻灯片 = 0;
-        const SlideCount = 幻灯片长度；
+        let currentSlide = 0;
+        const slideCount = slides.length;
 
-        函数更新滑块（）{
-          Slides.forEach((幻灯片，索引) => {
-            Slide.classList.remove('活动');
-            if (index === 当前幻灯片) {
-              Slide.classList.add('活动');
+        function updateSlider() {
+          slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === currentSlide) {
+              slide.classList.add('active');
             }
           });
 
-          dots.forEach((点，索引) => {
+          dots.forEach((dot, index) => {
             dot.classList.remove('active');
-            if (index === 当前幻灯片) {
+            if (index === currentSlide) {
               dot.classList.add('active');
             }
           });
         }
 
-        函数 nextSlide() {
-          当前幻灯片 = (当前幻灯片 + 1) % 幻灯片计数；
-          更新滑块（）；
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % slideCount;
+          updateSlider();
         }
 
-        函数上一页幻灯片（）{
-          当前幻灯片 = (当前幻灯片 - 1 + 幻灯片计数) % 幻灯片计数;
-          更新滑块（）；
+        function prevSlide() {
+          currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+          updateSlider();
         }
 
-        函数 goToSlide(索引) {
-          当前幻灯片=索引；
-          更新滑块（）；
+        function goToSlide(index) {
+          currentSlide = index;
+          updateSlider();
         }
 
-        // 事件监听器
-        if (nextBtn) nextBtn.addEventListener('点击', nextSlide);
-        if (prevBtn) prevBtn.addEventListener('点击', prevSlide);
+        // Event listeners
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 
-        dots.forEach((点，索引) => {
-          dot.addEventListener('点击', () => goToSlide(index));
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => goToSlide(index));
         });
 
-        // 每 5 秒自动前进幻灯片
+        // Auto-advance slides every 5 seconds
         setInterval(nextSlide, 5000);
       });
 
-    // 设置灯光主题
-    document.documentElement.setAttribute('数据主题', 'light');
+    // Set light theme
+    document.documentElement.setAttribute('data-theme', 'light');
 
-// 语言选择器
+    // Language Selector
     document.querySelectorAll('.language-option').forEach(option => {
-      option.addEventListener('点击', (e) => {
+      option.addEventListener('click', (e) => {
         e.preventDefault();
         const targetLang = option.dataset.lang;
 
@@ -3849,10 +3855,10 @@
         const pathParts = currentPath.split('/').filter(p => p);
         const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
 
-        让 currentLang = 'en';
-        让 currentPage = 'index';
+        let currentLang = 'en';
+        let currentPage = 'index';
 
-        对于（令 i = 0；i< pathParts.length; i++) {
+        for (let i = 0; i < pathParts.length; i++) {
           if (langDirs.includes(pathParts[i])) {
             currentLang = pathParts[i];
             currentPage = pathParts[i + 1] || 'index';

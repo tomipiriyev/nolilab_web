@@ -47,13 +47,14 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://nolilab.com/" />
+    <link rel="canonical" href="https://nolilab.com/ru/" />
 
     <!-- Hreflang Tags for Multilingual SEO -->
     <link rel="alternate" hreflang="en" href="https://nolilab.com/" />
     <link rel="alternate" hreflang="ja" href="https://nolilab.com/ja/" />
     <link rel="alternate" hreflang="es" href="https://nolilab.com/es/" />
     <link rel="alternate" hreflang="ru" href="https://nolilab.com/ru/" />
+    <link rel="alternate" hreflang="fr" href="https://nolilab.com/fr/" />
     <link rel="alternate" hreflang="zh" href="https://nolilab.com/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://nolilab.com/" />
     
@@ -3536,98 +3537,99 @@
       </div>
     </footer>
 
-    <script>// Переключение мобильного меню
+    <script>
+      // Mobile Menu Toggle
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
-      константное тело = document.body;
+      const body = document.body;
 
-      если (mobilMenuToggle) {
+      if (mobileMenuToggle) {
         mobileMenuToggle.addEventListener('click', () => {
-          mobileMenuToggle.classList.toggle('активный');
-          navLinks.classList.toggle('активный');
-          body.classList.toggle('меню-открыть');
+          mobileMenuToggle.classList.toggle('active');
+          navLinks.classList.toggle('active');
+          body.classList.toggle('menu-open');
         });
 
-        // Закрываем меню при нажатии на ссылку
+        // Close menu when clicking on a link
         document.querySelectorAll('.nav-link').forEach(link => {
           link.addEventListener('click', () => {
-            mobileMenuToggle.classList.remove('активный');
-            navLinks.classList.remove('активный');
-            body.classList.remove('меню-открыть');
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
           });
         });
 
-        // Закрываем меню при нажатии на оверлей
+        // Close menu when clicking overlay
         document.addEventListener('click', (e) => {
-          if (body.classList.contains('меню-открыть') &&
+          if (body.classList.contains('menu-open') &&
               !navLinks.contains(e.target) &&
               !mobileMenuToggle.contains(e.target)) {
-            mobileMenuToggle.classList.remove('активный');
-            navLinks.classList.remove('активный');
-            body.classList.remove('меню-открыть');
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
           }
         });
       }
 
-      // Плавная прокрутка для навигационных ссылок
+      // Smooth scroll for navigation links
       document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
           const href = link.getAttribute('href');
-          если (href.startsWith('#')) {
-            е.preventDefault();
+          if (href.startsWith('#')) {
+            e.preventDefault();
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
-            если (targetElement) {
+            if (targetElement) {
               window.scrollTo({
-                верх: targetElement.offsetTop - 80,
-                поведение: «гладкое»
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
               });
             }
           }
         });
       });
 
-      // Обработчик формы информационного бюллетеня
+      // Newsletter Form Handler
       const newsletterForm = document.getElementById('newsletterForm');
-      если (newsletterForm) {
-        информационная рассылкаForm.addEventListener('submit', (e) => {
-          е.preventDefault();
-          const emailInput = бюллетеньForm.querySelector('.newsletter-input');
-          константная электронная почта = emailInput.value;
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailInput = newsletterForm.querySelector('.newsletter-input');
+          const email = emailInput.value;
 
-          // Здесь вы обычно отправляете электронное письмо на свой сервер
-          // Сейчас мы просто покажем простое подтверждение
+          // Here you would normally send the email to your backend
+          // For now, we'll just show a simple confirmation
           alert(`Спасибо за подписку! Мы будем отправлять обновления на адрес ${email}`);
           emailInput.value = '';
         });
       }
 
-      // Функциональность слайдера изображений
+      // Image Slider Functionality
       document.addEventListener('DOMContentLoaded', () => {
-        const слайды = document.querySelectorAll('.slide');
+        const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.slider-dot');
         const headlineText = document.querySelector('.headline-text');
-        пусть currentSlide = 0;
-        пусть isTyping = ложь; // Предотвращаем перекрытие анимаций
-        константный слайдИнтервал = 5000; // 5 секунд (увеличено, чтобы можно было завершить ввод)
+        let currentSlide = 0;
+        let isTyping = false; // Prevent overlapping animations
+        const slideInterval = 5000; // 5 seconds (increased to allow typing to complete)
         
-        // Заголовки, соответствующие каждому слайду
-        константные заголовки = [
-          «Локо - Автономный GPS Трекер Дальнего Радиуса Действия»,
+        // Headlines corresponding to each slide
+        const headlines = [
+          'Loko - Автономный GPS Трекер Дальнего Радиуса Действия',
           'Отслеживайте Всё, Везде',
-          «Платформа Управления IOT Данными»,
+          'Платформа Управления IOT Данными',
         ];
 
-        функция typeWriter(текст, элемент, скорость = 50) {
-          if (isTyping) return Promise.resolve(); // Пропустить, если уже вводите
+        function typeWriter(text, element, speed = 50) {
+          if (isTyping) return Promise.resolve(); // Skip if already typing
           
-          вернуть новое обещание((решить) => {
-            ИсТипинг = Истина;
+          return new Promise((resolve) => {
+            isTyping = true;
             element.textContent = '';
-            пусть я = 0;
+            let i = 0;
             
-            тип функции() {
-              если (я< text.length) {
+            function type() {
+              if (i < text.length) {
                 element.textContent += text.charAt(i);
                 i++;
                 setTimeout(type, speed);
@@ -3643,204 +3645,208 @@
 
         async function showSlide(index) {
           // Remove active classes
-          slides.forEach(slide =>слайд.classList.remove('активный'));
-          dots.forEach(точка => { точка.classList.remove('активный'); точка.removeAttribute('aria-current'); });
+          slides.forEach(slide => slide.classList.remove('active'));
+          dots.forEach(dot => { dot.classList.remove('active'); dot.removeAttribute('aria-current'); });
           
-          // Добавляем активные классы
-          слайды[индекс].classList.add('активный');
-          точки[индекс].classList.add('активный');
-          точки[индекс].setAttribute('aria-current', 'true');
+          // Add active classes
+          slides[index].classList.add('active');
+          dots[index].classList.add('active');
+          dots[index].setAttribute('aria-current', 'true');
           
-          // Изменение заголовка с анимацией набора текста
-          ждут typeWriter (заголовки [индекс], заголовок Текст);
-          текущийСлайд = индекс;
+          // Change headline with typing animation
+          await typeWriter(headlines[index], headlineText);
+          currentSlide = index;
         }
 
-        функция nextSlide() {
-          пусть следующий = currentSlide + 1;
-          если (следующий >= слайды.длина) следующий = 0;
-          показатьСлайд (следующий);
+        function nextSlide() {
+          let next = currentSlide + 1;
+          if (next >= slides.length) next = 0;
+          showSlide(next);
         }
 
-        // Инициализируем первую анимацию заголовка
-        typeWriter(headlines[0],headlineText);
+        // Initialize first headline animation
+        typeWriter(headlines[0], headlineText);
 
-        // Запускаем автоматический слайдер после завершения первоначального ввода
+        // Start automatic slider after initial typing completes
         setTimeout(() => {
-          пустьlideTimer = setInterval(nextSlide,lideInterval);
+          let slideTimer = setInterval(nextSlide, slideInterval);
 
-          // Добавляем события клика к точкам
-          dots.forEach((точка, индекс) => {
+          // Add click events to dots
+          dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-              ClearInterval (slideTimer);
-              показатьСлайд (индекс);
-              слайдTimer = setInterval(nextSlide,lideInterval);
+              clearInterval(slideTimer);
+              showSlide(index);
+              slideTimer = setInterval(nextSlide, slideInterval);
             });
           });
 
-          // Пауза при наведении
-          const слайдер = document.getElementById('slider');
-          если (ползунок) {
-            слайдер.addEventListener('mouseenter', () => ClearInterval(slideTimer));
-            слайдер.addEventListener('mouseleave', () => {
-              слайдTimer = setInterval(nextSlide,lideInterval);
+          // Pause on hover
+          const slider = document.getElementById('slider');
+          if (slider) {
+            slider.addEventListener('mouseenter', () => clearInterval(slideTimer));
+            slider.addEventListener('mouseleave', () => {
+              slideTimer = setInterval(nextSlide, slideInterval);
             });
           }
 
-          // Добавляем события наведения к функциям приложения, чтобы изменить слайдер
+          // Add hover events to app features to change slider
           const appFeatures = document.querySelectorAll('.app-feature');
           appFeatures.forEach(feature => {
-            Feature.addEventListener('mouseenter', () => {
-              ClearInterval (slideTimer);
-              constlideIndex = parseInt(feature.getAttribute('data-slide'));
-              showSlide (slideIndex);
+            feature.addEventListener('mouseenter', () => {
+              clearInterval(slideTimer);
+              const slideIndex = parseInt(feature.getAttribute('data-slide'));
+              showSlide(slideIndex);
             });
 
-            Feature.addEventListener('mouseleave', () => {
-              слайдTimer = setInterval(nextSlide,lideInterval);
+            feature.addEventListener('mouseleave', () => {
+              slideTimer = setInterval(nextSlide, slideInterval);
             });
           });
-        }, заголовки[0].длина * 50 + 500); // Ждем завершения первой анимации
+        }, headlines[0].length * 50 + 500); // Wait for first animation to complete
        });
 
-      // Часто задаваемые вопросы Аккордеон
+      // FAQ Accordion
       document.querySelectorAll('.faq-question').forEach(button => {
         button.addEventListener('click', () => {
-          константный элемент = button.parentElement;
-          const isActive = item.classList.contains('активный');
+          const item = button.parentElement;
+          const isActive = item.classList.contains('active');
           
-          // Закрываем все остальные элементы
+          // Close all other items
           document.querySelectorAll('.faq-item').forEach(otherItem => {
-            другойItem.classList.remove('активный');
+            otherItem.classList.remove('active');
           });
           
-          // Переключение текущего элемента, если он не был активен
-          если (!isActive) {
-            item.classList.add('активный');
+          // Toggle current item if it wasn't active
+          if (!isActive) {
+            item.classList.add('active');
           }
         });
-      });</script>
-    <script>// Функциональность интерактивной визуализации
+      });
+
+
+    </script>
+    <script>
+      // Interactive Visualization Functionality
       document.addEventListener("DOMContentLoaded", function() {
-        const scriptBtns = document.querySelectorAll(".scenario-btn");
+        const scenarioBtns = document.querySelectorAll(".scenario-btn");
         const infoContents = document.querySelectorAll(".info-content");
         
-        сценарийBtns.forEach(btn => {
-          btn.addEventListener("клик", () => {
-            const сценарий = btn.getAttribute("сценарий данных");
+        scenarioBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            const scenario = btn.getAttribute("data-scenario");
             
-            // Обновить активную кнопку
-            сценарийBtns.forEach(b => b.classList.remove("активный"));
-            btn.classList.add("активный");
+            // Update active button
+            scenarioBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
             
-            // Обновляем активный контент
+            // Update active content
             infoContents.forEach(content => {
-              content.classList.remove("активный");
-              if(content.getAttribute("сценарий данных") === сценарий) {
-                content.classList.add("активный");
+              content.classList.remove("active");
+              if(content.getAttribute("data-scenario") === scenario) {
+                content.classList.add("active");
               }
             });
             
-            // Перемещаем точки отслеживания для имитации движения
-            moveTrackingPoints (сценарий);
+            // Move tracking points to simulate movement
+            moveTrackingPoints(scenario);
           });
         });
         
-        функция moveTrackingPoints(сценарий) {
-          const Points = document.querySelectorAll(".point");
+        function moveTrackingPoints(scenario) {
+          const points = document.querySelectorAll(".point");
           points.forEach(point => {
-            // Сброс анимации
-            point.style.animation = "нет";
+            // Reset animation
+            point.style.animation = "none";
             setTimeout(() => {
-              point.style.animation = "импульс 2 с бесконечен";
+              point.style.animation = "pulse 2s infinite";
             }, 10);
           });
           
-          // Перемещение точек в зависимости от сценария
-          константные позиции = {
-            домашнее животное: { сверху: "25%", слева: "15%" },
-            дрон: { сверху: "40%", слева: "30%" },
-            ферма: { вверху: "60%", слева: "20%" },
-            военные: { вверху: "35%", слева: "60%" },
-            на открытом воздухе: { вверху: "55%", слева: "70%" },
-            воздушный шар: { вверху: "15%", слева: "50%" }
+          // Move points based on scenario
+          const positions = {
+            pet: { top: "25%", left: "15%" },
+            drone: { top: "40%", left: "30%" },
+            farm: { top: "60%", left: "20%" },
+            military: { top: "35%", left: "60%" },
+            outdoor: { top: "55%", left: "70%" },
+            balloon: { top: "15%", left: "50%" }
           };
           
           const targetPoint = document.querySelector(`.point.${scenario}-tracking`);
-          если (targetPoint) {
-            targetPoint.style.transition = "все единицы легко";
-            targetPoint.style.top = позиции[сценарий].top;
-            targetPoint.style.left = позиции[сценарий].left;
+          if(targetPoint) {
+            targetPoint.style.transition = "all 1s ease";
+            targetPoint.style.top = positions[scenario].top;
+            targetPoint.style.left = positions[scenario].left;
           }
         }
         
-        // Инициализируем отслеживание домашних животных
-        moveTrackingPoints("питомец");
+        // Initialize with pet tracking
+        moveTrackingPoints("pet");
       });
 
-      // Функциональность слайдера приложения
+      // App Slider Functionality
       document.addEventListener('DOMContentLoaded', () => {
         const appSlider = document.getElementById('appSlider');
         if (!appSlider) return;
 
-        const слайды = appSlider.querySelectorAll('.app-slide');
+        const slides = appSlider.querySelectorAll('.app-slide');
         const dots = appSlider.querySelectorAll('.app-slider-dot');
         const prevBtn = appSlider.querySelector('.app-slider-prev');
         const nextBtn = appSlider.querySelector('.app-slider-next');
         
-        пусть currentSlide = 0;
-        constlideCount = слайды.длина;
+        let currentSlide = 0;
+        const slideCount = slides.length;
 
-        функция updateSlider() {
-          слайды.forEach((слайд, индекс) => {
-            слайд.classList.remove('активный');
-            если (индекс === currentSlide) {
-              слайд.classList.add('активный');
+        function updateSlider() {
+          slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === currentSlide) {
+              slide.classList.add('active');
             }
           });
 
-          dots.forEach((точка, индекс) => {
-            dot.classList.remove('активный');
-            если (индекс === currentSlide) {
-              dot.classList.add('активный');
+          dots.forEach((dot, index) => {
+            dot.classList.remove('active');
+            if (index === currentSlide) {
+              dot.classList.add('active');
             }
           });
         }
 
-        функция nextSlide() {
-          currentSlide = (currentSlide + 1) % слайдCount;
-          обновлениеСлайдер();
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % slideCount;
+          updateSlider();
         }
 
-        функция prevSlide() {
-          currentSlide = (currentSlide - 1 + SlideCount) % SlideCount;
-          обновлениеСлайдер();
+        function prevSlide() {
+          currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+          updateSlider();
         }
 
-        функция goToSlide(индекс) {
-          текущийСлайд = индекс;
-          обновлениеСлайдер();
+        function goToSlide(index) {
+          currentSlide = index;
+          updateSlider();
         }
 
-        // Слушатели событий
+        // Event listeners
         if (nextBtn) nextBtn.addEventListener('click', nextSlide);
         if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 
-        dots.forEach((точка, индекс) => {
+        dots.forEach((dot, index) => {
           dot.addEventListener('click', () => goToSlide(index));
         });
 
-        // Автоматическое перемещение слайдов каждые 5 секунд
-        setInterval (nextSlide, 5000);
+        // Auto-advance slides every 5 seconds
+        setInterval(nextSlide, 5000);
       });
 
-    // Устанавливаем светлую тему
-    document.documentElement.setAttribute('тема данных', 'свет');
+    // Set light theme
+    document.documentElement.setAttribute('data-theme', 'light');
 
-// Выбор языка
+    // Language Selector
     document.querySelectorAll('.language-option').forEach(option => {
       option.addEventListener('click', (e) => {
-        е.preventDefault();
+        e.preventDefault();
         const targetLang = option.dataset.lang;
 
         localStorage.setItem('selectedLanguage', targetLang);
@@ -3849,10 +3855,10 @@
         const pathParts = currentPath.split('/').filter(p => p);
         const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
 
-        пусть currentLang = 'en';
-        пусть currentPage = 'index';
+        let currentLang = 'en';
+        let currentPage = 'index';
 
-        для (пусть я = 0; я< pathParts.length; i++) {
+        for (let i = 0; i < pathParts.length; i++) {
           if (langDirs.includes(pathParts[i])) {
             currentLang = pathParts[i];
             currentPage = pathParts[i + 1] || 'index';

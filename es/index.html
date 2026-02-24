@@ -46,13 +46,14 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://nolilab.com/" />
+    <link rel="canonical" href="https://nolilab.com/es/" />
 
     <!-- Hreflang Tags for Multilingual SEO -->
     <link rel="alternate" hreflang="en" href="https://nolilab.com/" />
     <link rel="alternate" hreflang="ja" href="https://nolilab.com/ja/" />
     <link rel="alternate" hreflang="es" href="https://nolilab.com/es/" />
     <link rel="alternate" hreflang="ru" href="https://nolilab.com/ru/" />
+    <link rel="alternate" hreflang="fr" href="https://nolilab.com/fr/" />
     <link rel="alternate" hreflang="zh" href="https://nolilab.com/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://nolilab.com/" />
     
@@ -3539,98 +3540,99 @@
       </div>
     </footer>
 
-    <script>// Alternar menú móvil
+    <script>
+      // Mobile Menu Toggle
       const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
-      cuerpo constante = documento.cuerpo;
+      const body = document.body;
 
-      si (mobileMenuToggle) {
+      if (mobileMenuToggle) {
         mobileMenuToggle.addEventListener('click', () => {
-          mobileMenuToggle.classList.toggle('activo');
-          navLinks.classList.toggle('activo');
-          body.classList.toggle('menú abierto');
+          mobileMenuToggle.classList.toggle('active');
+          navLinks.classList.toggle('active');
+          body.classList.toggle('menu-open');
         });
 
-        //Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('.nav-link').forEach(enlace => {
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
           link.addEventListener('click', () => {
-            mobileMenuToggle.classList.remove('activo');
-            navLinks.classList.remove('activo');
-            body.classList.remove('menú abierto');
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
           });
         });
 
-        // Cerrar menú al hacer clic en superposición
+        // Close menu when clicking overlay
         document.addEventListener('click', (e) => {
-          if (body.classList.contains('menú-abierto') &&
-              !navLinks.contiene(e.objetivo) &&
-              !mobileMenuToggle.contiene(e.objetivo)) {
-            mobileMenuToggle.classList.remove('activo');
-            navLinks.classList.remove('activo');
-            body.classList.remove('menú abierto');
+          if (body.classList.contains('menu-open') &&
+              !navLinks.contains(e.target) &&
+              !mobileMenuToggle.contains(e.target)) {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
           }
         });
       }
 
-      // Desplazamiento suave para enlaces de navegación
-      document.querySelectorAll('.nav-link').forEach(enlace => {
+      // Smooth scroll for navigation links
+      document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
           const href = link.getAttribute('href');
-          si (href.startsWith('#')) {
+          if (href.startsWith('#')) {
             e.preventDefault();
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
-            si (elementodestino) {
-              ventana.scrollTo({
-                arriba: targetElement.offsetTop - 80,
-                comportamiento: 'suave'
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
               });
             }
           }
         });
       });
 
-      // Manejador de formulario de boletín
+      // Newsletter Form Handler
       const newsletterForm = document.getElementById('newsletterForm');
-      si (formulario del boletín) {
-        newsletterForm.addEventListener('enviar', (e) => {
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
           e.preventDefault();
           const emailInput = newsletterForm.querySelector('.newsletter-input');
-          correo electrónico constante = emailInput.value;
+          const email = emailInput.value;
 
-          // Aquí normalmente enviarías el correo electrónico a tu backend
-          // Por ahora, solo mostraremos una confirmación simple
+          // Here you would normally send the email to your backend
+          // For now, we'll just show a simple confirmation
           alert(`¡Gracias por suscribirte! Enviaremos actualizaciones a ${email}`);
-          emailInput.valor = '';
+          emailInput.value = '';
         });
       }
 
-      // Funcionalidad del control deslizante de imagen
+      // Image Slider Functionality
       document.addEventListener('DOMContentLoaded', () => {
-        diapositivas constantes = document.querySelectorAll('.slide');
-        puntos constantes = document.querySelectorAll('.slider-dot');
-        const títuloTexto = document.querySelector('.título-texto');
-        dejar diapositiva actual = 0;
-        let isTyping = falso; // Evitar animaciones superpuestas
-        intervalo de diapositiva constante = 5000; // 5 segundos (aumentados para permitir que se complete la escritura)
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const headlineText = document.querySelector('.headline-text');
+        let currentSlide = 0;
+        let isTyping = false; // Prevent overlapping animations
+        const slideInterval = 5000; // 5 seconds (increased to allow typing to complete)
         
-        // Titulares correspondientes a cada diapositiva
-        titulares constantes = [
+        // Headlines corresponding to each slide
+        const headlines = [
           'Loko - Rastreador GPS Offline de Largo Alcance',
           'Rastree Todo, En Cualquier Lugar',
           'Plataforma de Gestión de Datos IoT',
         ];
 
-        función typeWriter(texto, elemento, velocidad = 50) {
-          si (está escribiendo) devuelve Promise.resolve(); // Saltar si ya estás escribiendo
+        function typeWriter(text, element, speed = 50) {
+          if (isTyping) return Promise.resolve(); // Skip if already typing
           
-          devolver nueva Promesa((resolver) => {
-            está escribiendo = verdadero;
-            elemento.textContent = '';
-            sea yo = 0;
+          return new Promise((resolve) => {
+            isTyping = true;
+            element.textContent = '';
+            let i = 0;
             
-            tipo de función() {
-              si (yo< text.length) {
+            function type() {
+              if (i < text.length) {
                 element.textContent += text.charAt(i);
                 i++;
                 setTimeout(type, speed);
@@ -3646,83 +3648,86 @@
 
         async function showSlide(index) {
           // Remove active classes
-          slides.forEach(slide =>slide.classList.remove('activo'));
-          puntos.forEach(punto => { punto.classList.remove('activo'); punto.removeAttribute('aria-current'); });
+          slides.forEach(slide => slide.classList.remove('active'));
+          dots.forEach(dot => { dot.classList.remove('active'); dot.removeAttribute('aria-current'); });
           
-          // Agregar clases activas
-          diapositivas[index].classList.add('active');
-          puntos[índice].classList.add('activo');
-          puntos[índice].setAttribute('aria-current', 'true');
+          // Add active classes
+          slides[index].classList.add('active');
+          dots[index].classList.add('active');
+          dots[index].setAttribute('aria-current', 'true');
           
-          // Cambiar título con animación de escritura
-          await typeWriter(titulares[índice], títuloTexto);
-          diapositivaactual = índice;
+          // Change headline with typing animation
+          await typeWriter(headlines[index], headlineText);
+          currentSlide = index;
         }
 
-        función siguientediapositiva() {
-          let siguiente = diapositiva actual + 1;
-          if (siguiente >= diapositivas.longitud) siguiente = 0;
-          mostrarDiapositiva(siguiente);
+        function nextSlide() {
+          let next = currentSlide + 1;
+          if (next >= slides.length) next = 0;
+          showSlide(next);
         }
 
-        // Inicializa la animación del primer título
-        typeWriter(titulares[0], títuloTexto);
+        // Initialize first headline animation
+        typeWriter(headlines[0], headlineText);
 
-        // Iniciar el control deslizante automático después de completar la escritura inicial
+        // Start automatic slider after initial typing completes
         setTimeout(() => {
           let slideTimer = setInterval(nextSlide, slideInterval);
 
-          // Agregar eventos de clic a los puntos
-          puntos.forEach((punto, índice) => {
+          // Add click events to dots
+          dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-              clearInterval(temporizador de diapositivas);
-              mostrar diapositiva(índice);
-              slideTimer = setInterval(siguienteDiapositiva, slideInterval);
+              clearInterval(slideTimer);
+              showSlide(index);
+              slideTimer = setInterval(nextSlide, slideInterval);
             });
           });
 
-          // Pausa al pasar el mouse
-          control deslizante const = document.getElementById('control deslizante');
-          si (control deslizante) {
+          // Pause on hover
+          const slider = document.getElementById('slider');
+          if (slider) {
             slider.addEventListener('mouseenter', () => clearInterval(slideTimer));
             slider.addEventListener('mouseleave', () => {
-              slideTimer = setInterval(siguienteDiapositiva, slideInterval);
+              slideTimer = setInterval(nextSlide, slideInterval);
             });
           }
 
-          // Agregar eventos de desplazamiento a las funciones de la aplicación para cambiar el control deslizante
+          // Add hover events to app features to change slider
           const appFeatures = document.querySelectorAll('.app-feature');
-          appFeatures.forEach(característica => {
+          appFeatures.forEach(feature => {
             feature.addEventListener('mouseenter', () => {
-              clearInterval(temporizador de diapositivas);
-              const slideIndex = parseInt(feature.getAttribute('diapositiva de datos'));
-              mostrarDiapositiva(diapositivaIndex);
+              clearInterval(slideTimer);
+              const slideIndex = parseInt(feature.getAttribute('data-slide'));
+              showSlide(slideIndex);
             });
 
             feature.addEventListener('mouseleave', () => {
               slideTimer = setInterval(nextSlide, slideInterval);
             });
           });
-        }, titulares[0].length * 50 + 500); // Espera a que se complete la primera animación
+        }, headlines[0].length * 50 + 500); // Wait for first animation to complete
        });
 
-      // Preguntas frecuentes sobre acordeón
-      document.querySelectorAll('.pregunta-faq').forEach(botón => {
+      // FAQ Accordion
+      document.querySelectorAll('.faq-question').forEach(button => {
         button.addEventListener('click', () => {
-          elemento constante = botón.parentElement;
-          const isActive = item.classList.contains('activo');
+          const item = button.parentElement;
+          const isActive = item.classList.contains('active');
           
-          //Cerrar todos los demás elementos
+          // Close all other items
           document.querySelectorAll('.faq-item').forEach(otherItem => {
-            otherItem.classList.remove('activo');
+            otherItem.classList.remove('active');
           });
           
-          // Alternar elemento actual si no estaba activo
-          si (!isActive) {
-            item.classList.add('activo');
+          // Toggle current item if it wasn't active
+          if (!isActive) {
+            item.classList.add('active');
           }
         });
-      });</script>
+      });
+
+
+    </script>
     <script>
       // Interactive Visualization Functionality
       document.addEventListener("DOMContentLoaded", function() {
