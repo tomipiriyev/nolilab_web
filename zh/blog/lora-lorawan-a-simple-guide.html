@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LoRa & LoRaWAN: A Simple Guide | nolilab Blog</title>
+  <title>LoRa与LoRaWAN：简明指南 | nolilab博客</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -12,8 +12,17 @@
   <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../css/fa-subset.css">
-  <meta name="description" content="A wireless communication technology designed for long-range, low-power, and reliable data transmission with strong interference resistance.">
+  <link rel="stylesheet" href="../../css/fa-subset.css">
+  <meta name="description" content="一种专为远距离、低功耗和可靠数据传输而设计的无线通信技术，具有强抗干扰性。">
+  <link rel="canonical" href="https://nolilab.com/zh/blog/lora-lorawan-a-simple-guide" />
+  <link rel="alternate" hreflang="en" href="https://nolilab.com/blog/lora-lorawan-a-simple-guide" />
+  <link rel="alternate" hreflang="es" href="https://nolilab.com/es/blog/lora-lorawan-a-simple-guide" />
+  <link rel="alternate" hreflang="ja" href="https://nolilab.com/ja/blog/lora-lorawan-a-simple-guide" />
+  <link rel="alternate" hreflang="fr" href="https://nolilab.com/fr/blog/lora-lorawan-a-simple-guide" />
+  <link rel="alternate" hreflang="ru" href="https://nolilab.com/ru/blog/lora-lorawan-a-simple-guide" />
+  <link rel="alternate" hreflang="zh" href="https://nolilab.com/zh/blog/lora-lorawan-a-simple-guide" />
+  <link rel="alternate" hreflang="x-default" href="https://nolilab.com/blog/lora-lorawan-a-simple-guide" />
+  <meta property="og:url" content="https://nolilab.com/zh/blog/lora-lorawan-a-simple-guide" />
   <style>
     :root {
       --bg-primary: #ffffff;
@@ -340,20 +349,20 @@
 <body>
   <header>
     <div class="container nav-container">
-      <a href="/" class="logo">nolilab</a>
+      <a href="../" class="logo">nolilab</a>
       <div class="nav-links">
-        <a href="/#shop" class="nav-link">Shop</a>
-        <a href="/software" class="nav-link">Software</a>
-        <a href="/blog" class="nav-link">Blog</a>
-        <a href="/#faq" class="nav-link">FAQ</a>
+        <a href="../#shop" class="nav-link">Shop</a>
+        <a href="../software" class="nav-link">Software</a>
+        <a href="../blog" class="nav-link">Blog</a>
+        <a href="../#faq" class="nav-link">FAQ</a>
       </div>
     </div>
   </header>
     <main>
 
   <article>
-    <a href="/blog" class="back-link">
-      <i class="fas fa-arrow-left"></i> Back to Blog
+    <a href="../blog" class="back-link">
+      <i class="fas fa-arrow-left"></i> 返回博客
     </a>
 
     <div class="article-header">
@@ -361,68 +370,68 @@
         <span><i class="far fa-calendar"></i> March 26, 2025</span>
         <span><i class="far fa-user"></i> Tamleykha Piriyev</span>
       </div>
-      <h1 class="article-title">LoRa & LoRaWAN: A Simple Guide</h1>
+      <h1 class="article-title">LoRa与LoRaWAN：简明指南</h1>
     </div>
 
     <img src="https://nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&width=1920" alt="LoRa Spreading Factor" class="article-image">
 
     <div class="article-content">
-      <h2>Radio Interface LoRa / LoraWAN. Modulation</h2>
-      <p>LoRa (Long Range) represents a wireless communication technology designed for long-range, low-power, and reliable data transmission with strong interference resistance, making it suitable for IoT applications and low-power wide-area networks.</p>
+      <h2>LoRa / LoRaWAN无线接口——调制</h2>
+      <p>LoRa（远距离）代表一种专为远距离、低功耗和可靠数据传输而设计的无线通信技术，具有强抗干扰性，适用于IoT应用和低功耗广域网络。</p>
 
-      <p><strong>AM</strong> - Amplitude Modulation<br>
-      <strong>FM</strong> - Frequency Modulation</p>
+      <p><strong>AM</strong> - 幅度调制<br>
+      <strong>FM</strong> - 频率调制</p>
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Amfm3-en-de.gif?v=1743011265" alt="AM/FM Modulation Animation">
 
-      <p><strong>Modulation:</strong> The process involves encoding information onto a carrier signal by varying its frequency, amplitude, or phase, allowing the transmission of useful signals over a distance.</p>
+      <p><strong>调制：</strong>该过程通过改变载波信号的频率、幅度或相位将信息编码到载波信号上，从而实现有用信号在一定距离上的传输。</p>
 
-      <p><strong>Amplitude Modulation (AM):</strong> The amplitude of the carrier signal is varied in proportion to the information signal while the frequency and phase remain constant.</p>
+      <p><strong>幅度调制（AM）：</strong>载波信号的幅度按照信息信号的比例变化，而频率和相位保持不变。</p>
 
-      <p><strong>Frequency Modulation (FM):</strong> The frequency of the carrier signal is varied in proportion to the information signal while its amplitude remains constant.</p>
+      <p><strong>频率调制（FM）：</strong>载波信号的频率按照信息信号的比例变化，而幅度保持不变。</p>
 
-      <p>LoRa employs a combined modulation technique based on linear frequency modulation (chirp spread spectrum, CSS), where signal frequency continuously increases or decreases within a defined range.</p>
+      <p>LoRa采用基于线性频率调制（线性调频扩频，CSS）的组合调制技术，信号频率在规定范围内连续增加或减少。</p>
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora2.png?v=1743011098" alt="LoRa Modulation Diagram - Linear Frequency Modulation">
 
-      <p>LoRaWAN modulation utilizes LFM (linear frequency modulation) or CSS (chirp spread spectrum).</p>
+      <p>LoRaWAN调制利用LFM（线性频率调制）或CSS（线性调频扩频）。</p>
 
-      <h2>Radio Interface Lora / LoraWAN. Modulation</h2>
-      <p>Chirp modulation in LoRa consists of irregular cycle breaks, meaning the cycle can stop at any point rather than at equal time intervals. This creates time shifts, enhancing robustness and noise resistance.</p>
+      <h2>LoRa / LoRaWAN无线接口——调制</h2>
+      <p>LoRa中的线性调频调制由不规则的周期中断组成，这意味着周期可以在任何点停止，而不是在等时间间隔处停止。这会产生时间偏移，增强鲁棒性和抗噪声能力。</p>
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora1.png?v=1743011137" alt="LoRa Signal Chirp - Cycle Breaking and Time Shifts">
 
-      <p>LoRaWAN modulation occurs by "breaking" the cycle at intermediate points, interpreted as time shifts.</p>
+      <p>LoRaWAN调制通过在中间点"打断"周期来实现，这被解释为时间偏移。</p>
 
-      <h2>Radio Interface. Spreading Factor</h2>
-      <p><strong>Spreading Factor (SF):</strong> Represents the "speed" of frequency change in LFM signals. Higher SF values indicate slower frequency changes.</p>
+      <h2>无线接口——扩频因子</h2>
+      <p><strong>扩频因子（SF）：</strong>表示LFM信号频率变化的"速度"。SF值越高表示频率变化越慢。</p>
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sf.png?v=1743010750" alt="Spreading Factor Comparison">
 
-      <p>Changing the SF by one unit means doubling the cycle (Chirp) time. For SF=7 and 125 kHz bandwidth, the chirp duration is 1.024 milliseconds.</p>
+      <p>将SF改变一个单位意味着周期（Chirp）时间翻倍。对于SF=7和125 kHz带宽，线性调频持续时间为1.024毫秒。</p>
 
-      <p>The length of the chirp affects signal noise, enhancing signal recognition at the output. This allows signal detection with lower energy and reduced RSSI levels.</p>
+      <p>线性调频的长度影响信号噪声，增强输出处的信号识别能力。这使得在较低能量和降低的RSSI水平下也能检测到信号。</p>
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/1_RdkCF2t6XsG7LA8nKLeGGg.webp?v=1743011173" alt="LoRa Signal Preamble Examples">
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Preamble-1_jpg.webp?v=1743011201" alt="LoRa Preamble Technical Diagram">
 
-      <p>The concept is simplified: <strong>Think of SF as a 'zoom lens'—higher SF 'zooms in' for longer range but sends data slower.</strong></p>
+      <p>这个概念可以简化理解：<strong>将SF想象成"变焦镜头"——SF越高，"变焦"越深，传输距离越远，但数据发送越慢。</strong></p>
 
-      <p><strong>Key principle:</strong> Higher Spreading Factor = Longer Range but Slower Data.</p>
+      <p><strong>关键原则：</strong>扩频因子越高 = 距离越远，但数据传输越慢。</p>
 
-      <h2>Data Encoding</h2>
-      <p><strong>Coding:</strong> Adding redundant (control) information to the transmitted user data to increase the probability of successful reception.</p>
+      <h2>数据编码</h2>
+      <p><strong>编码：</strong>向传输的用户数据添加冗余（控制）信息，以提高成功接收的概率。</p>
 
-      <p>The level of redundancy is determined by the coderate (CR) ratio, such as 4/5, which means that for every 5 transmitted bits, 4 bits are useful data, and 1 bit is a control (redundant) bit.</p>
+      <p>冗余级别由编码率（CR）比率决定，例如4/5，这意味着每传输5个比特中，4个比特是有用数据，1个比特是控制（冗余）比特。</p>
 
-      <p>LoRaWAN employs Coderate from 4/5 to 4/8.</p>
+      <p>LoRaWAN采用从4/5到4/8的编码率。</p>
 
-      <p>Data transmission rates (bps) for 125 kHz channel bandwidth depend on Spreading Factor (SF) and CodeRate (CR).</p>
+      <p>125 kHz信道带宽的数据传输速率（bps）取决于扩频因子（SF）和编码率（CR）。</p>
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Screenshot_2025-03-26_at_19.52.36.png?v=1743011226" alt="Data Transmission Rate Chart - bps for 125 kHz Channel">
 
-      <h2>LoRa Signal Sample</h2>
+      <h2>LoRa信号示例</h2>
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Example-of-LoRa-Signal.jpg?v=1743011304" alt="Example of LoRa Signal Waveform">
 
@@ -430,16 +439,16 @@
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/maxresdefault.jpg?v=1743011354" alt="LoRa Modulation Educational Material">
 
-      <h2>The Interdependence of Data Rate and Propagation Distance</h2>
-      <p>The relationship between spreading factor, data rate, and propagation distance is fundamental to LoRa performance. Higher spreading factors enable longer range communication but at the cost of reduced data transmission rates.</p>
+      <h2>数据速率与传播距离的相互依赖</h2>
+      <p>扩频因子、数据速率和传播距离之间的关系是LoRa性能的基础。更高的扩频因子可以实现更远距离的通信，但代价是数据传输速率降低。</p>
 
       <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm.png?v=1743011384" alt="Spreading Factor vs Data Rate and Range">
 
-      <h2>Conclusion</h2>
-      <p>LoRa and LoRaWAN technologies provide powerful solutions for long-range, low-power wireless communication. Understanding the key concepts of modulation, spreading factors, and data encoding is essential for optimizing your LoRa deployments and achieving the best balance between range, power consumption, and data throughput.</p>
+      <h2>结论</h2>
+      <p>LoRa和LoRaWAN技术为远距离、低功耗无线通信提供了强大的解决方案。理解调制、扩频因子和数据编码的关键概念对于优化LoRa部署以及在距离、功耗和数据吞吐量之间实现最佳平衡至关重要。</p>
 
       <div class="references">
-        <h3>References</h3>
+        <h3>参考资料</h3>
         <ul>
           <li><a href="https://en.wikipedia.org/wiki/Signal_modulation" target="_blank">Wikipedia: Signal Modulation</a></li>
           <li><a href="https://www.researchgate.net/figure/Example-of-LoRa-Signal_fig2_348345539" target="_blank">ResearchGate: Example of LoRa Signal</a></li>
@@ -454,13 +463,13 @@
 
   <footer>
     <div class="footer-container">
-      <a href="/" class="footer-logo">nolilab</a>
+      <a href="../" class="footer-logo">nolilab</a>
       <div class="footer-links">
-        <a href="/" class="footer-link">Home</a>
-        <a href="/specifications" class="footer-link">Specs</a>
-        <a href="/software" class="footer-link">Software</a>
-        <a href="/blog" class="footer-link">Blog</a>
-        <a href="/#faq" class="footer-link">FAQ</a>
+        <a href="../" class="footer-link">Home</a>
+        <a href="../specifications" class="footer-link">Specs</a>
+        <a href="../software" class="footer-link">Software</a>
+        <a href="../blog" class="footer-link">Blog</a>
+        <a href="../#faq" class="footer-link">FAQ</a>
       </div>
     </div>
   </footer>
