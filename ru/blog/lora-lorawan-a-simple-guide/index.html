@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoRa и LoRaWAN: простое руководство | nolilab Блог</title>
+  <link rel="canonical" href="https://nolilab.com/ru/blog/lora-lorawan-a-simple-guide/">
+  <link rel="alternate" hreflang="en" href="https://nolilab.com/blog/lora-lorawan-a-simple-guide/">
+  <link rel="alternate" hreflang="ru" href="https://nolilab.com/ru/blog/lora-lorawan-a-simple-guide/">
+  <link rel="alternate" hreflang="es" href="https://nolilab.com/es/blog/lora-lorawan-a-simple-guide/">
+  <link rel="alternate" hreflang="fr" href="https://nolilab.com/fr/blog/lora-lorawan-a-simple-guide/">
+  <link rel="alternate" hreflang="zh" href="https://nolilab.com/zh/blog/lora-lorawan-a-simple-guide/">
+  <link rel="alternate" hreflang="x-default" href="https://nolilab.com/blog/lora-lorawan-a-simple-guide/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/fa-subset.css">
+  <meta name="description" content="Технология беспроводной связи, разработанная для дальней передачи данных с низким энергопотреблением и высокой помехоустойчивостью.">
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content h4 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: var(--spacing-md) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .article-content img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-md);
+      margin: var(--spacing-lg) 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .article-content code {
+      background: var(--bg-secondary);
+      padding: 0.2em 0.4em;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    .references {
+      margin-top: var(--spacing-xl);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--border);
+    }
+
+    .references h3 {
+      font-size: 1.125rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .references ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .references li {
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .references a {
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .references a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "LoRa & LoRaWAN: A Simple Guide",
+  "description": "A wireless communication technology designed for long-range, low-power, and reliable data transmission with strong interference resistance.",
+  "url": "https://nolilab.com/blog/lora-lorawan-a-simple-guide",
+  "datePublished": "2025-03-26",
+  "dateModified": "2025-03-26",
+  "author": {
+    "@type": "Person",
+    "name": "Tamleykha Piriyev"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nolilab.com/images/optimized/loco_Red_transparent.png"
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&width=1920"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nolilab.com/blog/lora-lorawan-a-simple-guide"
+  }
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <a href="/ru/" class="logo">nolilab</a>
+      <div class="nav-links">
+        <a href="/ru/#shop" class="nav-link">Shop</a>
+        <a href="/ru/software/" class="nav-link">Software</a>
+        <a href="/ru/blog/" class="nav-link">Blog</a>
+        <a href="/ru/#faq" class="nav-link">FAQ</a>
+      </div>
+    </div>
+  </header>
+    <main>
+
+  <article>
+    <a href="/ru/blog/" class="back-link">
+      <i class="fas fa-arrow-left"></i> Вернуться в блог
+    </a>
+
+    <div class="article-header">
+      <div class="article-meta">
+        <span><i class="far fa-calendar"></i> March 26, 2025</span>
+        <span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+      </div>
+      <h1 class="article-title">LoRa и LoRaWAN: простое руководство</h1>
+    </div>
+
+    <img src="https://nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&width=1920" alt="LoRa Spreading Factor" class="article-image">
+
+    <div class="article-content">
+      <h2>Радиоинтерфейс LoRa / LoRaWAN. Модуляция</h2>
+      <p>LoRa (Long Range) — технология беспроводной связи, разработанная для дальней передачи данных с низким энергопотреблением и высокой надёжностью при сильных помехах, что делает её пригодной для IoT-приложений и маломощных сетей большой дальности.</p>
+
+      <p><strong>AM</strong> — амплитудная модуляция<br>
+      <strong>FM</strong> — частотная модуляция</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Amfm3-en-de.gif?v=1743011265" alt="AM/FM Modulation Animation">
+
+      <p><strong>Модуляция:</strong> Процесс кодирования информации на несущий сигнал путём изменения его частоты, амплитуды или фазы, позволяющий передавать полезные сигналы на расстояние.</p>
+
+      <p><strong>Амплитудная модуляция (AM):</strong> Амплитуда несущего сигнала изменяется пропорционально информационному сигналу, в то время как частота и фаза остаются постоянными.</p>
+
+      <p><strong>Частотная модуляция (FM):</strong> Частота несущего сигнала изменяется пропорционально информационному сигналу, тогда как его амплитуда остаётся постоянной.</p>
+
+      <p>LoRa применяет комбинированный метод модуляции на основе линейной частотной манипуляции (chirp spread spectrum, CSS), при котором частота сигнала непрерывно увеличивается или уменьшается в заданном диапазоне.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora2.png?v=1743011098" alt="LoRa Modulation Diagram - Linear Frequency Modulation">
+
+      <p>Модуляция LoRaWAN использует ЛЧМ (линейную частотную манипуляцию) или CSS (chirp spread spectrum).</p>
+
+      <h2>Радиоинтерфейс LoRa / LoRaWAN. Модуляция</h2>
+      <p>Чёрп-модуляция в LoRa состоит из нерегулярных разрывов цикла, то есть цикл может прерваться в любой точке, а не через равные промежутки времени. Это создаёт временные сдвиги, повышая устойчивость и помехозащищённость.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora1.png?v=1743011137" alt="LoRa Signal Chirp - Cycle Breaking and Time Shifts">
+
+      <p>Модуляция LoRaWAN происходит путём «разрыва» цикла в промежуточных точках, интерпретируемых как временные сдвиги.</p>
+
+      <h2>Радиоинтерфейс. Коэффициент расширения спектра</h2>
+      <p><strong>Коэффициент расширения спектра (SF):</strong> Обозначает «скорость» изменения частоты в ЛЧМ-сигналах. Более высокие значения SF означают более медленное изменение частоты.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sf.png?v=1743010750" alt="Spreading Factor Comparison">
+
+      <p>Изменение SF на одну единицу означает удвоение времени цикла (чёрпа). При SF=7 и полосе пропускания 125 кГц длительность чёрпа составляет 1,024 миллисекунды.</p>
+
+      <p>Длина чёрпа влияет на шум сигнала, улучшая распознавание сигнала на выходе. Это позволяет обнаруживать сигнал при меньшей энергии и сниженных уровнях RSSI.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/1_RdkCF2t6XsG7LA8nKLeGGg.webp?v=1743011173" alt="LoRa Signal Preamble Examples">
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Preamble-1_jpg.webp?v=1743011201" alt="LoRa Preamble Technical Diagram">
+
+      <p>Концепция упрощённо: <strong>Воспринимайте SF как «объектив с зумом» — более высокий SF «приближает» для большей дальности, но замедляет передачу данных.</strong></p>
+
+      <p><strong>Ключевой принцип:</strong> Более высокий коэффициент расширения = большая дальность, но меньшая скорость передачи данных.</p>
+
+      <h2>Кодирование данных</h2>
+      <p><strong>Кодирование:</strong> Добавление избыточной (контрольной) информации к передаваемым пользовательским данным для повышения вероятности успешного приёма.</p>
+
+      <p>Уровень избыточности определяется соотношением кодовой скорости (CR), например 4/5, что означает: из каждых 5 передаваемых бит 4 бита являются полезными данными, а 1 бит — контрольным (избыточным).</p>
+
+      <p>LoRaWAN использует кодовую скорость от 4/5 до 4/8.</p>
+
+      <p>Скорость передачи данных (бит/с) для полосы канала 125 кГц зависит от коэффициента расширения спектра (SF) и кодовой скорости (CR).</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Screenshot_2025-03-26_at_19.52.36.png?v=1743011226" alt="Data Transmission Rate Chart - bps for 125 kHz Channel">
+
+      <h2>Пример сигнала LoRa</h2>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Example-of-LoRa-Signal.jpg?v=1743011304" alt="Example of LoRa Signal Waveform">
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sensors-20-04034-g001-550.jpg?v=1743011334" alt="LoRa Signal Analysis">
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/maxresdefault.jpg?v=1743011354" alt="LoRa Modulation Educational Material">
+
+      <h2>Взаимосвязь скорости передачи данных и дальности распространения</h2>
+      <p>Взаимосвязь между коэффициентом расширения, скоростью передачи данных и дальностью распространения является фундаментальной для производительности LoRa. Более высокие коэффициенты расширения обеспечивают связь на большее расстояние, но за счёт снижения скорости передачи данных.</p>
+
+      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm.png?v=1743011384" alt="Spreading Factor vs Data Rate and Range">
+
+      <h2>Заключение</h2>
+      <p>Технологии LoRa и LoRaWAN предоставляют мощные решения для беспроводной связи с большой дальностью и низким энергопотреблением. Понимание ключевых концепций модуляции, коэффициентов расширения и кодирования данных необходимо для оптимизации развёртываний LoRa и достижения наилучшего баланса между дальностью, энергопотреблением и пропускной способностью.</p>
+
+      <div class="references">
+        <h3>Источники</h3>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Signal_modulation" target="_blank">Wikipedia: Signal Modulation</a></li>
+          <li><a href="https://www.researchgate.net/figure/Example-of-LoRa-Signal_fig2_348345539" target="_blank">ResearchGate: Example of LoRa Signal</a></li>
+          <li><a href="https://www.youtube.com/watch?v=yHocu_n2udI" target="_blank">YouTube: LoRa Tutorial</a></li>
+          <li><a href="https://www.researchgate.net/figure/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless_fig7_324043563" target="_blank">ResearchGate: LoRa Spreading Factor, SF, Bitrates and Time on Air</a></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <a href="/ru/" class="footer-logo">nolilab</a>
+      <div class="footer-links">
+        <a href="/ru/" class="footer-link">Home</a>
+        <a href="/ru/specifications/" class="footer-link">Specs</a>
+        <a href="/ru/software/" class="footer-link">Software</a>
+        <a href="/ru/blog/" class="footer-link">Blog</a>
+        <a href="/ru/#faq" class="footer-link">FAQ</a>
+      </div>
+    </div>
+  </footer>
+    <script src="/js/analytics.js"></script>
+</body>
+</html>

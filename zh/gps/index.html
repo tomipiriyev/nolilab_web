@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+    <title>GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | NoliLab</title>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" /></noscript>
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7W0Q5n-wU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/fa-subset.css" />
+    <meta name="description" content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." />
+    <meta name="theme-color" content="#ffffff" />
+    
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | NoliLab" />
+    <meta property="og:description" content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." />
+    <meta property="og:url" content="https://nolilab.com/gps" />
+    <meta property="og:image" content="https://nolilab.com/images/optimized/loco_Red_transparent.png" />
+    <meta property="og:image:alt" content="Loko GPS Tracker and Technology Guide" />
+    <meta property="og:site_name" content="NoliLab" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | NoliLab" />
+    <meta name="twitter:description" content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." />
+    <meta name="twitter:image" content="https://nolilab.com/images/optimized/loco_Red_transparent.png" />
+    <meta name="twitter:site" content="@nolilab" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="keywords" content="GPS glossary, LoRa technology, GPS terms, LoRa explanation, P2P communication, radio technology" />
+    <meta name="author" content="Nolilab" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nolilab.com/gps/" />
+    <link rel="alternate" hreflang="en" href="https://nolilab.com/gps/" />
+    <link rel="alternate" hreflang="ja" href="https://nolilab.com/ja/gps/" />
+    <link rel="alternate" hreflang="es" href="https://nolilab.com/es/gps/" />
+    <link rel="alternate" hreflang="ru" href="https://nolilab.com/ru/gps/" />
+    <link rel="alternate" hreflang="zh" href="https://nolilab.com/zh/gps/" />
+    <link rel="alternate" hreflang="x-default" href="https://nolilab.com/gps/" />
+
+    <!-- Schema.org Structured Data (JSON-LD) - Glossary/Educational Content -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is GPS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GPS (Global Positioning System) is a satellite-based navigation system that provides location and time information in all weather conditions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is LoRa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LoRa (Long Range) is a wireless modulation technique that enables long-range, low-power communication for Internet of Things (IoT) applications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is LoRa P2P?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LoRa P2P (Peer-to-Peer) is direct device-to-device communication using LoRa technology without requiring a central server or internet connection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between LoRa and LoRaWAN?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LoRa is a modulation technique, while LoRaWAN is a networking protocol. LoRa P2P is direct communication; LoRaWAN uses a gateway and cloud architecture."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nolilab.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Glossary",
+          "item": "https://nolilab.com/gps.html"
+        }
+      ]
+    }
+    </script>
+    <meta name="theme-color" content="#0d1117" />
+    <style>
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f6f8fa;
+        --text-primary: #24292e;
+        --text-secondary: #57606a;
+        --accent: #238636;
+        --accent-hover: #2ea043;
+        --border: #d0d7de;
+        --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3rem;
+        --radius-sm: 0.25rem;
+        --radius-md: 0.5rem;
+        --radius-lg: 0.75rem;
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+        --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        font-weight: 400;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-sm);
+      }
+
+      /* Header Navigation */
+      header {
+        padding: var(--spacing-md) 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-size: 1.25rem;
+        font-weight: 500;
+        font-family: var(--font-mono);
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: var(--spacing-lg);
+        align-items: center;
+      }
+
+      .nav-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.875rem;
+        transition: color 0.2s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--text-primary);
+      }
+
+      .social-icons {
+        display: flex;
+        gap: var(--spacing-xs);
+        align-items: center;
+        margin-left: var(--spacing-sm);
+        flex-shrink: 0;
+      }
+
+      .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      width: 32px;
+      height: 32px;
+        color: #333333 !important;
+        border-radius: var(--radius-sm);
+        transition: all 0.2s ease;
+        text-decoration: none;
+      }
+
+      .social-icon:hover {
+        color: #333333 !important;
+        background-color: var(--bg-secondary);
+        transform: translateY(-1px);
+      }
+
+      .social-icon:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .social-icon svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+
+      .social-icon i {
+        font-size: 16px;
+      }
+
+      /* Page Hero */
+      .page-hero {
+        padding: var(--spacing-lg) 0 var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        background: var(--bg-secondary);
+      }
+
+      .page-hero h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+        font-family: var(--font-mono);
+        margin-bottom: 0.4rem;
+      }
+
+      .page-hero p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        max-width: 700px;
+      }
+
+      /* Compact content */
+      .content-section {
+        padding: var(--spacing-lg) 0;
+      }
+
+      .section-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: var(--spacing-sm);
+        font-family: var(--font-mono);
+      }
+
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .topic-card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: var(--spacing-md);
+        background: var(--bg-primary);
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .topic-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 3px;
+        background: var(--accent);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .topic-card:hover {
+        border-color: var(--accent);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-1px);
+      }
+
+      .topic-card:hover::before { opacity: 1; }
+
+      .topic-card-icon {
+        width: 36px;
+        height: 36px;
+        margin-bottom: var(--spacing-sm);
+        object-fit: contain;
+      }
+
+      .topic-card h2 {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-family: var(--font-mono);
+        margin-bottom: 0.4rem;
+        line-height: 1.3;
+      }
+
+      .topic-card .lead {
+        font-size: 0.8125rem;
+        color: var(--accent);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        line-height: 1.5;
+        padding: 0.35rem 0.6rem;
+        background: rgba(35, 134, 54, 0.08);
+        border-left: 2px solid var(--accent);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      .topic-card p {
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        margin-bottom: 0.4rem;
+      }
+
+      .topic-card p:last-child { margin-bottom: 0; }
+
+      /* Divider */
+      .section-divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: var(--spacing-lg) 0;
+      }
+
+      /* Modulation section */
+      .modulation-header {
+        margin-bottom: var(--spacing-md);
+      }
+
+      .modulation-header h2 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-family: var(--font-mono);
+        margin-bottom: 0.25rem;
+      }
+
+      .modulation-header p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+      }
+
+      .feature-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: var(--spacing-md);
+        transition: all 0.2s ease;
+      }
+
+      .feature-card:hover {
+        border-color: var(--accent);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .feature-card h3 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+        color: var(--text-primary);
+        font-family: var(--font-mono);
+      }
+
+      .feature-card p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-size: 0.8125rem;
+      }
+
+      .doc-hub-footer {
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(35, 134, 54, 0.05);
+        border-radius: var(--radius-md);
+        border: 1px solid rgba(35, 134, 54, 0.2);
+      }
+
+      .doc-hub-footer p {
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .doc-hub-footer a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .doc-hub-footer a:hover { color: var(--accent-hover); }
+
+      @media (max-width: 768px) {
+        .topic-grid,
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+
+      /* Footer */
+      footer {
+        padding: var(--spacing-xl) 0;
+        background-color: var(--bg-secondary);
+        border-top: 1px solid var(--border);
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-sm);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+      }
+
+      .footer-logo {
+        font-size: 1.25rem;
+        font-weight: 500;
+        font-family: var(--font-mono);
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: var(--spacing-md);
+        align-items: center;
+      }
+
+      .footer-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.875rem;
+        transition: color 0.2s ease;
+      }
+
+      .footer-link:hover {
+        color: var(--text-primary);
+      }
+
+      .footer-copyright {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        font-family: var(--font-mono);
+      }
+
+      /* Mobile Menu Toggle */
+      .mobile-menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1001;
+        margin-left: auto;
+      }
+
+      .mobile-menu-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--text-primary);
+        transition: all 0.3s ease;
+      }
+
+      .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      @media (max-width: 768px) {
+        .nav-container {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .mobile-menu-toggle {
+          display: flex;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 0;
+          left: -100%;
+          width: 80%;
+          max-width: 300px;
+          height: 100vh;
+          background: var(--bg-primary);
+          flex-direction: column;
+          gap: 0;
+          padding: 80px 1.5rem 1.5rem;
+          box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+          transition: left 0.3s ease;
+          z-index: 1000;
+          overflow-y: auto;
+          border-right: 1px solid var(--border);
+        }
+
+        .nav-links.active {
+          left: 0;
+        }
+
+        .nav-link {
+          width: 100%;
+          padding: 1.5rem;
+          border-bottom: 1px solid var(--border);
+          text-align: left;
+          font-size: 1rem;
+        }
+
+        .social-icons {
+          display: none;
+        }
+
+        body.menu-open::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 999;
+        }
+
+        body.menu-open {
+          overflow: hidden;
+        }
+
+        .footer-container {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: var(--spacing-md);
+        }
+      }
+
+
+      /* Language Selector */
+      .language-selector {
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.75rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        cursor: pointer;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .language-btn:hover {
+        background: var(--bg-tertiary);
+        border-color: var(--accent);
+      }
+
+      .language-btn .fa-globe {
+        font-size: 1rem;
+        color: var(--text-secondary);
+      }
+
+      .current-lang {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .language-btn .fa-chevron-down {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        transition: transform 0.2s ease;
+      }
+
+      .language-selector:hover .fa-chevron-down {
+        transform: rotate(180deg);
+      }
+
+      .language-dropdown {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        right: 0;
+        background: var(--bg-primary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.2s ease;
+        z-index: 1000;
+      }
+
+      .language-selector:hover .language-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .language-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: background 0.2s ease;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .language-option:last-child {
+        border-bottom: none;
+      }
+
+      .language-option:hover {
+        background: var(--bg-secondary);
+      }
+
+      .lang-code {
+        font-weight: 600;
+        font-size: 0.875rem;
+      }
+
+      .lang-name {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      @media (max-width: 1024px) {
+        .language-selector {
+          position: static;
+        }
+
+        .language-dropdown {
+          position: fixed;
+          top: auto;
+          right: 1rem;
+          left: 1rem;
+          bottom: 1rem;
+          min-width: auto;
+        }
+      }
+    /* Footer */
+      footer {
+        padding: var(--spacing-xl) 0;
+        background-color: var(--bg-secondary);
+        border-top: 1px solid var(--border);
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-sm);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+      }
+
+      .footer-logo {
+        font-size: 1.25rem;
+        font-weight: 500;
+        font-family: var(--font-mono);
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: var(--spacing-md);
+        align-items: center;
+      }
+
+      .footer-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.875rem;
+        transition: color 0.2s ease;
+      }
+
+      .footer-link:hover {
+        color: var(--text-primary);
+      }
+
+      .footer-copyright {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        font-family: var(--font-mono);
+      }
+
+      /* Mobile Menu Toggle */
+      .mobile-menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1001;
+        margin-left: auto;
+      }
+
+      .mobile-menu-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--text-primary);
+        transition: all 0.3s ease;
+      }
+
+      .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      @media (max-width: 768px) {
+        .nav-container {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .mobile-menu-toggle {
+          display: flex;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 0;
+          left: -100%;
+          width: 80%;
+          max-width: 300px;
+          height: 100vh;
+          background: var(--bg-primary);
+          flex-direction: column;
+          gap: 0;
+          padding: 80px 1.5rem 1.5rem;
+          box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+          transition: left 0.3s ease;
+          z-index: 1000;
+          overflow-y: auto;
+          border-right: 1px solid var(--border);
+        }
+
+        .nav-links.active {
+          left: 0;
+        }
+
+        .nav-link {
+          width: 100%;
+          padding: 1.5rem;
+          border-bottom: 1px solid var(--border);
+          text-align: left;
+          font-size: 1rem;
+        }
+
+        .social-icons {
+          display: none;
+        }
+
+        body.menu-open::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 999;
+        }
+
+        body.menu-open {
+          overflow: hidden;
+        }
+
+        .footer-container {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: var(--spacing-md);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .glossary h1 {
+          font-size: 2rem;
+        }
+
+        .glossary-item {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+        }
+
+        .glossary-item:nth-child(even) {
+          grid-template-columns: 1fr;
+        }
+
+        .glossary-item:nth-child(even) .glossary-image {
+          order: 1;
+        }
+
+        .glossary-item:nth-child(even) .glossary-content {
+          order: 2;
+        }
+
+        .glossary-content h2 {
+          font-size: 1.5rem;
+        }
+      }
+
+      /* Language Selector */
+      .language-selector {
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.75rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        cursor: pointer;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .language-btn:hover {
+        background: var(--bg-tertiary);
+        border-color: var(--accent);
+      }
+
+      .language-btn .fa-globe {
+        font-size: 1rem;
+        color: var(--text-secondary);
+      }
+
+      .current-lang {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .language-btn .fa-chevron-down {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        transition: transform 0.2s ease;
+      }
+
+      .language-selector:hover .fa-chevron-down {
+        transform: rotate(180deg);
+      }
+
+      .language-dropdown {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        right: 0;
+        background: var(--bg-primary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.2s ease;
+        z-index: 1000;
+      }
+
+      .language-selector:hover .language-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .language-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: background 0.2s ease;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .language-option:last-child {
+        border-bottom: none;
+      }
+
+      .language-option:hover {
+        background: var(--bg-secondary);
+      }
+
+      .lang-code {
+        font-weight: 600;
+        font-size: 0.875rem;
+      }
+
+      .lang-name {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      @media (max-width: 1024px) {
+        .language-selector {
+          position: static;
+        }
+
+        .language-dropdown {
+          position: fixed;
+          top: auto;
+          right: 1rem;
+          left: 1rem;
+          bottom: 1rem;
+          min-width: auto;
+        }
+      }
+    </style>
+  <style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container nav-container">
+        <a href="/" class="logo">nolilab</a>
+        <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+           <a href="/zh/#shop" class="nav-link">Shop</a>
+              <a href="/zh/specifications/" class="nav-link">规格</a>
+          <a href="/zh/software/" class="nav-link">软件</a>
+          <a href="/zh/setup-guides/" class="nav-link">设置指南</a>
+          <a href="/zh/lorawan/" class="nav-link">洛拉万</a>
+          <a href="/zh/#faq" class="nav-link">FAQ</a>
+          <a href="/zh/blog/" class="nav-link">Blog</a>
+          <a href="/zh/firmware/" class="nav-link">固件</a>
+          <a href="/zh/gps/" class="nav-link">GPS 和 LoRa</a>
+          <a href="/zh/contact/" class="nav-link">接触</a>
+        </div>
+        <div class="language-selector" style="flex-shrink: 0; position: relative;">
+        <button class="language-btn" aria-label="Select language">
+          <i class="fas fa-globe"></i>
+          <span class="current-lang">EN</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="language-dropdown">
+          <a href="#" class="language-option" data-lang="en">
+            <span class="lang-code">EN</span>
+            <span class="lang-name">英语</span>
+          </a>
+          <a href="#" class="language-option" data-lang="ru">
+            <span class="lang-code">RU</span>
+            <span class="lang-name">俄罗斯</span>
+          </a>
+          <a href="#" class="language-option" data-lang="ja">
+            <span class="lang-code">JA</span>
+            <span class="lang-name">日本语</span>
+          </a>
+          <a href="#" class="language-option" data-lang="zh">
+            <span class="lang-code">ZH</span>
+            <span class="lang-name">中文</span>
+          </a>
+          <a href="#" class="language-option" data-lang="fr">
+            <span class="lang-code">FR</span>
+            <span class="lang-name">法国人</span>
+          </a>
+          <a href="#" class="language-option" data-lang="es">
+            <span class="lang-code">ES</span>
+            <span class="lang-name">西班牙语</span>
+          </a>
+        </div>
+       </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+    <main>
+
+    <!-- Page Hero -->
+    <div class="page-hero">
+      <div class="container">
+        <h1>GPS 和 LoRa 技术指南</h1>
+        <p>无线电视线、LoRa P2P 与 LoRaWAN、电离层对 GPS 的影响，以及离线 GPS 跟踪如何在没有蜂窝网络的情况下工作。</p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-section">
+      <div class="container">
+
+        <p class="section-label">核心概念</p>
+        <div class="topic-grid">
+          <!-- Card 1 -->
+          <div class="topic-card">
+            <img src="/images/optimized/long-range.png" alt="Radio Line of Sight" class="topic-card-icon" loading="lazy">
+            <h2>无线电视线和信号传播</h2>
+            <p class="lead">发射和接收天线之间的直接路径没有障碍物。</p>
+            <p>在 GPS 和 LoRa 技术中，视距通信对于最佳范围至关重要。无线电波在障碍物周围会稍微弯曲，但较大的障碍物会显着降低信号强度。</p>
+            <p>Loko GPS 跟踪器使用 LoRa 技术，在理想视距条件下可实现长达 20 公里的范围。</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="topic-card">
+            <img src="/images/optimized/battery.png" alt="Ionosphere" class="topic-card-icon" loading="lazy">
+            <h2>电离层和 GPS 信号质量</h2>
+            <p class="lead">影响 GPS 信号质量和准确性的地球大气层。</p>
+            <p>电离层延迟可能会导致 GPS 定位错误，尤其是在太阳活动频繁期间。 Loko 使用多个星座（GPS、GLONASS、伽利略、北斗）来减轻这些误差。</p>
+            <p>了解电离层高度变化有助于优化跨区域的跟踪器性能。</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="topic-card">
+            <img src="/images/optimized/offline-map.svg" alt="LoRa vs LoRaWAN" class="topic-card-icon" loading="lazy">
+            <h2>LoRa 与 LoRaWAN 和 P2P 通信</h2>
+            <p class="lead">LoRa是物理层； LoRaWAN 是其之上的网络协议。</p>
+            <p>P2P LoRa 创建直接的设备到设备连接，无需基础设施。 Loko 同时使用 P2P 和 LoRaWAN，以在任何环境中实现最大的灵活性。</p>
+            <p>直接 P2P 通信使其成为无需外部服务器的远程跟踪的理想选择。</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="modulation-header">
+          <p class="section-label">技术文档</p>
+          <h2>LoRa 调制解释</h2>
+          <p>实现 Loko 远距离能力的技术：</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>扩频因子 (SF)</h3>
+            <p>SF7–SF12。值越高，范围越大，但数据速率越低。 Loko 使用自适应 SF 根据信号条件平衡范围和吞吐量。</p>
+          </div>
+          <div class="feature-card">
+            <h3>编码率 (CR)</h3>
+            <p>错误修正从 4/5 到 4/8。较高的 CR 可以提高抗干扰能力。 Loko 优化了 CR，以便在充满挑战的环境中实现可靠的通信。</p>
+          </div>
+          <div class="feature-card">
+            <h3>线性调频扩频</h3>
+            <p>使用线性 FM 线性调频信号跨频率传播信号，具有出色的抗干扰性，并允许多个设备共享同一频道。</p>
+          </div>
+        </div>
+
+        <div class="doc-hub-footer">
+          <p>有关完整规格，请参阅<a href="../#specifications">Loko GPS 追踪器技术规格</a>— RF 参数、GNSS 参数和高级配置。</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <a href="./index" class="footer-logo">nolilab</a>
+        <div class="footer-links">
+          <a href="./index" class="footer-link">Home</a>
+          <a href="/zh/#shop" class="footer-link">Shop</a>
+          <a href="/zh/software/" class="footer-link">软件</a>
+          <a href="/zh/setup-guides/" class="footer-link">设置指南</a>
+          <a href="/zh/lorawan/" class="footer-link">洛拉万</a>
+          <a href="/zh/#faq" class="footer-link">FAQ</a>
+          <a href="/zh/blog/" class="footer-link">Blog</a>
+          <a href="/zh/firmware/" class="footer-link">固件</a>
+          <a href="/zh/gps/" class="footer-link">GPS 和 LoRa</a>
+          <a href="/zh/contact/" class="footer-link">接触</a>
+          <a href="/zh/privacy/" class="footer-link">隐私</a>
+        </div>
+        <div class="social-icons" style="display: flex; gap: var(--spacing-md); justify-content: center; margin: var(--spacing-lg) 0;">
+          <a href="https://x.com/noli_lab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+             <i class="fab fa-twitter"></i>
+           </a>
+          <a href="https://instagram.com/nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+             <i class="fab fa-instagram"></i>
+           </a>
+          <a href="https://ee.linkedin.com/company/nolilab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+             <i class="fab fa-linkedin"></i>
+           </a>
+          <a href="https://www.youtube.com/@nolilab_loko_gps" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+             <i class="fab fa-youtube"></i>
+           </a>
+        </div>
+        <div class="footer-copyright">© 2025 nolilab. All rights reserved.</div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile Menu Toggle
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+          mobileMenuToggle.classList.toggle('active');
+          navLinks.classList.toggle('active');
+          document.body.classList.toggle('menu-open');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('menu-open');
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (document.body.classList.contains('menu-open') &&
+              !navLinks.contains(e.target) &&
+              !mobileMenuToggle.contains(e.target)) {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('menu-open');
+          }
+        });
+      }
+
+    // Set light theme
+    document.documentElement.setAttribute('data-theme', 'light');
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetLang = option.dataset.lang;
+
+        localStorage.setItem('selectedLanguage', targetLang);
+
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(p => p);
+        const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
+
+        let currentLang = 'en';
+        let currentPage = 'index';
+
+        for (let i = 0; i < pathParts.length; i++) {
+          if (langDirs.includes(pathParts[i])) {
+            currentLang = pathParts[i];
+            currentPage = pathParts[i + 1] || 'index';
+            break;
+          }
+        }
+
+        if (currentLang === 'en') {
+          currentPage = pathParts[pathParts.length - 1] || '';
+        }
+
+        if (currentPage === '' || currentPage === '') {
+          currentPage = 'index';
+        }
+
+        let redirectUrl;
+        if (targetLang === 'en') {
+          if (currentLang === 'en') {
+            redirectUrl = './';
+          } else {
+            redirectUrl = currentPage === 'index' ? '../nolilab' : `../${currentPage}`;
+          }
+        } else {
+          redirectUrl = currentLang === 'en' ? `./${targetLang}/${currentPage}` : `../${targetLang}/${currentPage}`;
+        }
+
+        window.location.href = redirectUrl;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      document.querySelector('.current-lang').textContent = langMap[savedLang] || 'EN';
+    }
+    </script>
+    <script src="/js/analytics.js"></script>
+</body>

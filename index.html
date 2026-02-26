@@ -15,7 +15,7 @@
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./css/fa-subset.css" />
+    <link rel="stylesheet" href="/css/fa-subset.css" />
     <meta name="description" content="No SIM. No cellular. No fees. Loko is the world's smallest offline GPS tracker — 20km LoRa range, 12-month battery. Track drones, pets, farm equipment &amp; valuables anywhere." />
     <meta name="theme-color" content="#ffffff" />
     
@@ -2644,16 +2644,16 @@
       <div class="container nav-container">
          <a href="./" class="logo">nolilab</a>
          <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
-           <a href="./#shop" class="nav-link">Shop</a>
-              <a href="./specifications" class="nav-link">Specs</a>
-           <a href="./software" class="nav-link">Software</a>
-           <a href="./setup-guides" class="nav-link">Setup Guides</a>
-           <a href="./lorawan" class="nav-link">LoRaWAN</a>
+           <a href="/#shop" class="nav-link">Shop</a>
+              <a href="/specifications/" class="nav-link">Specs</a>
+           <a href="/software/" class="nav-link">Software</a>
+           <a href="/setup-guides/" class="nav-link">Setup Guides</a>
+           <a href="/lorawan/" class="nav-link">LoRaWAN</a>
            <a href="#faq" class="nav-link">FAQ</a>
-           <a href="./blog" class="nav-link">Blog</a>
-           <a href="./firmware" class="nav-link">Firmware</a>
-           <a href="./gps" class="nav-link">GPS & LoRa</a>
-           <a href="./contact" class="nav-link">Contact</a>
+           <a href="/blog/" class="nav-link">Blog</a>
+           <a href="/firmware/" class="nav-link">Firmware</a>
+           <a href="/gps/" class="nav-link">GPS & LoRa</a>
+           <a href="/contact/" class="nav-link">Contact</a>
          </div>
          <div class="language-selector" style="flex-shrink: 0; position: relative;">
           <button class="language-btn" aria-label="Select language">
@@ -2810,7 +2810,9 @@
                 </p>
               </div>
               <div style="background: var(--bg-primary); padding: var(--spacing-xs); border-radius: var(--radius-md); border: 2px solid var(--border); max-width: 75%; margin: 0 auto;">
-                <img src="images/optimized/Lora_p2p.svg" alt="P2P Communication Flow - Loko Air to Ground Unit to Phone" width="960" height="720" style="width: 100%; height: auto; display: block;">
+                <div style="overflow: hidden;">
+                  <img src="images/optimized/Lora_p2p.svg" alt="P2P Communication Flow - Loko Air to Ground Unit to Phone" width="960" height="720" style="width: 100%; height: auto; display: block; margin-top: -10%; margin-bottom: -10%;">
+                </div>
                 <p style="text-align: center; margin-top: var(--spacing-md); color: var(--text-secondary); font-size: 0.875rem; font-style: italic;">
                   Tracker communicates with Receiver via LoRa P2P (up to 20km), then Receiver connects to your phone via Bluetooth
                 </p>
@@ -2878,7 +2880,7 @@
                 </div>
               </div>
               <div class="app-buttons">
-                <a href="./software" class="app-button" aria-label="Loko Tracking App">
+                <a href="/software/" class="app-button" aria-label="Loko Tracking App">
                   <i class="fas fa-mobile-alt"></i>
                   <span>Loko Tracking App</span>
                 </a>
@@ -3530,16 +3532,16 @@
         <a href="./" class="footer-logo">nolilab</a>
         <div class="footer-links">
           <a href="./" class="footer-link">Home</a>
-          <a href="./#shop" class="footer-link">Shop</a>
-          <a href="./software" class="footer-link">Software</a>
-          <a href="./setup-guides" class="footer-link">Setup Guides</a>
-          <a href="./lorawan" class="footer-link">LoRaWAN</a>
-          <a href="./#faq" class="footer-link">FAQ</a>
-          <a href="./blog" class="footer-link">Blog</a>
-          <a href="./firmware" class="footer-link">Firmware</a>
-          <a href="./gps" class="footer-link">GPS & LoRa</a>
-          <a href="./contact" class="footer-link">Contact</a>
-          <a href="./privacy" class="footer-link">Privacy</a>
+          <a href="/#shop" class="footer-link">Shop</a>
+          <a href="/software/" class="footer-link">Software</a>
+          <a href="/setup-guides/" class="footer-link">Setup Guides</a>
+          <a href="/lorawan/" class="footer-link">LoRaWAN</a>
+          <a href="/#faq" class="footer-link">FAQ</a>
+          <a href="/blog/" class="footer-link">Blog</a>
+          <a href="/firmware/" class="footer-link">Firmware</a>
+          <a href="/gps/" class="footer-link">GPS & LoRa</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
          </div>
          <div class="social-icons" style="display: flex; gap: var(--spacing-md); justify-content: center; margin: var(--spacing-lg) 0;">
            <a href="https://x.com/noli_lab" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
@@ -3926,5 +3928,6 @@
     }
     </script>
 
-  </body>
+    <script src="/js/analytics.js"></script>
+</body>
 </html>
