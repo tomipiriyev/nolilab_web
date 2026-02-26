@@ -1,31 +1,32 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Set Up LoRaWAN | nolilab Blog</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
-  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/css/fa-subset.css">
-  <meta name="description" content="Complete guide to configuring your Loko GPS tracker with TheThingsNetwork LoRaWAN for extended range tracking capabilities.">
-  <link rel="canonical" href="https://nolilab.com/blog/how-to-set-up-lorawan/">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="How to Set Up LoRaWAN | nolilab Blog">
-  <meta property="og:description" content="Complete guide to configuring your Loko GPS tracker with TheThingsNetwork LoRaWAN for extended range tracking capabilities.">
-  <meta property="og:url" content="https://nolilab.com/blog/how-to-set-up-lorawan">
-  <meta property="og:image" content="https://nolilab.com/cdn/shop/articles/Screenshot_2024-05-05_at_22.53.29.png?v=1714951354&width=1920">
-  <meta property="og:site_name" content="NoliLab">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="How to Set Up LoRaWAN | nolilab Blog">
-  <meta name="twitter:description" content="Complete guide to configuring your Loko GPS tracker with TheThingsNetwork LoRaWAN for extended range tracking capabilities.">
-  <meta name="twitter:image" content="https://nolilab.com/cdn/shop/articles/Screenshot_2024-05-05_at_22.53.29.png?v=1714951354&width=1920">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How to Set Up LoRaWAN | nolilab Blog</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2">
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2">
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2">
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Complete guide to configuring your Loko GPS tracker with TheThingsNetwork LoRaWAN for extended range tracking capabilities." name="description"/>
+<link href="https://nolilab.com/blog/how-to-set-up-lorawan/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="How to Set Up LoRaWAN | nolilab Blog" property="og:title"/>
+<meta content="Complete guide to configuring your Loko GPS tracker with TheThingsNetwork LoRaWAN for extended range tracking capabilities." property="og:description"/>
+<meta content="https://nolilab.com/blog/how-to-set-up-lorawan" property="og:url"/>
+<meta content="https://nolilab.com/cdn/shop/articles/Screenshot_2024-05-05_at_22.53.29.png?v=1714951354&amp;width=1920" property="og:image"/>
+<meta content="NoliLab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="How to Set Up LoRaWAN | nolilab Blog" name="twitter:title"/>
+<meta content="Complete guide to configuring your Loko GPS tracker with TheThingsNetwork LoRaWAN for extended range tracking capabilities." name="twitter:description"/>
+<meta content="https://nolilab.com/cdn/shop/articles/Screenshot_2024-05-05_at_22.53.29.png?v=1714951354&amp;width=1920" name="twitter:image"/>
+<style>
     :root {
       --bg-primary: #ffffff;
       --bg-secondary: #f6f8fa;
@@ -455,7 +456,6 @@
       }
     }
   </style>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -498,157 +498,165 @@
     size-adjust: 107.64%;
   }
 </style>
-</head>
+</link></link></link></head>
 <body>
-  <header>
-    <div class="container nav-container">
-      <a href="/" class="logo">nolilab</a>
-      <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
-        <a href="/#shop" class="nav-link">Shop</a>
-        <a href="/specifications/" class="nav-link">Specs</a>
-        <a href="/software/" class="nav-link">Software</a>
-        <a href="/setup-guides/" class="nav-link">Setup Guides</a>
-        <a href="/lorawan/" class="nav-link">LoRaWAN</a>
-        <a href="/#faq" class="nav-link">FAQ</a>
-        <a href="/blog/" class="nav-link">Blog</a>
-        <a href="/firmware/" class="nav-link">Firmware</a>
-        <a href="/gps/" class="nav-link">GPS & LoRa</a>
-        <a href="/contact/" class="nav-link">Contact</a>
-      </div>
-      <div class="language-selector" style="flex-shrink: 0; position: relative;">
-        <button class="language-btn" aria-label="Select language">
-          <i class="fas fa-globe"></i>
-          <span class="current-lang">EN</span>
-          <i class="fas fa-chevron-down"></i>
-        </button>
-        <div class="language-dropdown">
-          <a href="#" class="language-option" data-lang="en">
-            <span class="lang-code">EN</span>
-            <span class="lang-name">English</span>
-          </a>
-          <a href="#" class="language-option" data-lang="ru">
-            <span class="lang-code">RU</span>
-            <span class="lang-name">Русский</span>
-          </a>
-          <a href="#" class="language-option" data-lang="ja">
-            <span class="lang-code">JA</span>
-            <span class="lang-name">日本語</span>
-          </a>
-          <a href="#" class="language-option" data-lang="zh">
-            <span class="lang-code">ZH</span>
-            <span class="lang-name">中文</span>
-          </a>
-          <a href="#" class="language-option" data-lang="fr">
-            <span class="lang-code">FR</span>
-            <span class="lang-name">Français</span>
-          </a>
-          <a href="#" class="language-option" data-lang="es">
-            <span class="lang-code">ES</span>
-            <span class="lang-name">Español</span>
-          </a>
-        </div>
-      </div>
-      <button class="mobile-menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
-    <main>
 
-  <article>
-    <a href="/blog/" class="back-link">
-      <i class="fas fa-arrow-left"></i> Back to Blog
+<header>
+<div class="container nav-container">
+<a class="logo" href="/">nolilab</a>
+<div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+<a class="nav-link" href="/#shop">Shop</a>
+<a class="nav-link" href="/specifications/">Specs</a>
+<a class="nav-link" href="/software/">Software</a>
+<a class="nav-link" href="/setup-guides/">Setup Guides</a>
+<a class="nav-link" href="/lorawan/">LoRaWAN</a>
+<a class="nav-link" href="/#faq">FAQ</a>
+<a class="nav-link" href="/blog/">Blog</a>
+<a class="nav-link" href="/firmware/">Firmware</a>
+<a class="nav-link" href="/gps/">GPS &amp; LoRa</a>
+<a class="nav-link" href="/contact/">Contact</a>
+</div>
+<div class="language-selector" style="flex-shrink: 0; position: relative;">
+<button aria-label="Select language" class="language-btn">
+<i class="fas fa-globe"></i>
+<span class="current-lang">EN</span>
+<i class="fas fa-chevron-down"></i>
+</button>
+<div class="language-dropdown">
+<a class="language-option" data-lang="en" href="#">
+<span class="lang-code">EN</span>
+<span class="lang-name">English</span>
+</a>
+<a class="language-option" data-lang="ru" href="#">
+<span class="lang-code">RU</span>
+<span class="lang-name">Русский</span>
+</a>
+<a class="language-option" data-lang="ja" href="#">
+<span class="lang-code">JA</span>
+<span class="lang-name">日本語</span>
+</a>
+<a class="language-option" data-lang="zh" href="#">
+<span class="lang-code">ZH</span>
+<span class="lang-name">中文</span>
+</a>
+<a class="language-option" data-lang="fr" href="#">
+<span class="lang-code">FR</span>
+<span class="lang-name">Français</span>
+</a>
+<a class="language-option" data-lang="es" href="#">
+<span class="lang-code">ES</span>
+<span class="lang-name">Español</span>
+</a>
+</div>
+</div>
+<button aria-label="Toggle menu" class="mobile-menu-toggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</div>
+</header>
+
+<main>
+<article>
+<a class="back-link" href="/blog/">
+<i class="fas fa-arrow-left"></i> Back to Blog
     </a>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> May 22, 2024</span>
+<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+</div>
+<h1 class="article-title">How to Set Up LoRaWAN</h1>
+</div>
+<img alt="LoRaWAN Setup Configuration" class="article-image" src="https://nolilab.com/cdn/shop/articles/Screenshot_2024-05-05_at_22.53.29.png?v=1714951354&amp;width=1920"/>
+<div class="article-content">
+<h2>Overview</h2>
+<p>This comprehensive guide demonstrates how to configure your gateway and Loko device to establish a connection with TheThingsNetwork, enabling long-range LoRaWAN connectivity for your GPS tracking system.</p>
+<h2>Step 1: Create TheThingsNetwork Account</h2>
+<p>Visit The Things Network website and register for an account. After registration, navigate to the Console by clicking on the Profile Icon menu at the top right of the page.</p>
+<h2>Step 2: Regional Configuration</h2>
+<p>Select your geographic region from the available options. This is crucial for ensuring proper frequency plan selection. You'll then be presented with two options: "Go To Applications" or "Go To Gateways".</p>
+<h2>Step 3: Gateway Registration</h2>
+<p>If you're using a personal gateway, first configure it according to the manufacturer's guidelines. Then:</p>
+<ul>
+<li>Select "Go To Gateways" to begin registration</li>
+<li>Choose the appropriate frequency plan for your region</li>
+<li>Use the Gateway ID from your internet setup configuration</li>
+<li>Complete the gateway configuration process</li>
+</ul>
+<h2>Step 4: Application Creation</h2>
+<p>Access the "Go to Applications" section and click "Create Application". Assign a meaningful name and ID to your application for easy identification.</p>
+<h2>Step 5: End Device Registration</h2>
+<p>On your application page, follow these steps:</p>
+<ul>
+<li>Select "register end device"</li>
+<li>Choose to enter device specifications manually</li>
+<li>Configure the JoinEUI (this corresponds to APP-EUI in Loko Configuration Tools)</li>
+<li>Generate a Dev-EUI and App-Key using the provided buttons</li>
+<li>Complete the registration process</li>
+</ul>
+<h2>Step 6: Retrieve Device Parameters</h2>
+<p>After registration, access the overview page to obtain the activation parameters. These parameters are required for configuring your Loko Air unit in the next steps.</p>
+<h2>Step 7: Payload Configuration</h2>
+<p>Navigate to the payload formatters section and select "CayenneLPP" for uplink messaging. This standardized format ensures proper data interpretation.</p>
+<h2>Step 8: Loko Configuration Tool Setup</h2>
+<p>Configure your Loko device with the following steps:</p>
+<ol>
+<li>Open the Loko Configuration application</li>
+<li>Select the appropriate COM port and press read</li>
+<li>Enable LoRaWAN functionality</li>
+<li>Input the three required parameters from TheThingsNetwork (JoinEUI, Dev-EUI, and App-Key)</li>
+<li>Submit settings and restart your Loko Air unit</li>
+</ol>
+<h2>Step 9: Verification</h2>
+<p>To confirm successful setup:</p>
+<ul>
+<li>Monitor live data on the TheThingsNetwork End Device page</li>
+<li>View your Loko Air location on the integrated map</li>
+<li>Verify that location updates are being received at the expected intervals</li>
+</ul>
+<h2>Conclusion</h2>
+<p>With your Loko GPS tracker now connected to TheThingsNetwork via LoRaWAN, you can enjoy extended range tracking capabilities and integration with IoT platforms. This setup provides a robust, scalable solution for tracking applications across large areas.</p>
+</div>
+</article>
+</main>
 
-    <div class="article-header">
-      <div class="article-meta">
-        <span><i class="far fa-calendar"></i> May 22, 2024</span>
-        <span><i class="far fa-user"></i> Tamleykha Piriyev</span>
-      </div>
-      <h1 class="article-title">How to Set Up LoRaWAN</h1>
-    </div>
+<footer>
+<div class="footer-container">
+<a class="footer-logo" href="/">nolilab</a>
+<div class="footer-links">
+<a class="footer-link" href="/">Home</a>
+<a class="footer-link" href="/#shop">Shop</a>
+<a class="footer-link" href="/software/">Software</a>
+<a class="footer-link" href="/setup-guides/">Setup Guides</a>
+<a class="footer-link" href="/lorawan/">LoRaWAN</a>
+<a class="footer-link" href="/#faq">FAQ</a>
+<a class="footer-link" href="/blog/">Blog</a>
+<a class="footer-link" href="/firmware/">Firmware</a>
+<a class="footer-link" href="/gps/">GPS &amp; LoRa</a>
+<a class="footer-link" href="/contact/">Contact</a>
+<a class="footer-link" href="/privacy/">Privacy</a>
+</div>
+<div class="social-icons" style="display: flex; gap: var(--spacing-md); justify-content: center; margin: var(--spacing-lg) 0;">
+<a aria-label="Twitter" class="social-icon" href="https://x.com/noli_lab" rel="noopener noreferrer" target="_blank">
+<i class="fab fa-twitter"></i>
+</a>
+<a aria-label="Instagram" class="social-icon" href="https://instagram.com/nolilab" rel="noopener noreferrer" target="_blank">
+<i class="fab fa-instagram"></i>
+</a>
+<a aria-label="LinkedIn" class="social-icon" href="https://ee.linkedin.com/company/nolilab" rel="noopener noreferrer" target="_blank">
+<i class="fab fa-linkedin"></i>
+</a>
+<a aria-label="YouTube" class="social-icon" href="https://www.youtube.com/@nolilab_loko_gps" rel="noopener noreferrer" target="_blank">
+<i class="fab fa-youtube"></i>
+</a>
+</div>
+<div class="footer-copyright">© 2025 nolilab. All rights reserved.</div>
+</div>
+</footer>
 
-    <img src="https://nolilab.com/cdn/shop/articles/Screenshot_2024-05-05_at_22.53.29.png?v=1714951354&width=1920" alt="LoRaWAN Setup Configuration" class="article-image">
-
-    <div class="article-content">
-      <h2>Overview</h2>
-      <p>This comprehensive guide demonstrates how to configure your gateway and Loko device to establish a connection with TheThingsNetwork, enabling long-range LoRaWAN connectivity for your GPS tracking system.</p>
-
-      <h2>Step 1: Create TheThingsNetwork Account</h2>
-      <p>Visit The Things Network website and register for an account. After registration, navigate to the Console by clicking on the Profile Icon menu at the top right of the page.</p>
-
-      <h2>Step 2: Regional Configuration</h2>
-      <p>Select your geographic region from the available options. This is crucial for ensuring proper frequency plan selection. You'll then be presented with two options: "Go To Applications" or "Go To Gateways".</p>
-
-      <h2>Step 3: Gateway Registration</h2>
-      <p>If you're using a personal gateway, first configure it according to the manufacturer's guidelines. Then:</p>
-      <ul>
-        <li>Select "Go To Gateways" to begin registration</li>
-        <li>Choose the appropriate frequency plan for your region</li>
-        <li>Use the Gateway ID from your internet setup configuration</li>
-        <li>Complete the gateway configuration process</li>
-      </ul>
-
-      <h2>Step 4: Application Creation</h2>
-      <p>Access the "Go to Applications" section and click "Create Application". Assign a meaningful name and ID to your application for easy identification.</p>
-
-      <h2>Step 5: End Device Registration</h2>
-      <p>On your application page, follow these steps:</p>
-      <ul>
-        <li>Select "register end device"</li>
-        <li>Choose to enter device specifications manually</li>
-        <li>Configure the JoinEUI (this corresponds to APP-EUI in Loko Configuration Tools)</li>
-        <li>Generate a Dev-EUI and App-Key using the provided buttons</li>
-        <li>Complete the registration process</li>
-      </ul>
-
-      <h2>Step 6: Retrieve Device Parameters</h2>
-      <p>After registration, access the overview page to obtain the activation parameters. These parameters are required for configuring your Loko Air unit in the next steps.</p>
-
-      <h2>Step 7: Payload Configuration</h2>
-      <p>Navigate to the payload formatters section and select "CayenneLPP" for uplink messaging. This standardized format ensures proper data interpretation.</p>
-
-      <h2>Step 8: Loko Configuration Tool Setup</h2>
-      <p>Configure your Loko device with the following steps:</p>
-      <ol>
-        <li>Open the Loko Configuration application</li>
-        <li>Select the appropriate COM port and press read</li>
-        <li>Enable LoRaWAN functionality</li>
-        <li>Input the three required parameters from TheThingsNetwork (JoinEUI, Dev-EUI, and App-Key)</li>
-        <li>Submit settings and restart your Loko Air unit</li>
-      </ol>
-
-      <h2>Step 9: Verification</h2>
-      <p>To confirm successful setup:</p>
-      <ul>
-        <li>Monitor live data on the TheThingsNetwork End Device page</li>
-        <li>View your Loko Air location on the integrated map</li>
-        <li>Verify that location updates are being received at the expected intervals</li>
-      </ul>
-
-      <h2>Conclusion</h2>
-      <p>With your Loko GPS tracker now connected to TheThingsNetwork via LoRaWAN, you can enjoy extended range tracking capabilities and integration with IoT platforms. This setup provides a robust, scalable solution for tracking applications across large areas.</p>
-    </div>
-  </article>
-
-  </main>
-
-  <footer>
-    <div class="footer-container">
-      <a href="/" class="footer-logo">nolilab</a>
-      <div class="footer-links">
-        <a href="/" class="footer-link">Home</a>
-        <a href="/specifications" class="footer-link">Specs</a>
-        <a href="/software" class="footer-link">Software</a>
-        <a href="/blog/" class="footer-link">Blog</a>
-        <a href="/#faq" class="footer-link">FAQ</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
+<script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -740,6 +748,6 @@
       }
     }
   </script>
-    <script src="/js/analytics.js"></script>
+<script src="/js/analytics.js"></script>
 </body>
 </html>
