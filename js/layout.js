@@ -13,22 +13,70 @@
 document.documentElement.setAttribute('data-theme', 'light');
 
 (function () {
+  var BASE_URL  = 'https://www.nolilab.com';
+  var LANG_DIRS = ['ru', 'zh', 'ja', 'fr', 'es'];
+  var LANG_MAP  = { en: 'EN', ru: 'RU', ja: 'JA', zh: 'ZH', fr: 'FR', es: 'ES' };
+  var ALL_LANGS = ['en', 'ru', 'zh', 'ja', 'fr', 'es'];
+
+  // ── Detect current language and canonical page path ───────────────────────
+  // e.g. /ru/blog/some-post/ → currentLang = 'ru', pagePath = 'blog/some-post/'
+  //      /blog/some-post/    → currentLang = 'en', pagePath = 'blog/some-post/'
+
+  var parts = window.location.pathname.split('/').filter(Boolean);
+  var currentLang   = 'en';
+  var pathRemainder = parts.slice();
+
+  if (parts.length > 0 && LANG_DIRS.indexOf(parts[0]) !== -1) {
+    currentLang   = parts[0];
+    pathRemainder = parts.slice(1);
+  }
+
+  // Strip trailing 'index' / 'index.html' — treat as the directory root.
+  var last = pathRemainder[pathRemainder.length - 1];
+  if (last === 'index' || last === 'index.html') {
+    pathRemainder = pathRemainder.slice(0, -1);
+  }
+
+  var pagePath = pathRemainder.length ? pathRemainder.join('/') + '/' : '';
+
+  // Helper: build a clean URL for a given language.
+  function langUrl(lang) {
+    return lang === 'en'
+      ? '/' + pagePath
+      : '/' + lang + '/' + pagePath;
+  }
+
+  // ── Inject hreflang <link> tags ───────────────────────────────────────────
+
+  ALL_LANGS.forEach(function (lang) {
+    var link = document.createElement('link');
+    link.rel      = 'alternate';
+    link.hreflang = lang;
+    link.href     = BASE_URL + langUrl(lang);
+    document.head.appendChild(link);
+  });
+
+  // x-default → English root
+  var xdef = document.createElement('link');
+  xdef.rel      = 'alternate';
+  xdef.hreflang = 'x-default';
+  xdef.href     = BASE_URL + '/' + pagePath;
+  document.head.appendChild(xdef);
+
   // ── Fetch and inject partials ─────────────────────────────────────────────
 
   Promise.all([
     fetch('/partials/header.html').then(function (r) { return r.text(); }),
     fetch('/partials/footer.html').then(function (r) { return r.text(); }),
   ]).then(function (results) {
-    var headerHtml = results[0];
-    var footerHtml = results[1];
-
     var headerEl = document.getElementById('site-header');
     var footerEl = document.getElementById('site-footer');
 
-    if (headerEl) headerEl.outerHTML = headerHtml;
-    if (footerEl) footerEl.outerHTML = footerHtml;
+    if (headerEl) headerEl.outerHTML = results[0];
+    if (footerEl) footerEl.outerHTML = results[1];
 
     initMobileMenu();
+    initNavLinks();
     initLanguageSelector();
   });
 
@@ -36,7 +84,7 @@ document.documentElement.setAttribute('data-theme', 'light');
 
   function initMobileMenu() {
     var toggle = document.querySelector('.mobile-menu-toggle');
-    var nav = document.querySelector('.nav-links');
+    var nav    = document.querySelector('.nav-links');
     if (!toggle || !nav) return;
 
     toggle.addEventListener('click', function () {
@@ -66,42 +114,49 @@ document.documentElement.setAttribute('data-theme', 'light');
     });
   }
 
+  // ── Language-aware nav links ──────────────────────────────────────────────
+  // When browsing a non-English language, prefix the logo and all nav link
+  // hrefs so the user stays in their language tree.
+
+  function initNavLinks() {
+    if (currentLang === 'en') return;
+
+    var prefix = '/' + currentLang;
+
+    var logo = document.querySelector('a.logo');
+    if (logo) logo.href = prefix + '/';
+
+    document.querySelectorAll('.nav-link').forEach(function (link) {
+      var href = link.getAttribute('href') || '';
+      // Only rewrite root-relative links that don't already carry a lang prefix.
+      if (href.charAt(0) === '/' && href.indexOf(prefix) !== 0) {
+        link.href = prefix + href;
+      }
+    });
+  }
+
   // ── Language selector ─────────────────────────────────────────────────────
 
   function initLanguageSelector() {
-    var langMap = { en: 'EN', ru: 'RU', ja: 'JA', zh: 'ZH', fr: 'FR', es: 'ES' };
-    var LANG_DIRS = ['ru', 'zh', 'ja', 'fr', 'es'];
-
-    // Restore saved language label
-    var saved = localStorage.getItem('selectedLanguage');
+    // Show the active language in the button label.
     var labelEl = document.querySelector('.current-lang');
-    if (labelEl && saved) labelEl.textContent = langMap[saved] || 'EN';
+    if (labelEl) labelEl.textContent = LANG_MAP[currentLang] || 'EN';
 
     document.querySelectorAll('.language-option').forEach(function (option) {
-      option.addEventListener('click', function (e) {
-        e.preventDefault();
-        var targetLang = option.dataset.lang;
+      var targetLang = option.dataset.lang;
+      var targetPath = langUrl(targetLang);
+
+      // Set a real href so right-click / open-in-new-tab works.
+      option.href = targetPath;
+
+      // Mark the current language as active.
+      if (targetLang === currentLang) {
+        option.classList.add('active');
+      }
+
+      // Persist selection; let the href handle navigation naturally.
+      option.addEventListener('click', function () {
         localStorage.setItem('selectedLanguage', targetLang);
-
-        // Determine current language prefix and the rest of the path.
-        var parts = window.location.pathname.split('/').filter(Boolean);
-        var pathRemainder = parts;
-        if (parts.length > 0 && LANG_DIRS.indexOf(parts[0]) !== -1) {
-          pathRemainder = parts.slice(1);
-        }
-
-        // Strip trailing 'index' or 'index.html' — treat it as the section root.
-        var last = pathRemainder[pathRemainder.length - 1];
-        if (last === 'index' || last === 'index.html') {
-          pathRemainder = pathRemainder.slice(0, -1);
-        }
-
-        var suffix = pathRemainder.length ? pathRemainder.join('/') + '/' : '';
-        var newPath = targetLang === 'en'
-          ? '/' + suffix
-          : '/' + targetLang + '/' + suffix;
-
-        window.location.href = newPath;
       });
     });
   }
