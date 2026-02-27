@@ -13,7 +13,7 @@
 document.documentElement.setAttribute('data-theme', 'light');
 
 (function () {
-  var BASE_URL  = 'https://www.nolilab.com';
+  var BASE_URL  = 'https://nolilab.com';
   var LANG_DIRS = ['ru', 'zh', 'ja', 'fr', 'es'];
   var LANG_MAP  = { en: 'EN', ru: 'RU', ja: 'JA', zh: 'ZH', fr: 'FR', es: 'ES' };
   var ALL_LANGS = ['en', 'ru', 'zh', 'ja', 'fr', 'es'];
@@ -46,22 +46,38 @@ document.documentElement.setAttribute('data-theme', 'light');
       : '/' + lang + '/' + pagePath;
   }
 
+  // ── Inject canonical <link> tag ───────────────────────────────────────────
+  // Skip if the page already has a custom canonical (e.g. nolilab.html).
+
+  if (!document.querySelector('link[rel="canonical"]')) {
+    var canonical = document.createElement('link');
+    canonical.rel  = 'canonical';
+    canonical.href = BASE_URL + langUrl(currentLang);
+    document.head.appendChild(canonical);
+  }
+
   // ── Inject hreflang <link> tags ───────────────────────────────────────────
+  // Individual blog posts have per-post static hreflang that reflects which
+  // languages actually have a translation — skip injection for those pages.
 
-  ALL_LANGS.forEach(function (lang) {
-    var link = document.createElement('link');
-    link.rel      = 'alternate';
-    link.hreflang = lang;
-    link.href     = BASE_URL + langUrl(lang);
-    document.head.appendChild(link);
-  });
+  var isBlogPost = pagePath.indexOf('blog/') === 0 && pagePath !== 'blog/';
 
-  // x-default → English root
-  var xdef = document.createElement('link');
-  xdef.rel      = 'alternate';
-  xdef.hreflang = 'x-default';
-  xdef.href     = BASE_URL + '/' + pagePath;
-  document.head.appendChild(xdef);
+  if (!isBlogPost) {
+    ALL_LANGS.forEach(function (lang) {
+      var link = document.createElement('link');
+      link.rel      = 'alternate';
+      link.hreflang = lang;
+      link.href     = BASE_URL + langUrl(lang);
+      document.head.appendChild(link);
+    });
+
+    // x-default → English root
+    var xdef = document.createElement('link');
+    xdef.rel      = 'alternate';
+    xdef.hreflang = 'x-default';
+    xdef.href     = BASE_URL + '/' + pagePath;
+    document.head.appendChild(xdef);
+  }
 
   // ── Fetch and inject partials ─────────────────────────────────────────────
 
