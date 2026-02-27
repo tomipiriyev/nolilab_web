@@ -90,6 +90,12 @@ document.documentElement.setAttribute('data-theme', 'light');
           pathRemainder = parts.slice(1);
         }
 
+        // Strip trailing 'index' or 'index.html' — treat it as the section root.
+        var last = pathRemainder[pathRemainder.length - 1];
+        if (last === 'index' || last === 'index.html') {
+          pathRemainder = pathRemainder.slice(0, -1);
+        }
+
         var suffix = pathRemainder.length ? pathRemainder.join('/') + '/' : '';
         var newPath = targetLang === 'en'
           ? '/' + suffix
