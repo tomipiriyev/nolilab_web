@@ -1064,9 +1064,9 @@
 
   <footer>
     <div class="footer-container">
-      <a href="./index" class="footer-logo">nolilab</a>
+      <a href="/es/" class="footer-logo">nolilab</a>
       <div class="footer-links">
-        <a href="./index" class="footer-link">Home</a>
+        <a href="/es/" class="footer-link">Home</a>
         <a href="/es/#shop" class="footer-link">Shop</a>
         <a href="/es/software/" class="footer-link">Software</a>
         <a href="/es/setup-guides/" class="footer-link">Guías de configuración</a>
@@ -1135,44 +1135,17 @@
       option.addEventListener('click', (e) => {
         e.preventDefault();
         const targetLang = option.dataset.lang;
-
         localStorage.setItem('selectedLanguage', targetLang);
-
-        const currentPath = window.location.pathname;
-        const pathParts = currentPath.split('/').filter(p => p);
         const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
-
-        let currentLang = 'en';
-        let currentPage = 'index';
-
-        for (let i = 0; i < pathParts.length; i++) {
-          if (langDirs.includes(pathParts[i])) {
-            currentLang = pathParts[i];
-            currentPage = pathParts[i + 1] || 'index';
-            break;
-          }
-        }
-
-        if (currentLang === 'en') {
-          currentPage = pathParts[pathParts.length - 1] || '';
-        }
-
-        if (currentPage === '' || currentPage === '') {
-          currentPage = 'index';
-        }
-
-        let redirectUrl;
-        if (targetLang === 'en') {
-          if (currentLang === 'en') {
-            redirectUrl = './';
-          } else {
-            redirectUrl = currentPage === 'index' ? '../nolilab' : `../${currentPage}`;
-          }
+        const parts = window.location.pathname.split('/').filter(Boolean);
+        let pagePath = '';
+        if (parts.length > 0 && langDirs.includes(parts[0])) {
+          const rest = parts.slice(1);
+          pagePath = rest.length ? rest.join('/') + '/' : '';
         } else {
-          redirectUrl = currentLang === 'en' ? `./${targetLang}/${currentPage}` : `../${targetLang}/${currentPage}`;
+          pagePath = parts.length ? parts.join('/') + '/' : '';
         }
-
-        window.location.href = redirectUrl;
+        window.location.href = targetLang === 'en' ? '/' + pagePath : '/' + targetLang + '/' + pagePath;
       });
     });
 
