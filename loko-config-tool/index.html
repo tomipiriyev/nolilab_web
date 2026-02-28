@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loko Online Configuration Tool | NoliLab</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+    <meta name="description" content="Online browser-based configuration tool for Loko GPS tracker Air and Ground units. Requires Chrome browser with Web Serial API support.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Loko Online Configuration Tool | NoliLab">
+    <meta property="og:description" content="Configure your Loko GPS tracker Air and Ground units directly from Chrome browser via USB serial connection. No installation required.">
+    <meta property="og:url" content="https://nolilab.com/loko-config-tool/">
+    <meta property="og:image" content="https://nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png">
+    <meta property="og:site_name" content="NoliLab">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Loko Online Configuration Tool | NoliLab">
+    <meta name="twitter:description" content="Configure your Loko GPS tracker Air and Ground units directly from Chrome browser via USB serial connection.">
+    <meta name="twitter:image" content="https://nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png">
+    <style>
+        @font-face {
+            font-family: 'Inter-fallback';
+            src: local('Arial');
+            ascent-override: 90.44%;
+            descent-override: 22.52%;
+            line-gap-override: 0%;
+            size-adjust: 107.64%;
+        }
+
+        /* ── Site design tokens ─────────────────────────────────────────────── */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --text-primary: #24292e;
+            --text-secondary: #57606a;
+            --accent: #238636;
+            --accent-hover: #2ea043;
+            --border: #d0d7de;
+            --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --text-primary: #0d1117;
+            --text-secondary: #656d76;
+            --accent: #238636;
+            --accent-hover: #2ea043;
+            --border: #d0d7de;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #238636;
+            --accent-hover: #2ea043;
+            --border: #30363d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ── Site header ────────────────────────────────────────────────────── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        header {
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-container { display: flex; align-items: center; justify-content: space-between; }
+
+        .logo {
+            font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono);
+            letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+
+        .nav-link {
+            color: var(--text-secondary); text-decoration: none; font-weight: 500;
+            font-size: 0.875rem; transition: color 0.2s ease;
+        }
+
+        .nav-link:hover { color: var(--text-primary); }
+
+        .social-icons { display: flex; gap: var(--spacing-xs); align-items: center; margin-left: var(--spacing-sm); flex-shrink: 0; }
+
+        .social-icon {
+            display: flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; color: #333333 !important;
+            border-radius: var(--radius-sm); transition: all 0.2s ease; text-decoration: none;
+        }
+
+        .social-icon:hover { background-color: var(--bg-secondary); transform: translateY(-1px); }
+        .social-icon svg { width: 16px; height: 16px; fill: currentColor; }
+        .social-icon i { font-size: 16px; }
+
+        /* ── Mobile menu toggle ─────────────────────────────────────────────── */
+        .mobile-menu-toggle {
+            display: none; flex-direction: column; gap: 4px; background: none;
+            border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto;
+        }
+
+        .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+        .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+        /* ── Language selector ──────────────────────────────────────────────── */
+        .language-selector { margin-left: var(--spacing-sm); }
+
+        .language-btn {
+            display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem;
+            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm);
+            color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease;
+        }
+
+        .language-btn:hover { border-color: var(--accent); }
+        .language-btn .fa-globe { font-size: 1rem; color: var(--text-secondary); }
+        .current-lang { font-weight: 600; color: var(--text-primary); }
+        .language-btn .fa-chevron-down { font-size: 0.75rem; color: var(--text-secondary); transition: transform 0.2s ease; }
+        .language-selector:hover .fa-chevron-down { transform: rotate(180deg); }
+
+        .language-dropdown {
+            position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary);
+            border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+            min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.2s ease; z-index: 1000;
+        }
+
+        .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .language-option {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none;
+            transition: background 0.2s ease; border-bottom: 1px solid var(--border);
+        }
+
+        .language-option:last-child { border-bottom: none; }
+        .language-option:hover { background: var(--bg-secondary); }
+        .lang-code { font-weight: 600; font-size: 0.875rem; }
+        .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+
+        /* ── Site footer ────────────────────────────────────────────────────── */
+        footer {
+            padding: var(--spacing-xl) 0; background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.875rem;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .footer-container {
+            max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-md);
+        }
+
+        .footer-logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+        .footer-links { display: flex; gap: var(--spacing-md); align-items: center; flex-wrap: wrap; }
+        .footer-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+        .footer-link:hover { color: var(--text-primary); }
+        .footer-copyright { color: var(--text-secondary); font-size: 0.875rem; font-family: var(--font-mono); }
+
+        /* ── Mobile ─────────────────────────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: row; justify-content: space-between; align-items: center; }
+            .mobile-menu-toggle { display: flex; }
+
+            .nav-links {
+                position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh;
+                background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000;
+                overflow-y: auto; border-right: 1px solid var(--border);
+            }
+
+            .nav-links.active { left: 0; }
+            .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+            .social-icons { display: none; }
+
+            body.menu-open::before {
+                content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0, 0, 0, 0.5); z-index: 999;
+            }
+
+            body.menu-open { overflow: hidden; }
+
+            .language-selector { position: static; }
+            .language-dropdown { position: fixed; top: auto; right: 1rem; left: 1rem; bottom: 1rem; min-width: auto; }
+        }
+
+        /* ── Tool wrapper ───────────────────────────────────────────────────── */
+        .tool-wrapper { padding: 24px 16px 40px; }
+
+        /* ── Loko Config Tool styles (scoped under .loko-tool) ──────────────── */
+        /* Tool-specific CSS variables (separate namespace from site vars) */
+        .loko-tool {
+            --primary-color: #2196f3;
+            --primary-dark: #1976d2;
+            --tool-border: #ccc;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --grey-color: #9e9e9e;
+        }
+
+        .loko-tool * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .loko-tool .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 15px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .loko-tool .appbar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px 4px 0 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .loko-tool .appbar-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .loko-tool .appbar-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .loko-tool .tab-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .loko-tool .tab-button.active {
+            background-color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        .loko-tool .tab-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .loko-tool .content {
+            background-color: white;
+            padding: 16px;
+            border-radius: 0 0 4px 4px;
+            overflow-y: auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .loko-tool .tab-content {
+            display: none;
+        }
+
+        .loko-tool .tab-content.active {
+            display: block;
+        }
+
+        .loko-tool .section {
+            margin-bottom: 16px;
+        }
+
+        .loko-tool .row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .loko-tool .form-group {
+            flex: 1;
+            margin-bottom: 10px;
+        }
+
+        .loko-tool .input-field {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--tool-border);
+            border-radius: 4px;
+            font-size: 14px;
+            height: 40px;
+        }
+
+        .loko-tool .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .loko-tool label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .loko-tool .checkbox-label {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .loko-tool .checkbox-label input {
+            margin-right: 8px;
+        }
+
+        .loko-tool .dropdown {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--tool-border);
+            border-radius: 4px;
+            font-size: 14px;
+            height: 40px;
+        }
+
+        .loko-tool .bordered-container {
+            border: 1px solid var(--tool-border);
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .loko-tool .battery-text {
+            color: var(--success-color);
+            font-weight: 500;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .loko-tool .bottom-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+
+        .loko-tool .button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            height: 40px;
+            transition: background-color 0.3s;
+        }
+
+        .loko-tool .button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .loko-tool .status-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--grey-color);
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .loko-tool .status-light.green {
+            background-color: var(--success-color);
+        }
+
+        .loko-tool .status-light.red {
+            background-color: var(--error-color);
+        }
+
+        .loko-tool .output-container {
+            border: 1px solid var(--tool-border);
+            border-radius: 4px;
+            padding: 10px;
+            font-family: monospace;
+            height: 120px;
+            overflow-y: auto;
+            background-color: #f8f8f8;
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+
+        .loko-tool .snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--error-color);
+            color: white;
+            text-align: center;
+            border-radius: 4px;
+            padding: 12px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+        }
+
+        .loko-tool .snackbar.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        .loko-tool .connection-status {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .loko-tool .status-indicator {
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        #air-checkmark {
+            color: var(--success-color);
+        }
+
+        #ground-checkmark {
+            color: var(--success-color);
+        }
+
+        .browser-notice {
+            background-color: #fff8e1;
+            border: 1px solid #ffe082;
+            padding: 12px 20px;
+            margin: 0 auto 12px auto;
+            max-width: 750px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #5d4037;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .browser-notice strong {
+            font-weight: bold;
+        }
+
+        .browser-notice p {
+            margin: 0;
+        }
+
+        .browser-notice p + p {
+            margin-top: 4px;
+        }
+
+        @keyframes fadein {
+            from { bottom: 0; opacity: 0; }
+            to   { bottom: 30px; opacity: 1; }
+        }
+
+        @keyframes fadeout {
+            from { bottom: 30px; opacity: 1; }
+            to   { bottom: 0; opacity: 0; }
+        }
+    </style>
+    <script defer src="/js/layout.js"></script>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="tool-wrapper">
+    <div class="loko-tool">
+        <div class="browser-notice">
+            <p>This tool requires the <strong>Web Serial API</strong> — only available in <strong>Chrome</strong> (desktop).</p>
+            <p>Please open this page in <strong>Google Chrome</strong> and connect your Loko device via USB.</p>
+        </div>
+
+        <div class="container">
+            <div class="appbar">
+                <div class="appbar-title">Loko Configuration Tool</div>
+                <div class="appbar-actions">
+                    <button class="tab-button active" id="air-tab-btn">Air Unit</button>
+                    <button class="tab-button" id="ground-tab-btn">Ground Unit</button>
+                </div>
+            </div>
+
+            <div class="content">
+                <!-- Air Unit Tab -->
+                <div class="tab-content active" id="air-unit-tab">
+                    <div class="section">
+                        <div class="firmware-version">Firmware: --</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="id1-input">ID1:</label>
+                                <input type="number" id="id1-input" class="input-field" maxlength="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="id2-input">ID2:</label>
+                                <input type="number" id="id2-input" class="input-field" maxlength="2">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="freq-input">Freq: (Hz)</label>
+                                <input type="number" id="freq-input" class="input-field" maxlength="9">
+                            </div>
+                            <div class="form-group">
+                                <label for="interval-input">Interval: (sec)</label>
+                                <input type="number" id="interval-input" class="input-field" maxlength="10">
+                                <div class="battery-text" id="battery-text">Estimated Battery Life: --</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="trace-period-input" title="Records every Nth trace. Example: Period of 5 records the 5th, 10th, 15th trace, etc.">
+                                    Trace Record Period:
+                                    <span style="cursor: help; color: #666;">ⓘ</span>
+                                </label>
+                                <input type="number" id="trace-period-input" class="input-field" min="1" placeholder="e.g., 5" title="Records every Nth trace. Example: Period of 5 records the 5th, 10th, 15th trace, etc.">
+                                <div style="font-size: 12px; color: #666; margin-top: 3px;">Records every Nth trace (e.g., 5 → records 5th, 10th, 15th...)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="expand-checkbox">
+                                    Enable Velocity &amp; Altitude
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="gnss-dropdown">GNSS Mode</label>
+                                <select id="gnss-dropdown" class="dropdown">
+                                    <option value="">Select GNSS Mode</option>
+                                    <option value="Fitness">Fitness</option>
+                                    <option value="Balloon">Balloon</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section bordered-container">
+                        <div class="row">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="lorawan-checkbox">
+                                Enable LoraWAN
+                            </label>
+                        </div>
+                        <div class="section">
+                            <div class="form-group">
+                                <label for="region-dropdown">Region</label>
+                                <select id="region-dropdown" class="dropdown">
+                                    <option value="">Select Region</option>
+                                    <option value="AS923">AS923</option>
+                                    <option value="AU915">AU915</option>
+                                    <option value="CN470">CN470</option>
+                                    <option value="CN779">CN779</option>
+                                    <option value="EU433">EU433</option>
+                                    <option value="EU868">EU868</option>
+                                    <option value="KR920">KR920</option>
+                                    <option value="IN865">IN865</option>
+                                    <option value="US915">US915</option>
+                                    <option value="RU864">RU864</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="app-key-input">App Key:</label>
+                                <input type="text" id="app-key-input" class="input-field" maxlength="32">
+                            </div>
+                            <div class="form-group">
+                                <label for="dev-eui-input">Dev EUI:</label>
+                                <input type="text" id="dev-eui-input" class="input-field" maxlength="16">
+                            </div>
+                            <div class="form-group">
+                                <label for="app-eui-input">App/Join EUI:</label>
+                                <input type="text" id="app-eui-input" class="input-field" maxlength="16">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section bordered-container">
+                        <div class="row">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="p2p-checkbox">
+                                Enable Encryption
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="p2p-input">Key:</label>
+                            <input type="text" id="p2p-input" class="input-field" maxlength="64">
+                        </div>
+                    </div>
+
+                    <div class="bottom-controls">
+                        <div class="connection-status">
+                            <button class="button" id="air-connect-button">Connect</button>
+                            <div class="status-indicator" id="air-connection-status">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="display: none;" id="air-checkmark">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="width: 50px;"></div>
+                        <button class="button" id="air-read-button">Read</button>
+                        <button class="button" id="air-submit-button">Send</button>
+                        <button class="button" id="air-log-button">Download Log</button>
+                    </div>
+
+                    <div class="output-container" id="air-container-text"></div>
+                </div>
+
+                <!-- Ground Unit Tab -->
+                <div class="tab-content" id="ground-unit-tab">
+                    <div class="section">
+                        <div class="form-group">
+                            <label for="ground-id2-input">ID2:</label>
+                            <input type="number" id="ground-id2-input" class="input-field" maxlength="2">
+                        </div>
+                        <div class="form-group">
+                            <label for="ground-freq-input">Freq: (Hz)</label>
+                            <input type="number" id="ground-freq-input" class="input-field" maxlength="9">
+                        </div>
+                        <div class="form-group">
+                            <label for="ground-p2p-input">P2P Key:</label>
+                            <input type="text" id="ground-p2p-input" class="input-field" maxlength="64">
+                        </div>
+                    </div>
+
+                    <div class="bottom-controls">
+                        <div class="connection-status">
+                            <button class="button" id="ground-connect-button">Connect</button>
+                            <div class="status-indicator" id="ground-connection-status">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="display: none;" id="ground-checkmark">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="width: 50px;"></div>
+                        <button class="button" id="ground-read-button">Read</button>
+                        <button class="button" id="ground-submit-button">Send</button>
+                    </div>
+
+                    <div class="output-container" id="ground-container-text"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="snackbar" id="snackbar">Device disconnected! Please reconnect.</div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script>
+    // Global variables
+    let port = null;
+    let reader = null;
+    let readLoopRunning = false;
+    let currentView = "air"; // 'air' or 'ground'
+
+    // Commands dictionary
+    const commands = {
+        set_id1: "set id1 %d\n",
+        set_id2: "set id2 %d\n",
+        set_freq: "set freq %d\n",
+        set_interval: "set interval %d\n",
+        enable_extended: "extended 1\n",
+        disable_extended: "extended 0\n",
+        set_gnss_fitness: "set gnss mode 1\n",
+        set_gnss_balloon: "set gnss mode 3\n",
+        enable_lorawan: "enable lorawan mode 1\n",
+        disable_lorawan: "enable lorawan mode 0\n",
+        enable_p2p: "p2p encryption 1\n",
+        disable_p2p: "p2p encryption 0\n",
+        set_p2p_key: "set p2p-key %s\n",
+        set_region: "set region %s\n",
+        set_app_key: "set app-key %s\n",
+        set_dev_eui: "set dev-eui %s\n",
+        set_app_eui: "set app-eui %s\n",
+        get_info_air: "info\n",
+        get_log: "gtrace print\n",
+        set_trace_period: "gtrace period %d\n",
+
+        // Ground unit commands
+        get_info_ground: "info\r\n",
+        set_ground_id2: "set gid2 %d\r\n",
+        set_ground_freq: "set gfreq %d\r\n",
+        set_ground_p2p_key: "set gp2p-key %s\r\n",
+    };
+
+    // DOM Elements - Air Unit
+    const airTabBtn = document.getElementById("air-tab-btn");
+    const groundTabBtn = document.getElementById("ground-tab-btn");
+    const airUnitTab = document.getElementById("air-unit-tab");
+    const groundUnitTab = document.getElementById("ground-unit-tab");
+    const airSubmitButton = document.getElementById("air-submit-button");
+    const airReadButton = document.getElementById("air-read-button");
+    const airContainerText = document.getElementById("air-container-text");
+    const airConnectButton = document.getElementById("air-connect-button");
+    const airCheckmark = document.getElementById("air-checkmark");
+    const airLogButton = document.getElementById("air-log-button");
+
+    // DOM Elements - Ground Unit
+    const groundSubmitButton = document.getElementById("ground-submit-button");
+    const groundReadButton = document.getElementById("ground-read-button");
+    const groundContainerText = document.getElementById("ground-container-text");
+    const groundConnectButton = document.getElementById("ground-connect-button");
+    const groundCheckmark = document.getElementById("ground-checkmark");
+
+    // DOM Elements - Air Unit form fields
+    const id1Input = document.getElementById("id1-input");
+    const id2Input = document.getElementById("id2-input");
+    const freqInput = document.getElementById("freq-input");
+    const intervalInput = document.getElementById("interval-input");
+    const batteryText = document.getElementById("battery-text");
+    const expandCheckbox = document.getElementById("expand-checkbox");
+    const gnssDropdown = document.getElementById("gnss-dropdown");
+    const lorawanCheckbox = document.getElementById("lorawan-checkbox");
+    const regionDropdown = document.getElementById("region-dropdown");
+    const appKeyInput = document.getElementById("app-key-input");
+    const devEuiInput = document.getElementById("dev-eui-input");
+    const appEuiInput = document.getElementById("app-eui-input");
+    const p2pCheckbox = document.getElementById("p2p-checkbox");
+    const p2pInput = document.getElementById("p2p-input");
+    const tracePeriodInput = document.getElementById("trace-period-input");
+
+    // DOM Elements - Ground Unit form fields
+    const groundId2Input = document.getElementById("ground-id2-input");
+    const groundFreqInput = document.getElementById("ground-freq-input");
+    const groundP2pInput = document.getElementById("ground-p2p-input");
+
+    // Tab switching
+    airTabBtn.addEventListener("click", () => {
+        airTabBtn.classList.add("active");
+        groundTabBtn.classList.remove("active");
+        airUnitTab.classList.add("active");
+        groundUnitTab.classList.remove("active");
+        currentView = "air";
+    });
+
+    groundTabBtn.addEventListener("click", () => {
+        groundTabBtn.classList.add("active");
+        airTabBtn.classList.remove("active");
+        groundUnitTab.classList.add("active");
+        airUnitTab.classList.remove("active");
+        currentView = "ground";
+    });
+
+    // Battery life calculation
+    function calculateBatteryLife() {
+        if (!intervalInput.value) {
+            batteryText.innerText = "Estimated Battery Life: --";
+            return;
+        }
+        try {
+            const interval = parseFloat(intervalInput.value);
+            const batteryLifeHour = 0.5735 / ((54 * 15) / (interval * 1000) + 15 / 1000000);
+            const batteryLifeDays = batteryLifeHour / 24;
+            if (batteryLifeDays >= 1) {
+                batteryText.innerText = `Estimated Battery Life: ${batteryLifeDays.toFixed(1)} days`;
+            } else if (batteryLifeHour <= 1) {
+                const minutes = batteryLifeHour * 60;
+                batteryText.innerText = `Estimated Battery Life: ${minutes.toFixed(1)} minutes`;
+            } else {
+                batteryText.innerText = `Estimated Battery Life: ${batteryLifeHour.toFixed(1)} hours`;
+            }
+        } catch (error) {
+            batteryText.innerText = "Estimated Battery Life: --";
+        }
+    }
+
+    intervalInput.addEventListener("input", calculateBatteryLife);
+
+    // Connect button event handler
+    airConnectButton.addEventListener("click", async () => {
+        if (!port) {
+            const newPort = await connectToSerialPort();
+            if (newPort) {
+                airCheckmark.style.display = "block";
+                airConnectButton.textContent = "Connected";
+                showNotification("Device connected successfully", "#4CAF50");
+            }
+        } else {
+            await closeSerialPort();
+            airCheckmark.style.display = "none";
+            airConnectButton.textContent = "Connect";
+            showNotification("Device disconnected", "#F44336");
+        }
+    });
+
+    groundConnectButton.addEventListener("click", async () => {
+        if (!port) {
+            const newPort = await connectToSerialPort();
+            if (newPort) {
+                groundCheckmark.style.display = "block";
+                groundConnectButton.textContent = "Connected";
+                showNotification("Device connected successfully", "#4CAF50");
+            }
+        } else {
+            await closeSerialPort();
+            groundCheckmark.style.display = "none";
+            groundConnectButton.textContent = "Connect";
+            showNotification("Device disconnected", "#F44336");
+        }
+    });
+
+    function handleDisconnect() {
+        port = null;
+        airCheckmark.style.display = "none";
+        airConnectButton.textContent = "Connect";
+        groundCheckmark.style.display = "none";
+        groundConnectButton.textContent = "Connect";
+        showNotification("Device disconnected");
+        if (currentView === "air") {
+            addText(airContainerText, "Device disconnected!");
+        } else {
+            addText(groundContainerText, "Device disconnected!");
+        }
+    }
+
+    if (navigator.serial) {
+        navigator.serial.addEventListener("disconnect", (event) => {
+            if (port === event.target) {
+                handleDisconnect();
+            }
+        });
+    }
+
+    function showNotification(message, color = "#F44336") {
+        const snackbar = document.getElementById("snackbar");
+        snackbar.innerText = message;
+        snackbar.style.backgroundColor = color;
+        snackbar.className = "snackbar show";
+        setTimeout(() => {
+            snackbar.className = snackbar.className.replace("show", "");
+        }, 3000);
+    }
+
+    function addText(container, text) {
+        container.innerText += text + "\n-> ";
+        container.scrollTop = container.scrollHeight;
+    }
+
+    async function connectToSerialPort() {
+        if (!navigator.serial) {
+            showNotification("Web Serial API is not supported in your browser. Please use Chrome or Edge.");
+            return null;
+        }
+        try {
+            port = await navigator.serial.requestPort();
+            await port.open({ baudRate: 115200, dataBits: 8, stopBits: 1, parity: "none", flowControl: "none" });
+            if (!readLoopRunning) {
+                startReadLoop();
+            }
+            return port;
+        } catch (error) {
+            showNotification("Failed to open serial port: " + error.message);
+            return null;
+        }
+    }
+
+    async function closeSerialPort() {
+        if (reader) {
+            try { await reader.cancel(); reader = null; } catch (e) {}
+        }
+        if (port) {
+            try { await port.close(); port = null; } catch (e) {}
+        }
+        readLoopRunning = false;
+    }
+
+    async function sendCommand(command) {
+        if (!port || !port.writable) {
+            const newPort = await connectToSerialPort();
+            if (!newPort) return false;
+        }
+        try {
+            const writer = port.writable.getWriter();
+            const encoder = new TextEncoder();
+            await writer.write(encoder.encode(command));
+            writer.releaseLock();
+            return true;
+        } catch (error) {
+            showNotification("Failed to send command: " + error.message);
+            return false;
+        }
+    }
+
+    function formatCommand(commandTemplate, ...args) {
+        let command = commandTemplate;
+        args.forEach((arg) => {
+            if (typeof arg === "string") {
+                command = command.replace("%s", arg);
+            } else {
+                command = command.replace("%d", arg);
+            }
+        });
+        return command;
+    }
+
+    async function startReadLoop() {
+        if (readLoopRunning) return;
+        readLoopRunning = true;
+        const decoder = new TextDecoder();
+        let buffer = "";
+        while (port && port.readable && readLoopRunning) {
+            try {
+                reader = port.readable.getReader();
+                while (true) {
+                    const { value, done } = await reader.read();
+                    if (done) break;
+                    const text = decoder.decode(value);
+                    buffer += text;
+                    const lines = buffer.split(/\r?\n/);
+                    buffer = lines.pop() || "";
+                    for (const line of lines) {
+                        processReceivedData(line + "\n");
+                    }
+                }
+            } catch (error) {
+                console.error("Error in read loop:", error);
+            } finally {
+                if (reader) { reader.releaseLock(); reader = null; }
+            }
+            await new Promise((resolve) => setTimeout(resolve, 100));
+        }
+        readLoopRunning = false;
+    }
+
+    function processReceivedData(data) {
+        const currentContainer = currentView === "air" ? airContainerText : groundContainerText;
+        addText(currentContainer, data.trim());
+
+        if (currentView === "air") {
+            if (data.includes("id_1")) {
+                const match = data.match(/id_1\s*=\s*([0-9a-fx]+)/i);
+                if (match) {
+                    let value = match[1].trim();
+                    if (value.includes("x")) value = parseInt(value, 16).toString();
+                    id1Input.value = value;
+                }
+            } else if (data.includes("id_2")) {
+                const match = data.match(/id_2\s*=\s*([0-9a-fx]+)/i);
+                if (match) {
+                    let value = match[1].trim();
+                    if (value.includes("x")) value = parseInt(value, 16).toString();
+                    id2Input.value = value;
+                }
+            } else if (data.includes("is_extended_packet")) {
+                const match = data.match(/is_extended_packet\s*=\s*(\d+)/i);
+                if (match) expandCheckbox.checked = match[1] === "1";
+            } else if (data.includes("gnss_mode")) {
+                const match = data.match(/gnss_mode\s*=\s*(\d+)/i);
+                if (match) {
+                    if (match[1] === "1") gnssDropdown.value = "Fitness";
+                    else if (match[1] === "3") gnssDropdown.value = "Balloon";
+                }
+            } else if (data.includes("is_lorawan_mode")) {
+                const match = data.match(/is_lorawan_mode\s*=\s*(\d+)/i);
+                if (match) lorawanCheckbox.checked = match[1] === "1";
+            } else if (data.includes("lorawan_region")) {
+                const match = data.match(/lorawan_region\s*=\s*([A-Z0-9]+)/i);
+                if (match) regionDropdown.value = match[1].trim();
+            } else if (data.includes("auto_wakeup_period_s")) {
+                const match = data.match(/auto_wakeup_period_s\s*=\s*(\d+)/i);
+                if (match) { intervalInput.value = match[1].trim(); calculateBatteryLife(); }
+            } else if (data.includes("lora_frequency_hz")) {
+                const match = data.match(/lora_frequency_hz\s*=\s*(\d+)/i);
+                if (match) freqInput.value = match[1].trim();
+            } else if (data.includes("gnss_trace_save_mult")) {
+                const match = data.match(/gnss_trace_save_mult\s*=\s*(\d+)/i);
+                if (match) tracePeriodInput.value = match[1].trim();
+            }
+        } else {
+            if (data.includes("Device ID") || data.includes("id2") || data.includes("gid2")) {
+                let match = data.match(/(?:Device ID\s*\(id2\)|ID2|id2|gid2)\s*[:=]\s*([0-9a-fx]+)/i);
+                if (match) {
+                    let value = match[1].trim();
+                    if (value.includes("x")) value = parseInt(value, 16).toString();
+                    groundId2Input.value = value.replace(/[^0-9]/g, "");
+                }
+            } else if (data.includes("Frequency") || data.includes("frequency") || data.includes("gfreq")) {
+                let match = data.match(/(?:Frequency|frequency|gfreq)\s*[:=]\s*([0-9]+)/i);
+                if (match) groundFreqInput.value = match[1].trim().replace(/[^0-9]/g, "");
+            } else if (data.includes("P2P Key")) {
+                let match = data.match(/P2P Key\s*[:=]\s*([0-9a-fA-F]+)/i);
+                if (match) groundP2pInput.value = match[1].trim();
+            }
+        }
+    }
+
+    async function waitForOk(timeoutMs = 5000) {
+        return new Promise((resolve) => {
+            const startTime = Date.now();
+            const checkForOk = setInterval(() => {
+                const currentContainer = currentView === "air" ? airContainerText : groundContainerText;
+                if (currentContainer.innerText.includes("OK")) {
+                    clearInterval(checkForOk);
+                    resolve(true);
+                    return;
+                }
+                if (Date.now() - startTime > timeoutMs) {
+                    clearInterval(checkForOk);
+                    resolve(false);
+                }
+            }, 100);
+        });
+    }
+
+    async function sendCommandAndWaitForOk(command, containerText) {
+        addText(containerText, `Sending: ${command.trim()}`);
+        if (await sendCommand(command)) {
+            const gotOk = await waitForOk();
+            if (gotOk) { addText(containerText, "OK"); return true; }
+            else { addText(containerText, "No Response"); return false; }
+        } else {
+            addText(containerText, "Failed to send command");
+            return false;
+        }
+    }
+
+    // Air Unit Send Button Handler
+    airSubmitButton.addEventListener("click", async () => {
+        if (!port) {
+            const newPort = await connectToSerialPort();
+            if (!newPort) return;
+        }
+        airContainerText.innerText = "Connected to device...\n-> ";
+        try {
+            if (id1Input.value) await sendCommandAndWaitForOk(formatCommand(commands.set_id1, parseInt(id1Input.value)), airContainerText);
+            if (id2Input.value) await sendCommandAndWaitForOk(formatCommand(commands.set_id2, parseInt(id2Input.value)), airContainerText);
+            if (freqInput.value) await sendCommandAndWaitForOk(formatCommand(commands.set_freq, parseInt(freqInput.value.split(" ")[0])), airContainerText);
+            if (intervalInput.value) await sendCommandAndWaitForOk(formatCommand(commands.set_interval, parseInt(intervalInput.value.split(" ")[0])), airContainerText);
+            if (tracePeriodInput.value) await sendCommandAndWaitForOk(formatCommand(commands.set_trace_period, parseInt(tracePeriodInput.value)), airContainerText);
+            if (expandCheckbox.checked) {
+                await sendCommandAndWaitForOk(commands.enable_extended, airContainerText);
+            } else {
+                await sendCommandAndWaitForOk(commands.disable_extended, airContainerText);
+            }
+            if (gnssDropdown.value === "Balloon") {
+                await sendCommandAndWaitForOk(commands.set_gnss_balloon, airContainerText);
+            } else {
+                await sendCommandAndWaitForOk(commands.set_gnss_fitness, airContainerText);
+            }
+            if (p2pCheckbox.checked) {
+                await sendCommandAndWaitForOk(commands.enable_p2p, airContainerText);
+                if (p2pInput.value) await sendCommandAndWaitForOk(formatCommand(commands.set_p2p_key, p2pInput.value), airContainerText);
+            } else {
+                await sendCommandAndWaitForOk(commands.disable_p2p, airContainerText);
+            }
+            if (regionDropdown.value) await sendCommandAndWaitForOk(formatCommand(commands.set_region, regionDropdown.value), airContainerText);
+            if (lorawanCheckbox.checked) {
+                await sendCommandAndWaitForOk(commands.disable_lorawan, airContainerText);
+                if (appKeyInput.value && appKeyInput.value.length === 32) await sendCommandAndWaitForOk(formatCommand(commands.set_app_key, appKeyInput.value), airContainerText);
+                if (devEuiInput.value && devEuiInput.value.length === 16) await sendCommandAndWaitForOk(formatCommand(commands.set_dev_eui, devEuiInput.value), airContainerText);
+                if (appEuiInput.value && appEuiInput.value.length === 16) await sendCommandAndWaitForOk(formatCommand(commands.set_app_eui, appEuiInput.value), airContainerText);
+                await sendCommandAndWaitForOk(commands.enable_lorawan, airContainerText);
+            } else {
+                await sendCommandAndWaitForOk(commands.disable_lorawan, airContainerText);
+            }
+            addText(airContainerText, "Configuration Completed Successfully");
+            showNotification("Configuration Completed Successfully", "#4CAF50");
+        } catch (error) {
+            addText(airContainerText, `Error: ${error.message}`);
+            showNotification(`Error: ${error.message}`);
+        }
+    });
+
+    // Ground Unit Send Button Handler
+    groundSubmitButton.addEventListener("click", async () => {
+        if (!port) {
+            const newPort = await connectToSerialPort();
+            if (!newPort) return;
+        }
+        groundContainerText.innerText = "Connected to device...\n-> ";
+        try {
+            if (groundId2Input.value) await sendCommandAndWaitForOk(formatCommand(commands.set_ground_id2, parseInt(groundId2Input.value)), groundContainerText);
+            if (groundFreqInput.value) await sendCommandAndWaitForOk(formatCommand(commands.set_ground_freq, parseInt(groundFreqInput.value.split(" ")[0])), groundContainerText);
+            if (groundP2pInput.value && groundP2pInput.value.length >= 32) {
+                await sendCommandAndWaitForOk(commands.enable_p2p, groundContainerText);
+                await sendCommandAndWaitForOk(formatCommand(commands.set_ground_p2p_key, groundP2pInput.value), groundContainerText);
+            }
+            addText(groundContainerText, "Configuration Completed Successfully");
+            showNotification("Configuration Completed Successfully", "#4CAF50");
+        } catch (error) {
+            addText(groundContainerText, `Error: ${error.message}`);
+            showNotification(`Error: ${error.message}`);
+        }
+    });
+
+    // Air Unit Read Button Handler
+    airReadButton.addEventListener("click", async () => {
+        if (!port) {
+            const newPort = await connectToSerialPort();
+            if (!newPort) return;
+        }
+        airContainerText.innerText = "Reading device information...\n-> ";
+        try {
+            await sendCommand(commands.get_info_air);
+            addText(airContainerText, "Read command sent");
+        } catch (error) {
+            addText(airContainerText, `Error: ${error.message}`);
+            showNotification(`Error: ${error.message}`);
+        }
+    });
+
+    // Ground Unit Read Button Handler
+    groundReadButton.addEventListener("click", async () => {
+        if (!port) {
+            const newPort = await connectToSerialPort();
+            if (!newPort) return;
+        }
+        groundContainerText.innerText = "Reading device information...\n-> ";
+        try {
+            await sendCommand(commands.get_info_ground);
+            addText(groundContainerText, "Read command sent");
+        } catch (error) {
+            addText(groundContainerText, `Error: ${error.message}`);
+            showNotification(`Error: ${error.message}`);
+        }
+    });
+
+    // Air Unit Download Log Button Handler
+    airLogButton.addEventListener("click", async () => {
+        if (!port) {
+            const newPort = await connectToSerialPort();
+            if (!newPort) return;
+        }
+        airContainerText.innerText = "Downloading log file...\n-> ";
+        let logData = "";
+        let isCollectingLog = true;
+        const originalProcessData = processReceivedData;
+        processReceivedData = function(data) {
+            addText(airContainerText, data.trim());
+            if (isCollectingLog) logData += data;
+        };
+        try {
+            await sendCommand(commands.get_log);
+            addText(airContainerText, "Log command sent, waiting for data...");
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            isCollectingLog = false;
+            processReceivedData = originalProcessData;
+            if (logData.trim().length > 0) {
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                const filename = `loko_air_log_${timestamp}.txt`;
+                const blob = new Blob([logData], { type: 'text/plain' });
+                const downloadLink = document.createElement('a');
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = filename;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                URL.revokeObjectURL(downloadLink.href);
+                addText(airContainerText, `Log file saved as: ${filename}`);
+                showNotification(`Log file downloaded: ${filename}`, "#4CAF50");
+            } else {
+                addText(airContainerText, "No log data received");
+                showNotification("No log data received", "#F44336");
+            }
+        } catch (error) {
+            addText(airContainerText, `Error: ${error.message}`);
+            showNotification(`Error: ${error.message}`);
+            processReceivedData = originalProcessData;
+            isCollectingLog = false;
+        }
+    });
+
+    window.addEventListener("beforeunload", () => {
+        if (port) closeSerialPort();
+    });
+
+    // Display initial messages
+    addText(airContainerText, "Ready. Connect a device and click 'Read' or 'Send'.");
+    addText(groundContainerText, "Ready. Connect a device and click 'Read' or 'Send'.");
+
+    if (!navigator.serial) {
+        showNotification("Web Serial API is not supported in your browser. Please use Chrome or Edge.");
+    }
+</script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>
