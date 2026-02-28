@@ -173,26 +173,26 @@
 
     /* Firmware Section */
     .firmware-container {
-      padding: var(--spacing-xl) 0;
+      padding: var(--spacing-md) 0;
       background-color: var(--bg-primary);
     }
 
     .firmware-header {
       text-align: center;
-      margin-bottom: var(--spacing-xl);
-      padding: 0 var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      padding: 0 var(--spacing-sm);
     }
 
     .firmware-header h1 {
-      font-size: 2.5rem;
+      font-size: 1.75rem;
       font-weight: 500;
-      margin-bottom: var(--spacing-md);
+      margin-bottom: var(--spacing-xs);
       letter-spacing: -0.02em;
       color: var(--text-primary);
     }
 
     .firmware-subtitle {
-      font-size: 1.125rem;
+      font-size: 0.9rem;
       color: var(--text-secondary);
       max-width: 800px;
       margin: 0 auto;
@@ -201,25 +201,33 @@
     .firmware-content {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 var(--spacing-md);
+      padding: 0 var(--spacing-sm);
     }
 
     .upgrade-section {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
-      margin-bottom: var(--spacing-lg);
+      padding: var(--spacing-sm);
+      margin-bottom: var(--spacing-sm);
       transition: all 0.3s ease;
+      display: grid;
+      grid-template-areas:
+        "title title"
+        "steps video";
+      grid-template-columns: 1fr 1fr;
+      gap: 0 var(--spacing-sm);
+      align-items: start;
     }
 
     .upgrade-section h2 {
-      font-size: 1.5rem;
+      grid-area: title;
+      font-size: 1.15rem;
       font-weight: 500;
-      margin-bottom: var(--spacing-md);
+      margin-bottom: var(--spacing-xs);
       color: var(--text-primary);
       border-bottom: 1px solid var(--border);
-      padding-bottom: var(--spacing-sm);
+      padding-bottom: var(--spacing-xs);
     }
 
     .upgrade-section:hover {
@@ -228,33 +236,36 @@
     }
 
     .upgrade-steps {
-      margin: var(--spacing-md) 0;
+      grid-area: steps;
+      margin: var(--spacing-xs) 0;
     }
 
     .step {
       display: flex;
       align-items: flex-start;
-      margin-bottom: var(--spacing-sm);
+      margin-bottom: 0.35rem;
     }
 
     .step-number {
       background: var(--accent);
       color: white;
-      width: 28px;
-      height: 28px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       font-weight: 500;
-      margin-right: var(--spacing-sm);
+      margin-right: 0.6rem;
+      margin-top: 0.1rem;
     }
 
     .step-description {
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.4;
+      font-size: 0.875rem;
     }
 
     .download-link {
@@ -262,7 +273,7 @@
       color: var(--accent);
       text-decoration: none;
       font-weight: 500;
-      margin-top: var(--spacing-xs);
+      margin-left: 0.4rem;
       transition: color 0.2s ease;
     }
 
@@ -273,25 +284,27 @@
     .note {
       background: rgba(35, 134, 54, 0.1);
       border-left: 3px solid var(--accent);
-      padding: var(--spacing-md);
-      margin: var(--spacing-md) 0;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      margin: var(--spacing-xs) 0;
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     }
 
     .note-title {
       font-weight: 500;
+      font-size: 0.875rem;
       color: var(--text-primary);
-      margin-bottom: var(--spacing-xs);
+      margin-bottom: 0.2rem;
     }
 
     .note-content {
       color: var(--text-secondary);
-      line-height: 1.6;
+      font-size: 0.875rem;
+      line-height: 1.4;
     }
 
     /* Video Section Styles */
     .video-container {
-      margin: var(--spacing-lg) 0;
+      margin: var(--spacing-xs) 0;
       border-radius: var(--radius-md);
       overflow: hidden;
       box-shadow: var(--shadow-md);
@@ -310,22 +323,23 @@
     }
 
     .video-section {
-      margin: var(--spacing-xl) 0;
+      grid-area: video;
+      margin: var(--spacing-xs) 0;
       text-align: center;
     }
 
     .video-section h3 {
-      font-size: 1.25rem;
+      font-size: 0.95rem;
       font-weight: 500;
-      margin-bottom: var(--spacing-md);
+      margin-bottom: var(--spacing-xs);
       color: var(--text-primary);
     }
 
     .video-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-      gap: var(--spacing-md);
-      margin-top: var(--spacing-lg);
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-xs);
     }
 
     /* Mobile Menu Toggle */
@@ -362,12 +376,16 @@
     }
 
     @media (max-width: 768px) {
-      .video-grid {
+      .upgrade-section {
+        grid-template-areas:
+          "title"
+          "video"
+          "steps";
         grid-template-columns: 1fr;
       }
-      
+
       .video-container {
-        padding-top: 75%; /* Adjust for mobile */
+        padding-top: 56.25%;
       }
     }
 
