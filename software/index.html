@@ -1000,37 +1000,144 @@
 </section>
 </div>
 </div>
-  <section style="max-width:900px;margin:2rem auto 0;padding:0 1.5rem 3rem;font-family:inherit;color:var(--text-primary,#24292e);line-height:1.7">
-    <h2 style="font-size:1.5rem;font-weight:500;margin-bottom:1rem;letter-spacing:-0.02em">About the Loko App</h2>
-    <p>The Loko Navigation App is the companion app for the Loko GPS Tracker system. It connects to the Loko Ground Station via Bluetooth and displays live GPS positions of all paired Air Units on a map — all without any internet connection. The app stores tracking history on your device only; no data is sent to any server.</p>
-
-    <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Key app features</h3>
-    <ul style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
-      <li style="margin-bottom:0.4rem"><strong>Offline maps</strong> — Pre-download map tiles for use in areas without internet or mobile coverage. Works in remote fields, forests, and mountains.</li>
-      <li style="margin-bottom:0.4rem"><strong>Real-time position updates</strong> — See the live GPS position of every tracked Loko Air Unit as updates arrive from the Ground Station.</li>
-      <li style="margin-bottom:0.4rem"><strong>Multi-tracker support</strong> — Track up to 30 Air Units simultaneously on a single map view, each assigned a unique color and label.</li>
-      <li style="margin-bottom:0.4rem"><strong>Geofencing alerts</strong> — Set a virtual perimeter around any location and receive an alert when a tracked device enters or leaves the zone.</li>
-      <li style="margin-bottom:0.4rem"><strong>Track history</strong> — View the full route of any Air Unit and replay past tracking sessions with timestamps.</li>
-      <li style="margin-bottom:0.4rem"><strong>Data export</strong> — Export GPS tracks as GPX or CSV files for use in mapping software or for record-keeping.</li>
-      <li><strong>No subscription, no account</strong> — All features are free and work completely offline. No cloud account or monthly fee required.</li>
-    </ul>
-
-    <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Desktop configuration tool</h3>
-    <p>The Loko desktop application is a professional configuration utility for the Loko Air and Ground units. It connects to devices via USB and allows you to set LoRa radio parameters, device IDs, GPS update intervals, and trace record periods. The tool also shows real-time serial output for diagnostics.</p>
-    <ul style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
-      <li style="margin-bottom:0.4rem">Available for <strong>macOS</strong>, <strong>Windows 10/11</strong>, and <strong>Linux</strong> (64-bit)</li>
-      <li style="margin-bottom:0.4rem">Requires a USB-C data cable (not a charging-only cable)</li>
-      <li style="margin-bottom:0.4rem">Works with both Air Unit and Ground Unit firmware</li>
-      <li>Alternatively, use the browser-based <a href="/loko-config-tool/" style="color:var(--accent,#238636)">Loko Online Configuration Tool</a> in Chrome without installing anything</li>
-    </ul>
-
-    <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Frequently asked questions</h3>
-    <p><strong>Is the app free?</strong><br>Yes. The Loko app is free to download and has no in-app purchases or subscription fees. All features are included.</p>
-    <p><strong>Does the app require an internet connection?</strong><br>No. Once map tiles are downloaded, the app works entirely offline. GPS tracking happens over LoRa P2P radio — no cellular or Wi-Fi network is needed.</p>
-    <p><strong>Does the app collect my location data?</strong><br>No. Loko has a strict zero data-collection policy. All tracking data stays on your device. See the <a href="/privacy/" style="color:var(--accent,#238636)">Privacy Policy</a> for details.</p>
-    <p><strong>Which Android versions are supported?</strong><br>The Loko app supports Android 8.0 (Oreo) and later. It also runs on LineageOS 15.1 and later for users who prefer open-source Android builds.</p>
-    <p><strong>Can I use the app without a Loko Ground Station?</strong><br>The app requires a Loko Ground Station connected via Bluetooth to receive live GPS data from Air Units. The Ground Station is included in the Loko Starter Kit or available separately.</p>
+<div class="software-content">
+  <!-- About the Loko App -->
+  <section class="software-section">
+    <h2>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent)"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      About the Loko App
+    </h2>
+    <p class="software-description">The Loko Navigation App is the companion app for the Loko GPS Tracker system. It connects to the Loko Ground Station via Bluetooth and displays live GPS positions of all paired Air Units on a map — all without any internet connection. The app stores tracking history on your device only; no data is sent to any server.</p>
+    <div class="config-features">
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div>
+          <strong>Offline maps</strong>
+          <span>Pre-download map tiles for use in areas without internet or mobile coverage. Works in remote fields, forests, and mountains.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M1.5 8.5a13 13 0 0 1 21 0"/><path d="M4 12a9 9 0 0 1 16 0"/><path d="M6.5 15.5a5 5 0 0 1 11 0"/><line x1="12" y1="19" x2="12" y2="22"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></svg>
+        <div>
+          <strong>Real-time position updates</strong>
+          <span>See the live GPS position of every tracked Loko Air Unit as updates arrive from the Ground Station.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <strong>Multi-tracker support</strong>
+          <span>Track up to 30 Air Units simultaneously on a single map view, each assigned a unique color and label.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div>
+          <strong>Geofencing alerts</strong>
+          <span>Set a virtual perimeter around any location and receive an alert when a tracked device enters or leaves the zone.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+        <div>
+          <strong>Track history</strong>
+          <span>View the full route of any Air Unit and replay past tracking sessions with timestamps.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <div>
+          <strong>Data export</strong>
+          <span>Export GPS tracks as GPX or CSV files for use in mapping software or for record-keeping.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div>
+          <strong>No subscription, no account</strong>
+          <span>All features are free and work completely offline. No cloud account or monthly fee required.</span>
+        </div>
+      </div>
+    </div>
   </section>
+
+  <!-- Desktop Configuration Tool – About -->
+  <section class="software-section">
+    <h2>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent)"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Desktop Configuration Tool
+    </h2>
+    <p class="software-description">The Loko desktop application connects to your Air or Ground Unit via USB and lets you set LoRa radio parameters, device IDs, GPS update intervals, and trace record periods. It also displays real-time serial output for diagnostics.</p>
+    <div class="config-features">
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <div>
+          <strong>macOS, Windows &amp; Linux</strong>
+          <span>Runs on macOS 10.14+, Windows 10/11, and Linux (64-bit). No subscription or internet connection required.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <div>
+          <strong>USB connection required</strong>
+          <span>Use a USB-C data cable (not a charging-only cable). Compatible with both Air Unit and Ground Unit firmware.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        <div>
+          <strong>Browser-based alternative</strong>
+          <span>Use the <a href="/loko-config-tool/" style="color:var(--accent)">Loko Online Configuration Tool</a> in Chrome — no installation needed.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="software-section">
+    <h2>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent)"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Frequently Asked Questions
+    </h2>
+    <div class="config-features">
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div>
+          <strong>Is the app free?</strong>
+          <span>Yes. The Loko app is free to download and has no in-app purchases or subscription fees. All features are included.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        <div>
+          <strong>Does the app require an internet connection?</strong>
+          <span>No. Once map tiles are downloaded, the app works entirely offline. GPS tracking happens over LoRa P2P radio — no cellular or Wi-Fi network is needed.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div>
+          <strong>Does the app collect my location data?</strong>
+          <span>No. Loko has a strict zero data-collection policy. All tracking data stays on your device. See the <a href="/privacy/" style="color:var(--accent)">Privacy Policy</a> for details.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.64.64 0 0 0-.83.22l-1.88 3.24A10.07 10.07 0 0 0 12 8c-1.54 0-3 .37-4.47.91L5.65 5.67a.64.64 0 0 0-.83-.22c-.3.16-.42.54-.26.85L6.4 9.48C3.3 11.25 1.28 14.44 1 18h22c-.28-3.56-2.3-6.75-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>
+        <div>
+          <strong>Which Android versions are supported?</strong>
+          <span>The Loko app supports Android 8.0 (Oreo) and later. It also runs on LineageOS 15.1 and later for users who prefer open-source Android builds.</span>
+        </div>
+      </div>
+      <div class="config-feature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent);flex-shrink:0;margin-top:0.25rem"><path d="M6.5 6.5l11 11L12 23V1l5.5 5.5-11 11"/></svg>
+        <div>
+          <strong>Can I use the app without a Loko Ground Station?</strong>
+          <span>The app requires a Loko Ground Station connected via Bluetooth to receive live GPS data from Air Units. The Ground Station is included in the Loko Starter Kit or available separately.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 </main>
 <div id="site-footer"></div>
 <script>
