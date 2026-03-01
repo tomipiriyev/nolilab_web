@@ -693,6 +693,51 @@
     </div>
 </div>
 
+<section style="max-width:900px;margin:3rem auto;padding:0 1.5rem 3rem;font-family:inherit;color:var(--text-primary,#24292e);line-height:1.7">
+  <h2 style="font-size:1.5rem;font-weight:500;margin-bottom:1rem;letter-spacing:-0.02em">How to Use the Loko Configuration Tool</h2>
+  <p>The Loko Online Configuration Tool lets you configure Loko Air and Ground units directly from your browser using the Web Serial API — no software installation required. You need Google Chrome (desktop) and a USB cable to connect your device.</p>
+
+  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Step-by-step connection</h3>
+  <ol style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
+    <li style="margin-bottom:0.4rem">Open this page in <strong>Google Chrome</strong> on a desktop computer (Windows, macOS, or Linux).</li>
+    <li style="margin-bottom:0.4rem">Power on your Loko Air or Ground unit.</li>
+    <li style="margin-bottom:0.4rem">Connect the device to your computer with a <strong>USB-C cable</strong>.</li>
+    <li style="margin-bottom:0.4rem">Select the correct tab (Air Unit or Ground Unit) in the tool above.</li>
+    <li style="margin-bottom:0.4rem">Click <strong>Connect</strong>, then choose the correct serial port from the browser prompt.</li>
+    <li style="margin-bottom:0.4rem">The tool reads the current device settings automatically.</li>
+    <li>Edit any parameters and click <strong>Apply</strong> to save them to the device.</li>
+  </ol>
+
+  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Configurable parameters — Air Unit</h3>
+  <p>The Air Unit is the GPS tracker attached to the asset you want to track. The following parameters can be configured:</p>
+  <ul style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
+    <li style="margin-bottom:0.4rem"><strong>Device ID 1 &amp; ID 2</strong> — Unique identifiers that pair the Air Unit with a Ground Station. IDs must match between paired devices.</li>
+    <li style="margin-bottom:0.4rem"><strong>Radio frequency (Hz)</strong> — LoRa transmission frequency. Must match the Ground Station. Default bands: 868 MHz (EU), 915 MHz (US), 923 MHz (AS).</li>
+    <li style="margin-bottom:0.4rem"><strong>GPS update interval (seconds)</strong> — How often the Air Unit transmits its GPS position. Shorter intervals increase battery drain. Range: 1–3600 seconds.</li>
+    <li style="margin-bottom:0.4rem"><strong>Trace record period</strong> — How frequently GPS points are saved to the on-device data logger (up to 6,500 points).</li>
+    <li><strong>Firmware version</strong> — Displays the current firmware on the device. Update from the <a href="/firmware/" style="color:var(--accent,#238636)">Firmware page</a> when a new version is available.</li>
+  </ul>
+
+  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Configurable parameters — Ground Unit</h3>
+  <p>The Ground Unit receives GPS data from one or more Air Units and forwards it to the Loko mobile app via Bluetooth. Parameters include:</p>
+  <ul style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
+    <li style="margin-bottom:0.4rem"><strong>Device ID 1 &amp; ID 2</strong> — Must match the paired Air Unit(s). A single Ground Station supports up to 30 Air Units simultaneously.</li>
+    <li style="margin-bottom:0.4rem"><strong>Radio frequency</strong> — Must match all Air Units it should receive from.</li>
+    <li><strong>Firmware version</strong> — Keep the Ground Unit updated for best range and reliability.</li>
+  </ul>
+
+  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Battery life and update interval</h3>
+  <p>The GPS update interval has the single largest impact on battery life. The tool displays an estimated battery life based on the interval you set. At a 60-second interval, expect roughly 30 days of runtime. At a 600-second interval, runtime extends to several months. At intervals above 3,600 seconds, battery life reaches 12 months or more on a full charge.</p>
+
+  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Troubleshooting</h3>
+  <ul style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
+    <li style="margin-bottom:0.4rem"><strong>No serial port listed</strong> — Make sure the device is powered on and the USB cable supports data (not charging only). Try a different cable or port.</li>
+    <li style="margin-bottom:0.4rem"><strong>Connection fails immediately</strong> — Another app may be using the serial port. Close it and try again.</li>
+    <li style="margin-bottom:0.4rem"><strong>Tool shows blank values</strong> — Click Read again after connecting. If it persists, power-cycle the device and reconnect.</li>
+    <li><strong>Browser not supported</strong> — Web Serial API requires Chrome or Edge (desktop). Use the <a href="/software/" style="color:var(--accent,#238636)">desktop configuration app</a> as an alternative on unsupported browsers.</li>
+  </ul>
+</section>
+
 <div id="site-footer"></div>
 
 <script>
