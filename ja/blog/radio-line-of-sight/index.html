@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>無線見通し |ノリラボのブログ</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="無線見通し線の原理と、GPS 追跡およびドローン運用のための無線通信システムへの影響を理解します。" name="description"/>
+<link href="https://nolilab.com/blog/radio-line-of-sight/" hreflang="en" rel="alternate">
+<link href="https://nolilab.com/ru/blog/radio-line-of-sight/" hreflang="ru" rel="alternate"/>
+<link href="https://nolilab.com/zh/blog/radio-line-of-sight/" hreflang="zh" rel="alternate"/>  <link rel="alternate" hreflang="fr"        href="https://nolilab.com/fr/blog/radio-line-of-sight/" />
+
+<link href="https://nolilab.com/blog/radio-line-of-sight/" hreflang="x-default" rel="alternate"/>
+<link href="https://nolilab.com/blog/radio-line-of-sight/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="Radio Line of Sight | nolilab Blog" property="og:title"/>
+<meta content="Understanding radio line of sight principles and their impact on wireless communication systems for GPS tracking and drone operations." property="og:description"/>
+<meta content="https://nolilab.com/blog/radio-line-of-sight" property="og:url"/>
+<meta content="/images/radio-wave-signal.webp" property="og:image"/>
+<meta content="NoliLab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Radio Line of Sight | nolilab Blog" name="twitter:title"/>
+<meta content="Understanding radio line of sight principles and their impact on wireless communication systems for GPS tracking and drone operations." name="twitter:description"/>
+<meta content="/images/radio-wave-signal.webp" name="twitter:image"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Radio Line of Sight",
+  "description": "Understanding radio line of sight principles and their impact on wireless communication systems for GPS tracking and drone operations.",
+  "url": "https://nolilab.com/blog/radio-line-of-sight",
+  "datePublished": "2023-11-21",
+  "dateModified": "2023-11-21",
+  "author": {
+    "@type": "Organization",
+    "name": "NoliLab"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "/images/radio-wave-signal.webp"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nolilab.com/blog/radio-line-of-sight"
+  }
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</link><script defer="" src="/js/layout.js"></script></head>
+<body>
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/ja/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> ブログに戻る
+    </a>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> November 21, 2023</span>
+<span><i class="far fa-user"></i> NoliLab</span>
+</div>
+<h1 class="article-title">無線見通し線</h1>
+</div>
+<img alt="Radio Communication Tower" class="article-image" src="/images/radio-wave-signal.webp"/>
+<div class="article-content">
+<h2>導入</h2>
+<p>無線見通し線は、デバイス間の有効な信号経路を決定する無線通信システムの重要な側面です。最適な信号強度によりシステムの信頼性とパフォーマンスが向上するため、この概念を理解することは GPS 追跡、遠隔監視、ドローン操作にとって不可欠であることがわかります。</p>
+<h2>無線見通し線の基本</h2>
+<h3>意味</h3>
+<p>無線見通し線は、無線信号が送信機と受信機の間を直接通過する障害物のない経路を表します。障害物によって信号伝送が大幅に劣化したり完全にブロックされたりするため、この直接パスは信頼性の高い無線通信の基礎となります。</p>
+<h3>信号の伝播</h3>
+<p>無線信号は通常、光線と同様に、送信機から受信機まで直線で移動します。ただし、通信範囲が広がると、信号は自然の障害物、具体的には地球の曲率、丘、または送信を妨げるその他の地形に遭遇します。回折によって障害物の周りで曲がる可能性がある低周波信号とは異なり、GPS 追跡で使用される周波数 (通常は GHz 範囲) は、比較的明確な経路を必要とします。</p>
+<h2>無線見通しに影響を与える要因</h2>
+<p>いくつかの重要な変数が無線見通し線の有効性に影響します。</p>
+<h3>1. 地形と地形</h3>
+<p>丘、谷、山は物理的な障害物を生み出し、直接の信号経路を遮断します。地形の緩やかな変化であっても、アンテナの高さが低い場合には通信範囲に大きな影響を与える可能性があります。アンテナを丘の頂上や高い建造物に設置する高い位置に設置すると、見通し線のカバー範囲が大幅に向上します。</p>
+<h3>2. 障害物と構造物</h3>
+<p>建物、塔、密集した植生、その他の人工または自然の構造物は、信号の反射、吸収、または完全な遮断を引き起こします。金属構造は特に問題が多く、その背後に完全な信号の影が生じます。都市環境では、複数の反射面がマルチパス干渉を引き起こすため、複雑な課題が生じます。</p>
+<h3>3. 大気条件</h3>
+<p>温度、湿度、降水量は信号伝播特性に影響を与えます。大雨、霧、雪は、特に高周波数の無線信号を減衰（弱める）する可能性があります。温度の逆転により異常な伝播条件が発生し、大気ダクトを通じて通常の見通し線を超えて範囲が広がることがあります。</p>
+<h3>4. 周波数と電力</h3>
+<p>一般に、周波数が高いほど減衰が大きくなり、より鮮明な見通し線が必要になりますが、周波数が低いほど障害物を透過しやすく、障害物の周囲で回折することができます。送信出力を増加すると通信範囲は広がりますが、見通し線の制限を完全に克服することはできません。完全な障害物に直面した場合、出力を 2 倍にしても通信範囲はわずかに改善されるだけです。</p>
+<h2>無線見通し線の応用</h2>
+<h3>GPS追跡とナビゲーション</h3>
+<p>Loko GPS Tracker のようなシステムは、衛星 (位置決定用) と地上局 (データ通信用) の両方に対する明確な見通し線に依存しています。 Loko が採用している LoRa 無線技術は、最適な見通し条件下で 5 キロメートルを超える長距離通信を実現し、開けた地形での追跡アプリケーションに最適です。</p>
+<h3>通信システム</h3>
+<p>携帯電話ネットワーク、ワイヤレス インターネット プロバイダー、ポイントツーポイント通信リンクはすべて、見通し線の原則に依存しています。タワーの配置では、カバーエリアを最大化するために地形分析が考慮されます。</p>
+<h3>リモート監視とSCADAシステム</h3>
+<p>産業用監視システムには、センサーと中央ステーション間の信頼性の高い通信が必要です。見通し線の計算により、重要なインフラストラクチャの監視に適切な範囲が保証されます。</p>
+<h3>ドローンの運用と制御</h3>
+<p>ドローンのパイロットは、安全な操作と規制遵守のために、見通し線 (視覚と無線の両方) を維持する必要があります。無線見通し線を理解することは、パイロットが制御信号が弱くなるか失敗する可能性がある場所を予測するのに役立ちます。</p>
+<h2>視線の計算</h2>
+<p>無線見通し線を決定するには、次の 3 つの主な方法論が存在します。</p>
+<h3>幾何学的計算</h3>
+<p>エンジニアは、三角法と地球の曲率データを使用して、アンテナの高さに基づいて理論上の見通し距離を計算します。電波地平線は、大気の屈折により視覚地平線を超えて広がります。これは通常、地球半径 4/3 モデルで計算されます。</p>
+<h3>経験的モデル</h3>
+<p>さまざまな地形や条件にわたって収集された実験データに基づいて、Longley-Rice モデルや Okumura-Hata モデルなどの経験的モデルは、純粋な幾何学的計算よりも正確に信号伝播を予測します。</p>
+<h3>コンピュータシミュレーション</h3>
+<p>最新の計画ツールは、詳細な地形データベースと高度なアルゴリズムを使用して、信号伝播をモデル化します。これらのシミュレーションでは、地形、植生、建物、大気の影響が考慮されます。</p>
+<h3>利用可能なツール</h3>
+<ul>
+<li><strong>Google Earth:</strong>地形の標高データと基本的な見通し線の視覚化を提供します </li>
+<li><strong>Radio Mobile:</strong>詳細な電波伝播モデリングのための無料ソフトウェア </li>
+<li><strong>GIS Software Packages:</strong>包括的な地形分析と伝播予測を提供するプロフェッショナル ツール </li>
+</ul>
+<h2>視線の改善</h2>
+<p>いくつかの戦略により、無線見通し線のパフォーマンスを向上させることができます。</p>
+<h3>1. アンテナの配置と高さの最適化</h3>
+<p>アンテナを上げると見通しの範囲が大幅に広がります。わずかな標高の上昇でも、アンテナを地上ではなく屋上に取り付けると、カバレッジが大幅に向上します。 Loko GPS トラッカーは高い取り付け位置の恩恵を受け、5 キロメートルを超える範囲の可能性を最大限に高めます。</p>
+<h3>2. 信号増幅器とリピータの設置</h3>
+<p>直接の見通し線が達成できない場合、中継局は障害物を避けて信号を中継します。信号増幅器は弱い信号を増幅しますが、障害物を完全に克服することはできません。</p>
+<h3>3. 代替技術の探索</h3>
+<ul>
+<li><strong>Satellite Communication:</strong>地上の見通し線の制限を完全に回避します </li>
+<li><strong>Fiber-Optic Networks:</strong>無線伝播の問題に依存しない信頼性の高い接続を提供します </li>
+<li><strong>Mesh Networking:</strong>複数のノードが信号を中継し、障害物を回避して動的にルーティングします </li>
+</ul>
+<h2>結論</h2>
+<p>無線見通し線の課題を理解することで、情報に基づいたシステム設計の決定が可能になり、最終的にはワイヤレス アプリケーション全体で最適なパフォーマンスが保証されます。 Loko システムのような GPS トラッカーの導入、通信ネットワークの確立、またはドローンの操作のいずれにおいても、見通し線に関する考慮事項は信頼性とカバー範囲に根本的に影響します。</p>
+<p>地形を注意深く分析し、適切な周波数を選択し、アンテナの配置を最適化し、必要に応じて範囲拡張テクノロジーを採用することで、困難な環境でもワイヤレス通信システムの効果を最大化できます。</p>
+</div>
+</article>
+</main>
+<div id="site-footer"></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetLang = option.dataset.lang;
+        localStorage.setItem('selectedLanguage', targetLang);
+
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(p => p);
+        const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
+
+        let currentLang = 'en';
+        let currentPage = 'index';
+
+        for (let i = 0; i < pathParts.length; i++) {
+          if (langDirs.includes(pathParts[i])) {
+            currentLang = pathParts[i];
+            currentPage = pathParts[i + 1] || 'index';
+            break;
+          }
+        }
+
+        if (currentLang === 'en') {
+          currentPage = pathParts[pathParts.length - 1] || '';
+        }
+
+        if (currentPage === '') {
+          currentPage = 'index';
+        }
+
+        let redirectUrl;
+        if (targetLang === 'en') {
+          redirectUrl = '../';
+        } else {
+          redirectUrl = `../../${targetLang}/`;
+        }
+
+        window.location.href = redirectUrl;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      const currentLangEl = document.querySelector('.current-lang');
+      if (currentLangEl) {
+        currentLangEl.textContent = langMap[savedLang] || 'EN';
+      }
+    }
+  </script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>

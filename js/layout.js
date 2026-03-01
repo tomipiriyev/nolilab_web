@@ -1,1 +1,150 @@
-document.documentElement.setAttribute("data-theme","light"),function(){var e="https://nolilab.com",t={en:"EN",ru:"RU",ja:"JA",zh:"ZH",fr:"FR",es:"ES"},n=window.location.pathname.split("/").filter(Boolean),o="en",c=n.slice();n.length>0&&-1!==["ru","zh","ja","fr","es"].indexOf(n[0])&&(o=n[0],c=n.slice(1));var a=c[c.length-1];"index"!==a&&"index.html"!==a||(c=c.slice(0,-1));var r=c.length?c.join("/")+"/":"";function l(e){return"en"===e?"/"+r:"/"+e+"/"+r}if(!document.querySelector('link[rel="canonical"]')){var i=document.createElement("link");i.rel="canonical",i.href=e+l(o),document.head.appendChild(i)}if(!(0===r.indexOf("blog/")&&"blog/"!==r)){["en","ru","zh","ja","fr","es"].forEach(function(t){var n=document.createElement("link");n.rel="alternate",n.hreflang=t,n.href=e+l(t),document.head.appendChild(n)});var u=document.createElement("link");u.rel="alternate",u.hreflang="x-default",u.href=e+"/"+r,document.head.appendChild(u)}Promise.all([fetch("/partials/header.html").then(function(e){return e.text()}),fetch("/partials/footer.html").then(function(e){return e.text()})]).then(function(e){var n=document.getElementById("site-header"),c=document.getElementById("site-footer");n&&(n.outerHTML=e[0]),c&&(c.outerHTML=e[1]),function(){var e=document.querySelector(".mobile-menu-toggle"),t=document.querySelector(".nav-links");if(!e||!t)return;e.addEventListener("click",function(){e.classList.toggle("active"),t.classList.toggle("active"),document.body.classList.toggle("menu-open")}),t.querySelectorAll(".nav-link").forEach(function(n){n.addEventListener("click",function(){e.classList.remove("active"),t.classList.remove("active"),document.body.classList.remove("menu-open")})}),document.addEventListener("click",function(n){!document.body.classList.contains("menu-open")||t.contains(n.target)||e.contains(n.target)||(e.classList.remove("active"),t.classList.remove("active"),document.body.classList.remove("menu-open"))})}(),function(){if("en"===o)return;var e="/"+o,t=document.querySelector("a.logo");t&&(t.href=e+"/");document.querySelectorAll(".nav-link").forEach(function(t){var n=t.getAttribute("href")||"";"/"===n.charAt(0)&&0!==n.indexOf(e)&&(t.href=e+n)})}(),function(){var e=document.querySelector(".current-lang");e&&(e.textContent=t[o]||"EN");document.querySelectorAll(".language-option").forEach(function(e){var t=e.dataset.lang,n=l(t);e.href=n,t===o&&e.classList.add("active"),e.addEventListener("click",function(){localStorage.setItem("selectedLanguage",t)})})}()})}();
+document.documentElement.setAttribute('data-theme', 'light');
+
+(function () {
+  var BASE_URL = 'https://nolilab.com';
+  var LANG_LABELS = { en: 'EN', ru: 'RU', ja: 'JA', zh: 'ZH', fr: 'FR', es: 'ES' };
+  var NON_EN_LANGS = ['ru', 'zh', 'ja', 'fr', 'es'];
+  var ALL_LANGS = ['en', 'ru', 'zh', 'ja', 'fr', 'es'];
+
+  // Translations used only for the i18n group (ru, zh, fr, es)
+  var i18n = {
+    ru: { shop: 'Магазин', specs: 'Характеристики', software: 'Программы', contact: 'Контакт', home: 'Главная', setupGuides: 'Руководства', privacy: 'Конфиденциальность' },
+    zh: { shop: '商店', specs: '规格', software: '软件', contact: '联系我们', home: '首页', setupGuides: '设置指南', privacy: '隐私政策' },
+    fr: { shop: 'Boutique', specs: 'Spécifications', software: 'Logiciel', contact: 'Contact', home: 'Accueil', setupGuides: 'Guides', privacy: 'Confidentialité' },
+    es: { shop: 'Tienda', specs: 'Especificaciones', software: 'Software', contact: 'Contacto', home: 'Inicio', setupGuides: 'Guías', privacy: 'Privacidad' }
+  };
+
+  // Determine current language and page slug from URL
+  var parts = window.location.pathname.split('/').filter(Boolean);
+  var currentLang = 'en';
+  var pageParts = parts.slice();
+  if (parts.length > 0 && NON_EN_LANGS.indexOf(parts[0]) !== -1) {
+    currentLang = parts[0];
+    pageParts = parts.slice(1);
+  }
+  var lastPart = pageParts[pageParts.length - 1];
+  if (lastPart === 'index' || lastPart === 'index.html') {
+    pageParts = pageParts.slice(0, -1);
+  }
+  var pageSlug = pageParts.length ? pageParts.join('/') + '/' : '';
+
+  function langUrl(lang) {
+    return lang === 'en' ? '/' + pageSlug : '/' + lang + '/' + pageSlug;
+  }
+
+  // Partial file selection:
+  //   English  → header.html / footer.html         (hardcoded English)
+  //   Japanese → header.ja.html / footer.ja.html   (hardcoded Japanese)
+  //   Others   → header.i18n.html / footer.i18n.html (data-i18n, filled by JS)
+  var suffix = currentLang === 'en' ? '' : currentLang === 'ja' ? '.ja' : '.i18n';
+
+  // Inject canonical link
+  if (!document.querySelector('link[rel="canonical"]')) {
+    var canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = BASE_URL + langUrl(currentLang);
+    document.head.appendChild(canonical);
+  }
+
+  // Inject hreflang alternates (skip individual blog posts)
+  if (!(pageSlug.indexOf('blog/') === 0 && pageSlug !== 'blog/')) {
+    ALL_LANGS.forEach(function (lang) {
+      var alt = document.createElement('link');
+      alt.rel = 'alternate';
+      alt.hreflang = lang;
+      alt.href = BASE_URL + langUrl(lang);
+      document.head.appendChild(alt);
+    });
+    var xDefault = document.createElement('link');
+    xDefault.rel = 'alternate';
+    xDefault.hreflang = 'x-default';
+    xDefault.href = BASE_URL + '/' + pageSlug;
+    document.head.appendChild(xDefault);
+  }
+
+  // Fetch and inject the correct partials for this language group
+  Promise.all([
+    fetch('/partials/header' + suffix + '.html').then(function (r) { return r.text(); }),
+    fetch('/partials/footer' + suffix + '.html').then(function (r) { return r.text(); })
+  ]).then(function (html) {
+    var headerEl = document.getElementById('site-header');
+    var footerEl = document.getElementById('site-footer');
+    if (headerEl) headerEl.outerHTML = html[0];
+    if (footerEl) footerEl.outerHTML = html[1];
+
+    // Only the i18n group needs JS text replacement
+    if (suffix === '.i18n') applyTranslations();
+
+    applyLangPrefix();
+    initLangSelector();
+    initMobileMenu();
+  });
+
+  function applyTranslations() {
+    var t = i18n[currentLang];
+    if (!t) return;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+  }
+
+  function applyLangPrefix() {
+    if (currentLang === 'en') return;
+    var prefix = '/' + currentLang;
+
+    document.querySelectorAll('a.logo, a.footer-logo').forEach(function (el) {
+      el.href = prefix + '/';
+    });
+
+    document.querySelectorAll('.nav-link, .footer-link').forEach(function (el) {
+      var href = el.getAttribute('href') || '';
+      if (href.charAt(0) === '/' && href.indexOf(prefix) !== 0) {
+        el.href = prefix + href;
+      }
+    });
+  }
+
+  function initLangSelector() {
+    var currentLangEl = document.querySelector('.current-lang');
+    if (currentLangEl) currentLangEl.textContent = LANG_LABELS[currentLang] || 'EN';
+
+    document.querySelectorAll('.language-option').forEach(function (el) {
+      var lang = el.getAttribute('data-lang');
+      el.href = langUrl(lang);
+      if (lang === currentLang) el.classList.add('active');
+      el.addEventListener('click', function () {
+        localStorage.setItem('selectedLanguage', lang);
+      });
+    });
+  }
+
+  function initMobileMenu() {
+    var toggle = document.querySelector('.mobile-menu-toggle');
+    var navLinks = document.querySelector('.nav-links');
+    if (!toggle || !navLinks) return;
+
+    toggle.addEventListener('click', function () {
+      toggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      document.body.classList.toggle('menu-open');
+    });
+
+    navLinks.querySelectorAll('.nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        toggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!document.body.classList.contains('menu-open')) return;
+      if (!navLinks.contains(e.target) && !toggle.contains(e.target)) {
+        toggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+    });
+  }
+})();

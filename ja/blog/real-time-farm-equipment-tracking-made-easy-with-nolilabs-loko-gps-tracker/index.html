@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>noliLab の Loko GPS トラッカーでリアルタイムの農機具追跡が簡単に |ノリラボのブログ</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Loko GPS Tracker がリアルタイム追跡、バッテリ寿命の延長、月額料金無料などにより農機具の監視をどのように簡素化するかをご覧ください。" name="description"/>
+<link href="https://nolilab.com/blog/real-time-farm-equipment-tracking-made-easy-with-nolilabs-loko-gps-tracker/" rel="canonical">
+<meta content="article" property="og:type"/>
+<meta content="Real-Time Farm Equipment Tracking Made Easy with noliLab's Loko GPS Tracker | nolilab Blog" property="og:title"/>
+<meta content="Discover how the Loko GPS Tracker simplifies farm equipment monitoring with real-time tracking, extended battery life, and no monthly fees." property="og:description"/>
+<meta content="https://nolilab.com/blog/real-time-farm-equipment-tracking-made-easy-with-nolilabs-loko-gps-tracker" property="og:url"/>
+<meta content="/images/optimized/farm-equipment.webp" property="og:image"/>
+<meta content="NoliLab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Real-Time Farm Equipment Tracking Made Easy with noliLab's Loko GPS Tracker | nolilab Blog" name="twitter:title"/>
+<meta content="Discover how the Loko GPS Tracker simplifies farm equipment monitoring with real-time tracking, extended battery life, and no monthly fees." name="twitter:description"/>
+<meta content="/images/optimized/farm-equipment.webp" name="twitter:image"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Real-Time Farm Equipment Tracking Made Easy with noliLab's Loko GPS Tracker",
+  "description": "Discover how the Loko GPS Tracker simplifies farm equipment monitoring with real-time tracking, extended battery life, and no monthly fees.",
+  "url": "https://nolilab.com/blog/real-time-farm-equipment-tracking-made-easy-with-nolilabs-loko-gps-tracker",
+  "datePublished": "2023-11-16",
+  "dateModified": "2023-11-16",
+  "author": {
+    "@type": "Organization",
+    "name": "NoliLab"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "/images/optimized/farm-equipment.webp"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nolilab.com/blog/real-time-farm-equipment-tracking-made-easy-with-nolilabs-loko-gps-tracker"
+  }
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</link><script defer="" src="/js/layout.js"></script></head>
+<body>
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/ja/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> ブログに戻る
+    </a>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> November 16, 2023</span>
+<span><i class="far fa-user"></i> NoliLab</span>
+</div>
+<h1 class="article-title">noliLab の Loko GPS トラッカーでリアルタイムの農機具追跡が簡単に</h1>
+</div>
+<img alt="Farm Equipment GPS Tracking" class="article-image" src="/images/optimized/farm-equipment.webp"/>
+<div class="article-content">
+<h2>導入</h2>
+<p>効率的な農場管理は、機器の位置と使用状況に関する正確かつタイムリーなデータに依存します。現代の農業には、多くの場合携帯電話インフラから遠く離れた田舎の環境でも確実に機能する高度な追跡ソリューションが必要です。 noliLab の Loko GPS Tracker はこれらの課題に対処し、農家が高価な月々のサブスクリプションや複雑なセットアップ手順を行わずに機械を監視し、運用を最適化できるようにします。</p>
+<h2>主な機能と仕様</h2>
+<p>Loko GPS トラッカーは、農業環境向けに特別に設計されたコンパクトで堅牢なパッケージでプロ グレードの追跡機能を提供します。</p>
+<h3>複数衛星システムのサポート</h3>
+<p>GPS、GLONASS、GALILEO 衛星システムとの統合により、場所に関係なく正確な測位が保証されます。この冗長性は、個々の衛星システムの可視性が限られている田舎の地域では特に価値があることがわかります。</p>
+<h3>LoRa 無線接続</h3>
+<p>携帯電話に依存するトラッカーとは異なり、Loko は LoRa P2P および LoRaWAN テクノロジーを使用し、携帯電話の通信範囲や月々のデータ料金を必要とせずに 5 キロメートル以上の通信範囲を提供します。そのため、大規模な農場や遠隔地に最適です。</p>
+<h3>コンパクトで耐久性のある構造</h3>
+<p>物理仕様には次のものが含まれます。</p>
+<ul>
+<li>重量: 12グラム</li>
+<li>寸法: 30 x 23 mm</li>
+<li>防水、防塵、耐衝撃設計</li>
+<li>過酷な農業環境に耐えるように作られています</li>
+</ul>
+<h3>バッテリー寿命の延長</h3>
+<p>1 回の充電で 30 日以上のバッテリー寿命を持つ Loko トラッカーは、農繁期の間ずっと注意を払わなくても継続的に動作します。この延長された実行時間により、メンテナンスのオーバーヘッドが削減され、一貫した監視が保証されます。</p>
+<h2>実装</h2>
+<p>トラッカーのコンパクトな設計により、設置はシンプルかつ簡単であると説明されています。このデバイスは、通常の操作を妨げることなく、トラクター、コンバイン、ATV、灌漑システム、ポータブル発電機などの農機具に簡単に取り付けられます。</p>
+<p>Loko システムは既存の農場管理ソフトウェア プラットフォームと統合され、他の農業データ システムと並行して合理化された監視を可能にします。この統合により、農家は広範な運用ダッシュボード内で機器の位置を確認できるようになります。</p>
+<h2>農場経営のメリット</h2>
+<h3>機器利用の最適化</h3>
+<p>どのマシンが使用されているか、どこで、どのくらいの時間稼働しているかを追跡します。このデータは、十分に活用されていない機器を特定し、大規模な施設全体での導入を最適化するのに役立ちます。</p>
+<h3>盗難の防止と回復</h3>
+<p>農機具の盗難は、農業経営に毎年何百万もの損失をもたらします。リアルタイムの位置監視により、機器が予期せず移動した場合に即座にアラートが提供され、復旧の可能性が大幅に向上します。</p>
+<h3>メンテナンスのスケジュール設定</h3>
+<p>正確な使用状況データにより、推定ではなく実際の稼働時間に基づいてプロアクティブなメンテナンスのスケジュールを設定できるため、重要な季節における予期せぬ故障が軽減されます。</p>
+<h3>労働効率</h3>
+<p>大規模な敷地内で機器を探す無駄な時間を排除します。即時の位置データにより、作業者は必要な特定のマシンを素早く見つけることができます。</p>
+<h2>農業以外の追加用途</h2>
+<p>Loko GPS Tracker は農機具の追跡用に最適化されていますが、次のような複数のアプリケーションに対応します。</p>
+<h3>ドローンのナビゲーションと復旧</h3>
+<p>圃場調査や作物の検査中に農業用ドローンを監視し、遠隔地で墜落事故が発生した場合でも信頼性の高い復旧機能を備えています。</p>
+<h3>屋外機器の追跡</h3>
+<p>作業現場や保管場所全体で、発電機、ポンプ、工具などの貴重なポータブル機器を追跡します。</p>
+<h3>事業資産管理</h3>
+<p>建設会社、造園サービス、機器のレンタル業務など、貴重なモバイル資産を扱うあらゆる企業は、信頼性が高く手頃な価格の追跡の恩恵を受けることができます。</p>
+<h2>Loko設定アプリ</h2>
+<p>専用の Loko 設定アプリを使用すると、追跡機能に直感的にアクセスできます。</p>
+<ul>
+<li>特定の機器や運用ニーズに合わせたカスタマイズ可能な設定</li>
+<li>現在の機器の位置を示すリアルタイムデータ表示</li>
+<li>移動パターンと利用状況を分析するための履歴追跡情報</li>
+<li>ジオフェンシングと不正な移動に対するアラート構成</li>
+</ul>
+<h2>費用対効果の高いソリューション</h2>
+<p>Loko トラッカーは、以下を通じて競合他社に対してコスト効率の高い地位を確立しています。</p>
+<ul>
+<li>月々の購読料はかかりません</li>
+<li>SIM カードの要件や携帯データ通信料は不要です</li>
+<li>専門的なセットアップを必要としない簡単な取り付け</li>
+<li>バッテリー寿命が長く、メンテナンスの頻度を軽減</li>
+<li>交換コストを最小限に抑える耐久性のある構造</li>
+</ul>
+<h2>サポートとドキュメント</h2>
+<p>noliLab は、次のような包括的なドキュメントと技術サポートを提供します。</p>
+<ul>
+<li>詳細なセットアップ ガイドと構成手順</li>
+<li>ユーザーサポートのための活発なコミュニティフォーラム</li>
+<li>オープンソースのファームウェアと回路図を備えた GitHub リポジトリ</li>
+<li>対応力の高いテクニカル サポート チーム</li>
+</ul>
+<h2>結論</h2>
+<p>Loko GPS トラッカーは、従来のソリューションに伴う複雑さや継続的なコストを発生させることなく、プロの農機具追跡を実現します。複数の衛星測位、長距離 LoRa 通信、頑丈な構造、および延長されたバッテリー寿命の組み合わせにより、農業環境に最適です。</p>
+<p>機器の利用を最適化し、盗難を防止し、業務効率を向上させたいと考えている農家にとって、Loko トラッカーは、携帯電話の通信範囲のない僻地でも確実に機能する実用的で手頃なソリューションを提供します。</p>
+</div>
+</article>
+</main>
+<div id="site-footer"></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetLang = option.dataset.lang;
+        localStorage.setItem('selectedLanguage', targetLang);
+
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(p => p);
+        const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
+
+        let currentLang = 'en';
+        let currentPage = 'index';
+
+        for (let i = 0; i < pathParts.length; i++) {
+          if (langDirs.includes(pathParts[i])) {
+            currentLang = pathParts[i];
+            currentPage = pathParts[i + 1] || 'index';
+            break;
+          }
+        }
+
+        if (currentLang === 'en') {
+          currentPage = pathParts[pathParts.length - 1] || '';
+        }
+
+        if (currentPage === '') {
+          currentPage = 'index';
+        }
+
+        let redirectUrl;
+        if (targetLang === 'en') {
+          redirectUrl = '../';
+        } else {
+          redirectUrl = `../../${targetLang}/`;
+        }
+
+        window.location.href = redirectUrl;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      const currentLangEl = document.querySelector('.current-lang');
+      if (currentLangEl) {
+        currentLangEl.textContent = langMap[savedLang] || 'EN';
+      }
+    }
+  </script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>

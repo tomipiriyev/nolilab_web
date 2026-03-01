@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Почему любителям дронов следует рассмотреть возможность использования GPS-трекеров | Блог nolilab</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Узнайте, почему GPS-трекеры являются важным инструментом для пилотов дронов, позволяющим предотвратить потери, повысить безопасность и улучшить летные характеристики." name="description"/>
+<link href="https://nolilab.com/blog/why-drone-enthusiasts-should-consider-using-gps-trackers/" rel="canonical">
+<meta content="article" property="og:type"/>
+<meta content="Why Drone Enthusiasts Should Consider Using GPS Trackers | nolilab Blog" property="og:title"/>
+<meta content="Discover why GPS trackers are essential tools for drone pilots to prevent loss, enhance safety, and improve flight performance." property="og:description"/>
+<meta content="https://nolilab.com/blog/why-drone-enthusiasts-should-consider-using-gps-trackers" property="og:url"/>
+<meta content="https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=1920" property="og:image"/>
+<meta content="NoliLab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Why Drone Enthusiasts Should Consider Using GPS Trackers | nolilab Blog" name="twitter:title"/>
+<meta content="Discover why GPS trackers are essential tools for drone pilots to prevent loss, enhance safety, and improve flight performance." name="twitter:description"/>
+<meta content="https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=1920" name="twitter:image"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Why Drone Enthusiasts Should Consider Using GPS Trackers",
+  "description": "Discover why GPS trackers are essential tools for drone pilots to prevent loss, enhance safety, and improve flight performance.",
+  "url": "https://nolilab.com/blog/why-drone-enthusiasts-should-consider-using-gps-trackers",
+  "datePublished": "2023-10-16",
+  "dateModified": "2023-10-16",
+  "author": {
+    "@type": "Organization",
+    "name": "NoliLab"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=1920"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nolilab.com/blog/why-drone-enthusiasts-should-consider-using-gps-trackers"
+  }
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</link><script defer="" src="/js/layout.js"></script></head>
+<body>
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/ru/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Вернуться в блог
+    </a>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> October 16, 2023</span>
+<span><i class="far fa-user"></i> NoliLab</span>
+</div>
+<h1 class="article-title">Почему любителям дронов следует рассмотреть возможность использования GPS-трекеров</h1>
+</div>
+<img alt="Drone Flying Over Landscape" class="article-image" src="https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=1920"/>
+<div class="article-content">
+<h2>Введение</h2>
+<p>Энтузиастам дронов нравится пилотировать эти передовые машины для отдыха, фотосъемки и исследований, но защита их оборудования по-прежнему имеет решающее значение. GPS-трекеры предлагают пилотам дронов ценный инструмент для сохранения контроля, предотвращения потерь и повышения качества полетов. Независимо от того, являетесь ли вы обычным любителем или серьезным гонщиком FPV, понимание преимуществ GPS-слежения может защитить ваши инвестиции и расширить ваши возможности.</p>
+<h2>Понимание GPS-трекеров для дронов</h2>
+<p>Устройства GPS-слежения используют технологию спутникового позиционирования для предоставления данных о местоположении в режиме реального времени. Первоначально эти компактные системы использовались для управления автопарком и контроля активов, но сейчас они становятся все более популярными среди энтузиастов дронов.</p>
+<h3>Ключевые преимущества для пилотов дронов</h3>
+<ul>
+<li><strong>Real-time position updates:</strong>Контролируйте местоположение вашего дрона во время полета </li>
+<li><strong>Boundary establishment:</strong>Установите геозоны, чтобы предотвратить полеты в зоны ограниченного доступа. </li>
+<li><strong>Theft protection:</strong>Отслеживайте и находите украденное оборудование </li>
+<li><strong>Recovery assistance:</strong>Быстро находите разбившиеся или потерянные дроны </li>
+</ul>
+<h2>Устранение инцидентов с полетом</h2>
+<p>Инциденты с взлетом, когда дроны выходят из-под контроля и исчезают, представляют собой кошмар каждого пилота. Эти сценарии создаются несколькими причинами:</p>
+<h3>Распространенные причины разлета</h3>
+<ul>
+<li><strong>Signal degradation:</strong>Слабая радиосвязь приводит к потере управления </li>
+<li><strong>Software bugs:</strong>Сбои прошивки вызывают неожиданное поведение </li>
+<li><strong>Compass interference:</strong>Магнитные аномалии сбивают с толку навигационные системы </li>
+<li><strong>Battery failures:</strong>Внезапная потеря мощности во время полета </li>
+<li><strong>Communication failures:</strong>Радиочастотные помехи блокируют управляющие сигналы </li>
+</ul>
+<p>GPS-мониторинг оказывается неоценимым для «обнаружения и восстановления утерянных или украденных дронов, обеспечивая спокойствие энтузиастам дронов». Вместо того, чтобы навсегда потерять дорогостоящее оборудование, пилоты могут перейти к последним известным координатам и вернуть свой самолет.</p>
+<h2>Повышение летных характеристик</h2>
+<p>Помимо возможностей восстановления, GPS-слежение позволяет улучшить пилотирование с помощью нескольких механизмов:</p>
+<h3>Улучшенное управление пилотированием</h3>
+<p>Данные о местоположении в режиме реального времени помогают пилотам сохранять пространственную осведомленность, что особенно ценно при полете за пределами прямой видимости или на незнакомой местности. Понимание точного местоположения вашего дрона относительно ориентиров улучшает навигацию и предотвращает дезориентацию.</p>
+<h3>Анализ исторических полетных данных</h3>
+<p>Записанные траектории полета позволяют просмотреть и проанализировать их после полета. Изучите свои маршруты до:</p>
+<ul>
+<li>Выявление неэффективных схем полета</li>
+<li>Оптимизируйте будущие полеты для более эффективного управления аккумулятором.</li>
+<li>Задокументируйте интересные места для повторных посещений.</li>
+<li>Поделитесь впечатлениями о полетах с другими энтузиастами.</li>
+</ul>
+<h3>Назначенное управление границами полетов</h3>
+<p>Настройте геозоны, определяющие безопасные зоны полетов. Трекер предупреждает вас, когда ваш дрон приближается к этим границам или пересекает их, предотвращая:</p>
+<ul>
+<li>Непреднамеренное проникновение в ограниченное воздушное пространство</li>
+<li>Полет за пределами установленных законом ограничений по высоте.</li>
+<li>Забредание в опасные зоны (аэропорты, военные базы и т. д.)</li>
+<li>Превышение требований к прямой видимости</li>
+</ul>
+<h2>Улучшения безопасности</h2>
+<p>Системы GPS-слежения повышают безопасность дронов с помощью нескольких механизмов:</p>
+<h3>Защита от кражи</h3>
+<p>Видимые GPS-трекеры сигнализируют потенциальным ворам о том, что ваше оборудование находится под контролем и подлежит восстановлению. Самое главное, что в случае кражи данные о местонахождении в режиме реального времени значительно повышают шансы на восстановление, позволяя быстро отслеживать украденные дроны.</p>
+<h3>Автоматический возврат в исходную точку</h3>
+<p>Некоторые системы с поддержкой GPS имеют функцию автоматического возврата домой. При потере сигнала или низком заряде батареи дрон самостоятельно возвращается к точке запуска, используя координаты GPS.</p>
+<h3>Помощь в соблюдении нормативных требований</h3>
+<p>GPS-слежение помогает поддерживать соответствие нормативным требованиям, предотвращая несанкционированный вход в воздушное пространство. Исторические журналы полетов могут продемонстрировать соблюдение требований, если у властей возникнут вопросы о ваших схемах полетов.</p>
+<h2>Критерии выбора дронов GPS-трекеров</h2>
+<p>При выборе GPS-трекера для применения дронов оцените следующие критические факторы:</p>
+<h3>Физические характеристики</h3>
+<ul>
+<li><strong>Dimensions and mass:</strong>Минимальный размер и вес, чтобы не влиять на летные характеристики. </li>
+<li><strong>Power duration:</strong>Увеличенное время автономной работы для нескольких полетов </li>
+<li><strong>Weather resistance:</strong>Защита от дождя, пыли и влаги </li>
+</ul>
+<h3>Технические возможности</h3>
+<ul>
+<li><strong>Device compatibility:</strong>Интеграция с вашей конкретной моделью дрона </li>
+<li><strong>Signal range:</strong>Адекватное расстояние связи для вашего стиля полета </li>
+<li><strong>Precision quality:</strong>Точность позиционирования, достаточная для операций по восстановлению </li>
+<li><strong>Multi-satellite support:</strong>GPS, ГЛОНАСС и GALILEO для надежного позиционирования </li>
+</ul>
+<h3>Дополнительные возможности</h3>
+<ul>
+<li>Оповещения и уведомления в режиме реального времени</li>
+<li>Историческое отслеживание и запись траектории полета</li>
+<li>Возможности геозонирования</li>
+<li>Мобильное приложение с интуитивно понятным интерфейсом</li>
+<li>Отсутствие ежемесячной абонентской платы (для радиосистем)</li>
+</ul>
+<h2>Рекомендуемые варианты GPS-трекера</h2>
+<h3>Специальные трекеры дронов</h3>
+<p>Специализированные трекеры для дронов, такие как Loko GPS Tracker, предлагают:</p>
+<ul>
+<li>Сверхлегкий дизайн (12 грамм)</li>
+<li>Компактные размеры (30 х 23 мм)</li>
+<li>Увеличенный радиус действия (5+ километров)</li>
+<li>Длительное время автономной работы (30+ дней)</li>
+<li>Устойчивость к воде и ударам</li>
+<li>Без абонентской платы (радиосвязь LoRa)</li>
+</ul>
+<h3>Альтернативные производители</h3>
+<p>Другие варианты, которые стоит рассмотреть, включают устройства таких производителей, как NutTAG и Aiotize, однако оцените их характеристики с учетом ваших конкретных требований к весу, времени автономной работы и методу связи.</p>
+<h2>Лучшие практики интеграции</h2>
+<p>Чтобы максимизировать эффективность GPS-трекера:</p>
+<ul>
+<li><strong>Secure mounting:</strong>Надежно прикрепите трекеры, чтобы выдержать столкновения и маневры с высокой перегрузкой. </li>
+<li><strong>Weight distribution:</strong>Трекер положения для поддержания центра тяжести дрона </li>
+<li><strong>Regular testing:</strong>Проверяйте функциональность трекера перед каждым сеансом полета. </li>
+<li><strong>Battery management:</strong>Храните заряженные батареи трекеров отдельно от батарей дронов. </li>
+<li><strong>Backup systems:</strong>Комбинируйте GPS-отслеживание с звуковыми сигналами, светодиодами и визуальными маркерами. </li>
+</ul>
+<h2>Заключение</h2>
+<p>GPS-мониторинг усиливает защиту, управление и общий опыт пилотирования, что делает такие инвестиции выгодными для операторов, заботящихся о безопасности. Если вас беспокоят пролеты, вы хотите проанализировать летные характеристики или просто нуждаетесь в душевном спокойствии при превышении пределов дальности, GPS-трекеры предоставляют ценные возможности, которые улучшают впечатления от полета дрона.</p>
+<p>Небольшие инвестиции в качественный GPS-трекер могут сэкономить сотни или тысячи долларов на потерянном оборудовании, в то же время позволяя вам летать с уверенностью, зная, что вы можете найти и вернуть свой дрон независимо от того, что произойдет во время полета.</p>
+</div>
+</article>
+</main>
+<div id="site-footer"></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetLang = option.dataset.lang;
+        localStorage.setItem('selectedLanguage', targetLang);
+
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(p => p);
+        const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
+
+        let currentLang = 'en';
+        let currentPage = 'index';
+
+        for (let i = 0; i < pathParts.length; i++) {
+          if (langDirs.includes(pathParts[i])) {
+            currentLang = pathParts[i];
+            currentPage = pathParts[i + 1] || 'index';
+            break;
+          }
+        }
+
+        if (currentLang === 'en') {
+          currentPage = pathParts[pathParts.length - 1] || '';
+        }
+
+        if (currentPage === '') {
+          currentPage = 'index';
+        }
+
+        let redirectUrl;
+        if (targetLang === 'en') {
+          redirectUrl = '../';
+        } else {
+          redirectUrl = `../../${targetLang}/`;
+        }
+
+        window.location.href = redirectUrl;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      const currentLangEl = document.querySelector('.current-lang');
+      if (currentLangEl) {
+        currentLangEl.textContent = langMap[savedLang] || 'EN';
+      }
+    }
+  </script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>

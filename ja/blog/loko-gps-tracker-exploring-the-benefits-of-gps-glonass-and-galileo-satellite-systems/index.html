@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Loko GPS トラッカー: GPS、GLONASS、および GALILEO 衛星システムの利点を探る |ノリラボのブログ</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Loko GPS Tracker が GPS、GLONASS、GALILEO 衛星システムをどのように活用して測位精度と信頼性を向上させているかをご覧ください。" name="description"/>
+<link href="https://nolilab.com/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/" rel="canonical">
+<meta content="article" property="og:type"/>
+<meta content="Loko GPS Tracker: Exploring the Benefits of GPS, GLONASS, and GALILEO Satellite Systems | nolilab Blog" property="og:title"/>
+<meta content="Discover how the Loko GPS Tracker leverages GPS, GLONASS, and GALILEO satellite systems for enhanced positioning accuracy and reliability." property="og:description"/>
+<meta content="https://nolilab.com/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems" property="og:url"/>
+<meta content="/images/loko-gps-system-diagram.webp" property="og:image"/>
+<meta content="NoliLab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Loko GPS Tracker: Exploring the Benefits of GPS, GLONASS, and GALILEO Satellite Systems | nolilab Blog" name="twitter:title"/>
+<meta content="Discover how the Loko GPS Tracker leverages GPS, GLONASS, and GALILEO satellite systems for enhanced positioning accuracy and reliability." name="twitter:description"/>
+<meta content="/images/loko-gps-system-diagram.webp" name="twitter:image"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Loko GPS Tracker: Exploring the Benefits of GPS, GLONASS, and GALILEO Satellite Systems",
+  "description": "Discover how the Loko GPS Tracker leverages GPS, GLONASS, and GALILEO satellite systems for enhanced positioning accuracy and reliability.",
+  "url": "https://nolilab.com/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems",
+  "datePublished": "2023-10-17",
+  "dateModified": "2023-10-17",
+  "author": {
+    "@type": "Organization",
+    "name": "NoliLab"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "/images/loko-gps-system-diagram.webp"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nolilab.com/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems"
+  }
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</link><script defer="" src="/js/layout.js"></script></head>
+<body>
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/ja/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> ブログに戻る
+    </a>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> October 17, 2023</span>
+<span><i class="far fa-user"></i> NoliLab</span>
+</div>
+<h1 class="article-title">Loko GPS Tracker: GPS、GLONASS、GALILEO 衛星システムの利点を探る</h1>
+</div>
+<img alt="Satellite Navigation Systems" class="article-image" src="/images/loko-gps-system-diagram.webp"/>
+<div class="article-content">
+<h2>導入</h2>
+<p>正確で信頼性の高い位置情報は、アウトドア アドベンチャー、ドローン操作、資産監視など、今日のつながった世界では不可欠です。 Loko GPS Tracker は、複数の衛星ナビゲーション システム (GPS、GLONASS、GALILEO) を統合し、さまざまな条件や地理的領域にわたって強化された測位パフォーマンスを提供します。</p>
+<h2>全地球測位衛星システムについて</h2>
+<p>現代の測位は、地球を周回する衛星群に依存しており、受信機が正確な位置を計算するために使用する信号を継続的にブロードキャストします。 Loko GPS トラッカーは、3 つの独立したシステムに同時にアクセスします。</p>
+<h3>GPS (全地球測位システム)</h3>
+<p>米国国防総省によって開発された GPS は、1995 年に本格的に運用されるようになり、ナビゲーションに革命をもたらしました。このシステムは、高度約 20,000 キロメートルの 6 つの軌道面に分散された 32 個の衛星で構成されています。</p>
+<p>GPS は「世界で最も利用されている衛星ナビゲーション システム」と言われており、通常の状態では 5 ～ 10 メートルの測位精度を提供します。このシステムは、2 つの民間周波数 (L1 および L5) と安全な軍用周波数で動作します。</p>
+<h3>GLONASS (全地球航法衛星システム)</h3>
+<p>ロシアによって作成された GLONASS は、当初は軍事用途のために開発されましたが、現在は商用測位サービスを世界中で提供しています。このシステムは、3 つの軌道面にまたがる 24 個の衛星を備えています。</p>
+<p>GLONASS 衛星は、GPS とはわずかに異なる高度で軌道を周回し、特に GPS カバレッジが最適ではない可能性がある高緯度での測位の信頼性を向上させる補完的なカバレッジを提供します。</p>
+<h3>ガリレオ</h3>
+<p>欧州連合の GALILEO システムは、最新のグローバル ナビゲーション コンステレーションを代表します。計画されている 30 基の衛星が完全に運用されると、GALILEO は高精度の民間測位サービスを提供します。</p>
+<p>GALILEO は、高緯度でより正確な測位サービスを提供し、他のシステムが衛星の可視性を低下させる可能性があるギャップを埋めます。このシステムは、無料のオープンサービス信号とプレミアム アプリケーション向けの商用暗号化信号の両方を提供します。</p>
+<h2>マルチシステム統合の利点</h2>
+<p>複数の衛星システムに同時にアクセスすると、次のような大きな利点が得られます。</p>
+<h3>1. カバレッジの強化</h3>
+<p>GPS、GLONASS、GALILEO の衛星がすべて利用できるため、受信機はいつでもより多くの衛星にアクセスできます。この豊かさは次のことを意味します。</p>
+<ul>
+<li>困難な環境（都市部の峡谷、森林、山地）における衛星の視認性の向上</li>
+<li>個々のシステムに隙間がある場所でのより一貫した位置決め</li>
+<li>デバイスの電源投入時の初期位置取得の高速化</li>
+</ul>
+<h3>2. 精度の向上</h3>
+<p>マルチコンステレーション受信機は、さまざまなシステムにわたる利用可能なすべての衛星からのデータを結合します。このアプローチは、以下を通じて「精度とデータ整合性の向上」を実現します。</p>
+<ul>
+<li>衛星位置の幾何学的多様性の向上</li>
+<li>エラーの特定と排除に役立つ冗長測定</li>
+<li>一部の衛星の信号が劣化している場合でも、より堅牢な位置計算が可能</li>
+</ul>
+<h3>3. 研究用途</h3>
+<p>基本的な測位を超えて、マルチシステム受信機により、次のような高度なアプリケーションが可能になります。</p>
+<ul>
+<li>電離層モニタリングと大気研究</li>
+<li>科学機器の正確なタイミング</li>
+<li>測地測量と地球科学の研究</li>
+</ul>
+<h2>Loko GPS トラッカー: マルチシステムの実装</h2>
+<p>Loko GPS トラッカーは、高度な無線通信とともに 3 つの衛星システムすべてを活用しています。</p>
+<h3>技術仕様</h3>
+<ul>
+<li><strong>Satellite Support:</strong>GPS、GLONASS、および GALILEO の統合 </li>
+<li><strong>Communication:</strong>LoRa P2P および LoRaWAN 無線機能 </li>
+<li><strong>Range:</strong>最適な条件で 5 キロメートルを超える </li>
+<li><strong>Battery Life:</strong>1回の充電で30日を超える </li>
+<li><strong>Construction:</strong>防水、防塵、耐衝撃設計 </li>
+<li><strong>Form Factor:</strong>コンパクト、軽量設計 (12 グラム、30 x 23 mm) </li>
+</ul>
+<h3>実際的なメリット</h3>
+<p>このマルチシステム アプローチにより、Loko トラッカーはさまざまなシナリオで確実に動作します。</p>
+<ul>
+<li>樹冠が一部の衛星を遮る密林でも一貫した追跡を実現</li>
+<li>高層ビルが立ち並ぶ都市環境でも信頼性の高い測位を実現</li>
+<li>GPS だけでは最適ではない可能性がある高緯度での正確な位置データ</li>
+<li>初めてデバイスの電源を入れたときの位置修正が高速化</li>
+</ul>
+<h2>対象アプリケーション</h2>
+<h3>アウトドアアクティビティとアドベンチャースポーツ</h3>
+<p>ハイカー、登山家、バックカントリー愛好家は、困難な地形でも確実な位置情報を得ることができます。複数の衛星によるアプローチにより、深い峡谷、密林、高地環境でも一貫した追跡が保証されます。</p>
+<h3>ドローンの統合と保護</h3>
+<p>ドローンオペレーターは、リアルタイムの飛行監視と墜落後の回復のために、軽量の Loko トラッカーを航空機に取り付けます。マルチシステム測位により、衛星の視界が限られた地域を飛行している場合でも、正確な位置データが提供されます。</p>
+<h3>資産と所有の追跡</h3>
+<p>企業や個人は、貴重な機器、車両、個人の持ち物を追跡しています。衛星測位と LoRa 通信の組み合わせにより、高価な月々のサブスクリプションを必要とせずに信頼性の高い追跡が可能になります。</p>
+<h3>LoRaWAN を介した IoT ネットワーク統合</h3>
+<p>Loko トラッカーは既存の LoRaWAN ネットワークと統合されており、農業監視、車両管理、スマート シティ アプリケーションの大規模導入が可能になります。</p>
+<h2>マルチコンステレーション GNSS の将来</h2>
+<p>衛星ナビゲーション システムが進化し続けるにつれて、マルチコンスタレーション受信機の重要性がますます高まります。</p>
+<ul>
+<li>追加の地域システム (BeiDou、QZSS、NavIC) により、カバレッジがさらに強化されます</li>
+<li>新しい衛星信号により精度と耐干渉性が向上</li>
+<li>高度な受信機は複数の周波数を統合し、センチメートルレベルの精度を実現します</li>
+</ul>
+<h2>結論</h2>
+<p>Loko GPS Tracker は、GPS、GLONASS、および GALILEO 衛星システムを統合しているため、単一システムのデバイスと比較して優れた測位パフォーマンスを実現します。このマルチコンスタレーションアプローチにより、都市中心部から人里離れた荒野に至るまで、さまざまな環境や条件にわたって信頼性の高い追跡が保証されます。</p>
+<p>Loko トラッカーは、長距離通信のための LoRa 無線技術、過酷な環境に耐える頑丈な構造、連続動作のためのバッテリ寿命の延長を組み合わせることで、屋外レクリエーションからプロの資産管理に至るまでのアプリケーションに包括的なソリューションを提供します。</p>
+<p>僻地トレイルの探索、ドローン投資の保護、またはビジネス資産の管理のいずれの場合でも、マルチシステム衛星測位により、最も重要なときに追跡データを信頼できるようになります。</p>
+</div>
+</article>
+</main>
+<div id="site-footer"></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetLang = option.dataset.lang;
+        localStorage.setItem('selectedLanguage', targetLang);
+
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(p => p);
+        const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
+
+        let currentLang = 'en';
+        let currentPage = 'index';
+
+        for (let i = 0; i < pathParts.length; i++) {
+          if (langDirs.includes(pathParts[i])) {
+            currentLang = pathParts[i];
+            currentPage = pathParts[i + 1] || 'index';
+            break;
+          }
+        }
+
+        if (currentLang === 'en') {
+          currentPage = pathParts[pathParts.length - 1] || '';
+        }
+
+        if (currentPage === '') {
+          currentPage = 'index';
+        }
+
+        let redirectUrl;
+        if (targetLang === 'en') {
+          redirectUrl = '../';
+        } else {
+          redirectUrl = `../../${targetLang}/`;
+        }
+
+        window.location.href = redirectUrl;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      const currentLangEl = document.querySelector('.current-lang');
+      if (currentLangEl) {
+        currentLangEl.textContent = langMap[savedLang] || 'EN';
+      }
+    }
+  </script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>

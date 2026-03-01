@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>与 Loko GPS 跟踪器的远距离通信：探索 LoRa 无线电技术的力量 |诺利实验室博客</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="了解 LoRa 无线电技术如何以最低的功耗实现远程 GPS 跟踪且无需支付月费。" name="description"/>
+<link href="https://nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" rel="canonical">
+<meta content="article" property="og:type"/>
+<meta content="Long-Range Communication with the Loko GPS Tracker: Exploring the Power of LoRa Radio Technology | nolilab Blog" property="og:title"/>
+<meta content="Discover how LoRa radio technology enables long-range GPS tracking with minimal power consumption and no monthly fees." property="og:description"/>
+<meta content="https://nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1" property="og:url"/>
+<meta content="/images/lora-p2p-communication-diagram.webp" property="og:image"/>
+<meta content="NoliLab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Long-Range Communication with the Loko GPS Tracker: Exploring the Power of LoRa Radio Technology | nolilab Blog" name="twitter:title"/>
+<meta content="Discover how LoRa radio technology enables long-range GPS tracking with minimal power consumption and no monthly fees." name="twitter:description"/>
+<meta content="/images/lora-p2p-communication-diagram.webp" name="twitter:image"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Long-Range Communication with the Loko GPS Tracker: Exploring the Power of LoRa Radio Technology",
+  "description": "Discover how LoRa radio technology enables long-range GPS tracking with minimal power consumption and no monthly fees.",
+  "url": "https://nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1",
+  "datePublished": "2023-10-12",
+  "dateModified": "2023-10-12",
+  "author": {
+    "@type": "Organization",
+    "name": "NoliLab"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "/images/lora-p2p-communication-diagram.webp"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1"
+  }
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</link><script defer="" src="/js/layout.js"></script></head>
+<body>
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/zh/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 返回博客
+    </a>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> October 12, 2023</span>
+<span><i class="far fa-user"></i> NoliLab</span>
+</div>
+<h1 class="article-title">与 Loko GPS 跟踪器进行远距离通信：探索 LoRa 无线电技术的力量</h1>
+</div>
+<img alt="LoRa Radio Technology" class="article-image" src="/images/lora-p2p-communication-diagram.webp"/>
+<div class="article-content">
+<h2>介绍</h2>
+<p>Loko GPS 跟踪器引入了一种利用 LoRa 无线电技术的轻量级解决方案，以最小的功耗提供“远距离跟踪和通信”。这种创新方法消除了每月的订阅费，同时提供远远超过传统蓝牙解决方案的可靠跨距离跟踪。</p>
+<h2>了解 LoRa 技术</h2>
+<p>LoRa（Long Range）是一种专为低功耗长距离通信而设计的无线调制技术。与需要网络基础设施和订阅的基于蜂窝的解决方案不同，LoRa 在未经许可的无线电频率上运行，无需中间系统即可实现设备间的直接通信。</p>
+<h3>LoRa 的主要优势</h3>
+<ul>
+<li><strong>Extended Range:</strong>最佳条件下通讯距离超过5公里 </li>
+<li><strong>Low Power Consumption:</strong>使用小电池即可运行数月 </li>
+<li><strong>Obstacle Penetration:</strong>通过建筑物、植被和地形实现卓越的信号传播 </li>
+<li><strong>No Infrastructure Required:</strong>独立于蜂窝塔或 WiFi 网络工作 </li>
+<li><strong>Unlicensed Spectrum:</strong>在 ISM 频段上运行，无需支付许可费或限制 </li>
+</ul>
+<h2>Loko 系统组件</h2>
+<h3>空气单元（发射器）</h3>
+<p>这款超轻型跟踪器重 12 克，电池寿命令人印象深刻，每次充电续航里程可达 250 天，具体取决于传输间隔配置。这款紧凑型发射器可连接到您需要跟踪的任何设备，通过 GPS 卫星持续确定位置，并通过 LoRa 无线电将位置数据传输到地面单元。</p>
+<h3>地面单元（接收器）</h3>
+<p>地面单元充当通信中心，同时接收来自多达 30 个空中单元的 LoRa 传输。它通过蓝牙将数据转发到智能手机应用程序，用户可以在交互式地图上可视化位置。该架构支持从单设备跟踪到全面的车队管理的可扩展部署。</p>
+<h2>特性和功能</h2>
+<h3>坚固的结构</h3>
+<p>该系统提供防撞、防水、防尘设计，适合恶劣的户外环境。无论是安装在无人机、户外设备还是车辆上，跟踪器都能承受冲击、潮湿和碎片，这些都会损坏不太坚固的解决方案。</p>
+<h3>乐科移动应用程序</h3>
+<p>配套应用程序包括 2D 地图可视化，实时显示所有跟踪单元的位置。用户可以通过适用于 iOS 和 Android 平台的直观界面配置传输间隔、查看历史跟踪数据并自定义警报参数。</p>
+<h3>LoRaWAN 网络集成</h3>
+<p>除了点对点跟踪之外，Loko 还支持与现有 LoRaWAN 网络的集成。这使得大规模部署成为可能，其中多个跟踪器与集中式网络基础设施进行通信，以实现智能农业、资产管理或环境监测等应用。</p>
+<h2>开源开发</h2>
+<p>电路板原理图、固件源代码和软件可在 GitHub 上获取，从而实现社区协作和定制。这种透明度具有以下几个优点：</p>
+<h3>社区创新</h3>
+<p>世界各地的开发人员贡献改进、共享自定义配置并开发第三方集成。这种协作方法加速了功能开发并确保了项目的长期可持续性。</p>
+<h3>定制灵活性</h3>
+<p>高级用户可以修改固件来为独特的应用程序创建专门的配置。调整传输参数、实施自定义警报逻辑或通过记录的 API 与现有系统集成。</p>
+<h3>通过透明度建立信任</h3>
+<p>开源硬件和软件允许独立的安全审核，确保设备按照宣传的方式运行，没有隐藏功能或隐私问题。</p>
+<h2>制造与分销</h2>
+<h3>内部生产</h3>
+<p>noliLab 在内部处理 PCB 组装和注塑，确保整个制造过程的质量控制。这种垂直整合可以实现快速迭代并保持一致的产品质量。</p>
+<h3>全球供应</h3>
+<p>与 Mouser Electronics 合作，通过成熟的电子产品供应渠道提供全球分销。客户可受益于 Mouser 可靠的运输、技术支持以及与现有采购流程的集成。</p>
+<h2>组织背景</h2>
+<p>noliLab 是一家爱沙尼亚消费技术公司，专注于物联网设备和跟踪解决方案。该团队结合了电子设计、固件开发和制造方面的专业知识，为现实世界的跟踪挑战提供实用的解决方案。</p>
+<h2>目标应用</h2>
+<h3>无人机跟踪和恢复</h3>
+<p>将 12 克跟踪器连接到无人机上，以进行实时飞行监控和坠机后恢复。即使无人机飞出视线范围，扩展的范围也能确保连接性，而最小的重量不会显着影响飞行时间。</p>
+<h3>资产监控</h3>
+<p>跟踪工作现场、仓库或大型财产中的有价值的设备、工具和库存。延长的电池寿命无需持续充电，而 LoRa 通信可在 WiFi 或蜂窝覆盖可能不可靠的工业环境中可靠地工作。</p>
+<h3>户外活动和探险运动</h3>
+<p>徒步旅行者、登山者和野外爱好者使用跟踪器在没有蜂窝网络覆盖的偏远地区进行导航和紧急位置共享。坚固的结构可以承受恶劣的条件，而更长的电池寿命支持多天的探险。</p>
+<h3>商业资产追踪</h3>
+<p>企业在车队、租赁设备或集装箱中部署 Loko 跟踪器。每个地面站可监控 30 个设备，可实现经济高效的大规模跟踪，而无需在大型部署中快速积累月租费。</p>
+<h2>LoRa 与替代技术的比较</h2>
+<h3>与蓝牙相比</h3>
+<p>蓝牙提供适合个人区域网络的短距离连接（通常在 100 米以下）。 LoRa 的 5 公里以上范围使其非常适合发射器和接收器可能明显分离的跟踪应用。</p>
+<h3>与蜂窝网络相比</h3>
+<p>蜂窝跟踪器需要 SIM 卡、每月数据订阅和可靠的蜂窝塔覆盖。 LoRa 消除了不存在蜂窝基础设施的偏远地区的持续成本和功能。然而，蜂窝网络通过全球网络覆盖提供无限范围。</p>
+<h3>与 WiFi</h3>
+<p>WiFi 可在短距离内提供高带宽，但需要接入点基础设施。 LoRa 为了范围和简单性而牺牲了带宽，使其非常适合在没有基础设施的情况下长距离传输小数据包（GPS 坐标）。</p>
+<h2>技术考虑</h2>
+<h3>频段</h3>
+<p>LoRa 根据地区的不同以不同的频率运行：</p>
+<ul>
+<li>北美：902-928 MHz（ISM 频段）</li>
+<li>欧洲：863-870 MHz</li>
+<li>亚洲：915-928 MHz（因国家/地区而异）</li>
+</ul>
+<p>确保您购买适合您所在地理区域的正确频率变体，以保持法律合规性和最佳性能。</p>
+<h3>数据速率权衡</h3>
+<p>LoRa 通过牺牲数据速率来实现扩展范围。虽然不适合视频或音频流，但它擅长传输小数据包，例如 GPS 坐标、传感器读数或状态更新，而这正是跟踪应用程序所需要的。</p>
+<h3>视线注意事项</h3>
+<p>虽然 LoRa 比高频技术更能穿透障碍物，但最佳范围需要发射器和接收器之间相对清晰的路径。与开放区域相比，建筑物密集或山区地形的城市环境可能会减少有效范围。</p>
+<h2>入门</h2>
+<h3>初始设置</h3>
+<ol>
+<li>通过 USB Type-C 为空中和地面设备充电</li>
+<li>下载适用于 iOS 或 Android 的 Loko 应用程序</li>
+<li>打开地面装置电源并通过蓝牙与智能手机配对</li>
+<li>激活Air Unit并配置传输间隔</li>
+<li>通过观察应用程序中的位置更新来验证通信</li>
+</ol>
+<h3>优化技巧</h3>
+<ul>
+<li>将地面装置放置在最高的实际高度以实现最大范围</li>
+<li>配置传输间隔，平衡电池寿命与更新频率</li>
+<li>在关键部署之前在您的特定环境中测试范围</li>
+<li>保持固件更新以获得最新功能和改进</li>
+</ul>
+<h2>结论</h2>
+<p>LoRa 无线电技术通过提供扩展的范围和卓越的电池寿命而无需按月付费，从而改变了 GPS 跟踪。 Loko GPS 跟踪器展示了该技术的实际实施，为无人机跟踪、资产监控、户外活动和商业应用提供可靠的解决方案。</p>
+<p>无论您是寻求可靠恢复功能的无人机爱好者、需要在蜂窝覆盖范围之外进行跟踪的户外探险家，还是管理宝贵资产的企业，LoRa 通信和 GPS 定位的结合都可以提供专业级跟踪，而不受基于蜂窝替代方案的限制和持续成本。</p>
+</div>
+</article>
+</main>
+<div id="site-footer"></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetLang = option.dataset.lang;
+        localStorage.setItem('selectedLanguage', targetLang);
+
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(p => p);
+        const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
+
+        let currentLang = 'en';
+        let currentPage = 'index';
+
+        for (let i = 0; i < pathParts.length; i++) {
+          if (langDirs.includes(pathParts[i])) {
+            currentLang = pathParts[i];
+            currentPage = pathParts[i + 1] || 'index';
+            break;
+          }
+        }
+
+        if (currentLang === 'en') {
+          currentPage = pathParts[pathParts.length - 1] || '';
+        }
+
+        if (currentPage === '') {
+          currentPage = 'index';
+        }
+
+        let redirectUrl;
+        if (targetLang === 'en') {
+          redirectUrl = '../';
+        } else {
+          redirectUrl = `../../${targetLang}/`;
+        }
+
+        window.location.href = redirectUrl;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      const currentLangEl = document.querySelector('.current-lang');
+      if (currentLangEl) {
+        currentLangEl.textContent = langMap[savedLang] || 'EN';
+      }
+    }
+  </script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>

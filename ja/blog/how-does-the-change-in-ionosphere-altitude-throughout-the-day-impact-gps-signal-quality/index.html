@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>1 日を通しての電離層高度の変化は GPS 信号品質にどのような影響を与えるのか |ノリラボのブログ</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="1 日を通しての電離層高度の変化が GPS 信号の品質とナビゲーションの精度にどのような影響を与えるかを調べます。" name="description"/>
+<link href="https://nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" rel="canonical">
+<meta content="article" property="og:type"/>
+<meta content="How Does the Change in Ionosphere Altitude Throughout the Day Impact GPS Signal Quality | nolilab Blog" property="og:title"/>
+<meta content="Explore how ionospheric altitude variations throughout the day affect GPS signal quality and navigation accuracy." property="og:description"/>
+<meta content="https://nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality" property="og:url"/>
+<meta content="/images/optimized/ionosphere-impact-gps.webp" property="og:image"/>
+<meta content="NoliLab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="How Does the Change in Ionosphere Altitude Throughout the Day Impact GPS Signal Quality | nolilab Blog" name="twitter:title"/>
+<meta content="Explore how ionospheric altitude variations throughout the day affect GPS signal quality and navigation accuracy." name="twitter:description"/>
+<meta content="/images/optimized/ionosphere-impact-gps.webp" name="twitter:image"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .article-content code {
+      background: var(--bg-secondary);
+      padding: 0.2em 0.4em;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How Does the Change in Ionosphere Altitude Throughout the Day Impact GPS Signal Quality",
+  "description": "Explore how ionospheric altitude variations throughout the day affect GPS signal quality and navigation accuracy.",
+  "url": "https://nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality",
+  "datePublished": "2023-11-21",
+  "dateModified": "2023-11-21",
+  "author": {
+    "@type": "Organization",
+    "name": "NoliLab"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "/images/loko-gps-system-diagram.webp"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality"
+  }
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</link><script defer="" src="/js/layout.js"></script></head>
+<body>
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/ja/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> ブログに戻る
+    </a>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> November 21, 2023</span>
+<span><i class="far fa-user"></i> NoliLab</span>
+</div>
+<h1 class="article-title">1 日を通しての電離層高度の変化は GPS 信号品質にどのような影響を与えますか?</h1>
+</div>
+<img alt="Earth's Ionosphere and Atmosphere" class="article-image" src="/images/optimized/ionosphere-impact-gps.webp"/>
+<div class="article-content">
+<h2>導入</h2>
+<p>GPS の精度は衛星の位置だけではなく、信号品質において地球の電離層が重要な役割を果たしています。 D 層、E 層、F 層で構成される電離層は、1 日を通して、また季節を通じて高度が動的に変化するのが特徴で、GPS 信号が地上の受信機に到達する方法に直接影響します。</p>
+<h2>電離層: 概要</h2>
+<p>電離層は海抜約 48 キロメートルから 965 キロメートルまで広がり、太陽放射によって生成された荷電粒子が含まれています。この大気領域は 3 つの主要な層で構成されており、それぞれが異なる特徴を持っています。</p>
+<h3>D層</h3>
+<p>電離層の最下層は中周波以下の高周波電波を吸収します。この層は主に日照時間中に存在し、太陽放射が減少する夜間に消失します。</p>
+<h3>E層</h3>
+<p>中間層は、特に激しい散発的イベントの際に、最大 50 MHz の電波を反射します。 D 層と同様に、E 層の密度は昼と夜で大きく異なります。</p>
+<h3>F層</h3>
+<p>GPS にとって最上かつ最も重要な層には最大の電子密度が含まれており、スカイウェーブ電波伝播にとって重要であることがわかります。日中は、F1 サブレイヤーと F2 サブレイヤーに分割されます。夜になると、これらのレイヤーは単一の F レイヤーに結合されます。</p>
+<h2>GPS 信号と電離層</h2>
+<p>GPS 衛星は特定の周波数 (L1 は 1575.42 MHz、L2 は 1227.60 MHz) で信号を送信し、地上の受信機に到達する前に電離層を通過する必要があります。信号がイオン化粒子を通過する際、信号は屈折（曲がりや減速）を経験し、位置決め誤差が生じます。</p>
+<p>GPS 信号に対する電離層の影響を補償するために、さまざまなモデルが開発されています。ほとんどの民間 GPS 受信機に実装されている Klobuchar モデルは、GPS ナビゲーション メッセージでブロードキャストされるパラメーターを使用して、電離層エラーを約 50 ～ 60% 削減します。</p>
+<h2>電離層高度に影響を与える要因</h2>
+<p>電離層の状態は、次の 3 つの主要な影響によって継続的に変化します。</p>
+<h3>1. 太陽活動</h3>
+<p>太陽放射の変動により、電子密度と層の高度が劇的に変化します。太陽活動のピーク (太陽活動極大期) には、電子密度が高くなり電離層の乱流が大きくなり、GPS 信号の遅延が大きくなります。逆に、太陽極小期には、より安定した予測可能な電離層状態が特徴です。</p>
+<h3>2. 地磁気活動</h3>
+<p>地球の磁場と荷電した太陽粒子との相互作用は、電離層の構造変化を引き起こします。磁気嵐は突然の電離層擾乱を引き起こし、広い地理的領域にわたって GPS の精度を一時的に低下させる可能性があります。</p>
+<h3>3. 破壊的現象</h3>
+<p>突然の電離層の擾乱や極冠の吸収現象により、重大な信号干渉が発生します。これらの現象は、太陽フレアやコロナ質量放出によって引き起こされることが多く、数分から数時間にわたって電離層密度に急激な変化を引き起こす可能性があります。</p>
+<h2>GPS 信号品質への影響</h2>
+<p>電離層高度の変化により、GPS の精度に関していくつかの課題が生じます。</p>
+<h3>可変信号品質</h3>
+<p>電離層の密度は 1 日を通して変動するため、GPS 信号にはさまざまな程度の遅延が発生します。遅延が最大になるのは通常、日射量がピークとなる日中の時間帯です。一方、夜間の状態では信号伝播がより安定します。</p>
+<h3>周波数依存の屈折</h3>
+<p>GPS 周波数が異なれば、電離層遅延の量も異なります。二重周波数受信機はこの効果を利用してほとんどの電離層エラーを計算して除去し、単一周波数受信機よりも大幅に優れた精度を実現します。</p>
+<h3>標高に依存するエラー</h3>
+<p>衛星の仰角は、電離層を通る信号経路長に影響します。低高度衛星からの信号はより多くの電離層を通過するため、頭上衛星からの信号よりも大きな遅延が発生します。</p>
+<h2>Loko GPS トラッカー ソリューション</h2>
+<p>Loko のような最新の GPS トラッカーは、マルチシステム統合を通じて電離層の影響を補償します。</p>
+<ul>
+<li><strong>Multiple Satellite Systems:</strong>GPS、GLONASS、GALILEO へのアクセスにより冗長測位データが提供され、電離層擾乱が個々の衛星システムに影響を与える場合の精度が向上します。 </li>
+<li><strong>LoRa Radio Technology:</strong>5 キロメートルを超える拡張範囲の接続により、電離層の状態により衛星信号の品質が低下した場合でも、位置データが受信機に確実に届きます。 </li>
+<li><strong>Robust Construction:</strong>防水、防塵、耐衝撃性により、環境条件に関係なく信頼性の高い動作を保証します。 </li>
+<li><strong>Extended Battery Life:</strong>わずか 12 グラムで 30 日以上のバッテリー寿命により、頻繁に充電しなくても継続的な追跡が可能 </li>
+</ul>
+<h2>電離層の影響を軽減する</h2>
+<p>GPS 精度に対する電離層の影響を最小限に抑えるために、いくつかの戦略が役立ちます。</p>
+<ul>
+<li>正確な測位が重要な場合は、多周波数 GPS 受信機を使用します</li>
+<li>複数の衛星コンステレーション (GPS、GLONASS、GALILEO) を統合して冗長性を確保</li>
+<li>Klobuchar などの電離層補正モデルやより高度なアルゴリズムを適用する</li>
+<li>高い GPS 精度が必要な活動を計画する際に、宇宙天気予報を監視します</li>
+<li>電離層による遅延が大きくなる低高度衛星のみに依存することは避けてください。</li>
+</ul>
+<h2>結論</h2>
+<p>電離層の影響を理解することで、大気の変動にもかかわらずナビゲーション システムを最適化し、信頼性の高いパフォーマンスを実現できます。電離層の毎日の高度変化により GPS 信号品質に課題が生じますが、最新の受信機は、正確な位置を維持するために、高度な補正アルゴリズムとマルチコンステレーション追跡を採用しています。</p>
+<p>Loko GPS Tracker のような GPS 追跡システムのユーザーは、複数の衛星の統合と高度な信号処理の組み合わせにより、電離層の状態が 1 日を通して変動する場合でも、信頼性の高い位置データを確保できます。この回復力により、最新の GPS テクノロジーは、屋外レクリエーションから商用車両の管理に至るまでのアプリケーションで信頼できるものになっています。</p>
+</div>
+</article>
+</main>
+<div id="site-footer"></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetLang = option.dataset.lang;
+        localStorage.setItem('selectedLanguage', targetLang);
+
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(p => p);
+        const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
+
+        let currentLang = 'en';
+        let currentPage = 'index';
+
+        for (let i = 0; i < pathParts.length; i++) {
+          if (langDirs.includes(pathParts[i])) {
+            currentLang = pathParts[i];
+            currentPage = pathParts[i + 1] || 'index';
+            break;
+          }
+        }
+
+        if (currentLang === 'en') {
+          currentPage = pathParts[pathParts.length - 1] || '';
+        }
+
+        if (currentPage === '') {
+          currentPage = 'index';
+        }
+
+        let redirectUrl;
+        if (targetLang === 'en') {
+          redirectUrl = '../';
+        } else {
+          redirectUrl = `../../${targetLang}/`;
+        }
+
+        window.location.href = redirectUrl;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      const currentLangEl = document.querySelector('.current-lang');
+      if (currentLangEl) {
+        currentLangEl.textContent = langMap[savedLang] || 'EN';
+      }
+    }
+  </script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>

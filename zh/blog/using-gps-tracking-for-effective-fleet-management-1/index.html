@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>使用 GPS 跟踪进行有效的车队管理 |诺利实验室博客</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="了解 GPS 跟踪技术如何通过实时可见性、降低成本和提高安全性来改变车队管理。" name="description"/>
+<link href="https://nolilab.com/blog/using-gps-tracking-for-effective-fleet-management-1/" rel="canonical">
+<meta content="article" property="og:type"/>
+<meta content="Using GPS Tracking for Effective Fleet Management | nolilab Blog" property="og:title"/>
+<meta content="Discover how GPS tracking technology transforms fleet management through real-time visibility, cost reduction, and improved safety." property="og:description"/>
+<meta content="https://nolilab.com/blog/using-gps-tracking-for-effective-fleet-management-1" property="og:url"/>
+<meta content="https://s3-us-west-2.amazonaws.com/speedybrandimages/e8665200-a33c-4e1d-aa7b-b2e153a07cf6-9bc0931b-e98f-4e11-869c-da1be8ad2ac8.jpeg?w=1920" property="og:image"/>
+<meta content="NoliLab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Using GPS Tracking for Effective Fleet Management | nolilab Blog" name="twitter:title"/>
+<meta content="Discover how GPS tracking technology transforms fleet management through real-time visibility, cost reduction, and improved safety." name="twitter:description"/>
+<meta content="https://s3-us-west-2.amazonaws.com/speedybrandimages/e8665200-a33c-4e1d-aa7b-b2e153a07cf6-9bc0931b-e98f-4e11-869c-da1be8ad2ac8.jpeg?w=1920" name="twitter:image"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+
+    header {
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .article-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .article-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: var(--spacing-xl) 0 var(--spacing-md);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .article-content p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: var(--spacing-md) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    footer {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .article-title {
+        font-size: 2rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Using GPS Tracking for Effective Fleet Management",
+  "description": "Discover how GPS tracking technology transforms fleet management through real-time visibility, cost reduction, and improved safety.",
+  "url": "https://nolilab.com/blog/using-gps-tracking-for-effective-fleet-management-1",
+  "datePublished": "2023-10-12",
+  "dateModified": "2023-10-12",
+  "author": {
+    "@type": "Organization",
+    "name": "NoliLab"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://s3-us-west-2.amazonaws.com/speedybrandimages/e8665200-a33c-4e1d-aa7b-b2e153a07cf6-9bc0931b-e98f-4e11-869c-da1be8ad2ac8.jpeg?w=1920"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nolilab.com/blog/using-gps-tracking-for-effective-fleet-management-1"
+  }
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+</link><script defer="" src="/js/layout.js"></script></head>
+<body>
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/zh/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 返回博客
+    </a>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> October 12, 2023</span>
+<span><i class="far fa-user"></i> NoliLab</span>
+</div>
+<h1 class="article-title">使用 GPS 跟踪进行有效的车队管理</h1>
+</div>
+<img alt="Fleet Management with GPS Tracking" class="article-image" src="https://s3-us-west-2.amazonaws.com/speedybrandimages/e8665200-a33c-4e1d-aa7b-b2e153a07cf6-9bc0931b-e98f-4e11-869c-da1be8ad2ac8.jpeg?w=1920"/>
+<div class="article-content">
+<h2>介绍</h2>
+<p>有效的车队管理对于依赖运输、物流和送货服务的企业至关重要。 GPS 跟踪技术代表了公司监管车辆运营方式的变革性进步，实现了整个车队的实时可见性、降低了成本并提高了安全性。</p>
+<h2>GPS 跟踪如何在车队管理中发挥作用</h2>
+<p>GPS 车队跟踪系统依靠卫星三角测量来实时确定车辆位置。两个基本要素共同发挥作用，提供全面的车队可视性：</p>
+<h3>硬件设备</h3>
+<p>安装在车辆上的跟踪设备不断从 GPS 卫星收集定位数据。这些单元将位置信息以及速度、发动机状态和诊断数据等附加指标传输到中央管理平台。</p>
+<h3>云平台</h3>
+<p>基于网络的软件从车队跟踪设备接收数据，并通过直观的仪表板和地图显示位置信息。管理人员通过计算机或移动设备访问这些平台，以便从任何地方监控整个车队。</p>
+<h2>主要运营优势</h2>
+<h3>实时位置可见性</h3>
+<p>随时准确了解每辆车的位置。这种可视性可以实现更好的路线规划、准确的客户预计到达时间以及对不断变化的条件的快速响应。调度员可以识别最近的可用车辆来执行新任务，从而缩短响应时间并提高服务质量。</p>
+<h3>路线规划和优化</h3>
+<p>历史跟踪数据揭示了实际行驶路线与计划路线的对比。分析此信息以：</p>
+<ul>
+<li>识别低效的路由模式</li>
+<li>消除不必要的里程</li>
+<li>减少交通拥堵所花费的时间</li>
+<li>规划未来交付的最佳路线</li>
+<li>平衡驾驶员和车辆的工作量</li>
+</ul>
+<h3>驾驶员行为分析</h3>
+<p>监控驾驶模式，包括超速、急刹车、快速加速和过度怠速。这些数据可以进行有针对性的指导，以提高驾驶员的安全并减少车辆磨损。确定表现最佳的司机以获得认可，同时为需要的人提供额外的培训。</p>
+<h3>维护计划自动化</h3>
+<p>跟踪实际车辆使用情况，包括里程、发动机运行时间和运行状况。当车辆达到维护间隔时，自动警报会通知车队经理，从而实现主动服务，防止发生代价高昂的故障并延长车辆使用寿命。</p>
+<h3>事故记录</h3>
+<p>如果发生事故或事件，GPS 数据可提供车辆位置、速度和运动的客观记录。事实证明，这些信息对于保险索赔、责任确定和事故调查非常宝贵。</p>
+<h3>基于事件的警报系统</h3>
+<p>配置特定事件的自动通知：</p>
+<ul>
+<li>车辆进出指定区域</li>
+<li>违反限速规定</li>
+<li>下班后车辆使用</li>
+<li>延长怠速时间</li>
+<li>意外的路线偏差</li>
+<li>维护到期日临近</li>
+</ul>
+<h2>财务影响</h2>
+<p>GPS 跟踪的实施可在多个领域显着降低成本：</p>
+<h3>优化燃油消耗</h3>
+<ul>
+<li><strong>Better routing:</strong>通过优化路线规划减少不必要的里程 </li>
+<li><strong>Reduced idling:</strong>识别并消除浪费燃料的发动机过度空转 </li>
+<li><strong>Improved driving habits:</strong>指导驾驶员避免剧烈加速和超速 </li>
+<li><strong>Efficient dispatching:</strong>将最近的可用车辆发送到每个任务 </li>
+</ul>
+<h3>降低维护成本</h3>
+<p>基于实际使用数据的预防性维护成本明显低于意外故障的紧急维修成本。定期保养可以延长车辆的使用寿命并保持转售价值。</p>
+<h3>减少未经授权的使用</h3>
+<p>监控车辆位置和使用时间实际上可以消除未经授权的个人使用公司车辆的情况。下班后警报和地理围栏通知会立即标记可疑活动。</p>
+<h2>安全与合规</h2>
+<h3>驾驶员行为监控</h3>
+<p>识别危险驾驶行为可以制定有针对性的培训计划，从而提高安全性。通过指导和纠正措施解决具体问题，例如在学校区域超速、急转弯或不系安全带。</p>
+<h3>快速应急响应</h3>
+<p>在紧急情况或事故中，精确的车辆位置数据可以实现更快的紧急服务部署和即时管理通知。在严重事件中，快速反应确实可以挽救生命。</p>
+<h3>盗窃情况下的车辆追回</h3>
+<p>发生盗窃时，实时跟踪可显着提高车辆找回率。通常在发生重大损坏或损失之前，向执法部门提供当前位置数据，以便快速恢复。</p>
+<h2>增强客户体验</h2>
+<h3>实时交货通知</h3>
+<p>根据实际车辆位置为客户提供准确的到达时间预估。当司机接近送货地点时自动发出通知，提高客户满意度并减少错过送货的情况。</p>
+<h3>更快的响应时间</h3>
+<p>调度员可以了解车辆位置，从而可以为每次服务呼叫分配最近的可用车辆，从而减少客户等待时间并提高服务质量。</p>
+<h3>强化服务品质</h3>
+<p>一致、可靠的服务可以建立客户的信任和忠诚度。 GPS 跟踪确保通过更好的规划和执行来兑现对客户的承诺（送货窗口、服务预约）。</p>
+<h2>车队 GPS 系统的选择标准</h2>
+<p>选择 GPS 跟踪解决方案时，请评估以下关键因素：</p>
+<h3>安全特性</h3>
+<ul>
+<li>驾驶员行为监控能力</li>
+<li>超速和恶劣驾驶警报</li>
+<li>事故检测和通知</li>
+<li>紧急按钮或紧急警报功能</li>
+</ul>
+<h3>降低成本的能力</h3>
+<ul>
+<li>路线优化工具</li>
+<li>空闲时间跟踪和警报</li>
+<li>燃油消耗报告</li>
+<li>维护计划自动化</li>
+</ul>
+<h3>警报功能</h3>
+<ul>
+<li>带有进入/退出通知的地理围栏</li>
+<li>下班后使用提醒</li>
+<li>维护到期提醒</li>
+<li>可定制的警报阈值</li>
+</ul>
+<h3>可用性</h3>
+<ul>
+<li>直观的仪表板界面</li>
+<li>移动应用程序可用性</li>
+<li>报告生成和导出功能</li>
+<li>用于与现有系统集成的 API 访问</li>
+</ul>
+<h3>供应商支持质量</h3>
+<ul>
+<li>技术支持可用性和响应能力</li>
+<li>培训和入职协助</li>
+<li>定期软件更新和改进</li>
+<li>清晰的文档和资源</li>
+</ul>
+<h2>实施最佳实践</h2>
+<h3>驾驶员通讯</h3>
+<p>在实施之前，向驾驶员清楚地传达 GPS 跟踪的目的和好处。透明地解决隐私问题，并强调跟踪如何提高安全性和效率，而不仅仅是监控。</p>
+<h3>政策制定</h3>
+<p>制定明确的政策：</p>
+<ul>
+<li>可接受的车辆使用</li>
+<li>个人使用限制</li>
+<li>数据隐私和保留</li>
+<li>业绩预期</li>
+<li>违反政策的后果</li>
+</ul>
+<h3>逐步推出</h3>
+<p>考虑从一小部分车辆开始分阶段实施。在扩展到整个机群之前，先从初始部署中学习。</p>
+<h2>结论</h2>
+<p>GPS 跟踪技术将车队管理从被动操作转变为主动操作。实时可见性、数据驱动的见解和自动警报相结合，使公司能够降低成本、提高安全性、增强客户服务并优化资源利用率。</p>
+<p>对于依赖车队的企业来说，GPS 跟踪不仅是一个监控工具，而且是一个综合管理平台，可通过节省燃油、降低维护成本、提高生产力和提高客户满意度来提供可衡量的投资回报率。问题不在于是否实施 GPS 跟踪，而在于哪种系统最适合您的特定运营要求和业务目标。</p>
+</div>
+</article>
+</main>
+<div id="site-footer"></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // Language Selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetLang = option.dataset.lang;
+        localStorage.setItem('selectedLanguage', targetLang);
+
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(p => p);
+        const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
+
+        let currentLang = 'en';
+        let currentPage = 'index';
+
+        for (let i = 0; i < pathParts.length; i++) {
+          if (langDirs.includes(pathParts[i])) {
+            currentLang = pathParts[i];
+            currentPage = pathParts[i + 1] || 'index';
+            break;
+          }
+        }
+
+        if (currentLang === 'en') {
+          currentPage = pathParts[pathParts.length - 1] || '';
+        }
+
+        if (currentPage === '') {
+          currentPage = 'index';
+        }
+
+        let redirectUrl;
+        if (targetLang === 'en') {
+          redirectUrl = '../';
+        } else {
+          redirectUrl = `../../${targetLang}/`;
+        }
+
+        window.location.href = redirectUrl;
+      });
+    });
+
+    // Load saved language on page load
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+      const langMap = {
+        'en': 'EN',
+        'ru': 'RU',
+        'ja': 'JA',
+        'zh': 'ZH',
+        'fr': 'FR',
+        'es': 'ES'
+      };
+      const currentLangEl = document.querySelector('.current-lang');
+      if (currentLangEl) {
+        currentLangEl.textContent = langMap[savedLang] || 'EN';
+      }
+    }
+  </script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>
