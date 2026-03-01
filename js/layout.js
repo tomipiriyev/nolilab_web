@@ -47,7 +47,7 @@ document.documentElement.setAttribute('data-theme', 'light');
   }
 
   // ── Inject canonical <link> tag ───────────────────────────────────────────
-  // Skip if the page already has a custom canonical (e.g. nolilab.html).
+  // Skip if the page already has a custom canonical.
 
   if (!document.querySelector('link[rel="canonical"]')) {
     var canonical = document.createElement('link');

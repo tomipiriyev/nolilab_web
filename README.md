@@ -13,7 +13,6 @@ This directory is the **Git repository** that is deployed to GitHub Pages at
 | File | URL | Description |
 |------|-----|-------------|
 | `index.html` | `/` | Homepage — Loko GPS Tracker landing page |
-| `nolilab.html` | `/nolilab` | Legacy homepage (kept for backwards compatibility) |
 | `blog.html` | `/blog` | Blog listing |
 | `specifications.html` | `/specifications` | Technical specifications |
 | `software.html` | `/software` | App & software downloads |
