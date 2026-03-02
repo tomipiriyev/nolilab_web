@@ -109,6 +109,64 @@ document.documentElement.setAttribute('data-theme', 'light');
     var currentLangEl = document.querySelector('.current-lang');
     if (currentLangEl) currentLangEl.textContent = LANG_LABELS[currentLang] || 'EN';
 
+    var langBtn = document.querySelector('.language-btn');
+    var langSel = document.querySelector('.language-selector');
+    var langDd  = langSel ? langSel.querySelector('.language-dropdown') : null;
+
+    if (langBtn && langSel && langDd) {
+      // Move dropdown to <body> — removes it from the header CSS cascade entirely,
+      // so index.css mobile overrides (left:0, right:auto, transition:all) cannot interfere.
+      document.body.appendChild(langDd);
+
+      // Apply stable base styles once
+      langDd.style.cssText =
+        'position:fixed;top:auto;bottom:auto;left:auto;right:auto;' +
+        'opacity:0;visibility:hidden;transform:none;' +
+        'transition:opacity .15s ease,visibility .15s ease;' +
+        'width:auto;min-width:180px;max-width:220px;z-index:9999;' +
+        'background:var(--bg-primary,#fff);' +
+        'border:1px solid var(--border,#d0d7de);' +
+        'border-radius:var(--radius-md,0.5rem);' +
+        'box-shadow:var(--shadow-lg,0 10px 15px rgba(0,0,0,.12))';
+
+      // Inject active-language highlight (not in index.css)
+      var ddStyle = document.createElement('style');
+      ddStyle.textContent =
+        '.language-option.active{background:var(--bg-secondary);color:var(--text-primary)}' +
+        '.language-option.active .lang-code{color:var(--accent)}';
+      document.head.appendChild(ddStyle);
+
+      var isOpen = false;
+      var chevron = langSel.querySelector('.fa-chevron-down');
+
+      function openDropdown() {
+        var rect = langBtn.getBoundingClientRect();
+        langDd.style.top        = (rect.bottom + 6) + 'px';
+        langDd.style.right      = (document.documentElement.clientWidth - rect.right) + 'px';
+        langDd.style.left       = 'auto';
+        langDd.style.opacity    = '1';
+        langDd.style.visibility = 'visible';
+        isOpen = true;
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+      }
+
+      function closeDropdown() {
+        langDd.style.opacity    = '0';
+        langDd.style.visibility = 'hidden';
+        isOpen = false;
+        if (chevron) chevron.style.transform = '';
+      }
+
+      langBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        isOpen ? closeDropdown() : openDropdown();
+      });
+
+      document.addEventListener('click', closeDropdown);
+      window.addEventListener('scroll', closeDropdown, { passive: true });
+      langDd.addEventListener('click', function (e) { e.stopPropagation(); });
+    }
+
     document.querySelectorAll('.language-option').forEach(function (el) {
       var lang = el.getAttribute('data-lang');
       el.href = langUrl(lang);
