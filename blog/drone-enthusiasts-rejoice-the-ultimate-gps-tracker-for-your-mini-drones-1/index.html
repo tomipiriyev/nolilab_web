@@ -24,7 +24,7 @@
 <meta content="Discover how the Loko GPS Tracker provides superior tracking capabilities for mini-drones with 5km+ range and 30-day battery life." property="og:description"/>
 <meta content="https://www.nolilab.com/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1" property="og:url"/>
 <meta content="/images/optimized/drone-tracking.webp" property="og:image"/>
-<meta content="NoliLab" property="og:site_name"/>
+<meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Drone Enthusiasts Rejoice: The Ultimate GPS Tracker for Your Mini-Drones | nolilab Blog" name="twitter:title"/>
 <meta content="Discover how the Loko GPS Tracker provides superior tracking capabilities for mini-drones with 5km+ range and 30-day battery life." name="twitter:description"/>
@@ -458,6 +458,57 @@
         text-align: center;
       }
     }
+  
+    /* Related Posts */
+    .related-posts {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .related-posts-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+    .related-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .related-post-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem 1.1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .related-post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+    .related-post-card h3 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
+    }
+    .related-post-card .rp-cta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .related-posts-grid { grid-template-columns: 1fr; }
+    }
   </style>
 <script type="application/ld+json">
 {
@@ -470,11 +521,11 @@
   "dateModified": "2023-11-24",
   "author": {
     "@type": "Organization",
-    "name": "NoliLab"
+    "name": "nolilab"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "NoliLab",
+    "name": "nolilab",
     "url": "https://www.nolilab.com",
     "logo": {
       "@type": "ImageObject",
@@ -512,7 +563,7 @@
 <div class="article-header">
 <div class="article-meta">
 <span><i class="far fa-calendar"></i> November 24, 2023</span>
-<span><i class="far fa-user"></i> NoliLab</span>
+<span><i class="far fa-user"></i> nolilab</span>
 </div>
 <h1 class="article-title">Drone Enthusiasts Rejoice: The Ultimate GPS Tracker for Your Mini-Drones</h1>
 </div>
@@ -568,6 +619,24 @@
 <p>For drone enthusiasts seeking reliable, long-range tracking capabilities, the Loko GPS Tracker represents the ideal solution. Its combination of extended range, lightweight design, rugged construction, and advanced features makes it the ultimate GPS tracker for mini-drones. Don't risk losing your valuable equipment—invest in peace of mind with professional-grade tracking technology.</p>
 </div>
 </article>
+<section class="related-posts">
+<h2 class="related-posts-heading">Related Articles</h2>
+<div class="related-posts-grid">
+<a href="/blog/why-drone-enthusiasts-should-consider-using-gps-trackers/" class="related-post-card">
+<h3>Why Drone Enthusiasts Should Consider Using GPS Trackers</h3>
+<span class="rp-cta">Read more &#8594;</span>
+</a>
+<a href="/blog/enhance-the-safety-of-your-drone-flights-with-the-compact-loko-gps-tracker-by-nolilab-your-reliable-backup-tracking-solution/" class="related-post-card">
+<h3>Enhance the Safety of Your Drone Flights with the Compact Loko GPS Tracker by noliLab</h3>
+<span class="rp-cta">Read more &#8594;</span>
+</a>
+<a href="/blog/maximize-tracking-capabilities-with-5km-range-and-30-days-battery-life-in-gps-trackers/" class="related-post-card">
+<h3>Maximize Tracking Capabilities with +5km Range and +30 Days Battery Life in GPS Trackers</h3>
+<span class="rp-cta">Read more &#8594;</span>
+</a>
+</div>
+</section>
+
 </main>
 <div id="site-footer"></div>
 <script>

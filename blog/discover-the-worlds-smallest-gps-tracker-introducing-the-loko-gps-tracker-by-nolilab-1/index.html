@@ -25,7 +25,7 @@
 <meta content="Introducing the Loko GPS Tracker: a groundbreaking ultra-compact tracking device with extended range and no monthly fees." property="og:description"/>
 <meta content="https://www.nolilab.com/blog/discover-the-worlds-smallest-gps-tracker-introducing-the-loko-gps-tracker-by-nolilab-1" property="og:url"/>
 <meta content="https://s3-us-west-2.amazonaws.com/speedybrandimages/a2c4384d-9876-4ef6-bbcf-cbf0ea9cadb2-9a6a57e1-335d-4190-81e6-e16817e4470b.png?w=1920" property="og:image"/>
-<meta content="NoliLab" property="og:site_name"/>
+<meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Discover the World's Smallest GPS Tracker: Introducing the Loko GPS Tracker by noliLab | nolilab Blog" name="twitter:title"/>
 <meta content="Introducing the Loko GPS Tracker: a groundbreaking ultra-compact tracking device with extended range and no monthly fees." name="twitter:description"/>
@@ -445,6 +445,57 @@
         text-align: center;
       }
     }
+  
+    /* Related Posts */
+    .related-posts {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .related-posts-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+    .related-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .related-post-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem 1.1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .related-post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+    .related-post-card h3 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
+    }
+    .related-post-card .rp-cta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .related-posts-grid { grid-template-columns: 1fr; }
+    }
   </style>
 <script type="application/ld+json">
 {
@@ -457,11 +508,11 @@
   "dateModified": "2023-10-12",
   "author": {
     "@type": "Organization",
-    "name": "NoliLab"
+    "name": "nolilab"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "NoliLab",
+    "name": "nolilab",
     "url": "https://www.nolilab.com",
     "logo": {
       "@type": "ImageObject",
@@ -499,7 +550,7 @@
 <div class="article-header">
 <div class="article-meta">
 <span><i class="far fa-calendar"></i> October 12, 2023</span>
-<span><i class="far fa-user"></i> NoliLab</span>
+<span><i class="far fa-user"></i> nolilab</span>
 </div>
 <h1 class="article-title">Discover the World's Smallest GPS Tracker: Introducing the Loko GPS Tracker by noliLab</h1>
 </div>
@@ -607,6 +658,24 @@
 <p>The combination of open-source transparency, multi-constellation GPS, LoRa radio technology, and rugged construction makes the Loko tracker the ideal solution for applications where size, cost, and reliability matter most. Discover why thousands of users worldwide have chosen the Loko GPS Tracker as their go-to tracking solution.</p>
 </div>
 </article>
+<section class="related-posts">
+<h2 class="related-posts-heading">Related Articles</h2>
+<div class="related-posts-grid">
+<a href="/blog/how-to-upgrade-loko-firmware/" class="related-post-card">
+<h3>How to Upgrade Loko Firmware</h3>
+<span class="rp-cta">Read more &#8594;</span>
+</a>
+<a href="/blog/how-loko-gps-trackers-long-range-communication-and-durability-make-it-perfect-for-outdoor-adventures/" class="related-post-card">
+<h3>How Loko GPS Tracker's Long-Range Communication and Durability Make It Perfect for Outdoor Adventures</h3>
+<span class="rp-cta">Read more &#8594;</span>
+</a>
+<a href="/blog/maximize-tracking-capabilities-with-5km-range-and-30-days-battery-life-in-gps-trackers/" class="related-post-card">
+<h3>Maximize Tracking Capabilities with +5km Range and +30 Days Battery Life in GPS Trackers</h3>
+<span class="rp-cta">Read more &#8594;</span>
+</a>
+</div>
+</section>
+
 </main>
 <div id="site-footer"></div>
 <script>
