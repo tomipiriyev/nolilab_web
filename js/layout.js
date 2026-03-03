@@ -62,23 +62,12 @@ document.documentElement.setAttribute('data-theme', 'light');
     document.head.appendChild(xDefault);
   }
 
-  // Fetch and inject the correct partials for this language group
-  Promise.all([
-    fetch('/partials/header' + suffix + '.html').then(function (r) { return r.text(); }),
-    fetch('/partials/footer' + suffix + '.html').then(function (r) { return r.text(); })
-  ]).then(function (html) {
-    var headerEl = document.getElementById('site-header');
-    var footerEl = document.getElementById('site-footer');
-    if (headerEl) headerEl.outerHTML = html[0];
-    if (footerEl) footerEl.outerHTML = html[1];
-
-    // Only the i18n group needs JS text replacement
-    if (suffix === '.i18n') applyTranslations();
-
-    applyLangPrefix();
-    initLangSelector();
-    initMobileMenu();
-  });
+  // Nav HTML is now inlined in the page source — no fetch needed.
+  // Run initialisation directly (layout.js loads with defer, so DOM is ready).
+  if (suffix === '.i18n') applyTranslations();
+  applyLangPrefix();
+  initLangSelector();
+  initMobileMenu();
 
   function applyTranslations() {
     var t = i18n[currentLang];
