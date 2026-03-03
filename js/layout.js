@@ -1,7 +1,7 @@
 document.documentElement.setAttribute('data-theme', 'light');
 
 (function () {
-  var BASE_URL = 'https://nolilab.com';
+  var BASE_URL = 'https://www.nolilab.com';
   var LANG_LABELS = { en: 'EN', ru: 'RU', ja: 'JA', zh: 'ZH', fr: 'FR', es: 'ES' };
   var NON_EN_LANGS = ['ru', 'zh', 'ja', 'fr', 'es'];
   var ALL_LANGS = ['en', 'ru', 'zh', 'ja', 'fr', 'es'];
@@ -46,8 +46,8 @@ document.documentElement.setAttribute('data-theme', 'light');
     document.head.appendChild(canonical);
   }
 
-  // Inject hreflang alternates (skip individual blog posts)
-  if (!(pageSlug.indexOf('blog/') === 0 && pageSlug !== 'blog/')) {
+  // Inject hreflang alternates (skip individual blog posts, skip if already present in HTML)
+  if (!(pageSlug.indexOf('blog/') === 0 && pageSlug !== 'blog/') && !document.querySelector('link[rel="alternate"][hreflang]')) {
     ALL_LANGS.forEach(function (lang) {
       var alt = document.createElement('link');
       alt.rel = 'alternate';
