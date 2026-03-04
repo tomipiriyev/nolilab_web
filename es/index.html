@@ -589,7 +589,7 @@
         display: inline-block;
       }
 
-      .headline-text {
+      .static-headline {
         display: inline-block;
         overflow: hidden;
         white-space: normal;
@@ -2117,7 +2117,7 @@
           overflow: hidden;
         }
 
-        .headline-text {
+        .static-headline {
           max-width: 100%;
           white-space: normal;
         }
@@ -2691,7 +2691,7 @@
           <div class="hero-content">
             <h1 class="hero-headline" id="hero-headline">
               <span class="headline-animated">
-                <span class="headline-text">Loko: El Rastreador GPS Offline Más Pequeño del Mundo</span>
+                <span class="static-headline">Loko: El Rastreador GPS Offline Más Pequeño del Mundo</span>
               </span>
             </h1>
             <p>El rastreador GPS Loko es el dispositivo GPS offline más pequeño del mundo con solo 28,5 x 20,5 x 5,9 mm. Rastree mascotas, equipos agrícolas, drones y vehículos con alcance LoRa P2P de 20km. Sin tarifas de suscripción. Sin necesidad de internet.</p>
@@ -2715,31 +2715,27 @@
             </div>
           </div>
           <div class="hero-slider">
-            <div class="slider-container" id="slider">
-              <div class="slide active">
-                <picture>                  <source srcset="/images/optimized/loko-gps-tracker-red-transparent.avif" type="image/avif"><source srcset="/images/optimized/loko-gps-tracker-red-transparent.webp" type="image/webp">
-                  <img src="/images/optimized/loko-gps-tracker-red-transparent.png" alt="Loko GPS Tracker Device Front View" width="800" height="785" loading="lazy">
-                </picture>
-              </div>
-              <div class="slide">
-                <picture>                  <source srcset="/images/optimized/loko-gps-tracking-station-software.avif" type="image/avif"><source srcset="/images/optimized/loko-gps-tracking-station-software.webp" type="image/webp">
-                  <img src="/images/optimized/loko-gps-tracking-station-software.png" alt="Loko GPS Tracking Station" width="533" height="800" loading="lazy">
-                </picture>
-              </div>
-              <div class="slide">
-                <picture>                  <source srcset="/images/optimized/loko-station-solar-panel-transparent.avif" type="image/avif"><source srcset="/images/optimized/loko-station-solar-panel-transparent.webp" type="image/webp">
-                  <img src="/images/optimized/loko-station-solar-panel-transparent.png" alt="Loko Solar-Powered GPS Station" width="533" height="800" loading="lazy">
-                </picture>
-              </div>
-              <div class="slider-dots">
-                <button class="slider-dot active" data-slide="0" aria-label="Go to slide 1: Loko GPS Tracker" aria-current="true"></button>
-                <button class="slider-dot" data-slide="1" aria-label="Go to slide 2: Loko App"></button>
-                <button class="slider-dot" data-slide="2" aria-label="Go to slide 3: Loko Solar Station"></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+<div class="slider-container" id="slider">
+<div class="slide active">
+<picture>  <source srcset="/images/optimized/loko-gps-tracker-red-transparent.avif" type="image/avif"><source srcset="/images/optimized/loko-gps-tracker-red-transparent.webp" type="image/webp">
+  <img alt="Loko GPS Tracker Device Front View" height="785" fetchpriority="high" src="/images/optimized/loko-gps-tracker-red-transparent.png" width="800"/>
+</picture>
+</div>
+<div class="slide">
+<picture>  <source srcset="/images/optimized/loko-gps-tracking-station-software.avif" type="image/avif"><source srcset="/images/optimized/loko-gps-tracking-station-software.webp" type="image/webp">
+  <img alt="Loko GPS Tracking Station" height="800" loading="lazy" src="/images/optimized/loko-gps-tracking-station-software.png" width="533"/>
+</picture>
+</div>
+<div class="slide">
+<img alt="Loko GPS Geofence Feature" height="800" loading="lazy" src="/images/optimized/geofence.gif" width="533"/>
+</div>
+<div class="slider-dots">
+<button aria-current="true" aria-label="Go to slide 1: Loko GPS Tracker" class="slider-dot active" data-slide="0"></button>
+<button aria-label="Go to slide 2: Loko GPS Tracking Station" class="slider-dot" data-slide="1"></button>
+<button aria-label="Go to slide 3: Loko GPS Geofence Feature" class="slider-dot" data-slide="2"></button>
+</div>
+</div>
+</div></div></div></section>
 
       <section class="features" id="features">
         <div class="features-container">
@@ -3889,4 +3885,5 @@
     </script>
     <script defer src="/js/analytics.js"></script>
   <script src="/js/layout.js" defer></script>
+  <script defer src="/js/slider-no-headline.js"></script>
 </body>
