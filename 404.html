@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting… – Nolilab</title>
+  <script>
+    (function () {
+      var p = window.location.pathname.replace(/\/$/, '') || '/';
+
+      // ── Exact redirects ────────────────────────────────────────────────────────
+      var exact = {
+        '/nolilab': '/',
+        // Flat .html → directory URLs
+        '/blog.html': '/blog/',
+        '/specifications.html': '/specifications/',
+        '/software.html': '/software/',
+        '/contact.html': '/contact/',
+        '/firmware.html': '/firmware/',
+        '/setup-guides.html': '/setup-guides/',
+        '/gps.html': '/gps/',
+        '/lorawan.html': '/lorawan/',
+        '/privacy.html': '/privacy/',
+        '/es/blog.html': '/es/blog/',
+        '/es/specifications.html': '/es/specifications/',
+        '/es/software.html': '/es/software/',
+        '/es/contact.html': '/es/contact/',
+        '/es/firmware.html': '/es/firmware/',
+        '/es/setup-guides.html': '/es/setup-guides/',
+        '/es/gps.html': '/es/gps/',
+        '/es/lorawan.html': '/es/lorawan/',
+        '/es/privacy.html': '/es/privacy/',
+        '/fr/blog.html': '/fr/blog/',
+        '/fr/specifications.html': '/fr/specifications/',
+        '/fr/software.html': '/fr/software/',
+        '/fr/contact.html': '/fr/contact/',
+        '/fr/firmware.html': '/fr/firmware/',
+        '/fr/setup-guides.html': '/fr/setup-guides/',
+        '/fr/gps.html': '/fr/gps/',
+        '/fr/lorawan.html': '/fr/lorawan/',
+        '/fr/privacy.html': '/fr/privacy/',
+        '/ja/blog.html': '/ja/blog/',
+        '/ja/specifications.html': '/ja/specifications/',
+        '/ja/software.html': '/ja/software/',
+        '/ja/contact.html': '/ja/contact/',
+        '/ja/firmware.html': '/ja/firmware/',
+        '/ja/setup-guides.html': '/ja/setup-guides/',
+        '/ja/gps.html': '/ja/gps/',
+        '/ja/lorawan.html': '/ja/lorawan/',
+        '/ja/privacy.html': '/ja/privacy/',
+        '/ru/blog.html': '/ru/blog/',
+        '/ru/specifications.html': '/ru/specifications/',
+        '/ru/software.html': '/ru/software/',
+        '/ru/contact.html': '/ru/contact/',
+        '/ru/firmware.html': '/ru/firmware/',
+        '/ru/setup-guides.html': '/ru/setup-guides/',
+        '/ru/gps.html': '/ru/gps/',
+        '/ru/lorawan.html': '/ru/lorawan/',
+        '/ru/privacy.html': '/ru/privacy/',
+        '/zh/blog.html': '/zh/blog/',
+        '/zh/specifications.html': '/zh/specifications/',
+        '/zh/software.html': '/zh/software/',
+        '/zh/contact.html': '/zh/contact/',
+        '/zh/firmware.html': '/zh/firmware/',
+        '/zh/setup-guides.html': '/zh/setup-guides/',
+        '/zh/gps.html': '/zh/gps/',
+        '/zh/lorawan.html': '/zh/lorawan/',
+        '/zh/privacy.html': '/zh/privacy/',
+        // Legacy Shopify product pages
+        '/products/loko': '/',
+        '/ja/products/loko': '/ja/',
+        '/es/products/loko': '/es/',
+        '/ru/products/loko': '/ru/',
+        '/fr/products/loko': '/fr/',
+        '/zh/products/loko': '/zh/',
+        // Legacy Shopify blog index
+        '/blogs/news': '/blog/',
+        '/es/blogs/news': '/es/blog/',
+        '/fr/blogs/news': '/fr/blog/',
+        '/ja/blogs/news': '/ja/blog/',
+        '/ru/blogs/news': '/ru/blog/',
+        '/zh/blogs/news': '/zh/blog/',
+        // Legacy Shopify /pages/* URLs
+        '/pages/software': '/software/',
+        '/pages/contact': '/contact/',
+        '/pages/lorawan': '/lorawan/',
+        '/pages/firmware': '/firmware/',
+        '/pages/specs': '/specifications/',
+        '/pages/videos': '/blog/',
+        '/pages/faq': '/',
+        '/pages/loko-hub': '/',
+        // Legacy Shopify cart
+        '/cart': '/',
+        '/es/cart': '/es/',
+        '/fr/cart': '/fr/',
+        '/ja/cart': '/ja/',
+        '/ru/cart': '/ru/',
+        '/zh/cart': '/zh/',
+        // Legacy Shopify collections
+        '/collections/frontpage': '/',
+        '/collections/all': '/',
+        '/es/collections/frontpage': '/es/',
+        '/es/collections/all': '/es/',
+        '/fr/collections/frontpage': '/fr/',
+        '/fr/collections/all': '/fr/',
+        '/ja/collections/frontpage': '/ja/',
+        '/ja/collections/all': '/ja/',
+        '/ru/collections/frontpage': '/ru/',
+        '/ru/collections/all': '/ru/',
+        '/zh/collections/frontpage': '/zh/',
+        '/zh/collections/all': '/zh/',
+        // Legacy Shopify policies
+        '/policies/privacy-policy': '/privacy/',
+        '/policies/terms-of-service': '/',
+        '/policies/contact-information': '/contact/',
+        '/policies/refund-policy': '/',
+        // Legacy Shopify atom feed
+        '/blogs/news.atom': '/blog/',
+        // Legacy Shopify shop/misc
+        '/shop': '/',
+        '/jp': '/ja/',
+        // Language-prefixed /pages/* (exact)
+        '/es/pages/software': '/es/software/',
+        '/es/pages/contact': '/es/contact/',
+        '/es/pages/lorawan': '/es/lorawan/',
+        '/es/pages/firmware': '/es/firmware/',
+        '/es/pages/specs': '/es/specifications/',
+        '/es/pages/videos': '/es/blog/',
+        '/es/pages/faq': '/es/',
+        '/es/pages/loko-hub': '/es/',
+        '/fr/pages/software': '/fr/software/',
+        '/fr/pages/contact': '/fr/contact/',
+        '/fr/pages/lorawan': '/fr/lorawan/',
+        '/fr/pages/firmware': '/fr/firmware/',
+        '/fr/pages/specs': '/fr/specifications/',
+        '/fr/pages/videos': '/fr/blog/',
+        '/fr/pages/faq': '/fr/',
+        '/fr/pages/loko-hub': '/fr/',
+        '/ja/pages/software': '/ja/software/',
+        '/ja/pages/contact': '/ja/contact/',
+        '/ja/pages/lorawan': '/ja/lorawan/',
+        '/ja/pages/firmware': '/ja/firmware/',
+        '/ja/pages/specs': '/ja/specifications/',
+        '/ja/pages/videos': '/ja/blog/',
+        '/ja/pages/faq': '/ja/',
+        '/ja/pages/loko-hub': '/ja/',
+        '/ru/pages/software': '/ru/software/',
+        '/ru/pages/contact': '/ru/contact/',
+        '/ru/pages/lorawan': '/ru/lorawan/',
+        '/ru/pages/firmware': '/ru/firmware/',
+        '/ru/pages/specs': '/ru/specifications/',
+        '/ru/pages/videos': '/ru/blog/',
+        '/ru/pages/faq': '/ru/',
+        '/ru/pages/loko-hub': '/ru/',
+        '/zh/pages/software': '/zh/software/',
+        '/zh/pages/contact': '/zh/contact/',
+        '/zh/pages/lorawan': '/zh/lorawan/',
+        '/zh/pages/firmware': '/zh/firmware/',
+        '/zh/pages/specs': '/zh/specifications/',
+        '/zh/pages/videos': '/zh/blog/',
+        '/zh/pages/faq': '/zh/',
+        '/zh/pages/loko-hub': '/zh/'
+      };
+
+      var dest = exact[p] || null;
+
+      // ── Pattern redirects ──────────────────────────────────────────────────────
+      if (!dest) {
+        var patterns = [
+          // /blogs/news/<slug> → /blog/<slug>/
+          [/^\/blogs\/news\/([^/]+)$/, function (m) { return '/blog/' + m[1] + '/'; }],
+          // /<lang>/blogs/news/<slug> → /<lang>/blog/<slug>/
+          [/^\/(es|fr|ja|ru|zh)\/blogs\/news\/([^/]+)$/, function (m) { return '/' + m[1] + '/blog/' + m[2] + '/'; }],
+          // /blog/<slug>.html → /blog/<slug>/
+          [/^\/blog\/(.+)\.html$/, function (m) { return '/blog/' + m[1] + '/'; }],
+          // /<lang>/blog/<slug>.html → /<lang>/blog/<slug>/
+          [/^\/(es|fr|ja|ru|zh)\/blog\/(.+)\.html$/, function (m) { return '/' + m[1] + '/blog/' + m[2] + '/'; }],
+          // /collections/* → /
+          [/^\/collections\/.*$/, function () { return '/'; }],
+          // /<lang>/collections/* → /<lang>/
+          [/^\/(es|fr|ja|ru|zh)\/collections\/.*$/, function (m) { return '/' + m[1] + '/'; }],
+          // /products/* → /
+          [/^\/products\/.*$/, function () { return '/'; }],
+          // /<lang>/products/* → /<lang>/
+          [/^\/(es|fr|ja|ru|zh)\/products\/.*$/, function (m) { return '/' + m[1] + '/'; }],
+          // /<lang>/pages/* (fallback for any not in exact map) → /<lang>/
+          [/^\/(es|fr|ja|ru|zh)\/pages\/.*$/, function (m) { return '/' + m[1] + '/'; }],
+          // /policies/* → /
+          [/^\/policies\/.*$/, function () { return '/'; }]
+        ];
+
+        for (var i = 0; i < patterns.length; i++) {
+          var match = p.match(patterns[i][0]);
+          if (match) { dest = patterns[i][1](match); break; }
+        }
+      }
+
+      if (dest) {
+        window.location.replace(dest);
+      }
+    })();
+  </script>
+</head>
+<body style="font-family:sans-serif;text-align:center;padding:4rem 1rem">
+  <p>Redirecting&hellip;</p>
+  <p><a href="/">Go to homepage</a></p>
+</body>
+</html>
