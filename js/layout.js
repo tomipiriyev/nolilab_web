@@ -89,6 +89,7 @@ document.documentElement.setAttribute('data-theme', 'light');
           ns.textContent = s.textContent;
           s.parentNode.replaceChild(ns, s);
         });
+        if (suffix === '.i18n') applyTranslations();
         applyLangPrefix();
       })
       .catch(function (e) { console.warn('[layout] footer inject failed:', e); });
