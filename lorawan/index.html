@@ -905,66 +905,6 @@
 
     // Set light theme
     document.documentElement.setAttribute('data-theme', 'light');
-
-    // Language Selector
-    document.querySelectorAll('.language-option').forEach(option => {
-      option.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetLang = option.dataset.lang;
-
-        localStorage.setItem('selectedLanguage', targetLang);
-
-        const currentPath = window.location.pathname;
-        const pathParts = currentPath.split('/').filter(p => p);
-        const langDirs = ['ru', 'zh', 'ja', 'fr', 'es'];
-
-        let currentLang = 'en';
-        let currentPage = 'index';
-
-        for (let i = 0; i < pathParts.length; i++) {
-          if (langDirs.includes(pathParts[i])) {
-            currentLang = pathParts[i];
-            currentPage = pathParts[i + 1] || 'index';
-            break;
-          }
-        }
-
-        if (currentLang === 'en') {
-          currentPage = pathParts[pathParts.length - 1] || '';
-        }
-
-        if (currentPage === '' || currentPage === '') {
-          currentPage = 'index';
-        }
-
-        let redirectUrl;
-        if (targetLang === 'en') {
-          if (currentLang === 'en') {
-            redirectUrl = './';
-          } else {
-            redirectUrl = currentPage === 'index' ? '../nolilab' : `../${currentPage}`;
-          }
-        } else {
-          redirectUrl = currentLang === 'en' ? `./${targetLang}/${currentPage}` : `../${targetLang}/${currentPage}`;
-        }
-
-        window.location.href = redirectUrl;
-      });
-    });
-
-    // Load saved language on page load
-    const savedLang = localStorage.getItem('selectedLanguage');
-    if (savedLang) {
-      const langMap = {
-        'en': 'EN',
-        'ru': 'RU',
-        'ja': 'JA',
-        'zh': 'ZH',
-        'fr': 'FR',
-        'es': 'ES'
-      };
-      document.querySelector('.current-lang').textContent = langMap[savedLang] || 'EN';
-    }
   </script>
 <script defer src="/js/analytics.js"></script>
 </body>
