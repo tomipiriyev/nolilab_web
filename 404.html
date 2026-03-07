@@ -86,6 +86,7 @@
         '/pages/lorawan': '/lorawan/',
         '/pages/firmware': '/firmware/',
         '/pages/specs': '/specifications/',
+        '/pages/technical-specifications': '/specifications/',
         '/pages/videos': '/blog/',
         '/pages/faq': '/',
         '/pages/loko-hub': '/',
@@ -186,7 +187,17 @@
           // /<lang>/pages/* (fallback for any not in exact map) → /<lang>/
           [/^\/(es|fr|ja|ru|zh)\/pages\/.*$/, function (m) { return '/' + m[1] + '/'; }],
           // /policies/* → /
-          [/^\/policies\/.*$/, function () { return '/'; }]
+          [/^\/policies\/.*$/, function () { return '/'; }],
+          // /<lang>/policies/privacy-policy → /<lang>/privacy/
+          [/^\/(es|fr|ja|ru|zh)\/policies\/privacy-policy$/, function (m) { return '/' + m[1] + '/privacy/'; }],
+          // /<lang>/policies/contact-information → /<lang>/contact/
+          [/^\/(es|fr|ja|ru|zh)\/policies\/contact-information$/, function (m) { return '/' + m[1] + '/contact/'; }],
+          // /<lang>/policies/* (refund, terms, etc.) → /<lang>/
+          [/^\/(es|fr|ja|ru|zh)\/policies\/.*$/, function (m) { return '/' + m[1] + '/'; }],
+          // /cart/* (sub-paths like /cart/update) → /
+          [/^\/cart\/.*$/, function () { return '/'; }],
+          // /<lang>/cart/* → /<lang>/
+          [/^\/(es|fr|ja|ru|zh)\/cart\/.*$/, function (m) { return '/' + m[1] + '/'; }]
         ];
 
         for (var i = 0; i < patterns.length; i++) {
