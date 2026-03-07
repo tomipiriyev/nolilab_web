@@ -62,12 +62,37 @@ document.documentElement.setAttribute('data-theme', 'light');
     document.head.appendChild(xDefault);
   }
 
-  // Nav HTML is now inlined in the page source — no fetch needed.
-  // Run initialisation directly (layout.js loads with defer, so DOM is ready).
+  // Nav HTML is inlined; footer is loaded from partial.
+  // layout.js loads with defer, so DOM is ready.
+  injectFooter();
   if (suffix === '.i18n') applyTranslations();
   applyLangPrefix();
   initLangSelector();
   initMobileMenu();
+
+  function injectFooter() {
+    var el = document.getElementById('site-footer');
+    if (!el) return;
+    fetch('/partials/footer' + suffix + '.html')
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var footer = doc.querySelector('footer');
+        if (!footer) return;
+        el.replaceWith(document.adoptNode(footer));
+        // Re-execute inline <script> tags (DOMParser does not run them)
+        document.querySelectorAll('footer script').forEach(function (s) {
+          var ns = document.createElement('script');
+          ns.textContent = s.textContent;
+          s.parentNode.replaceChild(ns, s);
+        });
+        applyLangPrefix();
+      })
+      .catch(function (e) { console.warn('[layout] footer inject failed:', e); });
+  }
 
   function applyTranslations() {
     var t = i18n[currentLang];

@@ -43,14 +43,34 @@
       var form = document.getElementById('footer-subscribe-form');
       var msg  = document.getElementById('footer-subscribe-msg');
       if (!form) return;
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var email = form.email.value.trim();
         if (!email) return;
-        // TODO: replace fetch URL with your email service endpoint (Mailchimp, ConvertKit, etc.)
-        msg.textContent = 'Thanks! You\'re on the list.';
-        msg.style.color = 'var(--text-primary, #24292e)';
-        form.reset();
+
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = '…';
+
+        fetch('https://formspree.io/akio@nolilab.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ email: email, _subject: 'New subscriber: ' + email })
+        })
+        .then(function () {
+          msg.textContent = 'Thanks! You\'re on the list.';
+          msg.style.color = 'var(--text-primary, #24292e)';
+          form.reset();
+        })
+        .catch(function () {
+          msg.textContent = 'Something went wrong. Please try again.';
+          msg.style.color = 'red';
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+        });
       });
     })();
   </script>
@@ -139,6 +159,8 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
+      text-align: center;
       gap: 0.75rem;
       padding-top: var(--spacing-sm, 1rem);
       border-top: 1px solid var(--border, #d0d7de);
