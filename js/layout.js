@@ -8,10 +8,10 @@ document.documentElement.setAttribute('data-theme', 'light');
 
   // Translations used only for the i18n group (ru, zh, fr, es)
   var i18n = {
-    ru: { shop: 'Магазин', specs: 'Характеристики', software: 'Программы', contact: 'Контакт', home: 'Главная', setupGuides: 'Руководства', privacy: 'Конфиденциальность' },
-    zh: { shop: '商店', specs: '规格', software: '软件', contact: '联系我们', home: '首页', setupGuides: '设置指南', privacy: '隐私政策' },
-    fr: { shop: 'Boutique', specs: 'Spécifications', software: 'Logiciel', contact: 'Contact', home: 'Accueil', setupGuides: 'Guides', privacy: 'Confidentialité' },
-    es: { shop: 'Tienda', specs: 'Especificaciones', software: 'Software', contact: 'Contacto', home: 'Inicio', setupGuides: 'Guías', privacy: 'Privacidad' }
+    ru: { shop: 'Магазин', specs: 'Характеристики', software: 'Программы', contact: 'Контакт', home: 'Главная', setupGuides: 'Руководства', privacy: 'Конфиденциальность', huntingDogs: 'Охотничьи Собаки', farmGps: 'GPS Ферма', searchRescue: 'Поиск и Спасение' },
+    zh: { shop: '商店', specs: '规格', software: '软件', contact: '联系我们', home: '首页', setupGuides: '设置指南', privacy: '隐私政策', huntingDogs: '猎犬GPS', farmGps: '农场GPS', searchRescue: '搜索救援' },
+    fr: { shop: 'Boutique', specs: 'Spécifications', software: 'Logiciel', contact: 'Contact', home: 'Accueil', setupGuides: 'Guides', privacy: 'Confidentialité', huntingDogs: 'Chiens de Chasse', farmGps: 'GPS Agricole', searchRescue: 'Recherche & Secours' },
+    es: { shop: 'Tienda', specs: 'Especificaciones', software: 'Software', contact: 'Contacto', home: 'Inicio', setupGuides: 'Guías', privacy: 'Privacidad', huntingDogs: 'Perros de Caza', farmGps: 'GPS Agrícola', searchRescue: 'Búsqueda y Rescate' }
   };
 
   // Determine current language and page slug from URL

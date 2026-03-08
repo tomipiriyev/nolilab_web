@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>远程 LoRa GPS 跟踪器 | 20+ km，无 SIM 卡，无需订阅 | Loko</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Loko 是一款远距离 LoRa GPS 跟踪器，具有 20+ km P2P 无线电范围、1 年电池和零订阅费。无需手机服务、SIM 卡或互联网即可在任何地方工作。" name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="远程 LoRa GPS 跟踪器 | 20+ km，无 SIM 卡，无需订阅 | Loko" property="og:title"/>
+<meta content="Loko 是一款远距离 LoRa GPS 跟踪器，具有 20+ km P2P 无线电范围、1 年电池和零订阅费。无需手机服务、SIM 卡或互联网即可在任何地方工作。" property="og:description"/>
+<meta content="https://www.nolilab.com/zh/lora-gps-tracker/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Loko Long Range LoRa GPS Tracker" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="zh_CN" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="远程 LoRa GPS 跟踪器 | 20+ km，无 SIM 卡，无需订阅 | Loko" name="twitter:title"/>
+<meta content="Loko 是一款远距离 LoRa GPS 跟踪器，具有 20+ km P2P 无线电范围、1 年电池和零订阅费。无需手机服务、SIM 卡或互联网即可在任何地方工作。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="long range LoRa GPS tracker, LoRa GPS tracker, LoRa GPS no subscription, LoRa P2P GPS tracker, 20km GPS tracker, GPS tracker no SIM card, LoRa GPS tracker outdoor, best LoRa GPS tracker" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link href="https://www.nolilab.com/zh/lora-gps-tracker/" rel="canonical"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "LoRa GPS 追踪器可以到达多远？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko 在开阔地形、视线清晰的情况下达到了 20+ km 的水平。在城市环境或茂密的森林中，实际范围通常为 1–5 km。 LoRa 的扩频调制使其覆盖范围远大于 Wi-Fi (100m)、蓝牙 (50m) 或弱覆盖区域的蜂窝网络。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什么是 LoRa GPS 跟踪器？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa GPS 跟踪器将 GNSS 接收器（确定卫星位置）与 LoRa 无线电发射器（长距离无线发送位置）结合在一起。与蜂窝 GPS 跟踪器不同，LoRa GPS 跟踪器不需要 SIM 卡或移动网络 - 它们使用无线电波直接传输到附近的接收器。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRa GPS 跟踪器需要订阅吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko 不需要任何订阅。由于它使用 LoRa 无线电而不是蜂窝网络，因此没有 SIM 卡费用、数据计划费用和月费。您只需支付一次硬件费用即可无限期跟踪。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRa、P2P 和 LoRaWAN 对于 GPS 跟踪有什么区别？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa P2P（点对点）是直接的设备到设备 comm 通信 — 跟踪器直接与您的接收器通信，中间没有基础设施。 LoRaWAN 使用网关和网络服务器，可提供更广泛的覆盖范围，但需要部署基础设施。 Loko 使用 LoRa P2P，这意味着它可以在任何地方工作，无需超出两个设备的设置。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "对于 GPS 跟踪，LoRa 是否比蜂窝网络更好？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa 和蜂窝各有优势。 LoRa 更适用于以下情况：您需要在没有蜂窝网络覆盖的区域进行跟踪、您不希望收取月费，或者您需要多年的电池寿命。在以下情况下，蜂窝网络会更好：您需要在附近没有接收器的情况下进行全球跟踪，或者您需要在 LoRa 范围有限的建筑物内进行跟踪。 Loko 使用 LoRa，使其成为远程、户外和离网应用的理想选择。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRa GPS 跟踪器的准确度如何？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko 中的 GPS 精度来自 GNSS 接收器，而不是 LoRa 无线电。 Loko 同时支持 GPS、GLONASS、Galileo 和 BeiDou，在开阔天空条件下提供约 2-5 米的位置精度 — 与任何多星座 GNSS 设备的精度相同。 LoRa 无线电传输该位置而不增加任何位置误差。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "哪些因素影响 LoRa GPS 跟踪器范围？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "主要因素包括：海拔（较高的接收器 = 较长的范围）、地形（视线提供最大范围，丘陵和茂密的森林会减少范围）、扩频因子（较高的 SF = 较长的范围，但更新速率较慢）和天线质量。在接收器放置位置较高的开阔地形中，Loko 的性能达到 km 的 20+。在森林或城市环境中，预计有 1-5 个 km。"
+      }
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "远程 LoRa GPS 跟踪器",
+      "item": "https://www.nolilab.com/lora-gps-tracker/"
+    }
+  ]
+}</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono','Monaco','Inconsolata','Fira Mono','Droid Sans Mono','Source Code Pro',monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter','Inter-fallback',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+  /* Nav */
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+
+  .language-selector { margin-left: var(--spacing-sm); }
+
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-6px); }
+
+  /* Hero */
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+
+  .page-hero .eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-family: var(--font-mono); margin-bottom: 0.75rem; }
+
+  .page-hero h1 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); line-height: 1.15; margin-bottom: 0.85rem; }
+
+  .page-hero .lead { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.8; max-width: 720px; margin-bottom: var(--spacing-md); }
+
+  .stat-row { display: flex; flex-wrap: wrap; gap: var(--spacing-xs); margin-top: var(--spacing-md); }
+
+  .stat-pill { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 999px; font-size: 0.8125rem; font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+  .stat-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* Spec highlight bar */
+  .spec-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; margin: var(--spacing-md) 0; }
+
+  .spec-bar-item { background: var(--bg-primary); padding: var(--spacing-md); text-align: center; }
+
+  .spec-bar-value { font-size: 1.5rem; font-weight: 700; font-family: var(--font-mono); color: var(--text-primary); letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.3rem; }
+
+  .spec-bar-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; }
+
+  /* Content */
+  .content-block { padding: var(--spacing-xl) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+
+  .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-family: var(--font-mono); margin-bottom: 0.5rem; }
+
+  .content-block h2 { font-size: 1.375rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); line-height: 1.25; }
+
+  .content-block h3 { font-size: 1rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); margin: var(--spacing-md) 0 0.4rem; }
+  .content-block h3:first-child { margin-top: 0; }
+
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.85rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+
+  .content-block ul, .content-block ol { margin: 0.4rem 0 0.85rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; }
+  .content-block a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .content-block a:hover { color: var(--accent-hover); }
+
+  /* Range visual */
+  .range-grid { display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin: var(--spacing-sm) 0; }
+
+  .range-row { display: flex; align-items: center; gap: var(--spacing-sm); padding: 0.75rem var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-primary); }
+
+  .range-label { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); min-width: 200px; flex-shrink: 0; }
+
+  .range-bar-wrap { flex: 1; height: 8px; background: var(--bg-secondary); border-radius: 999px; overflow: hidden; }
+
+  .range-bar { height: 100%; border-radius: 999px; background: var(--accent); }
+
+  .range-val { font-size: 0.8125rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); min-width: 60px; text-align: right; flex-shrink: 0; }
+
+  /* Tech cards */
+  .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-sm); margin: var(--spacing-sm) 0; }
+
+  .tech-card { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+
+  .tech-card .mono-label { font-size: 0.75rem; font-weight: 700; font-family: var(--font-mono); color: var(--accent); letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+
+  .tech-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin: 0 0 0.4rem; }
+  .tech-card p { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
+
+  /* Use case grid */
+  .usecase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-sm); margin: var(--spacing-md) 0; }
+
+  .usecase-card { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); transition: border-color 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; }
+
+  .usecase-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); opacity: 0; transition: opacity 0.2s ease; }
+  .usecase-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+  .usecase-card:hover::before { opacity: 1; }
+  .usecase-card .icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+  .usecase-card h3 { font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); margin-bottom: 0.4rem; line-height: 1.3; }
+  .usecase-card p { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
+
+  /* Tables */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--spacing-sm) 0; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+  .data-table thead { background: var(--bg-secondary); border-bottom: 2px solid var(--border); }
+  .data-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8125rem; }
+  .data-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--bg-secondary); }
+  .data-table td:first-child { font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+  .data-table code { font-family: var(--font-mono); font-size: 0.8125rem; background: var(--bg-secondary); padding: 0.1rem 0.35rem; border-radius: var(--radius-sm); color: var(--text-primary); }
+
+  .yes { color: var(--accent); font-weight: 700; }
+  .no  { color: #cf222e; font-weight: 700; }
+  .partial { color: #9a6700; font-weight: 600; }
+
+  /* Callouts */
+  .callout { background: rgba(35,134,54,.06); border: 1px solid rgba(35,134,54,.25); border-left: 4px solid var(--accent); border-radius: var(--radius-md); padding: var(--spacing-sm) var(--spacing-md); margin: var(--spacing-sm) 0; }
+  .callout p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+  .callout strong { color: var(--text-primary); }
+  .callout a { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+
+  .faq-question { display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm) var(--spacing-md); cursor: pointer; background: var(--bg-primary); font-weight: 600; font-size: 0.9rem; color: var(--text-primary); user-select: none; list-style: none; gap: var(--spacing-sm); }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::after { content: '+'; font-size: 1.25rem; font-weight: 300; flex-shrink: 0; color: var(--text-secondary); }
+  details[open] > .faq-question { background: var(--bg-secondary); }
+  details[open] .faq-question::after { content: '−'; }
+
+  .faq-answer { padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; background: var(--bg-primary); border-top: 1px solid var(--border); }
+  .faq-answer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+  /* CTA */
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-xl); text-align: center; }
+  .cta-block h2 { font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.7rem 1.75rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9375rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .spec-bar { grid-template-columns: repeat(2,1fr); }
+    .tech-grid { grid-template-columns: 1fr; }
+    .usecase-grid { grid-template-columns: 1fr; }
+
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+
+    .range-label { min-width: 130px; font-size: 0.8rem; }
+    .data-table { font-size: 0.8rem; }
+    .data-table th, .data-table td { padding: 0.5rem 0.6rem; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer="" src="/js/layout.js"></script>
+</head>
+<body>
+<header>
+<div class="nav-container">
+<a class="logo" href="/">nolilab</a>
+<div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+<a class="nav-link" href="/#shop">Shop</a>
+<a class="nav-link" href="/specifications/">Specs</a>
+<a class="nav-link" href="/software/">Software</a>
+<a class="nav-link" href="/lorawan/">LoRaWAN</a>
+<a class="nav-link" href="/#faq">FAQ</a>
+<a class="nav-link" href="/blog/">Blog</a>
+<a class="nav-link" href="/firmware/">Firmware</a>
+<a class="nav-link" href="/setup-guides/">Setup</a>
+<a class="nav-link" href="/gps/">GPS &amp; LoRa</a>
+<a class="nav-link" href="/contact/">Contact</a>
+</div>
+<div class="language-selector" style="flex-shrink: 0; position: relative;">
+<button aria-label="Select language" class="language-btn">
+<svg aria-hidden="true" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+<span class="current-lang">EN</span>
+<svg aria-hidden="true" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div class="language-dropdown">
+<a class="language-option" data-lang="en" href="#"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+<a class="language-option" data-lang="ru" href="#"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+<a class="language-option" data-lang="ja" href="#"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+<a class="language-option" data-lang="zh" href="#"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+<a class="language-option" data-lang="fr" href="#"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+<a class="language-option" data-lang="es" href="#"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+</div>
+</div>
+<button aria-label="Toggle menu" class="mobile-menu-toggle">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+<main>
+<!-- Hero -->
+<div class="page-hero">
+<div class="container">
+<p class="eyebrow">Loko GPS 跟踪器 — LoRa 技术</p>
+<h1>远程 LoRa GPS 跟踪器</h1>
+<p class="lead">LoRa（长距离）无线电是唯一结合了公里级范围、多年电池寿命和完全独立于蜂窝网络的无线技术。 Loko 是一款专门构建的 LoRa GPS 跟踪器，可将这三个跟踪器放入您的口袋中 - 无需 SIM 卡，无需订阅，也无需基础设施。</p>
+<div class="spec-bar">
+<div class="spec-bar-item">
+<div class="spec-bar-value">20+</div>
+<div class="spec-bar-label">km 系列（开阔地形）</div>
+</div>
+<div class="spec-bar-item">
+<div class="spec-bar-value">1 年</div>
+<div class="spec-bar-label">电池寿命</div>
+</div>
+<div class="spec-bar-item">
+<div class="spec-bar-value">14克</div>
+<div class="spec-bar-label">追踪器重量</div>
+</div>
+<div class="spec-bar-item">
+<div class="spec-bar-value">$0</div>
+<div class="spec-bar-label">月费</div>
+</div>
+</div>
+<div class="stat-row">
+<span class="stat-pill"><span class="dot"></span>LoRa P2P — 无需网关</span>
+<span class="stat-pill"><span class="dot"></span>GPS + GLONASS + Galileo + BeiDou</span>
+<span class="stat-pill"><span class="dot"></span>离线地图</span>
+<span class="stat-pill"><span class="dot"></span>多跟踪器支持</span>
+</div>
+</div>
+</div>
+<!-- What is LoRa -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">技术</p>
+<h2>什么是 LoRa 以及为什么它使 GPS 跟踪器变得更好？</h2>
+<p>LoRa 代表长距离。它是 Semtech 开发的一种无线调制技术，使用线性调频扩频 (CSS) 在 Wi-Fi、蓝牙或 Zigbee 无法实现的距离上传输小数据有效负载。</p>
+<p>关键物理原理：LoRa 以数据速率换取范围和穿透力。它发送数据的速度很慢，但它发送的距离很远而且非常可靠，甚至可以穿过墙壁、树木和地形。对于 GPS 跟踪，位置更新是每隔几秒到几分钟发送的小数据包，这是一个理想的匹配。</p>
+<h3>为什么 LoRa 在 GPS 跟踪方面优于其他无线协议</h3>
+<div class="tech-grid">
+<div class="tech-card">
+<div class="mono-label">范围</div>
+<h3>公里级距离</h3>
+<p>LoRa 在开阔地形中达到了 20+ km 的水平。 Wi-Fi覆盖范围100m。蓝牙覆盖范围50m。在相当的功率水平下，没有其他免许可无线电技术能够接近 LoRa 的范围。</p>
+</div>
+<div class="tech-card">
+<div class="mono-label">力量</div>
+<h3>超低能耗</h3>
+<p>LoRa 无线电在传输期间消耗毫瓦，在睡眠时消耗微瓦。结合较长的更新间隔，Loko 的电池寿命可达 1 年——这对于蜂窝或 Wi-Fi 无线电来说是不可能的。</p>
+</div>
+<div class="tech-card">
+<div class="mono-label">渗透</div>
+<h3>穿越障碍</h3>
+<p>LoRa 的 sub-GHz 频率（欧盟为 868 MHz，美国为 915 MHz）穿透植被、建筑材料和温和地形的能力远远优于高频下的 2.4 GHz Wi-Fi 或蜂窝网络。</p>
+</div>
+<div class="tech-card">
+<div class="mono-label">独立</div>
+<h3>没有网络基础设施</h3>
+<p>LoRa P2P comm 直接连接设备到设备。跟踪链中的任何一点都不需要手机信号塔、网关、服务器、互联网连接。</p>
+</div>
+<div class="tech-card">
+<div class="mono-label">成本</div>
+<h3>零运营成本</h3>
+<p>LoRa 使用免许可的 ISM 无线电频段。无需通话费、数据费，也无需运营商。硬件成本是您唯一的开支。</p>
+</div>
+<div class="tech-card">
+<div class="mono-label">可靠性</div>
+<h3>无单点故障</h3>
+<p>LoRa P2P 链路有两个组件：跟踪器和接收器。没有云，没有运营商网络，没有可以离线并断开连接的服务器。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Real-world range -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">真实世界范围</p>
+<h2>Loko 能到达多远？逐个地形</h2>
+<p>LoRa 范围随地形和 Loko 地面接收器的高度而变化很大。这些是 Loko 在典型环境中的实际估计值，接收器保持在头部高度。</p>
+<div class="range-grid">
+<div class="range-row">
+<span class="range-label">地势开阔平坦</span>
+<div class="range-bar-wrap"><div class="range-bar" style="width:100%"></div></div>
+<span class="range-val">20+ km</span>
+</div>
+<div class="range-row">
+<span class="range-label">连绵起伏的山丘</span>
+<div class="range-bar-wrap"><div class="range-bar" style="width:65%"></div></div>
+<span class="range-val">8–12 km</span>
+</div>
+<div class="range-row">
+<span class="range-label">混合林地</span>
+<div class="range-bar-wrap"><div class="range-bar" style="width:40%"></div></div>
+<span class="range-val">3–6 km</span>
+</div>
+<div class="range-row">
+<span class="range-label">茂密的森林</span>
+<div class="range-bar-wrap"><div class="range-bar" style="width:22%"></div></div>
+<span class="range-val">1–3 km</span>
+</div>
+<div class="range-row">
+<span class="range-label">城市环境</span>
+<div class="range-bar-wrap"><div class="range-bar" style="width:18%"></div></div>
+<span class="range-val">0.5–2 km</span>
+</div>
+<div class="range-row">
+<span class="range-label">开放水域（沿海）</span>
+<div class="range-bar-wrap"><div class="range-bar" style="width:100%"></div></div>
+<span class="range-val">20+ km</span>
+</div>
+</div>
+<div class="callout">
+<p><strong>高程乘数：</strong> 升高 Loko 地面接收器可显着扩大范围。山顶或车顶上的接收器的有效覆盖范围可能是地面的三倍。在搜寻与援救和狩猎场景中，将接收器放置在高处是影响最大的范围改进。了解更多信息 <a href="/gps/">GPS 和 LoRa 技术页面</a>.</p>
+</div>
+</div>
+</div>
+<!-- LoRa P2P vs LoRaWAN -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">建筑学</p>
+<h2>LoRa P2P 与 LoRaWAN — Loko 使用什么以及为什么</h2>
+<p>LoRa 是物理无线电层。在其之上，有两种根本不同的网络架构，其选择定义了 GPS 跟踪器在现实世界中的行为方式。</p>
+<table class="data-table">
+<thead>
+<tr>
+<th>特征</th>
+<th>LoRa P2P (Loko)</th>
+<th>LoRaWAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>需要基础设施</td>
+<td class="yes">无——在任何地方都可以工作</td>
+<td class="no">需要网关+网络服务器</td>
+</tr>
+<tr>
+<td>在偏远地区工作</td>
+<td class="yes">✅ 总是</td>
+<td class="partial">⚠️ 仅在部署网关的地方</td>
+</tr>
+<tr>
+<td>需要订阅</td>
+<td class="yes">没有任何</td>
+<td class="partial">各不相同——通常是的</td>
+</tr>
+<tr>
+<td>设置复杂性</td>
+<td>通电即可运行</td>
+<td>需要安装网关+服务器配置</td>
+</tr>
+<tr>
+<td>数据延迟</td>
+<td>直接、近乎实时</td>
+<td>添加网关+服务器跃点延迟</td>
+</tr>
+<tr>
+<td>单点故障</td>
+<td class="yes">没有任何</td>
+<td class="no">网关+服务器故障停止追踪</td>
+</tr>
+<tr>
+<td>非常适合</td>
+<td>户外、远程、离网跟踪</td>
+<td>修复了现有基础设施的 IoT 部署</td>
+</tr>
+</tbody>
+</table>
+<p>Loko用途 <strong>LoRa P2P</strong>。这意味着您的动物、车辆或团队成员上的跟踪器 comm 直接与您的手持式 Loko 地面接收器连接，无需中间基础设施。您可以在几秒钟内将 Loko 部署到地球上的任何地方，无需预先配置，也没有网络依赖性。</p>
+<div class="callout">
+<p>有关 LoRa、P2P 和 LoRaWAN 架构的更深入比较，请阅读 <a href="/lorawan/">LoRaWAN 页面</a>.</p>
+</div>
+</div>
+</div>
+<!-- LoRa modulation parameters -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">技术参数</p>
+<h2>影响范围和电池寿命的 LoRa 调制设置</h2>
+<p>LoRa 具有可配置的调制参数，可在范围、更新频率和功耗之间进行直接权衡。了解这些有助于您针对特定用例配置 Loko。</p>
+<table class="data-table">
+<thead>
+<tr>
+<th>范围</th>
+<th>Loko 范围</th>
+<th>对性能的影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>扩频因子 (SF)</td>
+<td><code>SF7</code> – <code>SF12</code></td>
+<td>更高的 SF = 更远的范围、更慢的更新速率、每个数据包使用更多的电池。 SF12 提供最大范围。</td>
+</tr>
+<tr>
+<td>带宽（BW）</td>
+<td><code>125 kHz</code> / <code>250 kHz</code></td>
+<td>更窄的带宽增加了范围和灵敏度。 125 kHz 是最大范围的标准。</td>
+</tr>
+<tr>
+<td>编码率 (CR)</td>
+<td><code>4/5</code> – <code>4/8</code></td>
+<td>较高的 CR 会增加前向纠错开销，从而以数据速率为代价提高噪声环境中的恢复能力。</td>
+</tr>
+<tr>
+<td>发射功率</td>
+<td>不超过法定区域限制</td>
+<td>更高的发射功率 = 更远的距离、更快的电池消耗。 Loko 针对每个区域进行优化。</td>
+</tr>
+<tr>
+<td>更新间隔</td>
+<td>可在 Loko 应用程序中配置</td>
+<td>更长的间隔可显着延长电池寿命。 1分钟间隔可维持数月运行。</td>
+</tr>
+</tbody>
+</table>
+<div class="callout">
+<p>完整的射频配置详细信息——频率、扩频因子、功率电平和 GNSS 参数——记录在 <a href="/specifications/">Loko 技术规格页面</a>.</p>
+</div>
+</div>
+</div>
+<!-- GNSS -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">位置精度</p>
+<h2>GPS 精度：LoRa 与它有什么关系（无关）</h2>
+<p>common 的一个误解：LoRa 无线电对 GPS 位置精度没有任何影响。这两个系统是完全独立的。</p>
+<p><strong>GPS 精度</strong> 完全来自 Loko Air 中的 GNSS 接收器。 Loko 同时支持四个卫星星座：</p>
+<ul>
+<li><strong>GPS</strong> (美国) — 31 颗卫星</li>
+<li><strong>GLONASS</strong> （俄罗斯）— 24 颗卫星</li>
+<li><strong>Galileo</strong> (欧盟) — 30 颗卫星</li>
+<li><strong>BeiDou</strong> （中国）— 35颗以上卫星</li>
+</ul>
+<p>同时使用所有四个星座使 Loko 能够更快地获取位置（首次定位时间）和更高的精度，特别是在峡谷地形或茂密的树冠等困难环境中，只有一些卫星可见。</p>
+<p>开阔天空中的典型位置精度： <strong>2-5米CEP</strong> （可能存在循环误差）。这与任何多星座消费 GNSS 设备相同，并且与使用哪种无线电技术来传输位置无关。</p>
+<p><strong>LoRa的作用</strong> 纯粹是传输：它获取 GPS 坐标并将其长距离无误地传送到接收器。 LoRa 使用前向纠错（编码率参数）来确保即使在嘈杂的无线电环境中位置数据也能完好无损地到达。</p>
+</div>
+</div>
+<!-- Use cases -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">应用领域</p>
+<h2>人们使用远程 LoRa GPS 跟踪器跟踪什么</h2>
+<p>由于 Loko 不需要基础设施，也不需要订阅，因此它适合在没有可靠蜂窝覆盖的环境中需要远距离跟踪的任何场景。</p>
+<div class="usecase-grid">
+<div class="usecase-card">
+<div class="icon">🐕</div>
+<h3>狩猎犬和工作犬</h3>
+<p>在茂密的森林和没有手机信号覆盖的偏远地区追踪狗。 20+ km 范围意味着您可以不间断地跟踪整个狩猎过程。 <a href="/hunting-dogs/">了解更多→</a></p>
+</div>
+<div class="usecase-card">
+<div class="icon">🐄</div>
+<h3>牲畜和农场动物</h3>
+<p>在没有蜂窝基础设施的情况下监控大牧场上的牛、羊和马。一个接收器覆盖整个财产。 <a href="/farms/">了解更多→</a></p>
+</div>
+<div class="usecase-card">
+<div class="icon">🧭</div>
+<h3>搜救队</h3>
+<p>在没有信号塔的荒野环境中实时团队定位。大本营可以在一张离线地图上看到所有野战单位。 <a href="/search-rescue/">了解更多→</a></p>
+</div>
+<div class="usecase-card">
+<div class="icon">🚜</div>
+<h3>农场设备和车辆</h3>
+<p>跟踪大型物业中的拖拉机、全地形车、拖车和工具。对于位置管理和防盗都很有用。</p>
+</div>
+<div class="usecase-card">
+<div class="icon">🏔️</div>
+<h3>探险和徒步旅行团</h3>
+<p>在没有电话信号的情况下进行数天的远程旅行时，让徒步旅行团或探险队在共享的离线地图上相互可见。</p>
+</div>
+<div class="usecase-card">
+<div class="icon">🔬</div>
+<h3>野生动物研究与监测</h3>
+<p>14 克重量和 1 年电池使 Loko 能够在远离蜂窝网络的偏远栖息地进行野生动物标记和运动研究。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparison -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">比较</p>
+<h2>LoRa GPS 跟踪器与蜂窝跟踪器与卫星跟踪器 — 完整比较</h2>
+<p>远程 GPS 跟踪器使用了三种主要技术。每个都有根本不同的架构和不同的权衡。</p>
+<table class="data-table">
+<thead>
+<tr>
+<th>特征</th>
+<th>Loko — LoRa P2P</th>
+<th>蜂窝网络（GSM/LTE）</th>
+<th>卫星（铱星/全球星）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在没有小区覆盖的情况下也能工作</td>
+<td class="yes">✅ 总是</td>
+<td class="no">❌从来没有</td>
+<td class="yes">✅ 总是</td>
+</tr>
+<tr>
+<td>需要订阅</td>
+<td class="yes">✅ 无</td>
+<td class="no">❌ 每月（$5–$30）</td>
+<td class="no">❌ 每月（$15–$100+）</td>
+</tr>
+<tr>
+<td>电池寿命</td>
+<td>长达 1 年</td>
+<td>1–5 天</td>
+<td>几天到几周（取决于模式）</td>
+</tr>
+<tr>
+<td>更新频率</td>
+<td>可配置（秒到分钟）</td>
+<td>近实时（有覆盖）</td>
+<td>一般为 2–10 分钟</td>
+</tr>
+<tr>
+<td>需要附近的接收器</td>
+<td class="partial">⚠️ 是 — 在 LoRa 范围内</td>
+<td class="yes">✅ 否 — 全球追踪</td>
+<td class="yes">✅ 否 — 全球追踪</td>
+</tr>
+<tr>
+<td>基础设施依赖</td>
+<td class="yes">没有任何</td>
+<td class="no">运输塔</td>
+<td class="no">卫星网络+服务器</td>
+</tr>
+<tr>
+<td>硬件成本</td>
+<td>低的</td>
+<td>低-中</td>
+<td>高（每台设备 350 美元至 700 美元以上）</td>
+</tr>
+<tr>
+<td>离线地图支持</td>
+<td class="yes">✅ 内置</td>
+<td class="no">通常没有</td>
+<td class="no">通常没有</td>
+</tr>
+<tr>
+<td>一屏多追踪器</td>
+<td class="yes">✅ 是的，完全离线</td>
+<td class="partial">⚠️通过云应用程序</td>
+<td class="partial">⚠️通过云应用程序，单位成本高</td>
+</tr>
+<tr>
+<td>国际化运作</td>
+<td class="yes">✅ 不漫游</td>
+<td class="no">❌ 需支付漫游费</td>
+<td class="yes">✅ 是（有计划）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>当 LoRa 获胜时：</strong> 您的追踪范围在 20km 范围内、在没有蜂窝网络覆盖的区域中操作、想要多年的电池寿命或需要多个追踪器的零订阅成本。</p>
+<p><strong>当蜂窝网络获胜时：</strong> 您需要通过固定互联网连接进行全球跟踪，并且该物品始终在蜂窝网络覆盖范围内。</p>
+<p><strong>当卫星获胜时：</strong> 您需要对真正偏远地区（公海、极地地区）的某物进行全球跟踪，而预算不是主要问题。</p>
+</div>
+</div>
+<!-- FAQ -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">常问问题</p>
+<h2>Common 关于远程 LoRa GPS 跟踪器的问题</h2>
+<div class="faq-list">
+<details class="faq-item">
+<summary class="faq-question">LoRa GPS 追踪器可以到达多远？</summary>
+<p class="faq-answer">Loko 在开阔地形、视线清晰的情况下达到了 20+ km 的水平。在城市环境或茂密的森林中，实用范围为 1–5 km。抬高接收器可显着扩大覆盖范围 - 将其放置在山顶或车顶上可以显着增加有效覆盖面积。请参阅 <a href="/gps/">GPS 和 LoRa 技术页面</a> 获取详细的传播信息。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">什么是 LoRa GPS 跟踪器？</summary>
+<p class="faq-answer">LoRa GPS 跟踪器将 GNSS 接收器（确定卫星位置）与 LoRa 无线电发射器（长距离无线发送位置）结合在一起。与蜂窝 GPS 跟踪器不同，LoRa GPS 跟踪器不需要 SIM 卡或移动网络 - 跟踪器 comm 通过无线电直接与附近的接收器连接。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">LoRa GPS 跟踪器需要订阅吗？</summary>
+<p class="faq-answer">Loko 不需要任何订阅。由于它使用 LoRa 无线电而不是蜂窝网络，因此没有 SIM 卡费用、数据计划费用和月费。您只需支付一次硬件费用即可无限期跟踪。这是 LoRa 相对于蜂窝跟踪解决方案的主要优势之一。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">LoRa、P2P 和 LoRaWAN 对于 GPS 跟踪有什么区别？</summary>
+<p class="faq-answer">LoRa P2P（点对点）是直接的设备到设备 comm 通信 — 跟踪器直接与您的接收器通信，中间没有基础设施。 LoRaWAN 使用网关和网络服务器，可在部署网关的区域提供更广泛的覆盖范围，但需要存在基础设施。 Loko 使用 LoRa P2P，这意味着它可以在任何地方工作，无需在两个设备之外进行设置。阅读完整的比较 <a href="/lorawan/">LoRaWAN 页面</a>.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">对于 GPS 跟踪，LoRa 是否比蜂窝网络更好？</summary>
+<p class="faq-answer">这取决于应用程序。当您需要在没有蜂窝网络覆盖的区域进行跟踪、不希望收取月费、需要多年的电池寿命或在无需按设备订阅费用的情况下跟踪多个资产时，LoRa 会更好。当您需要在附近没有接收器的情况下实现全球覆盖并且跟踪的项目保持在覆盖范围内时，蜂窝网络会更好。对于户外、远程和农业应用，LoRa 几乎总是在总拥有成本方面获胜。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">LoRa GPS 跟踪器的准确度如何？</summary>
+<p class="faq-answer">Loko 中的 GPS 精度完全来自 GNSS 接收器，而不是 LoRa 无线电。 Loko 同时支持 GPS、GLONASS、Galileo 和 BeiDou，在开阔天空中提供约 2-5 米 CEP 的位置精度 - 与任何多星座 GNSS 设备相同。 LoRa 无线电传输该位置而不会引入任何位置误差。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">哪些因素影响 LoRa GPS 跟踪器范围？</summary>
+<p class="faq-answer">主要因素包括：接收器的仰角（更高的仰角 = 更远的范围）、地形（视线提供最大范围，丘陵和茂密的森林会缩小范围）、扩频因子（更高的 SF = 更远的范围，但更新速度更慢）、发射功率和天线质量。在具有高架接收器的开阔地形中，Loko 的性能达到 20+ km。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">LoRa GPS 跟踪器可以同时跟踪多个设备吗？</summary>
+<p class="faq-answer">是的。 Loko 支持多个 Loko Air 跟踪器同时连接到单个 Loko Ground 接收器。所有跟踪的位置都会实时显示在同一个离线地图上，这对于通过单个设备跟踪一群动物、一群人或一队车辆非常有用。</p>
+</details>
+</div>
+</div>
+</div>
+<!-- Getting Started -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">入门</p>
+<h2>使用 LoRa 开始跟踪需要什么</h2>
+<p>Loko 系统由两个组件组成。没有服务器，没有SIM卡，没有配置。</p>
+<ul>
+<li><strong>Loko 空气</strong> — 追踪器。附着在任何人、动物或资产上。重量为 14 克，即使是小动物也足够轻。多个单元同时向单个接收器广播。</li>
+<li><strong>Loko 接地</strong> — 接收器。携带或安装它。通过蓝牙与免费的 Loko 应用程序（iOS 和 Android）配对。进入现场前下载离线地图，实现完全离网操作。</li>
+</ul>
+<p>相关页面： <a href="/gps/">GPS 和 LoRa 技术指南</a> — <a href="/specifications/">技术规格</a> — <a href="/lorawan/">LoRa 与 LoRaWAN</a> — <a href="/setup-guides/">设置指南</a></p>
+</div>
+</div>
+<!-- CTA -->
+<div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<h2>您可以购买的距离最远的 GPS 跟踪器。</h2>
+<p>20+ km LoRa 无线电范围。电池 1 年。没有 SIM 卡。没有订阅。无需设置即可在地球上的任何地方工作。</p>
+<a class="cta-btn" href="/#shop">店铺 Loko →</a>
+</div>
+</div>
+</div>
+</main>
+<div id="site-footer"></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>

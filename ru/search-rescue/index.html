@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>Автономный трекер GPS для поиска и спасения | Нет сотовой связи | Loko</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Автономный трекер GPS для поисково-спасательных команд. Отслеживание команды в реальном времени с помощью более 20 радиодиапазонов km LoRa — без сотовой связи, без Интернета, без подписки. Работает где угодно." name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="Автономный трекер GPS для поиска и спасения | Нет сотовой связи | Loko" property="og:title"/>
+<meta content="Автономный трекер GPS для поисково-спасательных команд. Отслеживание команды в реальном времени с помощью более 20 радиодиапазонов km LoRa — без сотовой связи, без Интернета, без подписки. Работает где угодно." property="og:description"/>
+<meta content="https://www.nolilab.com/ru/search-rescue/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Loko GPS Tracker for Search and Rescue" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Автономный трекер GPS для поиска и спасения | Нет сотовой связи | Loko" name="twitter:title"/>
+<meta content="Автономный трекер GPS для поисково-спасательных команд. Отслеживание команды в реальном времени с помощью более 20 радиодиапазонов km LoRa — без сотовой связи, без Интернета, без подписки. Работает где угодно." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="off-grid GPS tracker search and rescue, SAR GPS tracker no cell service, search rescue GPS offline, GPS tracker wilderness rescue, emergency GPS no internet, mountain rescue GPS tracker, SAR team tracking device no subscription" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link href="https://www.nolilab.com/ru/search-rescue/" rel="canonical"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Какой трекер GPS работает без сотовой связи для поиска и спасения?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko GPS Tracker использует радиосвязь LoRa для передачи данных о местоположении в реальном времени между членами команды и координатором базы — без сотовой связи, без Интернета и без подписки. Он работает в горах, лесах и любой глухой глуши, куда не доходит сотовая сеть."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как поисково-спасательные команды отслеживают людей в отдаленных районах?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Для эффективного отслеживания SAR в отдаленных районах требуются радиосистемы GPS, которые не зависят от сотовой инфраструктуры. Loko использует радиомодуль LoRa P2P для передачи координат GPS непосредственно между полевыми модулями и приемником comm и приемником более 20 km, без необходимости использования вышек или Интернета."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Какой трекер GPS лучше всего подходит для поисково-спасательных служб?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Для групп, работающих в районах без покрытия сотовой связи, Loko — хороший выбор: он обеспечивает дальность радиосвязи более 20 km, срок службы батареи 1 год, весит всего 14 граммов, поддерживает несколько одновременных трекеров и не требует абонентской платы — все это критически важные факторы для профессиональных поисково-спасательных операций."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Может ли GPS работать без Интернета в чрезвычайной ситуации?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да. Спутники GPS работают независимо от Интернета — они транслируют с орбиты сигналы, которые любой приемник GPS может прочитать без подключения к сети. Loko использует эту автономную позицию GPS и передает ее через радио LoRa на приемник, предоставляя вам данные о местоположении в режиме реального времени без подключения к Интернету на любом этапе."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "На каком расстоянии автономный трекер GPS работает для поиска и спасения?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko достигает 20+ km на открытой или возвышенной местности. В густом лесу или глубоких долинах практический диапазон составляет 2–5 km. Размещение наземного приемника Loko на возвышенности значительно расширяет зону покрытия в зоне поиска."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Требуется ли подписка на трекер SAR GPS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko не требует абонентской платы. Здесь нет ни SIM-карты, ни сервера, ни облачного сервиса. Вы покупаете оборудование один раз, и оно работает бессрочно — важный фактор для волонтерских организаций SAR, работающих с ограниченным бюджетом."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Чем Loko отличается от персонального радиомаяка для поисково-спасательных операций?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PLB — это односторонний аварийный передатчик, который отправляет сигнал бедствия в спутниковую сеть, вызывая спасательную операцию. Loko — это инструмент непрерывного информирования о ситуации: он отображает в реальном времени положение каждого члена команды на общей карте на протяжении всей операции. Они служат разным целям и дополняют друг друга."
+      }
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Дом",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Трекер GPS для поиска и спасения",
+      "item": "https://www.nolilab.com/search-rescue/"
+    }
+  ]
+}</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono','Monaco','Inconsolata','Fira Mono','Droid Sans Mono','Source Code Pro',monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter','Inter-fallback',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+
+  .nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover { color: var(--text-primary); }
+
+  .language-selector { margin-left: var(--spacing-sm); }
+
+  .language-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+
+  .language-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem); right: 0;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    min-width: 180px;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+  }
+
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  .language-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    margin-left: auto;
+  }
+
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-6px); }
+
+  /* Hero */
+  .page-hero {
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+
+  .page-hero .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    line-height: 1.15;
+    margin-bottom: 0.85rem;
+  }
+
+  .page-hero .lead {
+    font-size: 1.0625rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 720px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .stat-row { display: flex; flex-wrap: wrap; gap: var(--spacing-xs); margin-top: var(--spacing-md); }
+
+  .stat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+
+  .stat-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* Content blocks */
+  .content-block { padding: var(--spacing-xl) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    margin-bottom: 0.5rem;
+  }
+
+  .content-block h2 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.25;
+  }
+
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.85rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+
+  .content-block ul, .content-block ol { margin: 0.4rem 0 0.85rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; }
+
+  /* Use-case grid */
+  .usecase-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--spacing-sm); margin: var(--spacing-md) 0; }
+
+  .usecase-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    background: var(--bg-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .usecase-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); opacity: 0; transition: opacity 0.2s ease; }
+  .usecase-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+  .usecase-card:hover::before { opacity: 1; }
+  .usecase-card .icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+  .usecase-card h3 { font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); margin-bottom: 0.4rem; line-height: 1.3; }
+  .usecase-card p { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
+
+  /* Steps */
+  .steps { display: flex; flex-direction: column; gap: var(--spacing-sm); margin: var(--spacing-sm) 0; }
+
+  .step { display: flex; gap: var(--spacing-md); align-items: flex-start; padding: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-primary); }
+
+  .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; font-family: var(--font-mono); }
+
+  .step-body h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; font-family: var(--font-mono); }
+  .step-body p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
+
+  /* Tables */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--spacing-sm) 0; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+  .data-table thead { background: var(--bg-secondary); border-bottom: 2px solid var(--border); }
+  .data-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8125rem; }
+  .data-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--bg-secondary); }
+  .data-table td:first-child { font-weight: 600; color: var(--text-primary); }
+
+  .yes { color: var(--accent); font-weight: 700; }
+  .no  { color: #cf222e; font-weight: 700; }
+  .partial { color: #9a6700; font-weight: 600; }
+
+  /* Callouts */
+  .callout { background: rgba(35,134,54,.06); border: 1px solid rgba(35,134,54,.25); border-left: 4px solid var(--accent); border-radius: var(--radius-md); padding: var(--spacing-sm) var(--spacing-md); margin: var(--spacing-sm) 0; }
+  .callout p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+  .callout strong { color: var(--text-primary); }
+  .callout a { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+  .callout-warning { background: rgba(154,103,0,.05); border: 1px solid rgba(154,103,0,.25); border-left: 4px solid #9a6700; border-radius: var(--radius-md); padding: var(--spacing-sm) var(--spacing-md); margin: var(--spacing-sm) 0; }
+  .callout-warning p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+  .callout-warning strong { color: var(--text-primary); }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+
+  .faq-question { display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm) var(--spacing-md); cursor: pointer; background: var(--bg-primary); font-weight: 600; font-size: 0.9rem; color: var(--text-primary); user-select: none; list-style: none; gap: var(--spacing-sm); }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::after { content: '+'; font-size: 1.25rem; font-weight: 300; flex-shrink: 0; color: var(--text-secondary); }
+  details[open] > .faq-question { background: var(--bg-secondary); }
+  details[open] .faq-question::after { content: '−'; }
+
+  .faq-answer { padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; background: var(--bg-primary); border-top: 1px solid var(--border); }
+  .faq-answer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+  /* CTA */
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-xl); text-align: center; }
+  .cta-block h2 { font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.7rem 1.75rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9375rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .usecase-grid { grid-template-columns: 1fr; }
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+
+    .stat-row { gap: 0.5rem; }
+    .data-table { font-size: 0.8rem; }
+    .data-table th, .data-table td { padding: 0.5rem 0.6rem; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+    .step { flex-direction: column; gap: var(--spacing-xs); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer="" src="/js/layout.js"></script>
+</head>
+<body>
+<header>
+<div class="nav-container">
+<a class="logo" href="/">nolilab</a>
+<div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+<a class="nav-link" href="/#shop">Shop</a>
+<a class="nav-link" href="/specifications/">Specs</a>
+<a class="nav-link" href="/software/">Software</a>
+<a class="nav-link" href="/lorawan/">LoRaWAN</a>
+<a class="nav-link" href="/#faq">FAQ</a>
+<a class="nav-link" href="/blog/">Blog</a>
+<a class="nav-link" href="/firmware/">Firmware</a>
+<a class="nav-link" href="/setup-guides/">Setup</a>
+<a class="nav-link" href="/gps/">GPS &amp; LoRa</a>
+<a class="nav-link" href="/contact/">Contact</a>
+</div>
+<div class="language-selector" style="flex-shrink: 0; position: relative;">
+<button aria-label="Select language" class="language-btn">
+<svg aria-hidden="true" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+<span class="current-lang">EN</span>
+<svg aria-hidden="true" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div class="language-dropdown">
+<a class="language-option" data-lang="en" href="#"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+<a class="language-option" data-lang="ru" href="#"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+<a class="language-option" data-lang="ja" href="#"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+<a class="language-option" data-lang="zh" href="#"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+<a class="language-option" data-lang="fr" href="#"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+<a class="language-option" data-lang="es" href="#"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+</div>
+</div>
+<button aria-label="Toggle menu" class="mobile-menu-toggle">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+<main>
+<!-- Hero -->
+<div class="page-hero">
+<div class="container">
+<p class="eyebrow">Loko Трекер GPS — Поиск и спасение</p>
+<h1>Автономный трекер GPS для поиска и спасения</h1>
+<p class="lead">Поисково-спасательные операции происходят именно там, где заканчивается инфраструктура. Вышки сотовой связи, Wi-Fi и подключение к Интернету недоступны в самые важные моменты. Loko GPS Tracker использует радиосвязь LoRa дальнего действия для определения местоположения команды в режиме реального времени в более чем 20 km в дикой местности — без сотовой связи, без Интернета, без подписки и без единой точки отказа.</p>
+<div class="stat-row">
+<span class="stat-pill"><span class="dot"></span>20+ радиодиапазонов km</span>
+<span class="stat-pill"><span class="dot"></span>1 год батареи</span>
+<span class="stat-pill"><span class="dot"></span>14 г на трекер</span>
+<span class="stat-pill"><span class="dot"></span>Нет SIM-карты</span>
+<span class="stat-pill"><span class="dot"></span>Нет подписки</span>
+<span class="stat-pill"><span class="dot"></span>Оффлайн карты</span>
+<span class="stat-pill"><span class="dot"></span>Отслеживание нескольких единиц</span>
+</div>
+</div>
+</div>
+<!-- The Problem -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Проблема</p>
+<h2>Почему операции SAR не могут полагаться на сотовую связь GPS</h2>
+<p>Фундаментальная задача поиска и спасения носит оперативный характер: районы, где теряются люди, — это те же районы, где сотовая инфраструктура не существует. Любой инструмент, зависящий от мобильной сети, становится ненадежным или совершенно бесполезным в тот момент, когда команда попадает в зону поиска.</p>
+<p>Критические сбои, с которыми сталкиваются команды SAR при работе с трекерами, зависящими от сотовой связи:</p>
+<ul>
+<li>Отслеживание в реальном времени перестает обновляться, как только член команды покидает зону покрытия сотовой связи.</li>
+<li>Базовый лагерь теряет видимость полевых команд на отдаленной местности</li>
+<li>Отслеживание объекта невозможно в местах без сигнала сети.</li>
+<li>Срок службы батареи, измеряемый днями, а не неделями, ограничивает продолжительность развертывания.</li>
+<li>Ежемесячная стоимость подписки является барьером для волонтерских организаций SAR.</li>
+<li>Сбои в работе облачных серверов создают единые точки отказа во время активных операций.</li>
+<li>Плата за роуминг быстро накапливается во время международных поисково-спасательных операций.</li>
+</ul>
+<p><strong>Трекер GPS для поиска и спасения должен работать везде и всегда — вне зависимости от какой-либо сети, которая может выйти из строя.</strong></p>
+</div>
+</div>
+<!-- Use Cases -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Варианты оперативного использования</p>
+<h2>Как команды SAR используют Loko в полевых условиях</h2>
+<p>Loko обеспечивает общую ситуационную осведомленность на протяжении всей операции без какой-либо инфраструктуры. Позиция каждого члена команды видна одновременно в базовом лагере и на поле.</p>
+<div class="usecase-grid">
+<div class="usecase-card">
+<div class="icon">🏔️</div>
+<h3>Горное и альпийское спасение</h3>
+<p>Отслеживайте спасательные команды через горные хребты, в оврагах и под деревьями, где сотовая связь никогда не достигает. Сигналы LoRa проникают через местность, блокирующую сотовую радиосвязь, и поддерживают связь на высоте.</p>
+</div>
+<div class="usecase-card">
+<div class="icon">🌲</div>
+<h3>Особый район дикой природы и лесов</h3>
+<p>Густой лес убивает сигнал сотовой связи на расстоянии нескольких метров. Модуляция расширенного спектра LoRa проникает в растительность гораздо лучше, чем GSM, обеспечивая связь между командами через большие поисковые сети в лесистой местности.</p>
+</div>
+<div class="usecase-card">
+<div class="icon">🎯</div>
+<h3>Отслеживание и сопровождение субъектов</h3>
+<p>Прикрепите Loko Air к обнаруженному объекту. Отслеживайте движение в режиме реального времени на общей автономной карте — это полезно, когда субъектам требуется сопровождение на большие расстояния в безопасное место.</p>
+</div>
+<div class="usecase-card">
+<div class="icon">🏕️</div>
+<h3>Координация базового лагеря</h3>
+<p>Координатор базового лагеря держит Loko Ground и контролирует позиции всех полевых команд с помощью приложения Loko. План спутниковой передачи данных не требуется. Интернет в лагере не нужен. Полная оперативная картина на одном экране.</p>
+</div>
+<div class="usecase-card">
+<div class="icon">🚁</div>
+<h3>Координация авиации и дронов</h3>
+<p>Установите Loko Air на вертолет или дрон, чтобы поделиться своим местоположением с наземными командами. Все полевые подразделения и авиационные средства отображаются одновременно на одной автономной карте, что улучшает координацию на больших территориях поиска.</p>
+</div>
+<div class="usecase-card">
+<div class="icon">🌊</div>
+<h3>Береговое и водное спасение</h3>
+<p>Сигнал LoRa исключительно хорошо распространяется по открытой воде. Отслеживайте спасательные катера, береговые команды и устройства swimm одновременно с помощью comm и позиции на берегу — морское соединение для передачи данных не требуется.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- How It Works -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Как это работает</p>
+<h2>Полностью автономный. Полностью в режиме реального времени.</h2>
+<p>Loko устраняет любую сетевую зависимость в цепочке отслеживания. Определение местоположения GPS, радиопередача, прием и отображение карты — все это работает без сигнала сотовой связи, подключения Wi-Fi или доступа к Интернету на любом этапе.</p>
+<div class="steps">
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-body">
+<h3>Loko Воздушная блокировка положения GPS со спутников</h3>
+<p>Каждый член команды имеет при себе трекер Loko Air. Он одновременно принимает сигналы от созвездий GPS, GLONASS, Galileo и BeiDou, определяя точное положение без какого-либо подключения к сети. Спутники GPS работают независимо от наземной инфраструктуры.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-body">
+<h3>Передача местоположения по радио LoRa — точка-точка</h3>
+<p>Loko Air передает координаты GPS с помощью радиосвязи LoRa (дальнего действия) — модуляции с расширенным спектром, которая обеспечивает дальность действия km более 20 на открытой местности. Сигнал передается напрямую по воздуху на землю Loko. Никакие башни, шлюзы или серверы не задействованы ни на каком этапе.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-body">
+<h3>Loko Ground принимает все трекеры одновременно</h3>
+<p>Координатор базы или руководитель группы имеет с собой Loko Ground — портативный приемник, который отслеживает каждое устройство Loko Air в радиусе действия радиосвязи. Развертывание его на возвышенности (коньке, крыше автомобиля или дроне) значительно расширяет эффективный охват зоны поиска.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-num">4</div>
+<div class="step-body">
+<h3>Текущие позиции на офлайн-карте — интернет не требуется</h3>
+<p>Loko Заземляется со смартфоном через Bluetooth. Бесплатное приложение Loko (iOS и Android) отображает все позиции команд в режиме реального времени на предварительно загруженной автономной топографической карте. История треков, расстояние и последние известные позиции доступны без подключения к сети.</p>
+</div>
+</div>
+</div>
+<div class="callout">
+<p><strong>Полевой совет:</strong> Разместите Loko Ground на вершине холма или крыше автомобиля, чтобы обеспечить максимальную радиовидимость в зоне поиска. Каждый метр высоты приемника напрямую увеличивает рабочий диапазон. Узнайте больше о радиораспространении LoRa на <a href="/gps/">Страница технологий GPS и LoRa</a>.</p>
+</div>
+</div>
+</div>
+<!-- Specifications -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Технические характеристики</p>
+<h2>Технические возможности для поисково-спасательных операций</h2>
+<p>Все характеристики, имеющие значение для профессионального поисково-спасательного использования.</p>
+<table class="data-table">
+<thead>
+<tr>
+<th>Возможность</th>
+<th>Спецификация Loko</th>
+<th>Актуальность поиска и спасания</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Радиодиапазон</td>
+<td>20+ km (открытая/возвышенная местность)</td>
+<td>Охватывает большие поисковые сетки с помощью одного базового приемника.</td>
+</tr>
+<tr>
+<td>Сетевая зависимость</td>
+<td>Нет — радио LoRa P2P</td>
+<td>Работает на местности с нулевым покрытием без ухудшения качества</td>
+</tr>
+<tr>
+<td>Срок службы батареи</td>
+<td>До 1 года</td>
+<td>Многодневная работа без подзарядки</td>
+</tr>
+<tr>
+<td>Вес трекера</td>
+<td>14 г</td>
+<td>Незначительное дополнение к снаряжению любого члена команды.</td>
+</tr>
+<tr>
+<td>Созвездия ГНСС</td>
+<td>GPS, GLONASS, Galileo, BeiDou</td>
+<td>Более быстрое определение местоположения и более высокая точность в любом регионе.</td>
+</tr>
+<tr>
+<td>Одновременные трекеры</td>
+<td>Несколько на приемник</td>
+<td>Полная видимость команды с одного наземного устройства Loko</td>
+</tr>
+<tr>
+<td>Поддержка офлайн-карт</td>
+<td>Встроенный в приложение Loko</td>
+<td>Отображение топографической карты без возможности подключения</td>
+</tr>
+<tr>
+<td>Требуется подписка</td>
+<td>Никто</td>
+<td>Никаких регулярных затрат для волонтерских организаций.</td>
+</tr>
+<tr>
+<td>Зависимость от сервера</td>
+<td>Никто</td>
+<td>Никакие сбои в облаке не могут вывести систему из строя во время работы.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout">
+<p>Полные радиочастотные параметры, конфигурация GNSS и настройки LoRa документированы на <a href="/specifications/">Страница технических характеристик Loko</a>.</p>
+</div>
+</div>
+</div>
+<!-- Comparison -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Сравнение</p>
+<h2>Loko по сравнению с другими вариантами отслеживания SAR</h2>
+<p>В поиске и спасании используется несколько технологий. Понимание различий помогает командам выбрать правильный инструмент — многие используют более одного.</p>
+<table class="data-table">
+<thead>
+<tr>
+<th>Особенность</th>
+<th>Loko (радиостанция LoRa)</th>
+<th>Сотовый трекер GPS</th>
+<th>Спутниковый трекер/ПЛБ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Работает без сотовой связи</td>
+<td class="yes">✅ Всегда</td>
+<td class="no">❌ Никогда</td>
+<td class="yes">✅ Всегда</td>
+</tr>
+<tr>
+<td>Просмотр карты команды в реальном времени</td>
+<td class="yes">✅ Да</td>
+<td class="partial">⚠️ Где есть покрытие</td>
+<td class="partial">⚠️ С планом подписки</td>
+</tr>
+<tr>
+<td>Требуется подписка</td>
+<td class="yes">✅ Нет</td>
+<td class="no">❌ Ежемесячно</td>
+<td class="no">❌ Ежемесячно (15–65 долларов США)</td>
+</tr>
+<tr>
+<td>Срок службы батареи</td>
+<td>До 1 года</td>
+<td>1–5 дней</td>
+<td>До 1 года (зависит от режима)</td>
+</tr>
+<tr>
+<td>Частота обновления</td>
+<td>Настраиваемый (секунды)</td>
+<td>Практически в режиме реального времени (с покрытием)</td>
+<td>Типичные интервалы 2–10 минут</td>
+</tr>
+<tr>
+<td>Несколько трекеров на одном экране</td>
+<td class="yes">✅ Да, офлайн</td>
+<td class="partial">⚠️ Через облачное приложение.</td>
+<td class="partial">⚠️ Через облачное приложение.</td>
+</tr>
+<tr>
+<td>Полностью автономная работа</td>
+<td class="yes">✅ Да</td>
+<td class="no">❌ Нет</td>
+<td class="partial">⚠️ Отправляет через спутник, приложению нужны данные.</td>
+</tr>
+<tr>
+<td>Стоимость оборудования за единицу</td>
+<td>Низкий</td>
+<td>Низкий–средний</td>
+<td>Высокий (300–700$+)</td>
+</tr>
+<tr>
+<td>Отсутствие единой точки отказа в облаке</td>
+<td class="yes">✅ Нет</td>
+<td class="no">❌ Зависимость от облака</td>
+<td class="no">❌ Зависит от спутниковой сети</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-warning">
+<p><strong>Примечание:</strong> Loko — это командный инструмент ситуационной осведомленности, а не персональный маяк бедствия. Для экстренного оповещения спасательных служб подходящим устройством остается PLB или спутниковый communicator. Loko и PLB выполняют разные функции, и их лучше всего использовать вместе: Loko координирует работу команды, PLB требует помощи извне.</p>
+</div>
+</div>
+</div>
+<!-- Who It Is For -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Для кого это</p>
+<h2>Организации SAR, которые получают выгоду от Loko</h2>
+<p>Любая команда, работающая в условиях отсутствия или ненадежности сотовой связи, может улучшить координацию и безопасность с помощью Loko:</p>
+<ul>
+<li><strong>Добровольческие горноспасательные отряды</strong> работа с ограниченным бюджетом без возможности подписки</li>
+<li><strong>Подразделения SAR национального парка</strong> охват обширных территорий дикой природы без мобильной инфраструктуры</li>
+<li><strong>Пещерные спасательные команды</strong> требующее отслеживания в средах, которые блокируют всю сотовую радиосвязь</li>
+<li><strong>Лавинные и лыжные патрульные группы</strong> координация работы на нескольких склонах и хребтах</li>
+<li><strong>Морские и прибрежные спасательные команды</strong> использование исключительного диапазона LoRa для открытой воды</li>
+<li><strong>Организации реагирования на стихийные бедствия</strong> работа в районах, где инфраструктура была повреждена или разрушена</li>
+<li><strong>Руководители экспедиции</strong> проведение многодневных походов по отдаленной местности, требующих ответственности команды</li>
+<li><strong>Организаторы трейловых забегов и ультрамарафонов</strong> отслеживание участников крупных автономных курсов</li>
+</ul>
+</div>
+</div>
+<!-- Deployment Tips -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Полевое развертывание</p>
+<h2>Увеличение дальности действия на местности SAR</h2>
+<p>Радио LoRa подчиняется той же физике распространения, что и все радиосигналы. Понимание этих принципов помогает координаторам SAR максимизировать оперативный охват:</p>
+<ul>
+<li><strong>Высота - это дальность.</strong> Каждый метр высоты Loko Ground расширяет радиогоризонты. Приемник, установленный на вершине холма или на крыше автомобиля, будет охватывать значительно большую площадь поиска, чем тот, который находится на высоте пояса в долине.</li>
+<li><strong>Линии хребтов являются естественными препятствиями.</strong> Члены команды на противоположной стороне хребта от Loko Ground будут иметь уменьшенную дальность действия. Планируйте положения приемников так, чтобы обеспечить прямую видимость предполагаемых зон поиска.</li>
+<li><strong>Лес уменьшает дальность действия, а не устраняет его.</strong> Модуляция расширенного спектра LoRa проникает в растительность гораздо лучше, чем GSM. Ожидайте 2–5 km в густом лесу по сравнению с 20+ km на открытой местности, что по-прежнему намного превышает производительность сотового трекера в той же среде.</li>
+<li><strong>Несколько приемников расширяют зону покрытия.</strong> Разверните дополнительные наземные подразделения Loko на передовых оперативных базах, чтобы охватить большую общую зону поиска с разных точек обзора.</li>
+<li><strong>Предварительно загрузите карты перед отъездом.</strong> Загрузите соответствующую топографическую область в приложение Loko, не отключаясь от Wi-Fi. В полевых условиях приложение работает полностью без подключения к сети.</li>
+</ul>
+<div class="callout">
+<p>Для более глубокого понимания распространения сигнала LoRa и переменных радиодиапазона прочтите <a href="/gps/">Руководство по технологиям GPS и LoRa</a>.</p>
+</div>
+</div>
+</div>
+<!-- FAQ -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Часто задаваемые вопросы</p>
+<h2>Вопросы, которые задают команды поисково-спасательных служб об автономном отслеживании GPS</h2>
+<div class="faq-list">
+<details class="faq-item">
+<summary class="faq-question">Какой трекер GPS работает без сотовой связи для поиска и спасения?</summary>
+<p class="faq-answer">Loko GPS Tracker использует радиосвязь LoRa для передачи данных о местоположении в реальном времени между членами команды и координатором базы — без сотовой связи, без Интернета и без подписки. Он обеспечивает дальность действия km более 20 на открытой местности и работает в горах, лесах и в любой удаленной среде, где не действуют сотовые сети.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Как поисково-спасательные команды отслеживают людей в отдаленных районах?</summary>
+<p class="faq-answer">Эффективное отслеживание SAR в отдаленных районах требует радиосистем GPS, которые работают независимо от сотовой инфраструктуры. Loko использует радиомодуль LoRa P2P — трекер каждого члена команды передает координаты GPS непосредственно на comm и приемник через 20+ km, без каких-либо вышек, шлюзов или подключения к Интернету.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Может ли GPS работать без Интернета в чрезвычайной ситуации?</summary>
+<p class="faq-answer">Да. Спутники GPS передают с орбиты сигналы, которые любой приемник может прочитать без подключения к сети — GPS никогда не требовался Интернет. Loko использует эту автономную позицию GPS и передает ее через радио LoRa на приемник, доставляя данные о местоположении в реальном времени без подключения к Интернету на любом этапе процесса.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">На каком расстоянии автономный трекер GPS работает для поиска и спасения?</summary>
+<p class="faq-answer">Loko достигает 20+ km на открытой или возвышенной местности. В густом лесу или глубоких долинах практический диапазон составляет 2–5 km. Размещение приемника Loko Ground на возвышенности значительно расширяет зону покрытия. Для очень больших зон поиска можно разместить несколько приемников в разных точках обзора, чтобы расширить общий охват.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Чем Loko отличается от персонального радиомаяка для поисково-спасательных операций?</summary>
+<p class="faq-answer">PLB — это односторонний аварийный передатчик, который отправляет сигнал бедствия в спутниковую сеть и запускает спасательную операцию. Loko — это инструмент непрерывного информирования о ситуации, который отображает в реальном времени положение всех членов команды на протяжении всей операции — до, во время и после чрезвычайной ситуации. PLB взывают о помощи; Loko координирует работу группы реагирования. Они служат разным целям и comm используются только вместе.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Нужна ли подписка на трекер SAR GPS?</summary>
+<p class="faq-answer">Loko не требует абонентской платы. Здесь нет ни SIM-карты, ни облачного сервера, ни ежемесячной платы — никогда. Это особенно важно для волонтерских организаций SAR, которые не могут покрывать периодические расходы на нескольких следопытов и членов команды.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Сколько членов команды можно отслеживать одновременно с помощью Loko?</summary>
+<p class="faq-answer">Loko поддерживает несколько трекеров Loko Air, одновременно подключенных к одному наземному приемнику Loko. Вся полевая группа отображается на одной карте, что позволяет базовому лагерю поддерживать полную позиционную осведомленность всего персонала в режиме реального времени.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Работает ли Loko для операций SAR на международном уровне?</summary>
+<p class="faq-answer">Да. Loko и mm подключаются через радиомодуль LoRa, а не через сотовую сеть, поэтому нет платы за роуминг, ограничений оператора связи и требований к SIM-карте. Он работает везде, где видны спутники GPS, то есть повсюду на Земле.</p>
+</details>
+</div>
+</div>
+</div>
+<!-- Getting Started -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Начиная</p>
+<h2>Что нужно команде SAR для развертывания Loko</h2>
+<p>Система состоит из двух компонентов. Никакой настройки сервера, создания учетной записи и подготовки сети.</p>
+<ul>
+<li><strong>Loko Воздух</strong> — по одному на каждого члена команды или отслеживаемый объект. Крепится к рюкзаку, ремню безопасности, ошейнику или креплению для снаряжения. Несколько устройств одновременно вещают на один приемник.</li>
+<li><strong>Loko Заземление</strong> — по одному на каждую позицию comm и базовый лагерь. Принимает все трекеры в радиусе действия радиосвязи и подключается к смартфону через Bluetooth.</li>
+</ul>
+<p>Перед операцией: загрузите фрагменты автономной карты для области поиска в приложении Loko, не отключаясь от Wi-Fi. В полевых условиях приложение работает полностью без подключения к сети.</p>
+<p>Инструкции по настройке находятся в <a href="/setup-guides/" style="color: var(--accent); font-weight: 500;">Руководства по установке</a>. Полные характеристики оборудования приведены на странице <a href="/specifications/" style="color: var(--accent); font-weight: 500;">Страница технических характеристик</a>. Распространение LoRa объясняется на <a href="/gps/" style="color: var(--accent); font-weight: 500;">Страница технологий GPS и LoRa</a>.</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<h2>Отслеживание команды в реальном времени. Нулевая инфраструктура.</h2>
+<p>Loko позволяет каждому члену вашей поисково-спасательной команды быть видимым на карте — в любой местности, в любой стране, без зависимости от сети и без подписки, которую нужно поддерживать.</p>
+<a class="cta-btn" href="/#shop">Купить Loko →</a>
+</div>
+</div>
+</div>
+</main>
+<div id="site-footer"></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
