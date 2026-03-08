@@ -40,6 +40,14 @@
       </form>
       <p class="footer-subscribe-msg" id="footer-subscribe-msg" aria-live="polite"></p>
     </div>
+    <nav class="footer-languages" aria-label="Language versions">
+      <a href="/" class="footer-lang-link" hreflang="en" lang="en">English</a>
+      <a href="/ja/" class="footer-lang-link" hreflang="ja" lang="ja">日本語</a>
+      <a href="/es/" class="footer-lang-link" hreflang="es" lang="es">Español</a>
+      <a href="/ru/" class="footer-lang-link" hreflang="ru" lang="ru">Русский</a>
+      <a href="/zh/" class="footer-lang-link" hreflang="zh" lang="zh">中文</a>
+      <a href="/fr/" class="footer-lang-link" hreflang="fr" lang="fr">Français</a>
+    </nav>
     <div class="footer-copyright">© 2025 nolilab. All rights reserved.</div>
   </div>
   <script>
@@ -291,5 +299,21 @@
         margin-top: 0;
       }
     }
+      .footer-languages {
+      flex: 0 0 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.5rem;
+      padding-top: var(--spacing-sm, 1rem);
+    }
+    .footer-lang-link {
+      color: var(--text-secondary, #57606a);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .footer-lang-link:hover { color: var(--text-primary, #24292e); }
   </style>
 </footer>
