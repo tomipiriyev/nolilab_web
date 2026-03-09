@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>How GPS Works Without Internet — Explained Simply | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="GPS satellites don't need internet — they broadcast signals directly to receivers. Learn how GPS works offline and why most trackers still need cellular." name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="How GPS Works Without Internet — Explained Simply | nolilab" property="og:title"/>
+<meta content="GPS satellites don't need internet — they broadcast signals directly to receivers. Learn how GPS works offline and why most trackers still need cellular." property="og:description"/>
+<meta content="https://www.nolilab.com/how-gps-works/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="How GPS Works Without Internet" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="How GPS Works Without Internet — Explained Simply | nolilab" name="twitter:title"/>
+<meta content="GPS satellites don't need internet — they broadcast signals directly to receivers. Learn how GPS works offline and why most trackers still need cellular." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="how GPS works, GPS without internet, GPS offline, GPS satellites explained, how GPS trackers work" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/how-gps-works/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/how-gps-works/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/how-gps-works/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does GPS require internet to work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. GPS satellites broadcast signals continuously using one-way radio transmission — the satellites do not receive anything from your device, and no internet is involved. Your GPS receiver calculates its position purely from timing differences in signals received from multiple satellites. However, most commercial GPS trackers still need internet or cellular to transmit that location to your phone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many GPS satellites are there?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The US GPS constellation has 31 operational satellites as of recent counts. At any given location on Earth's surface, you can typically see 6–12 satellites simultaneously. GPS devices need at least 4 satellites for a 3D position fix (latitude, longitude, altitude). Modern trackers like Loko use multiple constellations — GPS, GLONASS (Russia, 24 sats), and Galileo (EU, 30 sats) — giving access to 60+ satellites simultaneously for faster, more accurate fixes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do most GPS trackers need cellular if GPS works offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPS tells the tracker where it is. But how does that location get to your phone? Most trackers use a SIM card and cellular data to send coordinates to a cloud server, which your phone then queries over the internet. The GPS itself is offline, but the transmission layer is cellular. Loko replaces cellular with LoRa radio — a direct radio link that also requires no internet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between GPS, GLONASS, and Galileo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPS is the US satellite navigation system (31 satellites). GLONASS is Russia's equivalent (24 satellites). Galileo is the European Union's system (30 operational satellites as of 2024). Each system uses different frequencies and orbital planes. Using all three simultaneously — as Loko does — dramatically increases the number of visible satellites, improving position accuracy, reducing time to first fix, and maintaining tracking in environments where one constellation might have poor geometry."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Loko work completely offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko's signal chain involves no internet at any step: GPS/GLONASS/Galileo satellites broadcast radio signals → Loko Air's receiver calculates coordinates → Loko Air transmits coordinates over LoRa radio (a direct radio link, like a walkie-talkie) → Loko Ground receives the LoRa signal → Loko Ground sends coordinates to your phone via Bluetooth → Loko app displays position on an offline map. From satellite to screen, everything is local radio."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "How GPS Works Without Internet", "item": "https://www.nolilab.com/how-gps-works/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .chain-step { display: flex; align-items: flex-start; gap: var(--spacing-sm); padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); }
+  .chain-step:last-child { border-bottom: none; }
+  .step-num { flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; font-family: var(--font-mono); }
+  .step-content h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+  .step-content p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">Shop</a>
+      <a href="/specifications/" class="nav-link">Specs</a>
+      <a href="/software/" class="nav-link">Software</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">Blog</a>
+      <a href="/firmware/" class="nav-link">Firmware</a>
+      <a href="/setup-guides/" class="nav-link">Setup</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">Contact</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="Select language">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>How GPS Works Without Internet or Cell Service</h1>
+    <p class="subtitle">GPS Satellites Know Nothing About the Internet — And That Is the Point</p>
+    <p>There is a widespread misconception that GPS requires internet or cell service to work. It does not. GPS satellites were designed and launched decades before the smartphone era, and they operate on a completely separate radio system.</p>
+    <p>The confusion arises because <strong>most commercial GPS trackers do need internet to get your location to your phone</strong> — but that is a choice by the manufacturer, not a requirement of GPS itself. Understanding this distinction is the key to understanding why Loko GPS Tracker works perfectly with no cell coverage, no Wi-Fi, and no data plan.</p>
+  </div>
+</div>
+
+<!-- GPS satellites explained simply -->
+<div class="content-block">
+  <div class="container">
+    <h2>GPS Satellites: Explained Simply</h2>
+    <p>The Global Positioning System (GPS) is a constellation of satellites operated by the United States Space Force. Here is how it works at the most fundamental level:</p>
+    <ul>
+      <li><strong>31 satellites orbit Earth</strong> at an altitude of about 20,200 km, in medium Earth orbit</li>
+      <li>Each satellite carries an extremely precise atomic clock and <strong>continuously broadcasts a radio signal</strong> that includes the satellite's ID, its current position in orbit, and a precise timestamp</li>
+      <li>These signals travel at the speed of light toward Earth's surface</li>
+      <li>A GPS receiver on the ground receives signals from multiple satellites simultaneously</li>
+      <li>By measuring the <strong>time it took for each signal to arrive</strong>, the receiver calculates the distance to each satellite</li>
+      <li>With distances to at least 4 satellites, the receiver can calculate its exact 3D position (latitude, longitude, altitude) through a process called trilateration</li>
+    </ul>
+    <p>The critical point: <strong>this entire process is one-way</strong>. The satellites broadcast. Your receiver receives. Your receiver never transmits anything back to the satellites. The satellites have no idea your device exists. There is no internet connection involved at any step.</p>
+    <p>GPS works the same way whether you are in a city centre or on a remote mountain. The satellites do not care. They are just broadcasting.</p>
+  </div>
+</div>
+
+<!-- Why GPS itself needs no internet -->
+<div class="content-block">
+  <div class="container">
+    <h2>Why GPS Itself Needs No Internet</h2>
+    <p>GPS is fundamentally a passive, receive-only system for end users. The signal chain from satellites to your receiver involves only radio waves traveling through the atmosphere. No network connection, no server, no data plan.</p>
+    <p>Your car's built-in GPS navigation has worked offline for decades. Dedicated hiking GPS units like Garmin eTrex devices have always worked without cellular. Aviation navigation systems calculate position with no internet connection. All of these use the same GPS satellite signals — no internet required.</p>
+    <p>The GPS standard even deliberately avoids encryption or access control on the civilian signal band (L1, 1575.42 MHz) — it is intentionally designed to be receivable by anyone with a compatible receiver, anywhere on Earth, for free.</p>
+    <p>A GPS receiver chip costs a few dollars. It draws a modest amount of power. And it calculates precise position coordinates from nothing but radio waves from space — no subscription, no connection, no cloud.</p>
+  </div>
+</div>
+
+<!-- What DOES need internet -->
+<div class="content-block">
+  <div class="container">
+    <h2>What DOES Need Internet: Most Commercial GPS Trackers</h2>
+    <p>So if GPS itself is offline, why do most GPS trackers need a cellular data plan?</p>
+    <p>The answer lies in the second part of the problem: <strong>getting your location from the tracker to your phone</strong>.</p>
+    <p>GPS tells the tracker where it is. But a tracker sitting in a field, on a dog's collar, or on a drone is physically separate from you. Someone needs to transmit those GPS coordinates to your device. That transmission is where most manufacturers introduce the internet dependency.</p>
+    <p>The typical architecture of a cellular GPS tracker:</p>
+    <ol>
+      <li>GPS chip calculates coordinates (offline, no internet needed)</li>
+      <li>An embedded SIM card connects to a cellular network (requires a data plan)</li>
+      <li>Coordinates are uploaded to the manufacturer's cloud server (requires internet)</li>
+      <li>Your phone app queries the cloud server over the internet (requires internet)</li>
+      <li>The app displays the location on a map</li>
+    </ol>
+    <p>Steps 2, 3, and 4 all require internet infrastructure. Remove cellular coverage and the entire chain breaks after step 1. That is why cellular GPS trackers fail in remote areas — not because GPS stopped working, but because the transmission layer lost connectivity.</p>
+    <p><strong>This is an architectural choice, not a technical necessity.</strong> There is another way to transmit GPS coordinates without the internet.</p>
+  </div>
+</div>
+
+<!-- How LoRa replaces cellular -->
+<div class="content-block">
+  <div class="container">
+    <h2>How LoRa Replaces Cellular for Transmitting Coordinates</h2>
+    <p>LoRa (Long Range) radio is an alternative transmission technology that can carry GPS coordinate data over long distances without any cellular infrastructure.</p>
+    <p>LoRa uses unlicensed ISM radio bands (868 MHz in Europe, 915 MHz in North America) to transmit small data packets — including GPS coordinates — directly from one device to another. It is point-to-point radio, similar in concept to a walkie-talkie, but with far greater range and far lower power consumption.</p>
+    <p>A LoRa radio transmitting at 14 dBm can reliably send a GPS coordinate packet across 15–20km of open terrain. The receiver does not need to be connected to the internet, a cellular tower, or any infrastructure. It just needs to be within radio range.</p>
+    <p>This is exactly what Loko does. The GPS coordinates calculated by the Loko Air tracker are transmitted over LoRa to the Loko Ground receiver in your hand — bypassing the internet entirely. The transmission layer is as offline as the GPS reception layer.</p>
+  </div>
+</div>
+
+<!-- The full offline chain -->
+<div class="content-block">
+  <div class="container">
+    <h2>The Full Offline Chain: Satellite to Screen</h2>
+    <p>Here is the complete signal path in the Loko system — note that every step is local radio with no internet involvement:</p>
+
+    <div class="chain-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>GPS / GLONASS / Galileo Satellites</h3>
+        <p>31+ satellites broadcast radio timing signals from 20,000 km altitude. No internet. One-way broadcast, free to anyone.</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Loko Air GPS Receiver</h3>
+        <p>The under-15g tracker receives signals from multiple satellite constellations and calculates precise coordinates. All local computation, no network needed.</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>LoRa Radio Transmission</h3>
+        <p>Loko Air transmits the coordinate packet via LoRa radio. Direct point-to-point transmission up to 20km. No SIM card, no cellular network, no internet.</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Loko Ground Receiver</h3>
+        <p>Receives the LoRa packet, decodes the coordinates. A pocket-sized device you carry. Still no internet.</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>Bluetooth to Your Phone</h3>
+        <p>Loko Ground sends the coordinates to your smartphone via Bluetooth. Local short-range radio, no internet required.</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h3>Loko App — Offline Map</h3>
+        <p>The Loko app displays the location on an offline map pre-downloaded to your device. Real-time position, zero internet. From satellite to your screen, entirely local.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="content-block">
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <h3>Does GPS require internet to work?</h3>
+      <p>No. GPS satellites broadcast signals continuously using one-way radio transmission — the satellites do not receive anything from your device, and no internet is involved. Your GPS receiver calculates its position purely from timing differences in signals received from multiple satellites. However, most commercial GPS trackers still need internet or cellular to transmit that location to your phone.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How many GPS satellites are there?</h3>
+      <p>The US GPS constellation has 31 operational satellites as of recent counts. At any given location on Earth's surface, you can typically see 6–12 satellites simultaneously. GPS devices need at least 4 satellites for a 3D position fix (latitude, longitude, altitude). Modern trackers like Loko use multiple constellations — GPS, GLONASS (Russia, 24 sats), and Galileo (EU, 30 sats) — giving access to 60+ satellites simultaneously for faster, more accurate fixes.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Why do most GPS trackers need cellular if GPS works offline?</h3>
+      <p>GPS tells the tracker where it is. But how does that location get to your phone? Most trackers use a SIM card and cellular data to send coordinates to a cloud server, which your phone then queries over the internet. The GPS itself is offline, but the transmission layer is cellular. Loko replaces cellular with LoRa radio — a direct radio link that also requires no internet.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What is the difference between GPS, GLONASS, and Galileo?</h3>
+      <p>GPS is the US satellite navigation system (31 satellites). GLONASS is Russia's equivalent (24 satellites). Galileo is the European Union's system (30 operational satellites as of 2024). Each system uses different frequencies and orbital planes. Using all three simultaneously — as Loko does — dramatically increases the number of visible satellites, improving position accuracy, reducing time to first fix, and maintaining tracking in environments where one constellation might have poor geometry.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How does Loko work completely offline?</h3>
+      <p>Loko's signal chain involves no internet at any step: GPS/GLONASS/Galileo satellites broadcast radio signals → Loko Air's receiver calculates coordinates → Loko Air transmits coordinates over LoRa radio (a direct radio link, like a walkie-talkie) → Loko Ground receives the LoRa signal → Loko Ground sends coordinates to your phone via Bluetooth → Loko app displays position on an offline map. From satellite to screen, everything is local radio.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+  <div class="container">
+    <div class="cta-block">
+      <p>GPS has always been offline. Loko makes sure the rest of the tracking chain is too — from satellite to your screen, zero internet required.</p>
+      <p><strong>Loko GPS Tracker: the complete offline tracking system.</strong></p>
+      <p>Explore the full product details at <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
+      <br/>
+      <a href="/#shop" class="cta-btn">Shop Loko &rarr;</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div id="site-footer"></div>
+<script defer src="/js/analytics.js"></script>
+</body>
+</html>
