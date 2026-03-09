@@ -636,6 +636,54 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is LoRa modulation and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa uses chirp spread spectrum (CSS) modulation, encoding data by continuously varying the frequency of a signal (chirps). This makes signals highly resistant to noise and interference. The receiver can recover the signal even when it's 20dB below the noise floor, enabling the exceptional range and penetration that LoRa is known for."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a spreading factor in LoRa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The spreading factor (SF) in LoRa controls the trade-off between range and data rate. SF7 offers the highest data rate (~5.5kbps) at shorter ranges. SF12 provides maximum range at the lowest data rate (~250bps). Higher spreading factors also improve receiver sensitivity, allowing signals to be decoded at greater distances and through more obstacles."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What frequency does LoRa use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa operates on license-free ISM bands: 868 MHz in Europe, 915 MHz in North America, and 433 MHz in Asia. These sub-GHz frequencies propagate further and penetrate obstacles better than 2.4 GHz (Wi-Fi/Bluetooth) or cellular frequencies, contributing to LoRa's long range capabilities."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much power does a LoRa device consume?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa devices are designed for minimal power consumption. In transmit mode, a typical LoRa module draws 20–40mA. In sleep mode, consumption drops to under 1μA. This ultra-low sleep current enables devices like the Loko GPS Tracker to achieve 30+ days of battery life, even while periodically transmitting GPS positions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maximum data rate of LoRa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa's maximum data rate is approximately 27kbps using SF7 with a 500kHz bandwidth. In typical IoT use with SF9-SF12, data rates are 250bps–1760bps. LoRa is designed for small, infrequent data packets — GPS coordinates, sensor readings, status updates — not for streaming or high-bandwidth applications."
+      }
+    }
+  ]
+}
+</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';

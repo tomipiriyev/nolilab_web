@@ -535,6 +535,54 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "LoRa変調とはどのように機能しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRaはチャープスペクトラム拡散（CSS）変調を使用し、信号の周波数を連続的に変化させることでデータをエンコードします。これによりノイズや干渉に対して非常に耐性が高くなります。受信機はノイズフロアより20dB低い状態でも信号を復元でき、LoRaが誇る優れた通信範囲と障害物透過性を実現します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRaにおけるスプレッディングファクターとは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRaのスプレッディングファクター（SF）は、通信範囲とデータレートのトレードオフを制御します。SF7は最高データレート（約5.5kbps）で通信範囲は短め。SF12は最小データレート（約250bps）で最大通信範囲を提供します。スプレッディングファクターが高いほど受信感度も向上します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRaはどの周波数を使用しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRaはライセンスフリーのISMバンドで動作します：ヨーロッパで868MHz、北米で915MHz、アジアで433MHz。これらのサブGHz周波数はWi-Fi/Bluetooth（2.4GHz）や携帯周波数よりも遠くまで伝播し、障害物をより良く通過します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRaデバイスの消費電力はどれくらいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRaデバイスは低消費電力を念頭に設計されています。送信モードでは典型的なLoRaモジュールは20〜40mAを消費します。スリープモードでは1μA未満に低下します。この超低スリープ電流により、Loko GPSトラッカーはGPS位置を定期的に送信しながらも30日以上のバッテリー寿命を実現します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRaの最大データレートはどれくらいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRaの最大データレートは500kHz帯域幅のSF7を使用して約27kbpsです。SF9-SF12の一般的なIoT使用では250bps〜1760bpsです。LoRaはGPS座標、センサー読み取り、ステータス更新など小さく頻度の低いデータパケット向けに設計されており、ストリーミングや高帯域幅アプリケーション向けではありません。"
+      }
+    }
+  ]
+}
+</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';

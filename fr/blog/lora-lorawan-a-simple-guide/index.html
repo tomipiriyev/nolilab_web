@@ -336,6 +336,54 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que la modulation LoRa et comment fonctionne-t-elle ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa utilise la modulation par étalement de spectre à dérive de fréquence (CSS), encodant les données en faisant varier continuellement la fréquence d'un signal (chirps). Cela rend les signaux très résistants au bruit et aux interférences. Le récepteur peut récupérer le signal même à 20dB sous le plancher de bruit, permettant la portée et la pénétration exceptionnelles de LoRa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que le facteur d'étalement dans LoRa ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le facteur d'étalement (SF) dans LoRa contrôle le compromis entre portée et débit de données. SF7 offre le débit le plus élevé (~5,5kbps) avec une portée plus courte. SF12 fournit la portée maximale avec le débit le plus faible (~250bps). Des facteurs d'étalement plus élevés améliorent aussi la sensibilité du récepteur."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle fréquence utilise LoRa ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa fonctionne sur des bandes ISM sans licence : 868 MHz en Europe, 915 MHz en Amérique du Nord et 433 MHz en Asie. Ces fréquences sub-GHz se propagent plus loin et pénètrent mieux les obstacles que le 2,4 GHz (Wi-Fi/Bluetooth) ou les fréquences cellulaires."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la consommation d'énergie d'un appareil LoRa ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les appareils LoRa sont conçus pour une consommation minimale. En mode transmission, un module LoRa typique consomme 20–40mA. En mode veille, la consommation tombe à moins de 1μA. Ce courant de veille ultra-faible permet à des appareils comme le traceur GPS Loko d'atteindre plus de 30 jours d'autonomie."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le débit de données maximum de LoRa ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le débit de données maximum de LoRa est d'environ 27kbps en utilisant SF7 avec une bande passante de 500kHz. En utilisation IoT typique avec SF9-SF12, les débits sont de 250bps à 1760bps. LoRa est conçu pour de petits paquets de données peu fréquents — coordonnées GPS, mesures de capteurs, mises à jour de statut."
+      }
+    }
+  ]
+}
+</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';

@@ -344,6 +344,54 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "LoRa调制是什么，如何工作？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa使用线性调频扩频（CSS）调制，通过连续变化信号频率（调频脉冲）来编码数据。这使信号对噪声和干扰具有极高的抵抗力。接收机甚至在信号低于噪底20dB时也能恢复信号，这实现了LoRa卓越的通信距离和穿透能力。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRa中的扩频因子是什么？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa中的扩频因子（SF）控制通信距离与数据速率之间的权衡。SF7提供最高数据速率（约5.5kbps），通信距离较短。SF12以最低数据速率（约250bps）提供最大通信距离。更高的扩频因子还能提高接收机灵敏度。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRa使用什么频率？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa在免授权ISM频段运行：欧洲868 MHz，北美915 MHz，亚洲433 MHz。这些亚GHz频率比2.4 GHz（Wi-Fi/蓝牙）或蜂窝频率传播更远，穿透障碍物能力更强，这是LoRa长距离能力的重要原因。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRa设备消耗多少电量？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa设备专为低功耗设计。在发送模式下，典型LoRa模块消耗20至40mA。在休眠模式下，功耗降至1μA以下。这种超低休眠电流使Loko GPS追踪器等设备即使定期传输GPS位置也能实现30天以上的电池寿命。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRa的最大数据速率是多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "使用500kHz带宽的SF7时，LoRa最大数据速率约为27kbps。在使用SF9-SF12的典型IoT应用中，数据速率为250至1760bps。LoRa专为小型、低频次的数据包设计——GPS坐标、传感器读数、状态更新——而非流媒体或高带宽应用。"
+      }
+    }
+  ]
+}
+</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';

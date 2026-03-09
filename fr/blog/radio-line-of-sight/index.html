@@ -479,6 +479,54 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que la ligne de visée radio ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La ligne de visée radio (LOS) est un trajet en ligne droite sans obstacle entre un émetteur et un récepteur par lequel les ondes radio se propagent. Tout obstacle physique — collines, bâtiments ou arbres — sur ce trajet affaiblit ou bloque le signal, réduisant la portée effective des appareils sans fil comme les traceurs GPS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment le terrain affecte-t-il la portée des traceurs GPS et LoRa ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le terrain est le principal facteur limitant la portée des traceurs GPS et LoRa. Les collines et les vallées bloquent le trajet radio direct, tandis que les forêts denses atténuent les signaux. Le traceur GPS Loko atteint jusqu'à 20 km sur un terrain plat et dégagé avec une ligne de visée claire, mais la portée diminue considérablement en environnement montagneux ou urbain."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que la zone de Fresnel et pourquoi est-elle importante pour la portée sans fil ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La zone de Fresnel est un volume elliptique entourant le trajet radio direct entre l'émetteur et le récepteur. Pour une puissance de signal optimale, au moins 60 % de la première zone de Fresnel doit être libre d'obstacles. Même des objets légèrement en dehors du trajet direct peuvent provoquer des pertes de signal significatives s'ils s'introduisent dans cette zone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment maximiser la portée de mon traceur GPS ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pour maximiser la portée du traceur GPS : 1) Placez le récepteur (station de base) à la plus haute élévation disponible — même quelques mètres supplémentaires étendent considérablement la couverture. 2) Évitez d'installer près de grandes structures métalliques ou de bâtiments. 3) Utilisez une antenne externe si votre appareil le permet. 4) Choisissez un terrain ouvert avec un minimum d'obstacles entre le traceur et la station de base."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Le traceur GPS Loko fonctionne-t-il sans ligne de visée ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le traceur GPS Loko utilise la technologie radio LoRa P2P, qui fonctionne mieux que le Wi-Fi ou le Bluetooth en conditions sans ligne de visée grâce à sa fréquence sub-GHz et sa modulation par étalement de spectre à dérive de fréquence. Cependant, comme tous les appareils radio, la portée est réduite à travers des obstacles solides. En utilisation extérieure typique avec des obstructions partielles, Loko couvre de manière fiable 2 à 5 km."
+      }
+    }
+  ]
+}
+</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';

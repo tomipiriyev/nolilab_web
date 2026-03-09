@@ -292,6 +292,54 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "LoRa P2P和LoRaWAN有什么区别？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa P2P（点对点）在没有任何基础设施的情况下直接连接追踪器和基站两个设备。LoRaWAN添加了包含网关、网络服务器和云应用的网络层。LoRa P2P更简单、无费用、可在任何地方使用；LoRaWAN需要网关基础设施，但可实现大规模IoT网络。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什么是LoRa无线电技术？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa（长距离）是一种使用线性调频扩频（CSS）的无线调制技术。它在亚GHz频率（欧洲868 MHz，美国915 MHz）上运行，以极低功耗实现2至20公里的通信距离，专为需要长电池寿命和远距离通信的IoT设备设计。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRa P2P需要订阅或互联网连接吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不需要。LoRa P2P通信完全离线且无需订阅。Loko GPS追踪器使用LoRa P2P直接与基站通信，无需SIM卡、Wi-Fi或互联网。这使其在没有移动或互联网覆盖的偏远地区也能可靠工作。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRa P2P能通信多远？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa P2P在视距良好的开阔平坦地形上可通信最远20公里。在城市环境或有障碍物的地区，典型通信距离为2至5公里。通信距离取决于天线高度、地形、频率和扩频因子设置。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "GPS追踪用LoRa P2P还是LoRaWAN更好？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "对于个人GPS追踪（宠物、无人机、户外装备），LoRa P2P更好——无需基础设施即可在任何地方工作，无月费，通信范围2至20公里。LoRaWAN更适合车队管理或智慧城市应用，即需要大量设备向中央服务器大面积报告的场景。"
+      }
+    }
+  ]
+}
+</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';

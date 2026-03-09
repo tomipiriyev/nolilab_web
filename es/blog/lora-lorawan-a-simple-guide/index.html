@@ -336,6 +336,54 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué es la modulación LoRa y cómo funciona?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa usa modulación por espectro ensanchado chirp (CSS), codificando datos variando continuamente la frecuencia de una señal (chirps). Esto hace las señales muy resistentes al ruido e interferencias. El receptor puede recuperar la señal incluso cuando está 20dB por debajo del nivel de ruido, lo que permite el excepcional alcance y penetración de LoRa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es el factor de dispersión en LoRa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El factor de dispersión (SF) en LoRa controla el equilibrio entre alcance y tasa de datos. SF7 ofrece la mayor tasa de datos (~5,5kbps) con menor alcance. SF12 proporciona el máximo alcance con la menor tasa de datos (~250bps). Los factores de dispersión más altos también mejoran la sensibilidad del receptor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué frecuencia usa LoRa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa opera en bandas ISM sin licencia: 868 MHz en Europa, 915 MHz en Norteamérica y 433 MHz en Asia. Estas frecuencias sub-GHz se propagan más lejos y penetran mejor los obstáculos que 2,4 GHz (Wi-Fi/Bluetooth) o frecuencias celulares, contribuyendo a las capacidades de largo alcance de LoRa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánta energía consume un dispositivo LoRa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los dispositivos LoRa están diseñados para mínimo consumo de energía. En modo transmisión, un módulo LoRa típico consume 20–40mA. En modo suspensión, el consumo cae a menos de 1μA. Esta ultra-baja corriente en suspensión permite que dispositivos como el rastreador GPS Loko logren más de 30 días de vida útil de la batería."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es la tasa de datos máxima de LoRa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La tasa de datos máxima de LoRa es aproximadamente 27kbps usando SF7 con un ancho de banda de 500kHz. En uso IoT típico con SF9-SF12, las tasas de datos son 250bps–1760bps. LoRa está diseñado para paquetes de datos pequeños e infrecuentes — coordenadas GPS, lecturas de sensores, actualizaciones de estado."
+      }
+    }
+  ]
+}
+</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';
