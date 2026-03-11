@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>インターネットや携帯電話回線なしでGPSが動作する仕組み — 簡単解説 | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="GPS衛星はインターネットを必要としません — 信号を直接受信機にブロードキャストします。GPSがオフラインでどのように動作するか、そしてなぜほとんどのトラッカーが依然として携帯電話回線を必要とするのかを学びましょう。" name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="インターネットや携帯電話回線なしでGPSが動作する仕組み — 簡単解説 | nolilab" property="og:title"/>
+<meta content="GPS衛星はインターネットを必要としません — 信号を直接受信機にブロードキャストします。GPSがオフラインでどのように動作するか、そしてなぜほとんどのトラッカーが依然として携帯電話回線を必要とするのかを学びましょう。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/how-gps-works/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="インターネットや携帯電話回線なしでGPSが動作する仕組み" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ja_JP" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="インターネットや携帯電話回線なしでGPSが動作する仕組み — 簡単解説 | nolilab" name="twitter:title"/>
+<meta content="GPS衛星はインターネットを必要としません — 信号を直接受信機にブロードキャストします。GPSがオフラインでどのように動作するか、そしてなぜほとんどのトラッカーが依然として携帯電話回線を必要とするのかを学びましょう。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="how GPS works, GPS without internet, GPS offline, GPS satellites explained, how GPS trackers work" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/ja/how-gps-works/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/how-gps-works/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/how-gps-works/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "GPSの動作にインターネットは必要ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いいえ。GPS衛星は一方向の無線送信を使用して信号を継続的にブロードキャストしています — 衛星はあなたのデバイスから何も受信せず、インターネットは一切関与しません。あなたのGPS受信機は、複数の衛星から受信した信号のタイミング差から純粋に自身の位置を計算します。ただし、ほとんどの市販GPSトラッカーは、その位置情報をあなたの電話に送信するために、依然としてインターネットまたは携帯電話回線を必要とします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "GPS衛星はいくつありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "米国のGPSコンステレーションは、最近の数え方では31基の運用衛星があります。地球上の任意の場所では、通常6〜12基の衛星を同時に見ることができます。GPSデバイスは3D位置（緯度、経度、高度）を決定するために少なくとも4基の衛星を必要とします。Lokoのような最新のトラッカーは、複数のコンステレーション — GPS、GLONASS（ロシア、24衛星）、Galileo（EU、30衛星） — を使用するため、より速く、より正確な位置決定のために60基以上の衛星に同時にアクセスできます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "GPSがオフラインで動作するなら、なぜほとんどのGPSトラッカーは携帯電話回線を必要とするのですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPSはトラッカーにその位置を教えます。しかし、その位置情報はどのようにしてあなたの電話に届くのでしょうか？ほとんどのトラッカーはSIMカードと携帯電話データを使用して座標をクラウドサーバーに送信し、あなたの電話アプリがインターネットを介してそのサーバーに問い合わせます。GPS自体はオフラインですが、送信層は携帯電話回線に依存しています。Lokoは携帯電話回線をLoRa無線に置き換えます — これもインターネットを必要としない直接無線リンクです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "GPS、GLONASS、Galileoの違いは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPSは米国の衛星測位システム（31衛星）です。GLONASSはロシアの同等のシステム（24衛星）です。Galileoは欧州連合のシステム（2024年現在、30基の運用衛星）です。各システムは異なる周波数と軌道面を使用しています。Lokoが行うように、これら3つを同時に使用すると、可視衛星数が劇的に増加し、位置精度が向上し、初回位置決定までの時間が短縮され、1つのコンステレーションのジオメトリが悪い環境でも追跡を維持できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Lokoはどのように完全にオフラインで動作するのですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lokoの信号チェーンには、どのステップにもインターネットは関与しません：GPS/GLONASS/Galileo衛星が無線信号をブロードキャスト → Loko Airの受信機が座標を計算 → Loko AirがLoRa無線（トランシーバーのような直接無線リンク）を介して座標を送信 → Loko GroundがLoRa信号を受信 → Loko GroundがBluetoothを介して座標をあなたの電話に送信 → Lokoアプリがオフラインマップ上に位置を表示。衛星から画面まで、すべてがローカル無線です。"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "インターネットや携帯電話回線なしでGPSが動作する仕組み", "item": "https://www.nolilab.com/ja/how-gps-works/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .chain-step { display: flex; align-items: flex-start; gap: var(--spacing-sm); padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); }
+  .chain-step:last-child { border-bottom: none; }
+  .step-num { flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; font-family: var(--font-mono); }
+  .step-content h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+  .step-content p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">ショップ</a>
+      <a href="/specifications/" class="nav-link">仕様</a>
+      <a href="/software/" class="nav-link">ソフトウェア</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">ブログ</a>
+      <a href="/firmware/" class="nav-link">ファームウェア</a>
+      <a href="/setup-guides/" class="nav-link">セットアップ</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">お問い合わせ</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="言語を選択">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="メニューを切り替え">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>インターネットや携帯電話回線なしでGPSが動作する仕組み</h1>
+    <p class="subtitle">GPS衛星はインターネットについて何も知らない — それがポイントです</p>
+    <p>GPSの動作にインターネットや携帯電話回線が必要だという誤解が広まっています。実際には必要ありません。GPS衛星はスマートフォン時代の何十年も前に設計・打ち上げられ、完全に別の無線システムで動作しています。</p>
+    <p>この混乱は、<strong>ほとんどの市販GPSトラッカーが、位置情報をあなたの電話に届けるためにインターネットを必要とする</strong>ことから生じています — しかし、それはメーカーの選択であって、GPS自体の要件ではありません。この区別を理解することが、Loko GPSトラッカーがなぜ携帯電話の電波が届かない場所、Wi-Fiもデータ通信プランもなく完璧に動作するのかを理解する鍵です。</p>
+  </div>
+</div>
+
+<!-- GPS satellites explained simply -->
+<div class="content-block">
+  <div class="container">
+    <h2>GPS衛星：簡単解説</h2>
+    <p>全地球測位システム（GPS）は、米国宇宙軍が運用する衛星コンステレーションです。最も基本的なレベルでの動作は以下の通りです：</p>
+    <ul>
+      <li><strong>31基の衛星が地球を周回</strong>しており、高度約20,200 kmの中軌道にあります</li>
+      <li>各衛星は極めて正確な原子時計を搭載し、衛星ID、軌道上の現在位置、正確なタイムスタンプを含む<strong>無線信号を継続的にブロードキャスト</strong>します</li>
+      <li>これらの信号は光速で地球表面に向かって伝わります</li>
+      <li>地上のGPS受信機は、複数の衛星からの信号を同時に受信します</li>
+      <li><strong>各信号が到着するまでにかかった時間を測定</strong>することで、受信機は各衛星までの距離を計算します</li>
+      <li>少なくとも4基の衛星までの距離があれば、受信機は三角測量と呼ばれるプロセスを通じて正確な3D位置（緯度、経度、高度）を計算できます</li>
+    </ul>
+    <p>重要なポイント：<strong>このプロセス全体は一方向です</strong>。衛星はブロードキャストします。あなたの受信機は受信します。あなたの受信機は衛星に何も送信しません。衛星はあなたのデバイスの存在を知りません。どのステップにもインターネット接続は関与しません。</p>
+    <p>GPSは、都市の中心部にいても、遠隔地の山の中にいても同じように動作します。衛星は気にしません。ただブロードキャストしているだけです。</p>
+  </div>
+</div>
+
+<!-- Why GPS itself needs no internet -->
+<div class="content-block">
+  <div class="container">
+    <h2>なぜGPS自体はインターネットを必要としないのか</h2>
+    <p>GPSは、エンドユーザーにとって本質的に受動的で受信専用のシステムです。衛星から受信機への信号チェーンには、大気中を伝わる電波のみが関与します。ネットワーク接続、サーバー、データ通信プランは一切必要ありません。</p>
+    <p>あなたの車の組み込みGPSナビゲーションは何十年も前からオフラインで動作してきました。Garmin eTrexのような専用ハイキングGPSユニットは常に携帯電話回線なしで動作してきました。航空航法システムはインターネット接続なしで位置を計算します。これらすべてが同じGPS衛星信号を使用しています — インターネットは必要ありません。</p>
+    <p>GPS規格は、民間用信号帯（L1、1575.42 MHz）での暗号化やアクセス制御を意図的に避けています — 地球上のどこでも、互換性のある受信機を持つ誰でも無料で受信できるように意図的に設計されています。</p>
+    <p>GPS受信機チップは数ドルです。適度な電力を消費します。そして、宇宙からの電波だけから正確な位置座標を計算します — サブスクリプション、接続、クラウドは一切不要です。</p>
+  </div>
+</div>
+
+<!-- What DOES need internet -->
+<div class="content-block">
+  <div class="container">
+    <h2>インターネットを必要とするもの：ほとんどの市販GPSトラッカー</h2>
+    <p>では、GPS自体がオフラインなら、なぜほとんどのGPSトラッカーは携帯電話データ通信プランを必要とするのでしょうか？</p>
+    <p>答えは問題の第二の部分、<strong>トラッカーからあなたの電話に位置情報を届けること</strong>にあります。</p>
+    <p>GPSはトラッカーにその位置を教えます。しかし、野原に置かれた、犬の首輪につけられた、またはドローンに搭載されたトラッカーは、物理的にあなたから離れています。誰かがそのGPS座標をあなたのデバイスに送信する必要があります。その送信こそが、ほとんどのメーカーがインターネット依存を導入する場所です。</p>
+    <p>携帯電話式GPSトラッカーの典型的なアーキテクチャ：</p>
+    <ol>
+      <li>GPSチップが座標を計算（オフライン、インターネット不要）</li>
+      <li>組み込みSIMカードが携帯電話ネットワークに接続（データ通信プランが必要）</li>
+      <li>座標がメーカーのクラウドサーバーにアップロード（インターネットが必要）</li>
+      <li>あなたの電話アプリがインターネットを介してクラウドサーバーに問い合わせ（インターネットが必要）</li>
+      <li>アプリが地図上に位置を表示</li>
+    </ol>
+    <p>ステップ2、3、4はすべてインターネットインフラを必要とします。携帯電話の電波が届かない地域では、ステップ1の後にチェーン全体が途切れます。これが、携帯電話式GPSトラッカーが遠隔地で失敗する理由です — GPSが動作しなくなったからではなく、送信層が接続を失ったからです。</p>
+    <p><strong>これは技術的必要性ではなく、アーキテクチャ上の選択です。</strong>インターネットなしでGPS座標を送信する別の方法があります。</p>
+  </div>
+</div>
+
+<!-- How LoRa replaces cellular -->
+<div class="content-block">
+  <div class="container">
+    <h2>座標送信にLoRaが携帯電話回線をどのように置き換えるか</h2>
+    <p>LoRa（Long Range）無線は、GPS座標データを長距離にわたって、携帯電話インフラを一切使わずに伝送できる代替送信技術です。</p>
+    <p>LoRaは無免許ISM無線帯（欧州では868 MHz、北米では915 MHz）を使用して、GPS座標を含む小さなデータパケットをデバイス間で直接送信します。これはポイントツーポイント無線であり、概念的にはトランシーバーに似ていますが、はるかに長い距離とはるかに低い消費電力が特徴です。</p>
+    <p>14 dBmで送信するLoRa無線は、GPS座標パケットを開けた地形で15〜20kmにわたって確実に送信できます。受信機はインターネット、携帯電話基地局、またはあらゆるインフラに接続されている必要はありません。無線到達範囲内にあればよいのです。</p>
+    <p>これがまさにLokoが行っていることです。Loko Airトラッカーによって計算されたGPS座標は、LoRaを介してあなたの手元のLoko Ground受信機に送信され — インターネットを完全にバイパスします。送信層はGPS受信層と同じくオフラインです。</p>
+  </div>
+</div>
+
+<!-- The full offline chain -->
+<div class="content-block">
+  <div class="container">
+    <h2>完全なオフラインチェーン：衛星から画面まで</h2>
+    <p>以下はLokoシステムにおける完全な信号経路です — すべてのステップがローカル無線であり、インターネットは一切関与していないことに注意してください：</p>
+
+    <div class="chain-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>GPS / GLONASS / Galileo 衛星</h3>
+        <p>31基以上の衛星が高度20,000 kmから無線タイミング信号をブロードキャスト。インターネット不要。一方向ブロードキャスト、誰でも無料。</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Loko Air GPS受信機</h3>
+        <p>15g未満のトラッカーが複数の衛星コンステレーションからの信号を受信し、正確な座標を計算。すべてローカル計算、ネットワーク不要。</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>LoRa無線送信</h3>
+        <p>Loko Airが座標パケットをLoRa無線で送信。最大20kmの直接ポイントツーポイント送信。SIMカード、携帯電話ネットワーク、インターネット不要。</p>
+      </div>
+    </div>

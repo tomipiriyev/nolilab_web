@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>开源 GPS 追踪器 — 硬件与固件 | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Loko 是一款完全开源的 GPS 追踪器。原理图、PCB 文件和固件全部公开可用。定制、构建或购买 — 由您选择。" name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="开源 GPS 追踪器 — 硬件与固件 | nolilab" property="og:title"/>
+<meta content="Loko 是一款完全开源的 GPS 追踪器。原理图、PCB 文件和固件全部公开可用。定制、构建或购买 — 由您选择。" property="og:description"/>
+<meta content="https://www.nolilab.com/zh/open-source/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Loko 开源 GPS 追踪器" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="开源 GPS 追踪器 — 硬件与固件 | nolilab" name="twitter:title"/>
+<meta content="Loko 是一款完全开源的 GPS 追踪器。原理图、PCB 文件和固件全部公开可用。定制、构建或购买 — 由您选择。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="open source GPS tracker, open hardware GPS, GPS tracker GitHub, DIY GPS tracker, LoRa open source tracker" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/zh/open-source/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/open-source/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/open-source/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Loko 是否真正开源 — 硬件和固件都是？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "是的。Nolilab 已发布完整的硬件原理图、PCB 布局文件和固件源代码。您可以检查每一个元器件的选择，追踪每一个电路设计的决策，并阅读设备上运行的每一行代码。没有任何内容是隐藏或混淆的。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "我能否根据开源文件构建自己的 Loko GPS 追踪器？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "是的。制造您自己的 Loko 硬件所需的所有文件都已公开可用 — PCB Gerber 文件、物料清单 (BOM) 和固件。如果您有 PCB 制造和 SMD 贴装的经验，您可以自己构建追踪器。Nolilab 也销售预构建、经过测试的成品，供那些偏好即用型设备的用户选择。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Loko 硬件和固件是基于什么许可证发布的？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "硬件和固件仅限个人使用发布。未经 nolilab 明确书面许可，不得用于商业用途。完整许可证请参见 https://github.com/tomipiriyev/Loko"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "我能否修改 Loko 固件以自定义更新间隔或添加传感器？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "是的。固件使用 C/C++ 编写，并附有完整文档。开发者可以修改 GPS 更新间隔、调整 LoRa 传输参数、添加对额外传感器的支持、更改电源管理行为或实现自定义协议。开放的固件是 Loko 对技术用户而言最强大的功能之一。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "为什么 nolilab 在销售产品的同时还要开源硬件？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nolilab 相信透明度能建立信任。通过公开所有硬件和固件，用户可以验证 Loko 是否完全如其所述 — 没有隐藏追踪，没有秘密数据收集，没有黑盒固件。社区也会为项目贡献改进。Nolilab 的竞争力在于制造质量、支持和完整的产品体验 — 而非保密设计。"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "开源 GPS 追踪器", "item": "https://www.nolilab.com/open-source/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--spacing-sm) 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .compare-table thead { background: var(--bg-secondary); border-bottom: 2px solid var(--border); }
+  .compare-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8125rem; }
+  .compare-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 500; color: var(--text-primary); }
+  .yes { color: var(--accent); font-weight: 700; }
+  .no { color: #cf222e; font-weight: 700; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  .repo-card { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-secondary); margin-bottom: var(--spacing-sm); }
+  .repo-card h3 { font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); margin-bottom: 0.35rem; }
+  .repo-card p { font-size: 0.875rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.5rem 0.6rem; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">商店</a>
+      <a href="/specifications/" class="nav-link">规格</a>
+      <a href="/software/" class="nav-link">软件</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">常见问题</a>
+      <a href="/blog/" class="nav-link">博客</a>
+      <a href="/firmware/" class="nav-link">固件</a>
+      <a href="/setup-guides/" class="nav-link">设置指南</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">联系我们</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="选择语言">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="切换菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- 标题区 -->
+<div class="page-hero">
+  <div class="container">
+    <h1>开源 GPS 追踪器：完整的硬件与固件透明度</h1>
+    <p class="subtitle">每一份原理图。每一条 PCB 走线。每一行固件代码。全部公开可用。</p>
+    <p>在大多数 GPS 追踪器制造商将其硬件和软件视为商业机密的行业中，nolilab 采取了相反的方法。Loko GPS 追踪器是完全开源的 — 这意味着设备上的每一个电路原理图、每一个 PCB 布局文件和每一行固件代码都在 GitHub 上公开发布。</p>
+    <p><strong>您无需信任 Loko。您可以验证它。</strong></p>
+    <p>本页面解释了 nolilab 发布了什么、为什么这很重要，以及创客、开发者和高级用户如何利用 Loko 的开源特性。</p>
+  </div>
+</div>
+
+<!-- 开源对 GPS 追踪器意味着什么 -->
+<div class="content-block">
+  <div class="container">
+    <h2>开源对 GPS 追踪器意味着什么</h2>
+    <p>开源硬件和固件意味着物理设备的设计文件以及在其上运行的代码，在允许检查、修改和重新分发的许可证下公开可用。</p>
+    <p>特别是对于 GPS 追踪器，这具有深远的意义：</p>
+    <ul>
+      <li><strong>无隐藏数据收集：</strong>您可以阅读固件并验证设备不会将您的位置发送给您授权以外的任何人</li>
+      <li><strong>无黑盒安全漏洞：</strong>安全研究人员可以审计代码并负责任地披露任何漏洞</li>
+      <li><strong>无供应商锁定：</strong>如果 nolilab 将来停止支持，社区可以独立地继续维护固件</li>
+      <li><strong>可定制性：</strong>开发者可以修改固件以适应特殊用例 — 不同的更新间隔、自定义传感器、替代协议</li>
+      <li><strong>社区改进：</strong>具有工程专业知识的用户为项目贡献错误修复、功能和优化</li>
+    </ul>
+    <p>大多数商业 GPS 追踪器制造商不发布任何内容。您无法看到固件在做什么、您的数据是否被存储，或者无线电协议是如何实现的。对于 Loko，没有秘密。</p>
+  </div>
+</div>
+
+<!-- nolilab 发布了什么 -->
+<div class="content-block">
+  <div class="container">
+    <h2>nolilab 在 GitHub 上发布了什么</h2>
+    <p><a href="https://github.com/tomipiriyev/Loko" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">nolilab GitHub 仓库</a>包含了理解、构建和修改 Loko 所需的完整文件集：</p>
+
+    <div class="repo-card" style="border-color: var(--accent); background: var(--bg-primary);">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.6rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="color:var(--text-primary);flex-shrink:0" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <h3 style="margin:0;font-size:1rem;">tomipiriyev/Loko — GitHub 仓库</h3>
+      </div>
+      <p style="margin-bottom:0.75rem;">所有 Loko 项目文件 — 硬件原理图、PCB 布局、固件、BOM 和应用程序源代码 — 都在一个公共仓库中发布。</p>
+      <a href="https://github.com/tomipiriyev/Loko" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1.1rem;background:var(--text-primary);color:#fff;border-radius:var(--radius-sm);font-size:0.875rem;font-weight:600;text-decoration:none;transition:background 0.2s ease;" onmouseover="this.style.background='var(--accent)'" onmouseout="this.style.background='var(--text-primary)'">
+        在 GitHub 上查看 →
+      </a>
+    </div>
+
+    <div class="repo-card">
+      <h3>硬件原理图</h3>
+      <p>Loko Air 和 Loko Ground 的完整电气原理图。每一个元器件，每一个连接，每一个引脚分配。附有元器件值、零件号和设计原理注释。</p>
+    </div>
+
+    <div class="repo-card">
+      <h3>PCB 布局文件</h3>
+      <p>开放格式的完整 PCB 设计文件，包括可提交给 PCB 制造服务的 Gerber 文件。层叠结构、覆铜、过孔尺寸和元器件布局全部包含在内。您可以使用这些文件从任何制造厂订购裸板。</p>
+    </div>
+
+    <div class="repo-card">
+      <h3>物料清单 (BOM)</h3>
+      <p>完整的 BOM，列出每个元器件，包括制造商零件号、规格和建议的替代来源。包括无源元件、集成电路、连接器、GPS 模块、LoRa 无线电模块和微控制器。</p>
+    </div>
+
+    <div class="repo-card">
+      <h3>固件源代码</h3>
+      <p>使用 C/C++ 编写的完整固件，涵盖 GPS 获取、LoRa 传输调度、电源管理（睡眠模式）、与应用程序的蓝牙通信以及 GPS 星座配置 (GPS/GLONASS/Galileo)。</p>
+    </div>
+
+    <div class="repo-card">
+      <h3>应用程序源代码</h3>
+      <p>iOS 和 Android 应用程序源代码，包括离线地图渲染、蓝牙通信协议和 LoRa 数据包解析逻辑。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 为什么开源很重要 -->
+<div class="content-block">
+  <div class="container">
+    <h2>为什么开源对 GPS 硬件很重要</h2>
+    <p>信任问题对于位置追踪设备尤为重要。GPS 追踪器知道您（或您的宠物、孩子或贵重物品）的所有位置。这是敏感信息。</p>
+    <p>对于专有追踪器，您纯粹是基于信任的假设：制造商只将您的位置数据发送给您，不在其服务器上保留历史位置记录，不向第三方出售位置数据，并且其固件没有可利用的安全漏洞。</p>
+    <p>对于 Loko，您不需要信任。固件是可审计的。硬件是可审计的。通信协议是有文档记录的。LoRa P2P（点对点）架构意味着位置数据仅从 Loko Air 传输到 Loko Ground — 它根本不会发送到 nolilab 的服务器。</p>
+    <p><strong>Loko 在技术上无法将您的位置发送到 nolilab 的服务器</strong> — 不是因为 nolilab 承诺不这样做，而是因为无线电协议在任何步骤都不涉及互联网。开放的固件证明了这一点。</p>
+  </div>
+</div>
+
+<!-- 创客和开发者如何使用 Loko -->
+<div class="content-block">
+  <div class="container">
+    <h2>创客和开发者如何使用 Loko</h2>
+    <p>Loko 的开源特性吸引了活跃的硬件爱好者和开发者社区，他们以创造性的方式扩展了这个平台：</p>
+    <ul>
+      <li><strong>自定义更新间隔：</strong>一些用户修改固件，以实现每秒传输一次用于高速无人机回收，或每 5 分钟传输一次用于长期野生动物研究以进一步延长电池寿命</li>
+      <li><strong>额外传感器：</strong>开发者为 Loko Air 硬件添加了温度传感器、加速度计和气压传感器，用于环境监测应用</li>
+      <li><strong>LoRaWAN 集成：</strong>LoRa 无线电可以重新配置为与 LoRaWAN 网关通信，而不是专用的 Loko Ground 接收器 — 适用于固定基础设施部署</li>
+      <li><strong>自定义外壳：</strong>社区贡献了针对特定安装应用的 3D 打印外壳设计 — 无人机支架、防水盒、项圈附件</li>
+      <li><strong>第三方应用程序集成：</strong>有文档的蓝牙协议允许开发者构建自己的应用程序来接收 Loko 数据 — 已有与 Home Assistant、Node-RED 和自定义地图平台的集成</li>
+    </ul>
+    <p>如果您有标准 Loko 固件不支持的特定用例，开源架构意味着您可以自己实现它，而无需等待 nolilab 将其列为优先事项。</p>
+  </div>
+</div>
+
+<!-- 构建与购买对比 -->
+<div class="content-block">
+  <div class="container">
+    <h2>构建与购买：您对 Loko 的选择</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>选项</th>
+          <th>成本</th>
+          <th>所需时间</th>
+          <th>所需技能</th>
+          <th>最适合</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>从 nolilab 购买</td>
+          <td>硬件价格</td>
+          <td>几分钟设置</td>
+          <td>无需 — 即插即用</td>
+          <td>大多数用户</td>
+        </tr>
+        <tr>
+          <td>根据文件构建 (DIY)</td>
+          <td>元器件成本 (BOM)</td>
+          <td>10–20 小时</td>
+          <td>PCB 组装、焊接</td>
+          <td>创客、爱好者</td>
+        </tr>
+        <tr>
+          <td>构建 + 自定义固件</td>
+          <td>元器件成本</td>
+          <td>20–50+ 小时</td>
+          <td>嵌入式 C/C++ 编程</td>
+          <td>开发者、研究人员</td>
+        </tr>
+        <tr>
+          <td>分叉并创建变体</td>
+          <td>设计 + 制造成本</td>
+          <td>100+ 小时</td>
+          <td>PCB 设计 + 固件</td>
+          <td>公司、产品团队</td

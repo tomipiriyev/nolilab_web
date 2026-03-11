@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outil de Configuration en Ligne Loko | nolilab</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+    <meta name="description" content="Outil de configuration en ligne basé sur navigateur pour les unités GPS Tracker Loko Air et Ground. Nécessite le navigateur Chrome avec prise en charge de l'API Web Serial.">
+    <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.nolilab.com/fr/loko-config-tool/" />
+<link rel="alternate" hreflang="en"        href="https://www.nolilab.com/loko-config-tool/" />
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/loko-config-tool/" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Outil de Configuration en Ligne Loko | nolilab">
+    <meta property="og:description" content="Configurez vos unités GPS Tracker Loko Air et Ground directement depuis le navigateur Chrome via une connexion série USB. Aucune installation requise.">
+    <meta property="og:url" content="https://www.nolilab.com/fr/loko-config-tool/">
+    <meta property="og:image" content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png">
+    <meta property="og:site_name" content="nolilab">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Outil de Configuration en Ligne Loko | nolilab">
+    <meta name="twitter:description" content="Configurez vos unités GPS Tracker Loko Air et Ground directement depuis le navigateur Chrome via une connexion série USB.">
+    <meta name="twitter:image" content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png">
+    <style>
+        @font-face {
+            font-family: 'Inter-fallback';
+            src: local('Arial');
+            ascent-override: 90.44%;
+            descent-override: 22.52%;
+            line-gap-override: 0%;
+            size-adjust: 107.64%;
+        }
+
+        /* ── Site design tokens ─────────────────────────────────────────────── */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --text-primary: #24292e;
+            --text-secondary: #57606a;
+            --accent: #238636;
+            --accent-hover: #2ea043;
+            --border: #d0d7de;
+            --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --text-primary: #0d1117;
+            --text-secondary: #656d76;
+            --accent: #238636;
+            --accent-hover: #2ea043;
+            --border: #d0d7de;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #238636;
+            --accent-hover: #2ea043;
+            --border: #30363d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+            font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ── Site header ────────────────────────────────────────────────────── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        header {
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-container { display: flex; align-items: center; justify-content: space-between; }
+
+        .logo {
+            font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono);
+            letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+
+        .nav-link {
+            color: var(--text-secondary); text-decoration: none; font-weight: 500;
+            font-size: 0.875rem; transition: color 0.2s ease;
+        }
+
+        .nav-link:hover { color: var(--text-primary); }
+
+        .social-icons { display: flex; gap: var(--spacing-xs); align-items: center; margin-left: var(--spacing-sm); flex-shrink: 0; }
+
+        .social-icon {
+            display: flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; color: #333333 !important;
+            border-radius: var(--radius-sm); transition: all 0.2s ease; text-decoration: none;
+        }
+
+        .social-icon:hover { background-color: var(--bg-secondary); transform: translateY(-1px); }
+        .social-icon svg { width: 16px; height: 16px; fill: currentColor; }
+        .social-icon i { font-size: 16px; }
+
+        /* ── Mobile menu toggle ─────────────────────────────────────────────── */
+        .mobile-menu-toggle {
+            display: none; flex-direction: column; gap: 4px; background: none;
+            border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto;
+        }
+
+        .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+        .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+        /* ── Language selector ──────────────────────────────────────────────── */
+        .language-selector { margin-left: var(--spacing-sm); }
+
+        .language-btn {
+            display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem;
+            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm);
+            color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease;
+        }
+
+        .language-btn:hover { border-color: var(--accent); }
+        .language-btn .fa-globe { font-size: 1rem; color: var(--text-secondary); }
+        .current-lang { font-weight: 600; color: var(--text-primary); }
+        .language-btn .fa-chevron-down { font-size: 0.75rem; color: var(--text-secondary); transition: transform 0.2s ease; }
+        .language-selector:hover .fa-chevron-down { transform: rotate(180deg); }
+
+        .language-dropdown {
+            position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary);
+            border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+            min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.2s ease; z-index: 1000;
+        }
+
+        .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .language-option {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none;
+            transition: background 0.2s ease; border-bottom: 1px solid var(--border);
+        }
+
+        .language-option:last-child { border-bottom: none; }
+        .language-option:hover { background: var(--bg-secondary); }
+        .lang-code { font-weight: 600; font-size: 0.875rem; }
+        .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+
+        /* ── Site footer ────────────────────────────────────────────────────── */
+        footer {
+            padding: var(--spacing-xl) 0; background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.875rem;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .footer-container {
+            max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-md);
+        }
+
+        .footer-logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+        .footer-links { display: flex; gap: var(--spacing-md); align-items: center; flex-wrap: wrap; }
+        .footer-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+        .footer-link:hover { color: var(--text-primary); }
+        .footer-copyright { color: var(--text-secondary); font-size: 0.875rem; font-family: var(--font-mono); }
+
+        /* ── Mobile ─────────────────────────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: row; justify-content: space-between; align-items: center; }
+            .mobile-menu-toggle { display: flex; }
+
+            .nav-links {
+                position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh;
+                background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000;
+                overflow-y: auto; border-right: 1px solid var(--border);
+            }
+
+            .nav-links.active { left: 0; }
+            .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+            .social-icons { display: none; }
+
+            body.menu-open::before {
+                content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0, 0, 0, 0.5); z-index: 999;
+            }
+
+            body.menu-open { overflow: hidden; }
+
+            .language-selector { position: static; }
+            .language-dropdown { position: fixed; top: auto; right: 1rem; left: 1rem; bottom: 1rem; min-width: auto; }
+        }
+
+        /* ── Tool wrapper ───────────────────────────────────────────────────── */
+        .tool-wrapper { padding: 24px 16px 40px; }
+
+        /* ── Loko Config Tool styles (scoped under .loko-tool) ──────────────── */
+        /* Tool-specific CSS variables (separate namespace from site vars) */
+        .loko-tool {
+            --primary-color: #2196f3;
+            --primary-dark: #1976d2;
+            --tool-border: #ccc;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --grey-color: #9e9e9e;
+        }
+
+        .loko-tool * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .loko-tool .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 15px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .loko-tool .appbar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px 4px 0 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .loko-tool .appbar-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .loko-tool .appbar-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .loko-tool .tab-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .loko-tool .tab-button.active {
+            background-color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        .loko-tool .tab-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .loko-tool .content {
+            background-color: white;
+            padding: 16px;
+            border-radius: 0 0 4px 4px;
+            overflow-y: auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .loko-tool .tab-content {
+            display: none;
+        }
+
+        .loko-tool .tab-content.active {
+            display: block;
+        }
+
+        .loko-tool .section {
+            margin-bottom: 16px;
+        }
+
+        .loko-tool .row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .loko-tool .form-group {
+            flex: 1;
+            margin-bottom: 10px;
+        }
+
+        .loko-tool .input-field {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--tool-border);
+            border-radius: 4px;
+            font-size: 14px;
+            height: 40px;
+        }
+
+        .loko-tool .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .loko-tool label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .loko-tool .checkbox-label {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .loko-tool .checkbox-label input {
+            margin-right: 8px;
+        }
+
+        .loko-tool .dropdown {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--tool-border);
+            border-radius: 4px;
+            font-size: 14px;
+            height: 40px;
+        }
+
+        .loko-tool .bordered-container {
+            border: 1px solid var(--tool-border);
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .loko-tool .battery-text {
+            color: var(--success-color);
+            font-weight: 500;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .loko-tool .bottom-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+
+        .loko-tool .button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            height: 40px;
+            transition: background-color 0.3s;
+        }
+
+        .loko-tool .button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .loko-tool .status-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--grey-color);
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .loko-tool .status-light.green {
+            background-color: var(--success-color);
+        }
+
+        .loko-tool .status-light.red {
+            background-color: var(--error-color);
+        }
+
+        .loko-tool .output-container {
+            border: 1px solid var(--tool-border);
+            border-radius: 4px;
+            padding: 10px;
+            font-family: monospace;
+            height: 120px;
+            overflow-y: auto;
+            background-color: #f8f8f8;
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+
+        .loko-tool .snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--error-color);
+            color: white;
+            text-align: center;
+            border-radius: 4px;
+            padding: 12px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+        }
+
+        .loko-tool .snackbar.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        .loko-tool .connection-status {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .loko-tool .status-indicator {
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        #air-checkmark {
+            color: var(--success-color);
+        }
+
+        #ground-checkmark {
+            color: var(--success-color);
+        }
+
+        .browser-notice {
+            background-color: #fff8e1;
+            border: 1px solid #ffe082;
+            padding: 12px 20px;
+            margin: 0 auto 12px auto;
+            max-width: 750px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #5d4037;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .browser-notice strong {
+            font-weight: bold;
+        }
+
+        .browser-notice p {
+            margin: 0;
+        }
+
+        .browser-notice p + p {
+            margin-top: 4px;
+        }
+
+        @keyframes fadein {
+            from { bottom: 0; opacity: 0; }
+            to   { bottom: 30px; opacity: 1; }
+        }
+
+        @keyframes fadeout {
+            from { bottom: 30px; opacity: 1; }
+            to   { bottom: 0; opacity: 0; }
+        }
+    </style>
+    <script defer src="/js/layout.js"></script>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="tool-wrapper">
+    <div class="loko-tool">
+        <div class="browser-notice">
+            <p>Cet outil nécessite l'<strong>API Web Serial</strong> — uniquement disponible dans <strong>Chrome</strong> (bureau).</p>
+            <p>Veuillez ouvrir cette page dans <strong>Google Chrome</strong> et connecter votre appareil Loko via USB.</p>
+        </div>
+
+        <div class="container">
+            <div class="appbar">
+                <div class="appbar-title">Outil de Configuration Loko</div>
+                <div class="appbar-actions">
+                    <button class="tab-button active" id="air-tab-btn">Unité Air</button>
+                    <button class="tab-button" id="ground-tab-btn">Unité Ground</button>
+                </div>
+            </div>
+
+            <div class="content">
+                <!-- Onglet Unité Air -->
+                <div class="tab-content active" id="air-unit-tab">
+                    <div class="section">
+                        <div class="firmware-version">Firmware : --</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="id1-input">ID1 :</label>
+                                <input type="number" id="id1-input" class="input-field" maxlength="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="id2-input">ID2 :</label>
+                                <input type="number" id="id2-input" class="input-field" maxlength="2">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="freq-input">Fréq : (Hz)</label>
+                                <input type="number" id="freq-input" class="input-field" maxlength="9">
+                            </div>
+                            <div class="form-group">
+                                <label for="interval-input">Intervalle : (sec)</label>
+                                <input type="number" id="interval-input" class="input-field" maxlength="10">
+                                <div class="battery-text" id="battery-text">Autonomie estimée : --</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="trace-period-input" title="Enregistre chaque Nième trace. Exemple : Une période de 5 enregistre la 5e, 10e, 15e trace, etc.">
+                                    Période d'enregistrement des traces :
+                                    <span style="cursor: help; color: #666;">ⓘ</span>
+                                </label>
+                                <input type="number" id="trace-period-input" class="input-field" min="1" placeholder="ex. 5" title="Enregistre chaque Nième trace. Exemple : Une période de 5 enregistre la 5e, 10e, 15e trace, etc.">
+                                <div style="font-size: 12px; color: #666; margin-top: 3px;">Enregistre chaque Nième trace (ex. 5 → enregistre la 5e, 10e, 15e...)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="expand-checkbox">
+                                    Activer Vitesse &amp; Altitude
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="gnss-dropdown">Mode GNSS</label>
+                                <select id="gnss-dropdown" class="dropdown">
+                                    <option value="">Sélectionner le mode GNSS</option>
+                                    <option value="Fitness">Fitness</option>
+                                    <option value="Balloon">Balloon</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section bordered-container">
+                        <div class="row">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="lorawan-checkbox">
+                                Activer LoraWAN
+                            </label>
+                        </div>
+                        <div class="section">
+                            <div class="form-group">
+                                <label for="region-dropdown">Région</label>
+                                <select id="region-dropdown" class="dropdown">
+                                    <option value="">Sélectionner la région</option>
+                                    <option value="AS923">AS923</option>
+                                    <option value="AU915">AU915</option>
+                                    <option value="CN470">CN470</option>
+                                    <option value="CN779">CN779</option>
+                                    <option value="EU433">EU433</option>
+                                    <option value="EU868">EU868</option>
+                                    <option value="KR920">KR920</option>
+                                    <option value="IN865">IN865</option>
+                                    <option value="US915">US915</option>
+                                    <option value="RU864">RU864</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="app-key-input">App Key :</label>
+                                <input type="text" id="app-key-input" class="input-field" maxlength="32">
+                            </div>
+                            <div class="form-group">
+                                <label for="dev-eui-input">Dev EUI :</label>
+                                <input type="text" id="dev-eui-input" class="input-field" maxlength="16">
+                            </div>
+                            <div class="form-group">
+                                <label for="app-eui-input">App/Join EUI :</label>
+                                <input type="text" id="app-eui-input" class="input-field" maxlength="16">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section bordered-container">
+                        <div class="row">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="p2p-checkbox">
+                                Activer le chiffrement
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="p2p-input">Clé :</label>
+                            <input type="text" id="p2p-input" class="input-field" maxlength="64">
+                        </div>
+                    </div>
+
+                    <div class="bottom-controls">
+                        <div class="connection-status">
+                            <button class="button" id="air-connect-button">Connecter</button>
+                            <div class="status-indicator" id="air-connection-status">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="display: none;" id="air-checkmark">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="width: 50px;"></div>
+                        <button class="button" id="air-read-button">Lire</button>
+                        <button class="button" id="air-submit-button">Envoyer</button>
+                        <button class="button" id="air-log-button">Télécharger le journal</button>
+                    </div>
+
+                    <div class="output-container" id="air-container-text"></div>
+                </div>
+
+                <!-- Onglet Unité Ground -->
+                <div class="tab-content" id="ground-unit-tab">
+                    <div class="section">
+                        <div class="form-group">
+                            <label for="ground-id2-input">ID2 :</label>
+                            <input type="number" id="ground-id2-input" class="input-field" maxlength="2">
+                        </div>
+                        <div class="form-group">
+                            <label for="ground-freq-input">Fréq : (Hz)</label>
+                            <input type="number" id="ground-freq-input" class="input-field" maxlength="9">
+                        </div>
+                        <div class="form-group">
+                            <label for="ground-p2p-input">Clé P2P :</label>
+                            <input type="text" id="ground-p2p-input" class="input-field" maxlength="64">
+                        </div>
+                    </div>
+
+                    <div class="bottom-controls">
+                        <div class="connection-status">
+                            <button class="button" id="ground-connect-button">Connecter</button>
+                            <div class="status-indicator" id="ground-connection-status">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="display: none;" id="ground-checkmark">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="width: 50px;"></div>
+                        <button class="button" id="ground-read-button">Lire</button>
+                        <button class="button" id="ground-submit-button">Envoyer</button>
+                    </div>
+
+                    <div class="output-container" id="ground-container-text"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="snackbar" id="snackbar">Appareil déconnecté ! Veuillez le reconnecter.</div>
+    </div>
+</div>
+
+<section style="max-width:900px;margin:3rem auto;padding:0 1.5rem 3rem;font-family:inherit;color:var(--text-primary,#24292e);line-height:1.7">
+  <h1 style="font-size:2rem;font-weight:600;margin-bottom:0.5rem;letter-spacing:-0.03em">Outil de Configuration GPS Tracker Loko</h1>
+  <h2 style="font-size:1.5rem;font-weight:500;margin-bottom:1rem;letter-spacing:-0.02em">Comment utiliser l'outil de configuration Loko</h2>
+  <p>L'Outil de Configuration en Ligne Loko vous permet de configurer les unités Loko Air et Ground directement depuis votre navigateur en utilisant l'API Web Serial — aucune installation de logiciel requise. Vous avez besoin de Google Chrome (bureau) et d'un câble USB pour connecter votre appareil.</p>
+
+  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Connexion étape par étape</h3>
+  <ol style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
+    <li style="margin-bottom:0.4rem">Ouvrez cette page dans <strong>Google Chrome</strong> sur un ordinateur de bureau (Windows, macOS ou Linux).</li>
+    <li style="margin-bottom:0.4rem">Allumez votre unité Loko Air ou Ground.</li>
+    <li style="margin-bottom:0.4rem">Connectez l'appareil à votre ordinateur avec un <strong>câble USB-C</strong>.</li>
+    <li style="margin-bottom:0.4rem">Sélectionnez l'onglet correct (Unité Air ou Unité Ground) dans l'outil ci-dessus.</li>
+    <li style="margin-bottom:0.4rem">Cliquez sur <strong>Connecter</strong>, puis choisissez le port série correct dans l'invite du navigateur.</li>
+    <li style="margin-bottom:0.4rem">L'outil lit automatiquement les paramètres actuels de l'appareil.</li>
+    <li>Modifiez les paramètres souhaités et cliquez sur <strong>Appliquer</strong> pour les enregistrer sur l'appareil.</li>
+  </ol>
+
+  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">Paramètres configurables — Unité Air</h3>
+  <p>L'Unité Air est le tracker GPS attaché à l'actif que vous souhaitez suivre. Les paramètres suivants peuvent être configurés :</p>
+  <ul style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
+    <li style="margin-bottom:0.4rem"><strong>ID Appareil 1 &amp; ID 2</strong> — Identifiants uniques qui apparient l'Unité Air avec une Station Ground. Les ID doivent correspondre entre les appareils appariés.</li>
+    <li style="margin-bottom:0.4rem"><strong>Fréquence radio (Hz)</strong> — Fréquence de transmission LoRa. Doit correspondre à la Station Ground. Bandes par défaut : 868 MHz (UE), 915 MHz (US), 923 MHz (AS).</li>
+    <li style="margin-bottom:0.4rem"><strong>Intervalle de mise à jour GPS (secondes)</strong> — Fréquence à laquelle l'Unité Air transmet sa position GPS. Des intervalles plus courts augmentent la consommation de batterie. Plage : 1–3600 secondes.</li>
+    <li style="margin-bottom:

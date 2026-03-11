@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>Как работает GPS без интернета — простое объяснение | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Спутникам GPS не нужен интернет — они передают сигналы напрямую приёмникам. Узнайте, как GPS работает офлайн и почему большинству трекеров всё ещё нужна сотовая связь." name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="Как работает GPS без интернета — простое объяснение | nolilab" property="og:title"/>
+<meta content="Спутникам GPS не нужен интернет — они передают сигналы напрямую приёмникам. Узнайте, как GPS работает офлайн и почему большинству трекеров всё ещё нужна сотовая связь." property="og:description"/>
+<meta content="https://www.nolilab.com/ru/how-gps-works/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Как работает GPS без интернета" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Как работает GPS без интернета — простое объяснение | nolilab" name="twitter:title"/>
+<meta content="Спутникам GPS не нужен интернет — они передают сигналы напрямую приёмникам. Узнайте, как GPS работает офлайн и почему большинству трекеров всё ещё нужна сотовая связь." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="как работает GPS, GPS без интернета, GPS офлайн, объяснение спутников GPS, как работают GPS трекеры" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/ru/how-gps-works/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/how-gps-works/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/how-gps-works/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Требуется ли для работы GPS интернет?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. Спутники GPS непрерывно передают сигналы с помощью односторонней радиопередачи — спутники ничего не получают от вашего устройства, и интернет не задействован. Ваш GPS-приёмник вычисляет своё положение исключительно по разнице во времени приёма сигналов от нескольких спутников. Однако большинству коммерческих GPS-трекеров всё ещё нужен интернет или сотовая связь для передачи этого местоположения на ваш телефон."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Сколько всего спутников GPS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Созвездие GPS США насчитывает 31 действующий спутник по последним данным. В любой точке поверхности Земли вы обычно можете видеть одновременно 6–12 спутников. GPS-устройствам нужно как минимум 4 спутника для определения 3D-позиции (широта, долгота, высота). Современные трекеры, такие как Loko, используют несколько созвездий — GPS, ГЛОНАСС (Россия, 24 спутника) и Galileo (ЕС, 30 спутников) — что даёт доступ к более чем 60 спутникам одновременно для более быстрого и точного определения позиции."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Почему большинству GPS-трекеров нужна сотовая связь, если GPS работает офлайн?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPS сообщает трекеру, где он находится. Но как это местоположение попадает на ваш телефон? Большинство трекеров используют SIM-карту и мобильные данные для отправки координат на облачный сервер производителя, который ваш телефон затем запрашивает через интернет. Сам GPS работает офлайн, но слой передачи данных — сотовый. Loko заменяет сотовую связь на радио LoRa — прямой радиоканал, который также не требует интернета."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "В чём разница между GPS, ГЛОНАСС и Galileo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPS — это американская спутниковая навигационная система (31 спутник). ГЛОНАСС — российский аналог (24 спутника). Galileo — система Европейского союза (30 действующих спутников по состоянию на 2024 год). Каждая система использует разные частоты и орбитальные плоскости. Одновременное использование всех трёх систем — как это делает Loko — значительно увеличивает количество видимых спутников, повышая точность позиционирования, сокращая время до первого определения и обеспечивая отслеживание в условиях, где геометрия одного созвездия может быть неудовлетворительной."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как Loko работает полностью офлайн?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Цепочка сигнала Loko не включает интернет ни на одном этапе: спутники GPS/ГЛОНАСС/Galileo передают радиосигналы → приёмник Loko Air вычисляет координаты → Loko Air передаёт координаты по радио LoRa (прямой радиоканал, как рация) → Loko Ground принимает сигнал LoRa → Loko Ground отправляет координаты на ваш телефон через Bluetooth → приложение Loko отображает позицию на офлайн-карте. От спутника до экрана — всё работает на локальном радио."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "Как работает GPS без интернета", "item": "https://www.nolilab.com/ru/how-gps-works/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .chain-step { display: flex; align-items: flex-start; gap: var(--spacing-sm); padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); }
+  .chain-step:last-child { border-bottom: none; }
+  .step-num { flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; font-family: var(--font-mono); }
+  .step-content h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+  .step-content p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">Магазин</a>
+      <a href="/specifications/" class="nav-link">Характеристики</a>
+      <a href="/software/" class="nav-link">Программное обеспечение</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">Частые вопросы</a>
+      <a href="/blog/" class="nav-link">Блог</a>
+      <a href="/firmware/" class="nav-link">Прошивка</a>
+      <a href="/setup-guides/" class="nav-link">Настройка</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">Контакты</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="Выбрать язык">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>Как работает GPS без интернета или сотовой связи</h1>
+    <p class="subtitle">Спутники GPS ничего не знают об интернете — и в этом суть</p>
+    <p>Существует распространённое заблуждение, что для работы GPS требуется интернет или сотовая связь. Это не так. Спутники GPS были разработаны и запущены за десятилетия до эпохи смартфонов, и они работают на совершенно отдельной радиосистеме.</p>
+    <p>Путаница возникает из-за того, что <strong>большинству коммерческих GPS-трекеров действительно нужен интернет, чтобы передать ваше местоположение на телефон</strong> — но это выбор производителя, а не требование самого GPS. Понимание этого различия — ключ к пониманию того, почему GPS-трекер Loko идеально работает без сотового покрытия, без Wi-Fi и без тарифа на данные.</p>
+  </div>
+</div>
+
+<!-- GPS satellites explained simply -->
+<div class="content-block">
+  <div class="container">
+    <h2>Спутники GPS: простое объяснение</h2>
+    <p>Глобальная система позиционирования (GPS) — это созвездие спутников, управляемое Космическими силами США. Вот как она работает на самом фундаментальном уровне:</p>
+    <ul>
+      <li><strong>31 спутник вращается вокруг Земли</strong> на высоте около 20 200 км, на средней околоземной орбите</li>
+      <li>Каждый спутник несёт чрезвычайно точные атомные часы и <strong>непрерывно передаёт радиосигнал</strong>, который включает идентификатор спутника, его текущее положение на орбите и точную метку времени</li>
+      <li>Эти сигналы движутся со скоростью света к поверхности Земли</li>
+      <li>GPS-приёмник на земле одновременно принимает сигналы от нескольких спутников</li>
+      <li>Измеряя <strong>время, которое потребовалось каждому сигналу для прибытия</strong>, приёмник вычисляет расстояние до каждого спутника</li>
+      <li>Имея расстояния как минимум до 4 спутников, приёмник может вычислить своё точное 3D-положение (широта, долгота, высота) с помощью процесса, называемого трилатерацией</li>
+    </ul>
+    <p>Ключевой момент: <strong>весь этот процесс является односторонним</strong>. Спутники передают. Ваш приёмник принимает. Ваш приёмник никогда ничего не передаёт обратно спутникам. Спутники не знают о существовании вашего устройства. На любом этапе не задействовано интернет-соединение.</p>
+    <p>GPS работает одинаково, находитесь ли вы в центре города или на удалённой горе. Спутникам всё равно. Они просто передают.</p>
+  </div>
+</div>
+
+<!-- Why GPS itself needs no internet -->
+<div class="content-block">
+  <div class="container">
+    <h2>Почему самому GPS не нужен интернет</h2>
+    <p>GPS по своей сути является пассивной, только принимающей системой для конечных пользователей. Цепочка сигнала от спутников до вашего приёмника включает только радиоволны, проходящие через атмосферу. Никакого сетевого соединения, никаких серверов, никакого тарифа на данные.</p>
+    <p>Встроенная GPS-навигация в вашем автомобиле работала офлайн десятилетиями. Специализированные туристические GPS-устройства, такие как Garmin eTrex, всегда работали без сотовой связи. Авиационные навигационные системы вычисляют положение без подключения к интернету. Все они используют одни и те же сигналы спутников GPS — интернет не требуется.</p>
+    <p>Стандарт GPS даже намеренно избегает шифрования или контроля доступа в гражданском диапазоне сигналов (L1, 1575.42 МГц) — он специально разработан так, чтобы его мог принимать любой, у кого есть совместимый приёмник, в любой точке Земли, бесплатно.</p>
+    <p>Микросхема GPS-приёмника стоит несколько долларов. Она потребляет умеренное количество энергии. И она вычисляет точные координаты положения из ничего, кроме радиоволн из космоса — без подписки, без соединения, без облака.</p>
+  </div>
+</div>
+
+<!-- What DOES need internet -->
+<div class="content-block">
+  <div class="container">
+    <h2>Что ДЕЙСТВИТЕЛЬНО нуждается в интернете: большинство коммерческих GPS-трекеров</h2>
+    <p>Итак, если сам GPS работает офлайн, почему большинству GPS-трекеров нужен тариф на мобильные данные?</p>
+    <p>Ответ кроется во второй части проблемы: <strong>передача вашего местоположения с трекера на ваш телефон</strong>.</p>
+    <p>GPS сообщает трекеру, где он находится. Но трекер, находящийся в поле, на ошейнике собаки или на дроне, физически отделён от вас. Кто-то должен передать эти GPS-координаты на ваше устройство. Именно в этой передаче большинство производителей вводят зависимость от интернета.</p>
+    <p>Типичная архитектура сотового GPS-трекера:</p>
+    <ol>
+      <li>Микросхема GPS вычисляет координаты (офлайн, интернет не нужен)</li>
+      <li>Встроенная SIM-карта подключается к сотовой сети (требуется тариф на данные)</li>
+      <li>Координаты загружаются на облачный сервер производителя (требуется интернет)</li>
+      <li>Приложение на вашем телефоне запрашивает данные с облачного сервера через интернет (требуется интернет)</li>
+      <li>Приложение отображает местоположение на карте</li>
+    </ol>
+    <p>Шаги 2, 3 и 4 требуют интернет-инфраструктуры. Уберите сотовое покрытие — и вся цепочка разрывается после шага 1. Вот почему сотовые GPS-трекеры не работают в удалённых районах — не потому что GPS перестал работать, а потому что слой передачи данных потерял связь.</p>
+    <p><strong>Это архитектурный выбор, а не техническая необходимость.</strong> Существует другой способ передачи GPS-координат без интернета.</p>
+  </div>
+</div>
+
+<!-- How LoRa replaces cellular -->
+<div class="content-block">
+  <div class="container">
+    <h2>Как LoRa заменяет сотовую связь для передачи координат</h2>
+    <p>Радио LoRa (Long Range) — это альтернативная технология передачи, которая может передавать данные GPS-координат на большие расстояния без какой-либо сотовой инфраструктуры.</p>
+    <p>LoRa использует нелицензируемые ISM-радиодиапазоны (868 МГц в Европе, 915 МГц в Северной Америке) для передачи небольших пакетов данных — включая GPS-координаты — напрямую с одного устройства на другое. Это точка-точка радио, аналогичная по концепции рации, но с гораздо большей дальностью и гораздо меньшим энергопотреблением.</p>
+    <p>Радио LoRa, передающее на мощности 14 дБм, может надёжно отправлять пакет GPS-координат на расстояние 15–20 км по открытой местности. Приёмнику не нужно быть подключённым к интернету, сотовой вышке или какой-либо инфраструктуре. Ему просто нужно находиться в радиусе действия.</p>
+    <p>Именно это и делает Loko. GPS-координаты, вычисленные трекером Loko Air, передаются по LoRa на приёмник Loko Ground в вашей руке — полностью минуя интернет. Слой передачи данных так же офлайновый, как и слой приёма GPS.</p>
+  </div>
+</div>
+
+<!-- The full offline chain -->
+<div class="content-block">
+  <div class="container">
+    <h2>Полная офлайн-цепочка: от спутника до экрана</h2>
+    <p>Вот полный путь сигнала в системе Loko — обратите внимание, что каждый этап представляет собой локальное радио без участия интернета:</p>
+
+    <div class="chain-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Спутники GPS / ГЛОНАСС / Galileo</h3>
+        <p>31+ спутников передают радиосигналы с метками времени с высоты 20 000 км. Без интернета. Односторонняя передача, бесплатна для всех.</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>GPS-приёмник Loko Air</h3>
+        <p>Трекер весом менее 15 г принимает сигналы от нескольких спутниковых созвездий и вычисляет точные координаты. Вся обработка локальная, сеть не требуется.</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Радиопередача LoRa</h3>
+        <p>Loko Air передаёт пакет координат через радио LoRa. Прямая передача точка-точка на расстояние до 20 км. Без SIM-карты, без сотовой сети, без интернета.</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Приёмник Loko Ground</h3>
+        <p>Принимает пакет LoRa, декодирует координаты. Карманное устройство, которое вы носите с собой. Всё ещё без интернета.</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">5</div>

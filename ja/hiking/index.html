@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>ハイキング用GPSトラッカー — 携帯電話の電波不要 | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="奥地で迷った？ Loko GPSトラッカーは携帯電波ゼロでも動作 — LoRa無線、20km通信距離、最大1年のバッテリー。本格的なハイカーとトレイルランナーのために作られました。" name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="ハイキング用GPSトラッカー — 携帯電話の電波不要 | nolilab" property="og:title"/>
+<meta content="奥地で迷った？ Loko GPSトラッカーは携帯電波ゼロでも動作 — LoRa無線、20km通信距離、最大1年のバッテリー。本格的なハイカーとトレイルランナーのために作られました。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/hiking/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Loko GPS Tracker for Hiking" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ja_JP" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="ハイキング用GPSトラッカー — 携帯電話の電波不要 | nolilab" name="twitter:title"/>
+<meta content="奥地で迷った？ Loko GPSトラッカーは携帯電波ゼロでも動作 — LoRa無線、20km通信距離、最大1年のバッテリー。本格的なハイカーとトレイルランナーのために作られました。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="GPS tracker hiking, hiking GPS no cell service, backcountry GPS tracker, trail GPS no signal, offline hiking tracker" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/ja/hiking/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/hiking/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/hiking/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "ハイキング中にLokoを動作させるのに携帯電話の電波は必要ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いいえ。LokoはLoRa無線技術を使用しており、セルラーネットワークを一切介さずにトラッカーと基地局の間で直接通信します。携帯電話の電波がまったくない場所でも、GPS衛星が見えれば（事実上すべての屋外環境で見えます）、Lokoは完全に動作します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "山岳地形でのLokoの追跡距離はどのくらいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "開けた尾根や高山の台地では、15–20kmの通信距離に達します。密林では2–5kmを想定してください。深い谷や渓谷では、通信距離は1–3kmに低下する可能性があります。これらの距離でも、ほとんどのハイキングやトレイルランニングのシナリオを効果的にカバーします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "複数日にわたるハイキングでのLokoのバッテリーはどのくらい持ちますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko Airは1回の充電で最大1年間動作します。ほとんどの複数日ハイキング — 1週間の遠征でも — 旅の途中で充電する必要はありません。これは、LoRa無線がセルラーよりも劇的に少ない電力しか消費せず、Lokoのファームウェアが送信間のディープスリープに最適化されているためです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Lokoでハイキング仲間を追跡できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。1人がLoko Groundレシーバーを携帯し、複数のLoko Airユニットを同時に追跡できます。これにより、Lokoはグループハイキングに適しています — 仲間が道から外れたり、問題に遭遇したりした場合、アプリのオフラインマップでその位置を確認できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ハイキング中にLokoはどこに取り付けられますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko Airは15gと軽量で、リュックサックのショルダーストラップにクリップで留めたり、ギアに取り付けたり、胸ポケットに入れたり、トレッキングポールに取り付けたりできます。犬とハイキングする場合は、犬の首輪に取り付けることもできます。小さなサイズと軽量さのため、ほとんど気になりません。"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "ハイキング用GPSトラッカー", "item": "https://www.nolilab.com/hiking/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--spacing-sm) 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .compare-table thead { background: var(--bg-secondary); border-bottom: 2px solid var(--border); }
+  .compare-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8125rem; }
+  .compare-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 500; color: var(--text-primary); }
+  .yes { color: var(--accent); font-weight: 700; }
+  .no { color: #cf222e; font-weight: 700; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.5rem 0.6rem; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">ショップ</a>
+      <a href="/specifications/" class="nav-link">仕様</a>
+      <a href="/software/" class="nav-link">ソフトウェア</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">ブログ</a>
+      <a href="/firmware/" class="nav-link">ファームウェア</a>
+      <a href="/setup-guides/" class="nav-link">セットアップ</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">お問い合わせ</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="言語を選択">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="メニューを切り替え">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>携帯電話の電波不要なハイキング用GPSトラッカー</h1>
+    <p class="subtitle">最も重要なトレイルは、携帯電話の電波がゼロの場所にあるから</p>
+    <p>ほとんどのハイカーは、GPSトラッカーの最大の限界を最悪の瞬間に発見します：奥地の深く、救助から何マイルも離れ、携帯電話の電波がない場所です。その時点で、セルラー式GPSトラッカーは高価な文鎮と化します。</p>
+    <p><strong>Loko GPSトラッカーは、まさにこのシナリオのために作られました。</strong> LoRa無線 — 遠隔地での科学者や緊急サービスの使用するものと同じ長距離無線技術 — を使用して、Lokoはセルラー基地局に一切依存せずに、あなたの位置、ギア、またはハイキング仲間を追跡します。</p>
+    <p>携帯電話の電波はゼロ。Lokoの追跡はフル。</p>
+  </div>
+</div>
+
+<!-- Why cell-based GPS trackers fail on trails -->
+<div class="content-block">
+  <div class="container">
+    <h2>セルラー式GPSトラッカーがトレイルで失敗する理由</h2>
+    <p>消費者のGPSトラッカーの大半 — ペットトラッカーから個人用安全装置まで — は、位置情報をクラウドサーバーに送信するためにセルラー（4G/LTE）無線を使用しています。あなたの携帯電話はその後、インターネット経由でサーバーからその位置情報を取得します。</p>
+    <p>このアーキテクチャには厳しい依存関係があります：トラッカーの場所でセルラー電波が必要です。トラッカーが圏外に入った瞬間 — 事実上すべての本格的なハイキングトレイルで起こること — 位置情報の更新は完全に停止します。</p>
+    <p>トレイルでの一般的な失敗シナリオ：</p>
+    <ul>
+      <li><strong>深い森林：</strong> 樹冠と地形が基地局を遮断し、電波はせいぜい断続的</li>
+      <li><strong>山岳の谷：</strong> セルラー信号は見通し線が必要；谷はしばしば基地局から完全に遮られる</li>
+      <li><strong>遠隔の国立公園：</strong> 多くの保護地域では意図的にセルラーインフラが制限されている</li>
+      <li><strong>国際的なトレイル：</strong> あなたの携帯電話プランは外国の山岳地帯でのローミングをカバーしていない可能性がある</li>
+      <li><strong>高高度の高山帯：</strong> 森林限界以上では、キャリアの電波はまばらで不安定</li>
+    </ul>
+    <p>Garmin inReachのような衛星メッセンジャー機器でさえ、サブスクリプション（月額$15–$65）が必要で、基本プランでは位置情報の更新は10分ごとにしか行われません。Lokoはサブスクリプション不要でリアルタイムに更新します。</p>
+  </div>
+</div>
+
+<!-- How Loko works on mountain terrain -->
+<div class="content-block">
+  <div class="container">
+    <h2>山岳地形でのLokoの動作方法</h2>
+    <p>Lokoは、2つのデバイスシステムを使用して、2点間に独自のプライベート無線ネットワークを作成します — インフラは不要です。</p>
+    <p>Loko Airトラッカー（15g）は、あなたのリュック、犬の首輪、またはハイキング仲間のギアに取り付けられます。衛星から直接GPS信号を受信し、正確な座標を計算し、LoRa無線でそれらをブロードキャストします。Loko Groundレシーバー — あなたまたはベースキャンプの仲間が携帯 — はこれらの送信をキャプチャし、Bluetooth経由で位置情報をLokoアプリにプッシュします。</p>
+    <p>すべてがリアルタイムで行われます。アプリはインターネットなしで動作するオフラインマップ上に位置を表示します。距離、方向、トラック履歴を確認できます — セルラーデータを1バイトも使用せずに。</p>
+    <p>LokoはGPS、GLONASS、Galileoの衛星コンステレーションを同時にサポートします。山岳地形では、複数の衛星システムを使用することで、複数の軌道面の衛星にアクセスできるため、測位精度と捕捉速度が劇的に向上します。</p>
+  </div>
+</div>
+
+<!-- Range in different terrains -->
+<div class="content-block">
+  <div class="container">
+    <h2>さまざまなハイキング地形でのLoRa通信距離</h2>
+    <p>LoRa無線の通信距離は、主に見通し条件と地形障害に依存します。実際のハイキング環境での期待値は以下の通りです：</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>地形タイプ</th>
+          <th>期待通信距離</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>開けた尾根 / 高山の台地</td>
+          <td>15–20 km</td>
+          <td>最良ケース、ほぼ見通し線</td>
+        </tr>
+        <tr>
+          <td>開けた草原 / 草地</td>
+          <td>10–15 km</td>
+          <td>障害物最小</td>
+        </tr>
+        <tr>
+          <td>混合林（落葉樹）</td>
+          <td>3–6 km</td>
+          <td>葉が信号を減衰、冬の落葉樹は良好</td>
+        </tr>
+        <tr>
+          <td>密な針葉樹林</td>
+          <td>2–5 km</td>
+          <td>常緑樹の樹冠が信号を吸収</td>
+        </tr>
+        <tr>
+          <td>谷 / 渓谷</td>
+          <td>1–3 km</td>
+          <td>地形が見通し線を遮断</td>
+        </tr>
+        <tr>
+          <td>峡谷 / 急峻な渓谷</td>
+          <td>0.5–2 km</td>
+          <td>地形の形状に大きく依存</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>最小距離でも、Lokoは1–2kmの半径をカバーします — これは、道から外れたハイキング仲間や犬を追跡するのに依然として効果的です。開けた地形での最大距離では、20kmは日帰りハイキング全体とほとんどの奥地ルートを容易にカバーします。</p>
+    <p>グループ使用では、Loko Groundレシーバーを最高地点（尾根、丘の頂上）に配置することで、下の谷への実効的な追跡距離が劇的に延長されます。</p>
+  </div>
+</div>
+
+<!-- Battery life for multi-day trips -->
+<div class="content-block">
+  <div class="container">
+    <h2>複数日旅行のためのバッテリー寿命</h2>
+    <p>Loko Airは<strong>1回の充電で最大1年間動作します</strong>。これにより、充電なしで複数日、さらには複数週間の遠征にも実際に実用的です。</p>
+    <p>この卓越したバッテリー寿命の理由は、LoRa無線の根本的な効率性にあります。セルラーモデムが送信中に200–500ミリアンペアを消費する一方で、LoRa送信機はピーク時でもわずか20–40mA、スリープモードでは1マイクロアンペア未満しか消費しません。Lokoのファームウェアは、GPSを取得して送信するためにのみ起動する — ミリ秒単位のサイクル — というディープスリープ状態にほとんどの時間を費やします。</p>
+    <p>一般的なハイキング旅行のための実用的なバッテリー計画：</p>
+    <ul>
+      <li><strong>日帰りハイキング（1–2日）：</strong> バッテリー消費は無視でき、問題なし</li>
+      <li><strong>週末旅行（2–4日）：</strong> バッテリーの約5–15%を使用</li>
+      <li><strong>1週間の遠征：</strong> バッテリーの約20–25%を使用</li>
+      <li><strong>1か月にわたる縦走：</strong> 旅行の終わり近くにバッテリーが完全に消耗 — バックアップとして小型のパワーバンクを持参</li>
+    </ul>
+    <p>これを、通常1–7日しか持たず、野外での充電ソリューションが必要なセルラー式GPSトラッカーと比較してください — 軽量ハイキングキットにとって大きな負担です。</p>
+  </div>
+</div>
+
+<!-- What to attach it to -->
+<div class="content-block">
+  <div class="container">
+    <h2>ハイキング中にLokoをどこに取り付けるか</h2>
+    <p>15gのLoko Airは、重量やバランスに影響を与えずに、事実上どんなハイキングギアにも取り付けられるほど軽量です：</p>
+    <ul>
+      <li><strong>リュックサックのショルダーストラップ：</strong> GPSの空が見える位置とLoRa送信に理想的。MOLLEウェビングやショルダーストラップのループに簡単にクリップできます。</li>
+      <li><strong>チェストハーネスのポケット：</strong> 近くに置き、アクセスしやすく。高い位置から良好なGPSの見通し線が得られます。</li>
+      <li><strong>犬の首輪またはハーネス：</strong> 犬とハイキングする場合は、Loko Airを首輪に取り付けます。あなたがリュックにLoko Groundレシーバーを携帯している間、携帯電話で犬をリアルタイムに追跡できます。</li>
+      <li><strong>トレッキングポールのグリップ：</strong> 型破りですが効果的 — GPSの空が見えやすく、手が自由になります。</li>
+      <li><strong>リュックの外部メッシュポケット：</strong> 素早くアクセスでき、視認性が良い。GPS信号が減衰する可能性があるリュックの奥深くに埋め込むのは避けてください。</li>
+    </ul>
+    <p>Loko Groundレシ

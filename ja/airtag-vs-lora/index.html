@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>AirTag vs LoRa GPSトラッカー — どちらが優れているか？ | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="AirTagは動作するために近くのiPhoneに依存します。LoRa GPSトラッカーはどこでも動作します — 近くに電話は不要、月額料金なし、20kmの通信範囲。完全な比較をご覧ください。" name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="AirTag vs LoRa GPSトラッカー — どちらが優れているか？ | nolilab" property="og:title"/>
+<meta content="AirTagは動作するために近くのiPhoneに依存します。LoRa GPSトラッカーはどこでも動作します — 近くに電話は不要、月額料金なし、20kmの通信範囲。完全な比較をご覧ください。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/airtag-vs-lora/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="AirTag vs LoRa GPSトラッカー比較" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ja_JP" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="AirTag vs LoRa GPSトラッカー — どちらが優れているか？ | nolilab" name="twitter:title"/>
+<meta content="AirTagは動作するために近くのiPhoneに依存します。LoRa GPSトラッカーはどこでも動作します — 近くに電話は不要、月額料金なし、20kmの通信範囲。完全な比較をご覧ください。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="AirTag vs GPSトラッカー, AirTag vs LoRa, AirTagの代替品, iPhoneなしのGPSトラッカー, AirTagの範囲制限" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/ja/airtag-vs-lora/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/airtag-vs-lora/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/airtag-vs-lora/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "AirTagとLoRa GPSトラッカーの主な違いは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AirTagはBluetoothとAppleのクラウドソーシングされたFind Myネットワークを使用します — 位置情報を中継するために近くのiPhoneに依存します。LokoのようなLoRa GPSトラッカーは、実際のGPS衛星と専用の長距離無線リンクを使用します。Lokoは、近くに電話や人がいない遠隔地でも動作します。AirTagはそうではありません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AirTagは遠隔地や森林で動作しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いいえ。AirTagは、タグのBluetooth範囲（約10m）内を歩く他のiPhoneユーザーに依存します。遠隔の森林、山道、または田舎の農場では、何マイルも周りに誰もいないかもしれません。このような環境では、AirTagは実質的に動作を停止します。Loko GPSトラッカーは、GPS衛星が見える場所ならどこでも動作します — 人は必要ありません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AirTagにはGPSが搭載されていますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いいえ。AirTagにはGPSチップは含まれていません。近くのiPhoneと通信するためにBluetooth Low Energyを使用し、それらのiPhoneが自身のGPSを使用しておおよその位置を報告します。これは、衛星信号から直接自身の座標を計算する真のGPSトラッカーとは根本的に異なります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AirTagとLokoの実効範囲はどれくらいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AirTagの直接の精密探知範囲は、Ultra Widebandを使用して約30〜100メートルです。そのクラウドソーシングされたFind Myの範囲は理論上無制限ですが、他のiPhoneがたまたま通りかかったときにのみ機能します。Lokoは、開けた地形で最大20kmの直接無線範囲を持ち、他の人のデバイスから完全に独立しています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ペット、荷物、またはアウトドアギアの追跡にはどちらが優れていますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "それはあなたがどこにいるかによります。AirTagは、常にiPhoneユーザーが近くにいる密集した都市環境では優れています。遠隔地のペット、ハイキングギア、または人通りが少ない場所に置かれる可能性のあるものについては、LokoのようなLoRa GPSトラッカーの方がはるかに信頼性が高いです。なぜなら、他の人のデバイスに依存しないからです。"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "AirTag vs LoRa GPSトラッカー", "item": "https://www.nolilab.com/ja/airtag-vs-lora/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+
+  .nav-container {
+    max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+
+  .language-selector { margin-left: var(--spacing-sm); }
+
+  .language-btn {
+    display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem;
+    background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease;
+  }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+
+  .language-dropdown {
+    position: absolute; top: calc(100% + 0.5rem); right: 0;
+    background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden;
+    transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000;
+  }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  .language-option {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none;
+    transition: background 0.2s ease; border-bottom: 1px solid var(--border);
+  }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+
+  .mobile-menu-toggle {
+    display: none; flex-direction: column; gap: 4px; background: none; border: none;
+    cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto;
+  }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--spacing-sm) 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .compare-table thead { background: var(--bg-secondary); border-bottom: 2px solid var(--border); }
+  .compare-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8125rem; }
+  .compare-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 500; color: var(--text-primary); }
+  .yes { color: var(--accent); font-weight: 700; }
+  .no { color: #cf222e; font-weight: 700; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-sm); margin: var(--spacing-sm) 0; }
+  .verdict-card { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+  .verdict-card h3 { font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); margin-bottom: 0.75rem; }
+  .verdict-card ul { margin: 0 0 0 1.1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .verdict-card li { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; }
+
+  @media (max-width: 768px) {
+    .verdict-grid { grid-template-columns: 1fr; }
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links {
+      position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh;
+      background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem;
+      box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000;
+      overflow-y: auto; border-right: 1px solid var(--border);
+    }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.5rem 0.6rem; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">ショップ</a>
+      <a href="/specifications/" class="nav-link">仕様</a>
+      <a href="/software/" class="nav-link">ソフトウェア</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">ブログ</a>
+      <a href="/firmware/" class="nav-link">ファームウェア</a>
+      <a href="/setup-guides/" class="nav-link">セットアップ</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">お問い合わせ</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="言語を選択">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="メニューを切り替え">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>AirTag vs LoRa GPSトラッカー：正直な比較</h1>
+    <p class="subtitle">同じ問題をまったく異なる方法で解決する2つの非常に異なる技術</p>
+    <p>Apple AirTagは世界で最も人気のあるアイテムトラッカーの1つです。月額料金なしで29ドルという価格は、無敵の取引のように見えます。しかし、AirTagはGPSトラッカーではありません — そしてその区別は現実世界では非常に重要です。</p>
+    <p><strong>AirTagは、動作するために他の人のiPhoneに依存するBluetoothビーコンです。</strong> 都市部では、通常は問題ありません。ハイキングコース、遠隔の農場、またはiPhoneの通行量が多くない場所では、AirTagは完全に機能しなくなる可能性があります。</p>
+    <p>LokoのようなLoRa GPSトラッカーは異なる方法で動作します：実際のGPS衛星を測位に使用し、専用の長距離無線リンクを送信に使用します。クラウドソーシングなし、他のデバイスへの依存なし、デッドゾーンなし。</p>
+    <p>このページでは、正直な比較をお届けします。</p>
+  </div>
+</div>
+
+<!-- How AirTag works -->
+<div class="content-block">
+  <div class="container">
+    <h2>AirTagの動作方法 — そしてなぜ遠隔地で失敗するのか</h2>
+    <p>AirTagにはBluetooth Low Energy（BLE）無線と、近距離での精密な方向探知のためのUltra Wideband（UWB）チップが含まれています。GPSは含まれていません。実際にどのようにして位置情報を取得するのかをご説明します：</p>
+    <ol>
+      <li>AirTagは回転するBluetooth信号をブロードキャストします</li>
+      <li>iOS 14.5以降を実行している近くのiPhoneがその信号を静かに検出します</li>
+      <li>そのiPhoneは自身のGPSを使用して、AirTagを検出した場所を記録します</li>
+      <li>その位置は匿名でAppleのサーバーにアップロードされます</li>
+      <li>Find Myアプリで最後に検出された位置を確認できます</li>
+    </ol>
+    <p>このアーキテクチャ — クラウドソーシングされた位置情報と呼ばれる — は、iPhone密度が高い場所では見事に機能します。混雑した空港、ショッピングモール、または都市の近隣では、iPhoneはどこにでもあり、AirTagの位置は頻繁に更新されます。</p>
+    <p>致命的な欠陥は、文明を離れた瞬間に現れます。森林、山の谷、田舎の野原、または定期的なiPhoneの通行がない地域では、AirTagは何時間も、あるいは何日も検出されない可能性があります。あなたの犬が遠隔の森に走り込んだ場合、AirTagは最後に検出された位置 — それはあなたの私道かもしれません — を表示します。</p>
+    <p><strong>AirTagはまた、Appleデバイスでのみ動作します。</strong> AndroidユーザーはAirTagやFind Myネットワークをまったく使用できません。クラウドソーシングされたネットワークにはiPhoneのみが含まれます — Samsung、Google Pixel、その他のAndroidユーザーは参加しません。</p>
+  </div>
+</div>
+
+<!-- How LoRa GPS works -->
+<div class="content-block">
+  <div class="container">
+    <h2>LoRa GPSの動作方法 — 直接的、独立、どこでも</h2>
+    <p>LokoのようなLoRa GPSトラッカーは、インフラストラクチャや他の人のデバイスを必要としない、まったく異なるアーキテクチャを使用します。</p>
+    <p>信号チェーンは完全に自己完結しています：</p>
+    <ol>
+      <li>Loko Airトラッカーは、地球を周回する衛星から直接GPS信号を受信します</li>
+      <li>自身の正確な座標（緯度、経度、高度）を計算します</li>
+      <li>それらの座標をLoRa無線で直接あなたのLoko Groundレシーバーに送信します</li>
+      <li>Loko GroundはBluetooth経由でデータをあなたの電話に送信します</li>
+      <li>Lokoアプリはオフラインマップ上であなたの資産の位置を表示します</li>
+    </ol>
+    <p>このチェーンのどの段階でもインターネットは関与しません。クラウドサーバー、SIMカード、携帯電話ネットワーク、他の人の電話への依存はありません。Loko AirとLoko Groundの間の直接のLoRa無線リンクは、<strong>開けた地形で最大20km</strong> 動作します。</p>
+    <p>これは、ロンドン中心部にいても、遠隔のヒマラヤのトレイルにいても、Lokoが同じように動作することを意味します。唯一の要件は、GPS衛星が見えることです — それは、基本的に地球上のどこでも見えます。</p>
+  </div>
+</div>
+
+<!-- Big comparison table -->
+<div class="content-block">
+  <div class="container">
+    <h2>完全比較：AirTag vs Loko LoRa GPS</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>機能</th>
+          <th>Apple AirTag</th>
+          <th>Loko (LoRa GPS)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>技術</td>
+          <td>Bluetooth + UWB, クラウドソーシング</td>
+          <td>GPS + LoRa無線, 直接P2P</td>
+        </tr>
+        <tr>
+          <td>実際のGPSチップ搭載</td>
+          <td class="no">いいえ</td>
+          <td class="yes">はい</td>
+        </tr>
+        <tr>
+          <td>遠隔地で動作</td>
+          <td class="no">いいえ — 近くのiPhoneが必要</td>
+          <td class="yes">はい — どこでも動作</td>
+        </tr>
+        <tr>
+          <td>直接無線範囲</td>
+          <td>約100m Bluetooth</td>
+          <td>最大20km LoRa</td>
+        </tr>
+        <tr>
+          <td>月額費用</td>
+          <td class="yes">$0</td>
+          <td class="yes">$0</td>
+        </tr>
+        <tr>
+          <td>近くに電話がなくても動作</td>
+          <td class="no">いいえ</td>
+          <td class="yes">はい</td>
+        </tr>
+        <tr>
+          <td>リアルタイム更新</td>
+          <td>ネットワーク密度に依存</td>
+          <td class="yes">はい, 直接無線</td>
+        </tr>
+        <tr>
+          <td>Androidで動作</td>
+          <td class="no">いいえ</td>
+          <td class="yes">はい (iOS &amp; Android)</td>
+        </tr>
+        <tr>
+          <td>重量</td>
+          <td>11g</td>
+          <td>15g未満</td>
+        </tr>
+        <tr>
+          <td>バッテリー寿命</td>
+          <td>約1年 (CR2032)</td>
+          <td>最大1年</td>
+        </tr>
+        <tr>
+          <td>GPS衛星システムサポート</td>
+          <td>該当なし (GPSなし)</td>
+          <td>GPS, GLONASS, Galileo</td>
+        </tr>
+        <tr>
+          <td>オープンソースハードウェア</td>
+          <td class="no">いいえ</td>
+          <td class="yes">はい</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- When AirTag wins vs when Loko wins -->
+<div class="content-block">
+  <div class="container">
+    <h2>AirTagが勝つ場合 vs Lokoが勝つ場合</h2>
+    <div class="verdict-grid">
+      <div class="verdict-card">
+        <h3>AirTagが優れている場合：</h3>
+        <ul>
+          <li>iPhoneの通行量が多い密集した都市部にいる場合</li>
+          <li>可能な限り安価なハードウェア（29ドル）が欲しい場合</li>
+          <li>すでにAppleエコシステムに深く入っている場合</li>
+          <li>超精密な近距離方向探知（10m未満）が必要な場合</li>
+          <li>主要空港で荷物を追跡している場合</li>
+          <li>長期的な受動的追跡が許容される場合（リアルタイムではない）</li>
+        </ul>
+      </div>
+      <div class="verdict-card">
+        <h3>Loko LoRa GPSが優れている場合：</h3>
+        <ul>
+          <li>遠隔地、森林、または農場にいる場合</li>
+          <li>クラウドソーシングされた履歴ではなく、リアルタイムの位置更新が必要な場合</li>
+          <li>Android電話を使用している、またはiOSとAndroidを混在させている場合</li>
+          <li>実際の20kmの直接無線範囲が必要な場合</li>
+          <li>ペット、家畜、またはドローンを屋外で追跡している場合</li>
+          <li>周りに人がいなくてもトラッカーを動作させる必要がある場合</li>
+        </ul>
+      </div>
+    </div>
+    <p>正直なまとめ：AirTagは、トラッカーとして装った巧妙なBluetoothビーコンです。iPhoneがどこにでも

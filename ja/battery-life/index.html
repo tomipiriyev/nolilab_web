@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>GPSトラッカーのバッテリー駆動時間比較 — どれが最も長持ちする？ | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="ほとんどのGPSトラッカーは1〜7日間しか持ちません。Lokoは最大1年間持続します。バッテリー駆動時間の完全な比較と、LoRa無線が長いバッテリー寿命の鍵である理由をご覧ください。" name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="GPSトラッカーのバッテリー駆動時間比較 — どれが最も長持ちする？ | nolilab" property="og:title"/>
+<meta content="ほとんどのGPSトラッカーは1〜7日間しか持ちません。Lokoは最大1年間持続します。バッテリー駆動時間の完全な比較と、LoRa無線が長いバッテリー寿命の鍵である理由をご覧ください。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/battery-life/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="GPS Tracker Battery Life Comparison" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ja_JP" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPSトラッカーのバッテリー駆動時間比較 — どれが最も長持ちする？ | nolilab" name="twitter:title"/>
+<meta content="ほとんどのGPSトラッカーは1〜7日間しか持ちません。Lokoは最大1年間持続します。バッテリー駆動時間の完全な比較と、LoRa無線が長いバッテリー寿命の鍵である理由をご覧ください。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="GPS tracker battery life, longest battery GPS tracker, GPS tracker 1 year battery, LoRa GPS battery comparison" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/ja/battery-life/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/battery-life/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/battery-life/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "なぜほとんどのGPSトラッカーはバッテリー寿命が短いのですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ほとんどのGPSトラッカーは位置データを送信するためにセルラー（4G/LTE）無線を使用しています。セルラーモデムは送信中に200〜500ミリアンペアを消費します。これは非常に大きな電流であり、小型バッテリーを急速に消耗させます。積極的なスリープモードを採用していても、定期的なセルラーのウェイクアップにより、ポケットサイズのデバイスで数週間のバッテリー寿命を実現することは不可能です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Lokoはどのようにして最大1年のバッテリー寿命を実現していますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lokoはセルラーの代わりにLoRa無線を使用しています。LoRaの送信時のピーク電流はわずか20〜40ミリアンペアであり、セルラーの200〜500mAと比較して約10倍の送信電流削減となります。送信間のディープスリープモード（1マイクロアンペア未満の消費）と組み合わせることで、Lokoの平均消費電流はあらゆるセルラートラッカーよりも劇的に低くなります。その結果、小型の充電式バッテリーで最大1年の駆動が可能になります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Loko GPS Airはどのくらいの頻度で充電が必要ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "通常の更新間隔では、Loko Airは約1ヶ月に1回の充電が必要です。毎日または毎週充電が必要なセルラートラッカーと比較して、これは使い勝手の根本的な違いです。特に、犬の首輪、農場の車両、遠隔地に設置されたセンサーなど、トラッカーに頻繁にアクセスすることが不便な展開において重要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Lokoのバッテリー寿命をさらに延ばすことはできますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。オープンソースのファームウェアにより、GPS更新間隔を長く設定することができます。例えば、30秒ごとではなく5分ごとに送信するように設定すると、バッテリー寿命は数ヶ月の領域まで劇的に延びます。この更新頻度とバッテリー寿命のトレードオフは、完全にユーザーの制御下にあります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "寒冷地はGPSトラッカーのバッテリー寿命に影響しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。リチウム電池の容量は低温で減少します。0°Cで約20〜30%、-20°C以下で50%以上の減少が見込まれます。これはすべてのGPSトラッカーに同様に影響します。寒冷地での使用では、トラッカーを可能な限り体温に近い温度に保つようにしてください（例えば、積極的に追跡していないときはジャケットのポケットに入れるなど）。"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "GPSトラッカーのバッテリー駆動時間比較", "item": "https://www.nolilab.com/ja/battery-life/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--spacing-sm) 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .compare-table thead { background: var(--bg-secondary); border-bottom: 2px solid var(--border); }
+  .compare-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8125rem; }
+  .compare-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 500; color: var(--text-primary); }
+  .yes { color: var(--accent); font-weight: 700; }
+  .no { color: #cf222e; font-weight: 700; }
+  .highlight-row td { background: rgba(35, 134, 54, 0.05); }
+  .highlight-row td:first-child { color: var(--accent); font-weight: 700; }
+
+  .power-callout { background: var(--bg-secondary); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: var(--spacing-md); margin: var(--spacing-sm) 0; }
+  .power-callout p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+  .power-callout strong { color: var(--text-primary); }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.5rem 0.6rem; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">ショップ</a>
+      <a href="/specifications/" class="nav-link">仕様</a>
+      <a href="/software/" class="nav-link">ソフトウェア</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">ブログ</a>
+      <a href="/firmware/" class="nav-link">ファームウェア</a>
+      <a href="/setup-guides/" class="nav-link">セットアップ</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">お問い合わせ</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="言語を選択">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="メニューを切り替え">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>GPSトラッカーのバッテリー駆動時間比較：どれが最も長持ちする？</h1>
+    <p class="subtitle">1日から最大1年まで：なぜバッテリー寿命はこれほど劇的に異なるのか</p>
+    <p>バッテリー寿命は、GPSトラッカー市場において最も重要であり、かつ最も誤って表示されやすい仕様の一つです。「2日間バッテリー」から「1年間バッテリー」まで主張は様々ですが、この違いはバッテリー容量によるものではありません。無線送信のための根本的な技術選択によるものです。</p>
+    <p><strong>セルラーGPSトラッカーは1〜7日間持続します。</strong> LokoのようなLoRa GPSトラッカーは最大1年間持続します。この違いは、単一の要因に帰着します：無線送信機が消費する電力の量です。</p>
+    <p>このページでは、GPSトラッカーのバッテリー寿命の背後にある物理学と工学を説明し、実際の比較データを示し、Lokoが15gのデバイスで最大1年をどのように達成するかを正確にお伝えします。</p>
+  </div>
+</div>
+
+<!-- Why battery life varies so much -->
+<div class="content-block">
+  <div class="container">
+    <h2>なぜトラッカー間でバッテリー寿命がこれほど異なるのか</h2>
+    <p>GPSトラッカーには、主に2つの電力消費源があります：GPS受信チップと無線送信機です。このうち、無線送信機が総電力消費を大幅に支配しています。</p>
+    <p>GPSチップ自体は比較的効率的です。最新のマルチコンステレーション受信機は、アクティブな位置計算中に約15〜30mAを消費し、測位間のスリープ電流をマイクロアンペアレベルまで下げることができます。GPS単体が問題なのではありません。</p>
+    <p>問題は、GPS測位が計算された後に起こることです：座標はあなたの電話機に送信される必要があります。そして、その送信のための無線技術の選択が、他のどの要因よりもバッテリー寿命を決定します。</p>
+    <p><strong>セルラー（4G/LTE）送信：</strong></p>
+    <ul>
+      <li>セルラーネットワークに接続する必要があり、ハンドシェイクと認証が必要です</li>
+      <li>アクティブ送信中の典型的な消費電流：<strong>200〜500ミリアンペア（mA）</strong></li>
+      <li>下限（200mA）であっても、セルラーモデムは200個の典型的なLEDを同時に点灯させるのと同じ電流を消費します</li>
+      <li>各接続サイクル（ウェイクアップ、接続、認証、送信、切断）には、数秒間の高電流消費が必要です</li>
+      <li>頻繁な更新（30秒ごと）では、小型バッテリーは1〜3日で消耗します</li>
+    </ul>
+    <p><strong>LoRa無線送信：</strong></p>
+    <ul>
+      <li>ネットワーク接続は不要です。トランシーバーのような直接放送です</li>
+      <li>送信中の典型的な消費電流：<strong>20〜40ミリアンペア（mA）</strong></li>
+      <li>送信間のスリープ電流：<strong>1マイクロアンペア（μA）未満</strong> — 実質的にゼロです</li>
+      <li>各送信は数秒ではなく、ミリ秒単位で完了します</li>
+      <li>電力予算はセルラーよりも10〜25倍効率的です</li>
+    </ul>
+    <p>これは小さな違いではありません。1桁から2桁の違いです。そしてそれは直接バッテリー寿命に反映されます。</p>
+  </div>
+</div>
+
+<!-- Battery comparison table -->
+<div class="content-block">
+  <div class="container">
+    <h2>GPSトラッカーのバッテリー駆動時間比較</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>トラッカー</th>
+          <th>バッテリー寿命</th>
+          <th>無線技術</th>
+          <th>年間充電回数</th>
+          <th>月額料金</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td>Loko Air (nolilab)</td>
+          <td>最大1年間</td>
+          <td>LoRa (LPWAN)</td>
+          <td>~12回</td>
+          <td>$0</td>
+        </tr>
+        <tr>
+          <td>Tractive DOG LTE</td>
+          <td>2〜7日間</td>
+          <td>4G LTE セルラー</td>
+          <td>52〜180回</td>
+          <td>$9.99</td>
+        </tr>
+        <tr>
+          <td>Garmin Alpha TT15 Mini</td>
+          <td>~20時間（アクティブ時）</td>
+          <td>MURS VHF 無線</td>
+          <td>~180回</td>
+          <td>$0</td>
+        </tr>
+        <tr>
+          <td>Apple AirTag*</td>
+          <td>~12ヶ月</td>
+          <td>Bluetooth BLE</td>
+          <td>~1回（電池交換）</td>
+          <td>$0</td>
+        </tr>
+        <tr>
+          <td>Tile Mate*</td>
+          <td>~36ヶ月</td>
+          <td>Bluetooth BLE</td>
+          <td>~0.3回（電池交換）</td>
+          <td>$0 / $3</td>
+        </tr>
+        <tr>
+          <td>Garmin inReach Mini 2</td>
+          <td>14日間（1分間隔追跡）</td>
+          <td>Iridium 衛星通信</td>
+          <td>~26回</td>
+          <td>$15–$65</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>*AirTagとTile MateはBluetoothビーコンを使用しています。これらはGPSトラッカーではなく、近くの電話機に依存しないリアルタイム位置情報機能はありません。長いバッテリー寿命はBluetoothの極めて低い消費電力を反映していますが、遠隔地での追跡はできません。</p>
+    <p>Garmin inReach Mini 2はIridium衛星通信を使用しており、グローバルカバレッジを提供しますが、月額$15〜65のサブスクリプション料金と追跡モードでの2週間のバッテリー寿命となります。</p>
+    <p><strong>真のリアルタイムGPSトラッカーの中で、Lokoの最大1年のバッテリー寿命は、このサイズと価格帯において比類のないものです。</strong></p>
+  </div>
+</div>
+
+<!-- The math: cellular vs LoRa power -->
+<div class="content-block">
+  <div class="container">
+    <h2>計算：セルラー vs LoRaの電力消費</h2>
+    <p>この比較に具体的な数値を当てはめてみましょう。これらの数値は、トラッカーハードウェアからの実際の典型的な測定値に基づいています：</p>
+
+    <div class="power-callout">
+      <p><strong>セルラーGPSトラッカー、30秒ごとに更新：</strong><br/>
+      GPS測位：~20mA × 3秒 = 0.0167 mAh<br/>
+      セルラー接続 + 送信：~300mA × 5秒 = 0.417 mAh<br/>
+      サイクル間のスリープ：~0.1mA × 22秒 = 0.00061 mAh<br/>
+      <strong>30秒サイクルあたり：~0.43 mAh | 1日あたり：~51.8 mAh</strong><br/>
+      400mAhバッテリーの場合：約7.7日間</p>
+    </div>
+
+    <div class="power-callout">
+      <p><strong>Loko LoRa GPSトラッカー、30秒ごとに更新：</strong><br/>
+      GPS測位：~20mA × 3秒 = 0.0167 mAh<br/>
+      LoRa送信：~35mA × 0.1秒 = 0.001 mAh<br/>
+      サイクル間のディープスリープ：~0.001mA × 26.9秒 = 0.0000075 mAh<br/>
+      <strong>30秒サイクルあたり：~0.018 mAh | 1日あたり：~2.15 mAh</strong><br/>
+      400mAhバッテリーの場合：約186日間</p>
+    </div>
+
+    <p>数字が物語っています。同じ更新間隔と同様のバッテリー容量では、LoRaトラッカーはセルラートラッカーよりも約<strong>24倍長く</strong>持続します。これは特殊なケースではありません。無線物理学の基本的な結果です。</p>
+    <p>実際には、Lokoのバッテリー容量は15g未満のサイズに最適化されており、総容量が制限されています。実際の使用ケースによる更新間隔では、Lokoは一貫して最大1年を達成します。</p>
+  </div>
+</div>
+
+<!-- How Loko achieves up to 1 year -->
+<div class="content-block">
+  <div class="container">
+    <h2>Lokoが最大1年のバッテリー寿命を達成する方法</h2>
+    <

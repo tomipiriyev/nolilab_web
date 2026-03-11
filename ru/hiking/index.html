@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>GPS-трекер для пеших походов — без сигнала телефона | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Заблудились в глуши? GPS-трекер Loko работает без сотового покрытия — радио LoRa, дальность 20 км, батарея до 1 года. Создан для серьёзных туристов и трейлраннеров." name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="GPS Tracker for Hiking — No Phone Signal Needed | nolilab" property="og:title"/>
+<meta content="Lost in the backcountry? Loko GPS Tracker works with zero cell coverage — LoRa radio, 20km range, up to 1-year battery. Built for serious hikers and trail runners." property="og:description"/>
+<meta content="https://www.nolilab.com/ru/hiking/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Loko GPS Tracker for Hiking" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPS Tracker for Hiking — No Phone Signal Needed | nolilab" name="twitter:title"/>
+<meta content="Lost in the backcountry? Loko GPS Tracker works with zero cell coverage — LoRa radio, 20km range, up to 1-year battery. Built for serious hikers and trail runners." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="GPS tracker hiking, hiking GPS no cell service, backcountry GPS tracker, trail GPS no signal, offline hiking tracker" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/ru/hiking/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/hiking/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/hiking/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need cell service for Loko to work while hiking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Loko uses LoRa radio technology, which communicates directly between the tracker and the base station without any cellular network. You can be in a location with zero phone signal and Loko will work perfectly, as long as GPS satellites are visible (which they are in virtually all outdoor locations)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How far does Loko track on mountain terrain?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On open ridgelines or alpine plateaus, Loko reaches 15–20km range. In dense forest, expect 2–5km. In deep valleys or ravines, range may drop to 1–3km. These ranges still cover most hiking and trail running scenarios effectively."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does the Loko battery last on a multi-day hike?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko Air lasts up to 1 year on a single charge. For most multi-day hikes — even week-long expeditions — you will not need to recharge during the trip. This is because LoRa radio uses dramatically less power than cellular, and Loko's firmware is optimized for deep sleep between transmissions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I track a hiking partner with Loko?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. One person carries the Loko Ground receiver and can track multiple Loko Air units simultaneously. This makes Loko suitable for group hiking — if a partner strays off-trail or gets into trouble, you can see their location on the app's offline map."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I attach Loko on a hike?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko Air weighs 15g and can be attached to a backpack strap, clipped to gear, placed in a chest pocket, or mounted on a hiking pole. It can also be attached to a dog's collar if you are hiking with a dog. The small size and low weight mean you barely notice it."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "GPS Tracker for Hiking", "item": "https://www.nolilab.com/hiking/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--spacing-sm) 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .compare-table thead { background: var(--bg-secondary); border-bottom: 2px solid var(--border); }
+  .compare-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8125rem; }
+  .compare-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 500; color: var(--text-primary); }
+  .yes { color: var(--accent); font-weight: 700; }
+  .no { color: #cf222e; font-weight: 700; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.5rem 0.6rem; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">Магазин</a>
+      <a href="/specifications/" class="nav-link">Характеристики</a>
+      <a href="/software/" class="nav-link">Программное обеспечение</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">ЧаВо</a>
+      <a href="/blog/" class="nav-link">Блог</a>
+      <a href="/firmware/" class="nav-link">Прошивка</a>
+      <a href="/setup-guides/" class="nav-link">Настройка</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">Контакты</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="Select language">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>GPS-трекер для пеших походов без сигнала телефона</h1>
+    <p class="subtitle">Потому что самые важные тропы — те, где нет сотового покрытия</p>
+    <p>Большинство туристов обнаруживают главный недостаток своего GPS-трекера в самый неподходящий момент: в глуши, за много миль от помощи, без сотового сигнала. В этот момент сотовый GPS-трекер превращается в дорогой пресс-папье.</p>
+    <p><strong>GPS-трекер Loko создан именно для такого сценария.</strong> Используя радио LoRa — ту же технологию дальней радиосвязи, которую применяют учёные и экстренные службы в удалённых районах — Loko отслеживает ваше местоположение, снаряжение или спутника похода, не полагаясь ни на одну сотовую вышку.</p>
+    <p>Ноль полосок на телефоне. Полное отслеживание на Loko.</p>
+  </div>
+</div>
+
+<!-- Why cell-based GPS trackers fail on trails -->
+<div class="content-block">
+  <div class="container">
+    <h2>Почему сотовые GPS-трекеры подводят на тропах</h2>
+    <p>Подавляющее большинство потребительских GPS-трекеров — от трекеров для питомцев до персональных устройств безопасности — используют сотовое радио (4G/LTE) для отправки своего местоположения на облачный сервер. Ваш телефон затем получает это местоположение с сервера через интернет.</p>
+    <p>Эта архитектура имеет жёсткую зависимость: она требует сотового покрытия в месте нахождения трекера. Как только ваш трекер попадает в мёртвую зону — что происходит практически на каждой серьёзной пешей тропе — обновления местоположения полностью прекращаются.</p>
+    <p>Типичные сценарии сбоя на тропах:</p>
+    <ul>
+      <li><strong>Глухой лес:</strong> Кроны деревьев и рельеф блокируют вышки, покрытие в лучшем случае прерывистое</li>
+      <li><strong>Горные долины:</strong> Сотовые сигналы распространяются в пределах прямой видимости; долины часто полностью экранированы от вышек</li>
+      <li><strong>Удалённые национальные парки:</strong> Во многих охраняемых зонах намеренно ограничена сетевая инфраструктура</li>
+      <li><strong>Международные маршруты:</strong> Ваш тариф может не покрывать роуминг в зарубежных горах</li>
+      <li><strong>Высокогорные альпийские зоны:</strong> Выше границы леса покрытие операторов скудное и нестабильное</li>
+    </ul>
+    <p>Даже спутниковые мессенджеры, такие как Garmin inReach, требуют подписки ($15–$65/месяц) и на базовых тарифах обновляют местоположение только каждые 10 минут. Loko обновляет в реальном времени без какой-либо подписки.</p>
+  </div>
+</div>
+
+<!-- How Loko works on mountain terrain -->
+<div class="content-block">
+  <div class="container">
+    <h2>Как Loko работает в горной местности</h2>
+    <p>Loko использует систему из двух устройств, которая создаёт свою собственную частную радиосеть между двумя точками — без необходимости в инфраструктуре.</p>
+    <p>Трекер Loko Air (15 г) находится на вашем рюкзаке, ошейнике собаки или снаряжении вашего спутника. Он принимает сигналы GPS напрямую со спутников, вычисляет точные координаты и передаёт их по радио LoRa. Приёмник Loko Ground — который несёте вы или ваш партнёр в базовом лагере — улавливает эти передачи и отправляет местоположение в приложение Loko через Bluetooth.</p>
+    <p>Всё происходит в реальном времени. Приложение показывает позицию на офлайн-карте, которая работает без интернета. Вы можете видеть расстояние, направление и историю трека — всё без единого байта сотовых данных.</p>
+    <p>Loko поддерживает одновременную работу со спутниковыми группировками GPS, GLONASS и Galileo. В горной местности использование нескольких спутниковых систем значительно повышает точность позиционирования и скорость фиксации, поскольку у вас есть доступ к спутникам на нескольких орбитальных плоскостях.</p>
+  </div>
+</div>
+
+<!-- Range in different terrains -->
+<div class="content-block">
+  <div class="container">
+    <h2>Дальность LoRa в различных типах походной местности</h2>
+    <p>Дальность радиосвязи LoRa в первую очередь зависит от условий прямой видимости и препятствий рельефа. Вот чего ожидать в реальных походных условиях:</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Тип местности</th>
+          <th>Ожидаемая дальность</th>
+          <th>Примечания</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Открытый гребень / альпийское плато</td>
+          <td>15–20 км</td>
+          <td>Наилучший случай, почти прямая видимость</td>
+        </tr>
+        <tr>
+          <td>Открытый луг / степь</td>
+          <td>10–15 км</td>
+          <td>Минимальные препятствия</td>
+        </tr>
+        <tr>
+          <td>Смешанный лес (лиственный)</td>
+          <td>3–6 км</td>
+          <td>Листва ослабляет сигнал, голые зимние деревья лучше</td>
+        </tr>
+        <tr>
+          <td>Густой хвойный лес</td>
+          <td>2–5 км</td>
+          <td>Вечнозелёный полог поглощает часть сигнала</td>
+        </tr>
+        <tr>
+          <td>Долина / ущелье</td>
+          <td>1–3 км</td>
+          <td>Рельеф блокирует прямую видимость</td>
+        </tr>
+        <tr>
+          <td>Каньон / крутое ущелье</td>
+          <td>0.5–2 км</td>
+          <td>Сильно зависит от геометрии</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Даже при минимальной дальности Loko покрывает радиус 1–2 км — что всё ещё эффективно для отслеживания спутника похода или собаки, которые сошли с тропы. При максимальной дальности на открытой местности 20 км легко покрывают целые дневные походы и большинство маршрутов в глуши.</p>
+    <p>Для группового использования размещение приёмника Loko Ground в самой высокой точке (гребень, вершина холма) значительно расширяет эффективную дальность отслеживания в долины ниже.</p>
+  </div>
+</div>
+
+<!-- Battery life for multi-day trips -->
+<div class="content-block">
+  <div class="container">
+    <h2>Время работы батареи для многодневных походов</h2>
+    <p>Loko Air работает <strong>до 1 года от одной зарядки</strong>. Это делает его по-настоящему практичным для многодневных и даже многонедельных экспедиций без подзарядки.</p>
+    <p>Причина такого исключительного времени работы — фундаментальная эффективность радио LoRa. В то время как сотовый модем потребляет 200–500 миллиампер во время передачи, передатчик LoRa потребляет всего 20–40 мА на пике и менее 1 микроампера в спящем режиме. Прошивка Loko проводит подавляющую часть времени в глубоком сне, пробуждаясь только для получения GPS и передачи — цикл, который занимает миллисекунды.</p>
+    <p>Практическое планирование заряда для типичных походов:</p>
+    <ul>
+      <li><strong>Дневной поход (1–2 дня):</strong> Незначительный расход батареи, беспокоиться не о чем</li>
+      <li><strong>Выходные (2–4 дня):</strong> Использует примерно 5–15% заряда</li>
+      <li><strong>Недельная экспедиция:</strong> Использует примерно 20–25% заряда</li>
+      <li><strong>Месячный переход:</strong> Полный заряд истощается ближе к концу похода — возьмите небольшой пауэрбанк в качестве резерва</li>
+    </ul>
+    <p>Сравните это с сотовыми GPS-трекерами, которые обычно работают 1–7 дней и требуют решения для зарядки в полевых условиях — значительная обуза для лёгкого походного снаряжения.</p>
+  </div>
+</div>
+
+<!-- What to attach it to -->
+<div class="content-block">
+  <div class="container">
+    <h2>К чему крепить Loko в походе</h2>
+    <p>При весе 15 г Loko Air достаточно лёгкий, чтобы прикрепить его практически к чему угодно в вашем походном снаряжении, не влияя на вес или баланс:</p>
+    <ul>
+      <li><strong>Плечевой ремень рюкзака:</strong> Идеальное положение для видимости неба GPS и передачи LoRa. Легко крепится к MOLLE-сетке или петлям на ремне.</li>
+      <li><strong>Карман нагрудного ремня:</strong> Держите его близко и под рукой. Хорошая прямая видимость для GPS с приподнятой позиции.</li>
+      <li><strong>Ошейник или шлейка собаки:</strong> Если вы ходите в поход с собакой, прикрепите Loko Air к ошейнику. Отслеживайте свою собаку в реальном времени на телефоне, пока вы несёте приёмник Loko Ground в рюкзаке.</li>
+      <li><strong>Ручка треккинговой палки:</strong> Необычно, но эффективно — отличная видимость неба для GPS, руки остаются свободными.</li>
+      <li><strong>Внешний сетчатый карман рюкзака:</strong> Быстрый доступ, хорошая видимость. Избегайте закапывать его глубоко внутри рюкзака, где сигнал GPS может быть ослаблен.</li>
+    </ul>
+    <p>Приёмник Loko Ground немного больше, но всё равно карманного размера. Он связывается с вашим телефоном через Bluetooth, поэтому ваш телефон может оставаться в рюкзаке во время похода — приложение обновляется в фоновом режиме.</p>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="content-block">
+  <div class="container">
+    <h2>Часто задаваемые вопросы</h2>
+
+    <div class="faq-item">
+      <h3>Нужен ли сотовый сигнал для работы Loko во время похода?</h3>
+      <p>Нет. Loko использует технологию радио LoRa, которая обеспечивает прямую связь между трекером и базовой станцией без какой-либо сотовой сети. Вы можете находиться в месте с нулевым сигналом телефона, и Loko будет работать идеально, пока видны

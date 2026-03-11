@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>Tamleykha Piriyev — 寄稿者 | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Tamleykha Piriyevは、nolilabのGPSトラッキングおよびLoRa無線技術ライターです。オフラインGPSシステム、LoRaWAN統合、ドローントラッキング、農業機械用GPSについて執筆しています。" name="description"/>
+<meta content="index, follow" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/ja/author/tamleykha-piriyev/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/author/tamleykha-piriyev/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/author/tamleykha-piriyev/"/>
+<meta content="profile" property="og:type"/>
+<meta content="Tamleykha Piriyev — 寄稿者 | nolilab" property="og:title"/>
+<meta content="Tamleykha Piriyevは、nolilabのGPSトラッキングおよびLoRa無線技術ライターです。オフラインGPSシステム、LoRaWAN統合、ドローントラッキング、農業機械用GPSについて執筆しています。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/author/tamleykha-piriyev/" property="og:url"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Tamleykha Piriyev — 寄稿者 | nolilab" name="twitter:title"/>
+<meta content="Tamleykha Piriyevは、nolilabのGPSトラッキングおよびLoRa無線技術ライターです。オフラインGPSシステム、LoRaWAN統合、ドローントラッキング、農業機械用GPSについて執筆しています。" name="twitter:description"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Tamleykha Piriyev",
+  "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com"
+  },
+  "jobTitle": "テクニカルライター",
+  "knowsAbout": [
+    "GPS tracking",
+    "LoRa radio technology",
+    "LoRaWAN",
+    "GNSS systems",
+    "offline GPS tracking",
+    "drone tracking",
+    "IoT communication"
+  ],
+  "sameAs": [
+    "https://www.nolilab.com"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.nolilab.com" },
+    { "@type": "ListItem", "position": 2, "name": "ブログ", "item": "https://www.nolilab.com/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "Tamleykha Piriyev", "item": "https://www.nolilab.com/author/tamleykha-piriyev/" }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+  /* Header */
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { display: flex; align-items: center; justify-content: space-between; }
+  .logo {
+    font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono);
+    letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: var(--spacing-lg); }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .mobile-menu-toggle { display: none; }
+
+  /* Author hero */
+  .author-hero {
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+  }
+  .author-hero .container { display: flex; align-items: flex-start; gap: var(--spacing-lg); }
+  .author-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; font-weight: 600; color: var(--text-secondary);
+    flex-shrink: 0; font-family: var(--font-mono);
+  }
+  .author-info { flex: 1; }
+  .author-name { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .author-role { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.75rem; }
+  .author-bio {
+    font-size: 0.95rem; color: var(--text-secondary);
+    max-width: 640px; line-height: 1.65;
+  }
+  .author-topics {
+    margin-top: var(--spacing-sm);
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .author-topic {
+    display: inline-block; padding: 0.2rem 0.65rem;
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    font-size: 0.8rem; color: var(--text-secondary); background: var(--bg-secondary);
+  }
+
+  /* Post list */
+  .author-posts { padding: var(--spacing-xl) 0; }
+  .author-posts h2 {
+    font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+  }
+  .post-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .post-list-item {
+    border-top: 1px solid var(--border);
+    padding: var(--spacing-md) 0;
+  }
+  .post-list-item:last-child { border-bottom: 1px solid var(--border); }
+  .post-list-item a {
+    display: flex; align-items: baseline; justify-content: space-between;
+    text-decoration: none; color: inherit; gap: var(--spacing-md);
+  }
+  .post-list-item a:hover .post-title { color: var(--accent); }
+  .post-title { font-size: 0.95rem; font-weight: 500; line-height: 1.4; }
+  .post-date { font-size: 0.8rem; color: var(--text-secondary); white-space: nowrap; font-family: var(--font-mono); flex-shrink: 0; }
+
+  @media (max-width: 640px) {
+    .author-hero .container { flex-direction: column; }
+    .post-list-item a { flex-direction: column; gap: 0.25rem; }
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+<header>
+  <div class="container nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">ショップ</a>
+      <a href="/specifications/" class="nav-link">仕様</a>
+      <a href="/software/" class="nav-link">ソフトウェア</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">ブログ</a>
+      <a href="/firmware/" class="nav-link">ファームウェア</a>
+      <a href="/setup-guides/" class="nav-link">セットアップ</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">お問い合わせ</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="言語を選択">
+        <svg class="fa-globe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg class="fa-chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="メニューを切り替え"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+  <div class="author-hero">
+    <div class="container">
+      <div class="author-avatar">T</div>
+      <div class="author-info">
+        <h1 class="author-name">Tamleykha Piriyev</h1>
+        <p class="author-role">テクニカルライター · nolilab</p>
+        <p class="author-bio">
+          nolilabにてGPSトラッキング技術、LoRa無線システム、オフライン測位について執筆しています。
+          LoRaWAN統合、GNSS衛星コンステレーション、ドローントラッキング、
+          農業機械用GPS、およびLoko GPSトラッカーの背後にあるエンジニアリングについて書いています。
+        </p>
+        <div class="author-topics">
+          <span class="author-topic">GPS &amp; GNSS</span>
+          <span class="author-topic">LoRa P2P</span>
+          <span class="author-topic">LoRaWAN</span>
+          <span class="author-topic">オフライン追跡</span>
+          <span class="author-topic">ドローンGPS</span>
+          <span class="author-topic">農業機械</span>
+          <span class="author-topic">電波伝搬</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="author-posts">
+    <div class="container">
+      <h2>Tamleykha Piriyev の記事</h2>
+      <ul class="post-list">
+        <li class="post-list-item">
+          <a href="/blog/how-distance-affects-wireless-signal-range/">
+            <span class="post-title">距離が無線信号の到達範囲に与える影響</span>
+            <span class="post-date">Feb 7, 2026</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/how-to-upgrade-loko-firmware/">
+            <span class="post-title">Lokoファームウェアのアップグレード方法</span>
+            <span class="post-date">Jul 16, 2025</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/gps-tracking-for-farm-equipment/">
+            <span class="post-title">農業機械・車両向けGPSトラッキング究極ガイド</span>
+            <span class="post-date">Mar 30, 2025</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/lora-lorawan-a-simple-guide/">
+            <span class="post-title">LoRa &amp; LoRaWAN: シンプルガイド</span>
+            <span class="post-date">Mar 26, 2025</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/how-to-set-up-lorawan/">
+            <span class="post-title">LoRaWANのセットアップ方法</span>
+            <span class="post-date">May 22, 2024</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/radio-line-of-sight/">
+            <span class="post-title">無線の見通し距離</span>
+            <span class="post-date">Nov 21, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/">
+            <span class="post-title">電離層高度の日変化がGPS信号品質に与える影響</span>
+            <span class="post-date">Nov 21, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/what-are-lora-p2p-and-lorawan/">
+            <span class="post-title">LoRa P2PとLoRaWANとは？</span>
+            <span class="post-date">Nov 21, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/">
+            <span class="post-title">GPS無線の包括的ガイド: 特徴、メリット、応用</span>
+            <span class="post-date">Nov 24, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1/">
+            <span class="post-title">ミニドローン向け究極のGPSトラッカー</span>
+            <span class="post-date">Nov 24, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/how-loko-gps-trackers-long-range-communication-and-durability-make-it-perfect-for-outdoor-adventures/">
+            <span class="post-title">Lokoの長距離通信がアウトドアアドベンチャーに最適な理由</span>
+            <span class="post-date">Nov 24, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/">
+            <span class="post-title">Loko GPSトラッカー: GPS、GLONASS、Galileo衛星システム</span>
+            <span class="post-date">Oct 17, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/real-time-farm-equipment-tracking-made-easy-with-nolilabs-loko-gps-tracker/">
+            <span class="post-title">Lokoで実現する簡単リアルタイム農業機械トラッキング</span>
+            <span class="post-date">Nov 16, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/comparing-the-top-affordable-farm-equipment-gps-tracking-systems-1/">
+            <span class="post-title">手頃な価格の農業機械GPSトラッキングシステム比較</span>
+            <span class="post-date">Oct 16, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/exploring-the-benefits-of-radio-based-gps-tracking-with-nolilabs-loko-gps-tracker/">
+            <span class="post-title">無線ベースGPSトラッキングのメリットを探る</span>
+            <span class="post-date">Oct 16, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/maximize-tracking-capabilities-with-5km-range-and-30-days-battery-life-in-gps-trackers/">
+            <span class="post-title">5km範囲と最大1年のバッテリー寿命でGPSトラッキング能力を最大化</span>
+            <span class="post-date">Oct 16, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/why-drone-enthusiasts-should-consider-using-gps-trackers/">
+            <span class="post-title">ドローン愛好家がGPSトラッカーを検討すべき理由</span>
+            <span class="post-date">Oct 16, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/discover-the-worlds-smallest-gps-tracker-introducing-the-loko-gps-tracker-by-nolilab-1/">
+            <span class="post-title">世界最小のGPSトラッカーを発見 — nolilabのLoko</span>
+            <span class="post-date">Oct 12, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/enhance-the-safety-of-your-drone-flights-with-the-compact-loko-gps-tracker-by-nolilab-your-reliable-backup-tracking-solution/">
+            <span class="post-title">コンパクトなLoko GPSトラッカーでドローンフライトの安全性を向上</span>
+            <span class="post-date">Oct 12, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/enhance-your-outdoor-adventures-with-nolilabs-loko-gps-tracker/">
+            <span class="post-title">nolilabのLoko GPSトラッカーでアウトドアアドベンチャーを強化</span>
+            <span class="post-date">Oct 12, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/">
+            <span class="post-title">Lokoによる長距離通信: LoRa無線技術の力</span>
+            <span class="post-date">Oct 12, 2023</span>
+          </a>
+        </li>
+        <li class="post-list-item">
+          <a href="/blog/using-gps-tracking-for-effective-fleet-management-1/">
+            <span class="post-title">効果的なフリート管理のためのGPSトラッキング活用</span>
+            <span class="post-date">Oct 12, 2023</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>
+<div id="site-footer"></div>
+</body>
+</html>

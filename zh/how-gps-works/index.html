@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>GPS 如何在没有互联网的情况下工作 — 简单解释 | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="GPS 卫星不需要互联网 — 它们直接将信号广播给接收器。了解 GPS 如何离线工作，以及为什么大多数追踪器仍然需要蜂窝网络。" name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="GPS 如何在没有互联网的情况下工作 — 简单解释 | nolilab" property="og:title"/>
+<meta content="GPS 卫星不需要互联网 — 它们直接将信号广播给接收器。了解 GPS 如何离线工作，以及为什么大多数追踪器仍然需要蜂窝网络。" property="og:description"/>
+<meta content="https://www.nolilab.com/zh/how-gps-works/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="GPS 如何在没有互联网的情况下工作" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPS 如何在没有互联网的情况下工作 — 简单解释 | nolilab" name="twitter:title"/>
+<meta content="GPS 卫星不需要互联网 — 它们直接将信号广播给接收器。了解 GPS 如何离线工作，以及为什么大多数追踪器仍然需要蜂窝网络。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="how GPS works, GPS without internet, GPS offline, GPS satellites explained, how GPS trackers work" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/zh/how-gps-works/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/how-gps-works/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/how-gps-works/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "GPS 工作需要互联网吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不需要。GPS 卫星使用单向无线电传输持续广播信号 — 卫星不会从您的设备接收任何信息，也不涉及互联网。您的 GPS 接收器纯粹根据从多颗卫星接收到的信号的时间差来计算其位置。然而，大多数商用 GPS 追踪器仍然需要互联网或蜂窝网络来将该位置传输到您的手机。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "有多少颗 GPS 卫星？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "根据最近的统计，美国 GPS 星座有 31 颗在轨运行卫星。在地球表面的任何给定位置，您通常可以同时看到 6–12 颗卫星。GPS 设备至少需要 4 颗卫星才能进行 3D 定位（纬度、经度、海拔）。像 Loko 这样的现代追踪器使用多个星座 — GPS、GLONASS（俄罗斯，24 颗卫星）和 Galileo（欧盟，30 颗卫星）— 可同时访问 60 多颗卫星，以实现更快、更准确的定位。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如果 GPS 可以离线工作，为什么大多数 GPS 追踪器需要蜂窝网络？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPS 告诉追踪器它在哪里。但这个位置如何到达您的手机呢？大多数追踪器使用 SIM 卡和蜂窝数据将坐标发送到云服务器，然后您的手机通过互联网查询该服务器。GPS 本身是离线的，但传输层是蜂窝网络。Loko 用 LoRa 无线电取代了蜂窝网络 — 这是一种同样不需要互联网的直接无线电链路。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "GPS、GLONASS 和 Galileo 之间有什么区别？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPS 是美国的卫星导航系统（31 颗卫星）。GLONASS 是俄罗斯的对应系统（24 颗卫星）。Galileo 是欧盟的系统（截至 2024 年有 30 颗在轨运行卫星）。每个系统使用不同的频率和轨道平面。同时使用所有三个系统 — 正如 Loko 所做的那样 — 可以显著增加可见卫星的数量，提高定位精度，减少首次定位时间，并在某个星座几何条件较差的环境中保持跟踪。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Loko 如何完全离线工作？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko 的信号链在任何步骤都不涉及互联网：GPS/GLONASS/Galileo 卫星广播无线电信号 → Loko Air 的接收器计算坐标 → Loko Air 通过 LoRa 无线电（直接无线电链路，类似于对讲机）传输坐标 → Loko Ground 接收 LoRa 信号 → Loko Ground 通过蓝牙将坐标发送到您的手机 → Loko 应用程序在离线地图上显示位置。从卫星到屏幕，一切都是本地无线电。"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "GPS 如何在没有互联网的情况下工作", "item": "https://www.nolilab.com/how-gps-works/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .chain-step { display: flex; align-items: flex-start; gap: var(--spacing-sm); padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); }
+  .chain-step:last-child { border-bottom: none; }
+  .step-num { flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; font-family: var(--font-mono); }
+  .step-content h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+  .step-content p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">商店</a>
+      <a href="/specifications/" class="nav-link">规格</a>
+      <a href="/software/" class="nav-link">软件</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">常见问题</a>
+      <a href="/blog/" class="nav-link">博客</a>
+      <a href="/firmware/" class="nav-link">固件</a>
+      <a href="/setup-guides/" class="nav-link">设置</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">联系</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="选择语言">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="切换菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>GPS 如何在没有互联网或蜂窝服务的情况下工作</h1>
+    <p class="subtitle">GPS 卫星对互联网一无所知 — 而这正是关键所在</p>
+    <p>普遍存在一种误解，认为 GPS 工作需要互联网或蜂窝服务。事实并非如此。GPS 卫星的设计和发射比智能手机时代早了数十年，它们在一个完全独立的无线电系统上运行。</p>
+    <p>产生混淆的原因是 <strong>大多数商用 GPS 追踪器确实需要互联网才能将您的位置信息传送到您的手机</strong> — 但这是制造商的选择，而不是 GPS 本身的要求。理解这一区别是理解为什么 Loko GPS 追踪器在没有蜂窝覆盖、没有 Wi-Fi、没有数据套餐的情况下也能完美工作的关键。</p>
+  </div>
+</div>
+
+<!-- GPS satellites explained simply -->
+<div class="content-block">
+  <div class="container">
+    <h2>GPS 卫星：简单解释</h2>
+    <p>全球定位系统 (GPS) 是由美国太空军运营的卫星星座。以下是最基本的工作原理：</p>
+    <ul>
+      <li><strong>31 颗卫星环绕地球</strong> 运行，高度约为 20,200 km，位于中地球轨道</li>
+      <li>每颗卫星都携带一个极其精确的原子钟，并 <strong>持续广播无线电信号</strong>，其中包含卫星 ID、其在轨道上的当前位置以及精确的时间戳</li>
+      <li>这些信号以光速向地球表面传播</li>
+      <li>地面上的 GPS 接收器同时接收来自多颗卫星的信号</li>
+      <li>通过测量 <strong>每个信号到达所需的时间</strong>，接收器计算出到每颗卫星的距离</li>
+      <li>通过至少 4 颗卫星的距离，接收器可以通过称为三边测量的过程计算出其精确的 3D 位置（纬度、经度、海拔）</li>
+    </ul>
+    <p>关键点在于：<strong>整个过程是单向的</strong>。卫星广播。您的接收器接收。您的接收器从不向卫星传输任何信息。卫星不知道您的设备存在。任何步骤都不涉及互联网连接。</p>
+    <p>无论您是在市中心还是在偏远山区，GPS 都以相同的方式工作。卫星并不在意。它们只是在广播。</p>
+  </div>
+</div>
+
+<!-- Why GPS itself needs no internet -->
+<div class="content-block">
+  <div class="container">
+    <h2>为什么 GPS 本身不需要互联网</h2>
+    <p>从根本上说，GPS 对于最终用户而言是一个被动的、仅接收的系统。从卫星到您的接收器的信号链只涉及穿过大气层的无线电波。不需要网络连接、服务器或数据套餐。</p>
+    <p>您汽车内置的 GPS 导航系统已经离线工作了几十年。像 Garmin eTrex 这样的专用徒步 GPS 设备一直可以在没有蜂窝网络的情况下工作。航空导航系统在没有互联网连接的情况下计算位置。所有这些都使用相同的 GPS 卫星信号 — 不需要互联网。</p>
+    <p>GPS 标准甚至刻意避免在民用信号频段（L1，1575.42 MHz）上进行加密或访问控制 — 它被特意设计成可以被地球上任何地方的任何兼容接收器免费接收。</p>
+    <p>一个 GPS 接收器芯片只需几美元。它消耗适中的电量。并且它仅从来自太空的无线电波中计算出精确的位置坐标 — 无需订阅、无需连接、无需云端。</p>
+  </div>
+</div>
+
+<!-- What DOES need internet -->
+<div class="content-block">
+  <div class="container">
+    <h2>什么才需要互联网：大多数商用 GPS 追踪器</h2>
+    <p>那么，如果 GPS 本身是离线的，为什么大多数 GPS 追踪器需要蜂窝数据套餐呢？</p>
+    <p>答案在于问题的第二部分：<strong>将您的位置从追踪器传送到您的手机</strong>。</p>
+    <p>GPS 告诉追踪器它在哪里。但一个放在田野里、狗项圈上或无人机上的追踪器与您是物理分离的。需要有人将这些 GPS 坐标传输到您的设备。大多数制造商正是在这个传输环节引入了互联网依赖。</p>
+    <p>典型的蜂窝 GPS 追踪器架构：</p>
+    <ol>
+      <li>GPS 芯片计算坐标（离线，不需要互联网）</li>
+      <li>嵌入式 SIM 卡连接到蜂窝网络（需要数据套餐）</li>
+      <li>坐标上传到制造商的云服务器（需要互联网）</li>
+      <li>您的手机应用程序通过互联网查询云服务器（需要互联网）</li>
+      <li>应用程序在地图上显示位置</li>
+    </ol>
+    <p>步骤 2、3 和 4 都需要互联网基础设施。移除蜂窝覆盖，整个链条在步骤 1 之后就会中断。这就是为什么蜂窝 GPS 追踪器在偏远地区会失效 — 不是因为 GPS 停止工作，而是因为传输层失去了连接。</p>
+    <p><strong>这是一种架构选择，而不是技术上的必然。</strong> 有另一种无需互联网即可传输 GPS 坐标的方法。</p>
+  </div>
+</div>
+
+<!-- How LoRa replaces cellular -->
+<div class="content-block">
+  <div class="container">
+    <h2>LoRa 如何取代蜂窝网络传输坐标</h2>
+    <p>LoRa（远距离）无线电是一种替代传输技术，可以在没有任何蜂窝基础设施的情况下，远距离传输 GPS 坐标数据。</p>
+    <p>LoRa 使用免许可的 ISM 无线电频段（欧洲 868 MHz，北美 915 MHz）来传输小数据包 — 包括 GPS 坐标 — 直接从一台设备到另一台设备。它是点对点无线电，概念上类似于对讲机，但具有更远的范围和更低的功耗。</p>
+    <p>一个以 14 dBm 功率发射的 LoRa 无线电可以可靠地将 GPS 坐标数据包发送到 15–20km 的开阔地带。接收器不需要连接到互联网、蜂窝基站或任何基础设施。它只需要在无线电范围内。</p>
+    <p>这正是 Loko 所做的。由 Loko Air 追踪器计算出的 GPS 坐标通过 LoRa 传输到您手中的 Loko Ground 接收器 — 完全绕过了互联网。传输层和 GPS 接收层一样是离线的。</p>
+  </div>
+</div>
+
+<!-- The full offline chain -->
+<div class="content-block">
+  <div class="container">
+    <h2>完整的离线链条：从卫星到屏幕</h2>
+    <p>以下是 Loko 系统中的完整信号路径 — 请注意，每一步都是本地无线电，不涉及互联网：</p>
+
+    <div class="chain-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>GPS / GLONASS / Galileo 卫星</h3>
+        <p>31+ 颗卫星从 20,000 km 高度广播无线电定时信号。无需互联网。单向广播，对任何人免费。</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Loko Air GPS 接收器</h3>
+        <p>这个重量不足 15g 的追踪器接收来自多个卫星星座的信号并计算精确坐标。所有计算都在本地完成，无需网络。</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>LoRa 无线电传输</h3>
+        <p>Loko Air 通过 LoRa 无线电传输坐标数据包。直接点对点传输，距离可达 20km。无需 SIM 卡，无需蜂窝网络，无需互联网。</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Loko Ground 接收器</h3>
+        <p>接收 LoRa 数据包，解码坐标。一个您可以随身携带的口袋大小的设备。仍然不需要互联网。</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>蓝牙传输到您的手机</h3>
+        <p>Loko Ground 通过蓝牙将坐标发送到您的智能手机。本地短距离无线电，不需要互联网。</p>
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h3>Loko 应用程序 — 离线地图</h3>
+        <p>Loko 应用程序在预先下载到您设备上的离线地图上显示位置。实时位置，零互联网。从卫星到您的屏幕，完全是本地的。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="content-block">
+  <div class="container">
+    <h2>常见问题</h2>
+
+    <div class="faq-item">
+      <h3>GPS 工作需要互联网吗？</h3>
+      <p>不需要。GPS 卫星使用单向无线电传输持续广播信号 — 卫星不会从您的设备接收任何信息，也不涉及互联网。您的 GPS 接收器纯粹根据从多颗卫星接收到的信号的时间差来计算其位置。然而，大多数商用 GPS 追踪器仍然需要互联网或蜂窝网络来将该位置传输到您的手机。</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>有多少颗 GPS 卫星？</h3>
+      <p>根据最近的统计，美国 GPS 星座有 31 颗在轨运行卫星。在地球表面的任何给定位置，您通常可以同时看到 6–12 颗卫星。GPS 设备至少需要 4 颗卫星才能进行 3D 定位（纬度、经度、海拔）。像 Loko 这样的现代追踪器使用多个星座 — GPS、GLONASS（俄罗斯，24 颗卫星）和 Galileo（欧盟，30 颗卫星）— 可同时访问 60 多颗卫星，以实现更快、更准确的定位。</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>如果 GPS 可以离线工作，为什么大多数 GPS 追踪器需要蜂窝网络？</h3>
+      <p>GPS 告诉追踪器它在哪里。但这个位置如何到达您的手机呢？大多数追踪器使用 SIM 卡和蜂窝数据将坐标发送到云服务器，然后您的手机通过互联网查询该服务器。GPS 本身是离线的，但传输层是蜂窝网络。Loko 用 LoRa 无线电取代了蜂窝网络 — 这是一种同样不需要互联网的直接无线电链路。</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>GPS、GLONASS 和 Galileo 之间有什么区别？</h3>
+      <p>GPS 是美国的卫星导航系统（31 颗卫星）。GLONASS 是俄罗斯的对应系统（24 颗卫星）。Galileo 是欧盟的系统（截至 2024 年有 30 颗在轨运行卫星）。每个系统使用不同的频率和轨道平面。同时使用所有三个系统 — 正如 Loko 所做的那样 — 可以显著增加可见卫星的数量，提高定位精度，减少首次定位时间，并在某个星座几何条件较差的环境中保持跟踪。</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Loko 如何完全离线工作？</h3>
+      <p>Loko 的信号链在任何步骤都不涉及互联网：GPS/GLONASS/Galileo 卫星广播无线电信号 → Loko Air 的接收器计算坐标 → Loko Air 通过 LoRa 无线电（直接无线电链路，类似于对讲机）传输坐标 → Loko Ground 接收 LoRa 信号 → Loko Ground 通过蓝牙将坐标发送到您的手机 → Loko 应用程序在离线地图上显示位置。从卫星到屏幕，一切都是本地无线电。</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+  <div class="container">
+    <div class="cta-block">
+      <p>GPS 一直是离线的。Loko 确保追踪链的其余部分也是离线的 — 从卫星到您的屏幕，零互联网需求。</p>
+      <p><strong>Loko GPS 追踪器：完整的离线追踪系统。</strong></p>
+      <p>在 <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a>

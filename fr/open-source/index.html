@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>Traceur GPS Open Source — Matériel &amp; Firmware | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Loko est un traceur GPS entièrement open source. Schémas, fichiers PCB et firmware tous disponibles publiquement. Personnalisez, construisez ou achetez — à vous de choisir." name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="Traceur GPS Open Source — Matériel &amp; Firmware | nolilab" property="og:title"/>
+<meta content="Loko est un traceur GPS entièrement open source. Schémas, fichiers PCB et firmware tous disponibles publiquement. Personnalisez, construisez ou achetez — à vous de choisir." property="og:description"/>
+<meta content="https://www.nolilab.com/fr/open-source/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Traceur GPS Open Source Loko" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="fr_FR" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Traceur GPS Open Source — Matériel &amp; Firmware | nolilab" name="twitter:title"/>
+<meta content="Loko est un traceur GPS entièrement open source. Schémas, fichiers PCB et firmware tous disponibles publiquement. Personnalisez, construisez ou achetez — à vous de choisir." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="traceur GPS open source, matériel ouvert GPS, traceur GPS GitHub, traceur GPS DIY, traceur LoRa open source" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/fr/open-source/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/open-source/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/open-source/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Loko est-il vraiment open source — matériel et firmware ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Nolilab a publié les schémas matériels complets, les fichiers de mise en page PCB et le code source du firmware. Vous pouvez inspecter chaque sélection de composant, retracer chaque décision de circuit et lire chaque ligne de code qui s'exécute sur l'appareil. Rien n'est caché ou obscurci."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je construire mon propre traceur GPS Loko à partir des fichiers open source ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Tous les fichiers dont vous avez besoin pour fabriquer votre propre matériel Loko sont disponibles publiquement — fichiers Gerber PCB, BOM (liste de matériel) et firmware. Si vous avez de l'expérience en fabrication de PCB et en assemblage CMS, vous pouvez construire le traceur vous-même. Nolilab vend également des unités pré-assemblées et testées pour ceux qui préfèrent un appareil prêt à l'emploi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Sous quelle licence le matériel et le firmware Loko sont-ils publiés ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le matériel et le firmware sont publiés pour un usage personnel uniquement. L'utilisation commerciale n'est pas autorisée sans autorisation écrite explicite de nolilab. Voir la licence complète sur https://github.com/tomipiriyev/Loko"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je modifier le firmware Loko pour personnaliser les intervalles de mise à jour ou ajouter des capteurs ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Le firmware est écrit en C/C++ et est entièrement documenté. Les développeurs peuvent modifier les intervalles de mise à jour GPS, ajuster les paramètres de transmission LoRa, ajouter la prise en charge de capteurs supplémentaires, modifier le comportement de gestion de l'alimentation ou implémenter des protocoles personnalisés. Le firmware ouvert est l'une des fonctionnalités les plus puissantes de Loko pour les utilisateurs techniques."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi nolilab open-source-t-il le matériel s'il le vend également ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nolilab croit que la transparence construit la confiance. En publiant tout le matériel et le firmware publiquement, les utilisateurs peuvent vérifier que Loko fait exactement ce qu'il prétend — pas de suivi caché, pas de collecte secrète de données, pas de firmware boîte noire. La communauté contribue également des améliorations au projet. Nolilab rivalise sur la qualité de fabrication, le support et l'expérience produit complète — pas sur la conservation secrète des conceptions."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "Traceur GPS Open Source", "item": "https://www.nolilab.com/fr/open-source/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--spacing-sm) 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .compare-table thead { background: var(--bg-secondary); border-bottom: 2px solid var(--border); }
+  .compare-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8125rem; }
+  .compare-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 500; color: var(--text-primary); }
+  .yes { color: var(--accent); font-weight: 700; }
+  .no { color: #cf222e; font-weight: 700; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  .repo-card { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-secondary); margin-bottom: var(--spacing-sm); }
+  .repo-card h3 { font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); margin-bottom: 0.35rem; }
+  .repo-card p { font-size: 0.875rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.5rem 0.6rem; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">Boutique</a>
+      <a href="/specifications/" class="nav-link">Spécifications</a>
+      <a href="/software/" class="nav-link">Logiciel</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">Blog</a>
+      <a href="/firmware/" class="nav-link">Firmware</a>
+      <a href="/setup-guides/" class="nav-link">Configuration</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">Contact</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="Sélectionner la langue">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">FR</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Basculer le menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>Traceur GPS Open Source : Transparence Totale du Matériel &amp; du Firmware</h1>
+    <p class="subtitle">Chaque Schéma. Chaque Piste PCB. Chaque Ligne de Firmware. Disponible Publiquement.</p>
+    <p>Dans une industrie où la plupart des fabricants de traceurs GPS traitent leur matériel et leur logiciel comme des secrets commerciaux, nolilab adopte l'approche inverse. Le traceur GPS Loko est entièrement open source — ce qui signifie que chaque schéma de circuit, chaque fichier de mise en page PCB et chaque ligne de firmware exécutée sur l'appareil sont publiés publiquement sur GitHub.</p>
+    <p><strong>Vous n'avez pas à faire confiance à Loko. Vous pouvez le vérifier.</strong></p>
+    <p>Cette page explique ce que nolilab a publié, pourquoi c'est important, et comment les makers, développeurs et utilisateurs avancés peuvent tirer parti de la nature open source de Loko.</p>
+  </div>
+</div>
+
+<!-- What open source means for GPS trackers -->
+<div class="content-block">
+  <div class="container">
+    <h2>Ce Que Signifie Open Source pour les Traceurs GPS</h2>
+    <p>Le matériel et le firmware open source signifient que les fichiers de conception du dispositif physique et le code qui s'exécute dessus sont disponibles publiquement sous une licence qui permet l'inspection, la modification et la redistribution.</p>
+    <p>Pour un traceur GPS spécifiquement, cela a des implications profondes :</p>
+    <ul>
+      <li><strong>Pas de collecte de données cachée :</strong> Vous pouvez lire le firmware et vérifier que l'appareil ne transmet votre localisation qu'aux personnes que vous autorisez</li>
+      <li><strong>Pas de vulnérabilités de sécurité boîte noire :</strong> Les chercheurs en sécurité peuvent auditer le code et divulguer de manière responsable toute vulnérabilité</li>
+      <li><strong>Pas de verrouillage fournisseur :</strong> Si nolilab arrêtait un jour le support, la communauté pourrait continuer à maintenir le firmware indépendamment</li>
+      <li><strong>Personnalisation :</strong> Les développeurs peuvent modifier le firmware pour s'adapter à des cas d'utilisation spécialisés — intervalles de mise à jour différents, capteurs personnalisés, protocoles alternatifs</li>
+      <li><strong>Améliorations communautaires :</strong> Les utilisateurs ayant une expertise en ingénierie contribuent des corrections de bugs, des fonctionnalités et des optimisations au projet</li>
+    </ul>
+    <p>La plupart des fabricants de traceurs GPS commerciaux ne publient rien. Vous ne pouvez pas voir ce que fait le firmware, si vos données sont stockées, ou comment le protocole radio est implémenté. Avec Loko, il n'y a pas de secrets.</p>
+  </div>
+</div>
+
+<!-- What nolilab has published -->
+<div class="content-block">
+  <div class="container">
+    <h2>Ce Que nolilab a Publié sur GitHub</h2>
+    <p>Le <a href="https://github.com/tomipiriyev/Loko" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">dépôt GitHub de nolilab</a> contient l'ensemble complet des fichiers nécessaires pour comprendre, construire et modifier Loko :</p>
+
+    <div class="repo-card" style="border-color: var(--accent); background: var(--bg-primary);">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.6rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="color:var(--text-primary);flex-shrink:0" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <h3 style="margin:0;font-size:1rem;">tomipiriyev/Loko — Dépôt GitHub</h3>
+      </div>
+      <p style="margin-bottom:0.75rem;">Tous les fichiers du projet Loko — schémas matériels, mises en page PCB, firmware, BOM et code source de l'application — sont publiés dans un seul dépôt public.</p>
+      <a href="https://github.com/tomipiriyev/Loko" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1.1rem;background:var(--text-primary);color:#fff;border-radius:var(--radius-sm);font-size:0.875rem;font-weight:600;text-decoration:none;transition:background 0.2s ease;" onmouseover="this.style.background='var(--accent)'" onmouseout="this.style.background='var(--text-primary)'">
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="repo-card">
+      <h3>Schémas Matériels</h3>
+      <p>Schémas électriques complets pour Loko Air et Loko Ground. Chaque composant, chaque connexion, chaque affectation de broche. Annotés avec les valeurs des composants, les numéros de pièce et les commentaires de justification de conception.</p>
+    </div>
+
+    <div class="repo-card">
+      <h3>Fichiers de Mise en Page PCB</h3>
+      <p>Fichiers de conception PCB complets dans des formats ouverts, y compris les fichiers Gerber prêts à être soumis aux services de fabrication de PCB. L'empilement des couches, les remplissages de cuivre, les tailles de via et le placement des composants sont tous inclus. Vous pouvez commander des PCB nus auprès de n'importe quelle maison de fabrication avec ces fichiers.</p>
+    </div>
+
+    <div class="repo-card">
+      <h3>Liste de Matériel (BOM)</h3>
+      <p>BOM complète listant chaque composant avec les numéros de pièce du fabricant, les spécifications et les sources alternatives suggérées. Inclut les composants passifs, les CI, les connecteurs, le module GPS, le module radio LoRa et le microcontrôleur.</p>
+    </div>
+
+    <div class="repo-card">
+      <h3>Code Source du Firmware</h3>
+      <p>Firmware complet écrit en C/C++, couvrant l'acquisition GPS, la planification de la transmission LoRa, la gestion de l'alimentation (modes veille), la communication Bluetooth avec l'application et la configuration de la constellation GPS (GPS/GLONASS/Galileo).</p>
+    </div>
+
+    <div class="repo-card">
+      <h3>Code Source de l'Application</h3>
+      <p>Le code source des applications iOS et Android, y compris le rendu des cartes hors ligne, le protocole de communication Bluetooth et la logique d'analyse des paquets LoRa.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Why open source matters -->
+<div class="content-block">
+  <div class="container">
+    <h2>Pourquoi l'Open Source est Important pour le Matériel GPS</h2>
+    <p>La question de la confiance est particulièrement importante pour les dispositifs de suivi de localisation. Un traceur GPS sait où vous êtes à tout moment — ou où se trouvent votre animal de compagnie, votre enfant ou vos objets de valeur. Ce sont des informations sensibles.</p>
+    <p>Avec les traceurs propriétaires, vous faites une pure hypothèse de foi : que le fabricant n'envoie vos données de localisation qu'à vous, ne conserve pas d'historique de localisation sur ses serveurs, ne vend pas les données de localisation à des tiers, et que son firmware n'a pas de vulnérabilités de sécurité exploitables.</p>
+    <p>Avec Loko, vous n'avez pas besoin de foi. Le firmware est vérifiable. Le matériel est vérifiable. Le protocole de communication est documenté. L'architecture LoRa P2P (pair-à-pair) signifie que les données de localisation voyagent uniquement de Loko Air à Loko Ground — elles ne sont jamais envoyées aux serveurs de nolilab.</p>
+    <p><strong>Loko est techniquement incapable d'envoyer votre localisation aux serveurs de nolilab</strong> — non pas parce que nolilab promet de ne pas le faire, mais parce que le protocole radio n'implique pas Internet à aucune étape. Le firmware ouvert le prouve.</p>
+  </div>
+</div>
+
+<!-- How makers and developers use Loko -->
+<div class="content-block">
+  <div class="container">
+    <h2>Comment les Makers et Développeurs

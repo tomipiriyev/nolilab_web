@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>GPS-трекер без ежемесячной платы — Полное руководство | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Устали от ежемесячных платежей за GPS-трекер? Loko использует радио LoRa — без SIM-карты и абонентской платы навсегда. Заплатите один раз, отслеживайте вечно. Дальность 20km, батарея до 1 года." name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="GPS-трекер без ежемесячной платы — Полное руководство | nolilab" property="og:title"/>
+<meta content="Устали от ежемесячных платежей за GPS-трекер? Loko использует радио LoRa — без SIM-карты и абонентской платы навсегда. Заплатите один раз, отслеживайте вечно. Дальность 20km, батарея до 1 года." property="og:description"/>
+<meta content="https://www.nolilab.com/ru/no-monthly-fee/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Loko GPS Tracker — No Monthly Fee" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPS-трекер без ежемесячной платы — Полное руководство | nolilab" name="twitter:title"/>
+<meta content="Устали от ежемесячных платежей за GPS-трекер? Loko использует радио LoRa — без SIM-карты и абонентской платы навсегда. Заплатите один раз, отслеживайте вечно. Дальность 20km, батарея до 1 года." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="GPS tracker no monthly fee, no subscription GPS tracker, one time payment GPS tracker, LoRa GPS tracker, offline GPS tracker" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link rel="canonical" href="https://www.nolilab.com/ru/no-monthly-fee/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/no-monthly-fee/"/>
+<link rel="alternate" hreflang="en" href="https://www.nolilab.com/no-monthly-fee/"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Почему большинство GPS-трекеров берут ежемесячную плату?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Большинство GPS-трекеров используют SIM-карту для передачи данных о местоположении через сотовые сети. Ежемесячная плата покрывает этот тарифный план для передачи данных — деньги идут оператору связи, а не только производителю. Пока они полагаются на сотовую инфраструктуру, они всегда будут взимать повторяющуюся плату."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как Loko работает без ежемесячной платы?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko использует радиотехнологию LoRa (Long Range) для прямой передачи GPS-координат между трекером Loko Air и базовой станцией Loko Ground — без SIM-карты, без сотовой сети, без тарифного плана. Подписываться не на что."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Какова общая стоимость Loko по сравнению с трекером по подписке за 5 лет?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko — это разовая покупка оборудования без повторяющихся платежей. Типичный трекер по подписке, такой как Tractive, стоит около $9.99 в месяц — это $599 за 5 лет только за абонентскую плату, без учета стоимости оборудования. За 5 лет Loko экономит большинству пользователей $500–$1,800 по сравнению с трекерами по подписке."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Работает ли Loko в районах без сотового покрытия?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да. Поскольку Loko вообще не использует сотовые сети, он отлично работает в удаленных лесах, горах, на фермах и везде, где можно принимать сигналы GPS-спутников. Сотовое покрытие не имеет значения для работы Loko."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Для кого GPS-трекер без ежемесячной платы подходит лучше всего?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Для всех, кому нужно надежное долгосрочное отслеживание без постоянных затрат: владельцев домашних животных, фермеров, отслеживающих скот, пилотов дронов, восстанавливающих аппараты, а также туристов или охотников в районах без сотового покрытия. Модель без абонентской платы также идеальна для тех, кто одновременно отслеживает несколько объектов, где затраты на подписку на устройство быстро умножаются."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "GPS-трекер без ежемесячной платы", "item": "https://www.nolilab.com/no-monthly-fee/"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+  }
+
+  /* Header nav */
+  header {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover { color: var(--text-primary); }
+
+  /* Language selector */
+  .language-selector { margin-left: var(--spacing-sm); }
+
+  .language-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .language-btn:hover { border-color: var(--accent); }
+
+  .current-lang { font-weight: 600; }
+
+  .language-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+  }
+
+  .language-selector:hover .language-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .language-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+
+  /* Mobile menu toggle */
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    margin-left: auto;
+  }
+
+  .mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  /* Page content */
+  .page-hero {
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .page-hero .subtitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page-hero p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-hero strong {
+    color: var(--text-primary);
+  }
+
+  .content-block {
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .content-block:last-child { border-bottom: none; }
+
+  .content-block h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-family: var(--font-mono);
+  }
+
+  .content-block p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+  }
+
+  .content-block p:last-child { margin-bottom: 0; }
+
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+
+  .content-block ul, .content-block ol {
+    margin: 0.5rem 0 0.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .content-block li {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Device cards */
+  .device-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+  }
+
+  .device-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    background: var(--bg-primary);
+  }
+
+  .device-card h3 {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    margin-bottom: 0.35rem;
+  }
+
+  .device-card .device-num {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 0.1rem 0.45rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-mono);
+  }
+
+  .device-card p {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Compare table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin: var(--spacing-sm) 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .compare-table thead {
+    background: var(--bg-secondary);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .compare-table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+
+  .compare-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  .compare-table td:first-child {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .yes { color: var(--accent); font-weight: 700; }
+  .no  { color: #cf222e; font-weight: 700; }
+
+  /* CTA */
+  .cta-block {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    text-align: center;
+    margin: var(--spacing-sm) 0 0;
+  }
+
+  .cta-block p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.7;
+  }
+
+  .cta-block strong { color: var(--text-primary); }
+
+  .cta-btn {
+    display: inline-flex;
+    padding: 0.65rem 1.5rem;
+    background: var(--text-primary);
+    color: #fff;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .cta-btn:hover { background: var(--accent); }
+
+  /* FAQ */
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    background: var(--bg-primary);
+  }
+
+  .faq-item h3 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-item p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .device-grid { grid-template-columns: 1fr; }
+
+    .nav-container { flex-direction: row; justify-content: space-between; }
+
+    .mobile-menu-toggle { display: flex; }
+
+    .nav-links {
+      position: fixed;
+      top: 0; left: -100%;
+      width: 80%; max-width: 300px; height: 100vh;
+      background: var(--bg-primary);
+      flex-direction: column;
+      gap: 0;
+      padding: 80px 1.5rem 1.5rem;
+      box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+      transition: left 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+    }
+
+    .nav-links.active { left: 0; }
+
+    .nav-link {
+      width: 100%;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    body.menu-open::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.5rem 0.6rem; }
+
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">Магазин</a>
+      <a href="/specifications/" class="nav-link">Характеристики</a>
+      <a href="/software/" class="nav-link">Программное обеспечение</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">Частые вопросы</a>
+      <a href="/blog/" class="nav-link">Блог</a>
+      <a href="/firmware/" class="nav-link">Прошивка</a>
+      <a href="/setup-guides/" class="nav-link">Настройка</a>
+      <a href="/gps/" class="nav-link">GPS &amp; LoRa</a>
+      <a href="/contact/" class="nav-link">Контакты</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="Select language">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <h1>GPS-трекер без ежемесячной платы: Полное руководство</h1>
+    <p class="subtitle">Заплатите один раз. Отслеживайте вечно. Без SIM-карты, без подписки, без сюрпризов.</p>
+    <p>Рынок GPS-трекеров полон устройств, которые кажутся доступными поначалу — пока вы не прочитаете мелкий шрифт. Большинство требует ежемесячной подписки от $5 до $30 в месяц. За три-пять лет эти платежи складываются в сотни или тысячи долларов.</p>
+    <p><strong>GPS-трекер Loko разработан специально, чтобы полностью исключить эти повторяющиеся затраты.</strong> Заменив сотовую связь на дальнобойное радио LoRa, Loko не имеет SIM-карты, тарифного плана и подписки — никогда. Вы покупаете оборудование один раз, и оно работает весь срок службы устройства.</p>
+    <p>Это руководство объясняет, почему существуют ежемесячные платежи, сколько они на самом деле стоят со временем, и как именно Loko устраняет их, не жертвуя дальностью или надежностью.</p>
+  </div>
+</div>
+
+<!-- Why GPS trackers charge monthly fees -->
+<div class="content-block">
+  <div class="container">
+    <h2>Почему GPS-трекеры берут ежемесячную плату</h2>
+    <p>Чтобы понять, почему у большинства GPS-трекеров есть ежемесячные платежи, нужно понять, как они работают. GPS-чип в трекере только принимает сигналы со спутников — он не может ничего передавать самостоятельно. Чтобы доставить ваше местоположение на телефон, трекеру нужен отдельный радиопередатчик.</p>
+    <p>Большинство коммерческих трекеров выбирают для этой передачи сотовую связь. Трекер содержит миниатюрную SIM-карту, подключается к сетям 4G или LTE и отправляет ваши координаты на облачный сервер. Затем ваш телефон получает местоположение с этого сервера через интернет.</p>
+    <p>Эта архитектура имеет реальные затраты на каждом этапе:</p>
+    <ul>
+      <li><strong>Тарифный план для SIM-карты:</strong> Трекер потребляет сотовые данные 24/7, и этот план нужно оплачивать ежемесячно</li>
+      <li><strong>Инфраструктура облачных серверов:</strong> Производитель поддерживает серверы для хранения и ретрансляции ваших данных о местоположении</li>
+      <li><strong>Обслуживание приложения:</strong> Бэкенд API, обновления приложения и команда поддержки финансируются за счет подписок</li>
+    </ul>
+    <p>Ежемесячная плата не является опциональной — без нее тарифный план для передачи данных закончится, и трекер перестанет передавать. Подписка структурно заложена в принцип работы этих устройств.</p>
+    <p>Вот почему <strong>любой GPS-трекер, использующий сотовую связь, всегда будет требовать постоянных платежей</strong>, независимо от бренда или ценовой категории. Единственный способ устранить ежемесячные платежи — это устранить сотовую связь.</p>
+  </div>
+</div>
+
+<!-- True 5-year cost comparison -->
+<div class="content-block">
+  <div class="container">
+    <h2>Реальное сравнение стоимости за 5 лет</h2>
+    <p>Цена на ценнике GPS-трекера редко соответствует тому, что вы в итоге заплатите. Вот честный разбор общей стоимости владения за 5 лет для самых популярных трекеров на рынке:</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Трекер</th>
+          <th>Стоимость оборудования</th>
+          <th>Ежемесячная плата</th>
+          <th>Итого за 5 лет (плата)</th>
+          <th>Реальная стоимость за 5 лет</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Loko (nolilab)</td>
+          <td>$59</td>
+          <td class="yes">$0</td>
+          <td class="yes">$0</td>
+          <td class="yes">$59</td>
+        </tr>
+        <tr>
+          <td>Tractive DOG</td>
+          <td>~$50</td>
+          <td>$9.99</td>
+          <td>$599</td>
+          <td>~$649</td>
+        </tr>
+        <tr>
+          <td>Apple AirTag</td>
+          <td>~$29</td>
+          <td>$0*</td>
+          <td>$0*</td>
+          <td>~$29*</td>
+        </tr>
+        <tr>
+          <td>Tile Mate</td>
+          <td>~$25</td>
+          <td>$3/мес (Premium)</td>
+          <td>$180</td>
+          <td>~$205</td>
+        </tr>
+        <tr>
+          <td>Garmin Alpha TT15 Mini</td>
+          <td>~$699</td>
+          <td>$0</td>
+          <td>$0</td>
+          <td>~$699+</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>*Apple AirTag не имеет ежемесячной платы, но полностью зависит от краудсорсинговой сети Find My — у него нет GPS в реальном времени, и он не может работать в удаленных районах без iPhone поблизости. Подробности см. в нашем <a href="/airtag-vs-lora/" style="color: var(--accent);">сравнении AirTag и LoRa</a>.</p>
+    <p>Цифры говорят сами за себя. Подписка на Tractive, всего $9.99 в месяц, обходится в <strong>$599 за 5 лет только за абонентскую плату</strong> — в три раза больше стоимости оборудования. Более дорогие сотовые тарифы могут достигать $30 в месяц, что означает <strong>$1,800 в виде платежей за 5 лет</strong>, даже не считая само устройство.</p>
+    <p>Общая стоимость Loko за 5 лет — это цена оборудования, и всё. Никаких платежей, никогда.</p>
+  </div>
+</div>
+
+<!-- How LoRa eliminates cellular -->
+<div class="content-block">
+  <div class="container">
+    <h2>Как LoRa устраняет необходимость в сотовой связи</h2>
+    <p>LoRa означает Long Range radio (дальнобойное радио). Это метод модуляции, который передает небольшие пакеты данных на очень большие расстояния, используя очень мало энергии — без какой-либо сетевой инфраструктуры. Здесь нет вышек, SIM-карт и операторов связи.</p>
+    <p>Система Loko использует LoRa в качестве прямой радиосвязи точка-точка между двумя устройствами:</p>
+    <div class="device-grid">
+      <div class="device-card">
+        <span class="device-num">1</span>
+        <h3>Loko Air (трекер)</h3>
+        <p>Вес 15g. Содержит приемник GPS/GLONASS/Galileo и радиопередатчик LoRa. Он передает координаты вашего объекта в реальном времени напрямую на блок Loko Ground.</p>
+      </div>
+      <div class="device-card">
+        <span class="device-num">2</span>
+        <h3>Loko Ground (приемник)</h3>
+        <p>Находится у вас. Принимает радиопередачи LoRa от Loko Air и передает их на ваш смартфон через Bluetooth. Интернет не требуется ни на одном этапе.</p>
+      </div>
+    </div>
+    <p>Поскольку два устройства Loko общаются напрямую по радио — так же, как рация — третья сторона не участвует. Никакого сотового оператора, облачного сервера, подписки. Радиосигнал проходит до 20km на открытой местности, покрывая подавляющее большинство реальных сценариев отслеживания.</p>
+    <p>Радио LoRa работает в нели
