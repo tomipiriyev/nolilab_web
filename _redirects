@@ -117,6 +117,51 @@
 /pages/lorawan              /lorawan/           301
 /pages/firmware             /firmware/          301
 /pages/specs                /specifications/    301
+/pages/technical-specifications /specifications/ 301
 /pages/videos               /blog/              301
 /pages/faq                  /                   301
 /pages/loko-hub             /                   301
+
+# Language-prefixed /pages/* — exceptions (slug ≠ destination) come first
+/:lang/pages/specs                    /:lang/specifications/    301
+/:lang/pages/technical-specifications /:lang/specifications/    301
+/:lang/pages/faq                      /:lang/                   301
+/:lang/pages/loko-hub                 /:lang/                   301
+/:lang/pages/videos                   /:lang/blog/              301
+# Generic fallback: slug maps directly (software→software, lorawan→lorawan, etc.)
+/:lang/pages/:slug                    /:lang/:slug/             301
+
+# ── Cart ─────────────────────────────────────────────────────────────────────
+/cart                                 /                         301
+/cart/*                               /                         301
+/:lang/cart                           /:lang/                   301
+/:lang/cart/*                         /:lang/                   301
+
+# ── Shop ─────────────────────────────────────────────────────────────────────
+/shop                                 /                         301
+
+# ── Policies ─────────────────────────────────────────────────────────────────
+/policies/privacy-policy              /privacy/                 301
+/policies/contact-information         /contact/                 301
+/policies/*                           /                         301
+/:lang/policies/privacy-policy        /:lang/privacy/           301
+/:lang/policies/contact-information   /:lang/contact/           301
+/:lang/policies/*                     /:lang/                   301
+
+# ── Collections ──────────────────────────────────────────────────────────────
+/collections/*                        /                         301
+/:lang/collections/*                  /:lang/                   301
+
+# ── Legacy atom feed ─────────────────────────────────────────────────────────
+/blogs/news.atom                      /blog/                    301
+
+# ── /jp/ alias → /ja/ ────────────────────────────────────────────────────────
+/jp                                   /ja/                      301
+/jp/                                  /ja/                      301
+/jp/*                                 /ja/:splat                301
+
+# ── /[lang]/nolilab → /[lang]/ ───────────────────────────────────────────────
+/:lang/nolilab                        /:lang/                   301
+
+# ── Double /blog/blog/ path bug (group 3) ────────────────────────────────────
+/:lang/blog/blog/:slug                /:lang/blog/:slug/        301
