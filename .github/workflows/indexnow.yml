@@ -1,1 +1,32 @@
+name: Ping IndexNow on deploy
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping IndexNow
+        run: |
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "nolilab.com",
+              "key": "4d11ad9140055d8a4dc89a65f2439675",
+              "keyLocation": "https://nolilab.com/4d11ad9140055d8a4dc89a65f2439675.txt",
+              "urlList": [
+                "https://nolilab.com/",
+                "https://nolilab.com/specifications/",
+                "https://nolilab.com/blog/",
+                "https://nolilab.com/software/",
+                "https://nolilab.com/firmware/",
+                "https://nolilab.com/lorawan/",
+                "https://nolilab.com/gps/",
+                "https://nolilab.com/setup-guides/",
+                "https://nolilab.com/contact/",
+                "https://nolilab.com/privacy/"
+              ]
+            }'
 
