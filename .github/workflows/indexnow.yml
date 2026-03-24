@@ -1,11 +1,14 @@
 name: Ping IndexNow on deploy
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Deploy static content to Pages"]
+    types: [completed]
     branches: ["main"]
 
 jobs:
   indexnow:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Ping IndexNow
@@ -26,7 +29,17 @@ jobs:
                 "https://nolilab.com/gps/",
                 "https://nolilab.com/setup-guides/",
                 "https://nolilab.com/contact/",
-                "https://nolilab.com/privacy/"
+                "https://nolilab.com/privacy/",
+                "https://nolilab.com/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1/",
+                "https://nolilab.com/blog/maximize-tracking-capabilities-with-5km-range-and-30-days-battery-life-in-gps-trackers/",
+                "https://nolilab.com/blog/enhance-your-outdoor-adventures-with-nolilabs-loko-gps-tracker/",
+                "https://nolilab.com/blog/enhance-the-safety-of-your-drone-flights-with-the-compact-loko-gps-tracker-by-nolilab-your-reliable-backup-tracking-solution/",
+                "https://nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/",
+                "https://nolilab.com/blog/real-time-farm-equipment-tracking-made-easy-with-nolilabs-loko-gps-tracker/",
+                "https://nolilab.com/blog/discover-the-worlds-smallest-gps-tracker-introducing-the-loko-gps-tracker-by-nolilab-1/",
+                "https://nolilab.com/blog/how-distance-affects-wireless-signal-range/",
+                "https://nolilab.com/blog/loko-gps-tracker-firmware-update-v1-3-0/",
+                "https://nolilab.com/blog/loko-gps-tracker-firmware-update-v1-4-0/"
               ]
             }'
 
