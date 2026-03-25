@@ -586,16 +586,14 @@
 
       .headline-animated {
         position: relative;
-        display: inline-block;
+        display: block;
       }
 
       .headline-text {
-        display: inline-block;
-        overflow: hidden;
+        display: inline;
         white-space: normal;
         border-right: 2px solid var(--accent);
         animation: blink-caret 0.75s step-end infinite;
-        max-width: 100%;
         word-wrap: break-word;
       }
 
@@ -2113,8 +2111,8 @@
         }
         
         .hero-headline {
-          height: 6rem;
-          overflow: hidden;
+          min-height: 6rem;
+          overflow: visible;
         }
 
         .headline-text {
