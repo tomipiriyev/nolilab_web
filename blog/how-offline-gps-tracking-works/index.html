@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How Offline GPS Tracking Works: No SIM, No Internet, No Fees | Loko</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet">
+<meta content="Offline GPS trackers use direct radio links — no SIM, no internet, no monthly fees. Learn how LoRa P2P technology gives Loko 20km range and 1-year battery anywhere on Earth." name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<link rel="canonical" href="https://www.nolilab.com/blog/how-offline-gps-tracking-works/"/>
+<link href="https://www.nolilab.com/blog/how-offline-gps-tracking-works/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/how-offline-gps-tracking-works/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/how-offline-gps-tracking-works/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/how-offline-gps-tracking-works/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/how-offline-gps-tracking-works/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/how-offline-gps-tracking-works/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/how-offline-gps-tracking-works/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="How Offline GPS Tracking Works: No SIM, No Internet, No Fees | Loko" property="og:title"/>
+<meta content="Offline GPS trackers use direct radio links — no SIM, no internet, no monthly fees. Learn how LoRa P2P technology gives Loko 20km range and 1-year battery anywhere on Earth." property="og:description"/>
+<meta content="https://www.nolilab.com/blog/how-offline-gps-tracking-works/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="How Offline GPS Tracking Works: No SIM, No Internet, No Fees | Loko" name="twitter:title"/>
+<meta content="Offline GPS trackers use direct radio links — no SIM, no internet, no monthly fees. Learn how LoRa P2P technology gives Loko 20km range and 1-year battery anywhere on Earth." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-weight: 400; -webkit-font-smoothing: antialiased; font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+    header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+    .nav-container { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-lg); }
+    .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); color: var(--text-primary); text-decoration: none; }
+    .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+    .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+    .nav-link:hover { color: var(--text-primary); }
+    article { max-width: 800px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); }
+    .article-header { margin-bottom: var(--spacing-xl); }
+    .article-meta { display: flex; gap: var(--spacing-md); color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-md); }
+    .article-title { font-size: 2.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--spacing-md); line-height: 1.2; }
+    .article-image { width: 100%; border-radius: var(--radius-lg); margin-bottom: var(--spacing-xl); }
+    .article-content { font-size: 1.0625rem; line-height: 1.8; color: var(--text-primary); }
+    .article-content h2 { font-size: 1.75rem; font-weight: 600; margin: var(--spacing-xl) 0 var(--spacing-md); letter-spacing: -0.01em; }
+    .article-content h3 { font-size: 1.375rem; font-weight: 600; margin: var(--spacing-lg) 0 var(--spacing-sm); }
+    .article-content p { margin-bottom: var(--spacing-md); }
+    .article-content ul, .article-content ol { margin: var(--spacing-md) 0; padding-left: var(--spacing-lg); }
+    .article-content li { margin-bottom: var(--spacing-sm); }
+    .article-content strong { font-weight: 600; color: var(--text-primary); }
+    .article-content table { width: 100%; border-collapse: collapse; margin: var(--spacing-lg) 0; font-size: 0.9375rem; }
+    .article-content th { background: var(--bg-secondary); font-weight: 600; padding: 0.75rem 1rem; text-align: left; border: 1px solid var(--border); }
+    .article-content td { padding: 0.75rem 1rem; border: 1px solid var(--border); }
+    .article-content tr:nth-child(even) { background: var(--bg-secondary); }
+    .back-link { display: inline-flex; align-items: center; gap: var(--spacing-xs); color: var(--accent); text-decoration: none; font-weight: 500; margin-bottom: var(--spacing-lg); transition: color 0.2s ease; }
+    .back-link:hover { color: var(--accent-hover); }
+    .author-link { color: var(--text-secondary); text-decoration: none; }
+    .author-link:hover { color: var(--accent); }
+    .language-selector { margin-left: var(--spacing-sm); flex-shrink: 0; position: relative; }
+    .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+    .language-btn:hover { border-color: var(--accent); background: var(--bg-primary); }
+    .current-lang { font-family: var(--font-mono); font-weight: 600; }
+    .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+    .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .language-option { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: var(--text-secondary); text-decoration: none; transition: all 0.2s ease; border-bottom: 1px solid var(--border); }
+    .language-option:last-child { border-bottom: none; }
+    .language-option:hover { background: var(--bg-secondary); color: var(--text-primary); }
+    .language-option .lang-code { font-family: var(--font-mono); font-weight: 600; font-size: 0.8rem; min-width: 28px; color: var(--accent); }
+    .language-option .lang-name { font-size: 0.875rem; }
+    .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: var(--spacing-xs); z-index: 1001; margin-left: auto; }
+    .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+    .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+    @media (max-width: 768px) {
+      .nav-container { flex-direction: row; justify-content: space-between; align-items: center; }
+      .mobile-menu-toggle { display: flex; }
+      .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px var(--spacing-md) var(--spacing-md); box-shadow: var(--shadow-lg); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+      .nav-links.active { left: 0; }
+      .nav-link { width: 100%; padding: var(--spacing-md); border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+      .language-dropdown { left: 0; right: auto; min-width: 160px; }
+      body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+      body.menu-open { overflow: hidden; }
+      .article-title { font-size: 2rem; }
+      .article-content { font-size: 1rem; }
+    }
+    .related-posts { max-width: 800px; margin: 0 auto; padding: 2.5rem 1rem 3rem; border-top: 1px solid var(--border); }
+    .related-posts-heading { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; }
+    .related-posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .related-post-card { display: flex; flex-direction: column; justify-content: space-between; padding: 1rem 1.1rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+    .related-post-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+    .related-post-card h3 { font-size: 0.875rem; font-weight: 500; line-height: 1.45; margin-bottom: 0.6rem; }
+    .related-post-card .rp-cta { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
+    @media (max-width: 640px) { .related-posts-grid { grid-template-columns: 1fr; } }
+    .product-cta { max-width: 800px; margin: 0 auto 0; padding: 1.5rem 1rem 1.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); }
+    .product-cta-heading { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.9rem; }
+    .product-cta-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .product-cta-link { display: inline-block; padding: 0.45rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 500; color: var(--text-primary); text-decoration: none; background: var(--bg-primary); transition: border-color 0.15s ease, color 0.15s ease; }
+    .product-cta-link:hover { border-color: var(--accent); color: var(--accent); }
+    .product-cta-link.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .product-cta-link.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How Offline GPS Tracking Works: No SIM, No Internet, No Monthly Fees",
+  "description": "A technical and practical explanation of how offline GPS trackers work using LoRa P2P radio — no SIM card, no cellular network, no monthly subscription.",
+  "url": "https://www.nolilab.com/blog/how-offline-gps-tracking-works/",
+  "datePublished": "2026-05-02",
+  "dateModified": "2026-05-02",
+  "author": {
+    "@type": "Person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": ["https://www.linkedin.com/in/tomi-piriyev-33593354/", "https://github.com/tomipiriyev"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com",
+    "logo": { "@type": "ImageObject", "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" }
+  },
+  "image": { "@type": "ImageObject", "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.nolilab.com/blog/how-offline-gps-tracking-works/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is an offline GPS tracker?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An offline GPS tracker determines its position using GPS satellites (which always work) and transmits that position to a receiver using a direct radio link — not a cellular network. It requires no SIM card, no internet connection, and no monthly fee. Examples include LoRa P2P trackers like Loko, which use long-range radio to communicate directly between the tracker and a handheld receiver."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does an offline GPS tracker work without internet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tracker chip calculates its position from GPS satellite signals (this works globally without internet). It then transmits the coordinates via a radio link — typically LoRa, operating on 868MHz or 915MHz — directly to a receiver you carry. The receiver decodes the data and displays the location on a map in the companion app. No server, no cellular network, and no cloud service is involved."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the range of an offline GPS tracker?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa P2P offline GPS trackers like Loko achieve up to 20km in open, flat terrain with clear line-of-sight. In forests, 2–5km is typical. In urban environments with many buildings, 0.5–2km. Satellite GPS trackers (using Iridium or Globalstar) work anywhere on Earth but cost $50–$200/month. LoRa is the best balance of range, battery life, and zero ongoing cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does GPS work without a SIM card?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. GPS positioning is a one-way signal from satellites to your device — it never requires a SIM card. A SIM card is only needed if the tracker reports its position through a cellular network. Offline GPS trackers like Loko use radio instead of cellular, so they determine and transmit their position without any SIM card."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the battery life of an offline GPS tracker?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Offline LoRa GPS trackers have dramatically longer battery life than cellular GPS trackers. Loko lasts up to 1 year at a 60-second update interval because LoRa radio consumes only microwatts during transmission, versus the milliwatts required to maintain a cellular connection. Standard cellular GPS trackers typically last 1–7 days between charges."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.nolilab.com" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.nolilab.com/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "How Offline GPS Tracking Works", "item": "https://www.nolilab.com/blog/how-offline-gps-tracking-works/" }
+  ]
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer src="/js/layout.js"></script>
+</head>
+<body>
+<header>
+  <div class="container nav-container">
+    <a href="/" class="logo">nolilab</a>
+    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+      <a href="/#shop" class="nav-link">Shop</a>
+      <a href="/specifications/" class="nav-link">Specs</a>
+      <a href="/software/" class="nav-link">Software</a>
+      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">Blog</a>
+      <a href="/firmware/" class="nav-link">Firmware</a>
+      <a href="/setup-guides/" class="nav-link">Setup</a>
+      <a href="/contact/" class="nav-link">Contact</a>
+      <a href="https://lokohub.nolilab.com" class="nav-link" target="_blank" rel="noopener noreferrer">LokoHUB</a>
+    </div>
+    <div class="language-selector" style="flex-shrink: 0; position: relative;">
+      <button class="language-btn" aria-label="Select language">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="current-lang">EN</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="language-dropdown">
+        <a href="#" class="language-option" data-lang="en"><span class="lang-code">EN</span><span class="lang-name">English</span></a>
+        <a href="#" class="language-option" data-lang="ru"><span class="lang-code">RU</span><span class="lang-name">Русский</span></a>
+        <a href="#" class="language-option" data-lang="ja"><span class="lang-code">JA</span><span class="lang-name">日本語</span></a>
+        <a href="#" class="language-option" data-lang="zh"><span class="lang-code">ZH</span><span class="lang-name">中文</span></a>
+        <a href="#" class="language-option" data-lang="fr"><span class="lang-code">FR</span><span class="lang-name">Français</span></a>
+        <a href="#" class="language-option" data-lang="es"><span class="lang-code">ES</span><span class="lang-name">Español</span></a>
+      </div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main>
+<article>
+<a class="back-link" href="/blog/">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Blog
+</a>
+<div class="article-header">
+<div class="article-meta">
+  <span>May 2, 2026</span>
+  <span><a href="/author/tamleykha-piriyev/" class="author-link" rel="author">nolilab</a></span>
+</div>
+<h1 class="article-title">How Offline GPS Tracking Works: No SIM, No Internet, No Monthly Fees</h1>
+</div>
+<img alt="Loko offline GPS tracker device" class="article-image" src="/images/optimized/loko-gps-tracker-red-transparent.png" width="800" height="600" loading="eager"/>
+<div class="article-content">
+
+<p>When people search for an <strong>offline GPS tracker</strong>, they usually mean one thing: a device that tells you where something is without relying on a cellular network, a SIM card, or monthly fees. This guide explains exactly how that works — and why LoRa radio makes it possible at ranges up to 20km.</p>
+
+<h2>The Problem With Standard GPS Trackers</h2>
+
+<p>Most GPS trackers on the market are actually <em>cellular GPS trackers</em>. They determine their position via GPS satellites — which always work — but then transmit that position through a 4G or LTE cellular network to a cloud server. Your phone app retrieves the location from that server.</p>
+
+<p>This architecture has two unavoidable consequences:</p>
+<ul>
+  <li><strong>No cell signal = no tracking.</strong> In forests, mountains, farmland, and remote areas, cellular coverage drops out. The tracker goes dark.</li>
+  <li><strong>Subscription fees.</strong> The cellular data link requires a SIM card and a monthly data plan. Typical cost: $5–$15 per month, indefinitely.</li>
+</ul>
+
+<p>An offline GPS tracker eliminates both problems by replacing the cellular link with a direct radio connection.</p>
+
+<h2>How Offline GPS Tracking Actually Works</h2>
+
+<p>An offline GPS tracker has two separate systems inside it:</p>
+
+<h3>1. The GPS Positioning System</h3>
+<p>GPS (and its counterparts GLONASS, Galileo, BeiDou) works by receiving timed signals from satellites orbiting the Earth. The tracker calculates its position by measuring how long those signals take to arrive from multiple satellites. This is entirely passive — the tracker only receives signals, never transmits to the satellites. It works anywhere on the planet that has a clear view of the sky. No internet, no SIM, no infrastructure of any kind.</p>
+
+<h3>2. The Radio Data Link</h3>
+<p>The GPS position is only useful if you can receive it. An offline tracker needs a way to send the coordinates to you without going through a cellular network. This is where radio technology comes in.</p>
+
+<p>Different radio technologies are used for this purpose:</p>
+
+<table>
+  <tr><th>Technology</th><th>Range</th><th>Battery Life</th><th>Monthly Cost</th><th>Works Everywhere</th></tr>
+  <tr><td>LoRa P2P</td><td>Up to 20 km</td><td>Up to 1 year</td><td>$0</td><td>Yes (no infra needed)</td></tr>
+  <tr><td>Cellular (4G/LTE)</td><td>Unlimited</td><td>1–7 days</td><td>$5–$15</td><td>No (needs cell coverage)</td></tr>
+  <tr><td>Satellite (Iridium)</td><td>Global</td><td>Days</td><td>$50–$200</td><td>Yes (anywhere on Earth)</td></tr>
+  <tr><td>Bluetooth</td><td>~100 m</td><td>Weeks</td><td>$0</td><td>Very limited</td></tr>
+</table>
+
+<p>LoRa P2P occupies the optimal position for most use cases: long range, exceptional battery life, zero ongoing cost, and infrastructure-free operation.</p>
+
+<h2>What Is LoRa P2P and Why Does It Enable Offline Tracking?</h2>
+
+<p><strong>LoRa</strong> stands for Long Range. It is a radio modulation technique — specifically chirp spread spectrum (CSS) — that encodes data by continuously sweeping radio frequency across a defined band. This sweep pattern makes LoRa signals highly resistant to noise and interference, allowing them to be decoded even when the received signal is far weaker than the background noise level.</p>
+
+<p><strong>LoRa P2P</strong> (peer-to-peer) means the tracker communicates directly with your receiver without any infrastructure — no gateway, no server, no network. The Loko GPS tracker sends its position directly to the LokoHUB receiver connected to your phone. The LokoHUB decodes the radio signal and forwards the coordinates to the Loko app.</p>
+
+<p>The entire data path is:</p>
+<ol>
+  <li>GPS satellites → Loko tracker (position calculation)</li>
+  <li>Loko tracker → LokoHUB receiver (via LoRa radio, up to 20km)</li>
+  <li>LokoHUB → Loko app on your phone (via Bluetooth or USB)</li>
+</ol>
+
+<p>No cell tower. No cloud server. No internet. The location data never leaves this private loop.</p>
+
+<h2>Why LoRa Achieves 20km Range With a 1-Year Battery</h2>
+
+<p>LoRa's two key advantages — range and efficiency — come from the same source: chirp spread spectrum modulation spreads the signal energy over a wide bandwidth, making it extremely robust at very low power levels.</p>
+
+<h3>Range</h3>
+<p>A typical LoRa transmission power of 14–22 dBm (25–160 mW) can reach 20km in open terrain. A cellular radio transmitting at similar power barely covers a few hundred meters to the nearest tower. The difference is modulation: LoRa's spread spectrum encodes each bit across thousands of chips, giving the receiver enough signal processing gain to extract data from a signal that appears to be pure noise to conventional receivers.</p>
+
+<h3>Battery Life</h3>
+<p>LoRa transmissions are extremely short — typically 50–500 milliseconds per packet. Between transmissions, the radio chip draws near-zero current (sleep mode). At a 60-second update interval, the radio is active for less than 0.5% of the time. This duty cycle, combined with a 240 mAh battery, yields up to 1 year of operation for Loko. A cellular modem maintaining a continuous connection drains the same battery in hours.</p>
+
+<h2>Practical Implications: Who Needs an Offline GPS Tracker?</h2>
+
+<p>Offline GPS trackers are not the right tool for every situation. They are the right tool when:</p>
+
+<ul>
+  <li><strong>You operate outside cellular coverage</strong> — forests, mountains, farmland, remote wilderness</li>
+  <li><strong>You want zero ongoing costs</strong> — no subscription, ever</li>
+  <li><strong>Battery life matters</strong> — months or years, not days</li>
+  <li><strong>Privacy matters</strong> — your tracking data never passes through a third-party server</li>
+  <li><strong>You need redundancy</strong> — a backup tracker that works when your phone has no signal</li>
+</ul>
+
+<p>Common use cases for Loko: hunting dogs and working dogs, farm equipment, drones, boats and kayaks in remote areas, personal safety on hiking and climbing expeditions, and high-value assets stored in locations without cell coverage.</p>
+
+<h2>Limitations of Offline GPS Tracking</h2>
+
+<p>Understanding what offline trackers cannot do is as important as knowing what they can:</p>
+
+<ul>
+  <li><strong>Range is finite.</strong> 20km is the maximum in ideal conditions. Dense forests and mountains reduce this. If the asset moves beyond radio range, you lose the signal.</li>
+  <li><strong>No real-time cloud access.</strong> The tracker reports to your LokoHUB receiver, not to a server. If you want to see the location from 500km away, LoRa P2P cannot provide that. (For multi-point access, LoRaWAN with a gateway can extend reach.)</li>
+  <li><strong>Line-of-sight dependent.</strong> Like all radio, LoRa performs best with a clear path between transmitter and receiver. Terrain and buildings reduce range.</li>
+</ul>
+
+</div>
+</article>
+
+<div class="product-cta">
+<p class="product-cta-heading">The Offline GPS Tracker</p>
+<div class="product-cta-links">
+<a href="/lora-gps-tracker/" class="product-cta-link primary">See the Loko GPS Tracker</a>
+<a href="/no-monthly-fee/" class="product-cta-link">No Monthly Fee Details</a>
+<a href="/battery-life/" class="product-cta-link">Battery Life Comparison</a>
+<a href="/specifications/" class="product-cta-link">Full Specifications</a>
+</div>
+</div>
+
+<section class="related-posts">
+<h3 class="related-posts-heading">Related Articles</h3>
+<div class="related-posts-grid">
+<a href="/blog/what-are-lora-p2p-and-lorawan/" class="related-post-card">
+  <h3>LoRa P2P vs LoRaWAN: Key Differences Explained</h3>
+  <span class="rp-cta">Read more &#8594;</span>
+</a>
+<a href="/blog/lora-lorawan-a-simple-guide/" class="related-post-card">
+  <h3>LoRa &amp; LoRaWAN: A Simple Guide</h3>
+  <span class="rp-cta">Read more &#8594;</span>
+</a>
+<a href="/blog/radio-line-of-sight/" class="related-post-card">
+  <h3>Radio Line of Sight: How It Affects GPS &amp; LoRa Range</h3>
+  <span class="rp-cta">Read more &#8594;</span>
+</a>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script>
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const body = document.body;
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      body.classList.toggle('menu-open');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        body.classList.remove('menu-open');
+      });
+    });
+    document.addEventListener('click', (e) => {
+      if (body.classList.contains('menu-open') &&
+          !navLinks.contains(e.target) &&
+          !mobileMenuToggle.contains(e.target)) {
+        mobileMenuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        body.classList.remove('menu-open');
+      }
+    });
+  }
+</script>
+<script defer src="/js/analytics.js"></script>
+</body>
+</html>
