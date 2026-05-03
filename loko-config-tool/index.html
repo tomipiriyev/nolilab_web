@@ -682,6 +682,13 @@
                 <div class="fw-section">
                     <div class="fw-row"><span class="fw-label">Flash</span></div>
                     <button id="fw-flash-btn" class="dark-button" type="button" disabled style="width:100%">Flash Firmware</button>
+                    <div id="fw-download-container" class="fw-progress-wrap" style="display:none">
+                        <div class="fw-progress-header">
+                            <span id="fw-download-phase">Downloading firmware...</span>
+                            <span id="fw-download-text">0%</span>
+                        </div>
+                        <div class="fw-progress-bg"><div id="fw-download-bar" class="fw-progress-bar" style="background:#3b82f6"></div></div>
+                    </div>
                     <div id="fw-progress-container" class="fw-progress-wrap" style="display:none">
                         <div class="fw-progress-header">
                             <span id="fw-progress-phase">Ready</span>
@@ -870,6 +877,10 @@ class FirmwareUpdater {
       firmwareSize: document.getElementById('fw-firmware-size'),
       firmwareChecksum: document.getElementById('fw-firmware-checksum'),
       flashBtn: document.getElementById('fw-flash-btn'),
+      downloadContainer: document.getElementById('fw-download-container'),
+      downloadBar: document.getElementById('fw-download-bar'),
+      downloadText: document.getElementById('fw-download-text'),
+      downloadPhase: document.getElementById('fw-download-phase'),
       progressContainer: document.getElementById('fw-progress-container'),
       progressBar: document.getElementById('fw-progress-bar'),
       progressText: document.getElementById('fw-progress-text'),
@@ -1104,7 +1115,8 @@ class FirmwareUpdater {
   }
 
   async fetchFirmware() {
-    this.updateProgress(2, 'Downloading firmware...');
+    this.elements.downloadContainer.style.display = 'block';
+    this.updateDownloadProgress(0, 'Downloading firmware...');
     this.log('Downloading loko_v2.0.18.hex...');
     const response = await fetch('/air_firmware/loko_v2.0.18.hex');
     if (!response.ok) throw new Error(`Firmware download failed: HTTP ${response.status}`);
@@ -1118,8 +1130,9 @@ class FirmwareUpdater {
       if (done) break;
       chunks.push(value);
       received += value.length;
-      if (total) this.updateProgress(2 + 8 * received / total, 'Downloading...');
+      if (total) this.updateDownloadProgress(100 * received / total, 'Downloading...');
     }
+    this.updateDownloadProgress(100, 'Download complete');
     const text = await new Blob(chunks).text();
     const parsed = await _parseHexFile(text);
     this.firmwareData = parsed.data;
@@ -1130,17 +1143,25 @@ class FirmwareUpdater {
     this.validateFirmwareVectorTable();
   }
 
+  updateDownloadProgress(percent, phase) {
+    this.elements.downloadBar.style.width = `${percent}%`;
+    this.elements.downloadText.textContent = `${Math.round(percent)}%`;
+    this.elements.downloadPhase.textContent = phase;
+  }
+
   async flashFirmware() {
     if (!this.connected || !this.bootloader || this.isFlashing) return;
     this.isFlashing = true;
     this.elements.flashBtn.disabled = true;
-    this.elements.progressContainer.style.display = 'block';
+    this.elements.downloadContainer.style.display = 'none';
+    this.elements.progressContainer.style.display = 'none';
     this.elements.verificationBadge.style.display = 'none';
     try {
       // 1. Download firmware
       await this.fetchFirmware();
 
       // 2. Connect to bootloader
+      this.elements.progressContainer.style.display = 'block';
       this.log('Connecting to bootloader...');
       this.updateProgress(10, 'Connecting');
       const synced = await this.waitForBootloader(8000);
