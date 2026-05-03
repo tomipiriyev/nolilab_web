@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loko-AIR Configurator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M12 3.75a2.25 2.25 0 0 1 2.22 1.89l.11.67a6.96 6.96 0 0 1 1.39.57l.56-.39a2.25 2.25 0 0 1 2.9.2l.14.13a2.25 2.25 0 0 1 .2 2.9l-.39.56c.24.45.43.92.57 1.4l.67.1a2.25 2.25 0 0 1 1.88 2.23v.19a2.25 2.25 0 0 1-1.88 2.22l-.67.11c-.14.48-.33.95-.57 1.39l.39.56a2.25 2.25 0 0 1-.2 2.9l-.14.14a2.25 2.25 0 0 1-2.9.2l-.56-.39a6.96 6.96 0 0 1-1.4.57l-.1.67A2.25 2.25 0 0 1 12.2 22.5H12a2.25 2.25 0 0 1-2.22-1.89l-.11-.67a6.96 6.96 0 0 1-1.39-.57l-.56.39a2.25 2.25 0 0 1-2.9-.2l-.14-.14a2.25 2.25 0 0 1-.2-2.9l.39-.56a6.96 6.96 0 0 1-.57-1.39l-.67-.11A2.25 2.25 0 0 1 1.75 14v-.19a2.25 2.25 0 0 1 1.89-2.22l.67-.1c.14-.48.33-.95.57-1.4l-.39-.56a2.25 2.25 0 0 1 .2-2.9l.14-.13a2.25 2.25 0 0 1 2.9-.2l.56.39c.44-.24.91-.43 1.39-.57l.11-.67A2.25 2.25 0 0 1 12 3.75Z"
+                        stroke="currentColor" stroke-width="1.5" />
+                    <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.5" />
+                </svg>
+            </div>
+            <div>
+                <p class="eyebrow">Loko-AIR Device Setup</p>
+                <h1>Loko Configurator</h1>
+                <p class="hero-copy">Configure the data transfer mode, as well as the data transmission and collection
+                    intervals.</p>
+            </div>
+        </section>
+
+        <section class="card status-card">
+            <div class="status-meta">
+                <div class="status-cluster">
+                    <span class="status-icon disconnected" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <g class="wire-connected" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3.5 12H9" />
+                                <path d="M9 12C9 9.8 10.8 8 13 8H16" />
+                                <path d="M16 6.5V9.5" />
+                                <path d="M16 14.5V17.5" />
+                                <path d="M16 12H20.5" />
+                            </g>
+                            <g class="wire-disconnected" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3.5 12H8" />
+                                <path d="M9.8 10.3L11.5 8.6" />
+                                <path d="M9.8 13.7L11.5 15.4" />
+                                <path d="M14.2 10.3L12.5 8.6" />
+                                <path d="M14.2 13.7L12.5 15.4" />
+                                <path d="M16 6.5V9.5" />
+                                <path d="M16 14.5V17.5" />
+                                <path d="M16 12H20.5" />
+                            </g>
+                        </svg>
+                    </span>
+                    <div>
+                        <div id="connectionLabel" class="status-title disconnected">Disconnected</div>
+                        <div id="connectionHint" class="status-hint">Browser access to the serial device has not been
+                            granted.</div>
+                        <div id="portInfo" class="port-info">Port: not selected</div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="connectButton" class="primary-button disconnected" type="button">
+
+                <span id="connectButtonLabel">Connect</span>
+            </button>
+        </section>
+
+        <section class="card workspace-card">
+            <div class="main-tab-strip" role="tablist" aria-label="Main sections">
+                <button class="main-tab is-active" type="button" role="tab" aria-selected="true"
+                    data-main-tab="configuration">Configuration</button>
+                <button class="main-tab" type="button" role="tab" aria-selected="false" data-main-tab="gnss-trace">GNSS
+                    Trace</button>
+            </div>
+
+            <div class="main-panel is-active" data-main-panel="configuration">
+                <section class="card mode-card">
+                    <div class="mode-card-content">
+                        <div class="mode-fields-row">
+                            <div class="field">
+                                <label for="wakeUpPeriod">Wake Up Period</label>
+                                <div class="inline-input-group">
+                                    <input id="wakeUpPeriod" type="number" min="0" max="43200" step="any" value="0"
+                                        inputmode="numeric">
+                                    <select id="wakeUpPeriodUnit" aria-label="Wake Up Period units">
+                                        <option value="1">Seconds</option>
+                                        <option value="60">Minutes</option>
+                                        <option value="3600">Hours</option>
+                                    </select>
+                                </div>
+                                <p class="field-copy">Wake up period with selectable units. Maximum value is 12 hours.
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label for="sendEvery">Send Mult</label>
+                                <input id="sendEvery" type="number" min="0" max="200" step="1" value="0"
+                                    inputmode="numeric">
+                                <p class="field-copy">Send data on every N-th wake up cycle. `0` disables periodic send.
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label for="saveEvery">Save Mult</label>
+                                <input id="saveEvery" type="number" min="0" max="200" step="1" value="0"
+                                    inputmode="numeric">
+                                <p class="field-copy">Save GNSS trace on every N-th wake up cycle. `0` disables trace
+                                    saving.
+                                </p>
+                            </div>
+                        </div>
+
+                        <p id="timingSummary" class="mode-summary" aria-live="polite"></p>
+                        <div class="field">
+                            <label for="gnssMode">GNSS Mode</label>
+                            <select id="gnssMode">
+                                <option value="0">Normal</option>
+                                <option value="1">Fitness</option>
+                                <option value="2">Aviation</option>
+                                <option value="3">Balloon</option>
+                                <option value="4">Stationary</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mode-switch-group">
+                        <div class="mode-header">Transmit Mode</div>
+                        <div class="switch-row">
+                            <span class="mode-name active">P2P Mode</span>
+                            <label class="toggle">
+                                <input id="operatingModeToggle" type="checkbox"
+                                    aria-label="Switch between P2P and LoRaWAN">
+                                <span class="toggle-track"></span>
+                            </label>
+                            <span class="mode-name">LoRaWAN Mode</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card settings-card">
+                    <div class="tab-strip" role="tablist" aria-label="Configuration sections">
+                        <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="p2p">P2P
+                            Mode</button>
+                        <button class="tab" type="button" role="tab" aria-selected="false" data-tab="lorawan">LoRaWAN
+                            Mode</button>
+                    </div>
+
+                    <div class="panel is-active" data-panel="p2p">
+                        <div class="field">
+                            <div class="field-head">
+                                <label for="frequencyRange">Frequency</label>
+                                <output id="frequencyValue" for="frequencyRange">915 MHz</output>
+                            </div>
+                            <input id="frequencyRange" type="range" min="860" max="1020" value="0">
+                            <p class="field-copy">Set the operating frequency for Loko-AIR peer-to-peer communication.
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <div class="field-head">
+                                <label for="powerRange">TX Power</label>
+                                <output id="powerValue" for="powerRange">14 dBm</output>
+                            </div>
+                            <input id="powerRange" type="range" min="2" max="22" value="0">
+                            <p class="field-copy">Transmission power level for the radio output stage.</p>
+                        </div>
+
+                        <div class="two-column p2p-ids">
+                            <div class="field">
+                                <label for="id1">ID1</label>
+                                <input id="id1" type="text" value="" spellcheck="false" inputmode="numeric">
+                            </div>
+                            <div class="field">
+                                <div class="id-format-row" aria-label="ID value format">
+                                    <span class="id-format-label" id="idFormatDecLabel">DEC</span>
+                                    <label class="toggle" for="idFormatToggle">
+                                        <input id="idFormatToggle" type="checkbox"
+                                            aria-label="Switch ID format DEC or HEX">
+                                        <span class="toggle-track"></span>
+                                    </label>
+                                    <span class="id-format-label" id="idFormatHexLabel">HEX</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="id2">ID2</label>
+                                <input id="id2" type="text" value="" spellcheck="false" inputmode="numeric">
+                            </div>
+                        </div>
+
+                        <div class="field p2p-options">
+                            <div class="toggle-row">
+                                <span>Enable P2P Encryption</span>
+                                <label class="toggle" for="isP2pEncrypted">
+                                    <input id="isP2pEncrypted" type="checkbox" aria-label="Enable P2P Encryption">
+                                    <span class="toggle-track"></span>
+                                </label>
+                            </div>
+                            <div class="p2p-key-block">
+                                <label for="p2pEncryptionKey">P2P Key</label>
+                                <div class="p2p-key-row">
+                                    <input id="p2pEncryptionKey" type="text" value="" maxlength="64" spellcheck="false"
+                                        inputmode="text" autocomplete="off"
+                                        placeholder="The current key is hidden. Please enter a new key to update it, or leave the field empty to retain the existing key."
+                                        disabled>
+                                </div>
+                                <p class="field-copy">Enter 64 HEX characters(32bytes) for the 256-bit encryption key.
+                                </p>
+                            </div>
+                            <div class="toggle-row">
+                                <span>Include Velocity & Altitude In Air Data</span>
+                                <label class="toggle" for="isExtendedPacket">
+                                    <input id="isExtendedPacket" type="checkbox" aria-label="Use Extended Packet">
+                                    <span class="toggle-track"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="panel" data-panel="lorawan" hidden>
+                        <div class="two-column">
+                            <div class="field">
+                                <label for="loraWanRegion">Region</label>
+                                <select id="loraWanRegion">
+                                    <option>AS923</option>
+                                    <option>AU915</option>
+                                    <option>CN470</option>
+                                    <option>CN779</option>
+                                    <option>EU433</option>
+                                    <option selected>EU868</option>
+                                    <option>IN865</option>
+                                    <option>KR920</option>
+                                    <option>RU864</option>
+                                    <option>US915</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="devEui">DevEUI</label>
+                            <input id="devEui" type="text" value="" spellcheck="false" inputmode="text"
+                                autocomplete="off" maxlength="16">
+                        </div>
+
+                        <div class="field">
+                            <label for="appEui">AppEUI</label>
+                            <input id="appEui" type="text" value="" spellcheck="false" inputmode="text"
+                                autocomplete="off" maxlength="16">
+                        </div>
+
+                        <div class="field">
+                            <label for="appKey">AppKey</label>
+                            <input id="appKey" type="text" value="" spellcheck="false" inputmode="text"
+                                autocomplete="off" maxlength="32"
+                                placeholder="The current key is hidden. Please enter a new key to update it, or leave the field empty to retain the existing key.">
+                        </div>
+                    </div>
+
+                    <footer class="actions">
+                        <button id="saveButton" class="dark-button" type="button">Save Changes</button>
+                        <button id="resetButton" class="ghost-button" type="button">Reset to Defaults</button>
+                        <span id="saveStatus" class="save-status" aria-live="polite"></span>
+                    </footer>
+                </section>
+            </div>
+
+            <div class="main-panel" data-main-panel="gnss-trace" hidden>
+                <section class="card gnss-trace-card">
+                    <div class="field">
+                        <label for="gnssTraceMap">GNSS Trace Map</label>
+                        <div id="gnssTraceMap" class="gnss-trace-map" aria-label="GNSS trace map"></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="gnss-trace-toolbar">
+                            <button id="readGnssTraceButton" class="ghost-button" type="button">Read Trace</button>
+                            <button id="exportGnssTraceButton" class="ghost-button" type="button" disabled>Export to
+                                .gpx</button>
+                            <button id="exportGnssTraceCsvButton" class="ghost-button" type="button" disabled>Export to
+                                .csv</button>
+                            <button id="eraseGnssTraceButton" class="ghost-button" type="button">Erase Trace</button>
+                        </div>
+                        <p class="field-copy">Reads GNSS trace log using command gtrace print.</p>
+                        <div class="gnss-trace-progress-wrap" aria-live="polite">
+                            <progress id="gnssTraceProgress" class="gnss-trace-progress" max="100" value="0"></progress>
+                            <span id="gnssTraceProgressLabel" class="gnss-trace-progress-label">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="gnssTraceOutputTable">GNSS Trace Output</label>
+                        <div class="gnss-trace-table-wrap" role="region" aria-label="GNSS trace output table">
+                            <table id="gnssTraceOutputTable" class="gnss-trace-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Latitude</th>
+                                        <th scope="col">Longitude</th>
+                                        <th scope="col">Alt</th>
+                                        <th scope="col">Speed</th>
+                                        <th scope="col">HDOP</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="gnssTraceOutputBody">
+                                    <tr class="gnss-trace-row-message">
+                                        <td colspan="8">Trace output will appear here after pressing 'Read Trace'.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

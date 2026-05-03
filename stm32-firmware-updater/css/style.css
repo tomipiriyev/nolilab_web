@@ -1,0 +1,639 @@
+/* STM32 Firmware Updater — GNOME Adwaita Light Theme */
+
+:root {
+  /* Adwaita window chrome */
+  --window-bg:        #fafafa;
+  --headerbar-bg:     linear-gradient(to bottom, #ededed 0%, #e3e3e3 100%);
+  --headerbar-border: #c8c8c8;
+  --headerbar-shadow: 0 1px 0 rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.06);
+
+  /* Adwaita surface / card */
+  --card-bg:          #ffffff;
+  --card-border:      #deddda;
+  --card-shadow:      0 1px 3px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04);
+  --view-bg:          #ffffff;
+  --view-hover:       #f6f5f4;
+
+  /* Adwaita text */
+  --text-primary:     #1c1b1a;
+  --text-secondary:   #5c5855;
+  --text-muted:       #908e8b;
+  --text-link:        #1c71d8;
+
+  /* Adwaita semantic colours (exact libadwaita values) */
+  --blue-3:   #3584e4;
+  --blue-4:   #1c71d8;
+  --blue-5:   #1a5fb4;
+  --green-4:  #2ec27e;
+  --green-5:  #26a269;
+  --red-3:    #e01b24;
+  --red-4:    #c01c28;
+  --yellow-5: #e5a50a;
+
+  /* Semantic aliases */
+  --accent:       var(--blue-3);
+  --accent-hover: var(--blue-4);
+  --accent-tint:  rgba(53, 132, 228, 0.15);
+  --success:      var(--green-5);
+  --success-tint: #e9f6ee;
+  --error:        var(--red-4);
+  --error-tint:   #fce8ea;
+  --warning:      #7c4e00;
+  --warning-tint: #fef3d0;
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px var(--blue-3);
+
+  /* Button chrome */
+  --btn-bg:        linear-gradient(to bottom, #ffffff 0%, #f4f3f2 100%);
+  --btn-border:    #c0bfbc;
+  --btn-shadow:    0 1px 0 rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.4);
+  --btn-shadow-active: inset 0 2px 3px rgba(0,0,0,.10);
+
+  /* Typography */
+  --mono: ui-monospace, "Cascadia Mono", "Liberation Mono", "DejaVu Sans Mono",
+          "Courier New", monospace;
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Cantarell,
+          Ubuntu, "Noto Sans", sans-serif;
+
+  /* Geometry */
+  --radius-sm:  4px;
+  --radius:     6px;
+  --radius-lg:  10px;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Page ───────────────────────────────────────────────────── */
+
+body {
+  min-height: 100vh;
+  background: var(--window-bg);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: min(720px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 32px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ─── App window ─────────────────────────────────────────────── */
+
+.main-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+/* ─── Header bar (GTK-style) ─────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 46px;
+  padding: 0 16px;
+  background: var(--headerbar-bg);
+  border-bottom: 1px solid var(--headerbar-border);
+  box-shadow: var(--headerbar-shadow);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.header h1 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Status LED */
+.status-icon {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  border: 1px solid rgba(0,0,0,.12);
+}
+
+.status-icon.success {
+  background: var(--green-4);
+  border-color: var(--green-5);
+  box-shadow: 0 0 0 2px rgba(46,194,126,.20);
+}
+
+.status-icon.error {
+  background: var(--red-3);
+  border-color: var(--red-4);
+}
+
+.status-icon.pending {
+  background: #f6a908;
+  border-color: var(--yellow-5);
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .40; }
+}
+
+.status-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.status-text.status-success { color: var(--green-5); }
+.status-text.status-error   { color: var(--red-4);   }
+.status-text.status-pending { color: var(--warning);  }
+
+/* ─── Panels ─────────────────────────────────────────────────── */
+
+.panel {
+  padding: 16px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.panel:last-child {
+  border-bottom: none;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-secondary);
+}
+
+.panel-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: 0 0 auto;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 5px 12px;
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius);
+  background: var(--btn-bg);
+  box-shadow: var(--btn-shadow);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter .1s ease, box-shadow .1s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn:hover:not(:disabled) {
+  filter: brightness(.96);
+}
+
+.btn:active:not(:disabled) {
+  box-shadow: var(--btn-shadow-active);
+  filter: brightness(.93);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.btn:disabled {
+  opacity: .50;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-icon {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: 0 0 auto;
+}
+
+/* Suggested (green) action */
+.btn-primary,
+.btn-success {
+  background: #238636;
+  border-color: #196127;
+  box-shadow: 0 1px 0 rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.10);
+  color: #ffffff;
+  text-shadow: 0 1px 0 rgba(0,0,0,.20);
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-success:hover:not(:disabled) {
+  background: #1e7a2f;
+  filter: none;
+}
+
+.btn-success {
+  flex: 1 1 180px;
+}
+
+/* Destructive-ish (restore) */
+.btn-warning {
+  background: linear-gradient(to bottom, #fbe6ac 0%, #f7d76c 100%);
+  border-color: #c9991a;
+  box-shadow: 0 1px 0 rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.30);
+  color: #3d2800;
+  text-shadow: 0 1px 0 rgba(255,255,255,.30);
+}
+
+/* ─── Device / button row ────────────────────────────────────── */
+
+.device-actions,
+.flash-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+/* ─── Info rows ──────────────────────────────────────────────── */
+
+.device-info,
+.firmware-info {
+  background: var(--view-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+
+.device-detail,
+.firmware-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 2px 0;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.device-detail + .device-detail,
+.firmware-detail + .firmware-detail {
+  border-top: 1px solid #f0efee;
+  padding-top: 4px;
+  margin-top: 2px;
+}
+
+.device-detail .label,
+.firmware-detail .label {
+  flex: 0 0 auto;
+  color: var(--text-secondary);
+}
+
+.device-detail .value,
+.firmware-detail .value {
+  min-width: 0;
+  text-align: right;
+  word-break: break-all;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.firmware-detail .filename {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-link);
+  font-weight: 500;
+}
+
+.firmware-detail .checksum {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  letter-spacing: .02em;
+}
+
+/* ─── Drop zone ──────────────────────────────────────────────── */
+
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 100px;
+  padding: 24px 16px;
+  border: 2px dashed var(--card-border);
+  border-radius: var(--radius);
+  background: var(--view-hover);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
+
+.drop-zone:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.drop-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 4px;
+  color: var(--text-muted);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.drop-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.drop-subtext {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--mono);
+}
+
+.firmware-download-btn {
+  width: 100%;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+/* ─── Firmware info (below drop zone) ───────────────────────── */
+
+.firmware-info {
+  margin-top: 10px;
+}
+
+/* ─── Progress ───────────────────────────────────────────────── */
+
+.progress-container {
+  margin-bottom: 10px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.progress-phase {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.progress-percent {
+  font-family: var(--mono);
+  color: var(--text-secondary);
+}
+
+.progress-bar-bg {
+  height: 7px;
+  overflow: hidden;
+  background: #e8e6e3;
+  border: 1px solid #d5d3d0;
+  border-radius: 99px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(to right, var(--blue-3), var(--blue-4));
+  border-radius: 99px;
+  transition: width .3s ease;
+}
+
+/* ─── Badge ──────────────────────────────────────────────────── */
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge-success {
+  background: var(--success-tint);
+  border: 1px solid #b6e3c6;
+  color: var(--green-5);
+}
+
+.badge-error {
+  background: var(--error-tint);
+  border: 1px solid #f5b8bc;
+  color: var(--red-4);
+}
+
+.badge-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: 0 0 auto;
+}
+
+/* ─── Log panel ──────────────────────────────────────────────── */
+
+.log-container {
+  max-height: 210px;
+  padding: 6px;
+  overflow-y: auto;
+  background: #fdfcfb;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.log-entry {
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+}
+
+.log-entry + .log-entry {
+  margin-top: 1px;
+}
+
+.log-entry.log-info    { color: var(--text-primary); }
+
+.log-entry.log-success {
+  background: var(--success-tint);
+  color: var(--green-5);
+}
+
+.log-entry.log-error {
+  background: var(--error-tint);
+  color: var(--red-4);
+}
+
+.log-entry.log-warning {
+  background: var(--warning-tint);
+  color: var(--warning);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+
+.footer {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* ─── Unsupported browser ────────────────────────────────────── */
+
+.unsupported {
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.unsupported h2 {
+  margin-bottom: 10px;
+  color: var(--red-4);
+  font-size: 16px;
+}
+
+.unsupported p {
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+
+.unsupported ul {
+  list-style: none;
+  color: var(--text-secondary);
+}
+
+.unsupported li {
+  padding: 2px 0;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+
+::-webkit-scrollbar       { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+::-webkit-scrollbar-thumb {
+  background: #c4c0bb;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a09b95;
+  background-clip: padding-box;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 520px) {
+  .container {
+    padding: 0;
+  }
+
+  .main-card {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .header,
+  .panel {
+    padding: 12px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-height: auto;
+    padding-top: 14px;
+    padding-bottom: 12px;
+  }
+
+  .device-actions,
+  .flash-actions {
+    flex-direction: column;
+  }
+
+  .btn,
+  .btn-success {
+    width: 100%;
+    flex: none;
+  }
+
+  .device-detail,
+  .firmware-detail {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+  }
+
+  .device-detail .value,
+  .firmware-detail .value {
+    text-align: left;
+  }
+}

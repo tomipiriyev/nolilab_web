@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firmware Updater</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='5' width='20' height='22' rx='3' fill='%233584e4'/%3E%3Cpath d='M11 11h10M11 16h10M11 21h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <div class="container">
+    <div class="main-card">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <div id="status-icon" class="status-icon"></div>
+          <h1>Firmware Updater</h1>
+        </div>
+        <div id="device-status" class="status-text">Disconnected</div>
+      </header>
+
+      <!-- Device Panel -->
+      <section class="panel device-panel">
+        <h2 class="panel-title">
+          <svg class="panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M7 8h10M7 16h10M9 8V5h6v3M9 16v3h6v-3"/>
+            <rect x="5" y="8" width="14" height="8" rx="2"/>
+          </svg>
+          Device
+        </h2>
+
+        <div class="device-actions">
+          <button id="connect-btn" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M8 12h8M12 8v8"/>
+              <circle cx="12" cy="12" r="8"/>
+            </svg>
+            Connect
+          </button>
+          <button id="disconnect-btn" class="btn btn-secondary" style="display: none;">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M9 6H6v12h3M13 8l4 4-4 4M17 12H9"/>
+            </svg>
+            Disconnect
+          </button>
+        </div>
+        <div id="device-info" class="device-info"></div>
+      </section>
+
+      <!-- Firmware Panel -->
+      <section class="panel firmware-panel">
+        <h2 class="panel-title">
+          <svg class="panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M7 3h7l4 4v14H7z"/>
+            <path d="M14 3v5h4M9 13h6M9 17h6"/>
+          </svg>
+          Firmware
+        </h2>
+
+        <div id="drop-zone" class="drop-zone">
+          <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 4v11M8 8l4-4 4 4"/>
+            <path d="M5 15v4h14v-4"/>
+          </svg>
+          <p class="drop-text">Drop firmware file</p>
+          <p class="drop-subtext">BIN or HEX</p>
+        </div>
+        <input type="file" id="file-input" accept=".bin,.hex" style="display: none;">
+
+        <button id="download-firmware-btn" class="btn btn-secondary firmware-download-btn" title="Download latest firmware for Loko Air">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 3v12M8 11l4 4 4-4"/>
+            <path d="M5 19h14"/>
+          </svg>
+          Download Loko Air Firmware
+        </button>
+
+        <div id="firmware-info" class="firmware-info" style="display: none;">
+          <div class="firmware-detail">
+            <span class="label">File:</span>
+            <span id="firmware-filename" class="value filename"></span>
+          </div>
+          <div class="firmware-detail">
+            <span class="label">Size:</span>
+            <span id="firmware-size" class="value"></span>
+          </div>
+          <div class="firmware-detail">
+            <span class="label">SHA-256:</span>
+            <span id="firmware-checksum" class="value checksum"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Flash Panel -->
+      <section class="panel flash-panel">
+        <h2 class="panel-title">
+          <svg class="panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M13 3 6 13h5l-1 8 8-12h-5z"/>
+          </svg>
+          Flash
+        </h2>
+
+        <div class="flash-actions">
+          <button id="flash-btn" class="btn btn-success" disabled>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 3v12M8 11l4 4 4-4"/>
+              <path d="M5 19h14"/>
+            </svg>
+            Flash
+          </button>
+        </div>
+
+        <!-- Progress -->
+        <div id="progress-container" class="progress-container" style="display: none;">
+          <div class="progress-header">
+            <span id="progress-phase" class="progress-phase">Ready</span>
+            <span id="progress-text" class="progress-percent">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+        </div>
+
+        <!-- Verification Badge -->
+        <div id="verification-badge" class="badge" style="display: none;"></div>
+      </section>
+
+      <!-- Log Panel -->
+      <section class="panel log-panel">
+        <h2 class="panel-title">
+          <svg class="panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M5 5h14v14H5z"/>
+            <path d="M8 9h8M8 13h8M8 17h5"/>
+          </svg>
+          Log
+        </h2>
+        <div id="log-container" class="log-container"></div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <p>Local only. Firmware never leaves this browser.</p>
+    </footer>
+  </div>
+
+  <script src="js/serial.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

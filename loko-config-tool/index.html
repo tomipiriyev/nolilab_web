@@ -272,7 +272,7 @@
 
   .workspace-card { margin-top: 10px; padding: 14px; }
   .main-tab-strip { gap: 4px; padding: 4px; border-radius: 12px; }
-  .main-tab { height: 38px; font-size: 0.85rem; border-radius: 10px; }
+  .main-tab { height: 38px; font-size: 0.78rem; border-radius: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 6px; }
   .main-panel { padding-top: 14px; }
 
   .mode-card { margin-top: 0; padding: 14px 16px; gap: 10px; }
@@ -326,6 +326,44 @@
   .gnss-trace-table thead th { padding: 6px 10px; }
   .gnss-trace-table tbody td { padding: 5px 10px; }
   .gnss-trace-table-wrap { min-height: 240px; max-height: 300px; }
+
+  /* ── Firmware Updater panel ── */
+  .fw-updater { display: flex; flex-direction: column; gap: 10px; }
+  .fw-section { border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .fw-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .fw-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); flex: 1; }
+  .fw-status-text { font-size: 0.82rem; color: var(--text-secondary); }
+  .fw-status-dot { width: 10px; height: 10px; border-radius: 50%; background: #d1d5db; flex-shrink: 0; display: inline-block; transition: background 0.2s; }
+  .fw-status-dot.success { background: #22c55e; }
+  .fw-status-dot.error { background: #ef4444; }
+  .fw-status-dot.pending { background: #f59e0b; animation: fw-pulse 1s ease-in-out infinite; }
+  @keyframes fw-pulse { 0%,100% { opacity:1 } 50% { opacity:0.35 } }
+  .fw-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .fw-device-info { font-size: 0.75rem; color: var(--text-secondary); margin-top: 6px; min-height: 14px; }
+  .fw-drop-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 18px 12px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .fw-drop-zone p { margin: 0; font-size: 0.85rem; color: var(--text-secondary); }
+  .fw-drop-zone p + p { font-size: 0.75rem; margin-top: 2px; opacity: 0.7; }
+  .fw-drop-zone:hover, .fw-drop-zone.drag-over { border-color: #22c55e; background: rgba(34,197,94,0.04); }
+  .fw-firmware-info { font-size: 0.75rem; margin-top: 8px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; }
+  .fw-fi-row { display: flex; gap: 8px; }
+  .fw-fi-label { color: var(--text-secondary); min-width: 52px; flex-shrink: 0; }
+  .fw-fi-checksum { font-family: var(--font-mono); font-size: 0.68rem; word-break: break-all; }
+  .fw-progress-wrap { margin-top: 10px; }
+  .fw-progress-header { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px; }
+  .fw-progress-bg { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .fw-progress-bar { height: 100%; width: 0%; background: #22c55e; border-radius: 4px; transition: width 0.2s ease; }
+  .fw-badge { display: flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 500; margin-top: 8px; }
+  .fw-badge.badge-success { background: #dcfce7; color: #166534; }
+  .fw-badge.badge-error { background: #fee2e2; color: #991b1b; }
+  .fw-badge svg { width: 15px; height: 15px; stroke-width: 2.5; flex-shrink: 0; }
+  .fw-log-container { background: #13151a; border-radius: 8px; padding: 6px 10px; height: 160px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.5; }
+  .fw-log-container::-webkit-scrollbar { width: 3px; }
+  .fw-log-container::-webkit-scrollbar-thumb { background: #22252f; border-radius: 2px; }
+  .log-entry { display: block; white-space: pre-wrap; word-break: break-all; }
+  .log-info { color: #8b95a9; }
+  .log-success { color: #0aa34b; }
+  .log-error { color: #e05555; }
+  .log-warning { color: #f59e0b; }
 </style>
 
 <script defer src="/js/layout.js"></script>
@@ -434,6 +472,7 @@
         <div class="main-tab-strip" role="tablist" aria-label="Main sections">
             <button class="main-tab is-active" type="button" role="tab" aria-selected="true" data-main-tab="configuration">Configuration</button>
             <button class="main-tab" type="button" role="tab" aria-selected="false" data-main-tab="gnss-trace">GNSS Trace</button>
+            <button class="main-tab" type="button" role="tab" aria-selected="false" data-main-tab="firmware-updater">Firmware Update</button>
         </div>
 
         <div class="main-panel is-active" data-main-panel="configuration">
@@ -615,6 +654,57 @@
             </section>
         </div>
 
+        <div class="main-panel" data-main-panel="firmware-updater" hidden>
+            <div id="fw-updater-panel" class="fw-updater">
+                <!-- Device -->
+                <div class="fw-section">
+                    <div class="fw-row">
+                        <span id="fw-status-icon" class="fw-status-dot"></span>
+                        <span class="fw-label">Device</span>
+                        <span id="fw-device-status" class="fw-status-text">Disconnected</span>
+                    </div>
+                    <div class="fw-actions">
+                        <button id="fw-connect-btn" class="dark-button" type="button">Connect</button>
+                        <button id="fw-disconnect-btn" class="ghost-button" type="button" style="display:none">Disconnect</button>
+                    </div>
+                    <div id="fw-device-info" class="fw-device-info"></div>
+                </div>
+                <!-- Firmware -->
+                <div class="fw-section">
+                    <div class="fw-row"><span class="fw-label">Firmware</span></div>
+                    <div id="fw-drop-zone" class="fw-drop-zone">
+                        <p>Drop firmware file here</p>
+                        <p>BIN or HEX</p>
+                    </div>
+                    <input type="file" id="fw-file-input" accept=".bin,.hex" style="display:none">
+                    <button id="fw-download-firmware-btn" class="ghost-button" type="button" style="width:100%;margin-top:6px">Download Loko Air Firmware</button>
+                    <div id="fw-firmware-info" class="fw-firmware-info" style="display:none">
+                        <div class="fw-fi-row"><span class="fw-fi-label">File:</span><span id="fw-firmware-filename"></span></div>
+                        <div class="fw-fi-row"><span class="fw-fi-label">Size:</span><span id="fw-firmware-size"></span></div>
+                        <div class="fw-fi-row"><span class="fw-fi-label">SHA-256:</span><span id="fw-firmware-checksum" class="fw-fi-checksum"></span></div>
+                    </div>
+                </div>
+                <!-- Flash -->
+                <div class="fw-section">
+                    <div class="fw-row"><span class="fw-label">Flash</span></div>
+                    <button id="fw-flash-btn" class="dark-button" type="button" disabled style="width:100%">Flash Firmware</button>
+                    <div id="fw-progress-container" class="fw-progress-wrap" style="display:none">
+                        <div class="fw-progress-header">
+                            <span id="fw-progress-phase">Ready</span>
+                            <span id="fw-progress-text">0%</span>
+                        </div>
+                        <div class="fw-progress-bg"><div id="fw-progress-bar" class="fw-progress-bar"></div></div>
+                    </div>
+                    <div id="fw-verification-badge" class="fw-badge" style="display:none"></div>
+                </div>
+                <!-- Log -->
+                <div class="fw-section">
+                    <div class="fw-row"><span class="fw-label">Log</span></div>
+                    <div id="fw-log-container" class="fw-log-container"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="main-panel" data-main-panel="gnss-trace" hidden>
             <section class="card gnss-trace-card">
                 <div class="field">
@@ -675,6 +765,519 @@
     var b = document.getElementById('compatBanner');
     if (b) b.classList.add('hidden');
   }
+</script>
+<script src="../stm32-firmware-updater/js/serial.js"></script>
+<script>
+// ── Firmware Updater (embedded) ──────────────────────────────────────────────
+const _DB_NAME = 'stm32-updater';
+const _DB_VERSION = 1;
+const _BACKUP_STORE = 'backups';
+const _STM32_FLASH_ORIGIN = 0x08000000;
+const _STM32_FLASH_BASE = 0x08008000;
+const _STM32_FLASH_PAGE_SIZE = 2048;
+const _STM32_SRAM_BASE = 0x20000000;
+const _STM32_SRAM_END = 0x30000000;
+
+async function _parseHexFile(content) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const lines = content.split(/\r\n|\n|\r/);
+      let dataRecords = [];
+      let extendedAddress = 0;
+      let minAddress = Infinity;
+      let maxAddress = 0;
+      for (const line of lines) {
+        if (!line.startsWith(':')) continue;
+        const data = _hexLineToBytes(line);
+        if (!data || data.length < 5) continue;
+        const byteCount = data[0];
+        const address = (data[1] << 8) | data[2];
+        const recordType = data[3];
+        if (byteCount !== data.length - 5) continue;
+        switch (recordType) {
+          case 0x00: {
+            const fullAddress = (extendedAddress << 16) | address;
+            const dataBytes = Array.from(data.slice(4, 4 + byteCount));
+            dataRecords.push({ address: fullAddress, data: dataBytes });
+            if (fullAddress < minAddress) minAddress = fullAddress;
+            if (fullAddress + byteCount > maxAddress) maxAddress = fullAddress + byteCount;
+            break;
+          }
+          case 0x02: if (byteCount === 2) { extendedAddress = (data[4] << 12) | (data[5] << 4); } break;
+          case 0x04: if (byteCount === 2) { extendedAddress = ((data[4] << 24) | (data[5] << 16)) >> 16; } break;
+          case 0x01: break;
+        }
+      }
+      if (minAddress === Infinity) { resolve({ data: new Uint8Array(0), baseAddress: _STM32_FLASH_BASE }); return; }
+      const binarySize = maxAddress - minAddress;
+      const binary = new Uint8Array(binarySize);
+      binary.fill(0xFF);
+      for (const rec of dataRecords) { binary.set(rec.data, rec.address - minAddress); }
+      let baseAddress = minAddress;
+      if (baseAddress < _STM32_FLASH_BASE && binary.length >= 8) {
+        const view = new DataView(binary.buffer, binary.byteOffset, binary.byteLength);
+        const resetVector = view.getUint32(4, true);
+        if (resetVector >= _STM32_FLASH_BASE) { baseAddress = _STM32_FLASH_BASE; }
+      }
+      resolve({ data: binary, baseAddress });
+    }, 0);
+  });
+}
+
+function _hexLineToBytes(hexLine) {
+  const bytes = [];
+  for (let i = 1; i < hexLine.length; i += 2) {
+    const byte = parseInt(hexLine.substr(i, 2), 16);
+    if (isNaN(byte)) return null;
+    bytes.push(byte);
+  }
+  return new Uint8Array(bytes);
+}
+
+class FirmwareUpdater {
+  constructor() {
+    this.serial = new SerialManager();
+    this.bootloader = null;
+    this.connected = false;
+    this.isConnecting = false;
+    this.isFlashing = false;
+    this.isRebooting = false;
+    this.firmwareData = null;
+    this.firmwareBaseAddress = _STM32_FLASH_BASE;
+    this.firmwareChecksum = null;
+    this.backupChecksum = null;
+    this.backupData = null;
+    this.backupBaseAddress = _STM32_FLASH_BASE;
+    this.db = null;
+    this.elements = {};
+    this.handleFileSelect = this.handleFileSelect.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
+  }
+
+  async init() {
+    if (!this.serial.isSupported()) { this.showUnsupportedBrowser(); return; }
+    this.cacheElements();
+    await this.initDB();
+    this.setupEventListeners();
+    this.log('Ready. Connect your STM32 device.');
+  }
+
+  cacheElements() {
+    this.elements = {
+      connectBtn: document.getElementById('fw-connect-btn'),
+      deviceStatus: document.getElementById('fw-device-status'),
+      deviceInfo: document.getElementById('fw-device-info'),
+      disconnectBtn: document.getElementById('fw-disconnect-btn'),
+      dropZone: document.getElementById('fw-drop-zone'),
+      downloadFirmwareBtn: document.getElementById('fw-download-firmware-btn'),
+      fileInput: document.getElementById('fw-file-input'),
+      firmwareInfo: document.getElementById('fw-firmware-info'),
+      firmwareFilename: document.getElementById('fw-firmware-filename'),
+      firmwareSize: document.getElementById('fw-firmware-size'),
+      firmwareChecksum: document.getElementById('fw-firmware-checksum'),
+      flashBtn: document.getElementById('fw-flash-btn'),
+      progressContainer: document.getElementById('fw-progress-container'),
+      progressBar: document.getElementById('fw-progress-bar'),
+      progressText: document.getElementById('fw-progress-text'),
+      progressPhase: document.getElementById('fw-progress-phase'),
+      statusIcon: document.getElementById('fw-status-icon'),
+      verificationBadge: document.getElementById('fw-verification-badge'),
+      logContainer: document.getElementById('fw-log-container'),
+    };
+  }
+
+  setupEventListeners() {
+    this.elements.connectBtn.addEventListener('click', () => this.connect());
+    this.elements.disconnectBtn.addEventListener('click', () => this.disconnect());
+    this.elements.dropZone.addEventListener('dragover', (e) => { e.preventDefault(); this.elements.dropZone.classList.add('drag-over'); });
+    this.elements.dropZone.addEventListener('dragleave', () => { this.elements.dropZone.classList.remove('drag-over'); });
+    this.elements.dropZone.addEventListener('drop', this.handleDrop);
+    this.elements.dropZone.addEventListener('click', () => { this.elements.fileInput.click(); });
+    this.elements.fileInput.addEventListener('change', this.handleFileSelect);
+    this.elements.downloadFirmwareBtn.addEventListener('click', () => this.downloadLatestFirmware());
+    this.elements.flashBtn.addEventListener('click', () => this.flashFirmware());
+    this.updateUI();
+  }
+
+  async initDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(_DB_NAME, _DB_VERSION);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => { this.db = request.result; resolve(); };
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains(_BACKUP_STORE)) { db.createObjectStore(_BACKUP_STORE, { keyPath: 'id', autoIncrement: true }); }
+      };
+    });
+  }
+
+  async connect() {
+    if (this.isConnecting || this.connected) return;
+    this.isConnecting = true;
+    this.elements.connectBtn.disabled = true;
+    try {
+      this.log('Requesting serial port...');
+      this.updateDeviceStatus('Connecting...', 'pending');
+      const port = await this.serial.requestPort();
+      if (!port) { this.updateDeviceStatus('No port selected', 'error'); return; }
+      this.log('Opening port...');
+      await this.openSerialPort(port);
+      this.bootloader = new BootloaderProtocol(this.serial);
+      this.connected = true;
+      this.updateDeviceStatus('Connected', 'success');
+      this.updateDeviceInfo();
+      this.elements.connectBtn.style.display = 'none';
+      this.elements.disconnectBtn.style.display = 'block';
+      this.log('Connected via Web Serial');
+      await this.rebootToBootloader();
+      await this.checkBackup();
+      this.updateUI();
+    } catch (err) {
+      const message = this.getConnectionErrorMessage(err);
+      this.log(`Connection failed: ${message}`, 'error');
+      this.updateDeviceStatus('Connection failed', 'error');
+      this.connected = false;
+      this.elements.connectBtn.style.display = 'block';
+      this.elements.disconnectBtn.style.display = 'none';
+      this.updateUI();
+    } finally {
+      this.isConnecting = false;
+      this.elements.connectBtn.disabled = false;
+    }
+  }
+
+  async openSerialPort(port) {
+    try { await this.serial.open(port); }
+    catch (err) {
+      if (!this.isPortOpenFailure(err)) throw err;
+      this.log('Port did not open; retrying once after release delay...', 'warning');
+      await new Promise(r => setTimeout(r, 1000));
+      await this.serial.open(port);
+    }
+  }
+
+  isPortOpenFailure(err) { return err && /open serial port|already open|busy|denied/i.test(err.message || ''); }
+
+  getConnectionErrorMessage(err) {
+    if (this.isPortOpenFailure(err)) return 'Serial port is busy or not released. Close STM32CubeProgrammer and other browser tabs using this port, then unplug/replug the device and try again.';
+    return err.message || 'Unknown error';
+  }
+
+  async disconnect() {
+    try {
+      await this.serial.close();
+      this.connected = false;
+      this.updateDeviceStatus('Disconnected', '');
+      this.elements.deviceInfo.innerHTML = '';
+      this.elements.connectBtn.style.display = 'block';
+      this.elements.disconnectBtn.style.display = 'none';
+      this.log('Disconnected');
+      this.updateUI();
+    } catch (err) { this.log(`Disconnect error: ${err.message}`, 'error'); }
+  }
+
+  async rebootToBootloader() {
+    if (this.isRebooting || !this.connected || !this.bootloader) return;
+    this.isRebooting = true;
+    try {
+      this.log('Rebooting device to bootloader mode...');
+      this.updateDeviceStatus('Rebooting...', 'pending');
+      await this.serial.drain(100);
+      this.serial.clearReadBuffer();
+      this.bootloader.synced = false;
+      await this.serial.resetViaDtr();
+      this.log('Waiting for bootloader...');
+      this.serial.clearReadBuffer();
+      const synced = await this.waitForBootloader(8000, false);
+      if (synced) { this.log('Bootloader mode active', 'success'); this.updateDeviceStatus('Bootloader active', 'success'); }
+      else { this.log('Could not detect bootloader - device may not support auto-boot', 'warning'); this.updateDeviceStatus('Connected', 'success'); }
+    } catch (err) { this.log(`Reboot failed: ${err.message}`, 'error'); this.updateDeviceStatus('Reboot failed', 'error'); }
+    finally { this.isRebooting = false; }
+  }
+
+  async waitForBootloader(timeoutMs, allowCommandProbe = true) {
+    const deadline = Date.now() + timeoutMs;
+    while (Date.now() < deadline) {
+      await new Promise(r => setTimeout(r, 250));
+      try {
+        await this.serial.drain(25);
+        const synced = allowCommandProbe ? await this.bootloader.ensureSynced() : await this.bootloader.sync();
+        if (synced) return true;
+      } catch (err) { /* device may be resetting */ }
+    }
+    return false;
+  }
+
+  handleFileSelect(event) { const file = event.target.files[0]; if (file) this.loadFirmware(file); }
+
+  handleDrop(event) {
+    event.preventDefault();
+    this.elements.dropZone.classList.remove('drag-over');
+    const file = event.dataTransfer.files[0];
+    if (!file) return;
+    const ext = file.name.toLowerCase();
+    if (ext.endsWith('.bin') || ext.endsWith('.hex') || file.type === 'application/octet-stream') this.loadFirmware(file);
+    else this.log('Please drop a .bin or .hex file', 'error');
+  }
+
+  downloadLatestFirmware() {
+    const a = document.createElement('a');
+    a.href = '/air_firmware/loko_v2.0.18.hex';
+    a.download = 'loko_v2.0.18.hex';
+    a.click();
+    this.log('Downloading loko_v2.0.18.hex...');
+  }
+
+  async loadFirmware(file) {
+    try {
+      this.log(`Loading firmware: ${file.name}`);
+      const ext = file.name.toLowerCase();
+      if (ext.endsWith('.hex')) {
+        const text = await file.text();
+        const parsed = await _parseHexFile(text);
+        this.firmwareData = parsed.data;
+        this.firmwareBaseAddress = parsed.baseAddress;
+        this.log('Parsed .hex file');
+      } else {
+        this.firmwareData = await file.arrayBuffer().then(buf => new Uint8Array(buf));
+        this.firmwareBaseAddress = _STM32_FLASH_BASE;
+      }
+      if (!this.firmwareData || this.firmwareData.length === 0) throw new Error('Firmware file is empty');
+      this.firmwareChecksum = await this.calculateChecksum(this.firmwareData);
+      this.elements.firmwareFilename.textContent = file.name;
+      this.elements.firmwareSize.textContent = this.formatSize(this.firmwareData.length);
+      this.elements.firmwareChecksum.textContent = this.formatChecksum(this.firmwareChecksum);
+      this.elements.firmwareInfo.style.display = 'block';
+      this.log(`Firmware loaded: ${this.formatSize(this.firmwareData.length)}`);
+      this.log(`Address: 0x${this.firmwareBaseAddress.toString(16).toUpperCase()}`);
+      this.log(`SHA-256: ${this.formatChecksum(this.firmwareChecksum)}`);
+      this.validateFirmwareVectorTable();
+      this.updateUI();
+    } catch (err) {
+      this.log(`Failed to load firmware: ${err.message}`, 'error');
+      this.firmwareData = null;
+      this.firmwareBaseAddress = _STM32_FLASH_BASE;
+      this.updateUI();
+    }
+  }
+
+  async calculateChecksum(data) {
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    return new Uint8Array(hashBuffer);
+  }
+
+  async verifyFirmwareWrite(address, expectedData) {
+    this.log('Verifying written firmware...');
+    const readBack = new Uint8Array(expectedData.length);
+    const chunkSize = 128;
+    const chunks = Math.ceil(expectedData.length / chunkSize);
+    for (let i = 0; i < chunks; i++) {
+      const offset = i * chunkSize;
+      const size = Math.min(chunkSize, expectedData.length - offset);
+      const chunk = await this.bootloader.readMemory(address + offset, size);
+      readBack.set(chunk, offset);
+      const progress = 95 + (4 * (i + 1) / chunks);
+      this.updateProgress(progress, `Verifying ${Math.round(progress)}%`);
+    }
+    for (let i = 0; i < expectedData.length; i++) {
+      if (readBack[i] !== expectedData[i]) throw new Error(`Verification failed at 0x${(address + i).toString(16).toUpperCase()}`);
+    }
+    const readChecksum = await this.calculateChecksum(readBack);
+    this.log(`Verified SHA-256: ${this.formatChecksum(readChecksum)}`);
+  }
+
+  async eraseFirmwareRange() {
+    const firstPage = Math.floor((this.firmwareBaseAddress - _STM32_FLASH_ORIGIN) / _STM32_FLASH_PAGE_SIZE);
+    const pageCount = Math.ceil(this.firmwareData.length / _STM32_FLASH_PAGE_SIZE);
+    const pages = Array.from({ length: pageCount }, (_, i) => firstPage + i);
+    this.log(`Erasing application sectors ${firstPage}-${pages[pages.length - 1]}...`);
+    await this.bootloader.erasePages(pages);
+    this.log('Application sectors erased');
+  }
+
+  validateFirmwareVectorTable() {
+    if (!this.firmwareData || this.firmwareData.length < 8) throw new Error('Firmware is too small to contain a vector table');
+    const { initialStack, resetVector } = this.getFirmwareVectorTable();
+    if (initialStack < _STM32_SRAM_BASE || initialStack >= _STM32_SRAM_END) throw new Error(`Invalid vector table: stack pointer 0x${initialStack.toString(16).toUpperCase()} is not in SRAM`);
+    if (resetVector < _STM32_FLASH_BASE || resetVector >= _STM32_FLASH_BASE + 0x400000) throw new Error(`Invalid vector table: reset vector 0x${resetVector.toString(16).toUpperCase()} is not in flash`);
+    this.log(`Initial SP: 0x${initialStack.toString(16).toUpperCase()}`);
+    this.log(`Reset vector: 0x${resetVector.toString(16).toUpperCase()}`);
+  }
+
+  getFirmwareVectorTable() {
+    const view = new DataView(this.firmwareData.buffer, this.firmwareData.byteOffset, this.firmwareData.byteLength);
+    return { initialStack: view.getUint32(0, true), resetVector: view.getUint32(4, true) };
+  }
+
+  async flashFirmware() {
+    if (!this.connected || !this.firmwareData || !this.bootloader || this.isFlashing) return;
+    this.isFlashing = true;
+    this.elements.flashBtn.disabled = true;
+    this.elements.progressContainer.style.display = 'block';
+    this.elements.verificationBadge.style.display = 'none';
+    try {
+      this.log('Connecting to bootloader...');
+      this.updateProgress(5, 'Connecting');
+      const synced = await this.waitForBootloader(8000);
+      if (!synced) throw new Error('No response from bootloader. Make sure device is in bootloader mode.');
+      this.log('Bootloader synced');
+      this.updateProgress(10, 'Getting info');
+      const info = await this.bootloader.get();
+      this.log(`Bootloader version: 0x${info.version.toString(16)}`);
+      this.log(`Supported commands: ${info.commands.length}`);
+      this.log(`Commands: ${this.bootloader.formatCommands()}`);
+      if (!this.bootloader.supportsCommand(CMD.WRITE_MEMORY)) this.log('Bootloader did not report Write Memory support; trying anyway', 'warning');
+      this.updateProgress(15, 'Erasing');
+      this.log('Skipping backup before flash; UART bootloader rejects readback in this mode', 'warning');
+      await this.eraseFirmwareRange();
+      this.updateProgress(25, 'Erase complete');
+      this.log('Writing firmware...');
+      const totalSize = this.firmwareData.length;
+      const chunkSize = 128;
+      const chunks = Math.ceil(totalSize / chunkSize);
+      let triedWriteUnprotect = false;
+      for (let i = 0; i < chunks; i++) {
+        const offset = i * chunkSize;
+        const size = Math.min(chunkSize, totalSize - offset);
+        const chunk = this.firmwareData.slice(offset, offset + size);
+        const address = this.firmwareBaseAddress + offset;
+        try { await this.bootloader.writeMemory(address, chunk); }
+        catch (err) {
+          const isWriteRejected = err.message.includes('Write Memory command rejected') || err.message.includes('Write address');
+          if (i !== 0 || triedWriteUnprotect || !isWriteRejected) throw err;
+          triedWriteUnprotect = true;
+          this.log('Write rejected; trying write unprotect...', 'warning');
+          try { await this.bootloader.writeUnprotect(); }
+          catch (unprotectErr) { throw new Error(`Write rejected at 0x${address.toString(16).toUpperCase()} and write unprotect failed: ${unprotectErr.message}.`); }
+          this.log('Waiting for bootloader after write unprotect...');
+          if (!await this.waitForBootloader(10000, false)) throw new Error('No response after write unprotect');
+          this.log('Bootloader synced after write unprotect');
+          await this.bootloader.get();
+          this.log(`Commands after unprotect: ${this.bootloader.formatCommands()}`);
+          await this.eraseFirmwareRange();
+          i = -1; continue;
+        }
+        const progress = 25 + (70 * (i + 1) / chunks);
+        this.updateProgress(progress, `Writing ${Math.round(progress)}%`);
+      }
+      if (this.bootloader.supportsCommand(CMD.READ_MEMORY)) await this.verifyFirmwareWrite(this.firmwareBaseAddress, this.firmwareData);
+      else this.log('Skipping verification; bootloader does not report Read Memory support', 'warning');
+      this.updateProgress(99, 'Starting app');
+      this.log(`Starting application at 0x${this.firmwareBaseAddress.toString(16).toUpperCase()}...`);
+      await this.bootloader.go(this.firmwareBaseAddress);
+      this.updateProgress(100, 'Complete');
+      this.showVerificationSuccess();
+      this.log('Flash complete!', 'success');
+      setTimeout(() => this.disconnect(), 2000);
+    } catch (err) {
+      this.log(`Flash failed: ${err.message}`, 'error');
+      this.showFlashError(err.message);
+    } finally {
+      this.isFlashing = false;
+      this.elements.flashBtn.disabled = false;
+    }
+  }
+
+  async saveBackup() {
+    if (!this.db || !this.backupData) return;
+    const backup = { timestamp: Date.now(), data: Array.from(this.backupData), checksum: Array.from(this.backupChecksum || []), baseAddress: this.backupBaseAddress };
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction([_BACKUP_STORE], 'readwrite');
+      const store = tx.objectStore(_BACKUP_STORE);
+      store.clear();
+      const request = store.add(backup);
+      request.onsuccess = resolve;
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async loadBackup() {
+    if (!this.db) return null;
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction([_BACKUP_STORE], 'readonly');
+      const store = tx.objectStore(_BACKUP_STORE);
+      const request = store.getAll();
+      request.onsuccess = () => {
+        const backups = request.result;
+        if (backups.length > 0) resolve(backups.reduce((a, b) => a.timestamp > b.timestamp ? a : b));
+        else resolve(null);
+      };
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async checkBackup() {
+    const backup = await this.loadBackup();
+    if (backup) {
+      this.backupData = new Uint8Array(backup.data);
+      this.backupBaseAddress = backup.baseAddress || _STM32_FLASH_BASE;
+      this.backupChecksum = backup.checksum ? new Uint8Array(backup.checksum) : null;
+      this.log(`Backup found from ${new Date(backup.timestamp).toLocaleString()}`);
+    }
+  }
+
+  updateProgress(percent, phase) {
+    this.elements.progressBar.style.width = `${percent}%`;
+    this.elements.progressText.textContent = `${Math.round(percent)}%`;
+    this.elements.progressPhase.textContent = phase;
+  }
+
+  log(message, type = 'info') {
+    const entry = document.createElement('div');
+    entry.className = `log-entry log-${type}`;
+    const time = new Date().toLocaleTimeString();
+    entry.textContent = `[${time}] ${message}`;
+    this.elements.logContainer.appendChild(entry);
+    this.elements.logContainer.scrollTop = this.elements.logContainer.scrollHeight;
+  }
+
+  updateDeviceStatus(status, type) {
+    this.elements.deviceStatus.textContent = status;
+    this.elements.deviceStatus.className = `fw-status-text status-${type}`;
+    this.elements.statusIcon.className = `fw-status-dot ${type}`;
+  }
+
+  updateDeviceInfo() {
+    this.elements.deviceInfo.innerHTML = '<span>Status: Connected</span>';
+  }
+
+  showVerificationSuccess() {
+    this.elements.verificationBadge.style.display = 'flex';
+    this.elements.verificationBadge.className = 'fw-badge badge-success';
+    this.elements.verificationBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12l4 4L19 6"/></svg><span>Flash complete</span>`;
+  }
+
+  showFlashError(message) {
+    this.elements.verificationBadge.style.display = 'flex';
+    this.elements.verificationBadge.className = 'fw-badge badge-error';
+    this.elements.verificationBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6 6 18"/></svg><span>Failed: ${message}</span>`;
+  }
+
+  showUnsupportedBrowser() {
+    const panel = document.getElementById('fw-updater-panel');
+    if (panel) panel.innerHTML = '<p style="padding:16px;color:var(--text-secondary)">Web Serial API requires Chrome or Edge 89+.</p>';
+  }
+
+  updateUI() {
+    const canFlash = this.connected && this.firmwareData && !this.isFlashing;
+    this.elements.flashBtn.disabled = !canFlash;
+    this.elements.flashBtn.style.opacity = canFlash ? '1' : '0.5';
+    this.elements.dropZone.style.opacity = this.connected ? '1' : '0.6';
+    this.elements.dropZone.style.pointerEvents = this.connected ? 'auto' : 'none';
+  }
+
+  formatSize(bytes) {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  formatChecksum(hashArray) {
+    return Array.from(hashArray).map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+  }
+}
+
+window.FirmwareUpdater = FirmwareUpdater;
 </script>
 </body>
 </html>

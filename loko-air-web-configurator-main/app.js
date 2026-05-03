@@ -1,28 +1,3 @@
-// ── Serial terminal ──────────────────────────────────────────────────────────
-const termOutput = document.getElementById("termOutput");
-const termClearBtn = document.getElementById("termClearBtn");
-
-function termLog(text, type = "default") {
-    if (!termOutput) return;
-    const wasAtBottom = termOutput.scrollHeight - termOutput.clientHeight <= termOutput.scrollTop + 4;
-    const line = document.createElement("span");
-    line.className = "term-line" + (type !== "default" ? " term-" + type : "");
-    line.textContent = text;
-    if (termOutput.firstChild?.classList?.contains("term-muted") &&
-        termOutput.firstChild?.textContent === "Waiting for connection…") {
-        termOutput.replaceChildren();
-    }
-    termOutput.appendChild(line);
-    if (wasAtBottom) termOutput.scrollTop = termOutput.scrollHeight;
-}
-
-function termClear() {
-    if (termOutput) termOutput.replaceChildren();
-}
-
-if (termClearBtn) termClearBtn.addEventListener("click", termClear);
-// ─────────────────────────────────────────────────────────────────────────────
-
 const frequencyRange = document.getElementById("frequencyRange");
 const powerRange = document.getElementById("powerRange");
 const frequencyValue = document.getElementById("frequencyValue");
@@ -843,24 +818,6 @@ function formatDurationLabel(totalSeconds) {
     return parts.join(" ");
 }
 
-function updateBatteryEstimate() {
-    const el = document.getElementById("batteryEstimate");
-    if (!el) return;
-    const seconds = getWakeUpPeriodSecondsPreview();
-    if (seconds <= 0) { el.textContent = ""; return; }
-    const batteryLifeHours = 0.5735 / ((54 * 15) / (seconds * 1000) + 15 / 1000000);
-    const days = batteryLifeHours / 24;
-    let label;
-    if (days >= 1) {
-        label = `~${days.toFixed(1)} days`;
-    } else if (batteryLifeHours < 1) {
-        label = `~${(batteryLifeHours * 60).toFixed(1)} minutes`;
-    } else {
-        label = `~${batteryLifeHours.toFixed(1)} hours`;
-    }
-    el.textContent = `Est. battery life: ${label}`;
-}
-
 function updateTimingSummary() {
     const wakeUpSeconds = getWakeUpPeriodSecondsPreview();
     const sendEvery = getMultiplierPreview(sendEveryInput);
@@ -1005,20 +962,6 @@ function activateMainTab(tabName) {
     if (tabName === "gnss-trace") {
         ensureGnssTraceMap();
         renderGnssTraceMap(gnssTraceRecordsBuffer);
-    }
-
-    if (tabName === "firmware-updater") {
-        initFirmwareUpdater();
-    }
-}
-
-let _fwUpdaterInitialized = false;
-function initFirmwareUpdater() {
-    if (_fwUpdaterInitialized) return;
-    _fwUpdaterInitialized = true;
-    if (window.FirmwareUpdater) {
-        const fwApp = new window.FirmwareUpdater();
-        fwApp.init();
     }
 }
 
@@ -1339,7 +1282,6 @@ async function sendSerialCommandAndWaitForOk(command, timeoutMs = 2000, lineEndi
     try {
         debugSerial("[serial write]", command);
         await writer.write(encoder.encode(`${command}${lineEnding}`));
-        termLog("> " + command, "cmd");
     } finally {
         writer.releaseLock();
     }
@@ -1380,7 +1322,6 @@ async function sendSerialCommandAndWaitForOk(command, timeoutMs = 2000, lineEndi
                     ? trimDeviceInfoBuffer(`${responseBuffer}${trimmedLine}\n`)
                     : `${responseBuffer}${trimmedLine}\n`;
                 debugSerial("[serial ack line]", trimmedLine);
-                termLog("< " + trimmedLine, trimmedLine === "OK" ? "ok" : trimmedLine.startsWith("ERROR") ? "err" : "default");
 
                 if (trimmedLine === "OK") {
                     return responseBuffer;
@@ -1484,7 +1425,6 @@ async function disconnectPort() {
         connectedPort = null;
     }
 
-    termLog("── disconnected ──", "muted");
     setConnectionState(false, "Serial connection closed.");
     setPortInfo("not selected");
 }
@@ -1512,11 +1452,9 @@ async function connectPort() {
 
         setConnectionState(true, "Connected.");
         setPortInfo(formatPortDetails(connectedPort));
-        termLog("── connected: " + formatPortDetails(connectedPort) + " ──", "info");
         await requestDeviceInfo();
     } catch (error) {
         connectedPort = null;
-        termLog("error: " + (error.message || "Serial port permission denied."), "err");
         setConnectionState(false, error.message || "Serial port permission denied.");
         setPortInfo("not selected");
     }
@@ -1553,16 +1491,14 @@ function resetForm() {
 
 frequencyRange.addEventListener("input", syncOutputs);
 powerRange.addEventListener("input", syncOutputs);
-wakeUpPeriodInput.addEventListener("input", () => { updateTimingSummary(); updateBatteryEstimate(); });
+wakeUpPeriodInput.addEventListener("input", updateTimingSummary);
 wakeUpPeriodInput.addEventListener("change", () => {
     getWakeUpPeriodSeconds();
     syncOutputs();
-    updateBatteryEstimate();
 });
 wakeUpPeriodUnitSelect.addEventListener("change", () => {
     handleWakeUpPeriodUnitChange();
     syncOutputs();
-    updateBatteryEstimate();
 });
 sendEveryInput.addEventListener("input", updateTimingSummary);
 sendEveryInput.addEventListener("change", () => {
@@ -1890,7 +1826,6 @@ syncModeToggle();
 syncIdFormatUi();
 syncP2pEncryptionKeyUi();
 syncWakeUpPeriodConstraints();
-updateBatteryEstimate();
 activateMainTab("configuration");
 setConnectionState(false, "Browser access to the serial device has not been granted.");
 setPortInfo("serial permission not granted");
