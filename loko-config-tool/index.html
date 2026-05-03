@@ -669,20 +669,14 @@
                     </div>
                     <div id="fw-device-info" class="fw-device-info"></div>
                 </div>
-                <!-- Firmware -->
-                <div class="fw-section">
-                    <div class="fw-row"><span class="fw-label">Firmware</span></div>
-                    <div id="fw-drop-zone" class="fw-drop-zone">
-                        <p>Drop firmware file here</p>
-                        <p>BIN or HEX</p>
-                    </div>
-                    <input type="file" id="fw-file-input" accept=".bin,.hex" style="display:none">
-                    <button id="fw-download-firmware-btn" class="ghost-button" type="button" style="width:100%;margin-top:6px">Download Loko Air Firmware</button>
-                    <div id="fw-firmware-info" class="fw-firmware-info" style="display:none">
-                        <div class="fw-fi-row"><span class="fw-fi-label">File:</span><span id="fw-firmware-filename"></span></div>
-                        <div class="fw-fi-row"><span class="fw-fi-label">Size:</span><span id="fw-firmware-size"></span></div>
-                        <div class="fw-fi-row"><span class="fw-fi-label">SHA-256:</span><span id="fw-firmware-checksum" class="fw-fi-checksum"></span></div>
-                    </div>
+                <!-- Firmware (hidden inputs kept for code compatibility) -->
+                <input type="file" id="fw-file-input" accept=".bin,.hex" style="display:none">
+                <div id="fw-drop-zone" style="display:none"></div>
+                <button id="fw-download-firmware-btn" style="display:none"></button>
+                <div id="fw-firmware-info" style="display:none">
+                    <span id="fw-firmware-filename"></span>
+                    <span id="fw-firmware-size"></span>
+                    <span id="fw-firmware-checksum"></span>
                 </div>
                 <!-- Flash -->
                 <div class="fw-section">
@@ -1109,28 +1103,62 @@ class FirmwareUpdater {
     return { initialStack: view.getUint32(0, true), resetVector: view.getUint32(4, true) };
   }
 
+  async fetchFirmware() {
+    this.updateProgress(2, 'Downloading firmware...');
+    this.log('Downloading loko_v2.0.18.hex...');
+    const response = await fetch('/air_firmware/loko_v2.0.18.hex');
+    if (!response.ok) throw new Error(`Firmware download failed: HTTP ${response.status}`);
+    const contentLength = response.headers.get('Content-Length');
+    const total = contentLength ? parseInt(contentLength) : 0;
+    const reader = response.body.getReader();
+    const chunks = [];
+    let received = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
+      received += value.length;
+      if (total) this.updateProgress(2 + 8 * received / total, 'Downloading...');
+    }
+    const text = await new Blob(chunks).text();
+    const parsed = await _parseHexFile(text);
+    this.firmwareData = parsed.data;
+    this.firmwareBaseAddress = parsed.baseAddress;
+    this.firmwareChecksum = await this.calculateChecksum(this.firmwareData);
+    this.log(`Downloaded: ${this.formatSize(this.firmwareData.length)}`);
+    this.log(`SHA-256: ${this.formatChecksum(this.firmwareChecksum)}`);
+    this.validateFirmwareVectorTable();
+  }
+
   async flashFirmware() {
-    if (!this.connected || !this.firmwareData || !this.bootloader || this.isFlashing) return;
+    if (!this.connected || !this.bootloader || this.isFlashing) return;
     this.isFlashing = true;
     this.elements.flashBtn.disabled = true;
     this.elements.progressContainer.style.display = 'block';
     this.elements.verificationBadge.style.display = 'none';
     try {
+      // 1. Download firmware
+      await this.fetchFirmware();
+
+      // 2. Connect to bootloader
       this.log('Connecting to bootloader...');
-      this.updateProgress(5, 'Connecting');
+      this.updateProgress(10, 'Connecting');
       const synced = await this.waitForBootloader(8000);
       if (!synced) throw new Error('No response from bootloader. Make sure device is in bootloader mode.');
       this.log('Bootloader synced');
-      this.updateProgress(10, 'Getting info');
+      this.updateProgress(15, 'Getting info');
       const info = await this.bootloader.get();
       this.log(`Bootloader version: 0x${info.version.toString(16)}`);
-      this.log(`Supported commands: ${info.commands.length}`);
       this.log(`Commands: ${this.bootloader.formatCommands()}`);
       if (!this.bootloader.supportsCommand(CMD.WRITE_MEMORY)) this.log('Bootloader did not report Write Memory support; trying anyway', 'warning');
-      this.updateProgress(15, 'Erasing');
+
+      // 3. Erase
+      this.updateProgress(20, 'Erasing');
       this.log('Skipping backup before flash; UART bootloader rejects readback in this mode', 'warning');
       await this.eraseFirmwareRange();
-      this.updateProgress(25, 'Erase complete');
+      this.updateProgress(30, 'Erase complete');
+
+      // 4. Write
       this.log('Writing firmware...');
       const totalSize = this.firmwareData.length;
       const chunkSize = 128;
@@ -1157,11 +1185,15 @@ class FirmwareUpdater {
           await this.eraseFirmwareRange();
           i = -1; continue;
         }
-        const progress = 25 + (70 * (i + 1) / chunks);
+        const progress = 30 + (60 * (i + 1) / chunks);
         this.updateProgress(progress, `Writing ${Math.round(progress)}%`);
       }
+
+      // 5. Verify
       if (this.bootloader.supportsCommand(CMD.READ_MEMORY)) await this.verifyFirmwareWrite(this.firmwareBaseAddress, this.firmwareData);
       else this.log('Skipping verification; bootloader does not report Read Memory support', 'warning');
+
+      // 6. Launch
       this.updateProgress(99, 'Starting app');
       this.log(`Starting application at 0x${this.firmwareBaseAddress.toString(16).toUpperCase()}...`);
       await this.bootloader.go(this.firmwareBaseAddress);
@@ -1259,11 +1291,9 @@ class FirmwareUpdater {
   }
 
   updateUI() {
-    const canFlash = this.connected && this.firmwareData && !this.isFlashing;
+    const canFlash = this.connected && !this.isFlashing;
     this.elements.flashBtn.disabled = !canFlash;
     this.elements.flashBtn.style.opacity = canFlash ? '1' : '0.5';
-    this.elements.dropZone.style.opacity = this.connected ? '1' : '0.6';
-    this.elements.dropZone.style.pointerEvents = this.connected ? 'auto' : 'none';
   }
 
   formatSize(bytes) {
