@@ -364,6 +364,10 @@
   .log-success { color: #0aa34b; }
   .log-error { color: #e05555; }
   .log-warning { color: #f59e0b; }
+  .fw-flash-btn-green { background: #16a34a !important; color: #fff !important; border-color: #16a34a !important; }
+  .fw-flash-btn-green:hover:not(:disabled) { background: #15803d !important; border-color: #15803d !important; }
+  .fw-flash-btn-green:disabled { background: #16a34a !important; border-color: #16a34a !important; opacity: 0.45 !important; }
+  .fw-version-badge { font-size: 0.72rem; font-weight: 500; background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 20px; }
 </style>
 
 <script defer src="/js/layout.js"></script>
@@ -680,8 +684,11 @@
                 </div>
                 <!-- Flash -->
                 <div class="fw-section">
-                    <div class="fw-row"><span class="fw-label">Flash</span></div>
-                    <button id="fw-flash-btn" class="dark-button" type="button" disabled style="width:100%">Flash Firmware</button>
+                    <div class="fw-row">
+                        <span class="fw-label">Flash</span>
+                        <span class="fw-version-badge">v2.0.18 available</span>
+                    </div>
+                    <button id="fw-flash-btn" class="dark-button fw-flash-btn-green" type="button" disabled style="width:100%">Flash Firmware</button>
                     <div id="fw-download-container" class="fw-progress-wrap" style="display:none">
                         <div class="fw-progress-header">
                             <span id="fw-download-phase">Downloading firmware...</span>
