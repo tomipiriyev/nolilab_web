@@ -1,3 +1,85 @@
+# ── Canonical host and protocol ───────────────────────────────────────────────
+# Preferred origin is https://www.nolilab.com/. Keep all crawlers on one host.
+http://nolilab.com/         https://www.nolilab.com/ 301!
+https://nolilab.com/        https://www.nolilab.com/ 301!
+http://www.nolilab.com/     https://www.nolilab.com/ 301!
+http://nolilab.com/*        https://www.nolilab.com/:splat 301!
+https://nolilab.com/*       https://www.nolilab.com/:splat 301!
+http://www.nolilab.com/*    https://www.nolilab.com/:splat 301!
+
+# ── Trailing slash normalization for directory pages ─────────────────────────
+# Canonicals and sitemap entries use trailing slashes for HTML directory URLs.
+/blog                        /blog/              301
+/specifications              /specifications/    301
+/software                    /software/          301
+/contact                     /contact/           301
+/firmware                    /firmware/          301
+/setup-guides                /setup-guides/      301
+/gps                         /gps/               301
+/lorawan                     /lorawan/           301
+/privacy                     /privacy/           301
+/airtag-vs-lora              /airtag-vs-lora/    301
+/battery-life                /battery-life/      301
+/farms                       /farms/             301
+/hiking                      /hiking/            301
+/how-gps-works               /how-gps-works/     301
+/hunting-dogs                /hunting-dogs/      301
+/lora-gps-tracker            /lora-gps-tracker/  301
+/no-monthly-fee              /no-monthly-fee/    301
+/open-source                 /open-source/       301
+/search-rescue               /search-rescue/     301
+/smallest-gps-tracker        /smallest-gps-tracker/ 301
+
+/es/blog                     /es/blog/           301
+/es/specifications           /es/specifications/ 301
+/es/software                 /es/software/       301
+/es/contact                  /es/contact/        301
+/es/firmware                 /es/firmware/       301
+/es/setup-guides             /es/setup-guides/   301
+/es/gps                      /es/gps/            301
+/es/lorawan                  /es/lorawan/        301
+/es/privacy                  /es/privacy/        301
+
+/fr/blog                     /fr/blog/           301
+/fr/specifications           /fr/specifications/ 301
+/fr/software                 /fr/software/       301
+/fr/contact                  /fr/contact/        301
+/fr/firmware                 /fr/firmware/       301
+/fr/setup-guides             /fr/setup-guides/   301
+/fr/gps                      /fr/gps/            301
+/fr/lorawan                  /fr/lorawan/        301
+/fr/privacy                  /fr/privacy/        301
+
+/ja/blog                     /ja/blog/           301
+/ja/specifications           /ja/specifications/ 301
+/ja/software                 /ja/software/       301
+/ja/contact                  /ja/contact/        301
+/ja/firmware                 /ja/firmware/       301
+/ja/setup-guides             /ja/setup-guides/   301
+/ja/gps                      /ja/gps/            301
+/ja/lorawan                  /ja/lorawan/        301
+/ja/privacy                  /ja/privacy/        301
+
+/ru/blog                     /ru/blog/           301
+/ru/specifications           /ru/specifications/ 301
+/ru/software                 /ru/software/       301
+/ru/contact                  /ru/contact/        301
+/ru/firmware                 /ru/firmware/       301
+/ru/setup-guides             /ru/setup-guides/   301
+/ru/gps                      /ru/gps/            301
+/ru/lorawan                  /ru/lorawan/        301
+/ru/privacy                  /ru/privacy/        301
+
+/zh/blog                     /zh/blog/           301
+/zh/specifications           /zh/specifications/ 301
+/zh/software                 /zh/software/       301
+/zh/contact                  /zh/contact/        301
+/zh/firmware                 /zh/firmware/       301
+/zh/setup-guides             /zh/setup-guides/   301
+/zh/gps                      /zh/gps/            301
+/zh/lorawan                  /zh/lorawan/        301
+/zh/privacy                  /zh/privacy/        301
+
 # ── Homepage / legacy page ─────────────────────────────────────────────────────
 /nolilab            /               301
 
@@ -71,6 +153,14 @@
 /ja/blog/:slug.html         /ja/blog/:slug/     301
 /ru/blog/:slug.html         /ru/blog/:slug/     301
 /zh/blog/:slug.html         /zh/blog/:slug/     301
+
+# Blog post URLs also canonicalize to trailing-slash directory URLs.
+/blog/:slug                  /blog/:slug/        301
+/es/blog/:slug               /es/blog/:slug/     301
+/fr/blog/:slug               /fr/blog/:slug/     301
+/ja/blog/:slug               /ja/blog/:slug/     301
+/ru/blog/:slug               /ru/blog/:slug/     301
+/zh/blog/:slug               /zh/blog/:slug/     301
 
 # ── Legacy Shopify product URLs ────────────────────────────────────────────────
 /products/loko              /lora-gps-tracker/  301
