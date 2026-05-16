@@ -203,6 +203,11 @@ function syncControlsAvailability() {
         control.disabled = !connected;
     });
 
+    // Wake Up Period controls stay interactive when disconnected so users
+    // can preview battery life estimates without a connected device.
+    wakeUpPeriodInput.disabled = false;
+    wakeUpPeriodUnitSelect.disabled = false;
+
     syncModeTabsAvailability();
     syncP2pEncryptionKeyUi();
 }
