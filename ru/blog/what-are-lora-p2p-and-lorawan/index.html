@@ -1,28 +1,22 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Что такое LoRa P2P и LoRaWAN? | nolilab Блог</title>
-  <link rel="canonical" href="https://www.nolilab.com/ru/blog/what-are-lora-p2p-and-lorawan/" />
-  
-  
-  
-  
-  
-  
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display;=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display;=swap" rel="stylesheet" /></noscript>
-  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/css/fa-subset.css" />
-  <meta name="description" content="Дальняя IoT-связь требует технологий, позволяющих устройствам передавать данные на большие расстояния. Узнайте о LoRa P2P и LoRaWAN." />
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Что такое LoRa P2P и LoRaWAN? | nolilab Блог</title>
+<link href="https://www.nolilab.com/ru/blog/what-are-lora-p2p-and-lorawan/" rel="canonical"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Дальняя IoT-связь требует технологий, позволяющих устройствам передавать данные на большие расстояния. Узнайте о LoRa P2P и LoRaWAN." name="description"/>
+<style>
     :root {
       --bg-primary: #ffffff;
       --bg-secondary: #f6f8fa;
@@ -251,7 +245,6 @@
       }
     }
   </style>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -344,127 +337,60 @@
 </style>
 </head>
 <body>
-<header>
-  <div class="container nav-container">
-    <a href="/" class="logo">nolilab</a>
-    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
-      <a href="/#shop" class="nav-link" data-i18n="shop">Shop</a>
-      <a href="/specifications/" class="nav-link" data-i18n="specs">Specs</a>
-      <a href="/software/" class="nav-link" data-i18n="software">Software</a>
-      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
-      <a href="/#faq" class="nav-link">FAQ</a>
-      <a href="/blog/" class="nav-link">Blog</a>
-      <a href="/firmware/" class="nav-link">Firmware</a>
-      <a href="/setup-guides/" class="nav-link" data-i18n="setup">Setup</a>
-      <a href="/contact/" class="nav-link" data-i18n="contact">Contact</a>
-      <a href="https://lokohub.nolilab.com" class="nav-link" target="_blank" rel="noopener noreferrer">LokoHUB</a>
-    </div>
-    <div class="language-selector" style="flex-shrink: 0; position: relative;">
-      <button class="language-btn" aria-label="Select language">
-        <svg class="fa-globe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span class="current-lang">RU</span>
-        <svg class="fa-chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="language-dropdown">
-        <a href="#" class="language-option" data-lang="en">
-          <span class="lang-code">EN</span>
-          <span class="lang-name">English</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ru">
-          <span class="lang-code">RU</span>
-          <span class="lang-name">Русский</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ja">
-          <span class="lang-code">JA</span>
-          <span class="lang-name">日本語</span>
-        </a>
-        <a href="#" class="language-option" data-lang="zh">
-          <span class="lang-code">ZH</span>
-          <span class="lang-name">中文</span>
-        </a>
-        <a href="#" class="language-option" data-lang="fr">
-          <span class="lang-code">FR</span>
-          <span class="lang-name">Français</span>
-        </a>
-        <a href="#" class="language-option" data-lang="es">
-          <span class="lang-code">ES</span>
-          <span class="lang-name">Español</span>
-        </a>
-      </div>
-    </div>
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
-    <main>
-
-  <article>
-    <a href="/ru/blog/" class="back-link">
-      <svg class="fa-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Вернуться в блог
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/ru/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Вернуться в блог
     </a>
-
-    <div class="article-header">
-      <div class="article-meta">
-        <span><i class="far fa-calendar"></i> November 21, 2023</span>
-        <span><i class="far fa-user"></i> <a href="/author/tamleykha-piriyev/" class="author-link" rel="author">nolilab</a></span>
-      </div>
-      <h1 class="article-title">Что такое LoRa P2P и LoRaWAN?</h1>
-    </div>
-
-    <img src="https://www.nolilab.com/cdn/shop/articles/tmp_2d771d17-142f-4ef3-90a8-b50b826612c5.png?v=1700563147&width;=1920" alt="LoRa P2P and LoRaWAN" class="article-image" />
-
-    <div class="article-content">
-      <h2>Введение</h2>
-      <p>Дальняя IoT-связь требует технологий, позволяющих устройствам передавать данные на огромные расстояния. LoRa, LoRa P2P и LoRaWAN — это радиотехнологии, разработанные для обеспечения подобной связи, предлагающие малопотребляющие решения с большой дальностью действия. GPS-трекер Loko — наглядный пример практического применения этих технологий для отслеживания объектов и управления активами.</p>
-
-      <h2>Понимание технологии LoRa</h2>
-      <p>LoRa функционирует как технология радиочастотной модуляции для маломощных сетей большой дальности. В её основе лежит модуляция методом расширения спектра с линейной частотной манипуляцией (Chirp Spread Spectrum), которая обеспечивает дальнюю связь, низкое энергопотребление и высокую устойчивость к помехам. Устройства с батарейным питанием, использующие LoRa, способны работать до десяти лет, поддерживая надёжное подключение как в городских, так и в сельских условиях.</p>
-
-      <h2>LoRa P2P и LoRaWAN: основы</h2>
-      <p><strong>LoRa P2P</strong> обеспечивает прямую передачу данных между устройствами без централизованной инфраструктуры, поддерживая обмен данными в реальном времени с минимальной задержкой. В свою очередь, <strong>LoRaWAN</strong> функционирует как открытый протокол на основе технологии LoRa, поддерживающий крупные сети и глубокую связь внутри зданий.</p>
-
-      <p><strong>Ключевые различия включают:</strong></p>
-      <ul>
-        <li>Различная структура сети (одноранговая сеть против иерархической)</li>
-        <li>Отличающаяся масштабируемость (небольшие приложения против масштабных развёртываний)</li>
-        <li>Варианты использования зависят от количества устройств, требований к дальности и предпочтений архитектуры</li>
-      </ul>
-
-      <h2>Компоненты сети LoRaWAN</h2>
-      <p>Системы LoRaWAN включают шесть основных элементов:</p>
-      <ol>
-        <li><strong>Конечные устройства:</strong> датчики и исполнительные механизмы, передающие и принимающие данные</li>
-        <li><strong>Шлюзы:</strong> промежуточные устройства, принимающие и передающие радиосообщения LoRa</li>
-        <li><strong>Сетевые серверы:</strong> управляют параметрами и обеспечивают подлинность сообщений</li>
-        <li><strong>Серверы приложений:</strong> обрабатывают данные датчиков и формируют полезную нагрузку устройств</li>
-        <li><strong>Серверы присоединения:</strong> управляют процедурами активации устройств</li>
-        <li><strong>Классы устройств (A, B, C):</strong> предлагают различное потребление энергии и гибкость связи</li>
-      </ol>
-
-      <h2>Преимущества связи LoRa P2P</h2>
-      <p>LoRa P2P даёт три основных преимущества: расширение покрытия LoRaWAN в отдалённые районы, снижение затрат на инфраструктуру за счёт устранения необходимости в централизованных серверах, а также возможность гибкого проектирования сети без сложного обслуживания.</p>
-
-      <h2>Безопасность в сетях LoRaWAN</h2>
-      <p>LoRaWAN использует два критически важных механизма безопасности: взаимная аутентификация при подключении устройств гарантирует, что только авторизованные устройства получают доступ к сети, а аутентификация сообщений предотвращает фальсификацию данных и несанкционированные изменения.</p>
-
-      <h2>GPS-трекер Loko: применение в реальных условиях</h2>
-      <p>Данное устройство демонстрирует практическую реализацию LoRa со следующими характеристиками:</p>
-      <ul>
-        <li>Совместимость с несколькими спутниковыми системами (GPS, GLONASS, GALILEO)</li>
-        <li>Защита от воды, пыли и ударов</li>
-        <li>Дальность действия более 5 километров при сроке службы батареи свыше 30 дней</li>
-        <li>Компактная конструкция весом 12 граммов (30 x 23 мм)</li>
-      </ul>
-
-      <h2>Заключение</h2>
-      <p>Понимание различий между LoRa P2P и LoRaWAN помогает организациям выбирать подходящие решения для связи под конкретные требования IoT.</p>
-    </div>
-  </article>
-
-  <aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> November 21, 2023</span>
+<span><i class="far fa-user"></i> <a class="author-link" href="/author/tamleykha-piriyev/" rel="author">nolilab</a></span>
+</div>
+<h1 class="article-title">Что такое LoRa P2P и LoRaWAN?</h1>
+</div>
+<img alt="LoRa P2P and LoRaWAN" class="article-image" src="https://www.nolilab.com/cdn/shop/articles/tmp_2d771d17-142f-4ef3-90a8-b50b826612c5.png?v=1700563147&amp;width;=1920"/>
+<div class="article-content">
+<h2>Введение</h2>
+<p>Дальняя IoT-связь требует технологий, позволяющих устройствам передавать данные на огромные расстояния. LoRa, LoRa P2P и LoRaWAN — это радиотехнологии, разработанные для обеспечения подобной связи, предлагающие малопотребляющие решения с большой дальностью действия. GPS-трекер Loko — наглядный пример практического применения этих технологий для отслеживания объектов и управления активами.</p>
+<h2>Понимание технологии LoRa</h2>
+<p>LoRa функционирует как технология радиочастотной модуляции для маломощных сетей большой дальности. В её основе лежит модуляция методом расширения спектра с линейной частотной манипуляцией (Chirp Spread Spectrum), которая обеспечивает дальнюю связь, низкое энергопотребление и высокую устойчивость к помехам. Устройства с батарейным питанием, использующие LoRa, способны работать до десяти лет, поддерживая надёжное подключение как в городских, так и в сельских условиях.</p>
+<h2>LoRa P2P и LoRaWAN: основы</h2>
+<p><strong>LoRa P2P</strong> обеспечивает прямую передачу данных между устройствами без централизованной инфраструктуры, поддерживая обмен данными в реальном времени с минимальной задержкой. В свою очередь, <strong>LoRaWAN</strong> функционирует как открытый протокол на основе технологии LoRa, поддерживающий крупные сети и глубокую связь внутри зданий.</p>
+<p><strong>Ключевые различия включают:</strong></p>
+<ul>
+<li>Различная структура сети (одноранговая сеть против иерархической)</li>
+<li>Отличающаяся масштабируемость (небольшие приложения против масштабных развёртываний)</li>
+<li>Варианты использования зависят от количества устройств, требований к дальности и предпочтений архитектуры</li>
+</ul>
+<h2>Компоненты сети LoRaWAN</h2>
+<p>Системы LoRaWAN включают шесть основных элементов:</p>
+<ol>
+<li><strong>Конечные устройства:</strong> датчики и исполнительные механизмы, передающие и принимающие данные</li>
+<li><strong>Шлюзы:</strong> промежуточные устройства, принимающие и передающие радиосообщения LoRa</li>
+<li><strong>Сетевые серверы:</strong> управляют параметрами и обеспечивают подлинность сообщений</li>
+<li><strong>Серверы приложений:</strong> обрабатывают данные датчиков и формируют полезную нагрузку устройств</li>
+<li><strong>Серверы присоединения:</strong> управляют процедурами активации устройств</li>
+<li><strong>Классы устройств (A, B, C):</strong> предлагают различное потребление энергии и гибкость связи</li>
+</ol>
+<h2>Преимущества связи LoRa P2P</h2>
+<p>LoRa P2P даёт три основных преимущества: расширение покрытия LoRaWAN в отдалённые районы, снижение затрат на инфраструктуру за счёт устранения необходимости в централизованных серверах, а также возможность гибкого проектирования сети без сложного обслуживания.</p>
+<h2>Безопасность в сетях LoRaWAN</h2>
+<p>LoRaWAN использует два критически важных механизма безопасности: взаимная аутентификация при подключении устройств гарантирует, что только авторизованные устройства получают доступ к сети, а аутентификация сообщений предотвращает фальсификацию данных и несанкционированные изменения.</p>
+<h2>GPS-трекер Loko: применение в реальных условиях</h2>
+<p>Данное устройство демонстрирует практическую реализацию LoRa со следующими характеристиками:</p>
+<ul>
+<li>Совместимость с несколькими спутниковыми системами (GPS, GLONASS, GALILEO)</li>
+<li>Защита от воды, пыли и ударов</li>
+<li>Дальность действия более 5 километров при сроке службы батареи свыше 30 дней</li>
+<li>Компактная конструкция весом 12 граммов (30 x 23 мм)</li>
+</ul>
+<h2>Заключение</h2>
+<p>Понимание различий между LoRa P2P и LoRaWAN помогает организациям выбирать подходящие решения для связи под конкретные требования IoT.</p>
+</div>
+</article>
+<aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
 <h3 style="margin:0 0 1rem;font-size:1rem;font-weight:600">Похожие статьи</h3>
 <ul style="margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:0.5rem">
 <li><a href="/ru/blog/lora-lorawan-a-simple-guide/">LoRa и LoRaWAN: простое руководство</a></li>
@@ -473,7 +399,7 @@
 </aside>
 </main>
 <div id="site-footer"></div>
-    <script defer src="/js/analytics.js"></script>
-  <script src="/js/layout.js" defer></script>
+<script defer="" src="/js/analytics.js"></script>
+<script defer="" src="/js/layout.js"></script>
 </body>
 </html>

@@ -1,58 +1,54 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
-    <title>GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | nolilab</title>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" /></noscript>
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="stylesheet" href="/css/fa-subset.css" />
-    <meta name="description" content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." />
-    <meta name="theme-color" content="#ffffff" />
-    
-    <!-- Open Graph Meta Tags for Social Sharing -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | nolilab" />
-    <meta property="og:description" content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." />
-    <meta property="og:url" content="https://www.nolilab.com/gps" />
-    <meta property="og:image" content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" />
-    <meta property="og:image:alt" content="Loko GPS Tracker and Technology Guide" />
-    <meta property="og:site_name" content="nolilab" />
-    <meta property="og:locale" content="en_US" />
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | nolilab" />
-    <meta name="twitter:description" content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." />
-    <meta name="twitter:image" content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" />
-    <meta name="twitter:site" content="@nolilab" />
-    
-    <!-- Additional SEO Meta Tags -->
-    <meta name="keywords" content="GPS glossary, LoRa technology, GPS terms, LoRa explanation, P2P communication, radio technology" />
-    <meta name="author" content="nolilab" />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.nolilab.com/es/gps/" />
-    <link rel="alternate" hreflang="en" href="https://www.nolilab.com/gps/" />
-    <link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/gps/" />
-    <link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/gps/" />
-    <link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/gps/" />
-    <link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/gps/" />
-  <link rel="alternate" hreflang="fr"        href="https://www.nolilab.com/fr/gps/" />
-    <link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/gps/" />
+<!DOCTYPE html>
 
-    <!-- Schema.org Structured Data (JSON-LD) - Glossary/Educational Content -->
-    <script type="application/ld+json">
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<!-- Open Graph Meta Tags for Social Sharing -->
+<meta content="website" property="og:type"/>
+<meta content="GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | nolilab" property="og:title"/>
+<meta content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." property="og:description"/>
+<meta content="https://www.nolilab.com/gps" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Loko GPS Tracker and Technology Guide" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | nolilab" name="twitter:title"/>
+<meta content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<!-- Additional SEO Meta Tags -->
+<meta content="GPS glossary, LoRa technology, GPS terms, LoRa explanation, P2P communication, radio technology" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<!-- Canonical URL -->
+<link href="https://www.nolilab.com/es/gps/" rel="canonical"/>
+<link href="https://www.nolilab.com/gps/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/gps/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/es/gps/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/gps/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/gps/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/gps/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/gps/" hreflang="x-default" rel="alternate"/>
+<!-- Schema.org Structured Data (JSON-LD) - Glossary/Educational Content -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -92,9 +88,8 @@
       ]
     }
     </script>
-    
-    <!-- Breadcrumb Schema -->
-    <script type="application/ld+json">
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -114,8 +109,8 @@
       ]
     }
     </script>
-    <meta name="theme-color" content="#0d1117" />
-    <style>
+<meta content="#0d1117" name="theme-color"/>
+<style>
       :root {
         --bg-primary: #ffffff;
         --bg-secondary: #f6f8fa;
@@ -709,7 +704,7 @@
         }
       }
     </style>
-  <style>
+<style>
   @font-face {
     font-family: 'Inter-fallback';
     src: local('Arial');
@@ -720,144 +715,79 @@
   }
 </style>
 </head>
-  <body>
-    <!-- Header -->
-<header>
-  <div class="container nav-container">
-    <a href="/" class="logo">nolilab</a>
-    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
-      <a href="/#shop" class="nav-link" data-i18n="shop">Shop</a>
-      <a href="/specifications/" class="nav-link" data-i18n="specs">Specs</a>
-      <a href="/software/" class="nav-link" data-i18n="software">Software</a>
-      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
-      <a href="/#faq" class="nav-link">FAQ</a>
-      <a href="/blog/" class="nav-link">Blog</a>
-      <a href="/firmware/" class="nav-link">Firmware</a>
-      <a href="/setup-guides/" class="nav-link" data-i18n="setup">Setup</a>
-      <a href="/contact/" class="nav-link" data-i18n="contact">Contact</a>
-      <a href="https://lokohub.nolilab.com" class="nav-link" target="_blank" rel="noopener noreferrer">LokoHUB</a>
-    </div>
-    <div class="language-selector" style="flex-shrink: 0; position: relative;">
-      <button class="language-btn" aria-label="Select language">
-        <svg class="fa-globe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span class="current-lang">ES</span>
-        <svg class="fa-chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="language-dropdown">
-        <a href="#" class="language-option" data-lang="en">
-          <span class="lang-code">EN</span>
-          <span class="lang-name">English</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ru">
-          <span class="lang-code">RU</span>
-          <span class="lang-name">Русский</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ja">
-          <span class="lang-code">JA</span>
-          <span class="lang-name">日本語</span>
-        </a>
-        <a href="#" class="language-option" data-lang="zh">
-          <span class="lang-code">ZH</span>
-          <span class="lang-name">中文</span>
-        </a>
-        <a href="#" class="language-option" data-lang="fr">
-          <span class="lang-code">FR</span>
-          <span class="lang-name">Français</span>
-        </a>
-        <a href="#" class="language-option" data-lang="es">
-          <span class="lang-code">ES</span>
-          <span class="lang-name">Español</span>
-        </a>
-      </div>
-    </div>
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
-    <main>
-
-    <!-- Page Hero -->
-    <div class="page-hero">
-      <div class="container">
-        <h1>Guía de tecnología GPS y LoRa</h1>
-        <p>Línea de visión de radio, LoRa P2P vs LoRaWAN, efectos de la ionosfera en el GPS y cómo funciona el rastreo GPS fuera de línea sin redes celulares.</p>
-      </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content-section">
-      <div class="container">
-
-        <p class="section-label">Conceptos básicos</p>
-        <div class="topic-grid">
-          <!-- Card 1 -->
-          <div class="topic-card">
-            <picture>              <source srcset="/images/optimized/loko-5km-long-range-gps-icon.avif" type="image/avif"><source srcset="/images/optimized/loko-5km-long-range-gps-icon.webp" type="image/webp">
-              <img src="/images/optimized/loko-5km-long-range-gps-icon.png" alt="Radio Line of Sight" class="topic-card-icon" loading="lazy">
-            </picture>
-            <h2>Línea de visión de radio y propagación de señales</h2>
-            <p class="lead">Camino directo entre antenas transmisoras y receptoras sin obstrucciones.</p>
-            <p>En la tecnología GPS y LoRa, la comunicación con línea de visión es crucial para lograr un alcance óptimo. Las ondas de radio pueden desviarse ligeramente alrededor de los obstáculos, pero las barreras grandes reducen significativamente la intensidad de la señal.</p>
-            <p>El rastreador GPS Loko alcanza un alcance de hasta 20 km en condiciones ideales de línea de visión utilizando la tecnología LoRa.</p>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="topic-card">
-            <picture>              <source srcset="/images/optimized/loko-30-day-battery-life-icon.avif" type="image/avif"><source srcset="/images/optimized/loko-30-day-battery-life-icon.webp" type="image/webp">
-              <img src="/images/optimized/loko-30-day-battery-life-icon.png" alt="Ionosphere" class="topic-card-icon" loading="lazy">
-            </picture>
-            <h2>Calidad de la señal de ionosfera y GPS</h2>
-            <p class="lead">Una capa de la atmósfera terrestre que afecta la calidad y precisión de la señal GPS.</p>
-            <p>Los retrasos ionosféricos pueden provocar errores de posicionamiento GPS, especialmente durante una alta actividad solar. Loko utiliza múltiples constelaciones (GPS, GLONASS, Galileo, BeiDou) para mitigar estos errores.</p>
-            <p>Comprender las variaciones de altitud de la ionosfera ayuda a optimizar el rendimiento del rastreador en todas las regiones.</p>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="topic-card">
-            <img src="/images/optimized/offline-map.svg" alt="LoRa vs LoRaWAN" class="topic-card-icon" loading="lazy">
-            <h2>LoRa vs LoRaWAN y comunicación P2P</h2>
-            <p class="lead">LoRa es la capa física; LoRaWAN es el protocolo de red que está por encima.</p>
-            <p>P2P LoRa crea conexiones directas de dispositivo a dispositivo sin necesidad de infraestructura. Loko utiliza P2P y LoRaWAN para lograr la máxima flexibilidad en cualquier entorno.</p>
-            <p>La comunicación P2P directa lo hace ideal para el seguimiento remoto sin servidores externos.</p>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-
-        <div class="modulation-header">
-          <p class="section-label">Documentación técnica</p>
-          <h2>Modulación LoRa explicada</h2>
-          <p>Técnicas que habilitan las capacidades de largo alcance de Loko:</p>
-        </div>
-
-        <div class="feature-grid">
-          <div class="feature-card">
-            <h3>Factor de dispersión (SF)</h3>
-            <p>SF7–SF12. Los valores más altos proporcionan un mayor alcance pero velocidades de datos más bajas. Loko utiliza SF adaptativo para equilibrar el rango y el rendimiento según las condiciones de la señal.</p>
-          </div>
-          <div class="feature-card">
-            <h3>Tasa de codificación (CR)</h3>
-            <p>Corrección de errores del 4/5 al 4/8. Una CR más alta mejora la resiliencia a la interferencia. Loko optimiza CR para una comunicación confiable en entornos desafiantes.</p>
-          </div>
-          <div class="feature-card">
-            <h3>Espectro de propagación de chirrido</h3>
-            <p>Difunde señales a través de frecuencias utilizando chirridos de FM lineales: excelente resistencia a las interferencias y permite que varios dispositivos compartan el mismo canal.</p>
-          </div>
-        </div>
-
-        <div class="doc-hub-footer">
-          <p>Para especificaciones completas ver<a href="../#specifications">Especificaciones técnicas del rastreador GPS Loko</a>— Parámetros RF, Parámetros GNSS y Configuración avanzada.</p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Footer -->
-    </main>
+<body>
+<!-- Header -->
+<div id="site-header"></div>
+<main>
+<!-- Page Hero -->
+<div class="page-hero">
+<div class="container">
+<h1>Guía de tecnología GPS y LoRa</h1>
+<p>Línea de visión de radio, LoRa P2P vs LoRaWAN, efectos de la ionosfera en el GPS y cómo funciona el rastreo GPS fuera de línea sin redes celulares.</p>
+</div>
+</div>
+<!-- Main Content -->
+<div class="content-section">
+<div class="container">
+<p class="section-label">Conceptos básicos</p>
+<div class="topic-grid">
+<!-- Card 1 -->
+<div class="topic-card">
+<picture> <source srcset="/images/optimized/loko-5km-long-range-gps-icon.avif" type="image/avif"/><source srcset="/images/optimized/loko-5km-long-range-gps-icon.webp" type="image/webp"/>
+<img alt="Radio Line of Sight" class="topic-card-icon" loading="lazy" src="/images/optimized/loko-5km-long-range-gps-icon.png"/>
+</picture>
+<h2>Línea de visión de radio y propagación de señales</h2>
+<p class="lead">Camino directo entre antenas transmisoras y receptoras sin obstrucciones.</p>
+<p>En la tecnología GPS y LoRa, la comunicación con línea de visión es crucial para lograr un alcance óptimo. Las ondas de radio pueden desviarse ligeramente alrededor de los obstáculos, pero las barreras grandes reducen significativamente la intensidad de la señal.</p>
+<p>El rastreador GPS Loko alcanza un alcance de hasta 20 km en condiciones ideales de línea de visión utilizando la tecnología LoRa.</p>
+</div>
+<!-- Card 2 -->
+<div class="topic-card">
+<picture> <source srcset="/images/optimized/loko-30-day-battery-life-icon.avif" type="image/avif"/><source srcset="/images/optimized/loko-30-day-battery-life-icon.webp" type="image/webp"/>
+<img alt="Ionosphere" class="topic-card-icon" loading="lazy" src="/images/optimized/loko-30-day-battery-life-icon.png"/>
+</picture>
+<h2>Calidad de la señal de ionosfera y GPS</h2>
+<p class="lead">Una capa de la atmósfera terrestre que afecta la calidad y precisión de la señal GPS.</p>
+<p>Los retrasos ionosféricos pueden provocar errores de posicionamiento GPS, especialmente durante una alta actividad solar. Loko utiliza múltiples constelaciones (GPS, GLONASS, Galileo, BeiDou) para mitigar estos errores.</p>
+<p>Comprender las variaciones de altitud de la ionosfera ayuda a optimizar el rendimiento del rastreador en todas las regiones.</p>
+</div>
+<!-- Card 3 -->
+<div class="topic-card">
+<img alt="LoRa vs LoRaWAN" class="topic-card-icon" loading="lazy" src="/images/optimized/offline-map.svg"/>
+<h2>LoRa vs LoRaWAN y comunicación P2P</h2>
+<p class="lead">LoRa es la capa física; LoRaWAN es el protocolo de red que está por encima.</p>
+<p>P2P LoRa crea conexiones directas de dispositivo a dispositivo sin necesidad de infraestructura. Loko utiliza P2P y LoRaWAN para lograr la máxima flexibilidad en cualquier entorno.</p>
+<p>La comunicación P2P directa lo hace ideal para el seguimiento remoto sin servidores externos.</p>
+</div>
+</div>
+<hr class="section-divider"/>
+<div class="modulation-header">
+<p class="section-label">Documentación técnica</p>
+<h2>Modulación LoRa explicada</h2>
+<p>Técnicas que habilitan las capacidades de largo alcance de Loko:</p>
+</div>
+<div class="feature-grid">
+<div class="feature-card">
+<h3>Factor de dispersión (SF)</h3>
+<p>SF7–SF12. Los valores más altos proporcionan un mayor alcance pero velocidades de datos más bajas. Loko utiliza SF adaptativo para equilibrar el rango y el rendimiento según las condiciones de la señal.</p>
+</div>
+<div class="feature-card">
+<h3>Tasa de codificación (CR)</h3>
+<p>Corrección de errores del 4/5 al 4/8. Una CR más alta mejora la resiliencia a la interferencia. Loko optimiza CR para una comunicación confiable en entornos desafiantes.</p>
+</div>
+<div class="feature-card">
+<h3>Espectro de propagación de chirrido</h3>
+<p>Difunde señales a través de frecuencias utilizando chirridos de FM lineales: excelente resistencia a las interferencias y permite que varios dispositivos compartan el mismo canal.</p>
+</div>
+</div>
+<div class="doc-hub-footer">
+<p>Para especificaciones completas ver<a href="../#specifications">Especificaciones técnicas del rastreador GPS Loko</a>— Parámetros RF, Parámetros GNSS y Configuración avanzada.</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+</main>
 <div id="site-footer"></div>
-    <script defer src="/js/analytics.js"></script>
-  <script src="/js/layout.js" defer></script>
-</body>
+<script defer="" src="/js/analytics.js"></script>
+<script defer="" src="/js/layout.js"></script>
+</body></html>

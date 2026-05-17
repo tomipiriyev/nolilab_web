@@ -1,27 +1,22 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LoRa и LoRaWAN: простое руководство | nolilab Блог</title>
-  <link rel="canonical" href="https://www.nolilab.com/ru/blog/lora-lorawan-a-simple-guide/" />
-  
-  
-  
-  
-  
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display;=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display;=swap" rel="stylesheet" /></noscript>
-  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/css/fa-subset.css" />
-  <meta name="description" content="Технология беспроводной связи, разработанная для дальней передачи данных с низким энергопотреблением и высокой помехоустойчивостью." />
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LoRa и LoRaWAN: простое руководство | nolilab Блог</title>
+<link href="https://www.nolilab.com/ru/blog/lora-lorawan-a-simple-guide/" rel="canonical"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Технология беспроводной связи, разработанная для дальней передачи данных с низким энергопотреблением и высокой помехоустойчивостью." name="description"/>
+<style>
     :root {
       --bg-primary: #ffffff;
       --bg-secondary: #f6f8fa;
@@ -303,7 +298,6 @@
       }
     }
   </style>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -396,163 +390,72 @@
 </style>
 </head>
 <body>
-<header>
-  <div class="container nav-container">
-    <a href="/" class="logo">nolilab</a>
-    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
-      <a href="/#shop" class="nav-link" data-i18n="shop">Shop</a>
-      <a href="/specifications/" class="nav-link" data-i18n="specs">Specs</a>
-      <a href="/software/" class="nav-link" data-i18n="software">Software</a>
-      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
-      <a href="/#faq" class="nav-link">FAQ</a>
-      <a href="/blog/" class="nav-link">Blog</a>
-      <a href="/firmware/" class="nav-link">Firmware</a>
-      <a href="/setup-guides/" class="nav-link" data-i18n="setup">Setup</a>
-      <a href="/contact/" class="nav-link" data-i18n="contact">Contact</a>
-      <a href="https://lokohub.nolilab.com" class="nav-link" target="_blank" rel="noopener noreferrer">LokoHUB</a>
-    </div>
-    <div class="language-selector" style="flex-shrink: 0; position: relative;">
-      <button class="language-btn" aria-label="Select language">
-        <svg class="fa-globe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span class="current-lang">RU</span>
-        <svg class="fa-chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="language-dropdown">
-        <a href="#" class="language-option" data-lang="en">
-          <span class="lang-code">EN</span>
-          <span class="lang-name">English</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ru">
-          <span class="lang-code">RU</span>
-          <span class="lang-name">Русский</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ja">
-          <span class="lang-code">JA</span>
-          <span class="lang-name">日本語</span>
-        </a>
-        <a href="#" class="language-option" data-lang="zh">
-          <span class="lang-code">ZH</span>
-          <span class="lang-name">中文</span>
-        </a>
-        <a href="#" class="language-option" data-lang="fr">
-          <span class="lang-code">FR</span>
-          <span class="lang-name">Français</span>
-        </a>
-        <a href="#" class="language-option" data-lang="es">
-          <span class="lang-code">ES</span>
-          <span class="lang-name">Español</span>
-        </a>
-      </div>
-    </div>
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
-    <main>
-
-  <article>
-    <a href="/ru/blog/" class="back-link">
-      <svg class="fa-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Вернуться в блог
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/ru/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Вернуться в блог
     </a>
-
-    <div class="article-header">
-      <div class="article-meta">
-        <span><i class="far fa-calendar"></i> March 26, 2025</span>
-        <span><i class="far fa-user"></i> Tamleykha Piriyev</span>
-      </div>
-      <h1 class="article-title">LoRa и LoRaWAN: простое руководство</h1>
-    </div>
-
-    <img src="https://www.nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&width;=1920" alt="LoRa Spreading Factor" class="article-image" />
-
-    <div class="article-content">
-      <h2>Радиоинтерфейс LoRa / LoRaWAN. Модуляция</h2>
-      <p>LoRa (Long Range) — технология беспроводной связи, разработанная для дальней передачи данных с низким энергопотреблением и высокой надёжностью при сильных помехах, что делает её пригодной для IoT-приложений и маломощных сетей большой дальности.</p>
-
-      <p><strong>AM</strong> — амплитудная модуляция<br />
-      <strong>FM</strong> — частотная модуляция</p>
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Amfm3-en-de.gif?v=1743011265" alt="AM/FM Modulation Animation" />
-
-      <p><strong>Модуляция:</strong> Процесс кодирования информации на несущий сигнал путём изменения его частоты, амплитуды или фазы, позволяющий передавать полезные сигналы на расстояние.</p>
-
-      <p><strong>Амплитудная модуляция (AM):</strong> Амплитуда несущего сигнала изменяется пропорционально информационному сигналу, в то время как частота и фаза остаются постоянными.</p>
-
-      <p><strong>Частотная модуляция (FM):</strong> Частота несущего сигнала изменяется пропорционально информационному сигналу, тогда как его амплитуда остаётся постоянной.</p>
-
-      <p>LoRa применяет комбинированный метод модуляции на основе линейной частотной манипуляции (chirp spread spectrum, CSS), при котором частота сигнала непрерывно увеличивается или уменьшается в заданном диапазоне.</p>
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora2.png?v=1743011098" alt="LoRa Modulation Diagram - Linear Frequency Modulation" />
-
-      <p>Модуляция LoRaWAN использует ЛЧМ (линейную частотную манипуляцию) или CSS (chirp spread spectrum).</p>
-
-      <h2>Радиоинтерфейс LoRa / LoRaWAN. Модуляция</h2>
-      <p>Чёрп-модуляция в LoRa состоит из нерегулярных разрывов цикла, то есть цикл может прерваться в любой точке, а не через равные промежутки времени. Это создаёт временные сдвиги, повышая устойчивость и помехозащищённость.</p>
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora1.png?v=1743011137" alt="LoRa Signal Chirp - Cycle Breaking and Time Shifts" />
-
-      <p>Модуляция LoRaWAN происходит путём «разрыва» цикла в промежуточных точках, интерпретируемых как временные сдвиги.</p>
-
-      <h2>Радиоинтерфейс. Коэффициент расширения спектра</h2>
-      <p><strong>Коэффициент расширения спектра (SF):</strong> Обозначает «скорость» изменения частоты в ЛЧМ-сигналах. Более высокие значения SF означают более медленное изменение частоты.</p>
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sf.png?v=1743010750" alt="Spreading Factor Comparison" />
-
-      <p>Изменение SF на одну единицу означает удвоение времени цикла (чёрпа). При SF=7 и полосе пропускания 125 кГц длительность чёрпа составляет 1,024 миллисекунды.</p>
-
-      <p>Длина чёрпа влияет на шум сигнала, улучшая распознавание сигнала на выходе. Это позволяет обнаруживать сигнал при меньшей энергии и сниженных уровнях RSSI.</p>
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/1_RdkCF2t6XsG7LA8nKLeGGg.webp?v=1743011173" alt="LoRa Signal Preamble Examples" />
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Preamble-1_jpg.webp?v=1743011201" alt="LoRa Preamble Technical Diagram" />
-
-      <p>Концепция упрощённо: <strong>Воспринимайте SF как «объектив с зумом» — более высокий SF «приближает» для большей дальности, но замедляет передачу данных.</strong></p>
-
-      <p><strong>Ключевой принцип:</strong> Более высокий коэффициент расширения = большая дальность, но меньшая скорость передачи данных.</p>
-
-      <h2>Кодирование данных</h2>
-      <p><strong>Кодирование:</strong> Добавление избыточной (контрольной) информации к передаваемым пользовательским данным для повышения вероятности успешного приёма.</p>
-
-      <p>Уровень избыточности определяется соотношением кодовой скорости (CR), например 4/5, что означает: из каждых 5 передаваемых бит 4 бита являются полезными данными, а 1 бит — контрольным (избыточным).</p>
-
-      <p>LoRaWAN использует кодовую скорость от 4/5 до 4/8.</p>
-
-      <p>Скорость передачи данных (бит/с) для полосы канала 125 кГц зависит от коэффициента расширения спектра (SF) и кодовой скорости (CR).</p>
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Screenshot_2025-03-26_at_19.52.36.png?v=1743011226" alt="Data Transmission Rate Chart - bps for 125 kHz Channel" />
-
-      <h2>Пример сигнала LoRa</h2>
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Example-of-LoRa-Signal.jpg?v=1743011304" alt="Example of LoRa Signal Waveform" />
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sensors-20-04034-g001-550.jpg?v=1743011334" alt="LoRa Signal Analysis" />
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/maxresdefault.jpg?v=1743011354" alt="LoRa Modulation Educational Material" />
-
-      <h2>Взаимосвязь скорости передачи данных и дальности распространения</h2>
-      <p>Взаимосвязь между коэффициентом расширения, скоростью передачи данных и дальностью распространения является фундаментальной для производительности LoRa. Более высокие коэффициенты расширения обеспечивают связь на большее расстояние, но за счёт снижения скорости передачи данных.</p>
-
-      <img src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm.png?v=1743011384" alt="Spreading Factor vs Data Rate and Range" />
-
-      <h2>Заключение</h2>
-      <p>Технологии LoRa и LoRaWAN предоставляют мощные решения для беспроводной связи с большой дальностью и низким энергопотреблением. Понимание ключевых концепций модуляции, коэффициентов расширения и кодирования данных необходимо для оптимизации развёртываний LoRa и достижения наилучшего баланса между дальностью, энергопотреблением и пропускной способностью.</p>
-
-      <div class="references">
-        <h3>Источники</h3>
-        <ul>
-          <li><a href="https://en.wikipedia.org/wiki/Signal_modulation" target="_blank">Wikipedia: Signal Modulation</a></li>
-          <li><a href="https://www.researchgate.net/figure/Example-of-LoRa-Signal_fig2_348345539" target="_blank">ResearchGate: Example of LoRa Signal</a></li>
-          <li><a href="https://www.youtube.com/watch?v=yHocu_n2udI" target="_blank">YouTube: LoRa Tutorial</a></li>
-          <li><a href="https://www.researchgate.net/figure/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless_fig7_324043563" target="_blank">ResearchGate: LoRa Spreading Factor, SF, Bitrates and Time on Air</a></li>
-        </ul>
-      </div>
-    </div>
-  </article>
-
-  <aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> March 26, 2025</span>
+<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+</div>
+<h1 class="article-title">LoRa и LoRaWAN: простое руководство</h1>
+</div>
+<img alt="LoRa Spreading Factor" class="article-image" src="https://www.nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&amp;width;=1920"/>
+<div class="article-content">
+<h2>Радиоинтерфейс LoRa / LoRaWAN. Модуляция</h2>
+<p>LoRa (Long Range) — технология беспроводной связи, разработанная для дальней передачи данных с низким энергопотреблением и высокой надёжностью при сильных помехах, что делает её пригодной для IoT-приложений и маломощных сетей большой дальности.</p>
+<p><strong>AM</strong> — амплитудная модуляция<br/>
+<strong>FM</strong> — частотная модуляция</p>
+<img alt="AM/FM Modulation Animation" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Amfm3-en-de.gif?v=1743011265"/>
+<p><strong>Модуляция:</strong> Процесс кодирования информации на несущий сигнал путём изменения его частоты, амплитуды или фазы, позволяющий передавать полезные сигналы на расстояние.</p>
+<p><strong>Амплитудная модуляция (AM):</strong> Амплитуда несущего сигнала изменяется пропорционально информационному сигналу, в то время как частота и фаза остаются постоянными.</p>
+<p><strong>Частотная модуляция (FM):</strong> Частота несущего сигнала изменяется пропорционально информационному сигналу, тогда как его амплитуда остаётся постоянной.</p>
+<p>LoRa применяет комбинированный метод модуляции на основе линейной частотной манипуляции (chirp spread spectrum, CSS), при котором частота сигнала непрерывно увеличивается или уменьшается в заданном диапазоне.</p>
+<img alt="LoRa Modulation Diagram - Linear Frequency Modulation" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora2.png?v=1743011098"/>
+<p>Модуляция LoRaWAN использует ЛЧМ (линейную частотную манипуляцию) или CSS (chirp spread spectrum).</p>
+<h2>Радиоинтерфейс LoRa / LoRaWAN. Модуляция</h2>
+<p>Чёрп-модуляция в LoRa состоит из нерегулярных разрывов цикла, то есть цикл может прерваться в любой точке, а не через равные промежутки времени. Это создаёт временные сдвиги, повышая устойчивость и помехозащищённость.</p>
+<img alt="LoRa Signal Chirp - Cycle Breaking and Time Shifts" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora1.png?v=1743011137"/>
+<p>Модуляция LoRaWAN происходит путём «разрыва» цикла в промежуточных точках, интерпретируемых как временные сдвиги.</p>
+<h2>Радиоинтерфейс. Коэффициент расширения спектра</h2>
+<p><strong>Коэффициент расширения спектра (SF):</strong> Обозначает «скорость» изменения частоты в ЛЧМ-сигналах. Более высокие значения SF означают более медленное изменение частоты.</p>
+<img alt="Spreading Factor Comparison" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sf.png?v=1743010750"/>
+<p>Изменение SF на одну единицу означает удвоение времени цикла (чёрпа). При SF=7 и полосе пропускания 125 кГц длительность чёрпа составляет 1,024 миллисекунды.</p>
+<p>Длина чёрпа влияет на шум сигнала, улучшая распознавание сигнала на выходе. Это позволяет обнаруживать сигнал при меньшей энергии и сниженных уровнях RSSI.</p>
+<img alt="LoRa Signal Preamble Examples" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/1_RdkCF2t6XsG7LA8nKLeGGg.webp?v=1743011173"/>
+<img alt="LoRa Preamble Technical Diagram" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Preamble-1_jpg.webp?v=1743011201"/>
+<p>Концепция упрощённо: <strong>Воспринимайте SF как «объектив с зумом» — более высокий SF «приближает» для большей дальности, но замедляет передачу данных.</strong></p>
+<p><strong>Ключевой принцип:</strong> Более высокий коэффициент расширения = большая дальность, но меньшая скорость передачи данных.</p>
+<h2>Кодирование данных</h2>
+<p><strong>Кодирование:</strong> Добавление избыточной (контрольной) информации к передаваемым пользовательским данным для повышения вероятности успешного приёма.</p>
+<p>Уровень избыточности определяется соотношением кодовой скорости (CR), например 4/5, что означает: из каждых 5 передаваемых бит 4 бита являются полезными данными, а 1 бит — контрольным (избыточным).</p>
+<p>LoRaWAN использует кодовую скорость от 4/5 до 4/8.</p>
+<p>Скорость передачи данных (бит/с) для полосы канала 125 кГц зависит от коэффициента расширения спектра (SF) и кодовой скорости (CR).</p>
+<img alt="Data Transmission Rate Chart - bps for 125 kHz Channel" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Screenshot_2025-03-26_at_19.52.36.png?v=1743011226"/>
+<h2>Пример сигнала LoRa</h2>
+<img alt="Example of LoRa Signal Waveform" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Example-of-LoRa-Signal.jpg?v=1743011304"/>
+<img alt="LoRa Signal Analysis" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sensors-20-04034-g001-550.jpg?v=1743011334"/>
+<img alt="LoRa Modulation Educational Material" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/maxresdefault.jpg?v=1743011354"/>
+<h2>Взаимосвязь скорости передачи данных и дальности распространения</h2>
+<p>Взаимосвязь между коэффициентом расширения, скоростью передачи данных и дальностью распространения является фундаментальной для производительности LoRa. Более высокие коэффициенты расширения обеспечивают связь на большее расстояние, но за счёт снижения скорости передачи данных.</p>
+<img alt="Spreading Factor vs Data Rate and Range" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm.png?v=1743011384"/>
+<h2>Заключение</h2>
+<p>Технологии LoRa и LoRaWAN предоставляют мощные решения для беспроводной связи с большой дальностью и низким энергопотреблением. Понимание ключевых концепций модуляции, коэффициентов расширения и кодирования данных необходимо для оптимизации развёртываний LoRa и достижения наилучшего баланса между дальностью, энергопотреблением и пропускной способностью.</p>
+<div class="references">
+<h3>Источники</h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Signal_modulation" target="_blank">Wikipedia: Signal Modulation</a></li>
+<li><a href="https://www.researchgate.net/figure/Example-of-LoRa-Signal_fig2_348345539" target="_blank">ResearchGate: Example of LoRa Signal</a></li>
+<li><a href="https://www.youtube.com/watch?v=yHocu_n2udI" target="_blank">YouTube: LoRa Tutorial</a></li>
+<li><a href="https://www.researchgate.net/figure/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless_fig7_324043563" target="_blank">ResearchGate: LoRa Spreading Factor, SF, Bitrates and Time on Air</a></li>
+</ul>
+</div>
+</div>
+</article>
+<aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
 <h3 style="margin:0 0 1rem;font-size:1rem;font-weight:600">Похожие статьи</h3>
 <ul style="margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:0.5rem">
 <li><a href="/ru/blog/what-are-lora-p2p-and-lorawan/">Что такое LoRa P2P и LoRaWAN?</a></li>
@@ -561,7 +464,7 @@
 </aside>
 </main>
 <div id="site-footer"></div>
-    <script defer src="/js/analytics.js"></script>
-  <script src="/js/layout.js" defer></script>
+<script defer="" src="/js/analytics.js"></script>
+<script defer="" src="/js/layout.js"></script>
 </body>
 </html>

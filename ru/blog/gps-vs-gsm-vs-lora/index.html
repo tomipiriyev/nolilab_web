@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.ico" rel="icon" sizes="any"/>
+<title>GPS против GSM против LoRa | Что на самом деле отслеживает местоположение?</title>
+<meta content="Понимайте GPS, GSM и LoRa простыми словами. GPS рассчитывает местоположение, GSM отправляет данные через вышки, а LoRa обеспечивает локальное отслеживание в автономном режиме." name="description"/>
+<meta content="gps vs gsm vs lora, lora gps tracker explained, gps gsm tracker, lora tracking explained" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="https://www.nolilab.com/ru/blog/gps-vs-gsm-vs-lora/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="GPS против GSM против LoRa | Что на самом деле отслеживает местоположение?" property="og:title"/>
+<meta content="Понимайте GPS, GSM и LoRa простыми словами. GPS рассчитывает местоположение, GSM отправляет данные через вышки, а LoRa обеспечивает локальное отслеживание в автономном режиме." property="og:description"/>
+<meta content="https://www.nolilab.com/ru/blog/gps-vs-gsm-vs-lora/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPS против GSM против LoRa | Что на самом деле отслеживает местоположение?" name="twitter:title"/>
+<meta content="Понимайте GPS, GSM и LoRa простыми словами. GPS рассчитывает местоположение, GSM отправляет данные через вышки, а LoRa обеспечивает локальное отслеживание в автономном режиме." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "GPS — это то же самое, что GSM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. GPS предназначен для позиционирования; GSM — это сотовая связь communication."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Является ли LoRa системой GPS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. LoRa — это технология радиосвязи mm. Loko сочетает в себе LoRa и GPS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Почему это важно для подписок?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Для сотовой связи communication обычно требуется платный тарифный план оператора связи. LoRa P2P — нет."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Что лучше для отдаленных районов?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa хорош для локального удаленного отслеживания; Спутник лучше всего подходит для глобальной передачи экстренных сообщений."
+      }
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Дом",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "GPS против GSM против LoRa",
+      "item": "https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/"
+    }
+  ]
+}</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md); }
+  .logo { color: var(--text-primary); text-decoration: none; font-family: var(--font-mono); font-size: 1.25rem; font-weight: 600; }
+  .nav-links { display: flex; align-items: center; gap: var(--spacing-md); flex-wrap: wrap; justify-content: flex-end; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+  .nav-link:hover { color: var(--text-primary); }
+  .page-hero { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: var(--spacing-xl) 0; }
+  h1 { font-size: clamp(1.85rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.03em; margin-bottom: var(--spacing-sm); }
+  .subtitle { color: var(--text-secondary); font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-md); }
+  p { color: var(--text-secondary); margin-bottom: 0.8rem; }
+  strong, h2, h3 { color: var(--text-primary); }
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  h2 { font-family: var(--font-mono); font-size: 1.25rem; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
+  h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; font-size: 0.9rem; }
+  .compare-table th, .compare-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8rem; }
+  .compare-table td { color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.65rem 1.4rem; border-radius: var(--radius-sm); background: var(--text-primary); color: #fff; text-decoration: none; font-weight: 600; }
+  .cta-btn:hover { background: var(--accent); }
+  .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+  .faq-item p { margin-bottom: 0; }
+  a { color: var(--accent); }
+  @media (max-width: 760px) {
+    .nav-container { align-items: flex-start; flex-direction: column; }
+    .nav-links { justify-content: flex-start; gap: var(--spacing-sm); }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.55rem 0.65rem; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script defer="" src="/js/layout.js"></script>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<h1>GPS против GSM против LoRa</h1>
+<p class="subtitle">GPS находит позицию. GSM или LoRa отправляют координаты. Это различие меняет все.</p>
+<p>GPS, GSM и LoRa часто смешивают в маркетинге трекеров, но это не одна и та же технология.</p>
+<p>GPS рассчитывает положение по спутникам. GSM отправляет данные через вышки сотовой связи. LoRa отправляет небольшие пакеты по радиоканалу с низким энергопотреблением на большие расстояния.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Быстрое сравнение</h2>
+<table class="compare-table">
+<thead><tr><th>Технология</th><th>Роль</th><th>Сила</th><th>Слабость</th></tr></thead>
+<tbody>
+<tr><td>GPS</td><td>Позиционирование</td><td>Работает по всему миру на открытом воздухе</td><td>Не передает местоположение самостоятельно</td></tr>
+<tr><td>GSM/LTE</td><td>Communication</td><td>Широкий доступ к облаку с покрытием</td><td>Требуются SIM-карта, вышки и плата.</td></tr>
+<tr><td>LoRa</td><td>Communication</td><td>Локальные пакеты дальнего действия с низким энергопотреблением</td><td>Низкая пропускная способность и дальность действия зависят от местности</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>GPS — это еще не весь трекер</h2>
+<p>Приемник GPS может рассчитать широту и долготу, но не может волшебным образом отправить эти координаты на ваш телефон с расстояния в несколько миль.</p>
+<p>Каждому средству отслеживания в реальном времени необходим канал связи comm после того, как GPS получит позицию.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Почему у GSM-трекеров есть подписка</h2>
+<p>Трекеры GSM и LTE используют мобильные сети, а это значит, что устройству необходим тарифный план оператора связи. Это основная причина многих ежемесячных комиссий за использование трекера GPS.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Почему Loko использует LoRa</h2>
+<p>LoRa хорошо сочетается с отслеживанием GPS, поскольку координаты представляют собой небольшие пакеты. Loko использует LoRa для локальной передачи местоположения без сотовых вышек или Интернета.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Сопутствующие руководства по Loko</h2>
+<p>Для получения дополнительной информации прочтите <a href="/lora-gps-tracker/">Руководство по трекеру LoRa GPS</a>, <a href="/no-monthly-fee/">без ежемесячной платы, руководство по трекеру GPS</a>и <a href="/blog/how-offline-gps-tracking-works/">автономное руководство по отслеживанию GPS</a>.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Часто задаваемые вопросы</h2>
+<div class="faq-grid">
+<div class="faq-item">
+<h3>GPS — это то же самое, что GSM?</h3>
+<p>Нет. GPS предназначен для позиционирования; GSM — это сотовая связь communication.</p>
+</div>
+<div class="faq-item">
+<h3>Является ли LoRa системой GPS?</h3>
+<p>Нет. LoRa — это технология радиосвязи mm. Loko сочетает в себе LoRa и GPS.</p>
+</div>
+<div class="faq-item">
+<h3>Почему это важно для подписок?</h3>
+<p>Для сотовой связи communication обычно требуется платный тарифный план оператора связи. LoRa P2P — нет.</p>
+</div>
+<div class="faq-item">
+<h3>Что лучше для отдаленных районов?</h3>
+<p>LoRa хорош для локального удаленного отслеживания; Спутник лучше всего подходит для глобальной передачи экстренных сообщений.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p><strong>Loko GPS Tracker использует радиомодуль GPS плюс LoRa для локального отслеживания без SIM-карт, Интернета или ежемесячной подписки.</strong></p>
+<a class="cta-btn" href="/#shop">Магазин Loko</a>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>

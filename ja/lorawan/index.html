@@ -1,40 +1,41 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
-  <title>LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" /></noscript>
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7W0Q5n-wU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/css/fa-subset.css" />
-  <meta name="description" content="Connect your Loko GPS Tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking." />
-  <link rel="canonical" href="https://www.nolilab.com/ja/lorawan/" />
-  <link rel="alternate" hreflang="en" href="https://www.nolilab.com/lorawan/" />
-  <link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/lorawan/" />
-  <link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/lorawan/" />
-  <link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/lorawan/" />
-  <link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/lorawan/" />
-  <link rel="alternate" hreflang="fr"        href="https://www.nolilab.com/fr/lorawan/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/lorawan/" />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab" />
-  <meta property="og:description" content="Connect your Loko GPS Tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking." />
-  <meta property="og:url" content="https://www.nolilab.com/lorawan" />
-  <meta property="og:image" content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" />
-  <meta property="og:site_name" content="nolilab" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab" />
-  <meta name="twitter:description" content="Connect your Loko GPS Tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking." />
-  <meta name="twitter:image" content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" />
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport">
+<title>LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7W0Q5n-wU.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Connect your Loko GPS Tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking." name="description"/>
+<link href="https://www.nolilab.com/ja/lorawan/" rel="canonical"/>
+<link href="https://www.nolilab.com/lorawan/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/lorawan/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/es/lorawan/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/lorawan/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/lorawan/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/lorawan/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/lorawan/" hreflang="x-default" rel="alternate"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab" property="og:title"/>
+<meta content="Connect your Loko GPS Tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking." property="og:description"/>
+<meta content="https://www.nolilab.com/lorawan" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab" name="twitter:title"/>
+<meta content="Connect your Loko GPS Tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<style>
     :root {
       --bg-primary: #ffffff;
       --bg-secondary: #f6f8fa;
@@ -527,201 +528,137 @@
     size-adjust: 107.64%;
   }
 </style>
-</head>
+</meta></head>
 <body>
-<header>
-  <div class="container nav-container">
-    <a href="/" class="logo">nolilab</a>
-    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
-      <a href="/#shop" class="nav-link">ショップ</a>
-      <a href="/specifications/" class="nav-link">仕様</a>
-      <a href="/software/" class="nav-link">ソフトウェア</a>
-      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
-      <a href="/#faq" class="nav-link">FAQ</a>
-      <a href="/blog/" class="nav-link">ブログ</a>
-      <a href="/firmware/" class="nav-link">ファームウェア</a>
-      <a href="/setup-guides/" class="nav-link">セットアップ</a>
-      <a href="/contact/" class="nav-link">お問い合わせ</a>
-      <a href="https://lokohub.nolilab.com" class="nav-link" target="_blank" rel="noopener noreferrer">LokoHUB</a>
-    </div>
-    <div class="language-selector" style="flex-shrink: 0; position: relative;">
-      <button class="language-btn" aria-label="Select language">
-        <svg class="fa-globe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span class="current-lang">JA</span>
-        <svg class="fa-chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="language-dropdown">
-        <a href="#" class="language-option" data-lang="en">
-          <span class="lang-code">EN</span>
-          <span class="lang-name">English</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ru">
-          <span class="lang-code">RU</span>
-          <span class="lang-name">Русский</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ja">
-          <span class="lang-code">JA</span>
-          <span class="lang-name">日本語</span>
-        </a>
-        <a href="#" class="language-option" data-lang="zh">
-          <span class="lang-code">ZH</span>
-          <span class="lang-name">中文</span>
-        </a>
-        <a href="#" class="language-option" data-lang="fr">
-          <span class="lang-code">FR</span>
-          <span class="lang-name">Français</span>
-        </a>
-        <a href="#" class="language-option" data-lang="es">
-          <span class="lang-code">ES</span>
-          <span class="lang-name">Español</span>
-        </a>
-      </div>
-    </div>
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
-
-  <main class="lorawan-container">
-    <div class="lorawan-header">
-      <h1>Loko GPS トラッカーの LoRaWAN セットアップ ガイド | TTNの統合</h1>
-      <p class="lorawan-subtitle">このステップバイステップの LoRaWAN セットアップ ガイドを使用して、Loko GPS トラッカーを The Things Network (TTN) に接続します。ゲートウェイ、デバイスを構成し、IoT GPS 追跡を開始します。</p>
-    </div>
-
-    <div class="lorawan-content">
-      <!-- Steps 1-7: Initial Setup -->
-      <div class="setup-step">
-        <div class="step-header">
-          <div class="step-number">1-7</div>
-          <h2 class="step-title">ゲートウェイの初期セットアップ</h2>
-        </div>
-        <div class="step-description">
-          <p><strong>ステップ 1:</strong>The Things Network Web サイトでアカウントを作成します。</p>
-          <p><strong>ステップ 2:</strong>プロフィール アイコンからコンソールに移動します。</p>
-          <p><strong>ステップ 3:</strong>お住まいの地域に適した地域を選択してください。</p>
-          <p><strong>ステップ 4:</strong>メーカーの仕様に従ってゲートウェイを設定します。</p>
-          <p><strong>ステップ5:</strong>お住まいの地域の正しい周波数プランを使用してゲートウェイを登録します。</p>
-          <p><strong>ステップ6:</strong>製造元のセットアップからのゲートウェイ ID を使用します。</p>
-          <p><strong>ステップ 7:</strong>ゲートウェイの登録プロセスを完了します。</p>
-        </div>
-        <div class="note">
-          <div class="note-title">重要：</div>
-          <div class="note-content">適切な接続を確保するには、地域に応じて適切な周波数プランを選択してください。</div>
-        </div>
-      </div>
-
-      <!-- Step 8: Create Application -->
-      <div class="setup-step">
-        <div class="step-header">
-          <div class="step-number">8</div>
-          <h2 class="step-title">アプリケーションの作成</h2>
-        </div>
-        <div class="step-description">
-          <p>[アプリケーションの作成] ボタンをクリックし、アプリケーションに名前/ID を指定します。</p>
-        </div>
-        <img src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_03.01.10.jpg?v=1716937292&width=1500" alt="Create Application" class="step-image">
-      </div>
-
-      <!-- Step 9: Register End Device -->
-      <div class="setup-step">
-        <div class="step-header">
-          <div class="step-number">9</div>
-          <h2 class="step-title">エンドデバイスを手動で登録する</h2>
-        </div>
-        <div class="step-description">
-          <p>エンドデバイスを手動で登録します。 JoinEUI には何でも入力できます。 Loko Configuration Tools アプリの APP-EUI 設定に対応します。</p>
-        </div>
-        <img src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-26_19.30.30.jpg?v=1716737493&width=1500" alt="Register End Device" class="step-image">
-      </div>
-
-      <!-- Step 10: Generate Device Credentials -->
-      <div class="setup-step">
-        <div class="step-header">
-          <div class="step-number">10</div>
-          <h2 class="step-title">デバイス認証情報の生成</h2>
-        </div>
-        <div class="step-description">
-          <p>「確認」ボタンをクリックします。その後、さらに多くの設定が表示されます。生成ボタンを押すだけで、Dev-EUI と App-Key を作成できます。</p>
-        </div>
-        <img src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-26_19.33.14.jpg?v=1716737617&width=1500" alt="Generate Credentials" class="step-image">
-      </div>
-
-      <!-- Step 11: Retrieve Device Parameters -->
-      <div class="setup-step">
-        <div class="step-header">
-          <div class="step-number">11</div>
-          <h2 class="step-title">アクティベーションパラメータの取得</h2>
-        </div>
-        <div class="step-description">
-          <p>概要からデバイスパラメータを取得します。 Loko Air ユニットを設定するには、次のアクティベーション パラメータが必要です。</p>
-          <ul>
-            <li>AppEUI (EUI に参加)</li>
-            <li>DevEUI</li>
-            <li>アプリキー</li>
-          </ul>
-        </div>
-        <img src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_02.52.22.jpg?v=1716936769&width=1500" alt="Device Parameters" class="step-image">
-      </div>
-
-      <!-- Step 12: Configure Payload Formatter -->
-      <div class="setup-step">
-        <div class="step-header">
-          <div class="step-number">12</div>
-          <h2 class="step-title">ペイロード フォーマッタの構成</h2>
-        </div>
-        <div class="step-description">
-          <p>ペイロード フォーマッタに移動し、アップリンクとして CayenneLPP を選択します。</p>
-        </div>
-        <img src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-26_19.35.39.jpg?v=1716737760&width=1500" alt="Payload Formatter Selection" class="step-image">
-        <img src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_02.56.49.jpg?v=1716937063&width=1500" alt="CayenneLPP Configuration" class="step-image">
-      </div>
-
-      <!-- Steps 13-15: Configure Loko Device -->
-      <div class="setup-step">
-        <div class="step-header">
-          <div class="step-number">13-15</div>
-          <h2 class="step-title">Loko デバイスの構成</h2>
-        </div>
-        <div class="step-description">
-          <p><strong>ステップ 13:</strong>デバイスで Loko 設定ツール アプリを開きます。</p>
-          <p><strong>ステップ 14:</strong>現在の設定を読み取り、LoRaWAN 機能を有効にします。</p>
-          <p><strong>ステップ 15:</strong>TTN のエンドデバイスのアクティベーション情報から 3 つの必須パラメータを入力します。</p>
-          <ul>
-            <li>AppEUI (TTN より)</li>
-            <li>DevEUI (TTN より)</li>
-            <li>AppKey (TTN より)</li>
-          </ul>
-          <p>送信を押して設定をアップロードし、Loko Air ユニットを再起動します。</p>
-        </div>
-        <div class="note">
-          <div class="note-title">注記：</div>
-          <div class="note-content">接続の問題を避けるために、The Things Network コンソールに表示されるパラメーターを正確にコピーしてください。</div>
-        </div>
-      </div>
-
-      <!-- Step 16: Monitor Device -->
-      <div class="setup-step">
-        <div class="step-header">
-          <div class="step-number">16</div>
-          <h2 class="step-title">ライブデータの監視</h2>
-        </div>
-        <div class="step-description">
-          <p>The Things Network の [エンド デバイス] ページを監視して、ゲートウェイが情報を受信したら、ライブ データと地図上の Loko Air ユニットの位置を表示します。</p>
-          <p>データ送信が確認され、デバイスの位置をリアルタイムで追跡できるようになります。</p>
-        </div>
-        <img src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_02.59.11.jpg?v=1716937175&width=1500" alt="Live Data Monitoring" class="step-image">
-      </div>
-
-      <div class="note">
-        <div class="note-title">助けが必要ですか?</div>
-        <div class="note-content">セットアップ中に問題が発生した場合は、次の点を確認してください。<a href="/ja/#faq" style="color: var(--accent);">よくある質問セクション</a>またはサポートチームにお問い合わせください。私たちはあなたのつながりをお手伝いします!</div>
-      </div>
-    </div>
-  </main>
+<div id="site-header"></div>
+<main class="lorawan-container">
+<div class="lorawan-header">
+<h1>Loko GPS トラッカーの LoRaWAN セットアップ ガイド | TTNの統合</h1>
+<p class="lorawan-subtitle">このステップバイステップの LoRaWAN セットアップ ガイドを使用して、Loko GPS トラッカーを The Things Network (TTN) に接続します。ゲートウェイ、デバイスを構成し、IoT GPS 追跡を開始します。</p>
+</div>
+<div class="lorawan-content">
+<!-- Steps 1-7: Initial Setup -->
+<div class="setup-step">
+<div class="step-header">
+<div class="step-number">1-7</div>
+<h2 class="step-title">ゲートウェイの初期セットアップ</h2>
+</div>
+<div class="step-description">
+<p><strong>ステップ 1:</strong>The Things Network Web サイトでアカウントを作成します。</p>
+<p><strong>ステップ 2:</strong>プロフィール アイコンからコンソールに移動します。</p>
+<p><strong>ステップ 3:</strong>お住まいの地域に適した地域を選択してください。</p>
+<p><strong>ステップ 4:</strong>メーカーの仕様に従ってゲートウェイを設定します。</p>
+<p><strong>ステップ5:</strong>お住まいの地域の正しい周波数プランを使用してゲートウェイを登録します。</p>
+<p><strong>ステップ6:</strong>製造元のセットアップからのゲートウェイ ID を使用します。</p>
+<p><strong>ステップ 7:</strong>ゲートウェイの登録プロセスを完了します。</p>
+</div>
+<div class="note">
+<div class="note-title">重要：</div>
+<div class="note-content">適切な接続を確保するには、地域に応じて適切な周波数プランを選択してください。</div>
+</div>
+</div>
+<!-- Step 8: Create Application -->
+<div class="setup-step">
+<div class="step-header">
+<div class="step-number">8</div>
+<h2 class="step-title">アプリケーションの作成</h2>
+</div>
+<div class="step-description">
+<p>[アプリケーションの作成] ボタンをクリックし、アプリケーションに名前/ID を指定します。</p>
+</div>
+<img alt="Create Application" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_03.01.10.jpg?v=1716937292&amp;width=1500"/>
+</div>
+<!-- Step 9: Register End Device -->
+<div class="setup-step">
+<div class="step-header">
+<div class="step-number">9</div>
+<h2 class="step-title">エンドデバイスを手動で登録する</h2>
+</div>
+<div class="step-description">
+<p>エンドデバイスを手動で登録します。 JoinEUI には何でも入力できます。 Loko Configuration Tools アプリの APP-EUI 設定に対応します。</p>
+</div>
+<img alt="Register End Device" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-26_19.30.30.jpg?v=1716737493&amp;width=1500"/>
+</div>
+<!-- Step 10: Generate Device Credentials -->
+<div class="setup-step">
+<div class="step-header">
+<div class="step-number">10</div>
+<h2 class="step-title">デバイス認証情報の生成</h2>
+</div>
+<div class="step-description">
+<p>「確認」ボタンをクリックします。その後、さらに多くの設定が表示されます。生成ボタンを押すだけで、Dev-EUI と App-Key を作成できます。</p>
+</div>
+<img alt="Generate Credentials" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-26_19.33.14.jpg?v=1716737617&amp;width=1500"/>
+</div>
+<!-- Step 11: Retrieve Device Parameters -->
+<div class="setup-step">
+<div class="step-header">
+<div class="step-number">11</div>
+<h2 class="step-title">アクティベーションパラメータの取得</h2>
+</div>
+<div class="step-description">
+<p>概要からデバイスパラメータを取得します。 Loko Air ユニットを設定するには、次のアクティベーション パラメータが必要です。</p>
+<ul>
+<li>AppEUI (EUI に参加)</li>
+<li>DevEUI</li>
+<li>アプリキー</li>
+</ul>
+</div>
+<img alt="Device Parameters" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_02.52.22.jpg?v=1716936769&amp;width=1500"/>
+</div>
+<!-- Step 12: Configure Payload Formatter -->
+<div class="setup-step">
+<div class="step-header">
+<div class="step-number">12</div>
+<h2 class="step-title">ペイロード フォーマッタの構成</h2>
+</div>
+<div class="step-description">
+<p>ペイロード フォーマッタに移動し、アップリンクとして CayenneLPP を選択します。</p>
+</div>
+<img alt="Payload Formatter Selection" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-26_19.35.39.jpg?v=1716737760&amp;width=1500"/>
+<img alt="CayenneLPP Configuration" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_02.56.49.jpg?v=1716937063&amp;width=1500"/>
+</div>
+<!-- Steps 13-15: Configure Loko Device -->
+<div class="setup-step">
+<div class="step-header">
+<div class="step-number">13-15</div>
+<h2 class="step-title">Loko デバイスの構成</h2>
+</div>
+<div class="step-description">
+<p><strong>ステップ 13:</strong>デバイスで Loko 設定ツール アプリを開きます。</p>
+<p><strong>ステップ 14:</strong>現在の設定を読み取り、LoRaWAN 機能を有効にします。</p>
+<p><strong>ステップ 15:</strong>TTN のエンドデバイスのアクティベーション情報から 3 つの必須パラメータを入力します。</p>
+<ul>
+<li>AppEUI (TTN より)</li>
+<li>DevEUI (TTN より)</li>
+<li>AppKey (TTN より)</li>
+</ul>
+<p>送信を押して設定をアップロードし、Loko Air ユニットを再起動します。</p>
+</div>
+<div class="note">
+<div class="note-title">注記：</div>
+<div class="note-content">接続の問題を避けるために、The Things Network コンソールに表示されるパラメーターを正確にコピーしてください。</div>
+</div>
+</div>
+<!-- Step 16: Monitor Device -->
+<div class="setup-step">
+<div class="step-header">
+<div class="step-number">16</div>
+<h2 class="step-title">ライブデータの監視</h2>
+</div>
+<div class="step-description">
+<p>The Things Network の [エンド デバイス] ページを監視して、ゲートウェイが情報を受信したら、ライブ データと地図上の Loko Air ユニットの位置を表示します。</p>
+<p>データ送信が確認され、デバイスの位置をリアルタイムで追跡できるようになります。</p>
+</div>
+<img alt="Live Data Monitoring" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_02.59.11.jpg?v=1716937175&amp;width=1500"/>
+</div>
+<div class="note">
+<div class="note-title">助けが必要ですか?</div>
+<div class="note-content">セットアップ中に問題が発生した場合は、次の点を確認してください。<a href="/ja/#faq" style="color: var(--accent);">よくある質問セクション</a>またはサポートチームにお問い合わせください。私たちはあなたのつながりをお手伝いします!</div>
+</div>
+</div>
+</main>
 <div id="site-footer"></div>
-    <script defer src="/js/analytics.js"></script>
-  <script src="/js/layout.js" defer></script>
-</body>
+<script defer="" src="/js/analytics.js"></script>
+<script defer="" src="/js/layout.js"></script>
+</body></html>

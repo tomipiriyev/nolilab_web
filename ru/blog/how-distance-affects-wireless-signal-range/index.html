@@ -1,25 +1,22 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Как расстояние влияет на дальность беспроводного сигнала | nolilab Блог</title>
-  <link rel="canonical" href="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" />
-  
-    
-
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display;=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display;=swap" rel="stylesheet" /></noscript>
-  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/css/fa-subset.css" />
-  <meta name="description" content="Понимание того, как закон обратных квадратов влияет на дальность беспроводного сигнала и что это означает для систем GPS-отслеживания." />
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Как расстояние влияет на дальность беспроводного сигнала | nolilab Блог</title>
+<link href="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Понимание того, как закон обратных квадратов влияет на дальность беспроводного сигнала и что это означает для систем GPS-отслеживания." name="description"/>
+<style>
     :root {
       --bg-primary: #ffffff;
       --bg-secondary: #f6f8fa;
@@ -259,7 +256,6 @@
       }
     }
   </style>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -304,115 +300,50 @@
 </style>
 </head>
 <body>
-<header>
-  <div class="container nav-container">
-    <a href="/" class="logo">nolilab</a>
-    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
-      <a href="/#shop" class="nav-link" data-i18n="shop">Shop</a>
-      <a href="/specifications/" class="nav-link" data-i18n="specs">Specs</a>
-      <a href="/software/" class="nav-link" data-i18n="software">Software</a>
-      <a href="/lorawan/" class="nav-link">LoRaWAN</a>
-      <a href="/#faq" class="nav-link">FAQ</a>
-      <a href="/blog/" class="nav-link">Blog</a>
-      <a href="/firmware/" class="nav-link">Firmware</a>
-      <a href="/setup-guides/" class="nav-link" data-i18n="setup">Setup</a>
-      <a href="/contact/" class="nav-link" data-i18n="contact">Contact</a>
-      <a href="https://lokohub.nolilab.com" class="nav-link" target="_blank" rel="noopener noreferrer">LokoHUB</a>
-    </div>
-    <div class="language-selector" style="flex-shrink: 0; position: relative;">
-      <button class="language-btn" aria-label="Select language">
-        <svg class="fa-globe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span class="current-lang">RU</span>
-        <svg class="fa-chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="language-dropdown">
-        <a href="#" class="language-option" data-lang="en">
-          <span class="lang-code">EN</span>
-          <span class="lang-name">English</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ru">
-          <span class="lang-code">RU</span>
-          <span class="lang-name">Русский</span>
-        </a>
-        <a href="#" class="language-option" data-lang="ja">
-          <span class="lang-code">JA</span>
-          <span class="lang-name">日本語</span>
-        </a>
-        <a href="#" class="language-option" data-lang="zh">
-          <span class="lang-code">ZH</span>
-          <span class="lang-name">中文</span>
-        </a>
-        <a href="#" class="language-option" data-lang="fr">
-          <span class="lang-code">FR</span>
-          <span class="lang-name">Français</span>
-        </a>
-        <a href="#" class="language-option" data-lang="es">
-          <span class="lang-code">ES</span>
-          <span class="lang-name">Español</span>
-        </a>
-      </div>
-    </div>
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
-    <main>
-
-  <article>
-    <a href="/ru/blog/" class="back-link">
-      <svg class="fa-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Вернуться в блог
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/ru/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Вернуться в блог
     </a>
-
-    <div class="article-header">
-      <div class="article-meta">
-        <span><i class="far fa-calendar"></i> February 7, 2026</span>
-        <span><i class="far fa-user"></i> Tamleykha Piriyev</span>
-      </div>
-      <h1 class="article-title">Как расстояние влияет на дальность беспроводного сигнала</h1>
-    </div>
-
-    <img src="https://www.nolilab.com/cdn/shop/articles/radio-signal-range-by-distance.png?v=1770467347&width;=1920" alt="Radio Signal Range Diagram" class="article-image" />
-
-    <div class="article-content">
-      <h2>Введение</h2>
-      <p>В статье рассматривается распространение радиоволн в беспроводных системах с акцентом на то, что «закон обратных квадратов» принципиально ограничивает дальность связи по мере увеличения расстояния.</p>
-
-      <h2>Как распространяются радиосигналы</h2>
-      <p>Передатчики излучают энергию во всех направлениях, создавая расширяющийся сферический волновой фронт, а не сфокусированные лучи. Распределение сигнала растёт квадратично, тогда как расстояние увеличивается линейно — это и является математической основой ограничений дальности.</p>
-
-      <h2>Закон обратных квадратов</h2>
-      <p>Формула площади поверхности сферы: <strong>A = 4πr²</strong></p>
-      <p>Ключевой принцип: при удвоении расстояния площадь распределения сигнала увеличивается вчетверо, снижая плотность мощности на 75%. В статье отмечается: «удвоение расстояния уменьшает уровень принятого сигнала до одной четверти».</p>
-
-      <h2>Практические последствия для реальных систем</h2>
-      <p><strong>Три критических фактора:</strong></p>
-      <ol>
-        <li><strong>Нелинейное масштабирование дальности</strong> — Для удвоения эффективной дальности (теоретически в свободном пространстве) мощность передатчика необходимо увеличить в четыре раза</li>
-        <li><strong>Важность чувствительности приёмника</strong> — Улучшение уровня шумового пола зачастую эффективнее увеличения мощности</li>
-        <li><strong>Конструкция антенны</strong> — Направленные антенны концентрируют энергию, компенсируя потери на распространение</li>
-      </ol>
-
-      <h2>Потери в окружающей среде</h2>
-      <p>В реальных условиях развёртывания возникают дополнительные потери из-за препятствий, многолучевого замирания, атмосферного поглощения, неэффективности антенн и несоответствия поляризации — зачастую превышающие теоретические прогнозы.</p>
-
-      <h2>Практические применения (БПЛА, IoT, трекеры)</h2>
-      <ul>
-        <li>Более высокое расположение антенн снижает потери на препятствия</li>
-        <li>Более низкие скорости передачи данных улучшают отношение сигнал/шум</li>
-        <li>Технологии с расширенным спектром (LoRa) жертвуют полосой пропускания ради увеличения дальности</li>
-      </ul>
-
-      <h2>Заключение</h2>
-      <p>«Расстояние — враг радиосвязи» — этот принцип принципиально определяет инженерные решения в области оптимизации антенн, выбора метода модуляции и размещения систем.</p>
-    </div>
-  </article>
-
-  </main>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> February 7, 2026</span>
+<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+</div>
+<h1 class="article-title">Как расстояние влияет на дальность беспроводного сигнала</h1>
+</div>
+<img alt="Radio Signal Range Diagram" class="article-image" src="https://www.nolilab.com/cdn/shop/articles/radio-signal-range-by-distance.png?v=1770467347&amp;width;=1920"/>
+<div class="article-content">
+<h2>Введение</h2>
+<p>В статье рассматривается распространение радиоволн в беспроводных системах с акцентом на то, что «закон обратных квадратов» принципиально ограничивает дальность связи по мере увеличения расстояния.</p>
+<h2>Как распространяются радиосигналы</h2>
+<p>Передатчики излучают энергию во всех направлениях, создавая расширяющийся сферический волновой фронт, а не сфокусированные лучи. Распределение сигнала растёт квадратично, тогда как расстояние увеличивается линейно — это и является математической основой ограничений дальности.</p>
+<h2>Закон обратных квадратов</h2>
+<p>Формула площади поверхности сферы: <strong>A = 4πr²</strong></p>
+<p>Ключевой принцип: при удвоении расстояния площадь распределения сигнала увеличивается вчетверо, снижая плотность мощности на 75%. В статье отмечается: «удвоение расстояния уменьшает уровень принятого сигнала до одной четверти».</p>
+<h2>Практические последствия для реальных систем</h2>
+<p><strong>Три критических фактора:</strong></p>
+<ol>
+<li><strong>Нелинейное масштабирование дальности</strong> — Для удвоения эффективной дальности (теоретически в свободном пространстве) мощность передатчика необходимо увеличить в четыре раза</li>
+<li><strong>Важность чувствительности приёмника</strong> — Улучшение уровня шумового пола зачастую эффективнее увеличения мощности</li>
+<li><strong>Конструкция антенны</strong> — Направленные антенны концентрируют энергию, компенсируя потери на распространение</li>
+</ol>
+<h2>Потери в окружающей среде</h2>
+<p>В реальных условиях развёртывания возникают дополнительные потери из-за препятствий, многолучевого замирания, атмосферного поглощения, неэффективности антенн и несоответствия поляризации — зачастую превышающие теоретические прогнозы.</p>
+<h2>Практические применения (БПЛА, IoT, трекеры)</h2>
+<ul>
+<li>Более высокое расположение антенн снижает потери на препятствия</li>
+<li>Более низкие скорости передачи данных улучшают отношение сигнал/шум</li>
+<li>Технологии с расширенным спектром (LoRa) жертвуют полосой пропускания ради увеличения дальности</li>
+</ul>
+<h2>Заключение</h2>
+<p>«Расстояние — враг радиосвязи» — этот принцип принципиально определяет инженерные решения в области оптимизации антенн, выбора метода модуляции и размещения систем.</p>
+</div>
+</article>
+</main>
 <div id="site-footer"></div>
-    <script defer src="/js/analytics.js"></script>
-  <script src="/js/layout.js" defer></script>
+<script defer="" src="/js/analytics.js"></script>
+<script defer="" src="/js/layout.js"></script>
 </body>
 </html>

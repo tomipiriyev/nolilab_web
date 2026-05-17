@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.ico" rel="icon" sizes="any"/>
+<title>GPS vs GSM vs LoRa | What Actually Tracks Location?</title>
+<meta content="Understand GPS, GSM, and LoRa in simple terms. GPS calculates location, GSM sends data through towers, and LoRa enables offline local tracking." name="description"/>
+<meta content="gps vs gsm vs lora, lora gps tracker explained, gps gsm tracker, lora tracking explained" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="GPS vs GSM vs LoRa | What Actually Tracks Location?" property="og:title"/>
+<meta content="Understand GPS, GSM, and LoRa in simple terms. GPS calculates location, GSM sends data through towers, and LoRa enables offline local tracking." property="og:description"/>
+<meta content="https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPS vs GSM vs LoRa | What Actually Tracks Location?" name="twitter:title"/>
+<meta content="Understand GPS, GSM, and LoRa in simple terms. GPS calculates location, GSM sends data through towers, and LoRa enables offline local tracking." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is GPS the same as GSM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. GPS is for positioning; GSM is cellular communication."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is LoRa a GPS system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. LoRa is a radio communication technology. Loko combines LoRa with GPS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does this matter for subscriptions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cellular communication usually requires a paid carrier plan. LoRa P2P does not."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which is best for remote areas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa is strong for local remote tracking; satellite is best for global emergency messaging."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "GPS vs GSM vs LoRa",
+      "item": "https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/"
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md); }
+  .logo { color: var(--text-primary); text-decoration: none; font-family: var(--font-mono); font-size: 1.25rem; font-weight: 600; }
+  .nav-links { display: flex; align-items: center; gap: var(--spacing-md); flex-wrap: wrap; justify-content: flex-end; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+  .nav-link:hover { color: var(--text-primary); }
+  .page-hero { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: var(--spacing-xl) 0; }
+  h1 { font-size: clamp(1.85rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.03em; margin-bottom: var(--spacing-sm); }
+  .subtitle { color: var(--text-secondary); font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-md); }
+  p { color: var(--text-secondary); margin-bottom: 0.8rem; }
+  strong, h2, h3 { color: var(--text-primary); }
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  h2 { font-family: var(--font-mono); font-size: 1.25rem; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
+  h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; font-size: 0.9rem; }
+  .compare-table th, .compare-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8rem; }
+  .compare-table td { color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.65rem 1.4rem; border-radius: var(--radius-sm); background: var(--text-primary); color: #fff; text-decoration: none; font-weight: 600; }
+  .cta-btn:hover { background: var(--accent); }
+  .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+  .faq-item p { margin-bottom: 0; }
+  a { color: var(--accent); }
+  @media (max-width: 760px) {
+    .nav-container { align-items: flex-start; flex-direction: column; }
+    .nav-links { justify-content: flex-start; gap: var(--spacing-sm); }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.55rem 0.65rem; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script defer="" src="/js/layout.js"></script>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<h1>GPS vs GSM vs LoRa</h1>
+<p class="subtitle">GPS finds the position. GSM or LoRa sends the position. That distinction changes everything.</p>
+<p>GPS, GSM, and LoRa are often mixed together in tracker marketing, but they are not the same technology.</p>
+<p>GPS calculates position from satellites. GSM sends data through cellular towers. LoRa sends small packets by long-range low-power radio.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Quick Comparison</h2>
+<table class="compare-table">
+<thead><tr><th>Technology</th><th>Role</th><th>Strength</th><th>Weakness</th></tr></thead>
+<tbody>
+<tr><td>GPS</td><td>Positioning</td><td>Works globally outdoors</td><td>Does not transmit location by itself</td></tr>
+<tr><td>GSM/LTE</td><td>Communication</td><td>Wide cloud access with coverage</td><td>Needs SIM, towers, and fees</td></tr>
+<tr><td>LoRa</td><td>Communication</td><td>Long-range low-power local packets</td><td>Low bandwidth and range depends on terrain</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>GPS Is Not the Whole Tracker</h2>
+<p>A GPS receiver can calculate latitude and longitude, but it cannot magically send those coordinates to your phone from miles away.</p>
+<p>Every real-time tracker needs a communication channel after GPS gets the position.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Why GSM Trackers Have Subscriptions</h2>
+<p>GSM and LTE trackers use mobile networks, which means the device needs a carrier plan. That is the root cause of many monthly GPS tracker fees.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Why Loko Uses LoRa</h2>
+<p>LoRa is well matched to GPS tracking because coordinates are small packets. Loko uses LoRa to send location locally without cellular towers or internet.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Related Loko Guides</h2>
+<p>For more background, read the <a href="/lora-gps-tracker/">LoRa GPS tracker guide</a>, the <a href="/no-monthly-fee/">no monthly fee GPS tracker guide</a>, and the <a href="/blog/how-offline-gps-tracking-works/">offline GPS tracking guide</a>.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>FAQ</h2>
+<div class="faq-grid">
+<div class="faq-item">
+<h3>Is GPS the same as GSM?</h3>
+<p>No. GPS is for positioning; GSM is cellular communication.</p>
+</div>
+<div class="faq-item">
+<h3>Is LoRa a GPS system?</h3>
+<p>No. LoRa is a radio communication technology. Loko combines LoRa with GPS.</p>
+</div>
+<div class="faq-item">
+<h3>Why does this matter for subscriptions?</h3>
+<p>Cellular communication usually requires a paid carrier plan. LoRa P2P does not.</p>
+</div>
+<div class="faq-item">
+<h3>Which is best for remote areas?</h3>
+<p>LoRa is strong for local remote tracking; satellite is best for global emergency messaging.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p><strong>Loko GPS Tracker uses GPS plus LoRa radio for local tracking without SIM cards, internet, or monthly subscriptions.</strong></p>
+<a class="cta-btn" href="/#shop">Shop Loko</a>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>

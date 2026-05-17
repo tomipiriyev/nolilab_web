@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.ico" rel="icon" sizes="any"/>
+<title>インターネットなしの GPS トラッカー |オフライン GPS 追跡 | Loko</title>
+<meta content="Loko は、インターネット アクセスを必要としない GPS トラッカーです。遠隔地でのオフライン位置追跡には GPS 衛星と LoRa 無線を使用します。" name="description"/>
+<meta content="gps tracker without internet, offline gps tracker, gps tracker without cell service, gps tracker no internet" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="https://www.nolilab.com/ja/gps-tracker-without-internet/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="インターネットなしの GPS トラッカー |オフライン GPS 追跡 | Loko" property="og:title"/>
+<meta content="Loko は、インターネット アクセスを必要としない GPS トラッカーです。遠隔地でのオフライン位置追跡には GPS 衛星と LoRa 無線を使用します。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/gps-tracker-without-internet/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ja_JP" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="インターネットなしの GPS トラッカー |オフライン GPS 追跡 | Loko" name="twitter:title"/>
+<meta content="Loko は、インターネット アクセスを必要としない GPS トラッカーです。遠隔地でのオフライン位置追跡には GPS 衛星と LoRa 無線を使用します。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "GPS はインターネットなしでも動作しますか?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。 GPS サテライトはインターネットなしでも動作します。インターネットは、クラウド データ転送に依存するアプリまたはトラッカーでのみ必要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "携帯電話に信号がない場合でも、Loko は位置情報を表示できますか?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。 Loko Ground は LoRa 経由でトラッカーを受信し、Bluetooth で携帯電話に接続します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LokoにはWi-Fiが必要ですか?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いいえ、Loko P2P のトラッキングには Wi-Fi は必要ありません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "これは衛星追跡装置と同じですか?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いいえ、Loko はローカル LoRa ラジオ GPS トラッカーであり、衛星メッセージング デバイスではありません。"
+      }
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "インターネットなしの GPS トラッカー",
+      "item": "https://www.nolilab.com/gps-tracker-without-internet/"
+    }
+  ]
+}</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md); }
+  .logo { color: var(--text-primary); text-decoration: none; font-family: var(--font-mono); font-size: 1.25rem; font-weight: 600; }
+  .nav-links { display: flex; align-items: center; gap: var(--spacing-md); flex-wrap: wrap; justify-content: flex-end; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+  .nav-link:hover { color: var(--text-primary); }
+  .page-hero { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: var(--spacing-xl) 0; }
+  h1 { font-size: clamp(1.85rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.03em; margin-bottom: var(--spacing-sm); }
+  .subtitle { color: var(--text-secondary); font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-md); }
+  p { color: var(--text-secondary); margin-bottom: 0.8rem; }
+  strong, h2, h3 { color: var(--text-primary); }
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  h2 { font-family: var(--font-mono); font-size: 1.25rem; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
+  h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; font-size: 0.9rem; }
+  .compare-table th, .compare-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8rem; }
+  .compare-table td { color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.65rem 1.4rem; border-radius: var(--radius-sm); background: var(--text-primary); color: #fff; text-decoration: none; font-weight: 600; }
+  .cta-btn:hover { background: var(--accent); }
+  .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+  .faq-item p { margin-bottom: 0; }
+  a { color: var(--accent); }
+  @media (max-width: 760px) {
+    .nav-container { align-items: flex-start; flex-direction: column; }
+    .nav-links { justify-content: flex-start; gap: var(--spacing-sm); }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.55rem 0.65rem; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script defer="" src="/js/layout.js"></script>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<h1>インターネットなしの GPS トラッカー</h1>
+<p class="subtitle">携帯電話にデータ信号がなく、クラウドトラッカーが更新を停止する場所を追跡します。</p>
+<p>GPS の場所にはインターネット アクセスは必要ありません。 GPS 衛星は測位信号を世界中にブロードキャストします。インターネットは、多くのトラッカーが位置情報をアプリに中継するためにのみ使用します。</p>
+<p>Loko はオフライン トラッキング用に構築されています。トラッカーは衛星位置を受信し、LoRa 無線を介してハンドヘルド受信機に送信するため、Wi-Fi、モバイル データ、クラウド接続がない場所でも位置情報の更新を続けることができます。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>簡単な比較</h2>
+<table class="compare-table">
+<thead><tr><th>要件</th><th>クラウド GPS トラッカー</th><th>Loko オフライン トラッカー</th></tr></thead>
+<tbody>
+<tr><td>トラッカー上のインターネット</td><td>通常はLTE経由</td><td>いいえ</td></tr>
+<tr><td>電話でインターネット</td><td>通常は必須</td><td>ローカル追跡の場合はいいえ</td></tr>
+<tr><td>遠隔地の森林利用</td><td>携帯電話サービスが存在する場合のみ</td><td>そのために設計された</td></tr>
+<tr><td>プライベートローカル追跡</td><td>限定</td><td>はい</td></tr>
+<tr><td>継続料金</td><td>Common</td><td>購読なし</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>オフライン GPS トラッキングの意味</h2>
+<p>オフライン GPS 追跡とは、デバイスがインターネットに依存せずに位置を計算して共有できることを意味します。 GPS は座標を提供します。ローカル無線リンクは、追跡を行っている人にこれらの座標を伝えます。</p>
+<p>これはオフラインマップとは異なります。オフライン マップを使用すると、モバイル データなしで携帯電話に地形を表示できます。 Loko は、不足している部分、つまり追跡されたオブジェクトからユーザーに返される無線リンクを追加します。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>インターネットなしで GPS トラッカーを使用するのに最適な場所</h2>
+<p>オフライン追跡は、森林、農場、山道、ドローン飛行場、田園地帯、建設現場、捜索エリア、および携帯電話サービスが弱い場所に適しています。</p>
+<p>実際の通信範囲は、地形、アンテナの配置、見通し線によって異なります。開けた地形が最高のパフォーマンスを発揮します。丘、建物、密集した植生、アンテナの位置が低いと通信範囲が狭くなります。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>理解すべき限界</h2>
+<p>Loko は衛星メッセンジャーではなく、それ自体であなたの位置を世界中の誰かに送信しません。これは、ローカル長距離無線追跡システムです。</p>
+<p>ローカル無線範囲をはるかに超えた緊急の communication には、衛星 communicator が適切なカテゴリです。インターネットを使用しないローカル リカバリと資産追跡には、Loko が適しています。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>関連する Loko ガイド</h2>
+<p>詳しい背景については、以下をお読みください。 <a href="/lora-gps-tracker/">LoRa GPS トラッカー ガイド</a>、 <a href="/no-monthly-fee/">月額料金無料 GPS トラッカー ガイド</a>、そして <a href="/blog/how-offline-gps-tracking-works/">オフライン GPS 追跡ガイド</a>.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>よくある質問</h2>
+<div class="faq-grid">
+<div class="faq-item">
+<h3>GPS はインターネットなしでも動作しますか?</h3>
+<p>はい。 GPS サテライトはインターネットなしでも動作します。インターネットは、クラウド データ転送に依存するアプリまたはトラッカーでのみ必要です。</p>
+</div>
+<div class="faq-item">
+<h3>携帯電話に信号がない場合でも、Loko は位置情報を表示できますか?</h3>
+<p>はい。 Loko Ground は LoRa 経由でトラッカーを受信し、Bluetooth で携帯電話に接続します。</p>
+</div>
+<div class="faq-item">
+<h3>LokoにはWi-Fiが必要ですか?</h3>
+<p>いいえ、Loko P2P のトラッキングには Wi-Fi は必要ありません。</p>
+</div>
+<div class="faq-item">
+<h3>これは衛星追跡装置と同じですか?</h3>
+<p>いいえ、Loko はローカル LoRa ラジオ GPS トラッカーであり、衛星メッセージング デバイスではありません。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p><strong>Loko GPS トラッカーは、GPS と LoRa 無線を使用して、SIM カード、インターネット、月々のサブスクリプションなしでローカル追跡を行います。</strong></p>
+<a class="cta-btn" href="/#shop">Loko を購入する</a>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
