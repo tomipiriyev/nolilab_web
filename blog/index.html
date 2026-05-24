@@ -34,6 +34,50 @@
 <meta content="Loko GPS Tracker Blog | LoRa P2P Tracking News &amp; Guides | nolilab" name="twitter:title"/>
 <meta content="Latest articles about Loko GPS Tracker, LoRa P2P, offline GPS tracking, drone tracking, farm equipment GPS, and pet tracking guides." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Loko GPS Tracker Blog",
+  "url": "https://www.nolilab.com/blog/",
+  "description": "Guides about LoRa P2P, offline GPS tracking, drone recovery, farm equipment tracking, and pet tracking with Loko GPS Tracker.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com"
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "How Offline GPS Tracking Works: No SIM, No Internet, No Fees",
+      "url": "https://www.nolilab.com/blog/how-offline-gps-tracking-works/",
+      "datePublished": "2026-05-02"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "LoRa GPS Tracker for Dogs: Offline, No SIM, No Subscription",
+      "url": "https://www.nolilab.com/blog/lora-gps-tracker-for-dogs/",
+      "datePublished": "2026-05-02"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "The Ultimate Guide to GPS Tracking for Farm Equipment & Vehicles",
+      "url": "https://www.nolilab.com/blog/gps-tracking-for-farm-equipment/",
+      "datePublished": "2025-03-30"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.nolilab.com"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.nolilab.com/blog/"}
+  ]
+}
+</script>
 <style>
     :root {
       --bg-primary: #ffffff;
@@ -216,6 +260,35 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: var(--spacing-md);
+    }
+
+    .topic-links {
+      max-width: 1000px;
+      margin: 0 auto var(--spacing-xl);
+      padding: 0 var(--spacing-md);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-sm);
+    }
+
+    .topic-link {
+      display: block;
+      padding: var(--spacing-sm);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .topic-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
     }
 
     .blog-post {
@@ -495,6 +568,10 @@
       .blog-posts {
         grid-template-columns: 1fr;
       }
+
+      .topic-links {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* Language Selector */
@@ -626,6 +703,12 @@
 <h1>Loko GPS Tracker Blog</h1>
 <p class="blog-subtitle">Latest articles about LoRa P2P technology, offline GPS tracking tips, drone tracking, farm equipment GPS, and pet tracking guides.</p>
 </div>
+<nav class="topic-links" aria-label="GPS tracking topic guides">
+<a class="topic-link" href="/lora-gps-tracker/">LoRa GPS tracker</a>
+<a class="topic-link" href="/farms/">Farm GPS tracking</a>
+<a class="topic-link" href="/search-rescue/">Search and rescue</a>
+<a class="topic-link" href="/hunting-dogs/">Hunting dogs</a>
+</nav>
 <div class="blog-posts">
 <!-- Page 1 Posts -->
 <article class="blog-post">
