@@ -317,7 +317,7 @@ function ensureGnssTraceMap() {
 
     gnssTraceLayer = window.L.layerGroup().addTo(gnssTraceMap);
     gnssTraceSelectionLayer = window.L.layerGroup().addTo(gnssTraceMap);
-    gnssTraceMap.setView([54.6853, 25.2821], 14);
+    gnssTraceMap.setView([40.4093, 49.8671], 12);
 }
 
 function syncSelectedGnssTraceRow() {
