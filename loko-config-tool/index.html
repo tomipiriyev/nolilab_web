@@ -453,6 +453,7 @@
 <div aria-label="Main sections" class="main-tab-strip" role="tablist">
 <button aria-selected="true" class="main-tab is-active" data-main-tab="configuration" role="tab" type="button">Configuration</button>
 <button aria-selected="false" class="main-tab" data-main-tab="gnss-trace" role="tab" type="button">GNSS Trace</button>
+<button aria-selected="false" class="main-tab" data-main-tab="ground-unit" role="tab" type="button">Ground Unit</button>
 <button aria-selected="false" class="main-tab" data-main-tab="firmware-updater" role="tab" type="button">Firmware Update</button>
 </div>
 <div class="main-panel is-active" data-main-panel="configuration">
@@ -715,6 +716,74 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</section>
+</div>
+<div class="main-panel" data-main-panel="ground-unit" hidden="">
+<section class="card status-card">
+<div class="status-meta">
+<div class="status-cluster">
+<span aria-hidden="true" class="status-icon disconnected" id="groundStatusIcon">
+<svg fill="none" viewbox="0 0 24 24">
+<g class="wire-connected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+<path d="M3.5 12H9"></path>
+<path d="M9 12C9 9.8 10.8 8 13 8H16"></path>
+<path d="M16 6.5V9.5"></path>
+<path d="M16 14.5V17.5"></path>
+<path d="M16 12H20.5"></path>
+</g>
+<g class="wire-disconnected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+<path d="M3.5 12H8"></path>
+<path d="M9.8 10.3L11.5 8.6"></path>
+<path d="M9.8 13.7L11.5 15.4"></path>
+<path d="M14.2 10.3L12.5 8.6"></path>
+<path d="M14.2 13.7L12.5 15.4"></path>
+<path d="M16 6.5V9.5"></path>
+<path d="M16 14.5V17.5"></path>
+<path d="M16 12H20.5"></path>
+</g>
+</svg>
+</span>
+<div>
+<div class="status-title disconnected" id="groundConnectionLabel">Disconnected</div>
+<div class="status-hint" id="groundConnectionHint">Browser access to the Ground Unit has not been granted.</div>
+<div class="port-info" id="groundPortInfo">Port: not selected</div>
+</div>
+</div>
+</div>
+<button class="primary-button disconnected" id="groundConnectButton" type="button">
+<span id="groundConnectButtonLabel">Connect</span>
+</button>
+</section>
+<section class="card workspace-card">
+<div class="field">
+<label for="groundId2">ID2</label>
+<input id="groundId2" inputmode="numeric" min="0" max="99" step="1" type="number" value=""/>
+<p class="field-copy">Ground Unit ID2 identifier.</p>
+</div>
+<div class="field">
+<label for="groundFreq">Frequency (Hz)</label>
+<input id="groundFreq" inputmode="numeric" step="1" type="number" value=""/>
+<p class="field-copy">Operating frequency in Hz (e.g. 868000000).</p>
+</div>
+<div class="field">
+<label for="groundP2pKey">P2P Encryption Key</label>
+<input autocomplete="off" id="groundP2pKey" inputmode="text" maxlength="64" placeholder="Enter 64 HEX characters (32 bytes) to update, or leave empty" spellcheck="false" type="text" value=""/>
+<p class="field-copy">Enter 64 HEX characters (32 bytes) for the 256-bit encryption key.</p>
+</div>
+<footer class="actions">
+<button class="dark-button" disabled="" id="groundReadButton" type="button">Read</button>
+<button class="dark-button" disabled="" id="groundSendButton" type="button">Send</button>
+<span aria-live="polite" class="save-status" id="groundSaveStatus"></span>
+</footer>
+<div class="serial-terminal">
+<div class="serial-terminal-bar">
+<span>Serial Output</span>
+<button id="groundTermClearBtn" type="button">Clear</button>
+</div>
+<div class="serial-terminal-output" id="groundTermOutput">
+<span class="term-line term-muted">Waiting for connection…</span>
 </div>
 </div>
 </section>

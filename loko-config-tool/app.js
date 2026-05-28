@@ -1901,3 +1901,259 @@ setConnectionState(false, "Browser access to the serial device has not been gran
 setPortInfo("serial permission not granted");
 resetGnssTraceProgress();
 syncGnssTraceExportButtonState();
+
+// ── Ground Unit ───────────────────────────────────────────────────────────────
+let groundConnectedPort = null;
+let groundReader = null;
+
+const groundTermOutput = document.getElementById("groundTermOutput");
+const groundTermClearBtn = document.getElementById("groundTermClearBtn");
+const groundConnectButton = document.getElementById("groundConnectButton");
+const groundConnectButtonLabel = document.getElementById("groundConnectButtonLabel");
+const groundConnectionLabel = document.getElementById("groundConnectionLabel");
+const groundConnectionHint = document.getElementById("groundConnectionHint");
+const groundPortInfo = document.getElementById("groundPortInfo");
+const groundStatusIcon = document.getElementById("groundStatusIcon");
+const groundId2Input = document.getElementById("groundId2");
+const groundFreqInput = document.getElementById("groundFreq");
+const groundP2pKeyInput = document.getElementById("groundP2pKey");
+const groundReadButton = document.getElementById("groundReadButton");
+const groundSendButton = document.getElementById("groundSendButton");
+const groundSaveStatus = document.getElementById("groundSaveStatus");
+
+function groundTermLog(text, type = "default") {
+    if (!groundTermOutput) return;
+    const wasAtBottom = groundTermOutput.scrollHeight - groundTermOutput.clientHeight <= groundTermOutput.scrollTop + 4;
+    const line = document.createElement("span");
+    line.className = "term-line" + (type !== "default" ? " term-" + type : "");
+    line.textContent = text;
+    if (groundTermOutput.firstChild?.classList?.contains("term-muted") &&
+        groundTermOutput.firstChild?.textContent === "Waiting for connection…") {
+        groundTermOutput.replaceChildren();
+    }
+    groundTermOutput.appendChild(line);
+    if (wasAtBottom) groundTermOutput.scrollTop = groundTermOutput.scrollHeight;
+}
+
+if (groundTermClearBtn) {
+    groundTermClearBtn.addEventListener("click", () => {
+        if (groundTermOutput) groundTermOutput.replaceChildren();
+    });
+}
+
+function setGroundConnectionState(connected, hint) {
+    if (!groundConnectionLabel) return;
+    groundConnectionLabel.textContent = connected ? "Connected" : "Disconnected";
+    groundConnectionLabel.classList.toggle("connected", connected);
+    groundConnectionLabel.classList.toggle("disconnected", !connected);
+    groundConnectionHint.textContent = hint;
+    groundConnectButtonLabel.textContent = connected ? "Disconnect" : "Connect";
+    groundConnectButton.classList.toggle("connected", connected);
+    groundConnectButton.classList.toggle("disconnected", !connected);
+    groundStatusIcon.classList.toggle("connected", connected);
+    groundStatusIcon.classList.toggle("disconnected", !connected);
+    groundReadButton.disabled = !connected;
+    groundSendButton.disabled = !connected;
+}
+
+function setGroundPortInfo(text) {
+    if (groundPortInfo) groundPortInfo.textContent = `Port: ${text}`;
+}
+
+function parseGroundDeviceInfoLine(line) {
+    let match = line.match(/(?:Device ID\s*\(id2\)|ID2|id2|gid2)\s*[:=]\s*([0-9a-fx]+)/i);
+    if (match && groundId2Input) {
+        let value = match[1].trim();
+        if (/^0x/i.test(value)) value = parseInt(value, 16).toString();
+        groundId2Input.value = value.replace(/[^0-9]/g, "");
+        return;
+    }
+    match = line.match(/(?:Frequency|frequency|gfreq)\s*[:=]\s*([0-9]+)/i);
+    if (match && groundFreqInput) {
+        groundFreqInput.value = match[1].trim().replace(/[^0-9]/g, "");
+        return;
+    }
+    // P2P key is intentionally not populated from Read — user must enter a new key explicitly to update it.
+}
+
+async function groundDisconnectPort() {
+    if (groundReader) {
+        await groundReader.cancel().catch(() => {});
+        groundReader.releaseLock();
+        groundReader = null;
+    }
+    if (groundConnectedPort) {
+        await groundConnectedPort.close().catch(() => {});
+        groundConnectedPort = null;
+    }
+    groundTermLog("── disconnected ──", "muted");
+    setGroundConnectionState(false, "Serial connection closed.");
+    setGroundPortInfo("not selected");
+}
+
+async function sendGroundCommandAndWaitForOk(command, timeoutMs = 2000) {
+    if (!groundConnectedPort || !groundConnectedPort.writable || !groundReader) {
+        throw new Error("Ground Unit serial connection is not ready.");
+    }
+    const writer = groundConnectedPort.writable.getWriter();
+    try {
+        await writer.write(new TextEncoder().encode(`${command}\r\n`));
+        groundTermLog("> " + command, "cmd");
+    } finally {
+        writer.releaseLock();
+    }
+
+    let pendingLine = "";
+    let responseBuffer = "";
+    const deadline = Date.now() + timeoutMs;
+    const dec = new TextDecoder();
+
+    while (groundConnectedPort && Date.now() < deadline) {
+        const remainingMs = deadline - Date.now();
+        const readResult = await Promise.race([
+            groundReader.read(),
+            new Promise((_, reject) => window.setTimeout(() => reject(new Error(`Timeout waiting for OK after: ${command}`)), remainingMs))
+        ]);
+        const { value, done } = readResult;
+        const chunk = dec.decode(value ?? new Uint8Array(), { stream: !done });
+        if (chunk) {
+            pendingLine += chunk;
+            const lines = pendingLine.split(/\r\n|\n|\r/);
+            pendingLine = lines.pop() ?? "";
+            for (const line of lines) {
+                const t = line.trim();
+                if (!t) continue;
+                responseBuffer += t + "\n";
+                const isErr = /^Error:/i.test(t);
+                groundTermLog("< " + t, t === "OK" ? "ok" : isErr ? "err" : "default");
+                parseGroundDeviceInfoLine(t);
+                if (t === "OK") return responseBuffer;
+                if (isErr) throw new Error(t);
+            }
+        }
+        if (done) break;
+    }
+    throw new Error(`Did not receive OK after: ${command}`);
+}
+
+async function requestGroundDeviceInfo() {
+    if (!groundConnectedPort || !groundConnectedPort.writable || !groundReader) return;
+    try {
+        setGroundConnectionState(true, "Connected. Reading device info...");
+        const writer = groundConnectedPort.writable.getWriter();
+        await writer.write(new TextEncoder().encode("info\r\n"));
+        writer.releaseLock();
+
+        let pendingLine = "";
+        const deadline = Date.now() + 2000;
+        const dec = new TextDecoder();
+        let timedOut = false;
+
+        const timeoutId = window.setTimeout(async () => {
+            timedOut = true;
+            await groundDisconnectPort();
+            window.alert("No response from Ground Unit… Make sure a Loko Ground Unit is connected.");
+        }, 1000);
+
+        while (groundConnectedPort && !timedOut) {
+            const { value, done } = await groundReader.read();
+            const chunk = dec.decode(value ?? new Uint8Array(), { stream: !done });
+            if (chunk) {
+                pendingLine += chunk;
+                const lines = pendingLine.split(/\r\n|\n|\r/);
+                pendingLine = lines.pop() ?? "";
+                for (const line of lines) {
+                    const t = line.trim();
+                    if (!t) continue;
+                    groundTermLog("< " + t);
+                    parseGroundDeviceInfoLine(t);
+                    if (t === "OK") {
+                        clearTimeout(timeoutId);
+                        setGroundConnectionState(true, "Connected to Ground Unit.");
+                        return;
+                    }
+                }
+            }
+            if (done || Date.now() > deadline) break;
+        }
+        clearTimeout(timeoutId);
+        if (!timedOut) setGroundConnectionState(true, "Connected to Ground Unit.");
+    } catch (error) {
+        setGroundConnectionState(true, `Connected, info read failed: ${error.message || "unknown error"}`);
+    }
+}
+
+async function groundConnectPort() {
+    if (!("serial" in navigator)) {
+        setGroundConnectionState(false, "Web Serial is available in Chromium-based browsers only.");
+        setGroundPortInfo("unavailable in this browser");
+        return;
+    }
+    try {
+        groundConnectedPort = await navigator.serial.requestPort();
+        await groundConnectedPort.open({ baudRate: 115200, dataBits: 8, stopBits: 1, parity: "none", flowControl: "none" });
+        if (groundConnectedPort.readable) groundReader = groundConnectedPort.readable.getReader();
+        setGroundConnectionState(true, "Connected.");
+        setGroundPortInfo(formatPortDetails(groundConnectedPort));
+        groundTermLog("── connected: " + formatPortDetails(groundConnectedPort) + " ──", "info");
+        await requestGroundDeviceInfo();
+    } catch (error) {
+        groundConnectedPort = null;
+        groundTermLog("error: " + (error.message || "Serial port permission denied."), "err");
+        setGroundConnectionState(false, error.message || "Serial port permission denied.");
+        setGroundPortInfo("not selected");
+    }
+}
+
+groundConnectButton.addEventListener("click", async () => {
+    if (groundConnectedPort) { await groundDisconnectPort(); return; }
+    await groundConnectPort();
+});
+
+groundReadButton.addEventListener("click", async () => {
+    if (!groundConnectedPort) return;
+    groundSaveStatus.textContent = "";
+    groundReadButton.disabled = true;
+    try {
+        await requestGroundDeviceInfo();
+    } catch (error) {
+        groundTermLog("Read error: " + (error.message || "unknown error"), "err");
+    } finally {
+        groundReadButton.disabled = false;
+    }
+});
+
+groundSendButton.addEventListener("click", async () => {
+    if (!groundConnectedPort) return;
+    groundSaveStatus.textContent = "Sending settings...";
+    groundSendButton.disabled = true;
+    groundReadButton.disabled = true;
+    try {
+        if (groundId2Input.value !== "") {
+            await sendGroundCommandAndWaitForOk(`set gid2 ${parseInt(groundId2Input.value, 10)}`);
+        }
+        if (groundFreqInput.value !== "") {
+            await sendGroundCommandAndWaitForOk(`set gfreq ${parseInt(groundFreqInput.value, 10)}`);
+        }
+        const p2pKey = groundP2pKeyInput.value.trim().replace(/[^0-9a-f]/gi, "").toUpperCase().slice(0, 64);
+        if (p2pKey.length >= 32) {
+            await sendGroundCommandAndWaitForOk("p2p encryption 1");
+            await sendGroundCommandAndWaitForOk(`set gp2p-key ${p2pKey}`);
+        }
+        groundSaveStatus.textContent = "Configuration sent successfully.";
+        groundTermLog("Configuration sent successfully.", "ok");
+    } catch (error) {
+        groundSaveStatus.textContent = `Send failed: ${error.message || "unknown error"}`;
+        groundTermLog("Send error: " + (error.message || "unknown error"), "err");
+    } finally {
+        groundSendButton.disabled = false;
+        groundReadButton.disabled = false;
+    }
+});
+
+window.addEventListener("beforeunload", () => {
+    if (groundConnectedPort) groundDisconnectPort();
+});
+
+setGroundConnectionState(false, "Browser access to the Ground Unit has not been granted.");
+setGroundPortInfo("serial permission not granted");
