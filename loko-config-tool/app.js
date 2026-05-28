@@ -1226,11 +1226,6 @@ function buildSaveCommands() {
         updatedConfigFields.gnss_mode = gnssMode;
     }
 
-    if (differsFromConfig("lorawan_region", region, normalizeConfigString)) {
-        commands.push(`set region ${region}`);
-        updatedConfigFields.lorawan_region = region;
-    }
-
     if (differsFromConfig("is_p2p_encrypted", p2pEncrypted)) {
         commands.push(`p2p encryption ${p2pEncrypted}`);
         updatedConfigFields.is_p2p_encrypted = p2pEncrypted;
@@ -1246,34 +1241,52 @@ function buildSaveCommands() {
         updatedConfigFields.tx_power = txPower;
     }
 
-    if (differsFromConfig("is_lorawan_mode", lorawanMode)) {
-        commands.push(`enable lorawan mode ${lorawanMode}`);
-        updatedConfigFields.is_lorawan_mode = lorawanMode;
-    }
-
     const p2pKey = p2pEncryptionKeyInput.value.trim();
     if (p2pKey) {
         commands.push(`set p2p-key ${p2pKey}`);
     }
 
+    // LoRaWAN sequence: disable → Region → DevEUI → AppEUI → AppKey → enable
+    const lorawanRegionChanged = differsFromConfig("lorawan_region", region, normalizeConfigString);
+    const lorawanModeChanged = differsFromConfig("is_lorawan_mode", lorawanMode);
+    let devEui = "";
+    let appEui = "";
+    let appKey = "";
+    let devEuiChanged = false;
+    let appEuiChanged = false;
     if (modeToggle.checked) {
-        const devEui = devEuiInput.value.trim().toUpperCase();
-        const appEui = appEuiInput.value.trim().toUpperCase();
-        const appKey = appKeyInput.value.trim();
+        devEui = devEuiInput.value.trim().toUpperCase();
+        appEui = appEuiInput.value.trim().toUpperCase();
+        appKey = appKeyInput.value.trim();
+        devEuiChanged = !!(devEui && differsFromConfig("dev_eui", devEui, normalizeConfigString));
+        appEuiChanged = !!(appEui && differsFromConfig("app_eui", appEui, normalizeConfigString));
+    }
 
-        if (devEui && differsFromConfig("dev_eui", devEui, normalizeConfigString)) {
+    const hasLorawanParamChanges = lorawanRegionChanged || devEuiChanged || appEuiChanged || !!appKey;
+    if (hasLorawanParamChanges) {
+        commands.push("enable lorawan mode 0");
+        if (lorawanRegionChanged) {
+            commands.push(`set region ${region}`);
+            updatedConfigFields.lorawan_region = region;
+        }
+        if (devEuiChanged) {
             commands.push(`set dev-eui ${devEui}`);
             updatedConfigFields.dev_eui = devEui;
         }
-
-        if (appEui && differsFromConfig("app_eui", appEui, normalizeConfigString)) {
+        if (appEuiChanged) {
             commands.push(`set app-eui ${appEui}`);
             updatedConfigFields.app_eui = appEui;
         }
-
         if (appKey) {
             commands.push(`set app-key ${appKey}`);
         }
+        commands.push(`enable lorawan mode ${lorawanMode}`);
+        if (lorawanModeChanged) {
+            updatedConfigFields.is_lorawan_mode = lorawanMode;
+        }
+    } else if (lorawanModeChanged) {
+        commands.push(`enable lorawan mode ${lorawanMode}`);
+        updatedConfigFields.is_lorawan_mode = lorawanMode;
     }
 
     if (commands.length === 0) {
