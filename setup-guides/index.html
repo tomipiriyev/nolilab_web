@@ -633,6 +633,30 @@
         min-width: auto;
       }
     }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: var(--spacing-md);
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .download-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .download-btn i {
+      font-size: 1rem;
+    }
   </style>
 <style>
   @font-face {
@@ -710,6 +734,9 @@
 <div class="setup-guides-header">
 <h1>Loko GPS Tracker Setup Guide</h1>
 <p class="setup-guides-subtitle">Step-by-step instructions to configure your Loko Air &amp; Ground units, connect the mobile app, and start offline GPS tracking in minutes.</p>
+<a class="download-btn" download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">
+<i class="fa-solid fa-file-pdf"></i> Download User Manual (PDF)
+</a>
 </div>
 <div class="setup-guide-content">
 <div class="setup-guide-row">
