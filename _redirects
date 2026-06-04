@@ -175,6 +175,14 @@ http://www.nolilab.com/*    https://www.nolilab.com/:splat 301!
 /fr/products/loko/          /fr/lora-gps-tracker/ 301
 /zh/products/loko           /zh/lora-gps-tracker/ 301
 /zh/products/loko/          /zh/lora-gps-tracker/ 301
+/product/loko               /lora-gps-tracker/  301
+/product/loko/              /lora-gps-tracker/  301
+/product/loko-bundle        /lora-gps-tracker/  301
+/product/loko-bundle/       /lora-gps-tracker/  301
+/:lang/product/loko         /:lang/lora-gps-tracker/ 301
+/:lang/product/loko/        /:lang/lora-gps-tracker/ 301
+/:lang/product/loko-bundle  /:lang/lora-gps-tracker/ 301
+/:lang/product/loko-bundle/ /:lang/lora-gps-tracker/ 301
 
 # ── Legacy Shopify blog URLs (/blogs/news/* → /blog/*) ─────────────────────────
 /blogs/news                 /blog/              301
@@ -209,15 +217,15 @@ http://www.nolilab.com/*    https://www.nolilab.com/:splat 301!
 /pages/specs                /specifications/    301
 /pages/technical-specifications /specifications/ 301
 /pages/videos               /blog/              301
-/pages/faq                  /                   301
-/pages/loko-hub             /                   301
+/pages/faq                  /setup-guides/      301
+/pages/loko-hub             /lora-gps-tracker/  301
 
 # Language-prefixed /pages/* — exceptions (slug ≠ destination) come first
 /:lang/pages/specs                    /:lang/specifications/    301
 /:lang/pages/technical-specifications /:lang/specifications/    301
-/:lang/pages/faq                      /:lang/                   301
-/:lang/pages/loko-hub                 /:lang/                   301
-/:lang/pages/videos                   /:lang/blog/              301
+/:lang/pages/faq                      /:lang/setup-guides/      301
+/:lang/pages/loko-hub                 /:lang/lora-gps-tracker/  301
+/:lang/pages/videos                   /:lang/setup-guides/      301
 # Generic fallback: slug maps directly (software→software, lorawan→lorawan, etc.)
 /:lang/pages/:slug                    /:lang/:slug/             301
 
@@ -228,22 +236,51 @@ http://www.nolilab.com/*    https://www.nolilab.com/:splat 301!
 /:lang/cart/*                         /:lang/                   301
 
 # ── Shop ─────────────────────────────────────────────────────────────────────
-/shop                                 /                         301
+/shop                                 /lora-gps-tracker/        301
+/:lang/shop                           /:lang/lora-gps-tracker/  301
+
+# ── Search and locale endpoints ──────────────────────────────────────────────
+/search                               /                         301
+/:lang/search                         /:lang/                   301
+/localization                         /                         301
+/:lang/localization                   /:lang/                   301
 
 # ── Policies ─────────────────────────────────────────────────────────────────
+/privacy-policy                       /privacy/                 301
 /policies/privacy-policy              /privacy/                 301
 /policies/contact-information         /contact/                 301
-/policies/*                           /                         301
+/policies/refund-policy               /contact/                 301
+/policies/terms-of-service            /privacy/                 301
+/policies/*                           /privacy/                 301
+/:lang/privacy-policy                 /:lang/privacy/           301
 /:lang/policies/privacy-policy        /:lang/privacy/           301
 /:lang/policies/contact-information   /:lang/contact/           301
-/:lang/policies/*                     /:lang/                   301
+/:lang/policies/refund-policy         /:lang/contact/           301
+/:lang/policies/terms-of-service      /:lang/privacy/           301
+/:lang/policies/*                     /:lang/privacy/           301
 
 # ── Collections ──────────────────────────────────────────────────────────────
-/collections/*                        /                         301
-/:lang/collections/*                  /:lang/                   301
+/collections/drone                    /drone-recovery-gps-tracker/ 301
+/collections/drone/                   /drone-recovery-gps-tracker/ 301
+/collections/drone.atom               /drone-recovery-gps-tracker/ 301
+/collections/*                        /lora-gps-tracker/        301
+/:lang/collections/drone              /:lang/drone-recovery-gps-tracker/ 301
+/:lang/collections/drone/             /:lang/drone-recovery-gps-tracker/ 301
+/:lang/collections/drone.atom         /:lang/drone-recovery-gps-tracker/ 301
+/:lang/collections/*                  /:lang/lora-gps-tracker/  301
 
 # ── Legacy atom feed ─────────────────────────────────────────────────────────
 /blogs/news.atom                      /blog/                    301
+/:lang/blogs/news.atom                /:lang/blog/              301
+
+# ── Missing current-style blog aliases ───────────────────────────────────────
+/blog/loko-gps-tracker-firmware-update-v1-3-0  /blog/how-to-upgrade-loko-firmware/ 301
+/blog/loko-gps-tracker-firmware-update-v1-4-0  /blog/how-to-upgrade-loko-firmware/ 301
+/blog/ultra-compact-gps-tracker-recommended    /smallest-gps-tracker/             301
+
+# ── Account and email-protection remnants ────────────────────────────────────
+/customer_authentication/redirect      /                         301
+/cdn-cgi/l/email-protection            /contact/                 301
 
 # ── /jp/ alias → /ja/ ────────────────────────────────────────────────────────
 /jp                                   /ja/                      301
