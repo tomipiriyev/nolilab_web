@@ -2010,7 +2010,7 @@ async function sendGroundCommandAndWaitForOk(command, timeoutMs = 2000) {
     }
     const writer = groundConnectedPort.writable.getWriter();
     try {
-        await writer.write(new TextEncoder().encode(`${command}\r\n`));
+        await writer.write(new TextEncoder().encode(`${command}\r`));
         groundTermLog("> " + command, "cmd");
     } finally {
         writer.releaseLock();
@@ -2054,7 +2054,12 @@ async function requestGroundDeviceInfo() {
     try {
         setGroundConnectionState(true, "Connected. Reading device info...");
         const writer = groundConnectedPort.writable.getWriter();
-        await writer.write(new TextEncoder().encode("info\r\n"));
+        // Wake the device's line parser first (matches the Air-unit handshake),
+        // then send the command terminated with a bare CR — the firmware does
+        // not respond to "info\r\n".
+        await writer.write(new TextEncoder().encode("\r"));
+        await delay(150);
+        await writer.write(new TextEncoder().encode("info\r"));
         writer.releaseLock();
 
         let pendingLine = "";
@@ -2092,6 +2097,10 @@ async function requestGroundDeviceInfo() {
         clearTimeout(timeoutId);
         if (!timedOut) setGroundConnectionState(true, "Connected to Ground Unit.");
     } catch (error) {
+        // The timeout path disconnects the port, which makes the pending
+        // read() reject with "The device has been lost". That's expected —
+        // the alert has already been shown, so don't surface a second error.
+        if (!groundConnectedPort) return;
         setGroundConnectionState(true, `Connected, info read failed: ${error.message || "unknown error"}`);
     }
 }
