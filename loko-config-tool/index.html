@@ -788,6 +788,28 @@
 </div>
 </div>
 </section>
+<section class="card workspace-card" id="groundFwCard">
+<div class="fw-row" style="margin-bottom:6px;">
+<span class="fw-label">Firmware Update</span>
+<span class="fw-version-badge" id="groundFwBadge">latest bundled</span>
+</div>
+<p class="field-copy">Flash the Loko Ground (ESP32) firmware over USB. The image is written entirely in your browser — nothing is uploaded. Saved settings (ID2, frequency, P2P key) are kept in NVS across updates.</p>
+<div class="field" style="margin-top:10px;">
+<label class="fw-source-label"><input type="radio" name="groundFwSource" id="groundFwBundled" checked/> Latest (bundled)</label>
+<label class="fw-source-label" style="margin-left:14px;"><input type="radio" name="groundFwSource" id="groundFwCustom"/> Custom .bin</label>
+<input accept=".bin" id="groundFwFile" style="display:none; margin-top:8px;" type="file"/>
+</div>
+<button class="dark-button fw-flash-btn-green" id="groundFlashButton" style="width:100%; margin-top:12px;" type="button">Flash Firmware</button>
+<div class="fw-progress-wrap" id="groundFwProgressWrap" style="display:none">
+<div class="fw-progress-header"><span id="groundFwPhase">Flashing…</span><span id="groundFwPct">0%</span></div>
+<div class="fw-progress-bg"><div class="fw-progress-bar" id="groundFwBar"></div></div>
+</div>
+<div class="fw-section" style="margin-top:12px;">
+<div class="fw-row"><span class="fw-label">Log</span></div>
+<div class="fw-log-container" id="groundFwLog"></div>
+</div>
+<p class="field-copy" style="margin-top:8px;">If flashing does not start, hold the <strong>BOOT</strong> button on the Ground Unit while clicking Flash Firmware.</p>
+</section>
 </div>
 </section>
 </main>
@@ -1363,6 +1385,129 @@ class FirmwareUpdater {
 }
 
 window.FirmwareUpdater = FirmwareUpdater;
+</script>
+<!-- Ground Unit (ESP32) firmware updater — esptool-js over Web Serial -->
+<script type="module">
+import { ESPLoader, Transport } from "/js/esptool-bundle.js";
+
+const FW_URL = "/firmware/loko_ground_merged.bin";
+const FLASH_ADDRESS = 0x0; // merged image: bootloader + partition table + app
+
+const flashBtn = document.getElementById("groundFlashButton");
+const fwLog = document.getElementById("groundFwLog");
+const fwFile = document.getElementById("groundFwFile");
+const fwBundled = document.getElementById("groundFwBundled");
+const fwCustom = document.getElementById("groundFwCustom");
+const progressWrap = document.getElementById("groundFwProgressWrap");
+const progressBar = document.getElementById("groundFwBar");
+const progressPct = document.getElementById("groundFwPct");
+const progressPhase = document.getElementById("groundFwPhase");
+
+fwCustom.addEventListener("change", () => { fwFile.style.display = fwCustom.checked ? "block" : "none"; });
+fwBundled.addEventListener("change", () => { if (fwBundled.checked) fwFile.style.display = "none"; });
+
+function fwPrint(line) {
+    const div = document.createElement("div");
+    div.textContent = line;
+    div.style.color = "#cbd5e1";
+    fwLog.appendChild(div);
+    fwLog.scrollTop = fwLog.scrollHeight;
+}
+function setProgress(pct, phase) {
+    progressBar.style.width = pct + "%";
+    progressPct.textContent = pct + "%";
+    if (phase) progressPhase.textContent = phase;
+}
+
+// Terminal interface esptool-js writes to (clean / writeLine / write)
+const espTerminal = {
+    clean() { fwLog.innerHTML = ""; },
+    writeLine(data) { fwPrint(data); },
+    write(data) { fwPrint(data); },
+};
+
+async function loadFirmwareBinaryString() {
+    let buffer;
+    if (fwCustom.checked) {
+        if (!fwFile.files || !fwFile.files[0]) throw new Error("Choose a .bin file first.");
+        fwPrint("Reading " + fwFile.files[0].name + "...");
+        buffer = await fwFile.files[0].arrayBuffer();
+    } else {
+        fwPrint("Downloading bundled firmware...");
+        const resp = await fetch(FW_URL, { cache: "no-store" });
+        if (!resp.ok) throw new Error("Could not load bundled firmware (HTTP " + resp.status + ").");
+        buffer = await resp.arrayBuffer();
+    }
+    const bytes = new Uint8Array(buffer);
+    let binary = "";
+    const CHUNK = 0x8000;
+    for (let i = 0; i < bytes.length; i += CHUNK) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
+    }
+    return binary;
+}
+
+flashBtn.addEventListener("click", async () => {
+    if (!("serial" in navigator)) {
+        fwPrint("Web Serial is available in Chromium-based browsers only.");
+        return;
+    }
+    flashBtn.disabled = true;
+    fwLog.innerHTML = "";
+    progressWrap.style.display = "none";
+    setProgress(0, "Preparing");
+
+    let transport = null, loader = null;
+    try {
+        // Release the Ground Unit config connection so esptool can own the port
+        if (typeof groundDisconnectPort === "function") {
+            await groundDisconnectPort();
+        }
+
+        const fileData = await loadFirmwareBinaryString();
+        fwPrint("Firmware image: " + fileData.length + " bytes");
+
+        fwPrint("Select the Ground Unit serial port in the browser dialog...");
+        const device = await navigator.serial.requestPort();
+        transport = new Transport(device, true);
+
+        loader = new ESPLoader({
+            // 230400 is the reliable rate for the Loko Ground's USB-serial
+            // adapter; 921600 produces serial corruption on this hardware.
+            transport,
+            baudrate: 230400,
+            romBaudrate: 115200,
+            terminal: espTerminal,
+        });
+
+        const chip = await loader.main();
+        fwPrint("Connected to " + chip);
+
+        progressWrap.style.display = "block";
+        await loader.writeFlash({
+            fileArray: [{ data: fileData, address: FLASH_ADDRESS }],
+            flashSize: "keep",
+            flashMode: "keep",
+            flashFreq: "keep",
+            eraseAll: false,
+            compress: true,
+            reportProgress: (fileIndex, written, total) => {
+                setProgress(Math.round((written / total) * 100), "Writing flash");
+            },
+        });
+
+        setProgress(100, "Done");
+        fwPrint("Flash complete. Resetting device...");
+        await loader.after("hard_reset");
+        fwPrint("Done — the Ground Unit is restarting with the new firmware.");
+    } catch (error) {
+        console.error("Ground firmware update error:", error);
+        fwPrint("Error: " + (error && error.message ? error.message : error));
+    } finally {
+        try { if (transport) await transport.disconnect(); } catch (e) { /* ignore */ }
+        flashBtn.disabled = false;
+    }
+});
 </script>
 </body>
 </html>
