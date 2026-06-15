@@ -794,6 +794,18 @@
 <span class="fw-version-badge" id="groundFwBadge">latest bundled</span>
 </div>
 <p class="field-copy">Flash the Loko Ground (ESP32) firmware over USB. The image is written entirely in your browser — nothing is uploaded. Saved settings (ID2, frequency, P2P key) are kept in NVS across updates.</p>
+<div class="fw-section" style="margin-top:10px;">
+<div class="fw-row" style="margin-bottom:6px;"><span class="fw-label">How to enter flash mode</span></div>
+<ol class="fw-steps" style="margin:0; padding-left:20px; font-size:0.82rem; line-height:1.7; color:var(--text-secondary);">
+<li>Press and <strong>hold the Power button</strong>.</li>
+<li>Press and <strong>hold the IO button</strong>.</li>
+<li>While holding both IO and Power, press the <strong>EN (RESET)</strong> button once.</li>
+<li><strong>Release the IO button</strong> (keep holding Power).</li>
+<li>Press <strong>Flash Firmware</strong> below and select the serial port.</li>
+<li>When the progress bar reaches <strong>100%</strong>, release the Power button.</li>
+<li>Press the <strong>EN (RESET)</strong> button once. Done.</li>
+</ol>
+</div>
 <div class="field" style="margin-top:10px;">
 <label class="fw-source-label"><input type="radio" name="groundFwSource" id="groundFwBundled" checked/> Latest (bundled)</label>
 <label class="fw-source-label" style="margin-left:14px;"><input type="radio" name="groundFwSource" id="groundFwCustom"/> Custom .bin</label>
