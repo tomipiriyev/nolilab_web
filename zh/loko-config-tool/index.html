@@ -1,729 +1,1525 @@
 <!DOCTYPE html>
+
 <html lang="zh">
 <head>
 <link rel="stylesheet" href="/css/partials.css"/>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loko 在线配置工具 | nolilab</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
-    <meta name="description" content="适用于 Loko GPS 追踪器 Air 和 Ground 单元的在线浏览器配置工具。需要支持 Web Serial API 的 Chrome 浏览器。">
-    <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://www.nolilab.com/zh/loko-config-tool/" />
-<link rel="alternate" hreflang="en"        href="https://www.nolilab.com/loko-config-tool/" />
-<link rel="alternate" hreflang="x-default" href="https://www.nolilab.com/loko-config-tool/" />
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Loko 在线配置工具 | nolilab">
-    <meta property="og:description" content="通过 USB 串口连接，直接在 Chrome 浏览器中配置您的 Loko GPS 追踪器 Air 和 Ground 单元。无需安装。">
-    <meta property="og:url" content="https://www.nolilab.com/zh/loko-config-tool/">
-    <meta property="og:image" content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png">
-    <meta property="og:site_name" content="nolilab">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Loko 在线配置工具 | nolilab">
-    <meta name="twitter:description" content="通过 USB 串口连接，直接在 Chrome 浏览器中配置您的 Loko GPS 追踪器 Air 和 Ground 单元。">
-    <meta name="twitter:image" content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png">
-    <style>
-        @font-face {
-            font-family: 'Inter-fallback';
-            src: local('Arial');
-            ascent-override: 90.44%;
-            descent-override: 22.52%;
-            line-gap-override: 0%;
-            size-adjust: 107.64%;
-        }
-
-        /* ── Site design tokens ─────────────────────────────────────────────── */
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f6f8fa;
-            --text-primary: #24292e;
-            --text-secondary: #57606a;
-            --accent: #238636;
-            --accent-hover: #2ea043;
-            --border: #d0d7de;
-            --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 1.5rem;
-            --spacing-lg: 2rem;
-            --spacing-xl: 3rem;
-            --radius-sm: 0.25rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
-        }
-
-        [data-theme="light"] {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f6f8fa;
-            --text-primary: #0d1117;
-            --text-secondary: #656d76;
-            --accent: #238636;
-            --accent-hover: #2ea043;
-            --border: #d0d7de;
-        }
-
-        [data-theme="dark"] {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --text-primary: #f0f6fc;
-            --text-secondary: #8b949e;
-            --accent: #238636;
-            --accent-hover: #2ea043;
-            --border: #30363d;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-            font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            font-weight: 400;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* ── Site header ────────────────────────────────────────────────────── */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); }
-
-        header {
-            padding: var(--spacing-md) 0;
-            border-bottom: 1px solid var(--border);
-            background-color: var(--bg-primary);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .nav-container { display: flex; align-items: center; justify-content: space-between; }
-
-        .logo {
-            font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono);
-            letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none;
-        }
-
-        .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
-
-        .nav-link {
-            color: var(--text-secondary); text-decoration: none; font-weight: 500;
-            font-size: 0.875rem; transition: color 0.2s ease;
-        }
-
-        .nav-link:hover { color: var(--text-primary); }
-
-        .social-icons { display: flex; gap: var(--spacing-xs); align-items: center; margin-left: var(--spacing-sm); flex-shrink: 0; }
-
-        .social-icon {
-            display: flex; align-items: center; justify-content: center;
-            width: 32px; height: 32px; color: #333333 !important;
-            border-radius: var(--radius-sm); transition: all 0.2s ease; text-decoration: none;
-        }
-
-        .social-icon:hover { background-color: var(--bg-secondary); transform: translateY(-1px); }
-        .social-icon svg { width: 16px; height: 16px; fill: currentColor; }
-        .social-icon i { font-size: 16px; }
-
-        /* ── Mobile menu toggle ─────────────────────────────────────────────── */
-        .mobile-menu-toggle {
-            display: none; flex-direction: column; gap: 4px; background: none;
-            border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto;
-        }
-
-        .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
-        .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
-        .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
-
-        /* ── Language selector ──────────────────────────────────────────────── */
-        .language-selector { margin-left: var(--spacing-sm); }
-
-        .language-btn {
-            display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem;
-            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm);
-            color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease;
-        }
-
-        .language-btn:hover { border-color: var(--accent); }
-        .language-btn .fa-globe { font-size: 1rem; color: var(--text-secondary); }
-        .current-lang { font-weight: 600; color: var(--text-primary); }
-        .language-btn .fa-chevron-down { font-size: 0.75rem; color: var(--text-secondary); transition: transform 0.2s ease; }
-        .language-selector:hover .fa-chevron-down { transform: rotate(180deg); }
-
-        .language-dropdown {
-            position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary);
-            border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
-            min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px);
-            transition: all 0.2s ease; z-index: 1000;
-        }
-
-        .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-
-        .language-option {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none;
-            transition: background 0.2s ease; border-bottom: 1px solid var(--border);
-        }
-
-        .language-option:last-child { border-bottom: none; }
-        .language-option:hover { background: var(--bg-secondary); }
-        .lang-code { font-weight: 600; font-size: 0.875rem; }
-        .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
-
-        /* ── Site footer ────────────────────────────────────────────────────── */
-        footer {
-            padding: var(--spacing-xl) 0; background-color: var(--bg-secondary);
-            border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.875rem;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .footer-container {
-            max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm);
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-md);
-        }
-
-        .footer-logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
-        .footer-links { display: flex; gap: var(--spacing-md); align-items: center; flex-wrap: wrap; }
-        .footer-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
-        .footer-link:hover { color: var(--text-primary); }
-        .footer-copyright { color: var(--text-secondary); font-size: 0.875rem; font-family: var(--font-mono); }
-
-        /* ── Mobile ─────────────────────────────────────────────────────────── */
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: row; justify-content: space-between; align-items: center; }
-            .mobile-menu-toggle { display: flex; }
-
-            .nav-links {
-                position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh;
-                background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem;
-                box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000;
-                overflow-y: auto; border-right: 1px solid var(--border);
-            }
-
-            .nav-links.active { left: 0; }
-            .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
-            .social-icons { display: none; }
-
-            body.menu-open::before {
-                content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-                background: rgba(0, 0, 0, 0.5); z-index: 999;
-            }
-
-            body.menu-open { overflow: hidden; }
-
-            .language-selector { position: static; }
-            .language-dropdown { position: fixed; top: auto; right: 1rem; left: 1rem; bottom: 1rem; min-width: auto; }
-        }
-
-        /* ── Tool wrapper ───────────────────────────────────────────────────── */
-        .tool-wrapper { padding: 24px 16px 40px; }
-
-        /* ── Loko Config Tool styles (scoped under .loko-tool) ──────────────── */
-        /* Tool-specific CSS variables (separate namespace from site vars) */
-        .loko-tool {
-            --primary-color: #2196f3;
-            --primary-dark: #1976d2;
-            --tool-border: #ccc;
-            --success-color: #4caf50;
-            --error-color: #f44336;
-            --grey-color: #9e9e9e;
-        }
-
-        .loko-tool * {
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        .loko-tool .container {
-            max-width: 750px;
-            margin: 0 auto;
-            padding: 15px;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .loko-tool .appbar {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 4px 4px 0 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .loko-tool .appbar-title {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .loko-tool .appbar-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .loko-tool .tab-button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-
-        .loko-tool .tab-button.active {
-            background-color: var(--primary-dark);
-            font-weight: bold;
-        }
-
-        .loko-tool .tab-button:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .loko-tool .content {
-            background-color: white;
-            padding: 16px;
-            border-radius: 0 0 4px 4px;
-            overflow-y: auto;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .loko-tool .tab-content {
-            display: none;
-        }
-
-        .loko-tool .tab-content.active {
-            display: block;
-        }
-
-        .loko-tool .section {
-            margin-bottom: 16px;
-        }
-
-        .loko-tool .row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .loko-tool .form-group {
-            flex: 1;
-            margin-bottom: 10px;
-        }
-
-        .loko-tool .input-field {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid var(--tool-border);
-            border-radius: 4px;
-            font-size: 14px;
-            height: 40px;
-        }
-
-        .loko-tool .input-field:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .loko-tool label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .loko-tool .checkbox-label {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #666;
-            cursor: pointer;
-        }
-
-        .loko-tool .checkbox-label input {
-            margin-right: 8px;
-        }
-
-        .loko-tool .dropdown {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid var(--tool-border);
-            border-radius: 4px;
-            font-size: 14px;
-            height: 40px;
-        }
-
-        .loko-tool .bordered-container {
-            border: 1px solid var(--tool-border);
-            border-radius: 4px;
-            padding: 12px;
-            margin-bottom: 16px;
-        }
-
-        .loko-tool .battery-text {
-            color: var(--success-color);
-            font-weight: 500;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .loko-tool .bottom-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 16px;
-            align-items: center;
-        }
-
-        .loko-tool .button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 16px;
-            font-size: 14px;
-            cursor: pointer;
-            height: 40px;
-            transition: background-color 0.3s;
-        }
-
-        .loko-tool .button:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .loko-tool .status-light {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--grey-color);
-            display: inline-block;
-            margin-right: 5px;
-        }
-
-        .loko-tool .status-light.green {
-            background-color: var(--success-color);
-        }
-
-        .loko-tool .status-light.red {
-            background-color: var(--error-color);
-        }
-
-        .loko-tool .output-container {
-            border: 1px solid var(--tool-border);
-            border-radius: 4px;
-            padding: 10px;
-            font-family: monospace;
-            height: 120px;
-            overflow-y: auto;
-            background-color: #f8f8f8;
-            white-space: pre-wrap;
-            font-size: 14px;
-        }
-
-        .loko-tool .snackbar {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: var(--error-color);
-            color: white;
-            text-align: center;
-            border-radius: 4px;
-            padding: 12px;
-            position: fixed;
-            z-index: 1;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
-        }
-
-        .loko-tool .snackbar.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-
-        .loko-tool .connection-status {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-        }
-
-        .loko-tool .status-indicator {
-            margin-left: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        #air-checkmark {
-            color: var(--success-color);
-        }
-
-        #ground-checkmark {
-            color: var(--success-color);
-        }
-
-        .browser-notice {
-            background-color: #fff8e1;
-            border: 1px solid #ffe082;
-            padding: 12px 20px;
-            margin: 0 auto 12px auto;
-            max-width: 750px;
-            font-size: 14px;
-            line-height: 1.5;
-            color: #5d4037;
-            text-align: center;
-            border-radius: 4px;
-        }
-
-        .browser-notice strong {
-            font-weight: bold;
-        }
-
-        .browser-notice p {
-            margin: 0;
-        }
-
-        .browser-notice p + p {
-            margin-top: 4px;
-        }
-
-        @keyframes fadein {
-            from { bottom: 0; opacity: 0; }
-            to   { bottom: 30px; opacity: 1; }
-        }
-
-        @keyframes fadeout {
-            from { bottom: 30px; opacity: 1; }
-            to   { bottom: 0; opacity: 0; }
-        }
-    </style>
-    <script defer src="/js/layout.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>Loko AIR Online Configurator | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<meta content="Configure Loko AIR in Chrome or Edge: set LoRa frequency, P2P or LoRaWAN mode, wake intervals, and GNSS trace. No installation needed." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://www.nolilab.com/zh/loko-config-tool/" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Loko AIR Online Configurator | nolilab" property="og:title"/>
+<meta content="Configure Loko AIR in Chrome or Edge: set LoRa frequency, P2P or LoRaWAN mode, wake intervals, and GNSS trace. No installation needed." property="og:description"/>
+<meta content="https://www.nolilab.com/zh/loko-config-tool/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Loko AIR Online Configurator | nolilab" name="twitter:title"/>
+<meta content="Configure your Loko AIR GPS tracker directly from Chrome or Edge. No installation needed." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Loko AIR Online Configurator",
+  "url": "https://www.nolilab.com/loko-config-tool/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Chrome, Edge",
+  "description": "Browser-based configurator for Loko AIR GPS tracker LoRa frequency, P2P and LoRaWAN mode, wake-up intervals, and GNSS trace reading.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+  /* ── Site design tokens (light theme, matches nolilab site chrome) ── */
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Override the configurator's body font to match site */
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* ── Site header ── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+  header {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid rgba(208, 215, 222, 0.7);
+    background: rgba(251, 250, 248, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+
+  .nav-container { display: flex; align-items: center; justify-content: space-between; }
+
+  .logo {
+    font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono);
+    letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+
+  .nav-link {
+    color: var(--text-secondary); text-decoration: none; font-weight: 500;
+    font-size: 0.875rem; transition: color 0.2s ease;
+  }
+
+  .nav-link:hover { color: var(--text-primary); }
+  .nav-link.active { color: var(--text-primary); font-weight: 600; }
+
+  /* ── Language selector ── */
+  .language-selector { margin-left: var(--spacing-sm); }
+
+  .language-btn {
+    display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem;
+    background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease;
+  }
+
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; color: var(--text-primary); }
+  .language-btn .fa-chevron-down { font-size: 0.75rem; color: var(--text-secondary); transition: transform 0.2s ease; }
+  .language-selector:hover .fa-chevron-down { transform: rotate(180deg); }
+
+  .language-dropdown {
+    position: absolute; top: calc(100% + 0.5rem); right: 0;
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+    min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px);
+    transition: all 0.2s ease; z-index: 1000;
+  }
+
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  .language-option {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none;
+    transition: background 0.2s ease; border-bottom: 1px solid var(--border);
+  }
+
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+
+  /* ── Mobile menu ── */
+  .mobile-menu-toggle {
+    display: none; flex-direction: column; gap: 4px; background: none;
+    border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto;
+  }
+
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; align-items: center; }
+    .mobile-menu-toggle { display: flex; }
+
+    .nav-links {
+      position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh;
+      background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem;
+      box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000;
+      overflow-y: auto; border-right: 1px solid var(--border);
+    }
+
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+
+    body.menu-open::before {
+      content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5); z-index: 999;
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    .language-selector { position: static; }
+    .language-dropdown { position: fixed; top: auto; right: 1rem; left: 1rem; bottom: 1rem; min-width: auto; }
+  }
+
+  /* ── Browser compatibility banner ── */
+  .compat-banner {
+    background: #fffbeb;
+    border-bottom: 1px solid #fde68a;
+    padding: 0.625rem var(--spacing-sm);
+    text-align: center;
+    font-size: 0.85rem;
+    color: #92400e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .compat-banner svg { flex-shrink: 0; }
+  .compat-banner strong { font-weight: 600; }
+
+  .compat-banner.hidden { display: none; }
+
+  /* ── Adjust page-shell top padding since header is sticky ── */
+  .page-shell { padding-top: 40px; }
+
+  /* ── Serial terminal ── */
+  .serial-terminal {
+    margin-top: 12px;
+    border-radius: 8px;
+    background: #13151a;
+    border: 1px solid #22252f;
+    overflow: hidden;
+  }
+
+  .serial-terminal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 10px;
+    background: #1a1d26;
+    border-bottom: 1px solid #22252f;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #444b5e;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+  }
+
+  .serial-terminal-bar button {
+    background: none;
+    border: none;
+    color: #333848;
+    font-size: 0.63rem;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 1px 4px;
+    border-radius: 3px;
+    transition: color 0.15s;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .serial-terminal-bar button:hover { color: #6a7285; }
+
+  .serial-terminal-output {
+    height: 96px;
+    overflow-y: auto;
+    padding: 6px 10px;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: #8b95a9;
+    scroll-behavior: smooth;
+  }
+
+  .serial-terminal-output::-webkit-scrollbar { width: 3px; }
+  .serial-terminal-output::-webkit-scrollbar-track { background: transparent; }
+  .serial-terminal-output::-webkit-scrollbar-thumb { background: #22252f; border-radius: 2px; }
+
+  .term-line { display: block; white-space: pre-wrap; word-break: break-all; }
+  .term-cmd   { color: #c8d0e0; }
+  .term-ok    { color: #0aa34b; }
+  .term-err   { color: #e05555; }
+  .term-info  { color: #6b8cba; }
+  .term-muted { color: #2e3341; }
+
+  /* ── Battery estimate ── */
+  .battery-estimate {
+    margin: 5px 0 0;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--green-deep);
+    min-height: 1em;
+  }
+
+  /* ── Compact configurator layout ── */
+  .page-shell { padding: 16px 0 36px; }
+  h1 { font-size: clamp(1.3rem, 2.4vw, 1.7rem) !important; line-height: 1.1; }
+  .eyebrow { font-size: 0.65rem; margin-bottom: 4px; }
+  .hero-copy { font-size: 0.82rem; margin-top: 4px; }
+  .hero { gap: 12px; margin-bottom: 12px; }
+  .hero-mark { width: 36px; height: 36px; border-radius: 12px; }
+  .hero-mark svg { width: 18px; height: 18px; }
+
+  .card { border-radius: 14px; }
+  .status-card { padding: 12px 16px; }
+  .status-icon { width: 34px; height: 34px; border-radius: 10px; }
+  .status-icon svg { width: 17px; height: 17px; }
+  .status-cluster { gap: 10px; }
+  .status-title { font-size: 0.95rem; }
+  .status-hint { font-size: 0.78rem; margin-top: 2px; }
+  .port-info { font-size: 0.72rem; min-height: 24px; padding: 3px 8px; margin-top: 4px; }
+  .primary-button { height: 38px; padding: 0 16px; font-size: 0.85rem; border-radius: 10px; }
+
+  .workspace-card { margin-top: 10px; padding: 14px; }
+  .main-tab-strip { gap: 4px; padding: 4px; border-radius: 12px; }
+  .main-tab { height: 38px; font-size: 0.78rem; border-radius: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 6px; }
+  .main-panel { padding-top: 14px; }
+
+  .mode-card { margin-top: 0; padding: 14px 16px; gap: 10px; }
+  .mode-fields-row { gap: 10px; }
+  .mode-summary { font-size: 0.75rem; padding: 7px 10px; border-radius: 10px; }
+  .mode-header { font-size: 0.8rem; }
+  .switch-row { gap: 8px; }
+  .mode-name { font-size: 0.82rem; }
+  .mode-switch-group { gap: 6px; }
+  .inline-input-group { gap: 6px; }
+
+  .settings-card { margin-top: 10px; padding: 14px; }
+  .tab-strip { gap: 4px; padding: 4px; border-radius: 12px; }
+  .tab { height: 36px; font-size: 0.82rem; border-radius: 9px; }
+  .panel { padding: 14px 2px 4px; }
+
+  .field + .field,
+  .two-column + .field { margin-top: 12px; }
+  .field label, .mode-header { font-size: 0.78rem; }
+  .field-copy { font-size: 0.74rem; margin-top: 6px; }
+  .field-head output { font-size: 0.82rem; }
+
+  select,
+  input[type="text"],
+  input[type="number"] { height: 36px; padding: 0 10px; font-size: 0.85rem; border-radius: 10px; }
+  input[type="range"] { margin-top: 6px; }
+
+  .toggle-track { width: 38px; height: 22px; }
+  .toggle-track::after { width: 16px; height: 16px; top: 3px; left: 3px; }
+  .toggle input:checked + .toggle-track::after { transform: translateX(16px); }
+
+  .p2p-options { margin-top: 12px; gap: 8px; }
+  .p2p-key-block { gap: 6px; padding: 8px 10px; border-radius: 10px; }
+  .two-column { gap: 10px; }
+  .two-column.p2p-ids { gap: 8px; margin-top: 12px; }
+  .p2p-ids input[type="text"] { height: 34px; }
+  .id-format-row { gap: 6px; }
+  .id-format-label { font-size: 0.72rem; }
+
+  .actions { margin-top: 16px; padding-top: 14px; gap: 8px; }
+  .dark-button, .ghost-button { height: 34px; padding: 0 14px; font-size: 0.82rem; border-radius: 10px; }
+  .save-status { font-size: 0.78rem; }
+
+  .gnss-trace-card { padding: 14px; }
+  .gnss-trace-map { height: 260px; }
+  .gnss-trace-toolbar { gap: 6px; }
+  .gnss-trace-progress-wrap { margin-top: 6px; }
+  .gnss-trace-progress { height: 8px; }
+  .gnss-trace-progress-label { font-size: 0.75rem; }
+  .gnss-trace-table { font-size: 0.75rem; }
+  .gnss-trace-table thead th { padding: 6px 10px; }
+  .gnss-trace-table tbody td { padding: 5px 10px; }
+  .gnss-trace-table-wrap { min-height: 240px; max-height: 300px; }
+
+  /* ── Firmware Updater panel ── */
+  .fw-updater { display: flex; flex-direction: column; gap: 10px; }
+  .fw-section { border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .fw-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .fw-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); flex: 1; }
+  .fw-status-text { font-size: 0.82rem; color: var(--text-secondary); }
+  .fw-status-dot { width: 10px; height: 10px; border-radius: 50%; background: #d1d5db; flex-shrink: 0; display: inline-block; transition: background 0.2s; }
+  .fw-status-dot.success { background: #22c55e; }
+  .fw-status-dot.error { background: #ef4444; }
+  .fw-status-dot.pending { background: #f59e0b; animation: fw-pulse 1s ease-in-out infinite; }
+  @keyframes fw-pulse { 0%,100% { opacity:1 } 50% { opacity:0.35 } }
+  .fw-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .fw-device-info { font-size: 0.75rem; color: var(--text-secondary); margin-top: 6px; min-height: 14px; }
+  .fw-drop-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 18px 12px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .fw-drop-zone p { margin: 0; font-size: 0.85rem; color: var(--text-secondary); }
+  .fw-drop-zone p + p { font-size: 0.75rem; margin-top: 2px; opacity: 0.7; }
+  .fw-drop-zone:hover, .fw-drop-zone.drag-over { border-color: #22c55e; background: rgba(34,197,94,0.04); }
+  .fw-firmware-info { font-size: 0.75rem; margin-top: 8px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; }
+  .fw-fi-row { display: flex; gap: 8px; }
+  .fw-fi-label { color: var(--text-secondary); min-width: 52px; flex-shrink: 0; }
+  .fw-fi-checksum { font-family: var(--font-mono); font-size: 0.68rem; word-break: break-all; }
+  .fw-progress-wrap { margin-top: 10px; }
+  .fw-progress-header { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px; }
+  .fw-progress-bg { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .fw-progress-bar { height: 100%; width: 0%; background: #22c55e; border-radius: 4px; transition: width 0.2s ease; }
+  .fw-badge { display: flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 500; margin-top: 8px; }
+  .fw-badge.badge-success { background: #dcfce7; color: #166534; }
+  .fw-badge.badge-error { background: #fee2e2; color: #991b1b; }
+  .fw-badge svg { width: 15px; height: 15px; stroke-width: 2.5; flex-shrink: 0; }
+  .fw-log-container { background: #13151a; border-radius: 8px; padding: 6px 10px; height: 160px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.5; }
+  .fw-log-container::-webkit-scrollbar { width: 3px; }
+  .fw-log-container::-webkit-scrollbar-thumb { background: #22252f; border-radius: 2px; }
+  .log-entry { display: block; white-space: pre-wrap; word-break: break-all; }
+  .log-info { color: #8b95a9; }
+  .log-success { color: #0aa34b; }
+  .log-error { color: #e05555; }
+  .log-warning { color: #f59e0b; }
+  .fw-flash-btn-green { background: #16a34a !important; color: #fff !important; border-color: #16a34a !important; }
+  .fw-flash-btn-green:hover:not(:disabled) { background: #15803d !important; border-color: #15803d !important; }
+  .fw-flash-btn-green:disabled { background: #16a34a !important; border-color: #16a34a !important; opacity: 0.45 !important; }
+  .fw-version-badge { font-size: 0.72rem; font-weight: 500; background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 20px; }
+</style>
+<script defer="" src="/js/layout.js"></script>
 </head>
 <body>
+<!-- Site header -->
 <div id="site-header"></div>
-
-<div class="tool-wrapper">
-    <div class="loko-tool">
-        <div class="browser-notice">
-            <p>此工具需要 <strong>Web Serial API</strong> —— 仅在 <strong>Chrome</strong>（桌面版）中可用。</p>
-            <p>请在 <strong>Google Chrome</strong> 中打开此页面，并通过 USB 连接您的 Loko 设备。</p>
-        </div>
-
-        <div class="container">
-            <div class="appbar">
-                <div class="appbar-title">Loko 配置工具</div>
-                <div class="appbar-actions">
-                    <button class="tab-button active" id="air-tab-btn">Air 单元</button>
-                    <button class="tab-button" id="ground-tab-btn">Ground 单元</button>
-                </div>
-            </div>
-
-            <div class="content">
-                <!-- Air Unit Tab -->
-                <div class="tab-content active" id="air-unit-tab">
-                    <div class="section">
-                        <div class="firmware-version">固件版本: --</div>
-                    </div>
-
-                    <div class="section">
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="id1-input">ID1:</label>
-                                <input type="number" id="id1-input" class="input-field" maxlength="3">
-                            </div>
-                            <div class="form-group">
-                                <label for="id2-input">ID2:</label>
-                                <input type="number" id="id2-input" class="input-field" maxlength="2">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="freq-input">频率: (Hz)</label>
-                                <input type="number" id="freq-input" class="input-field" maxlength="9">
-                            </div>
-                            <div class="form-group">
-                                <label for="interval-input">间隔: (秒)</label>
-                                <input type="number" id="interval-input" class="input-field" maxlength="10">
-                                <div class="battery-text" id="battery-text">预估电池续航: --</div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="trace-period-input" title="记录每第 N 条轨迹。例如：周期为 5 则记录第 5、10、15 条轨迹，依此类推。">
-                                    轨迹记录周期:
-                                    <span style="cursor: help; color: #666;">ⓘ</span>
-                                </label>
-                                <input type="number" id="trace-period-input" class="input-field" min="1" placeholder="例如：5" title="记录每第 N 条轨迹。例如：周期为 5 则记录第 5、10、15 条轨迹，依此类推。">
-                                <div style="font-size: 12px; color: #666; margin-top: 3px;">记录每第 N 条轨迹（例如，5 → 记录第 5、10、15 条...）</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <div class="row">
-                            <div class="form-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" id="expand-checkbox">
-                                    启用速度与高度
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="gnss-dropdown">GNSS 模式</label>
-                                <select id="gnss-dropdown" class="dropdown">
-                                    <option value="">选择 GNSS 模式</option>
-                                    <option value="Fitness">Fitness</option>
-                                    <option value="Balloon">Balloon</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="section bordered-container">
-                        <div class="row">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="lorawan-checkbox">
-                                启用 LoRaWAN
-                            </label>
-                        </div>
-                        <div class="section">
-                            <div class="form-group">
-                                <label for="region-dropdown">区域</label>
-                                <select id="region-dropdown" class="dropdown">
-                                    <option value="">选择区域</option>
-                                    <option value="AS923">AS923</option>
-                                    <option value="AU915">AU915</option>
-                                    <option value="CN470">CN470</option>
-                                    <option value="CN779">CN779</option>
-                                    <option value="EU433">EU433</option>
-                                    <option value="EU868">EU868</option>
-                                    <option value="KR920">KR920</option>
-                                    <option value="IN865">IN865</option>
-                                    <option value="US915">US915</option>
-                                    <option value="RU864">RU864</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="app-key-input">App Key:</label>
-                                <input type="text" id="app-key-input" class="input-field" maxlength="32">
-                            </div>
-                            <div class="form-group">
-                                <label for="dev-eui-input">Dev EUI:</label>
-                                <input type="text" id="dev-eui-input" class="input-field" maxlength="16">
-                            </div>
-                            <div class="form-group">
-                                <label for="app-eui-input">App/Join EUI:</label>
-                                <input type="text" id="app-eui-input" class="input-field" maxlength="16">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="section bordered-container">
-                        <div class="row">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="p2p-checkbox">
-                                启用加密
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="p2p-input">密钥:</label>
-                            <input type="text" id="p2p-input" class="input-field" maxlength="64">
-                        </div>
-                    </div>
-
-                    <div class="bottom-controls">
-                        <div class="connection-status">
-                            <button class="button" id="air-connect-button">连接</button>
-                            <div class="status-indicator" id="air-connection-status">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="display: none;" id="air-checkmark">
-                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div style="width: 50px;"></div>
-                        <button class="button" id="air-read-button">读取</button>
-                        <button class="button" id="air-submit-button">发送</button>
-                        <button class="button" id="air-log-button">下载日志</button>
-                    </div>
-
-                    <div class="output-container" id="air-container-text"></div>
-                </div>
-
-                <!-- Ground Unit Tab -->
-                <div class="tab-content" id="ground-unit-tab">
-                    <div class="section">
-                        <div class="form-group">
-                            <label for="ground-id2-input">ID2:</label>
-                            <input type="number" id="ground-id2-input" class="input-field" maxlength="2">
-                        </div>
-                        <div class="form-group">
-                            <label for="ground-freq-input">频率: (Hz)</label>
-                            <input type="number" id="ground-freq-input" class="input-field" maxlength="9">
-                        </div>
-                        <div class="form-group">
-                            <label for="ground-p2p-input">P2P 密钥:</label>
-                            <input type="text" id="ground-p2p-input" class="input-field" maxlength="64">
-                        </div>
-                    </div>
-
-                    <div class="bottom-controls">
-                        <div class="connection-status">
-                            <button class="button" id="ground-connect-button">连接</button>
-                            <div class="status-indicator" id="ground-connection-status">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="display: none;" id="ground-checkmark">
-                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div style="width: 50px;"></div>
-                        <button class="button" id="ground-read-button">读取</button>
-                        <button class="button" id="ground-submit-button">发送</button>
-                    </div>
-
-                    <div class="output-container" id="ground-container-text"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="snackbar" id="snackbar">设备已断开连接！请重新连接。</div>
-    </div>
+<!-- Browser compatibility notice -->
+<div class="compat-banner" id="compatBanner">
+<svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+<span><strong>Requires Chrome or Edge</strong> — Web Serial API is not supported in Firefox or Safari.</span>
 </div>
+<!-- Configurator app -->
+<main class="page-shell">
+<section class="hero">
+<div aria-hidden="true" class="hero-mark">
+<svg fill="none" viewbox="0 0 24 24">
+<path d="M12 3.75a2.25 2.25 0 0 1 2.22 1.89l.11.67a6.96 6.96 0 0 1 1.39.57l.56-.39a2.25 2.25 0 0 1 2.9.2l.14.13a2.25 2.25 0 0 1 .2 2.9l-.39.56c.24.45.43.92.57 1.4l.67.1a2.25 2.25 0 0 1 1.88 2.23v.19a2.25 2.25 0 0 1-1.88 2.22l-.67.11c-.14.48-.33.95-.57 1.39l.39.56a2.25 2.25 0 0 1-.2 2.9l-.14.14a2.25 2.25 0 0 1-2.9.2l-.56-.39a6.96 6.96 0 0 1-1.4.57l-.1.67A2.25 2.25 0 0 1 12.2 22.5H12a2.25 2.25 0 0 1-2.22-1.89l-.11-.67a6.96 6.96 0 0 1-1.39-.57l-.56.39a2.25 2.25 0 0 1-2.9-.2l-.14-.14a2.25 2.25 0 0 1-.2-2.9l.39-.56a6.96 6.96 0 0 1-.57-1.39l-.67-.11A2.25 2.25 0 0 1 1.75 14v-.19a2.25 2.25 0 0 1 1.89-2.22l.67-.1c.14-.48.33-.95.57-1.4l-.39-.56a2.25 2.25 0 0 1 .2-2.9l.14-.13a2.25 2.25 0 0 1 2.9-.2l.56.39c.44-.24.91-.43 1.39-.57l.11-.67A2.25 2.25 0 0 1 12 3.75Z" stroke="currentColor" stroke-width="1.5"></path>
+<circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.5"></circle>
+</svg>
+</div>
+<div>
+<p class="eyebrow">Loko-AIR Device Setup</p>
+<h1>Loko Configurator</h1>
+<p class="hero-copy">Configure the data transfer mode, as well as the data transmission and collection intervals.</p>
+</div>
+</section>
+<section class="card status-card">
+<div class="status-meta">
+<div class="status-cluster">
+<span aria-hidden="true" class="status-icon disconnected">
+<svg fill="none" viewbox="0 0 24 24">
+<g class="wire-connected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+<path d="M3.5 12H9"></path>
+<path d="M9 12C9 9.8 10.8 8 13 8H16"></path>
+<path d="M16 6.5V9.5"></path>
+<path d="M16 14.5V17.5"></path>
+<path d="M16 12H20.5"></path>
+</g>
+<g class="wire-disconnected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+<path d="M3.5 12H8"></path>
+<path d="M9.8 10.3L11.5 8.6"></path>
+<path d="M9.8 13.7L11.5 15.4"></path>
+<path d="M14.2 10.3L12.5 8.6"></path>
+<path d="M14.2 13.7L12.5 15.4"></path>
+<path d="M16 6.5V9.5"></path>
+<path d="M16 14.5V17.5"></path>
+<path d="M16 12H20.5"></path>
+</g>
+</svg>
+</span>
+<div>
+<div class="status-title disconnected" id="connectionLabel">Disconnected</div>
+<div class="status-hint" id="connectionHint">Browser access to the serial device has not been granted.</div>
+<div class="port-info" id="portInfo">Port: not selected</div>
+</div>
+</div>
+</div>
+<button class="primary-button disconnected" id="connectButton" type="button">
+<span id="connectButtonLabel">Connect</span>
+</button>
+</section>
+<section class="card workspace-card">
+<div aria-label="Main sections" class="main-tab-strip" role="tablist">
+<button aria-selected="true" class="main-tab is-active" data-main-tab="configuration" role="tab" type="button">Configuration</button>
+<button aria-selected="false" class="main-tab" data-main-tab="gnss-trace" role="tab" type="button">GNSS Trace</button>
+<button aria-selected="false" class="main-tab" data-main-tab="ground-unit" role="tab" type="button">Ground Unit</button>
+<button aria-selected="false" class="main-tab" data-main-tab="firmware-updater" role="tab" type="button">Firmware Update</button>
+</div>
+<div class="main-panel is-active" data-main-panel="configuration">
+<section class="card mode-card">
+<div class="mode-card-content">
+<div class="mode-fields-row">
+<div class="field">
+<label for="wakeUpPeriod">Wake Up Period</label>
+<div class="inline-input-group">
+<input id="wakeUpPeriod" inputmode="numeric" max="43200" min="0" step="any" type="number" value="0"/>
+<select aria-label="Wake Up Period units" id="wakeUpPeriodUnit">
+<option value="1">Seconds</option>
+<option value="60">Minutes</option>
+<option value="3600">Hours</option>
+</select>
+</div>
+<p class="field-copy">Wake up period with selectable units. Maximum value is 12 hours.</p>
+<p class="battery-estimate" id="batteryEstimate"></p>
+</div>
+<div class="field">
+<label for="sendEvery">Send Mult</label>
+<input id="sendEvery" inputmode="numeric" max="200" min="0" step="1" type="number" value="0"/>
+<p class="field-copy">Send data on every N-th wake up cycle. `0` disables periodic send.</p>
+</div>
+<div class="field">
+<label for="saveEvery">Save Mult</label>
+<input id="saveEvery" inputmode="numeric" max="200" min="0" step="1" type="number" value="0"/>
+<p class="field-copy">Save GNSS trace on every N-th wake up cycle. `0` disables trace saving.</p>
+</div>
+</div>
+<p aria-live="polite" class="mode-summary" id="timingSummary"></p>
+<div class="field">
+<label for="gnssMode">GNSS Mode</label>
+<select id="gnssMode">
+<option value="0">Normal</option>
+<option value="1">Fitness</option>
+<option value="2">Aviation</option>
+<option value="3">Balloon</option>
+<option value="4">Stationary</option>
+</select>
+</div>
+</div>
+<div class="mode-switch-group">
+<div class="mode-header">Transmit Mode</div>
+<div class="switch-row">
+<span class="mode-name active">P2P Mode</span>
+<label class="toggle">
+<input aria-label="Switch between P2P and LoRaWAN" id="operatingModeToggle" type="checkbox"/>
+<span class="toggle-track"></span>
+</label>
+<span class="mode-name">LoRaWAN Mode</span>
+</div>
+</div>
+</section>
+<section class="card settings-card">
+<div aria-label="Configuration sections" class="tab-strip" role="tablist">
+<button aria-selected="true" class="tab is-active" data-tab="p2p" role="tab" type="button">P2P Mode</button>
+<button aria-selected="false" class="tab" data-tab="lorawan" role="tab" type="button">LoRaWAN Mode</button>
+</div>
+<div class="panel is-active" data-panel="p2p">
+<div class="field">
+<div class="field-head">
+<label for="frequencyRange">Frequency</label>
+<output for="frequencyRange" id="frequencyValue">915 MHz</output>
+</div>
+<input id="frequencyRange" max="1020" min="860" type="range" value="0"/>
+<p class="field-copy">Set the operating frequency for Loko-AIR peer-to-peer communication.</p>
+</div>
+<div class="field">
+<div class="field-head">
+<label for="powerRange">TX Power</label>
+<output for="powerRange" id="powerValue">14 dBm</output>
+</div>
+<input id="powerRange" max="22" min="2" type="range" value="0"/>
+<p class="field-copy">Transmission power level for the radio output stage.</p>
+</div>
+<div class="two-column p2p-ids">
+<div class="field">
+<label for="id1">ID1</label>
+<input id="id1" inputmode="numeric" spellcheck="false" type="text" value=""/>
+</div>
+<div class="field">
+<div aria-label="ID value format" class="id-format-row">
+<span class="id-format-label" id="idFormatDecLabel">DEC</span>
+<label class="toggle" for="idFormatToggle">
+<input aria-label="Switch ID format DEC or HEX" id="idFormatToggle" type="checkbox"/>
+<span class="toggle-track"></span>
+</label>
+<span class="id-format-label" id="idFormatHexLabel">HEX</span>
+</div>
+</div>
+<div class="field">
+<label for="id2">ID2</label>
+<input id="id2" inputmode="numeric" spellcheck="false" type="text" value=""/>
+</div>
+</div>
+<div class="field p2p-options">
+<div class="toggle-row">
+<span>Enable P2P Encryption</span>
+<label class="toggle" for="isP2pEncrypted">
+<input aria-label="Enable P2P Encryption" id="isP2pEncrypted" type="checkbox"/>
+<span class="toggle-track"></span>
+</label>
+</div>
+<div class="p2p-key-block">
+<label for="p2pEncryptionKey">P2P Key</label>
+<div class="p2p-key-row">
+<input autocomplete="off" disabled="" id="p2pEncryptionKey" inputmode="text" maxlength="64" placeholder="The current key is hidden. Please enter a new key to update it, or leave the field empty to retain the existing key." spellcheck="false" type="text" value=""/>
+</div>
+<p class="field-copy">Enter 64 HEX characters (32 bytes) for the 256-bit encryption key.</p>
+</div>
+<div class="toggle-row">
+<span>Include Velocity &amp; Altitude In Air Data</span>
+<label class="toggle" for="isExtendedPacket">
+<input aria-label="Use Extended Packet" id="isExtendedPacket" type="checkbox"/>
+<span class="toggle-track"></span>
+</label>
+</div>
+</div>
+</div>
+<div class="panel" data-panel="lorawan" hidden="">
+<div class="two-column">
+<div class="field">
+<label for="loraWanRegion">Region</label>
+<select id="loraWanRegion">
+<option>AS923</option>
+<option>AU915</option>
+<option>CN470</option>
+<option>CN779</option>
+<option>EU433</option>
+<option selected="">EU868</option>
+<option>IN865</option>
+<option>KR920</option>
+<option>RU864</option>
+<option>US915</option>
+</select>
+</div>
+</div>
+<div class="field">
+<label for="devEui">DevEUI</label>
+<input autocomplete="off" id="devEui" inputmode="text" maxlength="16" spellcheck="false" type="text" value=""/>
+</div>
+<div class="field">
+<label for="appEui">AppEUI</label>
+<input autocomplete="off" id="appEui" inputmode="text" maxlength="16" spellcheck="false" type="text" value=""/>
+</div>
+<div class="field">
+<label for="appKey">AppKey</label>
+<input autocomplete="off" id="appKey" inputmode="text" maxlength="32" placeholder="The current key is hidden. Please enter a new key to update it, or leave the field empty to retain the existing key." spellcheck="false" type="text" value=""/>
+</div>
+</div>
+<footer class="actions">
+<button class="dark-button" id="saveButton" type="button">Save Changes</button>
+<button class="ghost-button" id="resetButton" type="button">Reset to Defaults</button>
+<span aria-live="polite" class="save-status" id="saveStatus"></span>
+</footer>
+<div class="serial-terminal">
+<div class="serial-terminal-bar">
+<span>Serial Output</span>
+<button id="termClearBtn" type="button">Clear</button>
+</div>
+<div class="serial-terminal-output" id="termOutput">
+<span class="term-line term-muted">Waiting for connection…</span>
+</div>
+</div>
+</section>
+</div>
+<div class="main-panel" data-main-panel="firmware-updater" hidden="">
+<div class="fw-updater" id="fw-updater-panel">
+<!-- Device -->
+<div class="fw-section">
+<div class="fw-row">
+<span class="fw-status-dot" id="fw-status-icon"></span>
+<span class="fw-label">Device</span>
+<span class="fw-status-text" id="fw-device-status">Disconnected</span>
+</div>
+<div class="fw-actions">
+<button class="dark-button" id="fw-connect-btn" type="button">Connect</button>
+<button class="ghost-button" id="fw-disconnect-btn" style="display:none" type="button">Disconnect</button>
+</div>
+<div class="fw-device-info" id="fw-device-info"></div>
+</div>
+<!-- Firmware (hidden inputs kept for code compatibility) -->
+<input accept=".bin,.hex" id="fw-file-input" style="display:none" type="file"/>
+<div id="fw-drop-zone" style="display:none"></div>
+<button id="fw-download-firmware-btn" style="display:none"></button>
+<div id="fw-firmware-info" style="display:none">
+<span id="fw-firmware-filename"></span>
+<span id="fw-firmware-size"></span>
+<span id="fw-firmware-checksum"></span>
+</div>
+<!-- Flash -->
+<div class="fw-section">
+<div class="fw-row">
+<span class="fw-label">Flash</span>
+<span class="fw-version-badge">v2.0.18 available</span>
+</div>
+<button class="dark-button fw-flash-btn-green" disabled="" id="fw-flash-btn" style="width:100%" type="button">Flash Firmware</button>
+<div class="fw-progress-wrap" id="fw-download-container" style="display:none">
+<div class="fw-progress-header">
+<span id="fw-download-phase">Downloading firmware...</span>
+<span id="fw-download-text">0%</span>
+</div>
+<div class="fw-progress-bg"><div class="fw-progress-bar" id="fw-download-bar" style="background:#3b82f6"></div></div>
+</div>
+<div class="fw-progress-wrap" id="fw-progress-container" style="display:none">
+<div class="fw-progress-header">
+<span id="fw-progress-phase">Ready</span>
+<span id="fw-progress-text">0%</span>
+</div>
+<div class="fw-progress-bg"><div class="fw-progress-bar" id="fw-progress-bar"></div></div>
+</div>
+<div class="fw-badge" id="fw-verification-badge" style="display:none"></div>
+</div>
+<!-- Log -->
+<div class="fw-section">
+<div class="fw-row"><span class="fw-label">Log</span></div>
+<div class="fw-log-container" id="fw-log-container"></div>
+</div>
+</div>
+</div>
+<div class="main-panel" data-main-panel="gnss-trace" hidden="">
+<section class="card gnss-trace-card">
+<div class="field">
+<label for="gnssTraceMap">GNSS Trace Map</label>
+<div aria-label="GNSS trace map" class="gnss-trace-map" id="gnssTraceMap"></div>
+</div>
+<div class="field">
+<div class="gnss-trace-toolbar">
+<button class="ghost-button" id="readGnssTraceButton" type="button">Read Trace</button>
+<button class="ghost-button" disabled="" id="exportGnssTraceButton" type="button">Export to .gpx</button>
+<button class="ghost-button" disabled="" id="exportGnssTraceCsvButton" type="button">Export to .csv</button>
+<button class="ghost-button" id="eraseGnssTraceButton" type="button">Erase Trace</button>
+</div>
+<p class="field-copy">Reads GNSS trace log using command gtrace print.</p>
+<div aria-live="polite" class="gnss-trace-progress-wrap">
+<progress class="gnss-trace-progress" id="gnssTraceProgress" max="100" value="0"></progress>
+<span class="gnss-trace-progress-label" id="gnssTraceProgressLabel">0%</span>
+</div>
+</div>
+<div class="field">
+<label for="gnssTraceOutputTable">GNSS Trace Output</label>
+<div aria-label="GNSS trace output table" class="gnss-trace-table-wrap" role="region">
+<table class="gnss-trace-table" id="gnssTraceOutputTable">
+<thead>
+<tr>
+<th scope="col">#</th>
+<th scope="col">Date</th>
+<th scope="col">Time</th>
+<th scope="col">Latitude</th>
+<th scope="col">Longitude</th>
+<th scope="col">Alt</th>
+<th scope="col">Speed</th>
+<th scope="col">HDOP</th>
+</tr>
+</thead>
+<tbody id="gnssTraceOutputBody">
+<tr class="gnss-trace-row-message">
+<td colspan="8">Trace output will appear here after pressing 'Read Trace'.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+<div class="main-panel" data-main-panel="ground-unit" hidden="">
+<section class="card status-card">
+<div class="status-meta">
+<div class="status-cluster">
+<span aria-hidden="true" class="status-icon disconnected" id="groundStatusIcon">
+<svg fill="none" viewbox="0 0 24 24">
+<g class="wire-connected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+<path d="M3.5 12H9"></path>
+<path d="M9 12C9 9.8 10.8 8 13 8H16"></path>
+<path d="M16 6.5V9.5"></path>
+<path d="M16 14.5V17.5"></path>
+<path d="M16 12H20.5"></path>
+</g>
+<g class="wire-disconnected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+<path d="M3.5 12H8"></path>
+<path d="M9.8 10.3L11.5 8.6"></path>
+<path d="M9.8 13.7L11.5 15.4"></path>
+<path d="M14.2 10.3L12.5 8.6"></path>
+<path d="M14.2 13.7L12.5 15.4"></path>
+<path d="M16 6.5V9.5"></path>
+<path d="M16 14.5V17.5"></path>
+<path d="M16 12H20.5"></path>
+</g>
+</svg>
+</span>
+<div>
+<div class="status-title disconnected" id="groundConnectionLabel">Disconnected</div>
+<div class="status-hint" id="groundConnectionHint">Browser access to the Ground Unit has not been granted.</div>
+<div class="port-info" id="groundPortInfo">Port: not selected</div>
+</div>
+</div>
+</div>
+<button class="primary-button disconnected" id="groundConnectButton" type="button">
+<span id="groundConnectButtonLabel">Connect</span>
+</button>
+</section>
+<section class="card workspace-card">
+<div class="field">
+<label for="groundId2">ID2</label>
+<input id="groundId2" inputmode="numeric" min="0" max="99" step="1" type="number" value=""/>
+<p class="field-copy">Ground Unit ID2 identifier.</p>
+</div>
+<div class="field">
+<label for="groundFreq">Frequency (Hz)</label>
+<input id="groundFreq" inputmode="numeric" step="1" type="number" value=""/>
+<p class="field-copy">Operating frequency in Hz (e.g. 868000000).</p>
+</div>
+<div class="field">
+<label for="groundP2pKey">P2P Encryption Key</label>
+<input autocomplete="off" id="groundP2pKey" inputmode="text" maxlength="64" placeholder="Enter 64 HEX characters (32 bytes) to update, or leave empty" spellcheck="false" type="text" value=""/>
+<p class="field-copy">Enter 64 HEX characters (32 bytes) for the 256-bit encryption key.</p>
+</div>
+<footer class="actions">
+<button class="dark-button" disabled="" id="groundReadButton" type="button">Read</button>
+<button class="dark-button" disabled="" id="groundSendButton" type="button">Send</button>
+<span aria-live="polite" class="save-status" id="groundSaveStatus"></span>
+</footer>
+<div class="serial-terminal">
+<div class="serial-terminal-bar">
+<span>Serial Output</span>
+<button id="groundTermClearBtn" type="button">Clear</button>
+</div>
+<div class="serial-terminal-output" id="groundTermOutput">
+<span class="term-line term-muted">Waiting for connection…</span>
+</div>
+</div>
+</section>
+<section class="card workspace-card" id="groundFwCard">
+<div class="fw-row" style="margin-bottom:6px;">
+<span class="fw-label">Firmware Update</span>
+<span class="fw-version-badge" id="groundFwBadge">latest bundled</span>
+</div>
+<p class="field-copy">Flash the Loko Ground (ESP32) firmware over USB. The image is written entirely in your browser — nothing is uploaded. Saved settings (ID2, frequency, P2P key) are kept in NVS across updates.</p>
+<div class="fw-section" style="margin-top:10px;">
+<div class="fw-row" style="margin-bottom:6px;"><span class="fw-label">How to enter flash mode</span></div>
+<ol class="fw-steps" style="margin:0; padding-left:20px; font-size:0.82rem; line-height:1.7; color:var(--text-secondary);">
+<li>Press and <strong>hold the Power button</strong>.</li>
+<li>Press and <strong>hold the IO button</strong>.</li>
+<li>While holding both IO and Power, press the <strong>EN (RESET)</strong> button once.</li>
+<li><strong>Release the IO button</strong> (keep holding Power).</li>
+<li>Press <strong>Flash Firmware</strong> below and select the serial port.</li>
+<li>When the progress bar reaches <strong>100%</strong>, release the Power button.</li>
+<li>Press the <strong>EN (RESET)</strong> button once. Done.</li>
+</ol>
+</div>
+<div class="field" style="margin-top:10px;">
+<label class="fw-source-label"><input type="radio" name="groundFwSource" id="groundFwBundled" checked/> Latest (bundled)</label>
+<label class="fw-source-label" style="margin-left:14px;"><input type="radio" name="groundFwSource" id="groundFwCustom"/> Custom .bin</label>
+<input accept=".bin" id="groundFwFile" style="display:none; margin-top:8px;" type="file"/>
+</div>
+<button class="dark-button fw-flash-btn-green" id="groundFlashButton" style="width:100%; margin-top:12px;" type="button">Flash Firmware</button>
+<div class="fw-progress-wrap" id="groundFwProgressWrap" style="display:none">
+<div class="fw-progress-header"><span id="groundFwPhase">Flashing…</span><span id="groundFwPct">0%</span></div>
+<div class="fw-progress-bg"><div class="fw-progress-bar" id="groundFwBar"></div></div>
+</div>
+<div class="fw-section" style="margin-top:12px;">
+<div class="fw-row"><span class="fw-label">Log</span></div>
+<div class="fw-log-container" id="groundFwLog"></div>
+</div>
+<p class="field-copy" style="margin-top:8px;">If flashing does not start, hold the <strong>BOOT</strong> button on the Ground Unit while clicking Flash Firmware.</p>
+</section>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+<script>
+  // Hide compat banner in supported browsers
+  if ('serial' in navigator) {
+    var b = document.getElementById('compatBanner');
+    if (b) b.classList.add('hidden');
+  }
+</script>
+<script src="../stm32-firmware-updater/js/serial.js"></script>
+<script>
+// ── Firmware Updater (embedded) ──────────────────────────────────────────────
+const _DB_NAME = 'stm32-updater';
+const _DB_VERSION = 1;
+const _BACKUP_STORE = 'backups';
+const _STM32_FLASH_ORIGIN = 0x08000000;
+const _STM32_FLASH_BASE = 0x08008000;
+const _STM32_FLASH_PAGE_SIZE = 2048;
+const _STM32_SRAM_BASE = 0x20000000;
+const _STM32_SRAM_END = 0x30000000;
 
-<section style="max-width:900px;margin:3rem auto;padding:0 1.5rem 3rem;font-family:inherit;color:var(--text-primary,#24292e);line-height:1.7">
-  <h1 style="font-size:2rem;font-weight:600;margin-bottom:0.5rem;letter-spacing:-0.03em">Loko GPS 追踪器配置工具</h1>
-  <h2 style="font-size:1.5rem;font-weight:500;margin-bottom:1rem;letter-spacing:-0.02em">如何使用 Loko 配置工具</h2>
-  <p>Loko 在线配置工具让您可以直接在浏览器中使用 Web Serial API 配置 Loko Air 和 Ground 单元——无需安装软件。您需要 Google Chrome（桌面版）和一根 USB 数据线来连接设备。</p>
+async function _parseHexFile(content) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const lines = content.split(/\r\n|\n|\r/);
+      let dataRecords = [];
+      let extendedAddress = 0;
+      let minAddress = Infinity;
+      let maxAddress = 0;
+      for (const line of lines) {
+        if (!line.startsWith(':')) continue;
+        const data = _hexLineToBytes(line);
+        if (!data || data.length < 5) continue;
+        const byteCount = data[0];
+        const address = (data[1] << 8) | data[2];
+        const recordType = data[3];
+        if (byteCount !== data.length - 5) continue;
+        switch (recordType) {
+          case 0x00: {
+            const fullAddress = (extendedAddress << 16) | address;
+            const dataBytes = Array.from(data.slice(4, 4 + byteCount));
+            dataRecords.push({ address: fullAddress, data: dataBytes });
+            if (fullAddress < minAddress) minAddress = fullAddress;
+            if (fullAddress + byteCount > maxAddress) maxAddress = fullAddress + byteCount;
+            break;
+          }
+          case 0x02: if (byteCount === 2) { extendedAddress = (data[4] << 12) | (data[5] << 4); } break;
+          case 0x04: if (byteCount === 2) { extendedAddress = ((data[4] << 24) | (data[5] << 16)) >> 16; } break;
+          case 0x01: break;
+        }
+      }
+      if (minAddress === Infinity) { resolve({ data: new Uint8Array(0), baseAddress: _STM32_FLASH_BASE }); return; }
+      const binarySize = maxAddress - minAddress;
+      const binary = new Uint8Array(binarySize);
+      binary.fill(0xFF);
+      for (const rec of dataRecords) { binary.set(rec.data, rec.address - minAddress); }
+      let baseAddress = minAddress;
+      if (baseAddress < _STM32_FLASH_BASE && binary.length >= 8) {
+        const view = new DataView(binary.buffer, binary.byteOffset, binary.byteLength);
+        const resetVector = view.getUint32(4, true);
+        if (resetVector >= _STM32_FLASH_BASE) { baseAddress = _STM32_FLASH_BASE; }
+      }
+      resolve({ data: binary, baseAddress });
+    }, 0);
+  });
+}
 
-  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">分步连接指南</h3>
-  <ol style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
-    <li style="margin-bottom:0.4rem">在桌面电脑（Windows、macOS 或 Linux）上使用 <strong>Google Chrome</strong> 打开此页面。</li>
-    <li style="margin-bottom:0.4rem">打开您的 Loko Air 或 Ground 单元电源。</li>
-    <li style="margin-bottom:0.4rem">使用 <strong>USB-C 数据线</strong> 将设备连接到电脑。</li>
-    <li style="margin-bottom:0.4rem">在上方工具中选择正确的标签页（Air 单元或 Ground 单元）。</li>
-    <li style="margin-bottom:0.4rem">点击 <strong>连接</strong>，然后在浏览器提示中选择正确的串口。</li>
-    <li style="margin-bottom:0.4rem">工具将自动读取设备的当前设置。</li>
-    <li>编辑任何参数，然后点击 <strong>应用</strong> 将其保存到设备。</li>
-  </ol>
+function _hexLineToBytes(hexLine) {
+  const bytes = [];
+  for (let i = 1; i < hexLine.length; i += 2) {
+    const byte = parseInt(hexLine.substr(i, 2), 16);
+    if (isNaN(byte)) return null;
+    bytes.push(byte);
+  }
+  return new Uint8Array(bytes);
+}
 
-  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">可配置参数 — Air 单元</h3>
-  <p>Air 单元是附着在您要追踪的资产上的 GPS 追踪器。可以配置以下参数：</p>
-  <ul style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
-    <li style="margin-bottom:0.4rem"><strong>设备 ID 1 和 ID 2</strong> — 将 Air 单元与地面站配对的唯一标识符。配对的设备之间 ID 必须匹配。</li>
-    <li style="margin-bottom:0.4rem"><strong>无线电频率 (Hz)</strong> — LoRa 传输频率。必须与地面站匹配。默认频段：868 MHz (EU)、915 MHz (US)、923 MHz (AS)。</li>
-    <li style="margin-bottom:0.4rem"><strong>GPS 更新间隔 (秒)</strong> — Air 单元传输其 GPS 位置的频率。较短的间隔会增加电池消耗。范围：1–3600 秒。</li>
-    <li style="margin-bottom:0.4rem"><strong>轨迹记录周期</strong> — GPS 点保存到设备内置数据记录器的频率（最多 6,500 个点）。</li>
-    <li><strong>固件版本</strong> — 显示设备上的当前固件。当有新版本可用时，请从 <a href="/firmware/" style="color:var(--accent,#238636)">固件页面</a> 更新。</li>
-  </ul>
+class FirmwareUpdater {
+  constructor() {
+    this.serial = new SerialManager();
+    this.bootloader = null;
+    this.connected = false;
+    this.isConnecting = false;
+    this.isFlashing = false;
+    this.isRebooting = false;
+    this.firmwareData = null;
+    this.firmwareBaseAddress = _STM32_FLASH_BASE;
+    this.firmwareChecksum = null;
+    this.backupChecksum = null;
+    this.backupData = null;
+    this.backupBaseAddress = _STM32_FLASH_BASE;
+    this.db = null;
+    this.elements = {};
+    this.handleFileSelect = this.handleFileSelect.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
+  }
 
-  <h3 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.5rem">可配置参数 — Ground 单元</h3>
-  <p>Ground 单元从一个或多个 Air 单元接收 GPS 数据，并通过蓝牙将其转发到 Loko 移动应用。参数包括：</p>
-  <ul style="padding-left:1.25rem;color:var(--text-secondary,#57606a)">
-    <li style="margin-bottom:0.4rem"><strong>设备 ID 1 和 ID 2</strong> — 必须与配
+  async init() {
+    if (!this.serial.isSupported()) { this.showUnsupportedBrowser(); return; }
+    this.cacheElements();
+    await this.initDB();
+    this.setupEventListeners();
+    this.log('Ready. Connect your STM32 device.');
+  }
+
+  cacheElements() {
+    this.elements = {
+      connectBtn: document.getElementById('fw-connect-btn'),
+      deviceStatus: document.getElementById('fw-device-status'),
+      deviceInfo: document.getElementById('fw-device-info'),
+      disconnectBtn: document.getElementById('fw-disconnect-btn'),
+      dropZone: document.getElementById('fw-drop-zone'),
+      downloadFirmwareBtn: document.getElementById('fw-download-firmware-btn'),
+      fileInput: document.getElementById('fw-file-input'),
+      firmwareInfo: document.getElementById('fw-firmware-info'),
+      firmwareFilename: document.getElementById('fw-firmware-filename'),
+      firmwareSize: document.getElementById('fw-firmware-size'),
+      firmwareChecksum: document.getElementById('fw-firmware-checksum'),
+      flashBtn: document.getElementById('fw-flash-btn'),
+      downloadContainer: document.getElementById('fw-download-container'),
+      downloadBar: document.getElementById('fw-download-bar'),
+      downloadText: document.getElementById('fw-download-text'),
+      downloadPhase: document.getElementById('fw-download-phase'),
+      progressContainer: document.getElementById('fw-progress-container'),
+      progressBar: document.getElementById('fw-progress-bar'),
+      progressText: document.getElementById('fw-progress-text'),
+      progressPhase: document.getElementById('fw-progress-phase'),
+      statusIcon: document.getElementById('fw-status-icon'),
+      verificationBadge: document.getElementById('fw-verification-badge'),
+      logContainer: document.getElementById('fw-log-container'),
+    };
+  }
+
+  setupEventListeners() {
+    this.elements.connectBtn.addEventListener('click', () => this.connect());
+    this.elements.disconnectBtn.addEventListener('click', () => this.disconnect());
+    this.elements.dropZone.addEventListener('dragover', (e) => { e.preventDefault(); this.elements.dropZone.classList.add('drag-over'); });
+    this.elements.dropZone.addEventListener('dragleave', () => { this.elements.dropZone.classList.remove('drag-over'); });
+    this.elements.dropZone.addEventListener('drop', this.handleDrop);
+    this.elements.dropZone.addEventListener('click', () => { this.elements.fileInput.click(); });
+    this.elements.fileInput.addEventListener('change', this.handleFileSelect);
+    this.elements.downloadFirmwareBtn.addEventListener('click', () => this.downloadLatestFirmware());
+    this.elements.flashBtn.addEventListener('click', () => this.flashFirmware());
+    this.updateUI();
+  }
+
+  async initDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(_DB_NAME, _DB_VERSION);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => { this.db = request.result; resolve(); };
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains(_BACKUP_STORE)) { db.createObjectStore(_BACKUP_STORE, { keyPath: 'id', autoIncrement: true }); }
+      };
+    });
+  }
+
+  async connect() {
+    if (this.isConnecting || this.connected) return;
+    this.isConnecting = true;
+    this.elements.connectBtn.disabled = true;
+    try {
+      this.log('Requesting serial port...');
+      this.updateDeviceStatus('Connecting...', 'pending');
+      const port = await this.serial.requestPort();
+      if (!port) { this.updateDeviceStatus('No port selected', 'error'); return; }
+      this.log('Opening port...');
+      await this.openSerialPort(port);
+      this.bootloader = new BootloaderProtocol(this.serial);
+      this.connected = true;
+      this.updateDeviceStatus('Connected', 'success');
+      this.updateDeviceInfo();
+      this.elements.connectBtn.style.display = 'none';
+      this.elements.disconnectBtn.style.display = 'block';
+      this.log('Connected via Web Serial');
+      await this.rebootToBootloader();
+      await this.checkBackup();
+      this.updateUI();
+    } catch (err) {
+      const message = this.getConnectionErrorMessage(err);
+      this.log(`Connection failed: ${message}`, 'error');
+      this.updateDeviceStatus('Connection failed', 'error');
+      this.connected = false;
+      this.elements.connectBtn.style.display = 'block';
+      this.elements.disconnectBtn.style.display = 'none';
+      this.updateUI();
+    } finally {
+      this.isConnecting = false;
+      this.elements.connectBtn.disabled = false;
+    }
+  }
+
+  async openSerialPort(port) {
+    try { await this.serial.open(port); }
+    catch (err) {
+      if (!this.isPortOpenFailure(err)) throw err;
+      this.log('Port did not open; retrying once after release delay...', 'warning');
+      await new Promise(r => setTimeout(r, 1000));
+      await this.serial.open(port);
+    }
+  }
+
+  isPortOpenFailure(err) { return err && /open serial port|already open|busy|denied/i.test(err.message || ''); }
+
+  getConnectionErrorMessage(err) {
+    if (this.isPortOpenFailure(err)) return 'Serial port is busy or not released. Close STM32CubeProgrammer and other browser tabs using this port, then unplug/replug the device and try again.';
+    return err.message || 'Unknown error';
+  }
+
+  async disconnect() {
+    try {
+      await this.serial.close();
+      this.connected = false;
+      this.updateDeviceStatus('Disconnected', '');
+      this.elements.deviceInfo.innerHTML = '';
+      this.elements.connectBtn.style.display = 'block';
+      this.elements.disconnectBtn.style.display = 'none';
+      this.log('Disconnected');
+      this.updateUI();
+    } catch (err) { this.log(`Disconnect error: ${err.message}`, 'error'); }
+  }
+
+  async rebootToBootloader() {
+    if (this.isRebooting || !this.connected || !this.bootloader) return;
+    this.isRebooting = true;
+    try {
+      this.log('Rebooting device to bootloader mode...');
+      this.updateDeviceStatus('Rebooting...', 'pending');
+      await this.serial.drain(100);
+      this.serial.clearReadBuffer();
+      this.bootloader.synced = false;
+      await this.serial.resetViaDtr();
+      this.log('Waiting for bootloader...');
+      this.serial.clearReadBuffer();
+      const synced = await this.waitForBootloader(8000, false);
+      if (synced) { this.log('Bootloader mode active', 'success'); this.updateDeviceStatus('Bootloader active', 'success'); }
+      else { this.log('Could not detect bootloader - device may not support auto-boot', 'warning'); this.updateDeviceStatus('Connected', 'success'); }
+    } catch (err) { this.log(`Reboot failed: ${err.message}`, 'error'); this.updateDeviceStatus('Reboot failed', 'error'); }
+    finally { this.isRebooting = false; }
+  }
+
+  async waitForBootloader(timeoutMs, allowCommandProbe = true) {
+    const deadline = Date.now() + timeoutMs;
+    while (Date.now() < deadline) {
+      await new Promise(r => setTimeout(r, 250));
+      try {
+        await this.serial.drain(25);
+        const synced = allowCommandProbe ? await this.bootloader.ensureSynced() : await this.bootloader.sync();
+        if (synced) return true;
+      } catch (err) { /* device may be resetting */ }
+    }
+    return false;
+  }
+
+  handleFileSelect(event) { const file = event.target.files[0]; if (file) this.loadFirmware(file); }
+
+  handleDrop(event) {
+    event.preventDefault();
+    this.elements.dropZone.classList.remove('drag-over');
+    const file = event.dataTransfer.files[0];
+    if (!file) return;
+    const ext = file.name.toLowerCase();
+    if (ext.endsWith('.bin') || ext.endsWith('.hex') || file.type === 'application/octet-stream') this.loadFirmware(file);
+    else this.log('Please drop a .bin or .hex file', 'error');
+  }
+
+  downloadLatestFirmware() {
+    const a = document.createElement('a');
+    a.href = '/air_firmware/loko_v2.0.18.hex';
+    a.download = 'loko_v2.0.18.hex';
+    a.click();
+    this.log('Downloading loko_v2.0.18.hex...');
+  }
+
+  async loadFirmware(file) {
+    try {
+      this.log(`Loading firmware: ${file.name}`);
+      const ext = file.name.toLowerCase();
+      if (ext.endsWith('.hex')) {
+        const text = await file.text();
+        const parsed = await _parseHexFile(text);
+        this.firmwareData = parsed.data;
+        this.firmwareBaseAddress = parsed.baseAddress;
+        this.log('Parsed .hex file');
+      } else {
+        this.firmwareData = await file.arrayBuffer().then(buf => new Uint8Array(buf));
+        this.firmwareBaseAddress = _STM32_FLASH_BASE;
+      }
+      if (!this.firmwareData || this.firmwareData.length === 0) throw new Error('Firmware file is empty');
+      this.firmwareChecksum = await this.calculateChecksum(this.firmwareData);
+      this.elements.firmwareFilename.textContent = file.name;
+      this.elements.firmwareSize.textContent = this.formatSize(this.firmwareData.length);
+      this.elements.firmwareChecksum.textContent = this.formatChecksum(this.firmwareChecksum);
+      this.elements.firmwareInfo.style.display = 'block';
+      this.log(`Firmware loaded: ${this.formatSize(this.firmwareData.length)}`);
+      this.log(`Address: 0x${this.firmwareBaseAddress.toString(16).toUpperCase()}`);
+      this.log(`SHA-256: ${this.formatChecksum(this.firmwareChecksum)}`);
+      this.validateFirmwareVectorTable();
+      this.updateUI();
+    } catch (err) {
+      this.log(`Failed to load firmware: ${err.message}`, 'error');
+      this.firmwareData = null;
+      this.firmwareBaseAddress = _STM32_FLASH_BASE;
+      this.updateUI();
+    }
+  }
+
+  async calculateChecksum(data) {
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    return new Uint8Array(hashBuffer);
+  }
+
+  async verifyFirmwareWrite(address, expectedData) {
+    this.log('Verifying written firmware...');
+    const readBack = new Uint8Array(expectedData.length);
+    const chunkSize = 128;
+    const chunks = Math.ceil(expectedData.length / chunkSize);
+    for (let i = 0; i < chunks; i++) {
+      const offset = i * chunkSize;
+      const size = Math.min(chunkSize, expectedData.length - offset);
+      const chunk = await this.bootloader.readMemory(address + offset, size);
+      readBack.set(chunk, offset);
+      const progress = 95 + (4 * (i + 1) / chunks);
+      this.updateProgress(progress, `Verifying ${Math.round(progress)}%`);
+    }
+    for (let i = 0; i < expectedData.length; i++) {
+      if (readBack[i] !== expectedData[i]) throw new Error(`Verification failed at 0x${(address + i).toString(16).toUpperCase()}`);
+    }
+    const readChecksum = await this.calculateChecksum(readBack);
+    this.log(`Verified SHA-256: ${this.formatChecksum(readChecksum)}`);
+  }
+
+  async eraseFirmwareRange() {
+    const firstPage = Math.floor((this.firmwareBaseAddress - _STM32_FLASH_ORIGIN) / _STM32_FLASH_PAGE_SIZE);
+    const pageCount = Math.ceil(this.firmwareData.length / _STM32_FLASH_PAGE_SIZE);
+    const pages = Array.from({ length: pageCount }, (_, i) => firstPage + i);
+    this.log(`Erasing application sectors ${firstPage}-${pages[pages.length - 1]}...`);
+    await this.bootloader.erasePages(pages);
+    this.log('Application sectors erased');
+  }
+
+  validateFirmwareVectorTable() {
+    if (!this.firmwareData || this.firmwareData.length < 8) throw new Error('Firmware is too small to contain a vector table');
+    const { initialStack, resetVector } = this.getFirmwareVectorTable();
+    if (initialStack < _STM32_SRAM_BASE || initialStack >= _STM32_SRAM_END) throw new Error(`Invalid vector table: stack pointer 0x${initialStack.toString(16).toUpperCase()} is not in SRAM`);
+    if (resetVector < _STM32_FLASH_BASE || resetVector >= _STM32_FLASH_BASE + 0x400000) throw new Error(`Invalid vector table: reset vector 0x${resetVector.toString(16).toUpperCase()} is not in flash`);
+    this.log(`Initial SP: 0x${initialStack.toString(16).toUpperCase()}`);
+    this.log(`Reset vector: 0x${resetVector.toString(16).toUpperCase()}`);
+  }
+
+  getFirmwareVectorTable() {
+    const view = new DataView(this.firmwareData.buffer, this.firmwareData.byteOffset, this.firmwareData.byteLength);
+    return { initialStack: view.getUint32(0, true), resetVector: view.getUint32(4, true) };
+  }
+
+  async fetchFirmware() {
+    this.elements.downloadContainer.style.display = 'block';
+    this.updateDownloadProgress(0, 'Downloading firmware...');
+    this.log('Downloading loko_v2.0.18.hex...');
+    const response = await fetch('/air_firmware/loko_v2.0.18.hex');
+    if (!response.ok) throw new Error(`Firmware download failed: HTTP ${response.status}`);
+    const contentLength = response.headers.get('Content-Length');
+    const total = contentLength ? parseInt(contentLength) : 0;
+    const reader = response.body.getReader();
+    const chunks = [];
+    let received = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
+      received += value.length;
+      if (total) this.updateDownloadProgress(100 * received / total, 'Downloading...');
+    }
+    this.updateDownloadProgress(100, 'Download complete');
+    const text = await new Blob(chunks).text();
+    const parsed = await _parseHexFile(text);
+    this.firmwareData = parsed.data;
+    this.firmwareBaseAddress = parsed.baseAddress;
+    this.firmwareChecksum = await this.calculateChecksum(this.firmwareData);
+    this.log(`Downloaded: ${this.formatSize(this.firmwareData.length)}`);
+    this.log(`SHA-256: ${this.formatChecksum(this.firmwareChecksum)}`);
+    this.validateFirmwareVectorTable();
+  }
+
+  updateDownloadProgress(percent, phase) {
+    this.elements.downloadBar.style.width = `${percent}%`;
+    this.elements.downloadText.textContent = `${Math.round(percent)}%`;
+    this.elements.downloadPhase.textContent = phase;
+  }
+
+  async flashFirmware() {
+    if (!this.connected || !this.bootloader || this.isFlashing) return;
+    this.isFlashing = true;
+    this.elements.flashBtn.disabled = true;
+    this.elements.downloadContainer.style.display = 'none';
+    this.elements.progressContainer.style.display = 'none';
+    this.elements.verificationBadge.style.display = 'none';
+    try {
+      // 1. Download firmware
+      await this.fetchFirmware();
+
+      // 2. Connect to bootloader
+      this.elements.progressContainer.style.display = 'block';
+      this.log('Connecting to bootloader...');
+      this.updateProgress(10, 'Connecting');
+      const synced = await this.waitForBootloader(8000);
+      if (!synced) throw new Error('No response from bootloader. Make sure device is in bootloader mode.');
+      this.log('Bootloader synced');
+      this.updateProgress(15, 'Getting info');
+      const info = await this.bootloader.get();
+      this.log(`Bootloader version: 0x${info.version.toString(16)}`);
+      this.log(`Commands: ${this.bootloader.formatCommands()}`);
+      if (!this.bootloader.supportsCommand(CMD.WRITE_MEMORY)) this.log('Bootloader did not report Write Memory support; trying anyway', 'warning');
+
+      // 3. Erase
+      this.updateProgress(20, 'Erasing');
+      this.log('Skipping backup before flash; UART bootloader rejects readback in this mode', 'warning');
+      await this.eraseFirmwareRange();
+      this.updateProgress(30, 'Erase complete');
+
+      // 4. Write
+      this.log('Writing firmware...');
+      const totalSize = this.firmwareData.length;
+      const chunkSize = 128;
+      const chunks = Math.ceil(totalSize / chunkSize);
+      let triedWriteUnprotect = false;
+      for (let i = 0; i < chunks; i++) {
+        const offset = i * chunkSize;
+        const size = Math.min(chunkSize, totalSize - offset);
+        const chunk = this.firmwareData.slice(offset, offset + size);
+        const address = this.firmwareBaseAddress + offset;
+        try { await this.bootloader.writeMemory(address, chunk); }
+        catch (err) {
+          const isWriteRejected = err.message.includes('Write Memory command rejected') || err.message.includes('Write address');
+          if (i !== 0 || triedWriteUnprotect || !isWriteRejected) throw err;
+          triedWriteUnprotect = true;
+          this.log('Write rejected; trying write unprotect...', 'warning');
+          try { await this.bootloader.writeUnprotect(); }
+          catch (unprotectErr) { throw new Error(`Write rejected at 0x${address.toString(16).toUpperCase()} and write unprotect failed: ${unprotectErr.message}.`); }
+          this.log('Waiting for bootloader after write unprotect...');
+          if (!await this.waitForBootloader(10000, false)) throw new Error('No response after write unprotect');
+          this.log('Bootloader synced after write unprotect');
+          await this.bootloader.get();
+          this.log(`Commands after unprotect: ${this.bootloader.formatCommands()}`);
+          await this.eraseFirmwareRange();
+          i = -1; continue;
+        }
+        const progress = 30 + (60 * (i + 1) / chunks);
+        this.updateProgress(progress, `Writing ${Math.round(progress)}%`);
+      }
+
+      // 5. Verify
+      if (this.bootloader.supportsCommand(CMD.READ_MEMORY)) await this.verifyFirmwareWrite(this.firmwareBaseAddress, this.firmwareData);
+      else this.log('Skipping verification; bootloader does not report Read Memory support', 'warning');
+
+      // 6. Launch
+      this.updateProgress(99, 'Starting app');
+      this.log(`Starting application at 0x${this.firmwareBaseAddress.toString(16).toUpperCase()}...`);
+      await this.bootloader.go(this.firmwareBaseAddress);
+      this.updateProgress(100, 'Complete');
+      this.showVerificationSuccess();
+      this.log('Flash complete!', 'success');
+      setTimeout(() => this.disconnect(), 2000);
+    } catch (err) {
+      this.log(`Flash failed: ${err.message}`, 'error');
+      this.showFlashError(err.message);
+    } finally {
+      this.isFlashing = false;
+      this.elements.flashBtn.disabled = false;
+    }
+  }
+
+  async saveBackup() {
+    if (!this.db || !this.backupData) return;
+    const backup = { timestamp: Date.now(), data: Array.from(this.backupData), checksum: Array.from(this.backupChecksum || []), baseAddress: this.backupBaseAddress };
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction([_BACKUP_STORE], 'readwrite');
+      const store = tx.objectStore(_BACKUP_STORE);
+      store.clear();
+      const request = store.add(backup);
+      request.onsuccess = resolve;
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async loadBackup() {
+    if (!this.db) return null;
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction([_BACKUP_STORE], 'readonly');
+      const store = tx.objectStore(_BACKUP_STORE);
+      const request = store.getAll();
+      request.onsuccess = () => {
+        const backups = request.result;
+        if (backups.length > 0) resolve(backups.reduce((a, b) => a.timestamp > b.timestamp ? a : b));
+        else resolve(null);
+      };
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async checkBackup() {
+    const backup = await this.loadBackup();
+    if (backup) {
+      this.backupData = new Uint8Array(backup.data);
+      this.backupBaseAddress = backup.baseAddress || _STM32_FLASH_BASE;
+      this.backupChecksum = backup.checksum ? new Uint8Array(backup.checksum) : null;
+      this.log(`Backup found from ${new Date(backup.timestamp).toLocaleString()}`);
+    }
+  }
+
+  updateProgress(percent, phase) {
+    this.elements.progressBar.style.width = `${percent}%`;
+    this.elements.progressText.textContent = `${Math.round(percent)}%`;
+    this.elements.progressPhase.textContent = phase;
+  }
+
+  log(message, type = 'info') {
+    const entry = document.createElement('div');
+    entry.className = `log-entry log-${type}`;
+    const time = new Date().toLocaleTimeString();
+    entry.textContent = `[${time}] ${message}`;
+    this.elements.logContainer.appendChild(entry);
+    this.elements.logContainer.scrollTop = this.elements.logContainer.scrollHeight;
+  }
+
+  updateDeviceStatus(status, type) {
+    this.elements.deviceStatus.textContent = status;
+    this.elements.deviceStatus.className = `fw-status-text status-${type}`;
+    this.elements.statusIcon.className = `fw-status-dot ${type}`;
+  }
+
+  updateDeviceInfo() {
+    this.elements.deviceInfo.innerHTML = '<span>Status: Connected</span>';
+  }
+
+  showVerificationSuccess() {
+    this.elements.verificationBadge.style.display = 'flex';
+    this.elements.verificationBadge.className = 'fw-badge badge-success';
+    this.elements.verificationBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12l4 4L19 6"/></svg><span>Flash complete</span>`;
+  }
+
+  showFlashError(message) {
+    this.elements.verificationBadge.style.display = 'flex';
+    this.elements.verificationBadge.className = 'fw-badge badge-error';
+    this.elements.verificationBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6 6 18"/></svg><span>Failed: ${message}</span>`;
+  }
+
+  showUnsupportedBrowser() {
+    const panel = document.getElementById('fw-updater-panel');
+    if (panel) panel.innerHTML = '<p style="padding:16px;color:var(--text-secondary)">Web Serial API requires Chrome or Edge 89+.</p>';
+  }
+
+  updateUI() {
+    const canFlash = this.connected && !this.isFlashing;
+    this.elements.flashBtn.disabled = !canFlash;
+    this.elements.flashBtn.style.opacity = canFlash ? '1' : '0.5';
+  }
+
+  formatSize(bytes) {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  formatChecksum(hashArray) {
+    return Array.from(hashArray).map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+  }
+}
+
+window.FirmwareUpdater = FirmwareUpdater;
+</script>
+<!-- Ground Unit (ESP32) firmware updater — esptool-js over Web Serial -->
+<script type="module">
+import { ESPLoader, Transport } from "/js/esptool-bundle.js";
+
+const FW_URL = "/firmware/loko_ground_merged.bin";
+const FLASH_ADDRESS = 0x0; // merged image: bootloader + partition table + app
+
+const flashBtn = document.getElementById("groundFlashButton");
+const fwLog = document.getElementById("groundFwLog");
+const fwFile = document.getElementById("groundFwFile");
+const fwBundled = document.getElementById("groundFwBundled");
+const fwCustom = document.getElementById("groundFwCustom");
+const progressWrap = document.getElementById("groundFwProgressWrap");
+const progressBar = document.getElementById("groundFwBar");
+const progressPct = document.getElementById("groundFwPct");
+const progressPhase = document.getElementById("groundFwPhase");
+
+fwCustom.addEventListener("change", () => { fwFile.style.display = fwCustom.checked ? "block" : "none"; });
+fwBundled.addEventListener("change", () => { if (fwBundled.checked) fwFile.style.display = "none"; });
+
+function fwPrint(line) {
+    const div = document.createElement("div");
+    div.textContent = line;
+    div.style.color = "#cbd5e1";
+    fwLog.appendChild(div);
+    fwLog.scrollTop = fwLog.scrollHeight;
+}
+function setProgress(pct, phase) {
+    progressBar.style.width = pct + "%";
+    progressPct.textContent = pct + "%";
+    if (phase) progressPhase.textContent = phase;
+}
+
+// Terminal interface esptool-js writes to (clean / writeLine / write)
+const espTerminal = {
+    clean() { fwLog.innerHTML = ""; },
+    writeLine(data) { fwPrint(data); },
+    write(data) { fwPrint(data); },
+};
+
+async function loadFirmwareBinaryString() {
+    let buffer;
+    if (fwCustom.checked) {
+        if (!fwFile.files || !fwFile.files[0]) throw new Error("Choose a .bin file first.");
+        fwPrint("Reading " + fwFile.files[0].name + "...");
+        buffer = await fwFile.files[0].arrayBuffer();
+    } else {
+        fwPrint("Downloading bundled firmware...");
+        const resp = await fetch(FW_URL, { cache: "no-store" });
+        if (!resp.ok) throw new Error("Could not load bundled firmware (HTTP " + resp.status + ").");
+        buffer = await resp.arrayBuffer();
+    }
+    const bytes = new Uint8Array(buffer);
+    let binary = "";
+    const CHUNK = 0x8000;
+    for (let i = 0; i < bytes.length; i += CHUNK) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
+    }
+    return binary;
+}
+
+flashBtn.addEventListener("click", async () => {
+    if (!("serial" in navigator)) {
+        fwPrint("Web Serial is available in Chromium-based browsers only.");
+        return;
+    }
+    flashBtn.disabled = true;
+    fwLog.innerHTML = "";
+    progressWrap.style.display = "none";
+    setProgress(0, "Preparing");
+
+    let transport = null, loader = null;
+    try {
+        // Release the Ground Unit config connection so esptool can own the port
+        if (typeof groundDisconnectPort === "function") {
+            await groundDisconnectPort();
+        }
+
+        const fileData = await loadFirmwareBinaryString();
+        fwPrint("Firmware image: " + fileData.length + " bytes");
+
+        fwPrint("Select the Ground Unit serial port in the browser dialog...");
+        const device = await navigator.serial.requestPort();
+        transport = new Transport(device, true);
+
+        loader = new ESPLoader({
+            // 230400 is the reliable rate for the Loko Ground's USB-serial
+            // adapter; 921600 produces serial corruption on this hardware.
+            transport,
+            baudrate: 230400,
+            romBaudrate: 115200,
+            terminal: espTerminal,
+        });
+
+        const chip = await loader.main();
+        fwPrint("Connected to " + chip);
+
+        progressWrap.style.display = "block";
+        await loader.writeFlash({
+            fileArray: [{ data: fileData, address: FLASH_ADDRESS }],
+            flashSize: "keep",
+            flashMode: "keep",
+            flashFreq: "keep",
+            eraseAll: false,
+            compress: true,
+            reportProgress: (fileIndex, written, total) => {
+                setProgress(Math.round((written / total) * 100), "Writing flash");
+            },
+        });
+
+        setProgress(100, "Done");
+        fwPrint("Flash complete. Resetting device...");
+        await loader.after("hard_reset");
+        fwPrint("Done — the Ground Unit is restarting with the new firmware.");
+    } catch (error) {
+        console.error("Ground firmware update error:", error);
+        fwPrint("Error: " + (error && error.message ? error.message : error));
+    } finally {
+        try { if (transport) await transport.disconnect(); } catch (e) { /* ignore */ }
+        flashBtn.disabled = false;
+    }
+});
+</script>
+</body>
+</html>
