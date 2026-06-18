@@ -2,10 +2,10 @@
 
 <html lang="fr">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport">
-<title>Loko GPS Tracker Setup Guide | Installation Instructions | nolilab</title>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>Guide de configuration du tracker Loko GPS | Instructions d'installation | nolilab</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
@@ -15,7 +15,8 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Step-by-step setup guide for Loko GPS Tracker. Learn how to configure Air &amp; Ground units, connect the mobile app, and start offline GPS tracking in minutes." name="description"/>
+<meta content="Guide de configuration complet pour le Loko GPS Tracker. Configurez les unités Loko Air &amp; Ground, définissez les paramètres, associez-les à l'application mobile et démarrez le suivi GPS hors ligne." name="description"/>
+<meta content="index, follow" name="robots"/>
 <link href="https://www.nolilab.com/fr/setup-guides/" rel="canonical"/>
 <link href="https://www.nolilab.com/setup-guides/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/ja/setup-guides/" hreflang="ja" rel="alternate"/>
@@ -24,617 +25,447 @@
 <link href="https://www.nolilab.com/zh/setup-guides/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/fr/setup-guides/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/setup-guides/" hreflang="x-default" rel="alternate"/>
-<meta content="index, follow" name="robots"/>
-<meta content="website" property="og:type"/>
-<meta content="Loko GPS Tracker Setup Guide | Installation Instructions | nolilab" property="og:title"/>
-<meta content="Step-by-step setup guide for Loko GPS Tracker. Learn how to configure Air &amp; Ground units, connect the mobile app, and start offline GPS tracking in minutes." property="og:description"/>
-<meta content="https://www.nolilab.com/setup-guides" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="Guide de configuration du tracker Loko GPS | Instructions d'installation | nolilab" property="og:title"/>
+<meta content="Guide de configuration complet pour le Loko GPS Tracker. Configurez les unités Loko Air &amp; Ground, définissez les paramètres, associez-les à l'application mobile et démarrez le suivi GPS hors ligne." property="og:description"/>
+<meta content="https://www.nolilab.com/fr/setup-guides/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Loko GPS Tracker Setup Guide | Installation Instructions | nolilab" name="twitter:title"/>
-<meta content="Step-by-step setup guide for Loko GPS Tracker. Learn how to configure Air &amp; Ground units, connect the mobile app, and start offline GPS tracking in minutes." name="twitter:description"/>
+<meta content="Guide de configuration du tracker Loko GPS | Instructions d'installation | nolilab" name="twitter:title"/>
+<meta content="Guide de configuration complet pour le Loko GPS Tracker. Configurez les unités Loko Air &amp; Ground, définissez les paramètres, associez-les à l'application mobile et démarrez le suivi GPS hors ligne." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #24292e;
-      --text-secondary: #57606a;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
-      --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
-      --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
-    }
-
-    [data-theme="light"] {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #0d1117;
-      --text-secondary: #656d76;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-    }
-    
-    [data-theme="dark"] {
-      --bg-primary: #0d1117;
-      --bg-secondary: #161b22;
-      --text-primary: #f0f6fc;
-      --text-secondary: #8b949e;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #30363d;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      font-weight: 400;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    /* Header Navigation */
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    .social-icons {
-      display: flex;
-      gap: var(--spacing-xs);
-      align-items: center;
-      margin-left: var(--spacing-sm);
-      flex-shrink: 0;
-    }
-
-    .social-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      color: #333333 !important;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s ease;
-      text-decoration: none;
-    }
-
-    .social-icon:hover {
-      color: #333333 !important;
-      background-color: var(--bg-secondary);
-      transform: translateY(-1px);
-    }
-
-    .social-icon:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .social-icon svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-
-    .social-icon i {
-      font-size: 16px;
-    }
-
-    /* Setup Guides Section */
-    .setup-guides-container {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-primary);
-    }
-
-    .setup-guides-header {
-      text-align: center;
-      margin-bottom: var(--spacing-xl);
-      padding: 0 var(--spacing-md);
-    }
-
-    .setup-guides-header h1 {
-      font-size: 2.5rem;
-      font-weight: 500;
-      margin-bottom: var(--spacing-md);
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-    }
-
-    .setup-guides-subtitle {
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .setup-guide-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .setup-guide-row {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-xl);
-      margin-bottom: var(--spacing-xl);
-      padding: 0 var(--spacing-md);
-    }
-
-    .setup-guide-row.reverse {
-      flex-direction: row-reverse;
-    }
-
-    .setup-guide-content-part {
-      flex: 1;
-      padding: var(--spacing-md);
-    }
-
-    .setup-guide-content-part h2 {
-      font-size: 1.75rem;
-      font-weight: 500;
-      margin-bottom: var(--spacing-md);
-      color: var(--text-primary);
-    }
-
-    .setup-guide-content-part h3 {
-      font-size: 1.75rem;
-      font-weight: 500;
-      margin-bottom: var(--spacing-md);
-      color: var(--text-primary);
-    }
-
-    .lead {
-      color: var(--text-primary);
-      margin-bottom: var(--spacing-md);
-    }
-
-    .setup-guide-content-part p {
-      color: var(--text-secondary);
-      margin-bottom: var(--spacing-md);
-    }
-
-    .setup-guide-content-part ol {
-      margin: var(--spacing-md) 0;
-      padding-left: var(--spacing-lg);
-      text-align: left;
-    }
-
-    .setup-guide-content-part li {
-      margin-bottom: var(--spacing-sm);
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    .setup-guide-image {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .setup-guide-image img {
-      max-width: 100%;
-      height: auto;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: var(--spacing-md);
-      margin-top: var(--spacing-md);
-    }
-
-    .feature-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
-      transition: all 0.3s ease;
-    }
-
-    .feature-title {
-      font-size: 1.25rem;
-      font-weight: 500;
-      margin-bottom: var(--spacing-sm);
-      font-family: var(--font-mono);
-      letter-spacing: -0.01em;
-      color: var(--text-primary);
-    }
-
-    .feature-desc {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
-
-    /* Footer */
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      align-items: center;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-    .footer-copyright {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      font-family: var(--font-mono);
-    }
-
-    /* Theme Toggle */
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-    }
-
-    .theme-switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 24px;
-      margin: 0 var(--spacing-xs);
-    }
-
-    .theme-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .theme-slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #2a2f35;
-      transition: .4s;
-      border-radius: 24px;
-    }
-
-    .theme-slider:before {
-      position: absolute;
-      content: "";
-      height: 18px;
-      width: 18px;
-      left: 3px;
-      bottom: 3px;
-      background-color: #f0f6fc;
-      transition: .4s;
-      border-radius: 50%;
-    }
-
-    .theme-checkbox:checked + .theme-slider {
-      background-color: #2a2f35;
-    }
-
-    .theme-checkbox:checked + .theme-slider:before {
-      transform: translateX(26px);
-    }
-
-    .theme-label {
-      color: var(--text-secondary);
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      z-index: 1001;
-      margin-left: auto;
-    }
-
-    .mobile-menu-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--bg-primary);
-        flex-direction: column;
-        gap: 0;
-        padding: 80px 1.5rem 1.5rem;
-        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
-        transition: left 0.3s ease;
-        z-index: 1000;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-      }
-
-      .nav-links.active {
-        left: 0;
-      }
-
-      .nav-link {
-        width: 100%;
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border);
-        text-align: left;
-        font-size: 1rem;
-      }
-
-      .social-icons {
-        display: none;
-      }
-
-      body.menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      .setup-guide-row {
-        flex-direction: column;
-      }
-    }
-
-    /* Language Selector */
-    .language-selector {
-      margin-left: var(--spacing-sm);
-    }
-
-    .language-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.75rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .language-btn:hover {
-      background: var(--bg-tertiary);
-      border-color: var(--accent);
-    }
-
-    .language-btn .fa-globe {
-      font-size: 1rem;
-      color: var(--text-secondary);
-    }
-
-    .current-lang {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .language-btn .fa-chevron-down {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      transition: transform 0.2s ease;
-    }
-
-    .language-selector:hover .fa-chevron-down {
-      transform: rotate(180deg);
-    }
-
-    .language-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      right: 0;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
-      z-index: 1000;
-    }
-
-    .language-selector:hover .language-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .language-option {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: background 0.2s ease;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .language-option:last-child {
-      border-bottom: none;
-    }
-
-    .language-option:hover {
-      background: var(--bg-secondary);
-    }
-
-    .lang-code {
-      font-weight: 600;
-      font-size: 0.875rem;
-    }
-
-    .lang-name {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    @media (max-width: 1024px) {
-      .language-selector {
-        position: static;
-      }
-
-      .language-dropdown {
-        position: fixed;
-        top: auto;
-        right: 1rem;
-        left: 1rem;
-        bottom: 1rem;
-        min-width: auto;
-      }
-    }
-  </style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #0d1117;
+    --text-secondary: #656d76;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+  }
+
+  [data-theme="dark"] {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --text-primary: #f0f6fc;
+    --text-secondary: #8b949e;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #30363d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-hover); }
+
+  /* Mobile Menu Toggle */
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    margin-left: auto;
+  }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  @media (max-width: 768px) {
+    .mobile-menu-toggle { display: flex; }
+    body.menu-open::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+    body.menu-open { overflow: hidden; }
+  }
+
+  /* === Documentation Page Layout === */
+  .sg-outer {
+    background: var(--bg-primary);
+    padding: var(--spacing-xl) 0 calc(var(--spacing-xl) * 2);
+  }
+
+  .sg-page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  /* Hero */
+  .sg-hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sg-hero h1 {
+    font-size: 2.25rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    background: var(--accent);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+  .download-btn:hover { background: var(--accent-hover); transform: translateY(-1px); color: #fff; }
+
+  .checklist-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .checklist-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* TOC */
+  .toc {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    margin-bottom: 0.6rem;
+  }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.3rem; font-size: 0.875rem; }
+  .toc a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .toc a:hover { color: var(--accent); }
+
+  /* Sections */
+  .sg-section {
+    margin-bottom: 2.75rem;
+    padding-bottom: 2.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .sg-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .sg-section h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.875rem;
+    color: var(--text-primary);
+  }
+
+  .sg-section > p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .sg-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.6rem;
+    color: var(--text-primary);
+  }
+
+  /* Unit Cards */
+  .unit-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.25rem 0;
+  }
+  .unit-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.25rem;
+  }
+  .unit-label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .unit-desc {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+  }
+  .unit-specs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border);
+    padding-top: 0.6rem;
+  }
+  .unit-specs li {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    padding: 0.15rem 0;
+  }
+
+  /* Wake cycle flow */
+  .wake-cycle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 1.1rem 0;
+  }
+  .wake-step {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.4rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    color: var(--text-primary);
+  }
+  .wake-arrow { color: var(--accent); font-size: 1rem; }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+  }
+  .doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .doc-table th {
+    background: var(--bg-secondary);
+    padding: 0.55rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+  }
+  .doc-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    line-height: 1.55;
+    vertical-align: top;
+  }
+  .doc-table tr:last-child td { border-bottom: none; }
+  .doc-table td:first-child { white-space: nowrap; }
+  .doc-table code {
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    color: var(--accent);
+  }
+
+  /* Numbered steps */
+  .step-list {
+    margin: 0.75rem 0 0.75rem 1.5rem;
+    padding: 0;
+  }
+  .step-list li {
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 0.45rem;
+    font-size: 0.9rem;
+  }
+  .step-list li strong { color: var(--text-primary); }
+
+  /* Note callouts */
+  .note-box {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.65rem 1rem;
+    margin: 0.75rem 0;
+    font-size: 0.825rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-family: var(--font-mono);
+  }
+  .note-box strong { color: var(--text-primary); font-family: inherit; }
+
+  /* Warnings */
+  .warnings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .warning-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.875rem 1rem;
+  }
+  .warn-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #d97706;
+    margin-bottom: 0.3rem;
+    font-family: var(--font-mono);
+  }
+  .warning-item p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Checklist */
+  .checklist { margin-top: 0.75rem; }
+  .checklist label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    transition: color 0.2s;
+  }
+  .checklist label:last-child { border-bottom: none; }
+  .checklist input[type="checkbox"] {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .checklist label.done {
+    text-decoration: line-through;
+    opacity: 0.55;
+  }
+  .checklist label a { font-size: inherit; }
+
+  /* Links grid */
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .link-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.9rem 1rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+  }
+  .link-card:hover { border-color: var(--accent); }
+  .link-card-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+  }
+  .link-card-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 600px) {
+    .sg-hero h1 { font-size: 1.75rem; }
+    .unit-cards { grid-template-columns: 1fr; }
+    .wake-cycle { flex-wrap: wrap; }
+  }
+</style>
 <style>
   @font-face {
     font-family: 'Inter-fallback';
@@ -645,78 +476,353 @@
     size-adjust: 107.64%;
   }
 </style>
-</meta></head>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Comment faire",
+  "name": "Comment configurer le tracker Loko GPS",
+  "description": "Guide de configuration complet pour le système de suivi Loko GPS. Configurez les unités Loko Air et Ground, définissez les paramètres via le configurateur Web et associez-les à l'application mobile.",
+  "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
+  "totalTime": "PT15M",
+  "supply": [
+    {
+      "@type": "Comment s'approvisionner",
+      "name": "Unité aérienne Loko (émetteur GPS + LoRa)"
+    },
+    {
+      "@type": "Comment s'approvisionner",
+      "name": "Unité au sol Loko (récepteur LoRa)"
+    },
+    {
+      "@type": "Comment s'approvisionner",
+      "name": "Cellule Li-ion 18650 pour unité au sol (fournie par l'utilisateur)"
+    },
+    {
+      "@type": "Comment s'approvisionner",
+      "name": "Câble USB Type-C"
+    }
+  ],
+  "tool": [
+    {
+      "@type": "CommentOutil",
+      "name": "Navigateur Chrome ou Edge (API Web Serial requise)"
+    },
+    {
+      "@type": "CommentOutil",
+      "name": "Application Loko (iOS ou Android)"
+    }
+  ],
+  "step": [
+    {
+      "@type": "CommentÉtape",
+      "position": 1,
+      "name": "Ouvrez le configurateur Web",
+      "text": "Ouvrez Chrome ou Edge et accédez à nolilab.com/loko-config-tool/",
+      "url": "https://www.nolilab.com/loko-config-tool/"
+    },
+    {
+      "@type": "CommentÉtape",
+      "position": 2,
+      "name": "Connectez le Loko Air via USB",
+      "text": "Connectez le Loko Air à l'ordinateur via USB Type-C. Cliquez sur Connecter dans l'onglet Configuration et accordez l'accès série au navigateur."
+    },
+    {
+      "@type": "CommentÉtape",
+      "position": 3,
+      "name": "Définir les paramètres de l'unité aérienne et enregistrer",
+      "text": "Configurez transmission_mode, fréquence, id1, id2, wake_up_period, gnss_mode et tx_power. Cliquez sur Enregistrer les modifications."
+    },
+    {
+      "@type": "CommentÉtape",
+      "position": 4,
+      "name": "Allumer le Loko Air",
+      "text": "Débranchez l'USB. Maintenez le bouton d'alimentation enfoncé jusqu'à ce que la LED clignote en rouge : l'unité est active."
+    },
+    {
+      "@type": "CommentÉtape",
+      "position": 5,
+      "name": "Insérez la batterie et connectez le Loko Ground",
+      "text": "Insérez une cellule Li-ion 18650 dans l'unité au sol. Connectez-vous à l'ordinateur via USB, ouvrez l'onglet Ground Unit dans le configurateur et cliquez sur Connect."
+    },
+    {
+      "@type": "CommentÉtape",
+      "position": 6,
+      "name": "Faire correspondre les paramètres de l'unité terrestre et envoyer",
+      "text": "Cliquez sur Lire pour charger les paramètres actuels. Définissez id2 et Frequency_hz pour qu'ils correspondent à l'unité aérienne. Cliquez sur Envoyer, puis déconnectez l'USB."
+    },
+    {
+      "@type": "CommentÉtape",
+      "position": 7,
+      "name": "Allumez l'unité au sol et associez-la à l'application",
+      "text": "Maintenez le bouton d'alimentation enfoncé jusqu'à ce que la LED soit bleue fixe. Ouvrez l'application Loko, accédez à Paramètres et sélectionnez l'unité au sol. Attendez le correctif GPS - l'emplacement apparaît sur la carte."
+    }
+  ]
+}</script>
+<script defer="" src="/js/layout.js"></script>
+</head>
 <body>
 <div id="site-header"></div>
-<main class="setup-guides-container">
-<div class="setup-guides-header">
-<h1>Guide de configuration du traceur GPS Loko</h1>
-<p class="setup-guides-subtitle">Instructions étape par étape pour configurer vos unités Loko Air &amp; Ground, connecter l'application mobile et démarrer le suivi GPS hors ligne en quelques minutes.</p>
+<main class="sg-outer">
+<div class="sg-page">
+<!-- Hero -->
+<div class="sg-hero">
+<h1>Loko GPS Tracker — Guide de configuration</h1>
+<p class="hero-sub">Configurez vos unités Loko Air &amp; Ground à partir de zéro. L'installation complète prend environ 15 minutes.</p>
+<div class="hero-actions">
+<a class="download-btn" download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">
+<i class="fa-solid fa-file-pdf"></i> Télécharger le manuel d'utilisation (PDF)
+        </a>
+<a class="checklist-link" href="#checklist">
+<i class="fa-solid fa-list-check"></i> Aller à la liste de contrôle
+        </a>
 </div>
-<div class="setup-guide-content">
-<div class="setup-guide-row">
-<div class="setup-guide-content-part">
-<h3>Guide de démarrage rapide</h3>
-<p class="lead">Obtenez votre traceur GPS Loko opérationnel en quelques minutes :</p>
+</div>
+<!-- TOC -->
+<nav aria-label="Page contents" class="toc">
+<p class="toc-title">Sur cette page</p>
 <ol>
-<li><strong>Déballez et chargez :</strong>Chargez complètement l'unité aérienne et l'unité au sol à l'aide des câbles USB-C inclus (cela prend environ 60 minutes)</li>
-<li><strong>Télécharger l'application :</strong>Installez l'application Loko depuis iOS App Store ou Google Play Store</li>
-<li><strong>Mise sous tension :</strong>Appuyez et maintenez enfoncé le bouton d'alimentation pendant 3 secondes sur les deux unités</li>
-<li><strong>Unités en paire :</strong>Ouvrez l'application et suivez l'assistant d'appairage pour connecter vos unités aériennes et terrestres</li>
-<li><strong>Configurer les paramètres :</strong>Définir l'intervalle de mise à jour, les limites de barrière géographique et les préférences de notification</li>
-<li><strong>Traqueur de monture :</strong>Fixez solidement l'unité aérienne à votre actif à l'aide du matériel de montage inclus.</li>
+<li><a href="#overview">Aperçu</a></li>
+<li><a href="#specifications">Caractéristiques</a></li>
+<li><a href="#how-it-works">Comment ça marche</a></li>
+<li><a href="#configure-air">Partie 1 — Configurer Loko Air</a></li>
+<li><a href="#configure-ground">Partie 2 - Configurer Loko Ground</a></li>
+<li><a href="#warnings">Avertissements</a></li>
+<li><a href="#checklist">Liste de contrôle de démarrage rapide</a></li>
 </ol>
+</nav>
+<!-- Overview -->
+<section class="sg-section" id="overview">
+<h2>Aperçu</h2>
+<p>Loko est un tracker GPS compact pour drones. Deux unités travaillent ensemble : <strong>Loko Air</strong> (aéroporté) acquiert GPS et transmet via la radio LoRa ; <strong>Loko Terre</strong> (station de base) reçoit des données et les transmet à l'application mobile Loko via Bluetooth.</p>
+<div class="unit-cards">
+<div class="unit-card">
+<div class="unit-label">loko-air</div>
+<p class="unit-desc">Émetteur GPS + LoRa — se monte sur un avion</p>
+<ul class="unit-specs">
+<li>Li-ion 200 mAh</li>
+<li>13g</li>
+<li>Jusqu'à 1 an d'autonomie de la batterie</li>
+<li>Chargement USB Type-C</li>
+</ul>
 </div>
-<div class="setup-guide-image">
-<picture> <source srcset="/images/optimized/loko-gps-tracker-red-transparent.avif" type="image/avif"/><source srcset="/images/optimized/loko-gps-tracker-red-transparent.webp" type="image/webp"/>
-<img alt="Loko GPS Tracker Quick Setup" height="300" loading="lazy" src="/images/optimized/loko-gps-tracker-red-transparent.png" width="500"/>
-</picture>
+<div class="unit-card">
+<div class="unit-label">loko-sol</div>
+<p class="unit-desc">Récepteur LoRa + relais Bluetooth — reste au sol</p>
+<ul class="unit-specs">
+<li>18650 Li-ion (fourni par l'utilisateur)</li>
+<li>Non inclus dans la boîte</li>
+</ul>
 </div>
 </div>
-<div class="setup-guide-row reverse">
-<div class="setup-guide-content-part">
-<h3>Configuration avancée : configuration de la connexion LoRaWAN</h3>
-<p class="lead">Connectez votre Loko aux réseaux LoRaWAN pour une couverture étendue :</p>
-<p>Pour les applications nécessitant une connectivité au-delà de la portée P2P de 20 km, configurez votre Loko pour vous connecter à The Things Network (TTN) ou à d'autres fournisseurs LoRaWAN :</p>
-<ol>
-<li><strong>Accédez à DevEUI :</strong>Trouvez l'ID unique de l'appareil dans l'application Loko sous « Informations sur l'appareil »</li>
-<li><strong>Créer un compte :</strong>Inscrivez-vous sur console.thethingsnetwork.org ou auprès de votre fournisseur LoRaWAN préféré</li>
-<li><strong>Enregistrer l'appareil :</strong>Ajoutez votre Loko en utilisant l'activation OTAA (recommandé) ou ABP</li>
-<li><strong>Configurer les clés :</strong>Entrez AppEUI, AppKey et NwkKey dans les paramètres de l'application Loko</li>
-<li><strong>Test de connexion :</strong>Vérifiez la connexion à la passerelle la plus proche dans la console TTN</li>
-<li><strong>Ajuster les paramètres :</strong>Optimisez les paramètres SF, BW et DR pour votre emplacement</li>
+</section>
+<!-- Specifications -->
+<section class="sg-section" id="specifications">
+<h2>Caractéristiques</h2>
+<div class="table-wrap">
+<table class="doc-table">
+<thead>
+<tr><th>Paramètre</th><th>Valeur</th></tr>
+</thead>
+<tbody>
+<tr><td><code>radio</code></td><td>LoRa / CHIRP — pénètre dans les bâtiments, le désordre urbain et les forêts denses</td></tr>
+<tr><td><code>frequency</code></td><td>868-920 MHz (configurable)</td></tr>
+<tr><td><code>tx_power</code></td><td>8 dBm par défaut (configurable)</td></tr>
+<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo</td></tr>
+<tr><td><code>range</code></td><td>+20 ligne de visée km à 2 m AGL ; grandit avec l'altitude</td></tr>
+<tr><td><code>battery_life</code></td><td>Jusqu'à 1 an (dépend de l'intervalle de réveil)</td></tr>
+<tr><td><code>weight</code></td><td>15 g (unité aérienne)</td></tr>
+<tr><td><code>charge</code></td><td>USB Type-C 5 V uniquement</td></tr>
+<tr><td><code>temperature</code></td><td>0 °C – 40 °C en fonctionnement</td></tr>
+</tbody>
+</table>
+</div>
+<p>Utilisez le <a href="/specifications/">calculateur d'autonomie de batterie</a> pour estimer la durée d'exécution de votre intervalle de réveil.</p>
+</section>
+<!-- How It Works -->
+<section class="sg-section" id="how-it-works">
+<h2>Comment ça marche</h2>
+<p>À chaque cycle de réveil, l'unité aérienne se réveille, acquiert un repère GPS, transmet les coordonnées à l'unité terrestre, puis se met en veille jusqu'au cycle suivant. Si aucune position satellite n'est disponible, les dernières coordonnées connues sont transmises. Le journal de suivi du GPS est également écrit sur la mémoire flash interne et peut être téléchargé via USB.</p>
+<div class="wake-cycle">
+<div class="wake-step">Se réveiller</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">Correctif GPS</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">Transmettre au sol</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">Dormir</div>
+</div>
+<p>Plusieurs unités aériennes peuvent s'associer simultanément à une seule unité terrestre.</p>
+</section>
+<!-- Part 1: Configure Air -->
+<section class="sg-section" id="configure-air">
+<h2>Partie 1 — Configurer Loko Air</h2>
+<p>Aucun logiciel à installer. Utilisez le configurateur Web dans un navigateur basé sur Chromium.</p>
+<div class="note-box">Firefox et Safari ne sont pas pris en charge – pas d'API Web Serial.</div>
+<h3>1.1 Ouvrir le configurateur</h3>
+<ol class="step-list">
+<li>Ouvrir <strong>Chrome</strong> ou <strong>Bord</strong>.</li>
+<li>Aller à <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a></li>
 </ol>
-<p>Remarque : la configuration LoRaWAN nécessite une couverture des passerelles à proximité. Utilisez le mode P2P dans les zones sans couverture LoRaWAN.</p>
+<div class="note-box">Quatre onglets : <strong>Configuration</strong> — définir les paramètres de l'appareil. <strong>Trace GNSS</strong> — lire le journal GPS de l'unité aérienne, visualiser sur la carte, exporter .gpx / .csv. <strong>Unité au sol</strong> — configurer l'unité au sol. <strong>Mise à jour du micrologiciel</strong> - flasher le dernier firmware.</div>
+<h3>1.2 Connectez-vous</h3>
+<ol class="step-list" start="3">
+<li>Connectez le Loko Air à l'ordinateur via <strong>USB Type-C</strong>.</li>
+<li>Cliquez <strong>Connecter</strong> dans l'onglet Configuration.</li>
+<li>Accordez l'accès série au navigateur lorsque vous y êtes invité → sélectionnez le port correct.</li>
+</ol>
+<div class="note-box">Si le port n’apparaît pas, retournez le câble Type-C – l’orientation des broches est importante.</div>
+<h3>1.3 Définir les paramètres → Enregistrer les modifications</h3>
+<div class="table-wrap">
+<table class="doc-table">
+<thead>
+<tr><th>Paramètre</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>transmit_mode</code></td><td>P2P pour direct Air↔Sol (standard). LoRaWAN pour les intégrations réseau-serveur.</td></tr>
+<tr><td><code>frequency</code></td><td>868-920MHz. Doit correspondre exactement à l’unité terrestre.</td></tr>
+<tr><td><code>id1</code></td><td>Code d'appairage à 2 chiffres. Doit correspondre sur les unités aériennes et terrestres.</td></tr>
+<tr><td><code>id2</code></td><td>Identifiant de l'unité terrestre à 2 chiffres. Doit correspondre aux paramètres de l'unité terrestre.</td></tr>
+<tr><td><code>wake_up_period</code></td><td>À quelle fréquence l’unité aérienne se réveille. Unités : s/min/h. Plus court = épuisement plus rapide de la batterie.</td></tr>
+<tr><td><code>send_mult</code></td><td>Transmettre à chaque Nième cycle de réveil (1 = chaque cycle, 0 = désactiver).</td></tr>
+<tr><td><code>save_mult</code></td><td>Enregistrez la trace GNSS tous les N cycles de réveil (0 = désactiver la journalisation).</td></tr>
+<tr><td><code>gnss_mode</code></td><td>Profil de mouvement : Normal | Remise en forme | Aéronautique | Ballon | Stationnaire. Par défaut : Normal. Utilisez Aviation ou Balloon pour les drones.</td></tr>
+<tr><td><code>tx_power</code></td><td>Sortie radio dans dBm. Plus élevé = plus d'autonomie, plus de décharge de batterie. Par défaut : 8 dBm.</td></tr>
+<tr><td><code>p2p_encryption</code></td><td>Facultatif. Clé HEX de 64 caractères (32 octets) pour AES-256. Doit correspondre à l'unité terrestre si elle est activée.</td></tr>
+</tbody>
+</table>
+</div>
+<h3>1.4 Mise sous tension</h3>
+<ol class="step-list" start="6">
+<li>Débranchez l'USB.</li>
+<li>Maintenez le bouton d'alimentation enfoncé jusqu'à ce que la LED <strong>clignote en rouge</strong> → l'unité est active.</li>
+</ol>
+<div class="note-box">LED rouge fixe = mode veille entre les transmissions. Comportement normal.</div>
+</section>
+<!-- Part 2: Configure Ground -->
+<section class="sg-section" id="configure-ground">
+<h2>Partie 2 - Configurer Loko Ground</h2>
+<p>Le Loko Ground n'a pas de batterie intégrée. Avant le raccordement, dévissez les quatre attaches arrière, insérez un <strong>Cellule Li-ion 18650</strong> (non inclus) et remontez.</p>
+<h3>2.1 Ouvrir le configurateur → onglet Ground Unit</h3>
+<ol class="step-list" start="8">
+<li>Aller à <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a> dans Chrome ou Edge.</li>
+<li>Cliquez sur le <strong>Unité au sol</strong> languette.</li>
+</ol>
+<h3>2.2 Connectez-vous</h3>
+<ol class="step-list" start="10">
+<li>Connectez le Loko Ground à l'ordinateur via USB.</li>
+<li>Cliquez <strong>Connecter</strong> → accorder l'accès série → sélectionner le port.</li>
+</ol>
+<h3>2.3 Lire → mettre à jour → Envoyer</h3>
+<ol class="step-list" start="12">
+<li>Cliquez <strong>Lire</strong> pour charger les paramètres actuels.</li>
+<li>Définissez les paramètres ci-dessous pour qu'ils correspondent à la configuration de l'unité aérienne.</li>
+<li>Cliquez <strong>Envoyer</strong>, puis déconnectez l'USB.</li>
+</ol>
+<div class="table-wrap">
+<table class="doc-table">
+<thead>
+<tr><th>Paramètre</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id2</code></td><td>Identifiant à 2 chiffres. Doit correspondre à l'ID2 défini sur l'unité aérienne.</td></tr>
+<tr><td><code>frequency_hz</code></td><td>Fréquence en Hz (par exemple 868000000). Doit correspondre exactement à l’unité aérienne.</td></tr>
+<tr><td><code>p2p_key</code></td><td>Uniquement si le cryptage est activé sur l'unité aérienne. Même clé HEX de 64 caractères.</td></tr>
+</tbody>
+</table>
+</div>
+<h3>2.4 Mise sous tension et appairage</h3>
+<ol class="step-list" start="15">
+<li>Maintenez le bouton d'alimentation enfoncé jusqu'à ce que la LED soit <strong>bleu uni</strong> → prêt à être jumelé.</li>
+<li>Ouvrez l'application Loko → accordez les autorisations Bluetooth → <strong>Paramètres</strong> → sélectionner Unité au sol.</li>
+<li>Revenir à l'écran principal. Attendez le correctif GPS. L'emplacement apparaît sur la carte.</li>
+</ol>
+<div class="note-box">Plusieurs unités aériennes prises en charge. Appuyez sur une épingle de carte pour voir les détails de l'appareil.</div>
+</section>
+<!-- Warnings -->
+<section class="sg-section" id="warnings">
+<h2>Avertissements</h2>
+<div class="warnings-grid">
+<div class="warning-item">
+<span class="warn-label">ÉTANCHE</span>
+<p>Pas étanche. Tenir à l'écart des liquides. Bouchez toujours le port USB de l’unité Air.</p>
+</div>
+<div class="warning-item">
+<span class="warn-label">FEU</span>
+<p>Ne pas exposer à une flamme nue ou à une chaleur extrême.</p>
+</div>
+<div class="warning-item">
+<span class="warn-label">TEMPÉRATURE</span>
+<p>Fonctionne entre 0 °C et 40 °C uniquement.</p>
+</div>
+<div class="warning-item">
+<span class="warn-label">TENSION</span>
+<p>Chargez à 5V uniquement. Des tensions plus élevées détruiront l'appareil.</p>
+</div>
+<div class="warning-item">
+<span class="warn-label">FR</span>
+<p>Ne pas enfermer dans du métal. Tenir à l’écart des sources EM fortes.</p>
+</div>
+<div class="warning-item">
+<span class="warn-label">ANTENNE</span>
+<p>Montez l’antenne pointée vers le haut, aussi haut que possible du sol.</p>
+</div>
+<div class="warning-item">
+<span class="warn-label">SÉCURITÉ OCULAIRE</span>
+<p>Gardez la pointe de l'antenne éloignée des yeux des enfants et des animaux.</p>
 </div>
 </div>
-<div class="setup-guide-row">
-<div class="setup-guide-content-part">
-<h3>Dépannage des problèmes courants</h3>
-<p class="lead">Solutions aux problèmes courants de configuration et de fonctionnement :</p>
-<div class="features-grid">
-<div class="feature-card">
-<h3 class="feature-title">Problèmes de connexion</h3>
-<p class="feature-desc">Si les unités ne se connectent pas : vérifiez les niveaux de batterie, assurez-vous que les deux unités se trouvent dans un rayon de 20 km, vérifiez les mêmes paramètres de bande de fréquence et redémarrez les deux unités si nécessaire.</p>
+</section>
+<!-- Quick-Start Checklist -->
+<section class="sg-section" id="checklist">
+<h2>Liste de contrôle de démarrage rapide</h2>
+<div class="checklist" id="sg-checklist">
+<label><input type="checkbox"/> Ouvrir <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a> dans Chrome ou Edge</label>
+<label><input type="checkbox"/> Onglet Configuration → connecter l'unité aérienne → définir tous les paramètres → Enregistrer les modifications</label>
+<label><input type="checkbox"/> Onglet Unité au sol → connecter l'unité au sol → faire correspondre <code>id2</code> + <code>frequency_hz</code> → Envoyer</label>
+<label><input type="checkbox"/> Unité aérienne sous tension – La LED clignote en rouge</label>
+<label><input type="checkbox"/> Unité au sol sous tension – LED bleue fixe</label>
+<label><input type="checkbox"/> Application Loko → Paramètres → coupler l'unité au sol</label>
+<label><input type="checkbox"/> Attendez le correctif GPS - l'emplacement apparaît sur la carte</label>
 </div>
-<div class="feature-card">
-<h3 class="feature-title">Problèmes de verrouillage GPS</h3>
-<p class="feature-desc">Si le GPS n'acquiert pas : assurez-vous que le ciel est dégagé, vérifiez l'orientation de l'antenne, attendez jusqu'à 60 secondes pour un démarrage à froid et vérifiez que le micrologiciel est mis à jour.</p>
+</section>
+<!-- Links -->
+<section class="sg-section" id="links">
+<h2>Liens utiles</h2>
+<div class="links-grid">
+<a class="link-card" href="/loko-config-tool/">
+<span class="link-card-label">Outil Web</span>
+<span class="link-card-title">Configurateur Loko</span>
+</a>
+<a class="link-card" href="/software/">
+<span class="link-card-label">Télécharger</span>
+<span class="link-card-title">Application mobile Loko</span>
+</a>
+<a class="link-card" href="/specifications/">
+<span class="link-card-label">Calculatrice</span>
+<span class="link-card-title">Estimateur de durée de vie de la batterie</span>
+</a>
+<a class="link-card" download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">
+<span class="link-card-label">PDF</span>
+<span class="link-card-title">Télécharger le manuel d'utilisation</span>
+</a>
 </div>
-<div class="feature-card">
-<h3 class="feature-title">Connectivité des applications</h3>
-<p class="feature-desc">Si l'application ne se connecte pas à l'unité au sol : activez les services de localisation, vérifiez les autorisations Bluetooth, assurez-vous que vous êtes à moins de 10 m et redémarrez Bluetooth sur votre téléphone.</p>
-</div>
-</div>
-</div>
-<div class="setup-guide-image">
-<picture> <source srcset="/images/optimized/loko-mobile-app-history-screenshot.avif" type="image/avif"/><source srcset="/images/optimized/loko-mobile-app-history-screenshot.webp" type="image/webp"/>
-<img alt="Loko App Setup Troubleshooting" height="300" loading="lazy" src="/images/optimized/loko-mobile-app-history-screenshot.webp" width="500"/>
-</picture>
-</div>
-</div>
+</section>
 </div>
 </main>
 <div id="site-footer"></div>
+<script>
+  document.documentElement.setAttribute('data-theme', 'light');
+
+  // Checklist with localStorage persistence
+  document.querySelectorAll('#sg-checklist input[type="checkbox"]').forEach(function(cb, i) {
+    var key = 'loko-cl-' + i;
+    cb.checked = localStorage.getItem(key) === '1';
+    cb.closest('label').classList.toggle('done', cb.checked);
+    cb.addEventListener('change', function() {
+      localStorage.setItem(key, cb.checked ? '1' : '0');
+      cb.closest('label').classList.toggle('done', cb.checked);
+    });
+  });
+</script>
 <script defer="" src="/js/analytics.js"></script>
-<script defer="" src="/js/layout.js"></script>
-</body></html>
+</body>
+</html>

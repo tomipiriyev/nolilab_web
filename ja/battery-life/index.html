@@ -2,10 +2,10 @@
 
 <html lang="ja">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>GPSトラッカーのバッテリー駆動時間比較 — どれが最も長持ちする？ | nolilab</title>
+<title>Loko GPS トラッカーのバッテリー寿命 | 1 年間の LoRa トラッカーの比較</title>
 <link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
 <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
 <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
@@ -18,85 +18,96 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="ほとんどのGPSトラッカーは1〜7日間しか持ちません。Lokoは最大1年間持続します。バッテリー駆動時間の完全な比較と、LoRa無線が長いバッテリー寿命の鍵である理由をご覧ください。" name="description"/>
+<meta content="GPS トラッカーのバッテリー寿命を比較します。セルラー トラッカーは 1 ～ 7 日間持続しますが、Loko の LoRa GPS トラッカーは SIM や月額料金なしで最大 1 年間動作します。" name="description"/>
 <meta content="#ffffff" name="theme-color"/>
-<meta content="article" property="og:type"/>
-<meta content="GPSトラッカーのバッテリー駆動時間比較 — どれが最も長持ちする？ | nolilab" property="og:title"/>
-<meta content="ほとんどのGPSトラッカーは1〜7日間しか持ちません。Lokoは最大1年間持続します。バッテリー駆動時間の完全な比較と、LoRa無線が長いバッテリー寿命の鍵である理由をご覧ください。" property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="Loko GPS トラッカーのバッテリー寿命 | 1 年間の LoRa トラッカーの比較" property="og:title"/>
+<meta content="GPS トラッカーのバッテリー寿命を比較します。セルラー トラッカーは 1 ～ 7 日間持続しますが、Loko の LoRa GPS トラッカーは SIM や月額料金なしで最大 1 年間動作します。" property="og:description"/>
 <meta content="https://www.nolilab.com/ja/battery-life/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="GPS Tracker Battery Life Comparison" property="og:image:alt"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="ja_JP" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="GPSトラッカーのバッテリー駆動時間比較 — どれが最も長持ちする？ | nolilab" name="twitter:title"/>
-<meta content="ほとんどのGPSトラッカーは1〜7日間しか持ちません。Lokoは最大1年間持続します。バッテリー駆動時間の完全な比較と、LoRa無線が長いバッテリー寿命の鍵である理由をご覧ください。" name="twitter:description"/>
+<meta content="Loko GPS トラッカーのバッテリー寿命 | 1 年間の LoRa トラッカーの比較" name="twitter:title"/>
+<meta content="GPS トラッカーのバッテリー寿命を比較します。セルラー トラッカーは 1 ～ 7 日間持続しますが、Loko の LoRa GPS トラッカーは SIM や月額料金なしで最大 1 年間動作します。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
 <meta content="GPS tracker battery life, longest battery GPS tracker, GPS tracker 1 year battery, LoRa GPS battery comparison" name="keywords"/>
 <meta content="nolilab" name="author"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
 <link href="https://www.nolilab.com/ja/battery-life/" rel="canonical"/>
-<link href="https://www.nolilab.com/battery-life/" hreflang="x-default" rel="alternate"/>
 <link href="https://www.nolilab.com/battery-life/" hreflang="en" rel="alternate"/>
-<script type="application/ld+json">
-{
+<link href="https://www.nolilab.com/ja/battery-life/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/es/battery-life/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/battery-life/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/battery-life/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/battery-life/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/battery-life/" hreflang="x-default" rel="alternate"/>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "なぜほとんどのGPSトラッカーはバッテリー寿命が短いのですか？",
+      "name": "ほとんどの GPS トラッカーのバッテリー寿命がこれほど短いのはなぜですか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ほとんどのGPSトラッカーは位置データを送信するためにセルラー（4G/LTE）無線を使用しています。セルラーモデムは送信中に200〜500ミリアンペアを消費します。これは非常に大きな電流であり、小型バッテリーを急速に消耗させます。積極的なスリープモードを採用していても、定期的なセルラーのウェイクアップにより、ポケットサイズのデバイスで数週間のバッテリー寿命を実現することは不可能です。"
+        "text": "ほとんどの GPS トラッカーは、セルラー (4G/LTE) 無線を使用して位置データを送信します。セルラー モデムは、アクティブな送信中に 200 ～ 500 ミリアンペアを消費します。これは、小型バッテリーを急速に消耗させる膨大な電流です。積極的なスリープ モードであっても、セルラーが定期的にウェイクアップするため、ポケットサイズのデバイスでは数週間のバッテリー寿命は不可能です。"
       }
     },
     {
       "@type": "Question",
-      "name": "Lokoはどのようにして最大1年のバッテリー寿命を実現していますか？",
+      "name": "Loko はどのようにして最長 1 年のバッテリー寿命を実現しているのですか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Lokoはセルラーの代わりにLoRa無線を使用しています。LoRaの送信時のピーク電流はわずか20〜40ミリアンペアであり、セルラーの200〜500mAと比較して約10倍の送信電流削減となります。送信間のディープスリープモード（1マイクロアンペア未満の消費）と組み合わせることで、Lokoの平均消費電流はあらゆるセルラートラッカーよりも劇的に低くなります。その結果、小型の充電式バッテリーで最大1年の駆動が可能になります。"
+        "text": "Loko は、携帯電話の代わりに LoRa 無線を使用します。 LoRa は、携帯電話の 200 ～ 500 mA と比較して、わずか 20 ～ 40 ミリアンペアのピークで送信します。送信電流はおよそ 10 分の 1 です。送信間の消費電力が 1 マイクロアンペア未満のディープ スリープ モードと組み合わせることで、Loko の合計平均電流消費量は、どのセルラー トラッカーよりも劇的に低くなります。その結果、小型の充電式バッテリーで最長 1 年間使用できます。"
       }
     },
     {
       "@type": "Question",
-      "name": "Loko GPS Airはどのくらいの頻度で充電が必要ですか？",
+      "name": "Loko GPS Air はどのくらいの頻度で充電する必要がありますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "通常の更新間隔では、Loko Airは約1ヶ月に1回の充電が必要です。毎日または毎週充電が必要なセルラートラッカーと比較して、これは使い勝手の根本的な違いです。特に、犬の首輪、農場の車両、遠隔地に設置されたセンサーなど、トラッカーに頻繁にアクセスすることが不便な展開において重要です。"
+        "text": "通常のアップデート間隔では、Loko Air はおよそ月に 1 回再充電する必要があります。毎日または毎週の充電が必要なセルラー トラッカーと比較すると、これは使いやすさの根本的な違いです。特に、犬の首輪、農場の車両、またはリモートで展開されたセンサーなど、トラッカーに頻繁にアクセスすることが不便な展開の場合に当てはまります。"
       }
     },
     {
       "@type": "Question",
-      "name": "Lokoのバッテリー寿命をさらに延ばすことはできますか？",
+      "name": "Loko のバッテリー寿命をさらに延ばすことはできますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "はい。オープンソースのファームウェアにより、GPS更新間隔を長く設定することができます。例えば、30秒ごとではなく5分ごとに送信するように設定すると、バッテリー寿命は数ヶ月の領域まで劇的に延びます。この更新頻度とバッテリー寿命のトレードオフは、完全にユーザーの制御下にあります。"
+        "text": "はい。オープンソース ファームウェアを使用すると、GPS アップデートの間隔を長く設定できます。たとえば、30 秒ごとではなく 5 分ごとに送信すると、バッテリー寿命が数か月の領域に劇的に延長されます。 This trade-off between update frequency and battery life is entirely under user control."
       }
     },
     {
       "@type": "Question",
-      "name": "寒冷地はGPSトラッカーのバッテリー寿命に影響しますか？",
+      "name": "寒さは GPS トラッカーのバッテリー寿命に影響しますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "はい。リチウム電池の容量は低温で減少します。0°Cで約20〜30%、-20°C以下で50%以上の減少が見込まれます。これはすべてのGPSトラッカーに同様に影響します。寒冷地での使用では、トラッカーを可能な限り体温に近い温度に保つようにしてください（例えば、積極的に追跡していないときはジャケットのポケットに入れるなど）。"
+        "text": "はい。リチウム電池の容量は低温では減少します。0°C では約 20 ～ 30%、-20°C 未満では 50% 以上の減少が予想されます。これは、すべての GPS トラッカーに同様に影響します。寒い天候で使用する場合は、トラッカーをできるだけ体温に近づけてください (アクティブにトラッキングしていないときはジャケットのポケットに入れるなど)。"
       }
     }
   ]
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.nolilab.com"},
-    {"@type": "ListItem", "position": 2, "name": "GPSトラッカーのバッテリー駆動時間比較", "item": "https://www.nolilab.com/ja/battery-life/"}
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "GPS トラッカーのバッテリー寿命の比較",
+      "item": "https://www.nolilab.com/battery-life/"
+    }
   ]
-}
-</script>
+}</script>
 <style>
   :root {
     --bg-primary: #ffffff;
@@ -227,130 +238,201 @@
 <!-- Hero -->
 <div class="page-hero">
 <div class="container">
-<h1>GPSトラッカーのバッテリー駆動時間比較：どれが最も長持ちする？</h1>
-<p class="subtitle">1日から最大1年まで：なぜバッテリー寿命はこれほど劇的に異なるのか</p>
-<p>バッテリー寿命は、GPSトラッカー市場において最も重要であり、かつ最も誤って表示されやすい仕様の一つです。「2日間バッテリー」から「1年間バッテリー」まで主張は様々ですが、この違いはバッテリー容量によるものではありません。無線送信のための根本的な技術選択によるものです。</p>
-<p><strong>セルラーGPSトラッカーは1〜7日間持続します。</strong> LokoのようなLoRa GPSトラッカーは最大1年間持続します。この違いは、単一の要因に帰着します：無線送信機が消費する電力の量です。</p>
-<p>このページでは、GPSトラッカーのバッテリー寿命の背後にある物理学と工学を説明し、実際の比較データを示し、Lokoが15gのデバイスで最大1年をどのように達成するかを正確にお伝えします。</p>
+<h1>Loko GPS トラッカーのバッテリー寿命: 1 年間のオフライン LoRa トラッキング</h1>
+<p class="subtitle">Loko GPS トラッカーの持続期間が最長 1 年であるのに対し、セルラー GPS トラッカーの持続期間は通常 1 ～ 7 日である理由。</p>
+<p>GPS トラッカーのバッテリー寿命を比較する場合、有益な質問はバッテリーのサイズだけではありません。それは、トラッカーがセルラー データを使用するか、低電力の LoRa 無線を使用するかです。 Loko GPS トラッカーは、オフライン LoRa トラッキング用に構築されているため、SIM カード、携帯電話プラン、月額料金なしで最長 1 年間実行できます。</p>
+<p><strong>携帯電話 GPS トラッカーは 1 ～ 7 日間持続します。</strong> LoRa GPS トラッカー (Loko など) は最長 1 年間持続します。違いは、無線送信機が消費する電力の量という 1 つの要因に帰着します。</p>
+<p>このページでは、GPS トラッカーのバッテリー寿命の背後にある物理学と工学について説明し、実際の比較データを示し、Loko が 15g デバイスで最長 1 年間の寿命をどのように達成するかを正確に説明します。</p>
+<div class="cta-block">
+<p><strong>実際のトラッカーをお探しですか?</strong> バッテリーの計算に入る前に、Loko の LoRa GPS ハードウェア、ソフトウェアのダウンロード、セットアップ フローを参照してください。</p>
+<a class="cta-btn" href="/lora-gps-tracker/">Loko GPS トラッカーを参照→</a>
+</div>
 </div>
 </div>
 <!-- Why battery life varies so much -->
 <div class="content-block">
 <div class="container">
-<h2>なぜトラッカー間でバッテリー寿命がこれほど異なるのか</h2>
-<p>GPSトラッカーには、主に2つの電力消費源があります：GPS受信チップと無線送信機です。このうち、無線送信機が総電力消費を大幅に支配しています。</p>
-<p>GPSチップ自体は比較的効率的です。最新のマルチコンステレーション受信機は、アクティブな位置計算中に約15〜30mAを消費し、測位間のスリープ電流をマイクロアンペアレベルまで下げることができます。GPS単体が問題なのではありません。</p>
-<p>問題は、GPS測位が計算された後に起こることです：座標はあなたの電話機に送信される必要があります。そして、その送信のための無線技術の選択が、他のどの要因よりもバッテリー寿命を決定します。</p>
-<p><strong>セルラー（4G/LTE）送信：</strong></p>
+<h2>トラッカー間でバッテリー寿命が大きく異なる理由</h2>
+<p>GPS トラッカーには、GPS 受信機チップと無線送信機という 2 つの主な電力消費者があります。このうち、無線送信機が総電力消費量の大部分を占めます。</p>
+<p>GPS チップ自体は比較的効率的です。最新のマルチコンステレーション受信機は、アクティブな位置計算中に約 15 ～ 30mA を消費し、測定と測定の間にマイクロアンペア レベルのスリープ電流に低下する可能性があります。 GPS だけでは問題ありません。</p>
+<p>問題は、GPS 修正が計算された後に何が起こるかです。座標を携帯電話に送信する必要があります。そして、その送信用の無線技術の選択が、他のどの要素よりもバッテリー寿命を決定します。</p>
+<p><strong>セルラー (4G/LTE) 伝送:</strong></p>
 <ul>
-<li>セルラーネットワークに接続する必要があり、ハンドシェイクと認証が必要です</li>
-<li>アクティブ送信中の典型的な消費電流：<strong>200〜500ミリアンペア（mA）</strong></li>
-<li>下限（200mA）であっても、セルラーモデムは200個の典型的なLEDを同時に点灯させるのと同じ電流を消費します</li>
-<li>各接続サイクル（ウェイクアップ、接続、認証、送信、切断）には、数秒間の高電流消費が必要です</li>
-<li>頻繁な更新（30秒ごと）では、小型バッテリーは1〜3日で消耗します</li>
+<li>携帯電話ネットワークに接続する必要があり、ハンドシェイクと認証が必要です</li>
+<li>アクティブな送信中の一般的な電流引き込み: <strong>200 ～ 500 ミリアンペア (mA)</strong></li>
+<li>ローエンド (200mA) であっても、セルラー モデムは 200 個の一般的な LED を同時に動作させるのと同じくらいの電流を消費します。</li>
+<li>各接続サイクル (ウェイク、接続、認証、送信、切断) には数秒間の大電流がかかります。</li>
+<li>頻繁な更新 (30 秒ごと) により、小さなバッテリーは 1 ～ 3 日で消耗します。</li>
 </ul>
-<p><strong>LoRa無線送信：</strong></p>
+<p><strong>LoRa 無線送信:</strong></p>
 <ul>
-<li>ネットワーク接続は不要です。トランシーバーのような直接放送です</li>
-<li>送信中の典型的な消費電流：<strong>20〜40ミリアンペア（mA）</strong></li>
-<li>送信間のスリープ電流：<strong>1マイクロアンペア（μA）未満</strong> — 実質的にゼロです</li>
-<li>各送信は数秒ではなく、ミリ秒単位で完了します</li>
-<li>電力予算はセルラーよりも10〜25倍効率的です</li>
+<li>ネットワーク接続は必要ありません。トランシーバーのような直接ブロードキャストです。</li>
+<li>送信時の一般的な電流引き込み: <strong>20 ～ 40 ミリアンペア (mA)</strong></li>
+<li>送信間のスリープ電流: <strong>1 マイクロアンペア (μA) 未満</strong> — 事実上ゼロ</li>
+<li>各送信には数秒ではなくミリ秒かかります</li>
+<li>電力バジェットはセルラー方式よりも 10 ～ 25 倍効率的です</li>
 </ul>
-<p>これは小さな違いではありません。1桁から2桁の違いです。そしてそれは直接バッテリー寿命に反映されます。</p>
+<p>これは小さな違いではありません。それは1桁から2桁の差です。そしてそれはバッテリー寿命に直接関係します。</p>
 </div>
 </div>
 <!-- Battery comparison table -->
 <div class="content-block">
 <div class="container">
-<h2>GPSトラッカーのバッテリー駆動時間比較</h2>
+<h2>GPS トラッカーのバッテリー寿命の比較</h2>
 <table class="compare-table">
 <thead>
 <tr>
 <th>トラッカー</th>
 <th>バッテリー寿命</th>
 <th>無線技術</th>
-<th>年間充電回数</th>
+<th>年間料金</th>
 <th>月額料金</th>
 </tr>
 </thead>
 <tbody>
 <tr class="highlight-row">
-<td>Loko Air (nolilab)</td>
-<td>最大1年間</td>
+<td>Loko Air (ノリラボ)</td>
+<td>1年まで</td>
 <td>LoRa (LPWAN)</td>
-<td>~12回</td>
+<td>~12</td>
 <td>$0</td>
 </tr>
 <tr>
-<td>Tractive DOG LTE</td>
-<td>2〜7日間</td>
-<td>4G LTE セルラー</td>
-<td>52〜180回</td>
+<td>トラクティブドッグLTE</td>
+<td>2～7日</td>
+<td>4G LTEセルラー</td>
+<td>52～180</td>
 <td>$9.99</td>
 </tr>
 <tr>
-<td>Garmin Alpha TT15 Mini</td>
-<td>~20時間（アクティブ時）</td>
-<td>MURS VHF 無線</td>
-<td>~180回</td>
+<td>ガーミン アルファ TT15 ミニ</td>
+<td>~20 時間 (アクティブ)</td>
+<td>MURS VHF ラジオ</td>
+<td>~180</td>
 <td>$0</td>
 </tr>
 <tr>
-<td>Apple AirTag*</td>
-<td>~12ヶ月</td>
+<td>Apple エアタグ*</td>
+<td>～12ヶ月</td>
 <td>Bluetooth BLE</td>
-<td>~1回（電池交換）</td>
+<td>~1 (バッテリー交換)</td>
 <td>$0</td>
 </tr>
 <tr>
-<td>Tile Mate*</td>
-<td>~36ヶ月</td>
+<td>タイルメイト*</td>
+<td>～36か月</td>
 <td>Bluetooth BLE</td>
-<td>~0.3回（電池交換）</td>
+<td>~0.3 (バッテリー交換)</td>
 <td>$0 / $3</td>
 </tr>
 <tr>
-<td>Garmin inReach Mini 2</td>
-<td>14日間（1分間隔追跡）</td>
-<td>Iridium 衛星通信</td>
-<td>~26回</td>
+<td>ガーミン インリーチ ミニ 2</td>
+<td>14 日間 (1 分のトラック)</td>
+<td>イリジウム衛星</td>
+<td>~26</td>
 <td>$15–$65</td>
 </tr>
 </tbody>
 </table>
-<p>*AirTagとTile MateはBluetoothビーコンを使用しています。これらはGPSトラッカーではなく、近くの電話機に依存しないリアルタイム位置情報機能はありません。長いバッテリー寿命はBluetoothの極めて低い消費電力を反映していますが、遠隔地での追跡はできません。</p>
-<p>Garmin inReach Mini 2はIridium衛星通信を使用しており、グローバルカバレッジを提供しますが、月額$15〜65のサブスクリプション料金と追跡モードでの2週間のバッテリー寿命となります。</p>
-<p><strong>真のリアルタイムGPSトラッカーの中で、Lokoの最大1年のバッテリー寿命は、このサイズと価格帯において比類のないものです。</strong></p>
+<p>*AirTag と Tile Mate は Bluetooth ビーコンを使用します。これらは GPS トラッカーではなく、近くの電話に依存しないリアルタイムの位置情報機能を備えていません。バッテリー寿命が長いのは Bluetooth の消費電力が非常に低いことを反映していますが、遠隔地では追跡できません。</p>
+<p>Garmin inReach Mini 2 はイリジウム衛星 communication を使用しており、世界中をカバーしますが、月額 15 ～ 65 ドルのサブスクリプションと追跡モードで 2 週間のバッテリーがかかります。</p>
+<p><strong>真のリアルタイム GPS トラッカーの中でも、Loko の最大 1 年間のバッテリー寿命は、この価格とサイズの点では比類のないものです。</strong></p>
 </div>
 </div>
 <!-- The math: cellular vs LoRa power -->
 <div class="content-block">
 <div class="container">
-<h2>計算：セルラー vs LoRaの電力消費</h2>
-<p>この比較に具体的な数値を当てはめてみましょう。これらの数値は、トラッカーハードウェアからの実際の典型的な測定値に基づいています：</p>
+<h2>計算: セルラーと LoRa の消費電力</h2>
+<p>この比較に具体的な数字を入れてみましょう。これらの数値は、トラッカー ハードウェアからの典型的な実世界の測定値に基づいています。</p>
 <div class="power-callout">
-<p><strong>セルラーGPSトラッカー、30秒ごとに更新：</strong><br/>
-      GPS測位：~20mA × 3秒 = 0.0167 mAh<br/>
-      セルラー接続 + 送信：~300mA × 5秒 = 0.417 mAh<br/>
-      サイクル間のスリープ：~0.1mA × 22秒 = 0.00061 mAh<br/>
-<strong>30秒サイクルあたり：~0.43 mAh | 1日あたり：~51.8 mAh</strong><br/>
-      400mAhバッテリーの場合：約7.7日間</p>
+<p><strong>携帯電話 GPS トラッカー、30 秒ごとに更新:</strong><br/>
+      GPS 取得: ~20mA × 3 秒 = 0.0167 mAh<br/>
+      携帯電話接続 + 送信: ~300mA × 5 秒 = 0.417 mAh<br/>
+      サイクル間のスリープ: ~0.1mA × 22 秒 = 0.00061 mAh<br/>
+<strong>30 秒サイクルあたり: ~0.43 mAh | 1 日あたり: ~51.8 mAh</strong><br/>
+      400mAh バッテリーの場合: 約 7.7 日</p>
 </div>
 <div class="power-callout">
-<p><strong>Loko LoRa GPSトラッカー、30秒ごとに更新：</strong><br/>
-      GPS測位：~20mA × 3秒 = 0.0167 mAh<br/>
-      LoRa送信：~35mA × 0.1秒 = 0.001 mAh<br/>
-      サイクル間のディープスリープ：~0.001mA × 26.9秒 = 0.0000075 mAh<br/>
-<strong>30秒サイクルあたり：~0.018 mAh | 1日あたり：~2.15 mAh</strong><br/>
-      400mAhバッテリーの場合：約186日間</p>
+<p><strong>Loko LoRa GPS トラッカー、30 秒ごとに更新:</strong><br/>
+      GPS 取得: ~20mA × 3 秒 = 0.0167 mAh<br/>
+      LoRa 送信: ~35mA × 0.1 秒 = 0.001 mAh<br/>
+      サイクル間のディープスリープ: ~0.001mA × 26.9 秒 = 0.0000075 mAh<br/>
+<strong>30 秒サイクルあたり: ~0.018 mAh | 1 日あたり: ~2.15 mAh</strong><br/>
+      400mAh バッテリーの場合: 約 186 日</p>
 </div>
-<p>数字が物語っています。同じ更新間隔と同様のバッテリー容量では、LoRaトラッカーはセルラートラッカーよりも約<strong>24倍長く</strong>持続します。これは特殊なケースではありません。無線物理学の基本的な結果です。</p>
-<p>実際には、Lokoのバッテリー容量は15g未満のサイズに最適化されており、総容量が制限されています。実際の使用ケースによる更新間隔では、Lokoは一貫して最大1年を達成します。</p>
+<p>数字がすべてを物語っています。同じ更新間隔と同様のバッテリー容量の場合、LoRa トラッカーは約 <strong>24倍長い</strong> 携帯電話トラッカーよりも。これは特殊なケースではなく、電波物理学の基本的な結果です。</p>
+<p>実際には、Loko のバッテリー容量は 15g 未満のサイズに最適化されており、総容量が制限されます。実際の更新間隔 (ユースケースによって異なります) では、Loko は一貫して最大 1 年を達成します。</p>
 </div>
 </div>
 <!-- How Loko achieves up to 1 year -->
 <div class="content-block">
 <div class="container">
-<h2>Lokoが最大1年のバッテリー寿命を達成する方法</h2>
-    &lt;</div></div></main></body></html>
+<h2>Loko が最長 1 年のバッテリー寿命を実現する仕組み</h2>
+<p>Loko の並外れたバッテリー寿命は、いくつかのエンジニアリング上の決定が連携して実現されたものです。</p>
+<ul>
+<li><strong>核となる LoRa 無線:</strong> セルラーではなく LoRa を選択するという基本的な選択が、効率向上の大部分を担っています。携帯電話のピーク送信電流が 200 ～ 500mA であるのに対し、20 ～ 40mA では、各送信にかかるエネルギーは数分の 1 で済みます。</li>
+<li><strong>最適化されたディープスリープファームウェア:</strong> Loko Air は、ほとんどの時間をディープ スリープに費やし、消費電力は 1 マイクロアンペア未満です。マイクロコントローラー、GPS チップ、および LoRa 無線機はすべて、更新サイクルの間に最低電力状態に入ります。スリープ電流 1μA は、1mAh のバッテリー容量で 1,000 時間のスリープを意味します。</li>
+<li><strong>効率的な GPS 取得:</strong> Loko は、可能な限り支援 GPS を使用するように構成されており、最初の修正にかかる時間を短縮し、GPS チップが高出力取得モードで費やす時間を短縮します。 3 つの衛星コンステレーション (GPS + GLONASS + Galileo) をすべて使用すると、衛星のオーバーヘッドが増加し、修正が高速化されます。</li>
+<li><strong>適応型更新レート:</strong> オープンソース ファームウェアは、トラッカーが (加速度計を介して) 静止していることを検出したときに更新頻度を減らすように構成でき、実際にはバッテリー寿命をさらに延長できます。</li>
+<li><strong>クラウドキープアライブなし:</strong> 携帯電話トラッカーは、何も変更されていない場合でも、接続状態を維持するためにクラウド サーバーに定期的に ping を実行する必要があります。 Loko の P2P 無線アーキテクチャでは、そのようなキープアライブは必要ありません。送信は座標パケットだけです。</li>
+</ul>
+</div>
+</div>
+<!-- Tips to extend any GPS tracker battery -->
+<div class="content-block">
+<div class="container">
+<h2>GPS トラッカーのバッテリー寿命を延ばすためのヒント</h2>
+<p>使用するトラッカーに関係なく、次のことを実践するとバッテリー寿命を最大限に延ばすことができます。</p>
+<ul>
+<li><strong>更新頻度を減らす:</strong> 30 秒ごとではなく 5 分ごとに更新すると、バッテリーの使用量が大幅に減ります。ゆっくりと移動する資産 (家畜、保管機器) の場合、多くの場合、低い更新レートで完全に適切です。</li>
+<li><strong>モーショントリガーアップデートを使用します。</strong> 多くのトラッカーは、動きが検出された場合にのみ高頻度更新をアクティブにすることをサポートしています。これは、駐車中の車両や保管されている機器を追跡するのに最適です。</li>
+<li><strong>GPS の修正時間を最適化します。</strong> 複数の衛星コンステレーション (GPS + GLONASS + Galileo) をサポートするトラッカーを使用すると、修正が速くなり、GPS チップをフルパワーで使用する時間が短縮されます。</li>
+<li><strong>極端な温度を避けてください。</strong> リチウム電池は低温では著しく容量が減少します。特に保管中は、トラッカーを可能な限り適度な温度に保ちます。</li>
+<li><strong>導入前に完全に充電してください。</strong> 100% で長時間の展開を開始することは明らかですが、言及する価値があります。部分的な充電は数週間に渡って急速に増加します。</li>
+<li><strong>特に Loko の場合:</strong> 使用事例に合わせてファームウェアの更新間隔を調整します。動きの遅いアセットの場合、2 ～ 5 分ごとに更新すると、バッテリー寿命が数か月の領域に延長されます。</li>
+</ul>
+</div>
+</div>
+<!-- FAQ -->
+<div class="content-block">
+<div class="container">
+<h2>GPS トラッカーのバッテリー寿命: FAQ</h2>
+<div class="faq-item">
+<h3>ほとんどの GPS トラッカーのバッテリー寿命がこれほど短いのはなぜですか?</h3>
+<p>ほとんどの GPS トラッカーは、セルラー (4G/LTE) 無線を使用して位置データを送信します。セルラー モデムは、アクティブな送信中に 200 ～ 500 ミリアンペアを消費します。これは、小型バッテリーを急速に消耗させる膨大な電流です。積極的なスリープ モードであっても、セルラーが定期的にウェイクアップするため、ポケットサイズのデバイスでは数週間のバッテリー寿命は不可能です。</p>
+</div>
+<div class="faq-item">
+<h3>Loko はどのようにして最長 1 年のバッテリー寿命を実現しているのですか?</h3>
+<p>Loko は、携帯電話の代わりに LoRa 無線を使用します。 LoRa は、携帯電話の 200 ～ 500 mA と比較して、わずか 20 ～ 40 ミリアンペアのピークで送信します。送信電流はおよそ 10 分の 1 です。送信間の消費電力が 1 マイクロアンペア未満のディープ スリープ モードと組み合わせることで、Loko の合計平均電流消費量は、どのセルラー トラッカーよりも劇的に低くなります。その結果、小型の充電式バッテリーで最長 1 年間使用できます。</p>
+</div>
+<div class="faq-item">
+<h3>Loko GPS Air はどのくらいの頻度で充電する必要がありますか?</h3>
+<p>通常のアップデート間隔では、Loko Air はおよそ月に 1 回再充電する必要があります。毎日または毎週の充電が必要なセルラー トラッカーと比較すると、これは使いやすさの根本的な違いです。特に、犬の首輪、農場の車両、またはリモートで展開されたセンサーなど、トラッカーに頻繁にアクセスすることが不便な展開の場合に当てはまります。</p>
+</div>
+<div class="faq-item">
+<h3>Loko のバッテリー寿命をさらに延ばすことはできますか?</h3>
+<p>はい。オープンソース ファームウェアを使用すると、GPS アップデートの間隔を長く設定できます。たとえば、30 秒ごとではなく 5 分ごとに送信すると、バッテリー寿命が数か月の領域に劇的に延長されます。更新頻度とバッテリー寿命の間のこのトレードオフは、完全にユーザーの制御下にあります。</p>
+</div>
+<div class="faq-item">
+<h3>寒さは GPS トラッカーのバッテリー寿命に影響しますか?</h3>
+<p>はい。リチウム電池の容量は低温では減少します。0°C では約 20 ～ 30%、-20°C 未満では 50% 以上の減少が予想されます。これは、すべての GPS トラッカーに同様に影響します。寒い天候で使用する場合は、トラッカーをできるだけ体温に近づけてください (アクティブにトラッキングしていないときはジャケットのポケットに入れるなど)。</p>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p>充電間隔は最大 1 年です。 15g未満。月額料金ゼロ。 LoRa 無線により、セルラー トラッカーではできないことが Loko で可能になります。</p>
+<p><strong>Loko GPS トラッカー: このサイズと価格のリアルタイム GPS トラッカーの中で最長のバッテリー寿命を実現します。</strong></p>
+<p>製品の詳細については、次の URL をご覧ください。 <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
+<br/>
+<a class="cta-btn" href="/#shop">Loko を購入する →</a>
+</div>
+</div>
+</div>
+</main>
+<div id="site-footer"></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>

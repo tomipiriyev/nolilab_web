@@ -2,10 +2,10 @@
 
 <html lang="es">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>Rastreador GPS de Código Abierto — Hardware y Firmware | nolilab</title>
+<title>Rastreador GPS de código abierto: hardware y firmware | nolilab</title>
 <link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
 <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
 <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
@@ -18,85 +18,91 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Loko es un rastreador GPS completamente de código abierto. Esquemáticos, archivos PCB y firmware disponibles públicamente. Personaliza, construye o compra — tú decides." name="description"/>
+<meta content="Loko es un rastreador GPS totalmente de código abierto. Esquemas, archivos de PCB y firmware, todos disponibles públicamente. Personalice, cree o compre: usted elige." name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <meta content="article" property="og:type"/>
-<meta content="Rastreador GPS de Código Abierto — Hardware y Firmware | nolilab" property="og:title"/>
-<meta content="Loko es un rastreador GPS completamente de código abierto. Esquemáticos, archivos PCB y firmware disponibles públicamente. Personaliza, construye o compra — tú decides." property="og:description"/>
+<meta content="Rastreador GPS de código abierto: hardware y firmware | nolilab" property="og:title"/>
+<meta content="Loko es un rastreador GPS totalmente de código abierto. Esquemas, archivos de PCB y firmware, todos disponibles públicamente. Personalice, cree o compre: usted elige." property="og:description"/>
 <meta content="https://www.nolilab.com/es/open-source/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
-<meta content="Rastreador GPS de Código Abierto Loko" property="og:image:alt"/>
+<meta content="Loko Open Source GPS Tracker" property="og:image:alt"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="es_ES" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Rastreador GPS de Código Abierto — Hardware y Firmware | nolilab" name="twitter:title"/>
-<meta content="Loko es un rastreador GPS completamente de código abierto. Esquemáticos, archivos PCB y firmware disponibles públicamente. Personaliza, construye o compra — tú decides." name="twitter:description"/>
+<meta content="Rastreador GPS de código abierto: hardware y firmware | nolilab" name="twitter:title"/>
+<meta content="Loko es un rastreador GPS totalmente de código abierto. Esquemas, archivos de PCB y firmware, todos disponibles públicamente. Personalice, cree o compre: usted elige." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
-<meta content="rastreador GPS de código abierto, hardware abierto GPS, rastreador GPS GitHub, rastreador GPS DIY, rastreador LoRa de código abierto" name="keywords"/>
+<meta content="open source GPS tracker, open hardware GPS, GPS tracker GitHub, DIY GPS tracker, LoRa open source tracker" name="keywords"/>
 <meta content="nolilab" name="author"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
 <link href="https://www.nolilab.com/es/open-source/" rel="canonical"/>
 <link href="https://www.nolilab.com/open-source/" hreflang="x-default" rel="alternate"/>
-<link href="https://www.nolilab.com/open-source/" hreflang="en" rel="alternate"/>
-<script type="application/ld+json">
-{
+<link href="https://www.nolilab.com/open-source/" hreflang="en" rel="alternate"/><link href="https://www.nolilab.com/ja/open-source/" hreflang="ja" rel="alternate"/><link href="https://www.nolilab.com/es/open-source/" hreflang="es" rel="alternate"/><link href="https://www.nolilab.com/ru/open-source/" hreflang="ru" rel="alternate"/><link href="https://www.nolilab.com/zh/open-source/" hreflang="zh" rel="alternate"/><link href="https://www.nolilab.com/fr/open-source/" hreflang="fr" rel="alternate"/>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "¿Es Loko realmente de código abierto — hardware y firmware?",
+      "name": "¿Loko es verdaderamente de código abierto: hardware y firmware?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. Nolilab ha publicado los esquemáticos completos del hardware, los archivos de diseño PCB y el código fuente del firmware. Puedes inspeccionar cada selección de componentes, rastrear cada decisión de circuito y leer cada línea de código que se ejecuta en el dispositivo. Nada está oculto u ofuscado."
+        "text": "Sí. Nolilab ha publicado los esquemas completos del hardware, los archivos de diseño de PCB y el código fuente del firmware. Puede inspeccionar cada selección de componentes, rastrear cada decisión del circuito y leer cada línea de código que se ejecuta en el dispositivo. Nada está oculto ni ofuscado."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Puedo construir mi propio rastreador GPS Loko a partir de los archivos de código abierto?",
+      "name": "¿Puedo crear mi propio rastreador Loko GPS a partir de archivos de código abierto?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. Todos los archivos que necesitas para fabricar tu propio hardware Loko están disponibles públicamente — archivos Gerber PCB, BOM (lista de materiales) y firmware. Si tienes experiencia con fabricación de PCB y montaje SMD, puedes construir el rastreador tú mismo. Nolilab también vende unidades preconstruidas y probadas para quienes prefieren un dispositivo listo para usar."
+        "text": "Sí. Todos los archivos que necesita para fabricar su propio hardware Loko están disponibles públicamente: archivos PCB Gerber, BOM (lista de materiales) y firmware. Si tiene experiencia en la fabricación de PCB y el ensamblaje de SMD, puede construir el rastreador usted mismo. Nolilab también vende unidades probadas y prefabricadas para quienes prefieren un dispositivo listo para usar."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Bajo qué licencia se publican el hardware y firmware de Loko?",
+      "name": "¿Bajo qué licencia se publica el hardware y el firmware Loko?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "El hardware y el firmware se publican solo para uso personal. El uso comercial no está permitido sin el permiso explícito por escrito de nolilab. Consulta la licencia completa en https://github.com/tomipiriyev/Loko"
+        "text": "El hardware y el firmware se publican únicamente para uso personal. No se permite el uso comercial de Comm sin el permiso explícito por escrito de nolilab. Vea la licencia completa en https://github.com/tomipiriyev/Loko"
       }
     },
     {
       "@type": "Question",
-      "name": "¿Puedo modificar el firmware de Loko para personalizar intervalos de actualización o agregar sensores?",
+      "name": "¿Puedo modificar el firmware Loko para personalizar los intervalos de actualización o agregar sensores?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. El firmware está escrito en C/C++ y está completamente documentado. Los desarrolladores pueden modificar los intervalos de actualización del GPS, ajustar los parámetros de transmisión LoRa, agregar soporte para sensores adicionales, cambiar el comportamiento de la gestión de energía o implementar protocolos personalizados. El firmware abierto es una de las características más potentes de Loko para usuarios técnicos."
+        "text": "Sí. El firmware está escrito en C/C++ y está completamente documentado. Los desarrolladores pueden modificar los intervalos de actualización de GPS, ajustar los parámetros de transmisión de LoRa, agregar soporte para sensores adicionales, cambiar el comportamiento de administración de energía o implementar protocolos personalizados. El firmware abierto es una de las funciones más poderosas de Loko para usuarios técnicos."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Por qué nolilab publica el hardware como código abierto si también lo vende?",
+      "name": "¿Por qué nolilab abre el hardware si también lo vende?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Nolilab cree que la transparencia genera confianza. Al publicar todo el hardware y firmware públicamente, los usuarios pueden verificar que Loko hace exactamente lo que afirma — sin seguimiento oculto, sin recopilación secreta de datos, sin firmware de caja negra. La comunidad también contribuye con mejoras al proyecto. Nolilab compite en calidad de fabricación, soporte y la experiencia completa del producto — no en mantener los diseños en secreto."
+        "text": "Nolilab cree que la transparencia genera confianza. Al publicar públicamente todo el hardware y firmware, los usuarios pueden verificar que Loko hace exactamente lo que dice: sin seguimiento oculto, sin recopilación de datos secretos, sin firmware de caja negra. El community también aporta mejoras al proyecto. Nolilab compite en calidad de fabricación, soporte y experiencia completa del producto, no en mantener los diseños en secreto."
       }
     }
   ]
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.nolilab.com"},
-    {"@type": "ListItem", "position": 2, "name": "Rastreador GPS de Código Abierto", "item": "https://www.nolilab.com/es/open-source/"}
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Hogar",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Rastreador GPS de código abierto",
+      "item": "https://www.nolilab.com/open-source/"
+    }
   ]
-}
-</script>
+}</script>
 <style>
   :root {
     --bg-primary: #ffffff;
@@ -225,80 +231,179 @@
 <!-- Hero -->
 <div class="page-hero">
 <div class="container">
-<h1>Rastreador GPS de Código Abierto: Transparencia Total de Hardware y Firmware</h1>
-<p class="subtitle">Cada Esquemático. Cada Traza PCB. Cada Línea de Firmware. Disponible Públicamente.</p>
-<p>En una industria donde la mayoría de los fabricantes de rastreadores GPS tratan su hardware y software como secretos comerciales, nolilab toma el enfoque opuesto. Loko GPS Tracker es completamente de código abierto — lo que significa que cada esquemático de circuito, cada archivo de diseño PCB y cada línea de firmware que se ejecuta en el dispositivo se publican públicamente en GitHub.</p>
+<h1>Rastreador GPS de código abierto: total transparencia de hardware y firmware</h1>
+<p class="subtitle">Cada esquema. Cada rastro de PCB. Cada línea de firmware. Disponible públicamente.</p>
+<p>En una industria donde la mayoría de los fabricantes de rastreadores GPS tratan su hardware y software como secretos comerciales, nolilab adopta el enfoque opuesto. Loko GPS Tracker es completamente de código abierto, lo que significa que cada esquema de circuito, cada archivo de diseño de PCB y cada línea de firmware que se ejecuta en el dispositivo se publica públicamente en GitHub.</p>
 <p><strong>No tienes que confiar en Loko. Puedes verificarlo.</strong></p>
-<p>Esta página explica qué ha publicado nolilab, por qué es importante y cómo los creadores, desarrolladores y usuarios avanzados pueden aprovechar la naturaleza de código abierto de Loko.</p>
+<p>Esta página explica lo que ha publicado nolilab, por qué es importante y cómo los creadores, desarrolladores y usuarios avanzados pueden aprovechar la naturaleza de código abierto de Loko.</p>
 </div>
 </div>
-<!-- Qué significa código abierto para rastreadores GPS -->
+<!-- What open source means for GPS trackers -->
 <div class="content-block">
 <div class="container">
-<h2>Qué Significa Código Abierto para los Rastreadores GPS</h2>
-<p>Hardware y firmware de código abierto significa que los archivos de diseño del dispositivo físico y el código que se ejecuta en él están disponibles públicamente bajo una licencia que permite inspección, modificación y redistribución.</p>
-<p>Para un rastreador GPS específicamente, esto tiene implicaciones profundas:</p>
+<h2>Qué significa el código abierto para los rastreadores GPS</h2>
+<p>Hardware y firmware de código abierto significa que los archivos de diseño del dispositivo físico y el código que se ejecuta en él están disponibles públicamente bajo una licencia que permite la inspección, modificación y redistribución.</p>
+<p>Para un rastreador GPS específicamente, esto tiene profundas implicaciones:</p>
 <ul>
-<li><strong>Sin recopilación oculta de datos:</strong> Puedes leer el firmware y verificar que el dispositivo no transmite tu ubicación a nadie excepto a quien autorices</li>
-<li><strong>Sin vulnerabilidades de seguridad de caja negra:</strong> Los investigadores de seguridad pueden auditar el código y divulgar responsablemente cualquier vulnerabilidad</li>
-<li><strong>Sin dependencia del proveedor:</strong> Si nolilab alguna vez descontinuara el soporte, la comunidad podría continuar manteniendo el firmware de forma independiente</li>
-<li><strong>Personalización:</strong> Los desarrolladores pueden modificar el firmware para adaptarse a casos de uso especializados — diferentes intervalos de actualización, sensores personalizados, protocolos alternativos</li>
-<li><strong>Mejoras de la comunidad:</strong> Los usuarios con experiencia en ingeniería contribuyen con correcciones de errores, características y optimizaciones al proyecto</li>
+<li><strong>Sin recopilación de datos ocultos:</strong> Podrás leer el firmware y verificar que el dispositivo no transmite tu ubicación a nadie excepto a quien tú autorices</li>
+<li><strong>Sin vulnerabilidades de seguridad de caja negra:</strong> Los investigadores de seguridad pueden auditar el código y revelar cualquier vulnerabilidad de manera responsable.</li>
+<li><strong>Sin dependencia del proveedor:</strong> Si nolilab alguna vez dejara de brindar soporte, community podría continuar manteniendo el firmware de forma independiente</li>
+<li><strong>Personalización:</strong> Los desarrolladores pueden modificar el firmware para adaptarlo a casos de uso especializados: diferentes intervalos de actualización, sensores personalizados, protocolos alternativos.</li>
+<li><strong>Mejoras de Community:</strong> Los usuarios con experiencia en ingeniería aportan correcciones de errores, funciones y optimizaciones al proyecto.</li>
 </ul>
-<p>La mayoría de los fabricantes comerciales de rastreadores GPS no publican nada. No puedes ver qué está haciendo el firmware, si se almacenan tus datos o cómo se implementa el protocolo de radio. Con Loko, no hay secretos.</p>
+<p>La mayoría de fabricantes de seguidores commercial GPS no publican nada. No puede ver qué está haciendo el firmware, si se están almacenando sus datos o cómo se implementa el protocolo de radio. Con Loko no hay secretos.</p>
 </div>
 </div>
-<!-- Qué ha publicado nolilab -->
+<!-- What nolilab has published -->
 <div class="content-block">
 <div class="container">
-<h2>Qué Ha Publicado nolilab en GitHub</h2>
-<p>El <a href="https://github.com/tomipiriyev/Loko" rel="noopener noreferrer" style="color:var(--accent);" target="_blank">repositorio de GitHub de nolilab</a> contiene el conjunto completo de archivos necesarios para entender, construir y modificar Loko:</p>
+<h2>Lo que nolilab ha publicado en GitHub</h2>
+<p>El <a href="https://github.com/tomipiriyev/Loko" rel="noopener noreferrer" style="color:var(--accent);" target="_blank">repositorio nolilab GitHub</a> contiene el conjunto completo de archivos necesarios para comprender, construir y modificar Loko:</p>
 <div class="repo-card" style="border-color: var(--accent); background: var(--bg-primary);">
 <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.6rem;">
 <svg aria-hidden="true" fill="currentColor" height="22" style="color:var(--text-primary);flex-shrink:0" viewbox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg>
-<h3 style="margin:0;font-size:1rem;">tomipiriyev/Loko — Repositorio de GitHub</h3>
+<h3 style="margin:0;font-size:1rem;">tomipiriyev/Loko — Repositorio GitHub</h3>
 </div>
-<p style="margin-bottom:0.75rem;">Todos los archivos del proyecto Loko — esquemáticos de hardware, diseños PCB, firmware, BOM y código fuente de la app — se publican en un único repositorio público.</p>
+<p style="margin-bottom:0.75rem;">Todos los archivos del proyecto Loko (esquemas de hardware, diseños de PCB, firmware, lista de materiales y fuente de la aplicación) se publican en un único repositorio público.</p>
 <a href="https://github.com/tomipiriyev/Loko" onmouseout="this.style.background='var(--text-primary)'" onmouseover="this.style.background='var(--accent)'" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1.1rem;background:var(--text-primary);color:#fff;border-radius:var(--radius-sm);font-size:0.875rem;font-weight:600;text-decoration:none;transition:background 0.2s ease;" target="_blank">
         Ver en GitHub →
       </a>
 </div>
 <div class="repo-card">
-<h3>Esquemáticos de Hardware</h3>
-<p>Esquemáticos eléctricos completos para Loko Air y Loko Ground. Cada componente, cada conexión, cada asignación de pin. Anotados con valores de componentes, números de pieza y comentarios de justificación de diseño.</p>
+<h3>Esquemas de hardware</h3>
+<p>Esquemas eléctricos completos tanto para Loko Air como para Loko Ground. Cada componente, cada conexión, cada asignación de pines. Anotado con valores de componentes, números de piezas y comments de fundamentos de diseño.</p>
 </div>
 <div class="repo-card">
-<h3>Archivos de Diseño PCB</h3>
-<p>Archivos completos de diseño PCB en formatos abiertos, incluidos archivos Gerber listos para enviar a servicios de fabricación de PCB. La disposición de capas, rellenos de cobre, tamaños de vías y colocación de componentes están todos incluidos. Puedes pedir PCBs desnudos a cualquier casa de fabricación con estos archivos.</p>
+<h3>Archivos de diseño de PCB</h3>
+<p>Archivos completos de diseño de PCB en formatos abiertos, incluidos archivos Gerber listos para enviar a los servicios de fabricación de PCB. Se incluyen el apilamiento de capas, los vertidos de cobre, los tamaños de vía y la colocación de componentes. Puede solicitar PCB desnudos a cualquier fabricante con estos archivos.</p>
 </div>
 <div class="repo-card">
-<h3>Lista de Materiales (BOM)</h3>
-<p>Lista BOM completa que enumera cada componente con números de pieza del fabricante, especificaciones y fuentes alternativas sugeridas. Incluye componentes pasivos, ICs, conectores, el módulo GPS, el módulo de radio LoRa y el microcontrolador.</p>
+<h3>Lista de materiales (BOM)</h3>
+<p>Lista de materiales completa que enumera cada componente con números de pieza del fabricante, especificaciones y fuentes alternativas sugeridas. Incluye componentes pasivos, circuitos integrados, conectores, el módulo GPS, el módulo de radio LoRa y el microcontrolador.</p>
 </div>
 <div class="repo-card">
-<h3>Código Fuente del Firmware</h3>
-<p>Firmware completo escrito en C/C++, que cubre adquisición GPS, programación de transmisión LoRa, gestión de energía (modos de suspensión), comunicación Bluetooth con la app y configuración de constelación GPS (GPS/GLONASS/Galileo).</p>
+<h3>Código fuente del firmware</h3>
+<p>Firmware completo escrito en C/C++, que cubre la adquisición de GPS, la programación de transmisión de LoRa, la administración de energía (modos de suspensión), la comunicación Bluetooth comm con la aplicación y la configuración de la constelación GPS (GPS/GLONASS/Galileo).</p>
 </div>
 <div class="repo-card">
-<h3>Código Fuente de la App</h3>
-<p>El código fuente de las apps iOS y Android, incluido el renderizado de mapas sin conexión, el protocolo de comunicación Bluetooth y la lógica de análisis de paquetes LoRa.</p>
+<h3>Código fuente de la aplicación</h3>
+<p>El código fuente de la aplicación iOS y Android, incluida la representación de mapas sin conexión, el protocolo de comunicación Bluetooth comm y la lógica de análisis de paquetes LoRa.</p>
 </div>
 </div>
 </div>
-<!-- Por qué importa el código abierto -->
+<!-- Why open source matters -->
 <div class="content-block">
 <div class="container">
-<h2>Por qué el Código Abierto Importa para el Hardware GPS</h2>
-<p>La cuestión de la confianza es especialmente importante para los dispositivos de seguimiento de ubicación. Un rastreador GPS sabe dónde estás en todo momento — o dónde está tu mascota, hijo o objetos de valor. Esa es información sensible.</p>
-<p>Con rastreadores propietarios, estás haciendo una suposición de pura fe: que el fabricante solo envía tus datos de ubicación a ti, no retiene registros históricos de ubicación en sus servidores, no vende datos de ubicación a terceros y que su firmware no tiene vulnerabilidades de seguridad explotables.</p>
-<p>Con Loko, no necesitas fe. El firmware es auditable. El hardware es auditable. El protocolo de comunicación está documentado. La arquitectura LoRa P2P (peer-to-peer) significa que los datos de ubicación viajan solo de Loko Air a Loko Ground — nunca se envían a los servidores de nolilab.</p>
-<p><strong>Loko es técnicamente incapaz de enviar tu ubicación a los servidores de nolilab</strong> — no porque nolilab prometa no hacerlo, sino porque el protocolo de radio no involucra internet en ningún paso. El firmware abierto lo demuestra.</p>
+<h2>Por qué el código abierto es importante para el hardware GPS</h2>
+<p>La cuestión de la confianza es especialmente importante para los dispositivos de seguimiento de ubicación. Un rastreador GPS sabe dónde estás en todo momento, o dónde están tu mascota, tu hijo o tus objetos de valor. Esa es información sensible.</p>
+<p>Con los rastreadores propietarios, usted está haciendo una suposición de pura fe: que el fabricante solo le envía sus datos de ubicación, no retiene registros históricos de ubicación en sus servidores, no vende datos de ubicación a terceros y que su firmware no tiene vulnerabilidades de seguridad explotables.</p>
+<p>Con Loko, no necesitas fe. El firmware es auditable. El hardware es auditable. El protocolo de comunicación comm está documentado. La arquitectura LoRa P2P (peer-to-peer) significa que los datos de ubicación viajan solo desde Loko Air a Loko Ground; nunca se envían a los servidores de nolilab.</p>
+<p><strong>Loko es técnicamente incapaz de enviar su ubicación a los servidores de nolilab</strong> — no porque nolilab prometa no hacerlo, sino porque el protocolo de radio no involucra a Internet en ningún paso. El firmware abierto lo demuestra.</p>
 </div>
 </div>
-<!-- Cómo usan Loko los creadores y desarrolladores -->
+<!-- How makers and developers use Loko -->
 <div class="content-block">
 <div class="container">
-<h2>Cómo Usan Loko los Creadores y Desarrolladores</h2>
-<p>La naturaleza de código abierto de Loko ha atraído a una comunidad activa de entusiastas del hardware y desarrolladores que han extendido la plataforma de formas creativas:</p>
+<h2>Cómo los creadores y desarrolladores utilizan Loko</h2>
+<p>La naturaleza de código abierto de Loko ha atraído a una comunidad activa de entusiastas y desarrolladores de hardware que han ampliado la plataforma de manera creativa:</p>
 <ul>
-<li><strong>Intervalos de actualización personalizados:</strong> Algun</li></ul></div></div></main></body></html>
+<li><strong>Intervalos de actualización personalizados:</strong> Algunos usuarios modifican el firmware para transmitir cada 1 segundo para recuperación de drones de alta velocidad, o cada 5 minutos para investigaciones de vida silvestre de larga duración para extender aún más la vida útil de la batería.</li>
+<li><strong>Sensores adicionales:</strong> Los desarrolladores han agregado sensores de temperatura, acelerómetros y sensores de presión barométrica al hardware Loko Air para aplicaciones de monitoreo ambiental.</li>
+<li><strong>Integración LoRaWAN:</strong> La radio LoRa se puede reconfigurar para communicate con puertas de enlace LoRaWAN en lugar de un receptor de tierra Loko dedicado, útil para implementaciones de infraestructura fija.</li>
+<li><strong>Cerramientos personalizados:</strong> Community ha aportado diseños de carcasas imprimibles en 3D para aplicaciones de montaje específicas: soportes para drones, carcasas impermeables y accesorios para collares.</li>
+<li><strong>Integraciones de aplicaciones de terceros:</strong> El protocolo Bluetooth documentado permite a los desarrolladores crear sus propias aplicaciones que reciben datos Loko; existen integraciones con Home Assistant, Node-RED y plataformas de mapeo personalizadas.</li>
+</ul>
+<p>Si tiene un caso de uso específico que el firmware original Loko no admite, la arquitectura de código abierto significa que puede implementarlo usted mismo sin esperar a que nolilab le dé prioridad.</p>
+</div>
+</div>
+<!-- Build vs buy comparison -->
+<div class="content-block">
+<div class="container">
+<h2>Construir versus comprar: sus opciones con Loko</h2>
+<table class="compare-table">
+<thead>
+<tr>
+<th>Opción</th>
+<th>Costo</th>
+<th>Tiempo requerido</th>
+<th>Habilidad requerida</th>
+<th>Mejor para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comprar en nolilab</td>
+<td>Precio del equipo</td>
+<td>Minutos para configurar</td>
+<td>Ninguno: enchufar y usar</td>
+<td>La mayoría de los usuarios</td>
+</tr>
+<tr>
+<td>Construir a partir de archivos (DIY)</td>
+<td>Costo del componente (BOM)</td>
+<td>10 a 20 horas</td>
+<td>Montaje de PCB, soldadura</td>
+<td>Creadores, aficionados</td>
+</tr>
+<tr>
+<td>Construir y personalizar firmware</td>
+<td>Costo del componente</td>
+<td>20 a 50+ horas</td>
+<td>Programa integrado C/C++mming</td>
+<td>Desarrolladores, investigadores</td>
+</tr>
+<tr>
+<td>Bifurcar y crear una variante</td>
+<td>Diseño + fabricación</td>
+<td>Más de 100 horas</td>
+<td>Diseño de PCB + firmware</td>
+<td>Empresas, equipos de producto.</td>
+</tr>
+</tbody>
+</table>
+<p>La gran mayoría de los usuarios comprarán el dispositivo prefabricado, no porque esté prohibido construirlo, sino porque la calidad de fabricación, el firmware calibrado y el hardware probado de nolilab valen más que el ahorro de costos de los componentes. Los archivos de código abierto existen para permitir la confianza y la extensibilidad, no para socavar el producto commercial.</p>
+</div>
+</div>
+<!-- FAQ -->
+<div class="content-block">
+<div class="container">
+<h2>Rastreador GPS de código abierto: preguntas frecuentes</h2>
+<div class="faq-item">
+<h3>¿Loko es verdaderamente de código abierto: hardware y firmware?</h3>
+<p>Sí. Nolilab ha publicado los esquemas completos del hardware, los archivos de diseño de PCB y el código fuente del firmware. Puede inspeccionar cada selección de componentes, rastrear cada decisión del circuito y leer cada línea de código que se ejecuta en el dispositivo. Nada está oculto ni ofuscado.</p>
+</div>
+<div class="faq-item">
+<h3>¿Puedo crear mi propio rastreador Loko GPS a partir de archivos de código abierto?</h3>
+<p>Sí. Todos los archivos que necesita para fabricar su propio hardware Loko están disponibles públicamente: archivos PCB Gerber, BOM (lista de materiales) y firmware. Si tiene experiencia en la fabricación de PCB y el ensamblaje de SMD, puede construir el rastreador usted mismo. Nolilab también vende unidades probadas y prefabricadas para quienes prefieren un dispositivo listo para usar.</p>
+</div>
+<div class="faq-item">
+<h3>¿Bajo qué licencia se publica el hardware y el firmware Loko?</h3>
+<p>El hardware y el firmware se publican únicamente para uso personal. No se permite el uso comercial de Comm sin el permiso explícito por escrito de nolilab. Vea la licencia completa en <a href="https://github.com/tomipiriyev/Loko" rel="noopener noreferrer" style="color:var(--accent);" target="_blank">github.com/tomipiriyev/Loko</a>.</p>
+</div>
+<div class="faq-item">
+<h3>¿Puedo modificar el firmware Loko para personalizar los intervalos de actualización o agregar sensores?</h3>
+<p>Sí. El firmware está escrito en C/C++ y está completamente documentado. Los desarrolladores pueden modificar los intervalos de actualización de GPS, ajustar los parámetros de transmisión de LoRa, agregar soporte para sensores adicionales, cambiar el comportamiento de administración de energía o implementar protocolos personalizados. El firmware abierto es una de las funciones más poderosas de Loko para usuarios técnicos.</p>
+</div>
+<div class="faq-item">
+<h3>¿Por qué nolilab abre el hardware si también lo vende?</h3>
+<p>Nolilab cree que la transparencia genera confianza. Al publicar públicamente todo el hardware y firmware, los usuarios pueden verificar que Loko hace exactamente lo que dice: sin seguimiento oculto, sin recopilación de datos secretos, sin firmware de caja negra. El community también aporta mejoras al proyecto. Nolilab compite en calidad de fabricación, soporte y experiencia completa del producto, no en mantener los diseños en secreto.</p>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p>Loko es el único rastreador GPS donde puede leer el código fuente completo, inspeccionar cada circuito y verificar cada reclamo. Sin secretos. Sin bloqueo. Transparencia total.</p>
+<p><strong>Hardware de código abierto. Firmware de código abierto. Construido para la confianza.</strong></p>
+<p>Vea la fuente del firmware en <a href="/firmware/" style="color: var(--accent); font-weight: 500;">nolilab.com/firmware</a> o compre el sistema Loko completo a continuación.</p>
+<br/>
+<a class="cta-btn" href="/#shop">Comprar Loko →</a>
+</div>
+</div>
+</div>
+</main>
+<div id="site-footer"></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
