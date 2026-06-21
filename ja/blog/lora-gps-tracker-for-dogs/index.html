@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<link href="/css/partials.css" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LoRa 犬用 GPS トラッカー |携帯電話サービスがありません |ロコ GPS トラッカー</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="携帯電話サービスなしで狩猟犬や田舎のペットを追跡します。 Loko GPS Tracker は、SIM なし、月額料金なし、オフライン マップ、20 km の範囲を備えた LoRa GPS ドッグ トラッカーです。" name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="https://www.nolilab.com/blog/lora-gps-tracker-for-dogs/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/lora-gps-tracker-for-dogs/" hreflang="en" rel="alternate">
+<link href="https://www.nolilab.com/ja/blog/lora-gps-tracker-for-dogs/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/lora-gps-tracker-for-dogs/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/lora-gps-tracker-for-dogs/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/lora-gps-tracker-for-dogs/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/lora-gps-tracker-for-dogs/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/lora-gps-tracker-for-dogs/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="LoRa GPS Tracker for Dogs | No Cell Service | Loko GPS Tracker" property="og:title"/>
+<meta content="Track hunting dogs and rural pets without cell service. Loko GPS Tracker is a LoRa GPS dog tracker with no SIM, no monthly fee, offline maps, and 20km range." property="og:description"/>
+<meta content="https://www.nolilab.com/blog/lora-gps-tracker-for-dogs/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="LoRa GPS Tracker for Dogs | No Cell Service | Loko GPS Tracker" name="twitter:title"/>
+<meta content="Track hunting dogs and rural pets without cell service. Loko GPS Tracker is a LoRa GPS dog tracker with no SIM, no monthly fee, offline maps, and 20km range." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+    header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+    .nav-container { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-lg); }
+    .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); color: var(--text-primary); text-decoration: none; }
+    .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+    .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+    .nav-link:hover { color: var(--text-primary); }
+    article { max-width: 800px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); }
+    .article-header { margin-bottom: var(--spacing-xl); }
+    .article-meta { display: flex; gap: var(--spacing-md); color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-md); }
+    .article-title { font-size: 2.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--spacing-md); line-height: 1.2; }
+    .article-image { width: 100%; border-radius: var(--radius-lg); margin-bottom: var(--spacing-xl); }
+    .article-content { font-size: 1.0625rem; line-height: 1.8; color: var(--text-primary); }
+    .article-content h2 { font-size: 1.75rem; font-weight: 600; margin: var(--spacing-xl) 0 var(--spacing-md); letter-spacing: -0.01em; }
+    .article-content h3 { font-size: 1.375rem; font-weight: 600; margin: var(--spacing-lg) 0 var(--spacing-sm); }
+    .article-content p { margin-bottom: var(--spacing-md); }
+    .article-content ul, .article-content ol { margin: var(--spacing-md) 0; padding-left: var(--spacing-lg); }
+    .article-content li { margin-bottom: var(--spacing-sm); }
+    .article-content strong { font-weight: 600; color: var(--text-primary); }
+    .article-content table { width: 100%; border-collapse: collapse; margin: var(--spacing-lg) 0; font-size: 0.9375rem; }
+    .article-content th { background: var(--bg-secondary); font-weight: 600; padding: 0.75rem 1rem; text-align: left; border: 1px solid var(--border); }
+    .article-content td { padding: 0.75rem 1rem; border: 1px solid var(--border); }
+    .article-content tr:nth-child(even) { background: var(--bg-secondary); }
+    .back-link { display: inline-flex; align-items: center; gap: var(--spacing-xs); color: var(--accent); text-decoration: none; font-weight: 500; margin-bottom: var(--spacing-lg); transition: color 0.2s ease; }
+    .back-link:hover { color: var(--accent-hover); }
+    .author-link { color: var(--text-secondary); text-decoration: none; }
+    .author-link:hover { color: var(--accent); }
+    .language-selector { margin-left: var(--spacing-sm); flex-shrink: 0; position: relative; }
+    .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+    .language-btn:hover { border-color: var(--accent); background: var(--bg-primary); }
+    .current-lang { font-family: var(--font-mono); font-weight: 600; }
+    .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+    .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .language-option { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: var(--text-secondary); text-decoration: none; transition: all 0.2s ease; border-bottom: 1px solid var(--border); }
+    .language-option:last-child { border-bottom: none; }
+    .language-option:hover { background: var(--bg-secondary); color: var(--text-primary); }
+    .language-option .lang-code { font-family: var(--font-mono); font-weight: 600; font-size: 0.8rem; min-width: 28px; color: var(--accent); }
+    .language-option .lang-name { font-size: 0.875rem; }
+    .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: var(--spacing-xs); z-index: 1001; margin-left: auto; }
+    .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+    .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+    @media (max-width: 768px) {
+      .nav-container { flex-direction: row; justify-content: space-between; align-items: center; }
+      .mobile-menu-toggle { display: flex; }
+      .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px var(--spacing-md) var(--spacing-md); box-shadow: var(--shadow-lg); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+      .nav-links.active { left: 0; }
+      .nav-link { width: 100%; padding: var(--spacing-md); border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+      .language-selector { position: static; margin-left: var(--spacing-sm); }
+      .language-dropdown { left: 0; right: auto; min-width: 160px; }
+      body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+      body.menu-open { overflow: hidden; }
+      .article-title { font-size: 2rem; }
+      .article-content { font-size: 1rem; }
+    }
+    .related-posts { max-width: 800px; margin: 0 auto; padding: 2.5rem 1rem 3rem; border-top: 1px solid var(--border); }
+    .related-posts-heading { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; color: var(--text-primary); }
+    .related-posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .related-post-card { display: flex; flex-direction: column; justify-content: space-between; padding: 1rem 1.1rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+    .related-post-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+    .related-post-card h3 { font-size: 0.875rem; font-weight: 500; line-height: 1.45; margin-bottom: 0.6rem; }
+    .related-post-card .rp-cta { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
+    @media (max-width: 640px) { .related-posts-grid { grid-template-columns: 1fr; } }
+    .product-cta { max-width: 800px; margin: 0 auto 0; padding: 1.5rem 1rem 1.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); }
+    .product-cta-heading { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.9rem; }
+    .product-cta-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .product-cta-link { display: inline-block; padding: 0.45rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 500; color: var(--text-primary); text-decoration: none; background: var(--bg-primary); transition: border-color 0.15s ease, color 0.15s ease; }
+    .product-cta-link:hover { border-color: var(--accent); color: var(--accent); }
+    .product-cta-link.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .product-cta-link.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "LoRa GPS Tracker for Dogs: Offline Dog Tracking Without a SIM Card",
+  "description": "How LoRa P2P radio technology enables reliable offline GPS tracking for dogs — up to 20km range, 1-year battery, no SIM card, no monthly fees.",
+  "url": "https://www.nolilab.com/blog/lora-gps-tracker-for-dogs/",
+  "datePublished": "2026-05-02",
+  "dateModified": "2026-05-02",
+  "author": {
+    "@type": "Person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": ["https://www.linkedin.com/in/tomi-piriyev-33593354/", "https://github.com/tomipiriyev"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com",
+    "logo": { "@type": "ImageObject", "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" }
+  },
+  "image": { "@type": "ImageObject", "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.nolilab.com/blog/lora-gps-tracker-for-dogs/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can you use a LoRa GPS tracker for dogs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. LoRa P2P GPS trackers like Loko are well-suited for dog tracking. Loko weighs 14g, attaches to any collar, and communicates directly with a handheld receiver up to 20km away — no cell tower, no SIM card, no subscription required. Battery lasts up to 1 year on a single charge."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the range of a LoRa dog tracker in a forest?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In dense forest, LoRa P2P typically delivers 2–5km of reliable range. The exact range depends on tree density, terrain, and antenna elevation. Open farmland and mountains with clear line of sight can extend range to 10–20km. LoRa's sub-GHz frequency penetrates vegetation much better than Bluetooth or Wi-Fi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a LoRa GPS dog tracker need a subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. LoRa P2P GPS trackers like Loko communicate directly between the collar unit and your handheld receiver using radio — no cellular network, no server, no monthly fee. Standard GPS collars (GSM/LTE) require a SIM card and typically $5–$15/month. LoRa-based trackers eliminate that cost entirely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does the Loko GPS tracker weigh? Is it suitable for small dogs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko weighs 14g and measures 28.5 × 20.5 × 5.9mm — about the size of a large coin. It is suitable for medium and large dogs. For very small dogs (under 3kg), the weight may be noticeable, but it's among the lightest GPS trackers available. It attaches to standard collar D-rings using the included mount."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does the battery last on a GPS dog tracker?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko's battery lasts up to 1 year at a 60-second transmission interval. At a 10-second interval (more responsive tracking), battery life is approximately 2–3 months. GSM/LTE GPS collars typically last 1–7 days between charges. LoRa's ultra-low power consumption is why Loko achieves such dramatically longer battery life."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.nolilab.com" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.nolilab.com/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "LoRa GPS Tracker for Dogs", "item": "https://www.nolilab.com/blog/lora-gps-tracker-for-dogs/" }
+  ]
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer="" src="/js/layout.js"></script>
+</link></head>
+<body>
+<div id="site-header"></div>
+<main>
+<article>
+<a class="back-link" href="/blog/">
+<svg aria-hidden="true" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back to Blog
+</a>
+<div class="article-header">
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> May 2, 2026</span>
+<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+</div>
+<h1 class="article-title">LoRa 犬用 GPS トラッカー: SIM カードなしでオフラインで犬を追跡</h1>
+</div>
+<img alt="Loko GPS Tracker attached to a dog collar" class="article-image" height="600" loading="eager" src="/images/optimized/loko-gps-tracker-red-transparent.png" width="800"/>
+<div class="article-content">
+<p>ほとんどの GPS 犬用首輪は携帯電話ネットワークに依存しています。犬が森林、峡谷、人里離れた野原などの不感帯に遭遇すると、信号が低下し、犬を見失います。あ <strong>LoRa GPS tracker for dogs</strong>これを別の方法で解決します。位置データを携帯電話の基地局を介してルーティングする代わりに、電波を使用して携帯受信機に直接送信します。 </p>
+<p>その結果、どこでも機能し、月額料金はかからず、1 回の充電で最長 1 年間動作するトラッカーが誕生しました。</p>
+<p><strong>Looking for the device?</strong>から始めてください <a href="/lora-gps-tracker/">Loko LoRa GPS tracker</a>または専用の <a href="/hunting-dogs/">hunting dog tracking page</a>、犬特有の推論については、このガイドを使用してください。 </p>
+<h2>携帯電話GPSトラッカーが狩猟犬や田舎のペットの狩猟に失敗する理由</h2>
+<p>標準的な GPS 犬用首輪 (Tractive、Whistle、Fi などのブランド) が機能するには、SIM カードとライブセルラー接続が必要です。彼らのアプリは、都市、郊外、および信頼性の高い 4G カバレッジのある場所であればどこでも優れた性能を発揮します。しかし、それらには基本的な制限があります。 <strong>if there's no cell signal, there's no tracking</strong>。 </p>
+<p>これは以下にとって深刻な問題です。</p>
+<ul>
+<li><strong>Hunting dogs</strong>森林、湿地、僻地まで広範囲に及ぶ </li>
+<li><strong>Farm dogs</strong>最寄りの携帯電話基地局を越えた大規模な田舎の敷地内 </li>
+<li><strong>Hiking dogs</strong>山岳地帯、国立公園、またはカバー範囲のない自然地域 </li>
+<li><strong>Anyone outside Europe or North America</strong>ローミング料金により毎月の GPS サブスクリプションが利用できなくなる場合 </li>
+</ul>
+<p>LoRa P2P (ピアツーピア) テクノロジーは、この問題を完全に回避します。</p>
+<h2>LoRa 犬追跡の仕組み</h2>
+<p>LoRaはロングレンジの略です。これは、GPS 座標などの小さなデータ パケットを、非常に少ない電力で非常に長距離に送信する無線変調技術です。セルラー GPS とは異なり、LoRa トラッカーにはインフラストラクチャは必要ありません。</p>
+<ul>
+<li>首輪ユニット（犬の場合）は GPS 衛星から位置を受信します。</li>
+<li>LoRa 無線を介してその位置をハンドヘルド受信機に直接送信します。</li>
+<li>携帯電話基地局も SIM カードもインターネット接続も必要ありません</li>
+</ul>
+<p>Loko GPS トラッカーは、ゲートウェイを必要とする LoRaWAN ではなく、首輪と受信機間の直接リンクである LoRa P2P を使用します。これはつまり <strong>zero infrastructure</strong>。ロコは、首輪と受信機の間に無線見通し線がある限り、地球上のどこでも動作します。 </p>
+<h2>Loko 犬追跡仕様</h2>
+<table>
+<tr><th>Property</th><th>Loko</th><th>Typical Cellular GPS Collar</th></tr>
+<tr><td>Weight</td><td>14 g</td><td>35–80 g</td></tr>
+<tr><td>Dimensions</td><td>28.5 × 20.5 × 5.9 mm</td><td>50–100 mm long</td></tr>
+<tr><td>Radio range</td><td>Up to 20 km (open terrain)</td><td>Unlimited (needs cell signal)</td></tr>
+<tr><td>Range in forest</td><td>2–5 km typical</td><td>0 km (no coverage)</td></tr>
+<tr><td>Battery life</td><td>Up to 1 year</td><td>1–7 days</td></tr>
+<tr><td>Monthly fee</td><td>$0</td><td>$5–$15/month</td></tr>
+<tr><td>Works without cell signal</td><td>Yes — always</td><td>No</td></tr>
+<tr><td>GNSS systems</td><td>GPS + GLONASS + Galileo + BeiDou</td><td>Usually GPS only</td></tr>
+</table>
+<h2>現実世界の範囲: さまざまな地形で予想されること</h2>
+<p>LoRa の範囲は、地形と見通しの条件に大きく依存します。 Loko ユーザーが犬の追跡に関して通常報告する内容は次のとおりです。</p>
+<h3>原っぱと農地</h3>
+<p>大きな障害物のない平らで開けた地形では、ロコは確実に到達します。 <strong>10–20 km</strong>。広い敷地をカバーする農場の犬にとって、これは隙間なく継続的に追跡することを意味します。 </p>
+<h3>森林と密な植生</h3>
+<p>木の幹や葉は無線信号を吸収し散乱します。適度に密集した森林では、 <strong>2–5 km</strong>信頼できる範囲です。受信機を上げる（持ち上げるか尾根の上に置く）と、樹林帯での受信範囲が大幅に広がります。 </p>
+<h3>山と渓谷</h3>
+<p>山は見通しが利く場合に優れた範囲を提供し、尾根から谷を越えて犬を追跡すると 15 km を超える場合があります。見通しの悪い谷では、航続距離が 1 ～ 3 km に減少します。携帯電話の GPS トラッカーは、通常、これらの同じエリアでは信号がゼロです。</p>
+<h3>狩猟シナリオ</h3>
+<p>LoRa は、野外で働く鳥犬、猟犬、レトリバーに、ほとんどの狩猟隊が 1 日に移動できる距離を超える距離でも信頼性の高い接触を実現します。ハンターらは、携帯電話の首輪がずっと前に信号を失っていたにもかかわらず、ロコは接続されたままであると報告している。</p>
+<h2>ロコを犬の首輪に取り付ける</h2>
+<p>Loko のコンパクトな形状により、首輪の取り付けが簡単になります。デバイスのサイズは 28.5 × 20.5 × 5.9 mm で、10 セントユーロ硬貨よりわずかに大きく、重さは 14 g です。付属の取り付け金具を使用すると、標準的なカラー D リングに適合します。</p>
+<p>Loko には独自のディスプレイやコントロールがないため、コンパニオン アプリ (iOS および Android で利用可能) がすべての設定を処理します。送信間隔（10秒～5分）を設定すると、そこから首輪ユニットが自律動作します。</p>
+<h2>Loko と GSM GPS 犬用首輪の比較</h2>
+<p>適切なトラッカーはユースケースによって異なります。</p>
+<ul>
+<li><strong>Choose a cellular GPS collar</strong>あなたの犬が携帯電話の通信範囲が広い郊外または都市部に滞在している場合、スマートフォン アプリを介して任意の距離でライブ追跡が必要であり、月額料金は許容範囲内です。 </li>
+<li><strong>Choose Loko (LoRa P2P)</strong>あなたの犬が森林、農場、または携帯電話の通信範囲が不安定な山で働いている場合、サブスクリプションなしでどこでも機能する追跡が必要であり、7 日を超えるバッテリー寿命が不可欠です。 </li>
+</ul>
+<p>狩猟犬、農場で働く犬、田舎のペットの場合、携帯首輪の購読料は年月が経つにつれて高騰します。月額 10 ドル、つまり年間で 120 ドルとなり、ロコの購入価格よりも高くなります。 LoRa は初年度に料金を支払い、無期限に無料で動作し続けます。</p>
+<h2>よくある質問</h2>
+<h3>Loko を使用して犬の位置をリアルタイムで追跡できますか?</h3>
+<p>はい、Loko が 10 ～ 60 秒ごとに新しい GPS 位置を送信するという意味で (構成可能)。場所は携帯電話の Loko アプリに表示されます。セルラー GPS アプリとは異なり、Loko アプリはクラウド サーバー経由ではなく、携帯電話に接続されている LokoHUB レシーバー経由で首輪と直接通信します。</p>
+<h3>私の犬が地下や巣穴に入った場合でも、ロコは機能しますか?</h3>
+<p>LoRa またはセルラーの GPS トラッカーは、密集した地球や地下の内部では信頼性の高い追跡を提供できません。 GPS 信号は固い地面を通過できません。開けた地形や軽く木が茂った地形での表面レベルの追跡では、Loko は優れたパフォーマンスを発揮します。</p>
+<h3>ロコは泳ぐ犬にも防水ですか?</h3>
+<p>Loko は飛沫耐性に関する IP 等級を取得しています。日常的に泳ぐ犬や水没する犬の場合は、最新の防水仕様を販売店でご確認ください。 <a href="/specifications/">specifications page</a>購入前に。 </p>
+</div>
+</article>
+<div class="product-cta">
+<p class="product-cta-heading">Track Your Dog with Loko</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">See the Loko GPS Tracker</a>
+<a class="product-cta-link" href="/hunting-dogs/">Loko for Hunting Dogs</a>
+<a class="product-cta-link" href="/specifications/">Full Specifications</a>
+<a class="product-cta-link" href="/battery-life/">Battery Life Comparison</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">Related Articles</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1/">
+<h3>Best GPS Tracker for Drones 2025</h3>
+<span class="rp-cta">Read more →</span>
+</a>
+<a class="related-post-card" href="/blog/radio-line-of-sight/">
+<h3>Radio Line of Sight: How It Affects GPS &amp; LoRa Range</h3>
+<span class="rp-cta">Read more →</span>
+</a>
+<a class="related-post-card" href="/blog/what-are-lora-p2p-and-lorawan/">
+<h3>LoRa P2P vs LoRaWAN: Key Differences Explained</h3>
+<span class="rp-cta">Read more →</span>
+</a>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script>
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const body = document.body;
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      body.classList.toggle('menu-open');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        body.classList.remove('menu-open');
+      });
+    });
+    document.addEventListener('click', (e) => {
+      if (body.classList.contains('menu-open') &&
+          !navLinks.contains(e.target) &&
+          !mobileMenuToggle.contains(e.target)) {
+        mobileMenuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        body.classList.remove('menu-open');
+      }
+    });
+  }
+</script>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
