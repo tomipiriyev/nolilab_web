@@ -2,14 +2,35 @@
   'use strict';
 
   /* ── Gallery ───────────────────────────────────────────────────── */
-  var galleryMain = document.querySelector('.gallery-main');
-  var thumbs      = document.querySelectorAll('.gallery-thumb');
-  var prevBtn     = document.getElementById('gallery-prev');
-  var nextBtn     = document.getElementById('gallery-next');
-  var lightbox    = document.getElementById('lightbox');
-  var lightImg    = document.getElementById('lightbox-img');
-  var lightClose  = document.getElementById('lightbox-close');
-  var currentIdx  = 0;
+  var galleryMain     = document.querySelector('.gallery-main');
+  var thumbsContainer = document.querySelector('.gallery-thumbs');
+  var thumbs          = document.querySelectorAll('.gallery-thumb');
+  var prevBtn         = document.getElementById('gallery-prev');
+  var nextBtn         = document.getElementById('gallery-next');
+  var lightbox        = document.getElementById('lightbox');
+  var lightImg        = document.getElementById('lightbox-img');
+  var lightClose      = document.getElementById('lightbox-close');
+  var currentIdx      = 0;
+
+  /* Per-variant gallery image sets.
+     Loko Air  = tracker-only shots.
+     Loko Bundle = full kit (Air + Ground) shots first, then the Air detail shots. */
+  var AIR_SHOTS = [
+    { base: 'loko-air-gps-tracker-antenna-extended-front', alt: 'Loko Air GPS tracker with extended antenna — front view' },
+    { base: 'loko-air-gps-tracker-antenna-extended-side',  alt: 'Loko Air GPS tracker with extended antenna — side view' },
+    { base: 'loko-air-gps-tracker-red-with-antenna',       alt: 'Loko Air GPS tracker with antenna — red unit' },
+    { base: 'loko-air-gps-tracker-red-front-view',         alt: 'Loko Air GPS tracker — red unit front view' }
+  ];
+  var KIT_SHOTS = [
+    { base: 'loko-gps-tracker-kit-air-ground-receiver', alt: 'Loko GPS tracker kit — Loko Air tracker, Loko Ground receiver and antenna' },
+    { base: 'loko-gps-tracker-complete-kit-air-ground', alt: 'Loko GPS tracker complete kit — Loko Air and Loko Ground with antenna' }
+  ];
+  var GALLERY_SETS = {
+    'LOKO-AIR':    AIR_SHOTS,
+    'LOKO-BUNDLE': KIT_SHOTS.concat(AIR_SHOTS)
+  };
+  function gallerySet(sku) { return GALLERY_SETS[sku] || GALLERY_SETS['LOKO-BUNDLE']; }
+  function optPath(base, ext) { return '/images/optimized/' + base + '.' + ext; }
 
   function getMainImg() { return document.getElementById('gallery-main-img'); }
 
@@ -43,9 +64,34 @@
     if (old) galleryMain.replaceChild(newPicture, old);
   }
 
-  thumbs.forEach(function (thumb, i) {
-    thumb.addEventListener('click', function () { switchToIndex(i); });
-  });
+  function bindThumbs() {
+    thumbs.forEach(function (thumb, i) {
+      thumb.addEventListener('click', function () { switchToIndex(i); });
+    });
+  }
+
+  /* Rebuild the thumbnail strip for the selected variant and reset the main image. */
+  function renderGallery(sku) {
+    if (!thumbsContainer) return;
+    var html = gallerySet(sku).map(function (it, i) {
+      return '' +
+        '<button class="gallery-thumb' + (i === 0 ? ' active' : '') + '" role="listitem" aria-label="View: ' + it.alt + '"' +
+        ' data-full="' + optPath(it.base, 'jpg') + '"' +
+        ' data-srcset="' + optPath(it.base, 'avif') + '"' +
+        ' data-alt="' + it.alt + '">' +
+          '<picture>' +
+            '<source srcset="' + optPath(it.base, 'avif') + '" type="image/avif"/>' +
+            '<img src="' + optPath(it.base, 'jpg') + '" alt="" loading="lazy" width="80" height="80"/>' +
+          '</picture>' +
+        '</button>';
+    }).join('');
+    thumbsContainer.innerHTML = html;
+    thumbs = thumbsContainer.querySelectorAll('.gallery-thumb');
+    bindThumbs();
+    switchToIndex(0);
+  }
+
+  bindThumbs();
 
   if (prevBtn) prevBtn.addEventListener('click', function (e) { e.stopPropagation(); switchToIndex(currentIdx - 1); });
   if (nextBtn) nextBtn.addEventListener('click', function (e) { e.stopPropagation(); switchToIndex(currentIdx + 1); });
@@ -64,7 +110,15 @@
     document.body.style.overflow = '';
   }
 
-  if (galleryMain) galleryMain.addEventListener('click', openLightbox);
+  if (galleryMain) {
+    galleryMain.addEventListener('click', openLightbox);
+    galleryMain.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        openLightbox();
+      }
+    });
+  }
   if (lightClose)  lightClose.addEventListener('click', closeLightbox);
   if (lightbox) {
     lightbox.addEventListener('click', function (e) {
@@ -80,8 +134,6 @@
   var qtyInput     = document.getElementById('qty-input');
   var qtyMinus     = document.getElementById('qty-minus');
   var qtyPlus      = document.getElementById('qty-plus');
-  var SEEED_URL    = 'https://www.seeedstudio.com/Loko-GPS-Tracker-p-6261.html';
-
   function getActiveVariant() {
     var v = document.querySelector('.variant-option.active') || variants[0];
     if (!v) return { sku: 'LOKO-BUNDLE', price: 119, name: 'Loko Bundle' };
@@ -99,71 +151,22 @@
     return isNaN(v) || v < 1 ? 1 : (v > 10 ? 10 : v);
   }
 
-  function buildSeeedUrl(sku, qty) {
-    try {
-      var u = new URL(SEEED_URL);
-      u.searchParams.set('ref',           'nolilab-product');
-      u.searchParams.set('sku',           sku);
-      u.searchParams.set('qty',           String(qty));
-      u.searchParams.set('utm_source',    'nolilab');
-      u.searchParams.set('utm_medium',    'product_page');
-      u.searchParams.set('utm_campaign',  sku === 'LOKO-BUNDLE' ? 'buy_bundle' : 'buy_air');
-      return u.toString();
-    } catch (e) {
-      var sep = SEEED_URL.indexOf('?') === -1 ? '?' : '&';
-      return SEEED_URL + sep +
-             'ref=nolilab-product&sku=' + encodeURIComponent(sku) +
-             '&qty=' + qty +
-             '&utm_source=nolilab&utm_medium=product_page&utm_campaign=' +
-             (sku === 'LOKO-BUNDLE' ? 'buy_bundle' : 'buy_air');
-    }
-  }
+  function updatePurchaseLinks() { /* Buy Now wired via click handler below */ }
 
-  function updatePurchaseLinks() {
-    if (buyBtn) {
-      var v = getActiveVariant();
-      var q = getQty();
-      buyBtn.href = buildSeeedUrl(v.sku, q);
-    }
-  }
-
-  /* ── Cart state + line helpers ────────────────────────────────── */
-  var cart = []; // { lineId, sku, name, price, qty }
-  var nextLineId = 1;
-
+  /* ── Cart helpers (delegate to global CartStore) ──────────────── */
   function addLine(sku, name, price, qty) {
-    /* Merge into an existing line if the SKU matches */
-    var existing = null;
-    for (var i = 0; i < cart.length; i++) {
-      if (cart[i].sku === sku) { existing = cart[i]; break; }
-    }
-    if (existing) {
-      existing.qty = Math.min(10, existing.qty + qty);
-      return existing.lineId;
-    }
-    var line = { lineId: 'l' + (nextLineId++), sku: sku, name: name, price: price, qty: qty };
-    cart.push(line);
-    return line.lineId;
+    CartStore.add(sku, name, price, qty, '/images/optimized/loko-gps-tracker-red-transparent.png');
+    return sku; // use sku as identifier
   }
 
-  function removeLine(lineId) {
-    cart = cart.filter(function (l) { return l.lineId !== lineId; });
+  function removeLine(sku) { CartStore.remove(sku); }
+
+  function updateLineQty(sku, qty) {
+    if (qty < 1) CartStore.remove(sku);
+    else CartStore.update(sku, qty);
   }
 
-  function updateLineQty(lineId, qty) {
-    for (var i = 0; i < cart.length; i++) {
-      if (cart[i].lineId === lineId) {
-        cart[i].qty = Math.max(1, Math.min(10, qty));
-        return;
-      }
-    }
-  }
-
-  function getCartSubtotal() {
-    var sum = 0;
-    for (var i = 0; i < cart.length; i++) sum += cart[i].price * cart[i].qty;
-    return sum;
-  }
+  function getCartSubtotal() { return CartStore.getSubtotal(); }
 
   /* ── Cart Sheet ────────────────────────────────────────────────── */
   var cartSheet           = document.getElementById('cart-sheet');
@@ -187,7 +190,7 @@
   function makeLineEl(line) {
     var el = document.createElement('div');
     el.className = 'cart-sheet-item';
-    el.dataset.lineId = line.lineId;
+    el.dataset.lineId = line.sku; // sku is the stable identifier now
 
     var imgBox = document.createElement('div');
     imgBox.className = 'cart-sheet-item-img';
@@ -265,25 +268,28 @@
     return el;
   }
 
-  function renderCartSheet(flashLineId) {
+  function renderCartSheet(flashSku) {
     if (!cartSheet) return;
-    var count = cart.length;
-    var itemCount = cart.reduce(function (s, l) { return s + l.qty; }, 0);
+    var cartItems = CartStore.getItems();
+    var count     = cartItems.length;
+    var itemCount = CartStore.getCount();
 
     if (cartSheetTitle) {
       cartSheetTitle.textContent = count === 0 ? 'Your Cart' :
         (itemCount === 1 ? 'Your Cart (1 item)' : 'Your Cart (' + itemCount + ' items)');
     }
 
-    setHidden(cartSheetEmpty,     count > 0);
-    setHidden(cartSheetItems,     count === 0);
-    setHidden(cartSheetSubRow,    count === 0);
+    setHidden(cartSheetEmpty,  count > 0);
+    setHidden(cartSheetItems,  count === 0);
+    setHidden(cartSheetSubRow, count === 0);
 
     if (count > 0 && cartSheetItems) {
       cartSheetItems.innerHTML = '';
-      cart.forEach(function (line) {
+      cartItems.forEach(function (item) {
+        // Adapt CartStore shape to the lineEl format product.js expects
+        var line = { lineId: item.sku, sku: item.sku, name: item.name, price: item.price, qty: item.quantity };
         var lineEl = makeLineEl(line);
-        if (flashLineId && line.lineId === flashLineId) {
+        if (flashSku && item.sku === flashSku) {
           lineEl.classList.add('cart-sheet-item--just-added');
         }
         cartSheetItems.appendChild(lineEl);
@@ -291,7 +297,7 @@
     }
 
     if (cartSheetSubtotal) cartSheetSubtotal.textContent = '$' + getCartSubtotal();
-    setHidden(cartSheetMultiNote, count < 2);
+    if (cartSheetMultiNote) setHidden(cartSheetMultiNote, true); // no longer needed
 
     if (cartSheetCheckout) {
       if (count === 0) {
@@ -301,14 +307,9 @@
         if (span) span.textContent = 'Cart is empty';
       } else {
         cartSheetCheckout.removeAttribute('aria-disabled');
-        var first = cart[0];
-        cartSheetCheckout.href = buildSeeedUrl(first.sku, first.qty);
+        cartSheetCheckout.href = '/cart/';
         var span2 = document.getElementById('cart-sheet-checkout-text');
-        if (span2) {
-          span2.textContent = count === 1
-            ? 'Checkout at Seeed Studio'
-            : 'Add ' + cart.length + ' items to Seeed Studio';
-        }
+        if (span2) span2.textContent = 'Proceed to Checkout';
       }
     }
   }
@@ -331,16 +332,27 @@
   function addCurrentToCart() {
     var v = getActiveVariant();
     var q = getQty();
-    var id = addLine(v.sku, v.name, v.price, q);
-    renderCartSheet(id);
+    addLine(v.sku, v.name, v.price, q);
+    renderCartSheet(v.sku);
     openCartSheet();
   }
 
-  /* Add to Cart — intercept, push to cart, open sheet */
+  /* Add to Cart — push to CartStore, open sheet */
   if (cartBtn) {
     cartBtn.addEventListener('click', function (e) {
       e.preventDefault();
       addCurrentToCart();
+    });
+  }
+
+  /* Buy Now — add to cart then go straight to checkout */
+  if (buyBtn) {
+    buyBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var v = getActiveVariant();
+      var q = getQty();
+      CartStore.add(v.sku, v.name, v.price, q, '/images/optimized/loko-gps-tracker-red-transparent.png');
+      window.location.href = '/checkout/';
     });
   }
   if (cartSheetClose)    cartSheetClose.addEventListener('click', closeCartSheet);
@@ -354,68 +366,84 @@
       if (!btn) return;
       var lineEl = btn.closest('.cart-sheet-item');
       if (!lineEl) return;
-      var lineId = lineEl.dataset.lineId;
+      var sku = lineEl.dataset.lineId; // stored as sku
       var act = btn.dataset.act;
       if (act === 'remove') {
-        removeLine(lineId);
+        removeLine(sku);
       } else if (act === 'inc' || act === 'dec') {
-        var line = null;
-        for (var i = 0; i < cart.length; i++) {
-          if (cart[i].lineId === lineId) { line = cart[i]; break; }
+        var items = CartStore.getItems();
+        var item = null;
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].sku === sku) { item = items[i]; break; }
         }
-        if (!line) return;
-        var newQty = line.qty + (act === 'inc' ? 1 : -1);
-        if (newQty < 1) {
-          removeLine(lineId);
-        } else {
-          updateLineQty(lineId, newQty);
-        }
+        if (!item) return;
+        var newQty = item.quantity + (act === 'inc' ? 1 : -1);
+        updateLineQty(sku, newQty);
       }
       renderCartSheet();
     });
   }
 
-  /* ── Wire up variant + qty changes (page-level, not cart) ─────── */
+  /* ── Variant + qty changes ─────────────────────────────────────── */
+  var currentSku = getActiveVariant().sku;
   variants.forEach(function (v) {
     v.addEventListener('click', function () {
-      variants.forEach(function (x) { x.classList.remove('active'); });
+      variants.forEach(function (x) { x.classList.remove('active'); x.setAttribute('aria-pressed', 'false'); });
       v.classList.add('active');
+      v.setAttribute('aria-pressed', 'true');
       if (priceDisplay) priceDisplay.textContent = '$' + v.dataset.price;
-      updatePurchaseLinks();
+      if (v.dataset.sku !== currentSku) {
+        currentSku = v.dataset.sku;
+        renderGallery(currentSku);
+      }
     });
   });
 
   if (qtyInput && qtyMinus && qtyPlus) {
     qtyMinus.addEventListener('click', function () {
       var v = parseInt(qtyInput.value, 10);
-      if (v > 1) { qtyInput.value = v - 1; updatePurchaseLinks(); }
+      if (v > 1) qtyInput.value = v - 1;
     });
     qtyPlus.addEventListener('click', function () {
       var v = parseInt(qtyInput.value, 10);
-      if (v < 10) { qtyInput.value = v + 1; updatePurchaseLinks(); }
+      if (v < 10) qtyInput.value = v + 1;
     });
     qtyInput.addEventListener('change', function () {
       var v = parseInt(qtyInput.value, 10);
-      if (isNaN(v) || v < 1)  qtyInput.value = 1;
+      if (isNaN(v) || v < 1) qtyInput.value = 1;
       if (v > 10) qtyInput.value = 10;
-      updatePurchaseLinks();
     });
   }
-
-  updatePurchaseLinks();
 
   /* ── Tabs ──────────────────────────────────────────────────────── */
   var tabBtns  = document.querySelectorAll('.tab-btn');
   var tabPanes = document.querySelectorAll('.tab-pane');
 
-  tabBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var target = btn.dataset.tab;
-      tabBtns.forEach(function (b) { b.classList.remove('active'); });
-      tabPanes.forEach(function (p) { p.classList.remove('active'); });
-      btn.classList.add('active');
-      var pane = document.getElementById('tab-' + target);
-      if (pane) pane.classList.add('active');
+  function activateTab(btn) {
+    var target = btn.dataset.tab;
+    tabBtns.forEach(function (b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+      b.setAttribute('tabindex', '-1');
+    });
+    tabPanes.forEach(function (p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    btn.setAttribute('tabindex', '0');
+    var pane = document.getElementById('tab-' + target);
+    if (pane) pane.classList.add('active');
+  }
+
+  tabBtns.forEach(function (btn, i) {
+    btn.addEventListener('click', function () { activateTab(btn); });
+    // Arrow-key navigation between tabs (WAI-ARIA tablist pattern)
+    btn.addEventListener('keydown', function (e) {
+      var dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!dir) return;
+      e.preventDefault();
+      var next = tabBtns[(i + dir + tabBtns.length) % tabBtns.length];
+      activateTab(next);
+      next.focus();
     });
   });
 
