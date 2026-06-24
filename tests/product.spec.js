@@ -16,10 +16,21 @@ test.describe('product page', () => {
 
   // ── Gallery ──────────────────────────────────────────────────────────────
 
-  test('gallery: 5 thumbnails, first is active by default', async ({ page }) => {
+  test('gallery: 6 thumbnails for the default Loko Bundle, first is active', async ({ page }) => {
     const thumbs = page.locator('.gallery-thumb');
-    await expect(thumbs).toHaveCount(5);
+    await expect(thumbs).toHaveCount(6);
     await expect(thumbs.nth(0)).toHaveClass(/active/);
+  });
+
+  test('gallery: selecting Loko Air swaps to the 4 tracker-only images', async ({ page }) => {
+    const thumbs = page.locator('.gallery-thumb');
+    await expect(thumbs).toHaveCount(6); // Bundle default
+    await page.locator('.variant-option[data-sku="LOKO-AIR"]').click();
+    await expect(thumbs).toHaveCount(4); // Air-only set
+    await expect(thumbs.nth(0)).toHaveClass(/active/);
+    // Switching back to the bundle restores the full kit set
+    await page.locator('.variant-option[data-sku="LOKO-BUNDLE"]').click();
+    await expect(thumbs).toHaveCount(6);
   });
 
   test('gallery: clicking a thumbnail makes it active and deactivates the previous', async ({ page }) => {
