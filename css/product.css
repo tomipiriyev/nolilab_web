@@ -531,7 +531,7 @@
   overflow: hidden;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  aspect-ratio: 4/3;
+  aspect-ratio: 5/6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -915,46 +915,9 @@
   /* Cart sheet on mobile — full width */
   .cart-sheet-panel { max-width: 100%; }
 
-  /* Why Loko comparison — stack on mobile */
-  .loko-compare-table { border: none; background: transparent; }
-  .loko-compare-row,
-  .loko-compare-row--head {
-    grid-template-columns: 1fr;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--spacing-sm);
-    background: var(--bg-secondary);
-  }
-  .loko-compare-row--head { display: none; }
-  .loko-compare-label {
-    background: var(--bg-primary);
-    border-bottom: 1px solid var(--border);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-secondary);
-    padding: 0.625rem var(--spacing-md);
-  }
-  .loko-compare-cell {
-    border-bottom: 1px solid var(--border);
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-  .loko-compare-cell:last-child { border-bottom: none; }
-  .loko-compare-cell--loko { background: rgba(35, 134, 54, 0.06); }
-  .loko-compare-cell::before {
-    content: attr(data-label);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-secondary);
-    min-width: 90px;
-  }
-  .loko-compare-cell--loko::before { color: var(--accent); }
-  .loko-compare-header h2 { font-size: 1.5rem; }
+  /* Why-Loko comparison mobile styles live at the END of this file, after the
+     base .loko-compare-* rules, so they win the cascade (those base rules are
+     declared after this @media block and would otherwise override them). */
 }
 
 @media (max-width: 480px) {
@@ -1454,4 +1417,73 @@ body.cart-open { overflow: hidden; }
 }
 .cart-sheet-checkout[aria-disabled="true"]:hover {
   transform: none;
+}
+
+/* ── Why-Loko comparison — mobile card layout ─────────────────────────
+   Declared after the base .loko-compare-* rules above so these win the
+   cascade at <=768px (see note in the earlier @media block). Each row
+   becomes a card: an attribute header, then a Loko line and a Cellular
+   line, each with its own caption, status icon and value. */
+@media (max-width: 768px) {
+  .loko-compare-table {
+    border: none;
+    background: transparent;
+    overflow: visible;
+  }
+  .loko-compare-row {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    background: var(--bg-secondary);
+    overflow: hidden;
+  }
+  .loko-compare-row--head { display: none; }
+
+  .loko-compare-label {
+    display: block;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    padding: 0.6rem var(--spacing-md);
+  }
+
+  .loko-compare-cell {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 0.6rem;
+    row-gap: 0.2rem;
+    padding: 0.7rem var(--spacing-md);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+  .loko-compare-cell:last-child { border-bottom: none; }
+  .loko-compare-cell--loko { background: rgba(35, 134, 54, 0.06); }
+
+  /* data-label ("Loko" / "Cellular") becomes a caption across the top */
+  .loko-compare-cell::before {
+    content: attr(data-label);
+    grid-column: 1 / -1;
+    grid-row: 1;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    min-width: 0;
+  }
+  .loko-compare-cell--loko::before { color: var(--accent); }
+
+  .loko-compare-icon { grid-column: 1; grid-row: 2; margin-top: 1px; }
+  .loko-compare-cell > span:not(.loko-compare-icon) { grid-column: 2; grid-row: 2; }
+
+  .loko-compare-header h2 { font-size: 1.5rem; }
 }
