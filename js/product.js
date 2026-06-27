@@ -126,6 +126,56 @@
     });
   }
 
+  /* ── Description image slider ─────────────────────────────────── */
+  (function () {
+    var slider = document.getElementById('desc-slider');
+    if (!slider) return;
+    var slides  = slider.querySelectorAll('.desc-slide');
+    var dotsBox = document.getElementById('desc-slider-dots');
+    var prev    = document.getElementById('desc-slider-prev');
+    var next    = document.getElementById('desc-slider-next');
+    if (slides.length < 2) {
+      if (prev) prev.style.display = 'none';
+      if (next) next.style.display = 'none';
+      return;
+    }
+    var idx = 0;
+    var timer = null;
+    var DELAY = 5000;
+
+    var dots = [];
+    if (dotsBox) {
+      for (var i = 0; i < slides.length; i++) {
+        var d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'desc-slider-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('role', 'tab');
+        d.setAttribute('aria-label', 'Go to image ' + (i + 1));
+        (function (n) { d.addEventListener('click', function () { go(n); restart(); }); })(i);
+        dotsBox.appendChild(d);
+        dots.push(d);
+      }
+    }
+
+    function go(n) {
+      idx = (n + slides.length) % slides.length;
+      slides.forEach(function (s, k) { s.classList.toggle('active', k === idx); });
+      dots.forEach(function (d, k) { d.classList.toggle('active', k === idx); });
+    }
+    function start() { timer = setInterval(function () { go(idx + 1); }, DELAY); }
+    function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+    function restart() { stop(); start(); }
+
+    if (prev) prev.addEventListener('click', function () { go(idx - 1); restart(); });
+    if (next) next.addEventListener('click', function () { go(idx + 1); restart(); });
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', start);
+    slider.addEventListener('focusin', stop);
+    slider.addEventListener('focusout', start);
+
+    start();
+  })();
+
   /* ── Variant + Quantity helpers ───────────────────────────────── */
   var variants     = document.querySelectorAll('.variant-option');
   var priceDisplay = document.getElementById('price-display');

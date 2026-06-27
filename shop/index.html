@@ -509,11 +509,47 @@
             <p>All firmware is open source. Advanced users can extend, modify, and reflash over USB-C.</p>
           </div>
           <div class="tab-description-img">
-            <picture>
-              <source srcset="/images/optimized/loko-app-map-satellite.avif" type="image/avif"/>
-              <source srcset="/images/optimized/loko-app-map-satellite.webp" type="image/webp"/>
-              <img src="/images/optimized/loko-app-map-satellite.png" alt="Loko satellite map view on mobile" loading="lazy" width="1080" height="1296"/>
-            </picture>
+            <div class="desc-slider" id="desc-slider">
+              <div class="desc-slider-track" id="desc-slider-track">
+                <picture class="desc-slide active">
+                  <source srcset="/images/optimized/loko-app-map-satellite.avif" type="image/avif"/>
+                  <source srcset="/images/optimized/loko-app-map-satellite.webp" type="image/webp"/>
+                  <img src="/images/optimized/loko-app-map-satellite.png" alt="Loko app — satellite map view with live tracker positions" loading="lazy" width="1080" height="1296"/>
+                </picture>
+                <picture class="desc-slide">
+                  <source srcset="/images/optimized/loko-app-map-clean.avif" type="image/avif"/>
+                  <source srcset="/images/optimized/loko-app-map-clean.webp" type="image/webp"/>
+                  <img src="/images/optimized/loko-app-map-clean.png" alt="Loko app — clean map view with tracked devices" loading="lazy" width="1080" height="1296"/>
+                </picture>
+                <picture class="desc-slide">
+                  <source srcset="/images/optimized/loko-app-map-zoom.avif" type="image/avif"/>
+                  <source srcset="/images/optimized/loko-app-map-zoom.webp" type="image/webp"/>
+                  <img src="/images/optimized/loko-app-map-zoom.png" alt="Loko app — zoomed-in map view of a tracker" loading="lazy" width="1080" height="1296"/>
+                </picture>
+                <picture class="desc-slide">
+                  <source srcset="/images/optimized/loko-app-offline-maps.avif" type="image/avif"/>
+                  <source srcset="/images/optimized/loko-app-offline-maps.webp" type="image/webp"/>
+                  <img src="/images/optimized/loko-app-offline-maps.png" alt="Loko app — offline maps management" loading="lazy" width="1080" height="1296"/>
+                </picture>
+                <picture class="desc-slide">
+                  <source srcset="/images/optimized/loko-app-archive.avif" type="image/avif"/>
+                  <source srcset="/images/optimized/loko-app-archive.webp" type="image/webp"/>
+                  <img src="/images/optimized/loko-app-archive.png" alt="Loko app — location history archive" loading="lazy" width="1080" height="1296"/>
+                </picture>
+                <picture class="desc-slide">
+                  <source srcset="/images/optimized/loko-app-download.avif" type="image/avif"/>
+                  <source srcset="/images/optimized/loko-app-download.webp" type="image/webp"/>
+                  <img src="/images/optimized/loko-app-download.png" alt="Loko app — offline map download screen" loading="lazy" width="1080" height="1296"/>
+                </picture>
+              </div>
+              <button type="button" class="desc-slider-arrow desc-slider-prev" id="desc-slider-prev" aria-label="Previous image">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button type="button" class="desc-slider-arrow desc-slider-next" id="desc-slider-next" aria-label="Next image">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <div class="desc-slider-dots" id="desc-slider-dots" role="tablist" aria-label="Slide navigation"></div>
+            </div>
           </div>
         </div>
       </div>
