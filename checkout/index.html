@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5"/>
+<title>Checkout — Nolilab</title>
+<meta name="robots" content="noindex"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<link href="/css/index.css" rel="stylesheet"/>
+<link href="/css/checkout.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="site-header"></div>
+
+<main class="checkout-page">
+  <h1 style="font-size:1.5rem;font-weight:700;margin-bottom:var(--spacing-lg)">Checkout</h1>
+
+  <!-- Progress indicator -->
+  <nav class="checkout-progress" aria-label="Checkout steps">
+    <div class="progress-step active" data-step="1">
+      <div class="progress-step-label">
+        <span class="progress-step-num">1</span>
+        <span class="progress-step-text">Contact</span>
+      </div>
+    </div>
+    <div class="progress-connector"></div>
+    <div class="progress-step" data-step="2">
+      <div class="progress-step-label">
+        <span class="progress-step-num">2</span>
+        <span class="progress-step-text">Shipping</span>
+      </div>
+    </div>
+    <div class="progress-connector"></div>
+    <div class="progress-step" data-step="3">
+      <div class="progress-step-label">
+        <span class="progress-step-num">3</span>
+        <span class="progress-step-text">Billing</span>
+      </div>
+    </div>
+    <div class="progress-connector"></div>
+    <div class="progress-step" data-step="4">
+      <div class="progress-step-label">
+        <span class="progress-step-num">4</span>
+        <span class="progress-step-text">Delivery</span>
+      </div>
+    </div>
+    <div class="progress-connector"></div>
+    <div class="progress-step" data-step="5">
+      <div class="progress-step-label">
+        <span class="progress-step-num">5</span>
+        <span class="progress-step-text">Review</span>
+      </div>
+    </div>
+    <div class="progress-connector"></div>
+    <div class="progress-step" data-step="6">
+      <div class="progress-step-label">
+        <span class="progress-step-num">6</span>
+        <span class="progress-step-text">Payment</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="checkout-layout">
+    <!-- Steps column -->
+    <div id="checkout-steps">
+
+      <!-- Step 1: Contact information -->
+      <section class="checkout-step" id="step-1" data-step="1">
+        <h2>Contact Information</h2>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="first-name">First Name <span class="required">*</span></label>
+            <input type="text" id="first-name" name="first_name" autocomplete="given-name" required/>
+            <span class="field-error" id="err-first-name"></span>
+          </div>
+          <div class="form-field">
+            <label for="last-name">Last Name <span class="required">*</span></label>
+            <input type="text" id="last-name" name="last_name" autocomplete="family-name" required/>
+            <span class="field-error" id="err-last-name"></span>
+          </div>
+        </div>
+        <div class="form-row single">
+          <div class="form-field">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required/>
+            <span class="field-error" id="err-email"></span>
+          </div>
+        </div>
+        <div class="form-row single">
+          <div class="form-field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel"/>
+          </div>
+        </div>
+        <div class="checkout-actions">
+          <span></span>
+          <button class="btn-next" data-next="2">Continue to Shipping →</button>
+        </div>
+      </section>
+
+      <!-- Step 2: Shipping address -->
+      <section class="checkout-step" id="step-2" data-step="2" hidden>
+        <h2>Shipping Address</h2>
+        <div class="form-row single">
+          <div class="form-field">
+            <label for="ship-country">Country <span class="required">*</span></label>
+            <select id="ship-country" name="ship_country" autocomplete="shipping country" required>
+              <option value="">Select country…</option>
+            </select>
+            <span class="field-error" id="err-ship-country"></span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="ship-state">State / Province</label>
+            <input type="text" id="ship-state" name="ship_state" autocomplete="shipping address-level1"/>
+          </div>
+          <div class="form-field">
+            <label for="ship-city">City <span class="required">*</span></label>
+            <input type="text" id="ship-city" name="ship_city" autocomplete="shipping address-level2" required/>
+            <span class="field-error" id="err-ship-city"></span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="ship-postal">Postal Code <span class="required">*</span></label>
+            <input type="text" id="ship-postal" name="ship_postal" autocomplete="shipping postal-code" required/>
+            <span class="field-error" id="err-ship-postal"></span>
+          </div>
+          <div class="form-field">
+            <label for="ship-street">Street Address <span class="required">*</span></label>
+            <input type="text" id="ship-street" name="ship_street" autocomplete="shipping street-address" required/>
+            <span class="field-error" id="err-ship-street"></span>
+          </div>
+        </div>
+        <div class="form-row single">
+          <div class="form-field">
+            <label for="ship-apt">Apartment / Suite (optional)</label>
+            <input type="text" id="ship-apt" name="ship_apt" autocomplete="shipping address-line2"/>
+          </div>
+        </div>
+        <div class="checkout-actions">
+          <button class="btn-back" data-back="1">← Back</button>
+          <button class="btn-next" data-next="3">Continue to Billing →</button>
+        </div>
+      </section>
+
+      <!-- Step 3: Billing address -->
+      <section class="checkout-step" id="step-3" data-step="3" hidden>
+        <h2>Billing Address</h2>
+        <label class="checkbox-row">
+          <input type="checkbox" id="bill-same" checked/>
+          <label for="bill-same">Same as shipping address</label>
+        </label>
+        <div id="billing-fields" hidden>
+          <div class="form-row single">
+            <div class="form-field">
+              <label for="bill-country">Country <span class="required">*</span></label>
+              <select id="bill-country" name="bill_country" autocomplete="billing country">
+                <option value="">Select country…</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="bill-state">State / Province</label>
+              <input type="text" id="bill-state" name="bill_state" autocomplete="billing address-level1"/>
+            </div>
+            <div class="form-field">
+              <label for="bill-city">City <span class="required">*</span></label>
+              <input type="text" id="bill-city" name="bill_city" autocomplete="billing address-level2"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="bill-postal">Postal Code <span class="required">*</span></label>
+              <input type="text" id="bill-postal" name="bill_postal" autocomplete="billing postal-code"/>
+            </div>
+            <div class="form-field">
+              <label for="bill-street">Street Address <span class="required">*</span></label>
+              <input type="text" id="bill-street" name="bill_street" autocomplete="billing street-address"/>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="form-field">
+              <label for="bill-apt">Apartment / Suite (optional)</label>
+              <input type="text" id="bill-apt" name="bill_apt" autocomplete="billing address-line2"/>
+            </div>
+          </div>
+        </div>
+        <div class="checkout-actions">
+          <button class="btn-back" data-back="2">← Back</button>
+          <button class="btn-next" data-next="4">Continue to Delivery →</button>
+        </div>
+      </section>
+
+      <!-- Step 4: Shipping method -->
+      <section class="checkout-step" id="step-4" data-step="4" hidden>
+        <h2>Delivery Method</h2>
+        <div id="shipping-options-wrap">
+          <p class="shipping-loading">Loading shipping options…</p>
+        </div>
+        <div class="checkout-actions">
+          <button class="btn-back" data-back="3">← Back</button>
+          <button class="btn-next" data-next="5" id="btn-to-payment">Continue to Review →</button>
+        </div>
+      </section>
+
+      <!-- Step 5: Review -->
+      <section class="checkout-step" id="step-5" data-step="5" hidden>
+        <h2>Review Your Order</h2>
+        <div class="review-items" id="review-items"></div>
+        <div class="review-totals" id="review-totals"></div>
+        <div class="review-details-grid" id="review-details"></div>
+        <div class="checkout-actions">
+          <button class="btn-back" data-back="4">← Back</button>
+          <button class="btn-next" data-next="6">Continue to Payment →</button>
+        </div>
+      </section>
+
+      <!-- Step 6: Payment -->
+      <section class="checkout-step" id="step-6" data-step="6" hidden>
+        <h2>Payment</h2>
+        <div id="stripe-wrap">
+          <div id="payment-element"></div>
+          <div id="payment-message" hidden></div>
+        </div>
+        <div id="devmode-payment" hidden>
+          <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--spacing-md);margin-bottom:var(--spacing-md)">
+            <p style="margin:0;font-size:0.875rem;color:var(--text-secondary)">
+              <strong>Dev mode</strong> — Stripe is not configured. Click "Place Order" to place a test order without payment.
+            </p>
+          </div>
+        </div>
+        <div class="checkout-actions">
+          <button class="btn-back" data-back="5">← Back</button>
+          <button class="btn-place-order" id="btn-place-order">Place Order</button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Order summary sidebar -->
+    <aside class="checkout-order-summary">
+      <h3>Your Order</h3>
+      <div id="sidebar-items"></div>
+      <hr class="summary-divider"/>
+      <div class="summary-line"><span>Subtotal</span><span id="sidebar-subtotal">—</span></div>
+      <div class="summary-line"><span>Shipping</span><span id="sidebar-shipping">—</span></div>
+      <div class="summary-line total"><span>Total</span><span id="sidebar-total">—</span></div>
+    </aside>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<!-- Toast notification -->
+<div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+<script src="/js/cart.js"></script>
+<script src="/js/checkout.js"></script>
+<script src="/js/layout.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5"/>
+<title>Order Confirmed — Nolilab</title>
+<meta name="robots" content="noindex"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<link href="/css/index.css" rel="stylesheet"/>
+<style>
+.confirmation-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+.confirmation-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+.confirmation-icon {
+  width: 64px;
+  height: 64px;
+  background: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--spacing-md);
+}
+.confirmation-icon svg { width: 32px; height: 32px; stroke: var(--accent); }
+.confirmation-card h1 { font-size: 1.5rem; font-weight: 700; margin: 0 0 var(--spacing-sm); }
+.order-number-badge {
+  display: inline-block;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 8px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  margin: var(--spacing-md) 0;
+  letter-spacing: 0.05em;
+}
+.confirmation-meta { font-size: 0.875rem; color: var(--text-secondary); margin-top: var(--spacing-sm); }
+.order-detail-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  text-align: left;
+}
+.order-detail-section h3 { font-size: 0.875rem; text-transform: uppercase; color: var(--text-secondary); margin: 0 0 var(--spacing-sm); letter-spacing: 0.05em; }
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.order-item-row:last-child { border-bottom: none; }
+.order-total-row { display: flex; justify-content: space-between; font-size: 0.875rem; padding: 4px 0; color: var(--text-secondary); }
+.order-total-row.grand { font-weight: 700; font-size: 1rem; color: var(--text-primary); }
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.status-badge.paid { background: #dcfce7; color: #166534; }
+.status-badge.pending { background: #fef3c7; color: #92400e; }
+.btn-continue {
+  display: inline-block;
+  margin-top: var(--spacing-md);
+  padding: 0.75rem 2rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.btn-continue:hover { background: #1a6e2a; }
+#loading-state { text-align:center; padding: var(--spacing-xl); color: var(--text-secondary); }
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<main class="confirmation-page">
+  <div id="loading-state">Loading your order…</div>
+  <div id="confirmation-content" hidden></div>
+</main>
+
+<div id="site-footer"></div>
+<script src="/js/layout.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  var API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8000' : 'https://api.nolilab.com';
+
+  function fmt(n) { return '$' + Number(n).toFixed(2).replace(/\.00$/, ''); }
+
+  function renderConfirmation(order) {
+    var statusClass = order.payment_status === 'paid' ? 'paid' : 'pending';
+    var itemsHtml = order.items.map(function (item) {
+      return '<div class="order-item-row">' +
+        '<span>' + item.name + ' × ' + item.quantity + '</span>' +
+        '<span>' + fmt(item.subtotal) + '</span></div>';
+    }).join('');
+
+    var html =
+      '<div class="confirmation-card">' +
+        '<div class="confirmation-icon">' +
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M20 6L9 17l-5-5"/></svg>' +
+        '</div>' +
+        '<h1>Order Confirmed!</h1>' +
+        '<p style="color:var(--text-secondary)">Thank you for your purchase. We\'ll email you when it ships.</p>' +
+        '<div class="order-number-badge">' + order.order_number + '</div>' +
+        '<p class="confirmation-meta">Payment status: <span class="status-badge ' + statusClass + '">' + order.payment_status + '</span></p>' +
+      '</div>' +
+
+      '<div class="order-detail-section">' +
+        '<h3>Items Ordered</h3>' +
+        itemsHtml +
+        '<div style="margin-top:var(--spacing-sm)">' +
+          '<div class="order-total-row grand"><span>Total</span><span>' + fmt(order.total) + '</span></div>' +
+        '</div>' +
+      '</div>' +
+
+      (order.tracking_number ?
+        '<div class="order-detail-section"><h3>Tracking</h3>' +
+        '<p style="font-size:0.875rem">' + order.tracking_number + '</p></div>'
+        : '') +
+
+      '<div style="text-align:center">' +
+        '<a href="/shop/" class="btn-continue">Continue Shopping</a>' +
+      '</div>';
+
+    document.getElementById('confirmation-content').innerHTML = html;
+    document.getElementById('confirmation-content').removeAttribute('hidden');
+    document.getElementById('loading-state').setAttribute('hidden', '');
+    document.title = 'Order ' + order.order_number + ' Confirmed — Nolilab';
+  }
+
+  function showError(msg) {
+    document.getElementById('loading-state').innerHTML =
+      '<p style="color:#cb2431">' + msg + '</p>' +
+      '<a href="/shop/" style="color:var(--accent)">Return to shop</a>';
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var orderNumber = params.get('order');
+  if (!orderNumber) {
+    showError('No order number found.');
+  } else {
+    fetch(API_BASE + '/api/orders/' + encodeURIComponent(orderNumber))
+      .then(function (r) {
+        if (!r.ok) throw new Error('Order not found');
+        return r.json();
+      })
+      .then(renderConfirmation)
+      .catch(function () {
+        showError('Could not load order details. Your order may still have been placed — check your email.');
+      });
+  }
+})();
+</script>
+</body>
+</html>
