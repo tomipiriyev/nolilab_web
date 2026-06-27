@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Login — Nolilab</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="/css/admin.css" rel="stylesheet"/>
+</head>
+<body class="admin-body">
+
+<div class="admin-login-wrap">
+  <div class="admin-login-card">
+    <div class="admin-login-logo">
+      <span class="site-name">Nolilab <span class="badge">Admin</span></span>
+    </div>
+    <h1>Sign in</h1>
+    <div class="admin-error" id="login-error"></div>
+    <form id="login-form" autocomplete="on">
+      <div class="admin-field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autocomplete="username" required autofocus/>
+      </div>
+      <div class="admin-field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required/>
+      </div>
+      <button type="submit" class="btn-admin-login" id="login-btn">Sign in</button>
+    </form>
+  </div>
+</div>
+
+<script src="/js/admin.js"></script>
+<script>
+AdminApp.initLogin();
+</script>
+</body>
+</html>

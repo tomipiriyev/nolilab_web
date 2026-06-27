@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Orders — Nolilab Admin</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="/css/admin.css" rel="stylesheet"/>
+</head>
+<body class="admin-body">
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-brand">
+      <span class="brand-name">Nolilab <span class="brand-badge">Admin</span></span>
+    </div>
+    <nav class="admin-nav">
+      <a href="/admin/orders/" class="active">
+        <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="16" y2="15"/></svg></span> Orders
+      </a>
+      <a href="/admin/shipping/">
+        <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> Shipping
+      </a>
+      <a href="/shop/" target="_blank">
+        <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span> View Store
+      </a>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <button class="btn-logout" id="btn-logout">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <h1>Orders</h1>
+    </div>
+    <div class="admin-content">
+
+      <!-- Stats -->
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card"><div class="stat-label">Total Orders</div><div class="stat-value" id="stat-total">—</div></div>
+        <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="stat-pending">—</div></div>
+        <div class="stat-card"><div class="stat-label">Processing</div><div class="stat-value" id="stat-processing">—</div></div>
+        <div class="stat-card accent"><div class="stat-label">Revenue</div><div class="stat-value" id="stat-revenue">—</div></div>
+        <div class="stat-card"><div class="stat-label">Today</div><div class="stat-value" id="stat-today">—</div></div>
+      </div>
+
+      <!-- Orders table -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2>All Orders</h2>
+          <div class="admin-search">
+            <input type="search" id="search-input" placeholder="Search name, email, order #…"/>
+            <select id="filter-status">
+              <option value="">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+              <option value="refunded">Refunded</option>
+            </select>
+            <select id="filter-payment">
+              <option value="">All payments</option>
+              <option value="pending">Unpaid</option>
+              <option value="paid">Paid</option>
+              <option value="failed">Failed</option>
+            </select>
+          </div>
+        </div>
+        <div id="orders-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Country</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+              <tr><td colspan="8" style="text-align:center;padding:32px;color:#57606a">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="admin-pagination">
+          <span id="pagination-info"></span>
+          <div class="pagination-btns" id="pagination-btns"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="admin-toast" class="admin-toast"></div>
+<script src="/js/admin.js"></script>
+<script>AdminApp.initOrders();</script>
+</body>
+</html>

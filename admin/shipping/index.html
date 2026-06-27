@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shipping — Nolilab Admin</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="/css/admin.css" rel="stylesheet"/>
+</head>
+<body class="admin-body">
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-brand">
+      <span class="brand-name">Nolilab <span class="brand-badge">Admin</span></span>
+    </div>
+    <nav class="admin-nav">
+      <a href="/admin/orders/">
+        <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="16" y2="15"/></svg></span> Orders
+      </a>
+      <a href="/admin/shipping/" class="active">
+        <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> Shipping
+      </a>
+      <a href="/shop/" target="_blank">
+        <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span> View Store
+      </a>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <button class="btn-logout" id="btn-logout">Sign Out</button>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <h1>Shipping Zones &amp; Rates</h1>
+      <button class="btn-admin-add" id="btn-add-zone">+ Add Zone</button>
+    </div>
+    <div class="admin-content">
+
+      <div id="zones-wrap">
+        <p style="color:#57606a;text-align:center;padding:32px">Loading…</p>
+      </div>
+
+      <!-- Add / Edit Method form (hidden by default) -->
+      <div id="method-form-wrap" style="display:none;margin-top:16px">
+        <div class="detail-section">
+          <div class="detail-section-header">
+            <h3 id="method-form-title">Add Shipping Method</h3>
+            <button onclick="document.getElementById('method-form-wrap').style.display='none'" style="background:none;border:none;color:#57606a;cursor:pointer;font-size:1.2rem">×</button>
+          </div>
+          <div class="detail-section-body">
+            <input type="hidden" id="mf-zone-id"/>
+            <input type="hidden" id="mf-method-id"/>
+            <div class="admin-form-row">
+              <div class="admin-form-field" style="flex:2">
+                <label>Method Name *</label>
+                <input type="text" id="mf-name" placeholder="Standard Shipping"/>
+              </div>
+              <div class="admin-form-field">
+                <label>Carrier</label>
+                <input type="text" id="mf-carrier" placeholder="USPS"/>
+              </div>
+            </div>
+            <div class="admin-form-row">
+              <div class="admin-form-field">
+                <label>Rate ($) *</label>
+                <input type="number" id="mf-rate" step="0.01" min="0" placeholder="9.99"/>
+              </div>
+              <div class="admin-form-field">
+                <label>Free above ($)</label>
+                <input type="number" id="mf-free-above" step="0.01" min="0" placeholder="100"/>
+              </div>
+              <div class="admin-form-field">
+                <label>Min days</label>
+                <input type="number" id="mf-days-min" min="1" placeholder="5"/>
+              </div>
+              <div class="admin-form-field">
+                <label>Max days</label>
+                <input type="number" id="mf-days-max" min="1" placeholder="10"/>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn-admin-add" id="btn-save-method">Save Method</button>
+              <button onclick="document.getElementById('method-form-wrap').style.display='none'" style="height:32px;padding:0 14px;background:#eaeef2;border:1px solid #d0d7de;border-radius:6px;color:#24292e;font-size:0.8rem;cursor:pointer;font-family:inherit">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="admin-toast" class="admin-toast"></div>
+<script src="/js/admin.js"></script>
+<script>AdminApp.initShipping();</script>
+</body>
+</html>

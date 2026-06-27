@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Order Detail — Nolilab Admin</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="/css/admin.css" rel="stylesheet"/>
+</head>
+<body class="admin-body">
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-brand">
+      <span class="brand-name">Nolilab <span class="brand-badge">Admin</span></span>
+    </div>
+    <nav class="admin-nav">
+      <a href="/admin/orders/" class="active">
+        <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="16" y2="15"/></svg></span> Orders
+      </a>
+      <a href="/admin/shipping/">
+        <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> Shipping
+      </a>
+      <a href="/shop/" target="_blank">
+        <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span> View Store
+      </a>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <button class="btn-logout" id="btn-logout">Sign Out</button>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <a href="/admin/orders/" style="color:#0969da;font-size:0.875rem;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg> Orders</a>
+        <h1 id="page-title">Order Detail</h1>
+      </div>
+      <div id="status-badge-wrap"></div>
+    </div>
+    <div class="admin-content">
+      <div id="loading" style="text-align:center;padding:48px;color:#57606a">Loading order…</div>
+      <div id="detail-wrap" hidden>
+        <div class="order-detail-grid">
+          <!-- Left column -->
+          <div>
+            <!-- Items -->
+            <div class="detail-section">
+              <div class="detail-section-header"><h3>Items</h3></div>
+              <div class="detail-section-body" id="detail-items"></div>
+            </div>
+            <!-- Customer -->
+            <div class="detail-section">
+              <div class="detail-section-header"><h3>Customer</h3></div>
+              <div class="detail-section-body" id="detail-customer"></div>
+            </div>
+            <!-- Addresses -->
+            <div class="detail-section">
+              <div class="detail-section-header"><h3>Shipping Address</h3></div>
+              <div class="detail-section-body" id="detail-ship-addr"></div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-section-header"><h3>Billing Address</h3></div>
+              <div class="detail-section-body" id="detail-bill-addr"></div>
+            </div>
+            <!-- Notes -->
+            <div class="detail-section">
+              <div class="detail-section-header"><h3>Internal Notes</h3></div>
+              <div class="detail-section-body">
+                <div class="notes-existing" id="detail-notes"></div>
+                <div class="notes-form">
+                  <textarea id="note-input" placeholder="Add a note…"></textarea>
+                  <button id="btn-add-note">Add Note</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column (actions) -->
+          <div>
+            <!-- Totals -->
+            <div class="detail-section">
+              <div class="detail-section-header"><h3>Order Summary</h3></div>
+              <div class="detail-section-body" id="detail-totals"></div>
+            </div>
+            <!-- Status actions -->
+            <div class="detail-section">
+              <div class="detail-section-header"><h3>Update Status</h3></div>
+              <div class="detail-section-body">
+                <div class="action-btn-group">
+                  <button class="btn-action green" data-action="paid">Mark Paid</button>
+                  <button class="btn-action" data-action="processing">Mark Processing</button>
+                  <button class="btn-action green" data-action="shipped">Mark Shipped</button>
+                  <button class="btn-action green" data-action="delivered">Mark Delivered</button>
+                  <button class="btn-action red" data-action="cancelled">Cancel Order</button>
+                  <button class="btn-action red" data-action="refunded">Mark Refunded</button>
+                </div>
+              </div>
+            </div>
+            <!-- Tracking -->
+            <div class="detail-section">
+              <div class="detail-section-header"><h3>Tracking Number</h3></div>
+              <div class="detail-section-body">
+                <div id="current-tracking" style="font-size:0.8rem;color:#57606a;margin-bottom:8px"></div>
+                <div class="tracking-form">
+                  <input type="text" id="tracking-input" placeholder="Enter tracking number…"/>
+                  <button id="btn-save-tracking">Save</button>
+                </div>
+              </div>
+            </div>
+            <!-- Shipping -->
+            <div class="detail-section">
+              <div class="detail-section-header"><h3>Shipping Method</h3></div>
+              <div class="detail-section-body" id="detail-shipping"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="admin-toast" class="admin-toast"></div>
+<script src="/js/admin.js"></script>
+<script>AdminApp.initOrderDetail();</script>
+</body>
+</html>
