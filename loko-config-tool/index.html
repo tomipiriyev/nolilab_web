@@ -651,7 +651,12 @@
 <div class="fw-section">
 <div class="fw-row">
 <span class="fw-label">Flash</span>
-<span class="fw-version-badge">v2.0.18 available</span>
+<span class="fw-version-badge" id="fw-version-badge">v2.0.18 available</span>
+</div>
+<div class="field" style="margin-top:4px; margin-bottom:10px;">
+<label class="fw-source-label"><input type="radio" name="airFwSource" id="fw-source-bundled" checked=""/> Latest (v2.0.18)</label>
+<label class="fw-source-label" style="margin-left:14px;"><input type="radio" name="airFwSource" id="fw-source-custom"/> Custom .bin</label>
+<input accept=".bin,.hex" id="fw-custom-file" style="display:none; margin-top:8px;" type="file"/>
 </div>
 <button class="dark-button fw-flash-btn-green" disabled="" id="fw-flash-btn" style="width:100%" type="button">Flash Firmware</button>
 <div class="fw-progress-wrap" id="fw-download-container" style="display:none">
@@ -957,6 +962,10 @@ class FirmwareUpdater {
       statusIcon: document.getElementById('fw-status-icon'),
       verificationBadge: document.getElementById('fw-verification-badge'),
       logContainer: document.getElementById('fw-log-container'),
+      sourceBundled: document.getElementById('fw-source-bundled'),
+      sourceCustom: document.getElementById('fw-source-custom'),
+      customFile: document.getElementById('fw-custom-file'),
+      versionBadge: document.getElementById('fw-version-badge'),
     };
   }
 
@@ -970,6 +979,19 @@ class FirmwareUpdater {
     this.elements.fileInput.addEventListener('change', this.handleFileSelect);
     this.elements.downloadFirmwareBtn.addEventListener('click', () => this.downloadLatestFirmware());
     this.elements.flashBtn.addEventListener('click', () => this.flashFirmware());
+    if (this.elements.sourceCustom) {
+      this.elements.sourceCustom.addEventListener('change', () => {
+        this.elements.customFile.style.display = 'block';
+        if (this.elements.versionBadge) this.elements.versionBadge.textContent = 'custom .bin';
+      });
+      this.elements.sourceBundled.addEventListener('change', () => {
+        this.elements.customFile.style.display = 'none';
+        this.elements.customFile.value = '';
+        this.firmwareData = null;
+        if (this.elements.versionBadge) this.elements.versionBadge.textContent = 'v2.0.18 available';
+      });
+      this.elements.customFile.addEventListener('change', this.handleFileSelect);
+    }
     this.updateUI();
   }
 
@@ -1226,8 +1248,16 @@ class FirmwareUpdater {
     this.elements.progressContainer.style.display = 'none';
     this.elements.verificationBadge.style.display = 'none';
     try {
-      // 1. Download firmware
-      await this.fetchFirmware();
+      // 1. Obtain firmware — bundled download, or the user-selected custom file
+      if (this.elements.sourceCustom && this.elements.sourceCustom.checked) {
+        if (!this.firmwareData || this.firmwareData.length === 0) {
+          throw new Error('Select a custom .bin/.hex file first.');
+        }
+        this.log(`Using custom firmware: ${this.formatSize(this.firmwareData.length)}`);
+        this.log(`SHA-256: ${this.formatChecksum(this.firmwareChecksum)}`);
+      } else {
+        await this.fetchFirmware();
+      }
 
       // 2. Connect to bootloader
       this.elements.progressContainer.style.display = 'block';
