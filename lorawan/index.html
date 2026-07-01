@@ -11,11 +11,13 @@
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
 <link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Connect Loko to The Things Network (TTN). Step-by-step LoRaWAN setup guide — configure gateways, devices, and start IoT GPS tracking." name="description"/>
+<meta content="Connect your Loko Air trackers to The Things Network (TTN). Step-by-step LoRaWAN setup guide — create a TTN application, register devices, generate an API key, and go live in the Loko app." name="description"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots">
 <link href="https://www.nolilab.com/lorawan/" rel="canonical"/>
 <link href="https://www.nolilab.com/lorawan/" hreflang="en" rel="alternate"/>
@@ -27,13 +29,13 @@
 <link href="https://www.nolilab.com/lorawan/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab" property="og:title"/>
-<meta content="Connect Loko to The Things Network (TTN). Step-by-step LoRaWAN setup guide — configure gateways, devices, and start IoT GPS tracking." property="og:description"/>
+<meta content="Connect your Loko Air trackers to The Things Network (TTN). Step-by-step LoRaWAN setup guide — create a TTN application, register devices, generate an API key, and go live in the Loko app." property="og:description"/>
 <meta content="https://www.nolilab.com/lorawan/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab" name="twitter:title"/>
-<meta content="Connect Loko to The Things Network (TTN). Step-by-step LoRaWAN setup guide — configure gateways, devices, and start IoT GPS tracking." name="twitter:description"/>
+<meta content="Connect your Loko Air trackers to The Things Network (TTN). Step-by-step LoRaWAN setup guide — create a TTN application, register devices, generate an API key, and go live in the Loko app." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
     :root {
@@ -44,7 +46,8 @@
       --accent: #238636;
       --accent-hover: #2ea043;
       --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --font-mono: 'IBM Plex Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --font-sans: 'IBM Plex Sans', 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --spacing-xs: 0.5rem;
       --spacing-sm: 1rem;
       --spacing-md: 1.5rem;
@@ -56,6 +59,9 @@
       --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
       --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
       --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+      /* annotation-only colours for the numbered callouts drawn over screenshots */
+      --hl: #d29922;
+      --hl-red: #cf222e;
     }
 
     * {
@@ -64,459 +70,314 @@
       box-sizing: border-box;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
       font-weight: 400;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: var(--font-sans);
       background-color: var(--bg-primary);
       color: var(--text-primary);
       line-height: 1.6;
-      font-weight: 400;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    /* Header Navigation */
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    .social-icons {
-      display: flex;
-      gap: var(--spacing-xs);
-      align-items: center;
-      margin-left: var(--spacing-sm);
-      flex-shrink: 0;
-    }
-
-    .social-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      color: #333333 !important;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s ease;
-      text-decoration: none;
-    }
-
-    .social-icon:hover {
-      color: #333333 !important;
-      background-color: var(--bg-secondary);
-      transform: translateY(-1px);
-    }
-
-    .social-icon:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .social-icon svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-
-    .social-icon i {
-      font-size: 16px;
-    }
-
-    /* Main Content */
+    /* ---------- layout ---------- */
     .lorawan-container {
       padding: var(--spacing-xl) 0;
       background-color: var(--bg-primary);
       overflow-x: hidden;
     }
 
-    .lorawan-header {
-      text-align: center;
-      margin-bottom: var(--spacing-xl);
+    .lorawan-content {
+      max-width: 840px;
+      margin: 0 auto;
       padding: 0 var(--spacing-md);
     }
 
-    .lorawan-header h1 {
-      font-size: 2.5rem;
-      font-weight: 600;
+    .lorawan-content > p {
+      color: var(--text-secondary);
       margin-bottom: var(--spacing-md);
-      letter-spacing: -0.02em;
+    }
+
+    .lorawan-content b,
+    .lorawan-content strong { color: var(--text-primary); font-weight: 600; }
+
+    .lorawan-content a { color: var(--accent); text-decoration: none; }
+    .lorawan-content a:hover { text-decoration: underline; }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 2px 7px;
       color: var(--text-primary);
     }
 
-    .lorawan-subtitle {
-      font-size: 1.125rem;
+    /* ---------- hero ---------- */
+    .lorawan-hero {
+      text-align: center;
+      padding: 0 var(--spacing-md) var(--spacing-lg);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: var(--spacing-xl);
+      max-width: 840px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .lorawan-hero .kicker {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      letter-spacing: 3px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .lorawan-hero h1 {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .lorawan-hero p {
       color: var(--text-secondary);
-      max-width: 800px;
+      font-size: 1.125rem;
+      max-width: 640px;
       margin: 0 auto;
     }
 
-    .lorawan-content {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-md);
+    .lorawan-hero .meta {
+      margin-top: var(--spacing-md);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
     }
 
-    .setup-step {
+    /* ---------- requirements box ---------- */
+    .req {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: var(--spacing-lg);
-      margin-bottom: var(--spacing-lg);
+      margin: 0 0 var(--spacing-md);
     }
 
-    .step-header {
+    .req h3 {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .req ul { list-style: none; }
+
+    .req li {
+      display: flex;
+      gap: 12px;
+      padding: 9px 0;
+      align-items: flex-start;
+    }
+
+    .req li:not(:last-child) { border-bottom: 1px solid var(--border); }
+    .req li .dot { flex: 0 0 auto; color: var(--accent); font-weight: 700; }
+    .req li b { display: block; }
+    .req li span { color: var(--text-secondary); font-size: 0.9375rem; }
+
+    /* ---------- step badge ---------- */
+    .step {
       display: flex;
       align-items: center;
-      gap: var(--spacing-md);
-      margin-bottom: var(--spacing-md);
+      gap: 16px;
+      margin: var(--spacing-xl) 0 var(--spacing-xs);
+      scroll-margin-top: 24px;
     }
 
-    .step-number {
-      background: var(--accent);
-      color: white;
+    .step .num {
+      flex: 0 0 auto;
       width: 40px;
       height: 40px;
-      border-radius: 50%;
+      border-radius: var(--radius-md);
+      background: rgba(35, 134, 54, 0.08);
+      border: 1px solid rgba(35, 134, 54, 0.25);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 1.125rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.125rem;
-      font-weight: 600;
     }
 
-    .step-title {
-      font-size: 1.25rem;
-      font-weight: 600;
+    .step h2 {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--text-primary);
     }
 
-    .step-description {
+    .lead {
       color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: var(--spacing-md);
+      font-size: 1rem;
+      margin: 0 0 var(--spacing-md);
     }
 
-    .step-description ul {
-      margin: var(--spacing-sm) 0;
-      padding-left: var(--spacing-lg);
+    /* ---------- figure + overlay highlights ---------- */
+    figure { margin: var(--spacing-md) 0 var(--spacing-sm); }
+
+    .shot {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow-lg);
     }
 
-    .step-description li {
-      margin-bottom: var(--spacing-xs);
+    .shot img { display: block; width: 100%; height: auto; }
+
+    /* app screenshot already includes a phone frame on a light bg — show it plainly */
+    .shot.appshot {
+      max-width: 380px;
+      margin: 0 auto;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      container-type: inline-size;
+    }
+    .shot.appshot img { border-radius: var(--radius-lg); }
+
+    /* "@ttn" annotation overlaid at the end of the Application ID field */
+    .append {
+      position: absolute;
+      transform: translateY(-50%);
+      pointer-events: none;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 3.4cqw;
+      color: #fff;
+      background: var(--accent);
+      padding: 0.5cqw 1.6cqw;
+      border-radius: 1.2cqw;
+      box-shadow: 0 1cqw 2.4cqw rgba(0,0,0,.25);
     }
 
-    .step-image {
-      width: 100%;
-      border-radius: var(--radius-md);
-      margin-top: var(--spacing-md);
+    /* highlight ring drawn over a region (positioned in %) */
+    .hl {
+      position: absolute;
+      border: 3px solid var(--hl);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.6), 0 0 18px 3px rgba(210,153,34,.4);
+      pointer-events: none;
+    }
+    .hl.red {
+      border-color: var(--hl-red);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.6), 0 0 18px 3px rgba(207,34,46,.4);
+    }
+
+    /* little numbered tag attached to a highlight */
+    .tag {
+      position: absolute;
+      z-index: 5;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--hl);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow: var(--shadow-md);
+      transform: translate(-50%,-50%);
+    }
+    .tag.red { background: var(--hl-red); }
+
+    figcaption {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-top: var(--spacing-sm);
+      font-family: var(--font-mono);
     }
 
+    /* ---------- callout / note ---------- */
     .note {
-      background: rgba(35, 134, 54, 0.1);
-      border-left: 3px solid var(--accent);
+      display: flex;
+      gap: 14px;
+      border-radius: var(--radius-md);
       padding: var(--spacing-md);
       margin: var(--spacing-md) 0;
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    }
-
-    .note-title {
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: var(--spacing-xs);
-    }
-
-    .note-content {
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* Footer */
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      z-index: 1001;
-      margin-left: auto;
-    }
-
-    .mobile-menu-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--bg-primary);
-        flex-direction: column;
-        gap: 0;
-        padding: 80px 1.5rem 1.5rem;
-        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
-        transition: left 0.3s ease;
-        z-index: 1000;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-      }
-
-      .nav-links.active {
-        left: 0;
-      }
-
-      .nav-link {
-        width: 100%;
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border);
-        text-align: left;
-        font-size: 1rem;
-      }
-
-      .social-icons {
-        display: none;
-      }
-
-      body.menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      .lorawan-container {
-        padding: var(--spacing-lg) 0;
-      }
-
-      .lorawan-header h1 {
-        font-size: 2rem;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    /* Language Selector */
-    .language-selector {
-      margin-left: var(--spacing-sm);
-    }
-
-    .language-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.75rem;
-      background: var(--bg-secondary);
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
+      border-left: 3px solid var(--accent);
+      background: rgba(35, 134, 54, 0.06);
     }
+    .note .ic { flex: 0 0 auto; font-size: 20px; line-height: 1.3; }
+    .note .bd { font-size: 0.9375rem; color: var(--text-secondary); }
+    .note .bd b { color: var(--text-primary); }
+    .note.warn { border-left-color: var(--hl); background: rgba(210,153,34,.07); }
+    .note.crit { border-left-color: var(--hl-red); background: rgba(207,34,46,.06); }
 
-    .language-btn:hover {
-      background: var(--bg-tertiary);
-      border-color: var(--accent);
-    }
-
-    .language-btn .fa-globe {
-      font-size: 1rem;
-      color: var(--text-secondary);
-    }
-
-    .current-lang {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .language-btn .fa-chevron-down {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      transition: transform 0.2s ease;
-    }
-
-    .language-selector:hover .fa-chevron-down {
-      transform: rotate(180deg);
-    }
-
-    .language-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      right: 0;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
+    /* @ttn emphasis block */
+    .ttnbox {
+      text-align: center;
+      margin: var(--spacing-md) 0;
+      padding: var(--spacing-lg);
+      border: 1px dashed var(--accent);
       border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
-      z-index: 1000;
+      background: rgba(35, 134, 54, 0.05);
     }
-
-    .language-selector:hover .language-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
+    .ttnbox .small {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-sm);
     }
-
-    .language-option {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
+    .ttnbox .big {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: clamp(20px, 4.5vw, 30px);
       color: var(--text-primary);
-      text-decoration: none;
-      transition: background 0.2s ease;
-      border-bottom: 1px solid var(--border);
+      word-break: break-all;
     }
+    .ttnbox .big .suf { color: var(--accent); }
 
-    .language-option:last-child {
-      border-bottom: none;
-    }
-
-    .language-option:hover {
+    /* ---------- finish ---------- */
+    .done {
+      margin-top: var(--spacing-xl);
+      padding: var(--spacing-xl);
+      text-align: center;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
       background: var(--bg-secondary);
     }
+    .done h2 { margin: 0 0 var(--spacing-xs); font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; }
+    .done p { color: var(--text-secondary); max-width: 520px; margin: 0 auto; }
 
-    .lang-code {
-      font-weight: 600;
-      font-size: 0.875rem;
+    @media (max-width: 600px) {
+      .lorawan-container { padding: var(--spacing-lg) 0; }
+      .lorawan-hero h1 { font-size: 2rem; }
+      .step .num { width: 40px; height: 40px; font-size: 1.125rem; }
+      .step h2 { font-size: 1.25rem; }
     }
-
-    .lang-name {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
   </style>
 <style>
   @font-face {
@@ -533,10 +394,10 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration",
-  "description": "Step-by-step instructions for connecting the Loko GPS Tracker to The Things Network (TTN) via LoRaWAN, including gateway setup, device registration, credential generation, and payload formatter configuration.",
+  "description": "Step-by-step instructions for connecting Loko Air trackers to The Things Network (TTN) via LoRaWAN: create a TTN application, register end devices, generate an API key, and connect from the Loko app.",
   "url": "https://www.nolilab.com/lorawan/",
   "datePublished": "2024-05-22",
-  "dateModified": "2025-03-01",
+  "dateModified": "2026-07-01",
   "author": {
     "@type": "Person",
     "name": "Tamleykha Piriyev",
@@ -562,7 +423,7 @@
     "url": "https://www.nolilab.com"
   },
   "proficiencyLevel": "Beginner",
-  "dependencies": "Loko GPS Tracker, The Things Network (TTN) account, LoRaWAN gateway",
+  "dependencies": "Loko Air GPS Tracker, The Things Network (TTN) account, Loko app",
   "articleSection": "Setup Guides"
 }
 </script>
@@ -581,169 +442,251 @@
 <body>
 <div id="site-header"></div>
 <main class="lorawan-container">
-<div class="lorawan-header">
-<h1>LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration</h1>
-<p class="lorawan-subtitle">Connect your Loko GPS Tracker to The Things Network (TTN) with this step-by-step LoRaWAN setup guide. Configure gateways, devices, and start IoT GPS tracking.</p>
-</div>
-<div class="lorawan-content">
-<!-- Steps 1-7: Initial Setup -->
-<div class="setup-step">
-<div class="step-header">
-<div class="step-number">1-7</div>
-<h2 class="step-title">Initial Gateway Setup</h2>
-</div>
-<div class="step-description">
-<p><strong>Step 1:</strong> Create an account on The Things Network website.</p>
-<p><strong>Step 2:</strong> Navigate to the Console via the Profile Icon.</p>
-<p><strong>Step 3:</strong> Select the appropriate region for your location.</p>
-<p><strong>Step 4:</strong> Set up your gateway according to the manufacturer's specifications.</p>
-<p><strong>Step 5:</strong> Register your gateway with the correct frequency plan for your region.</p>
-<p><strong>Step 6:</strong> Use the Gateway ID from your manufacturer setup.</p>
-<p><strong>Step 7:</strong> Complete the gateway registration process.</p>
-</div>
-<div class="note">
-<div class="note-title">Important:</div>
-<div class="note-content">Make sure to choose the appropriate frequency plan according to your region to ensure proper connectivity.</div>
-</div>
-</div>
-<!-- Step 8: Create Application -->
-<div class="setup-step">
-<div class="step-header">
-<div class="step-number">8</div>
-<h2 class="step-title">Create Application</h2>
-</div>
-<div class="step-description">
-<p>Click on the "Create Application" button and give a Name/ID to your application.</p>
-</div>
-<img alt="Create Application" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_03.01.10.jpg?v=1716937292&amp;width=1500"/>
-</div>
-<!-- Step 9: Register End Device -->
-<div class="setup-step">
-<div class="step-header">
-<div class="step-number">9</div>
-<h2 class="step-title">Register End Device Manually</h2>
-</div>
-<div class="step-description">
-<p>Register an end device manually. For the JoinEUI you can put anything. It corresponds to APP-EUI settings on the Loko Configuration Tools app.</p>
-</div>
-<img alt="Register End Device" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-26_19.30.30.jpg?v=1716737493&amp;width=1500"/>
-</div>
-<!-- Step 10: Generate Device Credentials -->
-<div class="setup-step">
-<div class="step-header">
-<div class="step-number">10</div>
-<h2 class="step-title">Generate Device Credentials</h2>
-</div>
-<div class="step-description">
-<p>Click on the Confirm button. Then more settings will appear. You can just press the generate buttons in order to create Dev-EUI and App-Key.</p>
-</div>
-<img alt="Generate Credentials" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-26_19.33.14.jpg?v=1716737617&amp;width=1500"/>
-</div>
-<!-- Step 11: Retrieve Device Parameters -->
-<div class="setup-step">
-<div class="step-header">
-<div class="step-number">11</div>
-<h2 class="step-title">Retrieve Activation Parameters</h2>
-</div>
-<div class="step-description">
-<p>Retrieve device parameters from the overview. You'll need these activation parameters for configuring your Loko Air unit:</p>
-<ul>
-<li>AppEUI (JoinEUI)</li>
-<li>DevEUI</li>
-<li>AppKey</li>
-</ul>
-</div>
-<img alt="Device Parameters" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_02.52.22.jpg?v=1716936769&amp;width=1500"/>
-</div>
-<!-- Step 12: Configure Payload Formatter -->
-<div class="setup-step">
-<div class="step-header">
-<div class="step-number">12</div>
-<h2 class="step-title">Configure Payload Formatter</h2>
-</div>
-<div class="step-description">
-<p>Go to payload formatters and choose CayenneLPP for the uplink.</p>
-</div>
-<img alt="Payload Formatter Selection" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-26_19.35.39.jpg?v=1716737760&amp;width=1500"/>
-<img alt="CayenneLPP Configuration" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_02.56.49.jpg?v=1716937063&amp;width=1500"/>
-</div>
-<!-- Steps 13-15: Configure Loko Device -->
-<div class="setup-step">
-<div class="step-header">
-<div class="step-number">13-15</div>
-<h2 class="step-title">Configure Loko Device</h2>
-</div>
-<div class="step-description">
-<p><strong>Step 13:</strong> Open the Loko Configuration Tool app on your device.</p>
-<p><strong>Step 14:</strong> Read the current settings, then enable LoRaWAN feature.</p>
-<p><strong>Step 15:</strong> Fill in the three required parameters from TTN's end device activation information:</p>
-<ul>
-<li>AppEUI (from TTN)</li>
-<li>DevEUI (from TTN)</li>
-<li>AppKey (from TTN)</li>
-</ul>
-<p>Press send to upload the configuration, then restart your Loko Air unit.</p>
-</div>
-<div class="note">
-<div class="note-title">Note:</div>
-<div class="note-content">Make sure to copy the parameters exactly as they appear in The Things Network console to avoid connection issues.</div>
-</div>
-</div>
-<!-- Step 16: Monitor Device -->
-<div class="setup-step">
-<div class="step-header">
-<div class="step-number">16</div>
-<h2 class="step-title">Monitor Live Data</h2>
-</div>
-<div class="step-description">
-<p>Monitor the End Device page on The Things Network to view live data and the Loko Air unit's location on the map once the gateway receives information.</p>
-<p>You should see data transmission and be able to track your device's location in real-time.</p>
-</div>
-<img alt="Live Data Monitoring" class="step-image" src="https://www.nolilab.com/cdn/shop/files/photo_2024-05-29_02.59.11.jpg?v=1716937175&amp;width=1500"/>
-</div>
-<div class="note">
-<div class="note-title">Need Help?</div>
-<div class="note-content">
-          If you encounter any issues during setup, please check our <a href="/#faq" style="color: var(--accent);">FAQ section</a> or contact our support team. We're here to help you get connected!
-        </div>
-</div>
-</div>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="lorawan-hero">
+    <div class="kicker">Loko · Setup Guide</div>
+    <h1>Connecting Loko to the LoRaWAN Network</h1>
+    <p>Pair your Loko&nbsp;Air trackers with The&nbsp;Things&nbsp;Network (TTN) and start
+       receiving live positions in the app — in four short steps.</p>
+    <div class="meta">~10 min · Beginner friendly</div>
+  </header>
+
+  <div class="lorawan-content">
+
+    <!-- ============================ INTRO ============================ -->
+    <p>Loko receives your tracker positions over <b>LoRaWAN</b>, a long-range,
+       low-power radio network. To bridge those radio messages to your phone, the app
+       connects to <b>The Things Network (TTN)</b> — a free, global LoRaWAN community
+       network.</p>
+    <p>Setup happens in two places: first you create an <b>application</b> on the TTN
+       console and register your devices, then you paste two credentials into the Loko
+       app. Here's everything you need.</p>
+
+    <!-- ============================ REQUIREMENTS ============================ -->
+    <div class="req">
+      <h3>What you'll need</h3>
+      <ul>
+        <li><span class="dot">▸</span><div><b>A free TTN account</b><span>Sign up at <a href="https://www.thethingsnetwork.org/" rel="noopener" target="_blank">thethingsnetwork.org</a> if you don't have one.</span></div></li>
+        <li><span class="dot">▸</span><div><b>Your Loko Air device details</b><span>The DevEUI / JoinEUI / keys — you set these yourself when registering the device.</span></div></li>
+        <li><span class="dot">▸</span><div><b>The Loko app installed</b><span>On the phone you'll use to track your devices.</span></div></li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <span class="ic">🎯</span>
+      <div class="bd">By the end you'll have two values — an <b>Application&nbsp;ID</b> and an
+        <b>API&nbsp;Key</b> — which are the only things the app needs to go live.</div>
+    </div>
+
+    <!-- ============================ STEP 1 ============================ -->
+    <div class="step"><div class="num">1</div><h2>Create an application on TTN</h2></div>
+    <p class="lead">Log in to the TTN console, open the <b>Applications</b> section and
+       click <b>+ Add application</b>. Give it an ID and a name, then click
+       <b>Create application</b>.</p>
+
+    <figure>
+      <div class="shot">
+        <picture>
+          <source type="image/webp" srcset="/images/lorawan/ttn-create-application.webp">
+          <img src="/images/lorawan/ttn-create-application.png" alt="TTN Create application page" loading="lazy" width="1680" height="877">
+        </picture>
+        <!-- 1 · Application ID field -->
+        <span class="hl"  style="left:21.0%; top:35.5%; width:27%; height:5.5%;"></span>
+        <span class="tag" style="left:21.0%; top:35.5%;">1</span>
+        <!-- 2 · Create button -->
+        <span class="hl"  style="left:20.8%; top:92.5%; width:13%; height:5.5%;"></span>
+        <span class="tag" style="left:20.8%; top:92.5%;">2</span>
+      </div>
+      <figcaption>① Choose your Application ID  ·  ② Click Create application</figcaption>
+    </figure>
+
+    <div class="note warn">
+      <span class="ic">📝</span>
+      <div class="bd"><b>Write down your Application ID.</b> You'll need it for the app.
+        In the example above it's <code>demolokoappid</code>. The ID must be lowercase and
+        can't be changed later.</div>
+    </div>
+
+    <!-- ============================ STEP 2 ============================ -->
+    <div class="step"><div class="num">2</div><h2>Register your Loko Air devices</h2></div>
+    <p class="lead">In the left sidebar open <b>End devices</b>, then click
+       <b>Register end device</b>.</p>
+
+    <figure>
+      <div class="shot">
+        <picture>
+          <source type="image/webp" srcset="/images/lorawan/ttn-end-devices.webp">
+          <img src="/images/lorawan/ttn-end-devices.png" alt="TTN End devices page" loading="lazy" width="1680" height="834">
+        </picture>
+        <!-- 1 · End devices nav -->
+        <span class="hl"  style="left:1.5%; top:33.5%; width:18%; height:6%;"></span>
+        <span class="tag" style="left:1.5%; top:33.5%;">1</span>
+        <!-- 2 · Register end device button -->
+        <span class="hl"  style="left:86%; top:14.5%; width:13.5%; height:6%;"></span>
+        <span class="tag" style="left:86%; top:14.5%;">2</span>
+      </div>
+      <figcaption>① Open End devices  ·  ② Register end device</figcaption>
+    </figure>
+
+    <p>On the registration screen, choose <b>“Enter end device specifics manually”</b>,
+       then fill in the device details from your Loko Air (frequency plan, LoRaWAN
+       version and the provisioning info such as JoinEUI / DevEUI).</p>
+
+    <figure>
+      <div class="shot">
+        <picture>
+          <source type="image/webp" srcset="/images/lorawan/ttn-register-device.webp">
+          <img src="/images/lorawan/ttn-register-device.png" alt="TTN Register end device page" loading="lazy" width="1680" height="861">
+        </picture>
+        <!-- 1 · Enter manually radio -->
+        <span class="hl"  style="left:21.2%; top:38%; width:30%; height:5.5%;"></span>
+        <span class="tag" style="left:21.2%; top:38%;">1</span>
+        <!-- 2 · Provisioning / JoinEUI -->
+        <span class="hl"  style="left:21.2%; top:90%; width:24%; height:7.5%;"></span>
+        <span class="tag" style="left:21.2%; top:90%;">2</span>
+      </div>
+      <figcaption>① Enter end device specifics manually  ·  ② Fill in your device's provisioning info</figcaption>
+    </figure>
+
+    <div class="note">
+      <span class="ic">📡</span>
+      <div class="bd">Pick the <b>frequency plan</b> for your region (e.g. <i>Europe 863–870&nbsp;MHz</i>)
+        and match the <b>LoRaWAN version</b> to your Loko Air. Repeat this step for every
+        tracker you own.</div>
+    </div>
+
+    <!-- ============================ STEP 3 ============================ -->
+    <div class="step"><div class="num">3</div><h2>Create an API key</h2></div>
+    <p class="lead">Back in the sidebar, open <b>API keys</b> and click
+       <b>+ Add API key</b>. Grant it the rights to read application traffic, then save.</p>
+
+    <figure>
+      <div class="shot">
+        <picture>
+          <source type="image/webp" srcset="/images/lorawan/ttn-api-keys.webp">
+          <img src="/images/lorawan/ttn-api-keys.png" alt="TTN API keys page" loading="lazy" width="1680" height="834">
+        </picture>
+        <!-- 1 · API keys nav -->
+        <span class="hl"  style="left:1.5%; top:62.5%; width:18%; height:6%;"></span>
+        <span class="tag" style="left:1.5%; top:62.5%;">1</span>
+        <!-- 2 · Add API key button -->
+        <span class="hl"  style="left:86%; top:15%; width:13.5%; height:6%;"></span>
+        <span class="tag" style="left:86%; top:15%;">2</span>
+      </div>
+      <figcaption>① Open API keys  ·  ② Add API key</figcaption>
+    </figure>
+
+    <div class="note crit">
+      <span class="ic">🔑</span>
+      <div class="bd"><b>Copy the API key immediately.</b> TTN shows the full key only
+        <b>once</b>, right after you create it. Save it somewhere safe — if you lose it
+        you'll have to generate a new one.</div>
+    </div>
+
+    <!-- ============================ OPTIONAL: MQTT EXPLORER ============================ -->
+    <div class="step">
+      <div class="num">✓</div>
+      <h2>Optional — test with MQTT Explorer</h2>
+    </div>
+    <p class="lead">Before putting the credentials into Loko, you can verify they work
+       with any open-source MQTT client — for example
+       <a href="https://mqtt-explorer.com/" rel="noopener" target="_blank">MQTT&nbsp;Explorer</a>. It connects straight to
+       TTN's MQTT server and shows the raw uplink messages, which is a quick way to
+       confirm everything is set up correctly.</p>
+
+    <figure>
+      <div class="shot">
+        <picture>
+          <source type="image/webp" srcset="/images/lorawan/mqtt-explorer-connection.webp">
+          <img src="/images/lorawan/mqtt-explorer-connection.png" alt="MQTT Explorer connection settings for TTN" loading="lazy" width="1322" height="878">
+        </picture>
+        <!-- 1 · Protocol + Host + Port row -->
+        <span class="hl"  style="left:2%; top:41.5%; width:96%; height:13%;"></span>
+        <span class="tag" style="left:2%; top:41.5%;">1</span>
+        <!-- 2 · Username (@ttn) -->
+        <span class="hl"  style="left:2%; top:63%; width:48%; height:13%;"></span>
+        <span class="tag" style="left:2%; top:63%;">2</span>
+        <!-- 3 · Password (API key) -->
+        <span class="hl"  style="left:51%; top:63%; width:39%; height:13%;"></span>
+        <span class="tag" style="left:51%; top:63%;">3</span>
+        <!-- 4 · Connect -->
+        <span class="hl"  style="left:76.5%; top:82.5%; width:21%; height:8%;"></span>
+        <span class="tag" style="left:76.5%; top:82.5%;">4</span>
+      </div>
+      <figcaption>① Protocol mqtt:// · Host · Port 1883  ·  ② Username = App ID @ttn  ·  ③ Password = API key  ·  ④ Connect</figcaption>
+    </figure>
+
+    <div class="note">
+      <span class="ic">🔌</span>
+      <div class="bd">Use these settings: <b>Protocol</b> <code>mqtt://</code>,
+        <b>Host</b> <code>eu1.cloud.thethings.network</code> (match your region),
+        <b>Port</b> <code>1883</code>. The <b>Username</b> is your Application&nbsp;ID
+        with <code>@ttn</code> appended (same rule as the app!), and the <b>Password</b>
+        is your API&nbsp;key. Hit <b>Connect</b> — if it connects and you see topics
+        appear, your credentials are good to go.</div>
+    </div>
+
+    <!-- ============================ STEP 4 ============================ -->
+    <div class="step"><div class="num">4</div><h2>Connect from the Loko app</h2></div>
+    <p class="lead">Open the Loko app, go to the <b>LoRaWAN (TTN)</b> sheet, and enter
+       your credentials. Pick your region with the <b>Quick select</b> buttons (EU1 /
+       NAM1 / AU1), then paste the Application ID and API key.</p>
+
+    <figure>
+      <div class="shot appshot">
+        <picture>
+          <source type="image/webp" srcset="/images/lorawan/app-lorawan-settings.webp">
+          <img src="/images/lorawan/app-lorawan-settings.png" alt="Loko app LoRaWAN settings sheet" loading="lazy" width="800" height="960">
+        </picture>
+        <!-- 1 · Application ID field (with the @ttn suffix appended onto the value) -->
+        <span class="hl"  style="left:29%; top:56%; width:42%; height:4.5%;"></span>
+        <span class="tag" style="left:29%; top:56%;">1</span>
+        <span class="append" style="left:43%; top:58.2%;">@ttn</span>
+        <!-- 2 · API key field -->
+        <span class="hl"  style="left:29%; top:63.5%; width:42%; height:4.5%;"></span>
+        <span class="tag" style="left:29%; top:63.5%;">2</span>
+        <!-- 3 · Save -->
+        <span class="hl red"  style="left:29%; top:69%; width:21%; height:4%;"></span>
+        <span class="tag red" style="left:29%; top:69%;">3</span>
+      </div>
+      <figcaption>① Application ID (add @ttn!)  ·  ② API key  ·  ③ Save</figcaption>
+    </figure>
+
+    <div class="note crit">
+      <span class="ic">⚠️</span>
+      <div class="bd"><b>Important — add <code>@ttn</code> to your Application ID.</b>
+        In the app's Application&nbsp;ID field, append <code>@ttn</code> to the end of the
+        ID you noted in Step&nbsp;1. Without this suffix the connection will fail.</div>
+    </div>
+
+    <div class="ttnbox">
+      <div class="small">So your Application ID becomes</div>
+      <div class="big">demolokoappid<span class="suf">@ttn</span></div>
+    </div>
+
+    <p>Tap <b>Save</b>. When the status indicator at the top of the sheet turns to
+       <b style="color:var(--accent)">● Connected</b>, the app is live on the network and
+       your tracker positions will start arriving on the map.</p>
+
+    <!-- ============================ DONE ============================ -->
+    <div class="done">
+      <h2>🎉 You're connected!</h2>
+      <p>Your Loko Air devices are now streaming their positions through TTN into the
+         app. From here you can set up geofences, view archived tracks, and download
+         offline maps for the field.</p>
+    </div>
+
+    <div class="note">
+      <span class="ic">💬</span>
+      <div class="bd"><b>Need help?</b> If you hit any issues during setup, check our
+        <a href="/#faq">FAQ section</a> or contact our support team — we're here to help
+        you get connected.</div>
+    </div>
+
+  </div>
 </main>
 <div id="site-footer"></div>
-<script>
-    // Mobile Menu Toggle
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (mobileMenuToggle) {
-      mobileMenuToggle.addEventListener('click', () => {
-        mobileMenuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
-      });
-
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenuToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          document.body.classList.remove('menu-open');
-        });
-      });
-
-      document.addEventListener('click', (e) => {
-        if (document.body.classList.contains('menu-open') &&
-            !navLinks.contains(e.target) &&
-            !mobileMenuToggle.contains(e.target)) {
-          mobileMenuToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          document.body.classList.remove('menu-open');
-        }
-      });
-    }
-
-    // Set light theme
-    document.documentElement.setAttribute('data-theme', 'light');
-  </script>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>
