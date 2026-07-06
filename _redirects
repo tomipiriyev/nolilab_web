@@ -282,6 +282,16 @@ http://www.nolilab.com/*    https://www.nolilab.com/:splat 301!
 /blogs/news.atom                      /blog/                    301
 /:lang/blogs/news.atom                /:lang/blog/              301
 
+# ── Cannibalization consolidation (English-only; translations kept) ──────────
+# Thin duplicate landing pages 301'd into their stronger siblings to consolidate
+# ranking signals. GSC 2026-07: these EN pages earned ~0 clicks at pos 9-14 while
+# the targets rank pos 5-9 with real traffic. Language-prefixed versions are
+# intentionally NOT redirected — they win in their own less-competitive locales.
+/gps-tracker-vs-airtag                  /airtag-vs-lora/          301
+/gps-tracker-vs-airtag/                 /airtag-vs-lora/          301
+/gps-tracker-battery-life               /battery-life/            301
+/gps-tracker-battery-life/              /battery-life/            301
+
 # ── Account and email-protection remnants ────────────────────────────────────
 /customer_authentication/redirect      /                         301
 /cdn-cgi/l/email-protection            /contact/                 301
