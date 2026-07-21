@@ -1921,6 +1921,12 @@ let groundReader = null;
 
 const groundTermOutput = document.getElementById("groundTermOutput");
 const groundTermClearBtn = document.getElementById("groundTermClearBtn");
+const groundTermAutoscroll = document.getElementById("groundTermAutoscroll");
+const groundTermTimestamps = document.getElementById("groundTermTimestamps");
+const groundTermForm = document.getElementById("groundTermForm");
+const groundTermInput = document.getElementById("groundTermInput");
+const groundTermSendBtn = document.getElementById("groundTermSendBtn");
+const groundMonitorDot = document.getElementById("groundMonitorDot");
 const groundConnectButton = document.getElementById("groundConnectButton");
 const groundConnectButtonLabel = document.getElementById("groundConnectButtonLabel");
 const groundConnectionLabel = document.getElementById("groundConnectionLabel");
@@ -1934,23 +1940,137 @@ const groundReadButton = document.getElementById("groundReadButton");
 const groundSendButton = document.getElementById("groundSendButton");
 const groundSaveStatus = document.getElementById("groundSaveStatus");
 
+// The monitor keeps at most this many lines so a long session cannot grow the
+// DOM without bound.
+const GROUND_TERM_MAX_LINES = 2000;
+
+function groundTermTimestamp() {
+    const now = new Date();
+    const pad = (n, w = 2) => String(n).padStart(w, "0");
+    return `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}.${pad(now.getMilliseconds(), 3)} `;
+}
+
 function groundTermLog(text, type = "default") {
     if (!groundTermOutput) return;
     const wasAtBottom = groundTermOutput.scrollHeight - groundTermOutput.clientHeight <= groundTermOutput.scrollTop + 4;
     const line = document.createElement("span");
     line.className = "term-line" + (type !== "default" ? " term-" + type : "");
-    line.textContent = text;
+    line.textContent = (groundTermTimestamps?.checked ? groundTermTimestamp() : "") + text;
     if (groundTermOutput.firstChild?.classList?.contains("term-muted") &&
         groundTermOutput.firstChild?.textContent === "Waiting for connection…") {
         groundTermOutput.replaceChildren();
     }
     groundTermOutput.appendChild(line);
-    if (wasAtBottom) groundTermOutput.scrollTop = groundTermOutput.scrollHeight;
+    while (groundTermOutput.childElementCount > GROUND_TERM_MAX_LINES) {
+        groundTermOutput.removeChild(groundTermOutput.firstChild);
+    }
+    if (groundTermAutoscroll?.checked !== false && wasAtBottom) {
+        groundTermOutput.scrollTop = groundTermOutput.scrollHeight;
+    }
 }
 
 if (groundTermClearBtn) {
     groundTermClearBtn.addEventListener("click", () => {
         if (groundTermOutput) groundTermOutput.replaceChildren();
+    });
+}
+
+// ── Ground Unit serial monitor ───────────────────────────────────────────────
+// A single read loop owns the reader for the lifetime of the connection so the
+// device's output is always visible. Commands no longer read the port directly;
+// they subscribe to the parsed lines this loop emits.
+let groundLineListeners = [];
+let groundReadLoopPromise = null;
+// `info` responses are only parsed into the form fields while a Read is in
+// flight — otherwise unsolicited output would overwrite what the user typed.
+let groundParseInfoLines = false;
+
+function emitGroundLine(text) {
+    for (const listener of groundLineListeners.slice()) listener(text);
+}
+
+function waitForGroundOk(timeoutMs, label) {
+    return new Promise((resolve, reject) => {
+        let buffer = "";
+        const cleanup = () => {
+            groundLineListeners = groundLineListeners.filter((l) => l !== listener);
+            window.clearTimeout(timer);
+        };
+        const listener = (text) => {
+            buffer += text + "\n";
+            if (text === "OK") { cleanup(); resolve(buffer); }
+            else if (/^Error:/i.test(text)) { cleanup(); reject(new Error(text)); }
+        };
+        const timer = window.setTimeout(() => {
+            cleanup();
+            reject(new Error(`Did not receive OK after: ${label}`));
+        }, timeoutMs);
+        groundLineListeners.push(listener);
+    });
+}
+
+function setGroundMonitorActive(active) {
+    if (groundMonitorDot) groundMonitorDot.classList.toggle("success", active);
+    if (groundTermInput) groundTermInput.disabled = !active;
+    if (groundTermSendBtn) groundTermSendBtn.disabled = !active;
+}
+
+async function groundReadLoop() {
+    const decoder = new TextDecoder();
+    let pendingLine = "";
+    try {
+        while (groundReader) {
+            const { value, done } = await groundReader.read();
+            if (done) break;
+            const chunk = decoder.decode(value ?? new Uint8Array(), { stream: true });
+            if (!chunk) continue;
+            pendingLine += chunk;
+            const lines = pendingLine.split(/\r\n|\n|\r/);
+            pendingLine = lines.pop() ?? "";
+            for (const line of lines) {
+                const text = line.trim();
+                if (!text) continue;
+                const isErr = /^Error:/i.test(text);
+                groundTermLog("< " + text, text === "OK" ? "ok" : isErr ? "err" : "default");
+                if (groundParseInfoLines) parseGroundDeviceInfoLine(text);
+                emitGroundLine(text);
+            }
+        }
+    } catch (error) {
+        // Cancelling the reader on disconnect rejects the pending read() — that
+        // is the normal teardown path, not a failure worth surfacing.
+        if (groundConnectedPort) {
+            groundTermLog("monitor stopped: " + (error.message || "read error"), "err");
+        }
+    } finally {
+        setGroundMonitorActive(false);
+    }
+}
+
+async function writeGroundSerial(text) {
+    if (!groundConnectedPort || !groundConnectedPort.writable) {
+        throw new Error("Ground Unit serial connection is not ready.");
+    }
+    const writer = groundConnectedPort.writable.getWriter();
+    try {
+        await writer.write(new TextEncoder().encode(text));
+    } finally {
+        writer.releaseLock();
+    }
+}
+
+if (groundTermForm) {
+    groundTermForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const command = groundTermInput.value.trim();
+        if (!command || !groundConnectedPort) return;
+        groundTermInput.value = "";
+        try {
+            groundTermLog("> " + command, "cmd");
+            await writeGroundSerial(`${command}\r`);
+        } catch (error) {
+            groundTermLog("write error: " + (error.message || "unknown error"), "err");
+        }
     });
 }
 
@@ -1990,15 +2110,21 @@ function parseGroundDeviceInfoLine(line) {
 }
 
 async function groundDisconnectPort() {
+    // Clear the port first so the read loop treats its cancelled read() as a
+    // normal teardown rather than a monitor failure.
+    const port = groundConnectedPort;
+    groundConnectedPort = null;
     if (groundReader) {
-        await groundReader.cancel().catch(() => {});
-        groundReader.releaseLock();
+        const reader = groundReader;
+        await reader.cancel().catch(() => {});
         groundReader = null;
+        await groundReadLoopPromise?.catch(() => {});
+        groundReadLoopPromise = null;
+        reader.releaseLock();
     }
-    if (groundConnectedPort) {
-        await groundConnectedPort.close().catch(() => {});
-        groundConnectedPort = null;
-    }
+    groundLineListeners = [];
+    if (port) await port.close().catch(() => {});
+    setGroundMonitorActive(false);
     groundTermLog("── disconnected ──", "muted");
     setGroundConnectionState(false, "Serial connection closed.");
     setGroundPortInfo("not selected");
@@ -2008,100 +2134,40 @@ async function sendGroundCommandAndWaitForOk(command, timeoutMs = 2000) {
     if (!groundConnectedPort || !groundConnectedPort.writable || !groundReader) {
         throw new Error("Ground Unit serial connection is not ready.");
     }
-    const writer = groundConnectedPort.writable.getWriter();
-    try {
-        await writer.write(new TextEncoder().encode(`${command}\r`));
-        groundTermLog("> " + command, "cmd");
-    } finally {
-        writer.releaseLock();
-    }
-
-    let pendingLine = "";
-    let responseBuffer = "";
-    const deadline = Date.now() + timeoutMs;
-    const dec = new TextDecoder();
-
-    while (groundConnectedPort && Date.now() < deadline) {
-        const remainingMs = deadline - Date.now();
-        const readResult = await Promise.race([
-            groundReader.read(),
-            new Promise((_, reject) => window.setTimeout(() => reject(new Error(`Timeout waiting for OK after: ${command}`)), remainingMs))
-        ]);
-        const { value, done } = readResult;
-        const chunk = dec.decode(value ?? new Uint8Array(), { stream: !done });
-        if (chunk) {
-            pendingLine += chunk;
-            const lines = pendingLine.split(/\r\n|\n|\r/);
-            pendingLine = lines.pop() ?? "";
-            for (const line of lines) {
-                const t = line.trim();
-                if (!t) continue;
-                responseBuffer += t + "\n";
-                const isErr = /^Error:/i.test(t);
-                groundTermLog("< " + t, t === "OK" ? "ok" : isErr ? "err" : "default");
-                parseGroundDeviceInfoLine(t);
-                if (t === "OK") return responseBuffer;
-                if (isErr) throw new Error(t);
-            }
-        }
-        if (done) break;
-    }
-    throw new Error(`Did not receive OK after: ${command}`);
+    // Subscribe before writing so a fast reply cannot land between the two.
+    const response = waitForGroundOk(timeoutMs, command);
+    groundTermLog("> " + command, "cmd");
+    await writeGroundSerial(`${command}\r`);
+    return response;
 }
 
 async function requestGroundDeviceInfo() {
     if (!groundConnectedPort || !groundConnectedPort.writable || !groundReader) return;
+    groundParseInfoLines = true;
     try {
         setGroundConnectionState(true, "Connected. Reading device info...");
-        const writer = groundConnectedPort.writable.getWriter();
         // Wake the device's line parser first (matches the Air-unit handshake),
         // then send the command terminated with a bare CR — the firmware does
         // not respond to "info\r\n".
-        await writer.write(new TextEncoder().encode("\r"));
+        await writeGroundSerial("\r");
         await delay(150);
-        await writer.write(new TextEncoder().encode("info\r"));
-        writer.releaseLock();
 
-        let pendingLine = "";
-        const deadline = Date.now() + 2000;
-        const dec = new TextDecoder();
-        let timedOut = false;
+        const response = waitForGroundOk(1000, "info");
+        groundTermLog("> info", "cmd");
+        await writeGroundSerial("info\r");
+        await response;
 
-        const timeoutId = window.setTimeout(async () => {
-            timedOut = true;
+        setGroundConnectionState(true, "Connected to Ground Unit.");
+    } catch (error) {
+        if (!groundConnectedPort) return;
+        if (/Did not receive OK/i.test(error.message || "")) {
             await groundDisconnectPort();
             window.alert("No response from Ground Unit… Make sure a Loko Ground Unit is connected.");
-        }, 1000);
-
-        while (groundConnectedPort && !timedOut) {
-            const { value, done } = await groundReader.read();
-            const chunk = dec.decode(value ?? new Uint8Array(), { stream: !done });
-            if (chunk) {
-                pendingLine += chunk;
-                const lines = pendingLine.split(/\r\n|\n|\r/);
-                pendingLine = lines.pop() ?? "";
-                for (const line of lines) {
-                    const t = line.trim();
-                    if (!t) continue;
-                    groundTermLog("< " + t);
-                    parseGroundDeviceInfoLine(t);
-                    if (t === "OK") {
-                        clearTimeout(timeoutId);
-                        setGroundConnectionState(true, "Connected to Ground Unit.");
-                        return;
-                    }
-                }
-            }
-            if (done || Date.now() > deadline) break;
+            return;
         }
-        clearTimeout(timeoutId);
-        if (!timedOut) setGroundConnectionState(true, "Connected to Ground Unit.");
-    } catch (error) {
-        // The timeout path disconnects the port, which makes the pending
-        // read() reject with "The device has been lost". That's expected —
-        // the alert has already been shown, so don't surface a second error.
-        if (!groundConnectedPort) return;
         setGroundConnectionState(true, `Connected, info read failed: ${error.message || "unknown error"}`);
+    } finally {
+        groundParseInfoLines = false;
     }
 }
 
@@ -2118,6 +2184,8 @@ async function groundConnectPort() {
         setGroundConnectionState(true, "Connected.");
         setGroundPortInfo(formatPortDetails(groundConnectedPort));
         groundTermLog("── connected: " + formatPortDetails(groundConnectedPort) + " ──", "info");
+        setGroundMonitorActive(true);
+        groundReadLoopPromise = groundReadLoop();
         await requestGroundDeviceInfo();
     } catch (error) {
         groundConnectedPort = null;
@@ -2179,3 +2247,4 @@ window.addEventListener("beforeunload", () => {
 
 setGroundConnectionState(false, "Browser access to the Ground Unit has not been granted.");
 setGroundPortInfo("serial permission not granted");
+setGroundMonitorActive(false);

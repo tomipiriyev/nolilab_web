@@ -242,6 +242,60 @@
 
   .serial-terminal-bar button:hover { color: #6a7285; }
 
+  .serial-terminal-bar-actions { display: flex; align-items: center; gap: 10px; }
+
+  .serial-terminal-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #333848;
+    cursor: pointer;
+    font-size: 0.63rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .serial-terminal-toggle:hover { color: #6a7285; }
+  .serial-terminal-toggle input { accent-color: #16a34a; width: 11px; height: 11px; margin: 0; cursor: pointer; }
+
+  .serial-terminal-tall .serial-terminal-output { height: 260px; }
+
+  .serial-terminal-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    background: #1a1d26;
+    border-top: 1px solid #22252f;
+  }
+
+  .serial-terminal-prompt {
+    color: #444b5e;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 0.75rem;
+  }
+
+  .serial-terminal-input input {
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
+    outline: none;
+    color: #c8d0e0;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 0.72rem;
+    padding: 3px 0;
+  }
+
+  .serial-terminal-input input::placeholder { color: #2e3341; }
+  .serial-terminal-input input:disabled { cursor: not-allowed; }
+
+  .serial-terminal-input button {
+    padding: 3px 12px;
+    font-size: 0.68rem;
+    flex-shrink: 0;
+  }
+
   .serial-terminal-output {
     height: 96px;
     overflow-y: auto;
@@ -784,15 +838,6 @@
 <button class="dark-button" disabled="" id="groundSendButton" type="button">Send</button>
 <span aria-live="polite" class="save-status" id="groundSaveStatus"></span>
 </footer>
-<div class="serial-terminal">
-<div class="serial-terminal-bar">
-<span>Serial Output</span>
-<button id="groundTermClearBtn" type="button">Clear</button>
-</div>
-<div class="serial-terminal-output" id="groundTermOutput">
-<span class="term-line term-muted">Waiting for connection…</span>
-</div>
-</div>
 </section>
 <section class="card workspace-card" id="groundFwCard">
 <div class="fw-row" style="margin-bottom:6px;">
@@ -827,6 +872,31 @@
 <div class="fw-log-container" id="groundFwLog"></div>
 </div>
 <p class="field-copy" style="margin-top:8px;">If flashing does not start, hold the <strong>BOOT</strong> button on the Ground Unit while clicking Flash Firmware.</p>
+</section>
+<section class="card workspace-card" id="groundMonitorCard">
+<div class="fw-row" style="margin-bottom:6px;">
+<span class="fw-label">Serial Monitor</span>
+<span class="fw-status-dot" id="groundMonitorDot"></span>
+</div>
+<p class="field-copy">Live serial output from the Ground Unit at 115200 baud. Everything the device prints appears here while connected — including messages sent outside of Read and Send.</p>
+<div class="serial-terminal serial-terminal-tall">
+<div class="serial-terminal-bar">
+<span>Serial Output</span>
+<span class="serial-terminal-bar-actions">
+<label class="serial-terminal-toggle"><input checked="" id="groundTermAutoscroll" type="checkbox"/> Autoscroll</label>
+<label class="serial-terminal-toggle"><input id="groundTermTimestamps" type="checkbox"/> Timestamps</label>
+<button id="groundTermClearBtn" type="button">Clear</button>
+</span>
+</div>
+<div class="serial-terminal-output" id="groundTermOutput">
+<span class="term-line term-muted">Waiting for connection…</span>
+</div>
+<form class="serial-terminal-input" id="groundTermForm">
+<span class="serial-terminal-prompt">&gt;</span>
+<input autocomplete="off" disabled="" id="groundTermInput" placeholder="Type a command and press Enter (e.g. info)" spellcheck="false" type="text"/>
+<button class="dark-button" disabled="" id="groundTermSendBtn" type="submit">Send</button>
+</form>
+</div>
 </section>
 </div>
 </section>
