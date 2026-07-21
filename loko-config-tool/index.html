@@ -240,7 +240,8 @@
     text-transform: uppercase;
   }
 
-  .serial-terminal-bar button:hover { color: #6a7285; }
+  .serial-terminal-bar button:hover:not(:disabled) { color: #6a7285; }
+  .serial-terminal-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .serial-terminal-bar-actions { display: flex; align-items: center; gap: 10px; }
 
@@ -290,11 +291,24 @@
   .serial-terminal-input input::placeholder { color: #2e3341; }
   .serial-terminal-input input:disabled { cursor: not-allowed; }
 
-  .serial-terminal-input button {
-    padding: 3px 12px;
-    font-size: 0.68rem;
+  .serial-terminal-export {
     flex-shrink: 0;
+    padding: 5px 14px;
+    border: 0;
+    border-radius: 6px;
+    background: #16a34a;
+    color: #fff;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s, opacity 0.15s;
   }
+
+  .serial-terminal-export:hover:not(:disabled) { background: #15803d; }
+  .serial-terminal-export:disabled { opacity: 0.35; cursor: not-allowed; }
 
   .serial-terminal-output {
     height: 96px;
@@ -894,7 +908,7 @@
 <form class="serial-terminal-input" id="groundTermForm">
 <span class="serial-terminal-prompt">&gt;</span>
 <input autocomplete="off" disabled="" id="groundTermInput" placeholder="Type a command and press Enter (e.g. info)" spellcheck="false" type="text"/>
-<button class="dark-button" disabled="" id="groundTermSendBtn" type="submit">Send</button>
+<button class="serial-terminal-export" disabled="" id="groundTermExportBtn" type="button">↓ Export Log</button>
 </form>
 </div>
 </section>

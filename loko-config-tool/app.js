@@ -1921,11 +1921,11 @@ let groundReader = null;
 
 const groundTermOutput = document.getElementById("groundTermOutput");
 const groundTermClearBtn = document.getElementById("groundTermClearBtn");
+const groundTermExportBtn = document.getElementById("groundTermExportBtn");
 const groundTermAutoscroll = document.getElementById("groundTermAutoscroll");
 const groundTermTimestamps = document.getElementById("groundTermTimestamps");
 const groundTermForm = document.getElementById("groundTermForm");
 const groundTermInput = document.getElementById("groundTermInput");
-const groundTermSendBtn = document.getElementById("groundTermSendBtn");
 const groundMonitorDot = document.getElementById("groundMonitorDot");
 const groundConnectButton = document.getElementById("groundConnectButton");
 const groundConnectButtonLabel = document.getElementById("groundConnectButtonLabel");
@@ -1944,6 +1944,10 @@ const groundSaveStatus = document.getElementById("groundSaveStatus");
 // DOM without bound.
 const GROUND_TERM_MAX_LINES = 2000;
 
+// Export reads from this buffer rather than the DOM, so exported logs always
+// carry a timestamp regardless of the Timestamps display toggle.
+let groundTermLines = [];
+
 function groundTermTimestamp() {
     const now = new Date();
     const pad = (n, w = 2) => String(n).padStart(w, "0");
@@ -1961,19 +1965,48 @@ function groundTermLog(text, type = "default") {
         groundTermOutput.replaceChildren();
     }
     groundTermOutput.appendChild(line);
+    groundTermLines.push({ at: new Date().toISOString(), text });
     while (groundTermOutput.childElementCount > GROUND_TERM_MAX_LINES) {
         groundTermOutput.removeChild(groundTermOutput.firstChild);
     }
+    if (groundTermLines.length > GROUND_TERM_MAX_LINES) {
+        groundTermLines = groundTermLines.slice(-GROUND_TERM_MAX_LINES);
+    }
+    syncGroundTermExportState();
     if (groundTermAutoscroll?.checked !== false && wasAtBottom) {
         groundTermOutput.scrollTop = groundTermOutput.scrollHeight;
     }
 }
 
+function syncGroundTermExportState() {
+    if (groundTermExportBtn) groundTermExportBtn.disabled = groundTermLines.length === 0;
+}
+
 if (groundTermClearBtn) {
     groundTermClearBtn.addEventListener("click", () => {
         if (groundTermOutput) groundTermOutput.replaceChildren();
+        groundTermLines = [];
+        syncGroundTermExportState();
     });
 }
+
+if (groundTermExportBtn) {
+    groundTermExportBtn.addEventListener("click", () => {
+        if (!groundTermLines.length) return;
+        const header = [
+            "# Loko Ground Unit — serial monitor log",
+            `# Exported: ${new Date().toISOString()}`,
+            `# Port: ${groundConnectedPort ? formatPortDetails(groundConnectedPort) : "not connected"}`,
+            `# Lines: ${groundTermLines.length}`,
+            ""
+        ].join("\n");
+        const body = groundTermLines.map((line) => `${line.at}\t${line.text}`).join("\n");
+        const fileName = `ground-serial-${new Date().toISOString().replace(/[:.]/g, "-")}.log`;
+        downloadTextFile(header + body + "\n", fileName, "text/plain;charset=utf-8");
+    });
+}
+
+syncGroundTermExportState();
 
 // ── Ground Unit serial monitor ───────────────────────────────────────────────
 // A single read loop owns the reader for the lifetime of the connection so the
@@ -2012,7 +2045,6 @@ function waitForGroundOk(timeoutMs, label) {
 function setGroundMonitorActive(active) {
     if (groundMonitorDot) groundMonitorDot.classList.toggle("success", active);
     if (groundTermInput) groundTermInput.disabled = !active;
-    if (groundTermSendBtn) groundTermSendBtn.disabled = !active;
 }
 
 async function groundReadLoop() {
