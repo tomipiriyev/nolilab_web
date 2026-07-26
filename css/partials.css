@@ -42,6 +42,68 @@ header {
 .nav-link:hover {
   color:var(--text-primary,#24292e);
 }
+/* nav dropdown — parent link stays clickable, submenu opens on hover/focus */
+.nav-dropdown {
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+.nav-dropdown > .nav-link {
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+}
+.nav-caret {
+  transition:transform .2s ease;
+  opacity:.7;
+}
+.nav-dropdown:hover .nav-caret,
+.nav-dropdown:focus-within .nav-caret {
+  transform:rotate(180deg);
+}
+.nav-submenu {
+  position:absolute;
+  top:100%;
+  left:50%;
+  transform:translate(-50%,-6px);
+  margin-top:.75rem;
+  min-width:190px;
+  display:flex;
+  flex-direction:column;
+  background:var(--bg-primary,#fff);
+  border:1px solid var(--border,#d0d7de);
+  border-radius:var(--radius-md,.5rem);
+  box-shadow:var(--shadow-lg,0 10px 15px rgba(0,0,0,.12));
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .15s ease,visibility .15s ease,transform .15s ease;
+  z-index:1000;
+}
+/* bridges the gap between the parent link and the panel so hover doesn't drop */
+.nav-submenu::before {
+  content:"";
+  position:absolute;
+  top:-.75rem;
+  left:0;
+  right:0;
+  height:.75rem;
+}
+.nav-dropdown:hover .nav-submenu,
+.nav-dropdown:focus-within .nav-submenu {
+  opacity:1;
+  visibility:visible;
+  transform:translate(-50%,0);
+}
+.nav-sublink {
+  padding:.7rem 1rem;
+  white-space:nowrap;
+}
+.nav-sublink:not(:last-child) {
+  border-bottom:1px solid var(--border,#d0d7de);
+}
+.nav-sublink:hover {
+  background:var(--bg-secondary,#f6f8fa);
+}
 .language-selector {
   flex-shrink:0;
   position:relative;
@@ -156,7 +218,21 @@ header {
   right:0;
   bottom:0;
   background:rgba(0,0,0,.5);
-  z-index:999};
+  z-index:999}
+  /* dropdown flattens into an indented group inside the slide-out menu */
+  .nav-dropdown{display:block;width:100%}
+  .nav-caret{display:none}
+  .nav-submenu{position:static;transform:none;margin:0;min-width:0;
+  opacity:1;
+  visibility:visible;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:transparent}
+  .nav-submenu::before{display:none}
+  .nav-sublink{padding-left:2.5rem;
+  font-size:.9375rem;
+  color:var(--text-secondary,#57606a)}
 }
 
 .language-option.active {
