@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <title>Loko AIR Online Configurator | nolilab</title>
@@ -46,7 +46,7 @@
 }
 </script>
 <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
-<link href="styles.css" rel="stylesheet"/>
+<link href="styles.css?v=20260727b" rel="stylesheet"/>
 <style>
   /* ── Site design tokens (light theme, matches nolilab site chrome) ── */
   :root {
@@ -484,6 +484,18 @@
 <p class="hero-copy">Configure the data transfer mode, as well as the data transmission and collection intervals.</p>
 </div>
 </section>
+<section class="card workspace-card">
+<div aria-label="Main sections" class="main-tab-strip" role="tablist">
+<button aria-selected="true" class="main-tab is-active" data-main-tab="configuration" role="tab" type="button">Configuration</button>
+<button aria-selected="false" class="main-tab" data-main-tab="gnss-trace" role="tab" type="button">GNSS Trace</button>
+<button aria-selected="false" class="main-tab" data-main-tab="firmware-updater" role="tab" type="button">Firmware Update</button>
+</div>
+<div class="main-panel is-active" data-main-panel="configuration">
+<div aria-label="Device" class="device-tab-strip" role="tablist">
+<button aria-selected="true" class="device-tab is-active" data-device-tab="air" role="tab" type="button">Loko Air</button>
+<button aria-selected="false" class="device-tab" data-device-tab="ground" role="tab" type="button">Loko Ground</button>
+</div>
+<div class="device-panel is-active" data-device-panel="air">
 <section class="card status-card">
 <div class="status-meta">
 <div class="status-cluster">
@@ -519,14 +531,6 @@
 <span id="connectButtonLabel">Connect</span>
 </button>
 </section>
-<section class="card workspace-card">
-<div aria-label="Main sections" class="main-tab-strip" role="tablist">
-<button aria-selected="true" class="main-tab is-active" data-main-tab="configuration" role="tab" type="button">Configuration</button>
-<button aria-selected="false" class="main-tab" data-main-tab="gnss-trace" role="tab" type="button">GNSS Trace</button>
-<button aria-selected="false" class="main-tab" data-main-tab="ground-unit" role="tab" type="button">Ground Unit</button>
-<button aria-selected="false" class="main-tab" data-main-tab="firmware-updater" role="tab" type="button">Loko Air Firmware Update</button>
-</div>
-<div class="main-panel is-active" data-main-panel="configuration">
 <section class="card mode-card">
 <div class="mode-card-content">
 <div class="mode-fields-row">
@@ -691,7 +695,72 @@
 </div>
 </section>
 </div>
+<div class="device-panel" data-device-panel="ground" hidden="">
+<section class="card status-card">
+<div class="status-meta">
+<div class="status-cluster">
+<span aria-hidden="true" class="status-icon disconnected" id="groundStatusIcon">
+<svg fill="none" viewbox="0 0 24 24">
+<g class="wire-connected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+<path d="M3.5 12H9"></path>
+<path d="M9 12C9 9.8 10.8 8 13 8H16"></path>
+<path d="M16 6.5V9.5"></path>
+<path d="M16 14.5V17.5"></path>
+<path d="M16 12H20.5"></path>
+</g>
+<g class="wire-disconnected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+<path d="M3.5 12H8"></path>
+<path d="M9.8 10.3L11.5 8.6"></path>
+<path d="M9.8 13.7L11.5 15.4"></path>
+<path d="M14.2 10.3L12.5 8.6"></path>
+<path d="M14.2 13.7L12.5 15.4"></path>
+<path d="M16 6.5V9.5"></path>
+<path d="M16 14.5V17.5"></path>
+<path d="M16 12H20.5"></path>
+</g>
+</svg>
+</span>
+<div>
+<div class="status-title disconnected" id="groundConnectionLabel">Disconnected</div>
+<div class="status-hint" id="groundConnectionHint">Browser access to the Ground Unit has not been granted.</div>
+<div class="port-info" id="groundPortInfo">Port: not selected</div>
+</div>
+</div>
+</div>
+<button class="primary-button disconnected" id="groundConnectButton" type="button">
+<span id="groundConnectButtonLabel">Connect</span>
+</button>
+</section>
+<section class="card workspace-card">
+<div class="field">
+<label for="groundId2">ID2</label>
+<input id="groundId2" inputmode="numeric" max="99" min="0" step="1" type="number" value=""/>
+<p class="field-copy">Ground Unit ID2 identifier.</p>
+</div>
+<div class="field">
+<label for="groundFreq">Frequency (Hz)</label>
+<input id="groundFreq" inputmode="numeric" step="1" type="number" value=""/>
+<p class="field-copy">Operating frequency in Hz (e.g. 868000000).</p>
+</div>
+<div class="field">
+<label for="groundP2pKey">P2P Encryption Key</label>
+<input autocomplete="off" id="groundP2pKey" inputmode="text" maxlength="64" placeholder="Enter 64 HEX characters (32 bytes) to update, or leave empty" spellcheck="false" type="text" value=""/>
+<p class="field-copy">Enter 64 HEX characters (32 bytes) for the 256-bit encryption key.</p>
+</div>
+<footer class="actions">
+<button class="dark-button" disabled="" id="groundReadButton" type="button">Read</button>
+<button class="dark-button" disabled="" id="groundSendButton" type="button">Send</button>
+<span aria-live="polite" class="save-status" id="groundSaveStatus"></span>
+</footer>
+</section>
+</div>
+</div>
 <div class="main-panel" data-main-panel="firmware-updater" hidden="">
+<div aria-label="Device" class="device-tab-strip" role="tablist">
+<button aria-selected="true" class="device-tab is-active" data-device-tab="fw-air" role="tab" type="button">Loko Air</button>
+<button aria-selected="false" class="device-tab" data-device-tab="fw-ground" role="tab" type="button">Loko Ground</button>
+</div>
+<div class="device-panel is-active" data-device-panel="fw-air">
 <div class="fw-updater" id="fw-updater-panel">
 <!-- Device -->
 <div class="fw-section">
@@ -722,8 +791,8 @@
 <span class="fw-version-badge" id="fw-version-badge">v2.0.18 available</span>
 </div>
 <div class="field" style="margin-top:4px; margin-bottom:10px;">
-<label class="fw-source-label"><input type="radio" name="airFwSource" id="fw-source-bundled" checked=""/> Latest (v2.0.18)</label>
-<label class="fw-source-label" style="margin-left:14px;"><input type="radio" name="airFwSource" id="fw-source-custom"/> Custom .bin</label>
+<label class="fw-source-label"><input checked="" id="fw-source-bundled" name="airFwSource" type="radio"/> Latest (v2.0.18)</label>
+<label class="fw-source-label" style="margin-left:14px;"><input id="fw-source-custom" name="airFwSource" type="radio"/> Custom .bin</label>
 <input accept=".bin,.hex" id="fw-custom-file" style="display:none; margin-top:8px;" type="file"/>
 </div>
 <button class="dark-button fw-flash-btn-green" disabled="" id="fw-flash-btn" style="width:100%" type="button">Flash Firmware</button>
@@ -750,7 +819,70 @@
 </div>
 </div>
 </div>
-<div class="main-panel" data-main-panel="gnss-trace" hidden="">
+<div class="device-panel" data-device-panel="fw-ground" hidden="">
+<div class="status-mirror" data-mirror="ground"></div>
+<section class="card workspace-card" id="groundFwCard">
+<div class="fw-row" style="margin-bottom:6px;">
+<span class="fw-label">Firmware Update</span>
+<span class="fw-version-badge" id="groundFwBadge">latest bundled</span>
+</div>
+<p class="field-copy">Flash the Loko Ground (ESP32) firmware over USB. The image is written entirely in your browser — nothing is uploaded. Saved settings (ID2, frequency, P2P key) are kept in NVS across updates.</p>
+<div class="fw-section" style="margin-top:10px;">
+<div class="fw-row" style="margin-bottom:6px;"><span class="fw-label">How to enter flash mode</span></div>
+<ol class="fw-steps" style="margin:0; padding-left:20px; font-size:0.82rem; line-height:1.7; color:var(--text-secondary);">
+<li>Press and <strong>hold the Power button</strong>.</li>
+<li>Press and <strong>hold the IO button</strong>.</li>
+<li>While holding both IO and Power, press the <strong>EN (RESET)</strong> button once.</li>
+<li><strong>Release the IO button</strong> (keep holding Power).</li>
+<li>Press <strong>Flash Firmware</strong> below and select the serial port.</li>
+<li>When the progress bar reaches <strong>100%</strong>, release the Power button.</li>
+<li>Press the <strong>EN (RESET)</strong> button once. Done.</li>
+</ol>
+</div>
+<div class="field" style="margin-top:10px;">
+<label class="fw-source-label"><input checked="" id="groundFwBundled" name="groundFwSource" type="radio"/> Latest (bundled)</label>
+<label class="fw-source-label" style="margin-left:14px;"><input id="groundFwCustom" name="groundFwSource" type="radio"/> Custom .bin</label>
+<input accept=".bin" id="groundFwFile" style="display:none; margin-top:8px;" type="file"/>
+</div>
+<button class="dark-button fw-flash-btn-green" id="groundFlashButton" style="width:100%; margin-top:12px;" type="button">Flash Firmware</button>
+<div class="fw-progress-wrap" id="groundFwProgressWrap" style="display:none">
+<div class="fw-progress-header"><span id="groundFwPhase">Flashing…</span><span id="groundFwPct">0%</span></div>
+<div class="fw-progress-bg"><div class="fw-progress-bar" id="groundFwBar"></div></div>
+</div>
+<div class="fw-section" style="margin-top:12px;">
+<div class="fw-row"><span class="fw-label">Log</span></div>
+<div class="fw-log-container" id="groundFwLog"></div>
+</div>
+<p class="field-copy" style="margin-top:8px;">If flashing does not start, hold the <strong>BOOT</strong> button on the Ground Unit while clicking Flash Firmware.</p>
+</section>
+<section class="card workspace-card" id="groundMonitorCard">
+<div class="fw-row" style="margin-bottom:6px;">
+<span class="fw-label">Serial Monitor</span>
+<span class="fw-status-dot" id="groundMonitorDot"></span>
+</div>
+<p class="field-copy">Live serial output from the Ground Unit at 115200 baud. Everything the device prints appears here while connected — including messages sent outside of Read and Send.</p><div class="serial-terminal serial-terminal-tall">
+<div class="serial-terminal-bar">
+<span>Serial Output</span>
+<span class="serial-terminal-bar-actions">
+<label class="serial-terminal-toggle"><input checked="" id="groundTermAutoscroll" type="checkbox"/> Autoscroll</label>
+<label class="serial-terminal-toggle"><input id="groundTermTimestamps" type="checkbox"/> Timestamps</label>
+<button id="groundTermClearBtn" type="button">Clear</button>
+</span>
+</div>
+<div class="serial-terminal-output" id="groundTermOutput">
+<span class="term-line term-muted">Waiting for connection…</span>
+</div>
+<form class="serial-terminal-input" id="groundTermForm">
+<span class="serial-terminal-prompt">&gt;</span>
+<input autocomplete="off" disabled="" id="groundTermInput" placeholder="Type a command and press Enter (e.g. info)" spellcheck="false" type="text"/>
+<button class="serial-terminal-export" disabled="" id="groundTermExportBtn" type="button">↓ Export Log</button>
+</form>
+</div></section></div>
+
+
+
+</div><div class="main-panel" data-main-panel="gnss-trace" hidden="">
+<div class="status-mirror" data-mirror="air"></div>
 <section class="card gnss-trace-card">
 <div class="field">
 <label for="gnssTraceMap">GNSS Trace Map</label>
@@ -794,130 +926,13 @@
 </div>
 </div>
 </section>
-</div>
-<div class="main-panel" data-main-panel="ground-unit" hidden="">
-<section class="card status-card">
-<div class="status-meta">
-<div class="status-cluster">
-<span aria-hidden="true" class="status-icon disconnected" id="groundStatusIcon">
-<svg fill="none" viewbox="0 0 24 24">
-<g class="wire-connected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
-<path d="M3.5 12H9"></path>
-<path d="M9 12C9 9.8 10.8 8 13 8H16"></path>
-<path d="M16 6.5V9.5"></path>
-<path d="M16 14.5V17.5"></path>
-<path d="M16 12H20.5"></path>
-</g>
-<g class="wire-disconnected" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
-<path d="M3.5 12H8"></path>
-<path d="M9.8 10.3L11.5 8.6"></path>
-<path d="M9.8 13.7L11.5 15.4"></path>
-<path d="M14.2 10.3L12.5 8.6"></path>
-<path d="M14.2 13.7L12.5 15.4"></path>
-<path d="M16 6.5V9.5"></path>
-<path d="M16 14.5V17.5"></path>
-<path d="M16 12H20.5"></path>
-</g>
-</svg>
-</span>
-<div>
-<div class="status-title disconnected" id="groundConnectionLabel">Disconnected</div>
-<div class="status-hint" id="groundConnectionHint">Browser access to the Ground Unit has not been granted.</div>
-<div class="port-info" id="groundPortInfo">Port: not selected</div>
-</div>
-</div>
-</div>
-<button class="primary-button disconnected" id="groundConnectButton" type="button">
-<span id="groundConnectButtonLabel">Connect</span>
-</button>
-</section>
-<section class="card workspace-card">
-<div class="field">
-<label for="groundId2">ID2</label>
-<input id="groundId2" inputmode="numeric" min="0" max="99" step="1" type="number" value=""/>
-<p class="field-copy">Ground Unit ID2 identifier.</p>
-</div>
-<div class="field">
-<label for="groundFreq">Frequency (Hz)</label>
-<input id="groundFreq" inputmode="numeric" step="1" type="number" value=""/>
-<p class="field-copy">Operating frequency in Hz (e.g. 868000000).</p>
-</div>
-<div class="field">
-<label for="groundP2pKey">P2P Encryption Key</label>
-<input autocomplete="off" id="groundP2pKey" inputmode="text" maxlength="64" placeholder="Enter 64 HEX characters (32 bytes) to update, or leave empty" spellcheck="false" type="text" value=""/>
-<p class="field-copy">Enter 64 HEX characters (32 bytes) for the 256-bit encryption key.</p>
-</div>
-<footer class="actions">
-<button class="dark-button" disabled="" id="groundReadButton" type="button">Read</button>
-<button class="dark-button" disabled="" id="groundSendButton" type="button">Send</button>
-<span aria-live="polite" class="save-status" id="groundSaveStatus"></span>
-</footer>
-</section>
-<section class="card workspace-card" id="groundFwCard">
-<div class="fw-row" style="margin-bottom:6px;">
-<span class="fw-label">Firmware Update</span>
-<span class="fw-version-badge" id="groundFwBadge">latest bundled</span>
-</div>
-<p class="field-copy">Flash the Loko Ground (ESP32) firmware over USB. The image is written entirely in your browser — nothing is uploaded. Saved settings (ID2, frequency, P2P key) are kept in NVS across updates.</p>
-<div class="fw-section" style="margin-top:10px;">
-<div class="fw-row" style="margin-bottom:6px;"><span class="fw-label">How to enter flash mode</span></div>
-<ol class="fw-steps" style="margin:0; padding-left:20px; font-size:0.82rem; line-height:1.7; color:var(--text-secondary);">
-<li>Press and <strong>hold the Power button</strong>.</li>
-<li>Press and <strong>hold the IO button</strong>.</li>
-<li>While holding both IO and Power, press the <strong>EN (RESET)</strong> button once.</li>
-<li><strong>Release the IO button</strong> (keep holding Power).</li>
-<li>Press <strong>Flash Firmware</strong> below and select the serial port.</li>
-<li>When the progress bar reaches <strong>100%</strong>, release the Power button.</li>
-<li>Press the <strong>EN (RESET)</strong> button once. Done.</li>
-</ol>
-</div>
-<div class="field" style="margin-top:10px;">
-<label class="fw-source-label"><input type="radio" name="groundFwSource" id="groundFwBundled" checked/> Latest (bundled)</label>
-<label class="fw-source-label" style="margin-left:14px;"><input type="radio" name="groundFwSource" id="groundFwCustom"/> Custom .bin</label>
-<input accept=".bin" id="groundFwFile" style="display:none; margin-top:8px;" type="file"/>
-</div>
-<button class="dark-button fw-flash-btn-green" id="groundFlashButton" style="width:100%; margin-top:12px;" type="button">Flash Firmware</button>
-<div class="fw-progress-wrap" id="groundFwProgressWrap" style="display:none">
-<div class="fw-progress-header"><span id="groundFwPhase">Flashing…</span><span id="groundFwPct">0%</span></div>
-<div class="fw-progress-bg"><div class="fw-progress-bar" id="groundFwBar"></div></div>
-</div>
-<div class="fw-section" style="margin-top:12px;">
-<div class="fw-row"><span class="fw-label">Log</span></div>
-<div class="fw-log-container" id="groundFwLog"></div>
-</div>
-<p class="field-copy" style="margin-top:8px;">If flashing does not start, hold the <strong>BOOT</strong> button on the Ground Unit while clicking Flash Firmware.</p>
-</section>
-<section class="card workspace-card" id="groundMonitorCard">
-<div class="fw-row" style="margin-bottom:6px;">
-<span class="fw-label">Serial Monitor</span>
-<span class="fw-status-dot" id="groundMonitorDot"></span>
-</div>
-<p class="field-copy">Live serial output from the Ground Unit at 115200 baud. Everything the device prints appears here while connected — including messages sent outside of Read and Send.</p>
-<div class="serial-terminal serial-terminal-tall">
-<div class="serial-terminal-bar">
-<span>Serial Output</span>
-<span class="serial-terminal-bar-actions">
-<label class="serial-terminal-toggle"><input checked="" id="groundTermAutoscroll" type="checkbox"/> Autoscroll</label>
-<label class="serial-terminal-toggle"><input id="groundTermTimestamps" type="checkbox"/> Timestamps</label>
-<button id="groundTermClearBtn" type="button">Clear</button>
-</span>
-</div>
-<div class="serial-terminal-output" id="groundTermOutput">
-<span class="term-line term-muted">Waiting for connection…</span>
-</div>
-<form class="serial-terminal-input" id="groundTermForm">
-<span class="serial-terminal-prompt">&gt;</span>
-<input autocomplete="off" disabled="" id="groundTermInput" placeholder="Type a command and press Enter (e.g. info)" spellcheck="false" type="text"/>
-<button class="serial-terminal-export" disabled="" id="groundTermExportBtn" type="button">↓ Export Log</button>
-</form>
-</div>
-</section>
-</div>
-</section>
+</div></section>
+
+
 </main>
 <div id="site-footer"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js"></script>
+<script src="app.js?v=20260727b"></script>
 <script>
   // Hide compat banner in supported browsers
   if ('serial' in navigator) {

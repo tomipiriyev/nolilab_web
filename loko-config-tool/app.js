@@ -31,6 +31,8 @@ const configTabs = [...document.querySelectorAll(".settings-card .tab")];
 const configPanels = [...document.querySelectorAll(".settings-card .panel")];
 const mainTabs = [...document.querySelectorAll(".main-tab")];
 const mainPanels = [...document.querySelectorAll(".main-panel")];
+const deviceTabs = [...document.querySelectorAll(".device-tab")];
+const devicePanels = [...document.querySelectorAll(".device-panel")];
 const modeToggle = document.getElementById("operatingModeToggle");
 const modeNames = [...document.querySelectorAll(".mode-name")];
 const connectButton = document.getElementById("connectButton");
@@ -994,6 +996,24 @@ function activateTab(tabName) {
     });
 }
 
+function activateDeviceTab(tabName, scope) {
+    // Configuration and Firmware Update each have their own Air/Ground strip,
+    // so only touch the tabs and panels inside the calling main panel.
+    const root = scope || document;
+
+    [...root.querySelectorAll(".device-tab")].forEach((tab) => {
+        const active = tab.dataset.deviceTab === tabName;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", String(active));
+    });
+
+    [...root.querySelectorAll(".device-panel")].forEach((panel) => {
+        const active = panel.dataset.devicePanel === tabName;
+        panel.classList.toggle("is-active", active);
+        panel.hidden = !active;
+    });
+}
+
 function activateMainTab(tabName) {
     mainTabs.forEach((tab) => {
         const active = tab.dataset.mainTab === tabName;
@@ -1764,6 +1784,12 @@ mainTabs.forEach((tab) => {
     });
 });
 
+deviceTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+        activateDeviceTab(tab.dataset.deviceTab, tab.closest("[data-main-panel]"));
+    });
+});
+
 configTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
         if (tab.disabled) {
@@ -2280,3 +2306,38 @@ window.addEventListener("beforeunload", () => {
 setGroundConnectionState(false, "Browser access to the Ground Unit has not been granted.");
 setGroundPortInfo("serial permission not granted");
 setGroundMonitorActive(false);
+
+
+// ── Connect-card mirrors ─────────────────────────────────────────────────────
+// A device has exactly one real status card (the one app.js talks to). Tabs that
+// need the same control render a mirror: the source card's markup is copied in
+// with its ids stripped, kept in sync by a MutationObserver, and clicks are
+// forwarded to the real button. Avoids duplicate ids and duplicated state logic.
+function installStatusMirror(source, mirrorEl) {
+    if (!source || !mirrorEl) return;
+
+    const sync = () => {
+        mirrorEl.className = `${source.className} status-mirror`;
+        mirrorEl.innerHTML = source.innerHTML;
+        mirrorEl.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+    };
+
+    sync();
+    new MutationObserver(sync).observe(source, {
+        subtree: true,
+        childList: true,
+        attributes: true,
+        characterData: true,
+    });
+
+    mirrorEl.addEventListener("click", (event) => {
+        if (event.target.closest("button")) {
+            source.querySelector("button").click();
+        }
+    });
+}
+
+document.querySelectorAll(".status-mirror").forEach((mirrorEl) => {
+    const sourceId = mirrorEl.dataset.mirror === "ground" ? "groundConnectButton" : "connectButton";
+    installStatusMirror(document.getElementById(sourceId)?.closest(".status-card"), mirrorEl);
+});

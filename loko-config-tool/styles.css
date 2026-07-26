@@ -231,7 +231,8 @@ input[type="checkbox"]:focus {
 .dark-button,
 .ghost-button,
 .tab,
-.main-tab {
+.main-tab,
+.device-tab {
     border: 0;
     border-radius: 14px;
     font: inherit;
@@ -244,7 +245,8 @@ input[type="checkbox"]:focus {
 .dark-button:hover,
 .ghost-button:hover,
 .tab:hover,
-.main-tab:hover {
+.main-tab:hover,
+.device-tab:hover {
     transform: translateY(-1px);
 }
 
@@ -395,7 +397,7 @@ input[type="checkbox"]:focus {
 
 .main-tab-strip {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     padding: 6px;
     border-radius: 18px;
@@ -416,6 +418,43 @@ input[type="checkbox"]:focus {
 
 .main-panel {
     padding-top: 24px;
+}
+
+/* Device sub-tabs inside the Configuration panel (Loko Air / Loko Ground).
+   Sits one level below .main-tab-strip, so it reads as a segmented control
+   rather than a third full-width tab bar. */
+/* a mirror renders the same markup as its source status card */
+.status-mirror {
+    margin-top: 22px;
+}
+
+.device-tab-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 6px;
+    margin-top: 22px;
+    border-radius: 18px;
+    background: #f0eee9;
+}
+
+.device-tab {
+    height: 50px;
+    padding: 0 20px;
+    font-size: 1rem;
+    border-radius: 14px;
+    background: transparent;
+    color: #8c92a0;
+}
+
+.device-tab.is-active {
+    background: white;
+    color: var(--dark);
+    box-shadow: 0 4px 14px rgba(38, 38, 38, 0.08);
+}
+
+.device-panel {
+    padding-top: 4px;
 }
 
 .gnss-trace-card {
@@ -904,6 +943,12 @@ button:disabled:hover {
     .main-tab-strip,
     .two-column {
         grid-template-columns: 1fr;
+    }
+
+    /* device tabs stay side by side — only two of them, and they're short */
+    .device-tab-strip {
+        display: grid;
+        width: 100%;
     }
 
     .two-column.p2p-ids {
