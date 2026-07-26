@@ -2,10 +2,10 @@
 
 <html lang="ru">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>Руководство по настройке LoRaWAN для GPS-трекера Loko | Интеграция с TTN | nolilab</title>
+<title>Руководство по настройке LoRaWAN для трекера Loko GPS | Интеграция TTN | нолилаб</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
@@ -17,8 +17,8 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Подключите трекеры Loko Air к The Things Network (TTN). Пошаговое руководство по настройке LoRaWAN — создайте приложение в TTN, зарегистрируйте устройства, сгенерируйте API-ключ и запустите всё в приложении Loko." name="description"/>
-<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots">
+<meta content="Подключите трекеры Loko Air к The Things Network (TTN). Пошаговое руководство по настройке LoRaWAN — создайте приложение TTN, зарегистрируйте устройства, сгенерируйте ключ API и запустите приложение Loko." name="description"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
 <link href="https://www.nolilab.com/ru/lorawan/" rel="canonical"/>
 <link href="https://www.nolilab.com/lorawan/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/ja/lorawan/" hreflang="ja" rel="alternate"/>
@@ -27,16 +27,15 @@
 <link href="https://www.nolilab.com/zh/lorawan/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/fr/lorawan/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/lorawan/" hreflang="x-default" rel="alternate"/>
-<meta content="article" property="og:type"/>
-<meta content="Руководство по настройке LoRaWAN для GPS-трекера Loko | Интеграция с TTN | nolilab" property="og:title"/>
-<meta content="Подключите трекеры Loko Air к The Things Network (TTN). Пошаговое руководство по настройке LoRaWAN — создайте приложение в TTN, зарегистрируйте устройства, сгенерируйте API-ключ и запустите всё в приложении Loko." property="og:description"/>
+<meta content="article" property="og:type">
+<meta content="Руководство по настройке LoRaWAN для трекера Loko GPS | Интеграция TTN | нолилаб" property="og:title"/>
+<meta content="Подключите трекеры Loko Air к The Things Network (TTN). Пошаговое руководство по настройке LoRaWAN — создайте приложение TTN, зарегистрируйте устройства, сгенерируйте ключ API и запустите приложение Loko." property="og:description"/>
 <meta content="https://www.nolilab.com/ru/lorawan/" property="og:url"/>
-<meta content="ru_RU" property="og:locale"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Руководство по настройке LoRaWAN для GPS-трекера Loko | Интеграция с TTN | nolilab" name="twitter:title"/>
-<meta content="Подключите трекеры Loko Air к The Things Network (TTN). Пошаговое руководство по настройке LoRaWAN — создайте приложение в TTN, зарегистрируйте устройства, сгенерируйте API-ключ и запустите всё в приложении Loko." name="twitter:description"/>
+<meta content="Руководство по настройке LoRaWAN для трекера Loko GPS | Интеграция TTN | нолилаб" name="twitter:title"/>
+<meta content="Подключите трекеры Loko Air к The Things Network (TTN). Пошаговое руководство по настройке LoRaWAN — создайте приложение TTN, зарегистрируйте устройства, сгенерируйте ключ API и запустите приложение Loko." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
     :root {
@@ -373,6 +372,35 @@
     .done h2 { margin: 0 0 var(--spacing-xs); font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; }
     .done p { color: var(--text-secondary); max-width: 520px; margin: 0 auto; }
 
+    /* ---------- next guide link ---------- */
+    .next-guide {
+      display: block;
+      margin: 0 0 var(--spacing-lg);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-secondary);
+      text-decoration: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .next-guide:hover { border-color: var(--accent); box-shadow: var(--shadow-md); text-decoration: none; }
+    .next-guide .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .next-guide .title {
+      display: block;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--text-primary);
+      margin: 4px 0 2px;
+    }
+    .next-guide .sub { font-size: 0.9375rem; color: var(--text-secondary); }
+
     @media (max-width: 600px) {
       .lorawan-container { padding: var(--spacing-lg) 0; }
       .lorawan-hero h1 { font-size: 2rem; }
@@ -390,24 +418,26 @@
     size-adjust: 107.64%;
   }
 </style>
-</meta><script defer="" src="/js/layout.js"></script><script type="application/ld+json">
-{
+</meta><script defer="" src="/js/layout.js"></script><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Руководство по настройке LoRaWAN для GPS-трекера Loko | Интеграция с TTN",
-  "description": "Пошаговая инструкция по подключению трекеров Loko Air к The Things Network (TTN) через LoRaWAN: создание приложения в TTN, регистрация конечных устройств, генерация API-ключа и подключение из приложения Loko.",
+  "headline": "Руководство по настройке LoRaWAN для трекера Loko GPS | Интеграция TTN",
+  "description": "Пошаговые инструкции по подключению трекеров Loko Air к The Things Network (TTN) через LoRaWAN: создайте приложение TTN, зарегистрируйте конечные устройства, сгенерируйте ключ API и подключитесь из приложения Loko.",
   "url": "https://www.nolilab.com/lorawan/",
   "datePublished": "2024-05-22",
   "dateModified": "2026-07-01",
   "author": {
     "@type": "Person",
-    "name": "Tamleykha Piriyev",
+    "name": "Тамлейха Пириев",
     "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
-    "sameAs": ["https://www.linkedin.com/in/tomi-piriyev-33593354/", "https://github.com/tomipiriyev"]
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
   },
   "publisher": {
     "@type": "Organization",
-    "name": "nolilab",
+    "name": "нолилаб",
     "url": "https://www.nolilab.com",
     "logo": {
       "@type": "ImageObject",
@@ -420,219 +450,265 @@
   },
   "about": {
     "@type": "Product",
-    "name": "Loko GPS Tracker",
+    "name": "Loko GPS Трекер",
     "url": "https://www.nolilab.com"
   },
-  "proficiencyLevel": "Начальный",
-  "dependencies": "GPS-трекер Loko Air, аккаунт The Things Network (TTN), приложение Loko",
-  "articleSection": "Руководства по настройке"
-}
-</script>
-<script type="application/ld+json">
-{
+  "proficiencyLevel": "Новичок",
+  "dependencies": "Loko Air GPS Tracker, учетная запись The Things Network (TTN), приложение Loko",
+  "articleSection": "Руководства по установке"
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://www.nolilab.com" },
-    { "@type": "ListItem", "position": 2, "name": "Руководства по настройке", "item": "https://www.nolilab.com/setup-guides/" },
-    { "@type": "ListItem", "position": 3, "name": "Интеграция LoRaWAN", "item": "https://www.nolilab.com/lorawan/" }
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Дом",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Руководства по установке",
+      "item": "https://www.nolilab.com/setup-guides/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Интеграция LoRaWAN",
+      "item": "https://www.nolilab.com/lorawan/"
+    }
   ]
-}
-</script>
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main class="lorawan-container">
-
-  <!-- ============================ HERO ============================ -->
-  <header class="lorawan-hero">
-    <div class="kicker">Loko · Руководство по настройке</div>
-    <h1>Подключение Loko к сети LoRaWAN</h1>
-    <p>Свяжите трекеры Loko&nbsp;Air с The&nbsp;Things&nbsp;Network (TTN) и начните получать позиции в реальном времени в приложении — всего за четыре коротких шага.</p>
-    <div class="meta">~10 мин · Для начинающих</div>
-  </header>
-
-  <div class="lorawan-content">
-
-    <!-- ============================ INTRO ============================ -->
-    <p>Loko получает координаты ваших трекеров по <b>LoRaWAN</b> — радиосети большого радиуса действия с низким энергопотреблением. Чтобы передать эти радиосообщения на ваш телефон, приложение подключается к <b>The Things Network (TTN)</b> — бесплатной глобальной общественной сети LoRaWAN.</p>
-    <p>Настройка происходит в двух местах: сначала вы создаёте <b>приложение</b> в консоли TTN и регистрируете устройства, затем вставляете два реквизита в приложение Loko. Вот всё, что вам понадобится.</p>
-
-    <!-- ============================ REQUIREMENTS ============================ -->
-    <div class="req">
-      <h3>Что вам понадобится</h3>
-      <ul>
-        <li><span class="dot">▸</span><div><b>Бесплатный аккаунт TTN</b><span>Зарегистрируйтесь на <a href="https://www.thethingsnetwork.org/" rel="noopener" target="_blank">thethingsnetwork.org</a>, если у вас её ещё нет.</span></div></li>
-        <li><span class="dot">▸</span><div><b>Данные вашего устройства Loko Air</b><span>DevEUI / JoinEUI / ключи — вы задаёте их сами при регистрации устройства.</span></div></li>
-        <li><span class="dot">▸</span><div><b>Установленное приложение Loko</b><span>На телефоне, с которого вы будете отслеживать устройства.</span></div></li>
-      </ul>
-    </div>
-
-    <div class="note">
-      <span class="ic">🎯</span>
-      <div class="bd">В итоге у вас будет два значения — <b>Application&nbsp;ID</b> и <b>API&nbsp;Key</b> — это всё, что нужно приложению для запуска.</div>
-    </div>
-
-    <!-- ============================ STEP 1 ============================ -->
-    <div class="step"><div class="num">1</div><h2>Создайте приложение в TTN</h2></div>
-    <p class="lead">Войдите в консоль TTN, откройте раздел <b>Applications</b> и нажмите <b>+ Add application</b>. Задайте ID и имя, затем нажмите <b>Create application</b>.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-create-application.webp">
-          <img src="/images/lorawan/ttn-create-application.png" alt="Страница Create application в TTN" loading="lazy" width="1680" height="877">
-        </picture>
-        <span class="hl"  style="left:21.0%; top:35.5%; width:27%; height:5.5%;"></span>
-        <span class="tag" style="left:21.0%; top:35.5%;">1</span>
-        <span class="hl"  style="left:20.8%; top:92.5%; width:13%; height:5.5%;"></span>
-        <span class="tag" style="left:20.8%; top:92.5%;">2</span>
-      </div>
-      <figcaption>① Выберите Application ID  ·  ② Нажмите Create application</figcaption>
-    </figure>
-
-    <div class="note warn">
-      <span class="ic">📝</span>
-      <div class="bd"><b>Запишите ваш Application ID.</b> Он понадобится для приложения. В примере выше это <code>demolokoappid</code>. ID должен быть в нижнем регистре и не может быть изменён позже.</div>
-    </div>
-
-    <!-- ============================ STEP 2 ============================ -->
-    <div class="step"><div class="num">2</div><h2>Зарегистрируйте устройства Loko Air</h2></div>
-    <p class="lead">В левой боковой панели откройте <b>End devices</b>, затем нажмите <b>Register end device</b>.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-end-devices.webp">
-          <img src="/images/lorawan/ttn-end-devices.png" alt="Страница End devices в TTN" loading="lazy" width="1680" height="834">
-        </picture>
-        <span class="hl"  style="left:1.5%; top:33.5%; width:18%; height:6%;"></span>
-        <span class="tag" style="left:1.5%; top:33.5%;">1</span>
-        <span class="hl"  style="left:86%; top:14.5%; width:13.5%; height:6%;"></span>
-        <span class="tag" style="left:86%; top:14.5%;">2</span>
-      </div>
-      <figcaption>① Откройте End devices  ·  ② Register end device</figcaption>
-    </figure>
-
-    <p>На экране регистрации выберите <b>«Enter end device specifics manually»</b>, затем введите данные устройства вашего Loko Air (частотный план, версию LoRaWAN и данные подготовки, такие как JoinEUI / DevEUI).</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-register-device.webp">
-          <img src="/images/lorawan/ttn-register-device.png" alt="Страница Register end device в TTN" loading="lazy" width="1680" height="861">
-        </picture>
-        <span class="hl"  style="left:21.2%; top:38%; width:30%; height:5.5%;"></span>
-        <span class="tag" style="left:21.2%; top:38%;">1</span>
-        <span class="hl"  style="left:21.2%; top:90%; width:24%; height:7.5%;"></span>
-        <span class="tag" style="left:21.2%; top:90%;">2</span>
-      </div>
-      <figcaption>① Enter end device specifics manually  ·  ② Введите данные подготовки устройства</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">📡</span>
-      <div class="bd">Выберите <b>частотный план</b> для вашего региона (например, <i>Europe 863–870&nbsp;MHz</i>) и приведите <b>версию LoRaWAN</b> в соответствие с вашим Loko Air. Повторите этот шаг для каждого вашего трекера.</div>
-    </div>
-
-    <!-- ============================ STEP 3 ============================ -->
-    <div class="step"><div class="num">3</div><h2>Создайте API-ключ</h2></div>
-    <p class="lead">Вернувшись в боковую панель, откройте <b>API keys</b> и нажмите <b>+ Add API key</b>. Предоставьте ему права на чтение трафика приложения и сохраните.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-api-keys.webp">
-          <img src="/images/lorawan/ttn-api-keys.png" alt="Страница API keys в TTN" loading="lazy" width="1680" height="834">
-        </picture>
-        <span class="hl"  style="left:1.5%; top:62.5%; width:18%; height:6%;"></span>
-        <span class="tag" style="left:1.5%; top:62.5%;">1</span>
-        <span class="hl"  style="left:86%; top:15%; width:13.5%; height:6%;"></span>
-        <span class="tag" style="left:86%; top:15%;">2</span>
-      </div>
-      <figcaption>① Откройте API keys  ·  ② Add API key</figcaption>
-    </figure>
-
-    <div class="note crit">
-      <span class="ic">🔑</span>
-      <div class="bd"><b>Скопируйте API-ключ сразу же.</b> TTN показывает полный ключ только <b>один раз</b> — сразу после создания. Сохраните его в надёжном месте: если потеряете, придётся генерировать новый.</div>
-    </div>
-
-    <!-- ============================ OPTIONAL: MQTT EXPLORER ============================ -->
-    <div class="step">
-      <div class="num">✓</div>
-      <h2>Необязательно — проверьте с помощью MQTT Explorer</h2>
-    </div>
-    <p class="lead">Прежде чем вводить реквизиты в Loko, вы можете проверить их работу с помощью любого открытого MQTT-клиента — например, <a href="https://mqtt-explorer.com/" rel="noopener" target="_blank">MQTT&nbsp;Explorer</a>. Он подключается напрямую к MQTT-серверу TTN и показывает необработанные uplink-сообщения — это быстрый способ убедиться, что всё настроено правильно.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/mqtt-explorer-connection.webp">
-          <img src="/images/lorawan/mqtt-explorer-connection.png" alt="Настройки подключения MQTT Explorer для TTN" loading="lazy" width="1322" height="878">
-        </picture>
-        <span class="hl"  style="left:2%; top:41.5%; width:96%; height:13%;"></span>
-        <span class="tag" style="left:2%; top:41.5%;">1</span>
-        <span class="hl"  style="left:2%; top:63%; width:48%; height:13%;"></span>
-        <span class="tag" style="left:2%; top:63%;">2</span>
-        <span class="hl"  style="left:51%; top:63%; width:39%; height:13%;"></span>
-        <span class="tag" style="left:51%; top:63%;">3</span>
-        <span class="hl"  style="left:76.5%; top:82.5%; width:21%; height:8%;"></span>
-        <span class="tag" style="left:76.5%; top:82.5%;">4</span>
-      </div>
-      <figcaption>① Протокол mqtt:// · Хост · Порт 1883  ·  ② Username = App ID @ttn  ·  ③ Password = API-ключ  ·  ④ Connect</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">🔌</span>
-      <div class="bd">Используйте следующие настройки: <b>Protocol</b> <code>mqtt://</code>, <b>Host</b> <code>eu1.cloud.thethings.network</code> (для вашего региона), <b>Port</b> <code>1883</code>. <b>Username</b> — это ваш Application&nbsp;ID с добавленным <code>@ttn</code> (то же правило, что и в приложении!), а <b>Password</b> — ваш API-ключ. Нажмите <b>Connect</b>: если соединение установлено и появляются топики, ваши реквизиты в порядке.</div>
-    </div>
-
-    <!-- ============================ STEP 4 ============================ -->
-    <div class="step"><div class="num">4</div><h2>Подключитесь из приложения Loko</h2></div>
-    <p class="lead">Откройте приложение Loko, перейдите на вкладку <b>LoRaWAN (TTN)</b> и введите свои реквизиты. Выберите регион кнопками <b>Quick select</b> (EU1 / NAM1 / AU1), затем вставьте Application ID и API-ключ.</p>
-
-    <figure>
-      <div class="shot appshot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/app-lorawan-settings.webp">
-          <img src="/images/lorawan/app-lorawan-settings.png" alt="Вкладка настроек LoRaWAN в приложении Loko" loading="lazy" width="800" height="960">
-        </picture>
-        <span class="hl"  style="left:29%; top:56%; width:42%; height:4.5%;"></span>
-        <span class="tag" style="left:29%; top:56%;">1</span>
-        <span class="append" style="left:43%; top:58.2%;">@ttn</span>
-        <span class="hl"  style="left:29%; top:63.5%; width:42%; height:4.5%;"></span>
-        <span class="tag" style="left:29%; top:63.5%;">2</span>
-        <span class="hl red"  style="left:29%; top:69%; width:21%; height:4%;"></span>
-        <span class="tag red" style="left:29%; top:69%;">3</span>
-      </div>
-      <figcaption>① Application ID (добавьте @ttn!)  ·  ② API-ключ  ·  ③ Save</figcaption>
-    </figure>
-
-    <div class="note crit">
-      <span class="ic">⚠️</span>
-      <div class="bd"><b>Важно — добавьте <code>@ttn</code> к вашему Application ID.</b> В поле Application&nbsp;ID приложения добавьте <code>@ttn</code> в конец ID, который вы записали на Шаге&nbsp;1. Без этого суффикса подключение не удастся.</div>
-    </div>
-
-    <div class="ttnbox">
-      <div class="small">Итак, ваш Application ID становится</div>
-      <div class="big">demolokoappid<span class="suf">@ttn</span></div>
-    </div>
-
-    <p>Нажмите <b>Save</b>. Когда индикатор состояния вверху вкладки станет <b style="color:var(--accent)">● Connected</b>, приложение подключено к сети, и позиции вашего трекера начнут появляться на карте.</p>
-
-    <!-- ============================ DONE ============================ -->
-    <div class="done">
-      <h2>🎉 Вы подключены!</h2>
-      <p>Ваши устройства Loko Air теперь передают свои координаты в приложение через TTN. Отсюда вы можете настроить геозоны, просматривать сохранённые треки и загружать офлайн-карты для использования в поле.</p>
-    </div>
-
-    <div class="note">
-      <span class="ic">💬</span>
-      <div class="bd"><b>Нужна помощь?</b> Если при настройке возникнут проблемы, загляните в наш <a href="/ru/#faq">раздел FAQ</a> или обратитесь в службу поддержки — мы поможем вам подключиться.</div>
-    </div>
-
-  </div>
+<!-- ============================ HERO ============================ -->
+<header class="lorawan-hero">
+<div class="kicker">Loko · Руководство по установке</div>
+<h1>Подключение Loko к сети LoRaWAN</h1>
+<p>Подключите трекеры Loko Air к The Things Network (TTN) и начните
+       получение живых позиций в приложении — за четыре коротких шага.</p>
+<div class="meta">~10 минут · Подходит для начинающих</div>
+</header>
+<div class="lorawan-content">
+<!-- ============================ OTHER GUIDE ============================ -->
+<a class="next-guide" href="/lorawan-chirpstack/">
+<span class="eyebrow">Размещаете собственный сетевой сервер самостоятельно?</span>
+<span class="title">Как подключить Loko к ChirpStack →</span>
+<span class="sub">Та же настройка на локальном экземпляре ChirpStack — подключите шлюз к сети,
+        создайте профиль устройства с помощью Cayenne LPP, добавьте свои устройства и составьте график их
+        измерения как измерительные приборы.</span>
+</a>
+<!-- ============================ INTRO ============================ -->
+<p>Loko получает координаты вашего трекера <b>LoRaWAN</b>, дальнобойность,
+       маломощная радиосеть. Чтобы передать эти радиосообщения на телефон, приложение
+       соединяется с <b>ХПРОТХ10Х (TTN)</b> — бесплатный глобальный пакет LoRaWAN community.
+       сеть.</p>
+<p>Установка происходит в двух местах: сначала вы создаете <b>приложение</b> на TTN
+       консоль и зарегистрируйте свои устройства, затем вставьте два учетных данных в Loko.
+       приложение. Вот все, что вам нужно.</p>
+<!-- ============================ REQUIREMENTS ============================ -->
+<div class="req">
+<h3>Что вам понадобится</h3>
+<ul>
+<li><span class="dot">▸</span><div><b>Бесплатная учетная запись TTN</b><span>Зарегистрируйтесь на <a href="https://www.thethingsnetwork.org/" rel="noopener" target="_blank">thethingsnetwork.org</a> если у вас его нет.</span></div></li>
+<li><span class="dot">▸</span><div><b>Сведения о вашем устройстве Loko Air</b><span>Ключи DevEUI/JoinEUI/ — вы сами устанавливаете их при регистрации устройства.</span></div></li>
+<li><span class="dot">▸</span><div><b>Приложение Loko установлено.</b><span>На телефоне, который вы будете использовать для отслеживания своих устройств.</span></div></li>
+</ul>
+</div>
+<div class="note">
+<span class="ic">🎯</span>
+<div class="bd">К концу у вас будет два значения — <b>Идентификатор приложения</b> и
+        <b>API-ключ</b> — это единственное, что нужно приложению для запуска.</div>
+</div>
+<!-- ============================ STEP 1 ============================ -->
+<div class="step"><div class="num">1</div><h2>Создайте приложение на TTN</h2></div>
+<p class="lead">Войдите в консоль TTN, откройте <b>Приложения</b> раздел и
+       щелкнуть <b>+ Добавить приложение</b>. Дайте ему идентификатор и имя, затем нажмите
+       <b>Создать заявку</b>.</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-create-application.webp" type="image/webp"/>
+<img alt="TTN Create application page" height="877" loading="lazy" src="/images/lorawan/ttn-create-application.png" width="1680"/>
+</picture>
+<!-- 1 · Application ID field -->
+<span class="hl" style="left:21.0%; top:35.5%; width:27%; height:5.5%;"></span>
+<span class="tag" style="left:21.0%; top:35.5%;">1</span>
+<!-- 2 · Create button -->
+<span class="hl" style="left:20.8%; top:92.5%; width:13%; height:5.5%;"></span>
+<span class="tag" style="left:20.8%; top:92.5%;">2</span>
+</div>
+<figcaption>① Выберите идентификатор приложения · ② Нажмите «Создать приложение».</figcaption>
+</figure>
+<div class="note warn">
+<span class="ic">📝</span>
+<div class="bd"><b>Запишите свой идентификатор приложения.</b> Он понадобится вам для приложения.
+        В примере выше это <code>demolokoappid</code>. Идентификатор должен быть в нижнем регистре и
+        не может быть изменено позже.</div>
+</div>
+<!-- ============================ STEP 2 ============================ -->
+<div class="step"><div class="num">2</div><h2>Зарегистрируйте свои устройства Loko Air</h2></div>
+<p class="lead">В левой боковой панели откройте <b>Конечные устройства</b>, затем нажмите
+       <b>Зарегистрировать конечное устройство</b>.</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-end-devices.webp" type="image/webp"/>
+<img alt="TTN End devices page" height="834" loading="lazy" src="/images/lorawan/ttn-end-devices.png" width="1680"/>
+</picture>
+<!-- 1 · End devices nav -->
+<span class="hl" style="left:1.5%; top:33.5%; width:18%; height:6%;"></span>
+<span class="tag" style="left:1.5%; top:33.5%;">1</span>
+<!-- 2 · Register end device button -->
+<span class="hl" style="left:86%; top:14.5%; width:13.5%; height:6%;"></span>
+<span class="tag" style="left:86%; top:14.5%;">2</span>
+</div>
+<figcaption>① Открытые устройства · ② Регистрация конечного устройства</figcaption>
+</figure>
+<p>На экране регистрации выберите <b>«Введите данные конечного устройства вручную»</b>,
+       затем заполните данные об устройстве на вашем Loko Air (частотный план, LoRaWAN).
+       версию и информацию об обеспечении, такую как JoinEUI/DevEUI).</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-register-device.webp" type="image/webp"/>
+<img alt="TTN Register end device page" height="861" loading="lazy" src="/images/lorawan/ttn-register-device.png" width="1680"/>
+</picture>
+<!-- 1 · Enter manually radio -->
+<span class="hl" style="left:21.2%; top:38%; width:30%; height:5.5%;"></span>
+<span class="tag" style="left:21.2%; top:38%;">1</span>
+<!-- 2 · Provisioning / JoinEUI -->
+<span class="hl" style="left:21.2%; top:90%; width:24%; height:7.5%;"></span>
+<span class="tag" style="left:21.2%; top:90%;">2</span>
+</div>
+<figcaption>① Введите характеристики конечного устройства вручную · ② Заполните информацию о настройке вашего устройства.</figcaption>
+</figure>
+<div class="note">
+<span class="ic">📡</span>
+<div class="bd">Выберите <b>частотный план</b> для вашего региона (напр. <i>Европа 863–870 MHz</i>)
+        и сопоставить <b>Версия LoRaWAN</b> к вашему Loko Air. Повторите этот шаг для каждого
+        трекер, который у вас есть.</div>
+</div>
+<!-- ============================ STEP 3 ============================ -->
+<div class="step"><div class="num">3</div><h2>Создайте ключ API</h2></div>
+<p class="lead">Вернитесь на боковую панель и откройте <b>Ключи API</b> и нажмите
+       <b>+ Добавить ключ API</b>. Предоставьте ему права на чтение трафика приложения, затем сохраните.</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-api-keys.webp" type="image/webp"/>
+<img alt="TTN API keys page" height="834" loading="lazy" src="/images/lorawan/ttn-api-keys.png" width="1680"/>
+</picture>
+<!-- 1 · API keys nav -->
+<span class="hl" style="left:1.5%; top:62.5%; width:18%; height:6%;"></span>
+<span class="tag" style="left:1.5%; top:62.5%;">1</span>
+<!-- 2 · Add API key button -->
+<span class="hl" style="left:86%; top:15%; width:13.5%; height:6%;"></span>
+<span class="tag" style="left:86%; top:15%;">2</span>
+</div>
+<figcaption>① Открыть ключи API · ② Добавить ключ API</figcaption>
+</figure>
+<div class="note crit">
+<span class="ic">🔑</span>
+<div class="bd"><b>Скопируйте ключ API imm сразу.</b> TTN показывает только полный ключ
+        <b>один раз</b>, сразу после его создания. Сохраните его в безопасном месте — если потеряете.
+        вам придется создать новый.</div>
+</div>
+<!-- ============================ OPTIONAL: MQTT EXPLORER ============================ -->
+<div class="step">
+<div class="num">✓</div>
+<h2>Необязательно — протестируйте с помощью MQTT Explorer.</h2>
+</div>
+<p class="lead">Прежде чем вводить учетные данные в Loko, вы можете убедиться, что они работают.
+       с любым MQTT-клиентом с открытым исходным кодом — например
+       <a href="https://mqtt-explorer.com/" rel="noopener" target="_blank">MQTT-проводник</a>. Он подключается напрямую к
+       MQTT-сервер TTN и отображает необработанные сообщения восходящей линии связи, что является быстрым способом
+       убедитесь, что все настроено правильно.</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/mqtt-explorer-connection.webp" type="image/webp"/>
+<img alt="MQTT Explorer connection settings for TTN" height="878" loading="lazy" src="/images/lorawan/mqtt-explorer-connection.png" width="1322"/>
+</picture>
+<!-- 1 · Protocol + Host + Port row -->
+<span class="hl" style="left:2%; top:41.5%; width:96%; height:13%;"></span>
+<span class="tag" style="left:2%; top:41.5%;">1</span>
+<!-- 2 · Username (@ttn) -->
+<span class="hl" style="left:2%; top:63%; width:48%; height:13%;"></span>
+<span class="tag" style="left:2%; top:63%;">2</span>
+<!-- 3 · Password (API key) -->
+<span class="hl" style="left:51%; top:63%; width:39%; height:13%;"></span>
+<span class="tag" style="left:51%; top:63%;">3</span>
+<!-- 4 · Connect -->
+<span class="hl" style="left:76.5%; top:82.5%; width:21%; height:8%;"></span>
+<span class="tag" style="left:76.5%; top:82.5%;">4</span>
+</div>
+<figcaption>① Протокол mqtt:// · Хост · Порт 1883 · ② Имя пользователя = App ID @ttn · ③ Пароль = API-ключ · ④ Подключиться</figcaption>
+</figure>
+<div class="note">
+<span class="ic">🔌</span>
+<div class="bd">Используйте эти настройки: <b>Протокол</b> <code>mqtt://</code>,
+        <b>Хозяин</b> <code>eu1.cloud.thethings.network</code> (соответствует вашему региону),
+        <b>Порт</b> <code>1883</code>. <b>Имя пользователя</b> это идентификатор вашего приложения
+        с <code>@ttn</code> добавлено (то же правило, что и для приложения!), и <b>Пароль</b>
+        это ваш ключ API. Ударять <b>Соединять</b> — если он подключается и вы видите темы
+        Похоже, ваши учетные данные в порядке.</div>
+</div>
+<!-- ============================ STEP 4 ============================ -->
+<div class="step"><div class="num">4</div><h2>Подключайтесь из приложения Loko</h2></div>
+<p class="lead">Откройте приложение Loko, перейдите в <b>ХPROTX0XWAN (TTN)</b> лист и введите
+       ваши учетные данные. Выберите свой регион с помощью <b>Быстрый выбор</b> кнопки (EU1/
+       NAM1/AU1), затем вставьте идентификатор приложения и ключ API.</p>
+<figure>
+<div class="shot appshot">
+<picture>
+<source srcset="/images/lorawan/app-lorawan-settings.webp" type="image/webp"/>
+<img alt="Loko app LoRaWAN settings sheet" height="960" loading="lazy" src="/images/lorawan/app-lorawan-settings.png" width="800"/>
+</picture>
+<!-- 1 · Application ID field (with the @ttn suffix appended onto the value) -->
+<span class="hl" style="left:29%; top:56%; width:42%; height:4.5%;"></span>
+<span class="tag" style="left:29%; top:56%;">1</span>
+<span class="append" style="left:43%; top:58.2%;">@ttn</span>
+<!-- 2 · API key field -->
+<span class="hl" style="left:29%; top:63.5%; width:42%; height:4.5%;"></span>
+<span class="tag" style="left:29%; top:63.5%;">2</span>
+<!-- 3 · Save -->
+<span class="hl red" style="left:29%; top:69%; width:21%; height:4%;"></span>
+<span class="tag red" style="left:29%; top:69%;">3</span>
+</div>
+<figcaption>① Идентификатор приложения (добавьте @ttn!) · ② Ключ API · ③ Сохранить</figcaption>
+</figure>
+<div class="note crit">
+<span class="ic">⚠️</span>
+<div class="bd"><b>Важно — добавьте <code>@ttn</code> к вашему идентификатору приложения.</b>
+        В поле "Идентификатор приложения" добавьте <code>@ttn</code> до конца
+        Идентификатор, который вы указали на шаге 1. Без этого суффикса соединение не будет установлено.</div>
+</div>
+<div class="ttnbox">
+<div class="small">Таким образом, ваш идентификатор приложения становится</div>
+<div class="big">демолокоаппид<span class="suf">@ttn</span></div>
+</div>
+<p>Кран <b>Сохранять</b>. Когда индикатор состояния в верхней части листа изменится на
+       <b style="color:var(--accent)">● Подключено</b>, приложение доступно в сети и
+       Позиции вашего трекера начнут появляться на карте.</p>
+<!-- ============================ DONE ============================ -->
+<div class="done">
+<h2>🎉Вы на связи!</h2>
+<p>Ваши устройства Loko Air теперь передают свои координаты через TTN в
+         приложение. Отсюда вы можете настроить геозоны, просмотреть архивные треки и скачать
+         автономные карты для поля.</p>
+</div>
+<div class="note">
+<span class="ic">💬</span>
+<div class="bd"><b>Нужна помощь?</b> Если во время установки у вас возникнут какие-либо проблемы, проверьте наш
+        <a href="/#faq">Раздел часто задаваемых вопросов</a> или свяжитесь с нашей службой поддержки — мы здесь, чтобы помочь
+        вы подключаетесь.</div>
+</div>
+</div>
 </main>
 <div id="site-footer"></div>
 <script defer="" src="/js/analytics.js"></script>

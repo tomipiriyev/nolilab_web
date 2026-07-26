@@ -2,10 +2,10 @@
 
 <html lang="zh">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>Loko GPS 追踪器 LoRaWAN 设置指南 | TTN 集成 | nolilab</title>
+<title>Loko GPS 跟踪器的 LoRaWAN 设置指南 | TTN 集成 |诺利拉布</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
@@ -17,8 +17,8 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="将您的 Loko Air 追踪器连接到 The Things Network（TTN）。分步 LoRaWAN 设置指南——在 TTN 中创建应用、注册设备、生成 API 密钥，并在 Loko 应用中上线。" name="description"/>
-<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots">
+<meta content="将 Loko Air 追踪器连接到 The Things Network (TTN)。分步 LoRaWAN 设置指南 — 创建 TTN 应用程序、注册设备、生成 API 密钥并在 Loko 应用程序中上线。" name="description"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
 <link href="https://www.nolilab.com/zh/lorawan/" rel="canonical"/>
 <link href="https://www.nolilab.com/lorawan/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/ja/lorawan/" hreflang="ja" rel="alternate"/>
@@ -27,16 +27,15 @@
 <link href="https://www.nolilab.com/zh/lorawan/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/fr/lorawan/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/lorawan/" hreflang="x-default" rel="alternate"/>
-<meta content="article" property="og:type"/>
-<meta content="Loko GPS 追踪器 LoRaWAN 设置指南 | TTN 集成 | nolilab" property="og:title"/>
-<meta content="将您的 Loko Air 追踪器连接到 The Things Network（TTN）。分步 LoRaWAN 设置指南——在 TTN 中创建应用、注册设备、生成 API 密钥，并在 Loko 应用中上线。" property="og:description"/>
+<meta content="article" property="og:type">
+<meta content="Loko GPS 跟踪器的 LoRaWAN 设置指南 | TTN 集成 |诺利拉布" property="og:title"/>
+<meta content="将 Loko Air 追踪器连接到 The Things Network (TTN)。分步 LoRaWAN 设置指南 — 创建 TTN 应用程序、注册设备、生成 API 密钥并在 Loko 应用程序中上线。" property="og:description"/>
 <meta content="https://www.nolilab.com/zh/lorawan/" property="og:url"/>
-<meta content="zh_CN" property="og:locale"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Loko GPS 追踪器 LoRaWAN 设置指南 | TTN 集成 | nolilab" name="twitter:title"/>
-<meta content="将您的 Loko Air 追踪器连接到 The Things Network（TTN）。分步 LoRaWAN 设置指南——在 TTN 中创建应用、注册设备、生成 API 密钥，并在 Loko 应用中上线。" name="twitter:description"/>
+<meta content="Loko GPS 跟踪器的 LoRaWAN 设置指南 | TTN 集成 |诺利拉布" name="twitter:title"/>
+<meta content="将 Loko Air 追踪器连接到 The Things Network (TTN)。分步 LoRaWAN 设置指南 — 创建 TTN 应用程序、注册设备、生成 API 密钥并在 Loko 应用程序中上线。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
     :root {
@@ -373,6 +372,35 @@
     .done h2 { margin: 0 0 var(--spacing-xs); font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; }
     .done p { color: var(--text-secondary); max-width: 520px; margin: 0 auto; }
 
+    /* ---------- next guide link ---------- */
+    .next-guide {
+      display: block;
+      margin: 0 0 var(--spacing-lg);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-secondary);
+      text-decoration: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .next-guide:hover { border-color: var(--accent); box-shadow: var(--shadow-md); text-decoration: none; }
+    .next-guide .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .next-guide .title {
+      display: block;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--text-primary);
+      margin: 4px 0 2px;
+    }
+    .next-guide .sub { font-size: 0.9375rem; color: var(--text-secondary); }
+
     @media (max-width: 600px) {
       .lorawan-container { padding: var(--spacing-lg) 0; }
       .lorawan-hero h1 { font-size: 2rem; }
@@ -390,24 +418,26 @@
     size-adjust: 107.64%;
   }
 </style>
-</meta><script defer="" src="/js/layout.js"></script><script type="application/ld+json">
-{
+</meta><script defer="" src="/js/layout.js"></script><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Loko GPS 追踪器 LoRaWAN 设置指南 | TTN 集成",
-  "description": "通过 LoRaWAN 将 Loko Air 追踪器连接到 The Things Network（TTN）的分步说明：在 TTN 中创建应用、注册终端设备、生成 API 密钥，并从 Loko 应用连接。",
+  "headline": "Loko GPS 跟踪器的 LoRaWAN 设置指南 | TTN 集成",
+  "description": "通过 LoRaWAN 将 Loko Air 跟踪器连接到 The Things Network (TTN) 的分步说明：创建 TTN 应用程序、注册终端设备、生成 API 密钥，然后从 Loko 应用程序进行连接。",
   "url": "https://www.nolilab.com/lorawan/",
   "datePublished": "2024-05-22",
   "dateModified": "2026-07-01",
   "author": {
     "@type": "Person",
-    "name": "Tamleykha Piriyev",
+    "name": "塔姆雷哈·皮里耶夫",
     "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
-    "sameAs": ["https://www.linkedin.com/in/tomi-piriyev-33593354/", "https://github.com/tomipiriyev"]
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
   },
   "publisher": {
     "@type": "Organization",
-    "name": "nolilab",
+    "name": "诺利拉布",
     "url": "https://www.nolilab.com",
     "logo": {
       "@type": "ImageObject",
@@ -420,219 +450,265 @@
   },
   "about": {
     "@type": "Product",
-    "name": "Loko GPS Tracker",
+    "name": "Loko GPS 追踪器",
     "url": "https://www.nolilab.com"
   },
-  "proficiencyLevel": "初级",
-  "dependencies": "Loko Air GPS 追踪器、The Things Network（TTN）账户、Loko 应用",
+  "proficiencyLevel": "初学者",
+  "dependencies": "Loko Air GPS 追踪器、The Things Network (TTN) 帐户、Loko 应用程序",
   "articleSection": "设置指南"
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://www.nolilab.com" },
-    { "@type": "ListItem", "position": 2, "name": "设置指南", "item": "https://www.nolilab.com/setup-guides/" },
-    { "@type": "ListItem", "position": 3, "name": "LoRaWAN 集成", "item": "https://www.nolilab.com/lorawan/" }
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "设置指南",
+      "item": "https://www.nolilab.com/setup-guides/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "LoRaWAN 集成",
+      "item": "https://www.nolilab.com/lorawan/"
+    }
   ]
-}
-</script>
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main class="lorawan-container">
-
-  <!-- ============================ HERO ============================ -->
-  <header class="lorawan-hero">
-    <div class="kicker">Loko · 设置指南</div>
-    <h1>将 Loko 连接到 LoRaWAN 网络</h1>
-    <p>将您的 Loko&nbsp;Air 追踪器与 The&nbsp;Things&nbsp;Network（TTN）配对，只需四个简单步骤，即可开始在应用中接收实时位置。</p>
-    <div class="meta">约 10 分钟 · 新手友好</div>
-  </header>
-
-  <div class="lorawan-content">
-
-    <!-- ============================ INTRO ============================ -->
-    <p>Loko 通过 <b>LoRaWAN</b>（一种远距离、低功耗的无线电网络）接收追踪器的位置。为了将这些无线电消息传送到您的手机，应用会连接到 <b>The Things Network（TTN）</b>——一个免费的全球 LoRaWAN 社区网络。</p>
-    <p>设置在两个地方进行：首先在 TTN 控制台创建一个<b>应用</b>并注册您的设备，然后将两项凭据粘贴到 Loko 应用中。以下是您需要的一切。</p>
-
-    <!-- ============================ REQUIREMENTS ============================ -->
-    <div class="req">
-      <h3>您需要准备</h3>
-      <ul>
-        <li><span class="dot">▸</span><div><b>一个免费的 TTN 账户</b><span>如果还没有，请在 <a href="https://www.thethingsnetwork.org/" rel="noopener" target="_blank">thethingsnetwork.org</a> 注册。</span></div></li>
-        <li><span class="dot">▸</span><div><b>您的 Loko Air 设备信息</b><span>DevEUI / JoinEUI / 密钥——在注册设备时由您自行设置。</span></div></li>
-        <li><span class="dot">▸</span><div><b>已安装 Loko 应用</b><span>在您用于追踪设备的手机上。</span></div></li>
-      </ul>
-    </div>
-
-    <div class="note">
-      <span class="ic">🎯</span>
-      <div class="bd">完成后，您将获得两个值——一个 <b>Application&nbsp;ID</b> 和一个 <b>API&nbsp;Key</b>——这是应用上线所需的全部内容。</div>
-    </div>
-
-    <!-- ============================ STEP 1 ============================ -->
-    <div class="step"><div class="num">1</div><h2>在 TTN 中创建应用</h2></div>
-    <p class="lead">登录 TTN 控制台，打开 <b>Applications</b> 部分并点击 <b>+ Add application</b>。为其设置一个 ID 和名称，然后点击 <b>Create application</b>。</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-create-application.webp">
-          <img src="/images/lorawan/ttn-create-application.png" alt="TTN 的 Create application 页面" loading="lazy" width="1680" height="877">
-        </picture>
-        <span class="hl"  style="left:21.0%; top:35.5%; width:27%; height:5.5%;"></span>
-        <span class="tag" style="left:21.0%; top:35.5%;">1</span>
-        <span class="hl"  style="left:20.8%; top:92.5%; width:13%; height:5.5%;"></span>
-        <span class="tag" style="left:20.8%; top:92.5%;">2</span>
-      </div>
-      <figcaption>① 选择您的 Application ID  ·  ② 点击 Create application</figcaption>
-    </figure>
-
-    <div class="note warn">
-      <span class="ic">📝</span>
-      <div class="bd"><b>记下您的 Application ID。</b>应用会用到它。在上面的示例中是 <code>demolokoappid</code>。该 ID 必须为小写，且之后无法更改。</div>
-    </div>
-
-    <!-- ============================ STEP 2 ============================ -->
-    <div class="step"><div class="num">2</div><h2>注册您的 Loko Air 设备</h2></div>
-    <p class="lead">在左侧边栏打开 <b>End devices</b>，然后点击 <b>Register end device</b>。</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-end-devices.webp">
-          <img src="/images/lorawan/ttn-end-devices.png" alt="TTN 的 End devices 页面" loading="lazy" width="1680" height="834">
-        </picture>
-        <span class="hl"  style="left:1.5%; top:33.5%; width:18%; height:6%;"></span>
-        <span class="tag" style="left:1.5%; top:33.5%;">1</span>
-        <span class="hl"  style="left:86%; top:14.5%; width:13.5%; height:6%;"></span>
-        <span class="tag" style="left:86%; top:14.5%;">2</span>
-      </div>
-      <figcaption>① 打开 End devices  ·  ② Register end device</figcaption>
-    </figure>
-
-    <p>在注册界面选择 <b>“Enter end device specifics manually”</b>，然后填写您 Loko Air 的设备信息（频率计划、LoRaWAN 版本，以及 JoinEUI / DevEUI 等配置信息）。</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-register-device.webp">
-          <img src="/images/lorawan/ttn-register-device.png" alt="TTN 的 Register end device 页面" loading="lazy" width="1680" height="861">
-        </picture>
-        <span class="hl"  style="left:21.2%; top:38%; width:30%; height:5.5%;"></span>
-        <span class="tag" style="left:21.2%; top:38%;">1</span>
-        <span class="hl"  style="left:21.2%; top:90%; width:24%; height:7.5%;"></span>
-        <span class="tag" style="left:21.2%; top:90%;">2</span>
-      </div>
-      <figcaption>① Enter end device specifics manually  ·  ② 填写设备的配置信息</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">📡</span>
-      <div class="bd">为您所在区域选择<b>频率计划</b>（例如 <i>Europe 863–870&nbsp;MHz</i>），并将 <b>LoRaWAN 版本</b>与您的 Loko Air 匹配。为您拥有的每个追踪器重复此步骤。</div>
-    </div>
-
-    <!-- ============================ STEP 3 ============================ -->
-    <div class="step"><div class="num">3</div><h2>创建 API 密钥</h2></div>
-    <p class="lead">回到边栏，打开 <b>API keys</b> 并点击 <b>+ Add API key</b>。授予其读取应用流量的权限，然后保存。</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-api-keys.webp">
-          <img src="/images/lorawan/ttn-api-keys.png" alt="TTN 的 API keys 页面" loading="lazy" width="1680" height="834">
-        </picture>
-        <span class="hl"  style="left:1.5%; top:62.5%; width:18%; height:6%;"></span>
-        <span class="tag" style="left:1.5%; top:62.5%;">1</span>
-        <span class="hl"  style="left:86%; top:15%; width:13.5%; height:6%;"></span>
-        <span class="tag" style="left:86%; top:15%;">2</span>
-      </div>
-      <figcaption>① 打开 API keys  ·  ② Add API key</figcaption>
-    </figure>
-
-    <div class="note crit">
-      <span class="ic">🔑</span>
-      <div class="bd"><b>请立即复制 API 密钥。</b>TTN 仅在创建后<b>显示一次</b>完整密钥。请妥善保存——如果丢失，您将不得不重新生成一个。</div>
-    </div>
-
-    <!-- ============================ OPTIONAL: MQTT EXPLORER ============================ -->
-    <div class="step">
-      <div class="num">✓</div>
-      <h2>可选——使用 MQTT Explorer 测试</h2>
-    </div>
-    <p class="lead">在将凭据输入 Loko 之前，您可以使用任何开源 MQTT 客户端（例如 <a href="https://mqtt-explorer.com/" rel="noopener" target="_blank">MQTT&nbsp;Explorer</a>）验证其是否有效。它直接连接到 TTN 的 MQTT 服务器并显示原始上行消息，可快速确认一切设置正确。</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/mqtt-explorer-connection.webp">
-          <img src="/images/lorawan/mqtt-explorer-connection.png" alt="用于 TTN 的 MQTT Explorer 连接设置" loading="lazy" width="1322" height="878">
-        </picture>
-        <span class="hl"  style="left:2%; top:41.5%; width:96%; height:13%;"></span>
-        <span class="tag" style="left:2%; top:41.5%;">1</span>
-        <span class="hl"  style="left:2%; top:63%; width:48%; height:13%;"></span>
-        <span class="tag" style="left:2%; top:63%;">2</span>
-        <span class="hl"  style="left:51%; top:63%; width:39%; height:13%;"></span>
-        <span class="tag" style="left:51%; top:63%;">3</span>
-        <span class="hl"  style="left:76.5%; top:82.5%; width:21%; height:8%;"></span>
-        <span class="tag" style="left:76.5%; top:82.5%;">4</span>
-      </div>
-      <figcaption>① 协议 mqtt:// · 主机 · 端口 1883  ·  ② Username = App ID @ttn  ·  ③ Password = API 密钥  ·  ④ Connect</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">🔌</span>
-      <div class="bd">使用以下设置：<b>Protocol</b> <code>mqtt://</code>、<b>Host</b> <code>eu1.cloud.thethings.network</code>（与您的区域匹配）、<b>Port</b> <code>1883</code>。<b>Username</b> 是您的 Application&nbsp;ID 加上 <code>@ttn</code>（与应用中的规则相同！），<b>Password</b> 是您的 API 密钥。点击 <b>Connect</b>——如果连接成功并看到主题出现，说明您的凭据没有问题。</div>
-    </div>
-
-    <!-- ============================ STEP 4 ============================ -->
-    <div class="step"><div class="num">4</div><h2>从 Loko 应用连接</h2></div>
-    <p class="lead">打开 Loko 应用，进入 <b>LoRaWAN (TTN)</b> 面板并输入您的凭据。使用 <b>Quick select</b> 按钮（EU1 / NAM1 / AU1）选择您的区域，然后粘贴 Application ID 和 API 密钥。</p>
-
-    <figure>
-      <div class="shot appshot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/app-lorawan-settings.webp">
-          <img src="/images/lorawan/app-lorawan-settings.png" alt="Loko 应用的 LoRaWAN 设置面板" loading="lazy" width="800" height="960">
-        </picture>
-        <span class="hl"  style="left:29%; top:56%; width:42%; height:4.5%;"></span>
-        <span class="tag" style="left:29%; top:56%;">1</span>
-        <span class="append" style="left:43%; top:58.2%;">@ttn</span>
-        <span class="hl"  style="left:29%; top:63.5%; width:42%; height:4.5%;"></span>
-        <span class="tag" style="left:29%; top:63.5%;">2</span>
-        <span class="hl red"  style="left:29%; top:69%; width:21%; height:4%;"></span>
-        <span class="tag red" style="left:29%; top:69%;">3</span>
-      </div>
-      <figcaption>① Application ID（添加 @ttn！）  ·  ② API 密钥  ·  ③ Save</figcaption>
-    </figure>
-
-    <div class="note crit">
-      <span class="ic">⚠️</span>
-      <div class="bd"><b>重要——请在您的 Application ID 后添加 <code>@ttn</code>。</b>在应用的 Application&nbsp;ID 字段中，将 <code>@ttn</code> 添加到您在步骤&nbsp;1 中记下的 ID 末尾。没有此后缀，连接将会失败。</div>
-    </div>
-
-    <div class="ttnbox">
-      <div class="small">因此您的 Application ID 变为</div>
-      <div class="big">demolokoappid<span class="suf">@ttn</span></div>
-    </div>
-
-    <p>点击 <b>Save</b>。当面板顶部的状态指示变为 <b style="color:var(--accent)">● Connected</b> 时，应用已在网络上上线，您追踪器的位置将开始出现在地图上。</p>
-
-    <!-- ============================ DONE ============================ -->
-    <div class="done">
-      <h2>🎉 您已连接！</h2>
-      <p>您的 Loko Air 设备现在通过 TTN 将位置流式传输到应用中。从这里，您可以设置地理围栏、查看已存档的轨迹，并下载用于野外的离线地图。</p>
-    </div>
-
-    <div class="note">
-      <span class="ic">💬</span>
-      <div class="bd"><b>需要帮助吗？</b>如果在设置过程中遇到任何问题，请查看我们的 <a href="/zh/#faq">常见问题解答</a>，或联系我们的支持团队——我们随时帮助您完成连接。</div>
-    </div>
-
-  </div>
+<!-- ============================ HERO ============================ -->
+<header class="lorawan-hero">
+<div class="kicker">Loko·设置指南</div>
+<h1>将 Loko 连接到 LoRaWAN 网络</h1>
+<p>将您的 Loko Air 追踪器与 The Things Network (TTN) 配对并开始
+       只需四个简短步骤即可在应用程序中接收实时职位。</p>
+<div class="meta">~10 分钟 · 适合初学者</div>
+</header>
+<div class="lorawan-content">
+<!-- ============================ OTHER GUIDE ============================ -->
+<a class="next-guide" href="/lorawan-chirpstack/">
+<span class="eyebrow">自托管您自己的网络服务器？</span>
+<span class="title">如何将 Loko 连接到 ChirpStack →</span>
+<span class="sub">在自托管 ChirpStack 实例上进行相同的设置 — 使网关上线，
+        使用 Cayenne LPP 创建设备配置文件，添加您的设备并绘制图表
+        测量作为仪表。</span>
+</a>
+<!-- ============================ INTRO ============================ -->
+<p>Loko 接收您的跟踪器位置 <b>LoRaWAN</b>, 远距离,
+       低功率无线电网络。为了将这些无线电消息桥接到您的手机上，该应用程序
+       连接到 <b>The Things Network (TTN)</b> — 免费的全球 LoRaWAN community
+       网络。</p>
+<p>设置发生在两个地方：首先您创建一个 <b>应用</b> 在 TTN 上
+       控制台并注册您的设备，然后将两个凭据粘贴到 Loko 中
+       应用程序。这里有您需要的一切。</p>
+<!-- ============================ REQUIREMENTS ============================ -->
+<div class="req">
+<h3>你需要什么</h3>
+<ul>
+<li><span class="dot">▸</span><div><b>一个免费的 TTN 帐户</b><span>注册于 <a href="https://www.thethingsnetwork.org/" rel="noopener" target="_blank">thethingsnetwork.org</a> 如果你没有的话。</span></div></li>
+<li><span class="dot">▸</span><div><b>您的 Loko Air 设备详细信息</b><span>DevEUI / JoinEUI / 键 - 您在注册设备时自行设置。</span></div></li>
+<li><span class="dot">▸</span><div><b>已安装 Loko 应用程序</b><span>在手机上，您将用来跟踪您的设备。</span></div></li>
+</ul>
+</div>
+<div class="note">
+<span class="ic">🎯</span>
+<div class="bd">最后你将得到两个值——一个 <b>应用程序 ID</b> 和一个
+        <b>API 密钥</b> — 这是应用程序上线所需的唯一内容。</div>
+</div>
+<!-- ============================ STEP 1 ============================ -->
+<div class="step"><div class="num">1</div><h2>在 TTN 上创建应用程序</h2></div>
+<p class="lead">登录TTN控制台，打开 <b>应用领域</b> 部分和
+       单击 <b>+ 添加应用程序</b>。为其指定 ID 和名称，然后单击
+       <b>创建应用程序</b>.</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-create-application.webp" type="image/webp"/>
+<img alt="TTN Create application page" height="877" loading="lazy" src="/images/lorawan/ttn-create-application.png" width="1680"/>
+</picture>
+<!-- 1 · Application ID field -->
+<span class="hl" style="left:21.0%; top:35.5%; width:27%; height:5.5%;"></span>
+<span class="tag" style="left:21.0%; top:35.5%;">1</span>
+<!-- 2 · Create button -->
+<span class="hl" style="left:20.8%; top:92.5%; width:13%; height:5.5%;"></span>
+<span class="tag" style="left:20.8%; top:92.5%;">2</span>
+</div>
+<figcaption>① 选择您的应用程序 ID · ② 单击“创建应用程序”</figcaption>
+</figure>
+<div class="note warn">
+<span class="ic">📝</span>
+<div class="bd"><b>写下您的申请 ID。</b> 您将需要它来使用该应用程序。
+        在上面的例子中是 <code>demolokoappid</code>。 ID 必须小写并且
+        以后无法更改。</div>
+</div>
+<!-- ============================ STEP 2 ============================ -->
+<div class="step"><div class="num">2</div><h2>注册您的 Loko Air 设备</h2></div>
+<p class="lead">在左侧边栏中打开 <b>终端设备</b>，然后单击
+       <b>注册终端设备</b>.</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-end-devices.webp" type="image/webp"/>
+<img alt="TTN End devices page" height="834" loading="lazy" src="/images/lorawan/ttn-end-devices.png" width="1680"/>
+</picture>
+<!-- 1 · End devices nav -->
+<span class="hl" style="left:1.5%; top:33.5%; width:18%; height:6%;"></span>
+<span class="tag" style="left:1.5%; top:33.5%;">1</span>
+<!-- 2 · Register end device button -->
+<span class="hl" style="left:86%; top:14.5%; width:13.5%; height:6%;"></span>
+<span class="tag" style="left:86%; top:14.5%;">2</span>
+</div>
+<figcaption>① 开放终端设备 · ② 注册终端设备</figcaption>
+</figure>
+<p>在注册屏幕上，选择 <b>“手动输入终端设备详细信息”</b>,
+       然后填写 Loko Air 中的设备详细信息（频率计划、LoRaWAN
+       版本和配置信息，例如 JoinEUI / DevEUI）。</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-register-device.webp" type="image/webp"/>
+<img alt="TTN Register end device page" height="861" loading="lazy" src="/images/lorawan/ttn-register-device.png" width="1680"/>
+</picture>
+<!-- 1 · Enter manually radio -->
+<span class="hl" style="left:21.2%; top:38%; width:30%; height:5.5%;"></span>
+<span class="tag" style="left:21.2%; top:38%;">1</span>
+<!-- 2 · Provisioning / JoinEUI -->
+<span class="hl" style="left:21.2%; top:90%; width:24%; height:7.5%;"></span>
+<span class="tag" style="left:21.2%; top:90%;">2</span>
+</div>
+<figcaption>① 手动输入终端设备详细信息 · ② 填写设备的配置信息</figcaption>
+</figure>
+<div class="note">
+<span class="ic">📡</span>
+<div class="bd">选择 <b>频率计划</b> 对于您所在的地区（例如 <i>欧洲 863–870 MHz</i>）
+        并匹配 <b>LoRaWAN版本</b> 到您的 Loko Air。对每个重复此步骤
+        您拥有的追踪器。</div>
+</div>
+<!-- ============================ STEP 3 ============================ -->
+<div class="step"><div class="num">3</div><h2>创建 API 密钥</h2></div>
+<p class="lead">返回侧边栏，打开 <b>API 密钥</b> 然后单击
+       <b>+ 添加API密钥</b>。授予其读取应用程序流量的权限，然后保存。</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-api-keys.webp" type="image/webp"/>
+<img alt="TTN API keys page" height="834" loading="lazy" src="/images/lorawan/ttn-api-keys.png" width="1680"/>
+</picture>
+<!-- 1 · API keys nav -->
+<span class="hl" style="left:1.5%; top:62.5%; width:18%; height:6%;"></span>
+<span class="tag" style="left:1.5%; top:62.5%;">1</span>
+<!-- 2 · Add API key button -->
+<span class="hl" style="left:86%; top:15%; width:13.5%; height:6%;"></span>
+<span class="tag" style="left:86%; top:15%;">2</span>
+</div>
+<figcaption>① 开放 API 密钥 · ② 添加 API 密钥</figcaption>
+</figure>
+<div class="note crit">
+<span class="ic">🔑</span>
+<div class="bd"><b>立即复制 API 密钥 imm。</b> TTN 仅显示完整密钥
+        <b>一次</b>，在您创建它之后。将其保存在安全的地方 - 如果您丢失了它
+        你必须生成一个新的。</div>
+</div>
+<!-- ============================ OPTIONAL: MQTT EXPLORER ============================ -->
+<div class="step">
+<div class="num">✓</div>
+<h2>可选 — 使用 MQTT Explorer 进行测试</h2>
+</div>
+<p class="lead">在将凭据放入 Loko 之前，您可以验证它们是否有效
+       与任何开源 MQTT 客户端 — 例如
+       <a href="https://mqtt-explorer.com/" rel="noopener" target="_blank">MQTT 浏览器</a>。它直接连接到
+       TTN 的 MQTT 服务器并显示原始上行链路消息，这是一种快速方法
+       确认一切设置正确。</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/mqtt-explorer-connection.webp" type="image/webp"/>
+<img alt="MQTT Explorer connection settings for TTN" height="878" loading="lazy" src="/images/lorawan/mqtt-explorer-connection.png" width="1322"/>
+</picture>
+<!-- 1 · Protocol + Host + Port row -->
+<span class="hl" style="left:2%; top:41.5%; width:96%; height:13%;"></span>
+<span class="tag" style="left:2%; top:41.5%;">1</span>
+<!-- 2 · Username (@ttn) -->
+<span class="hl" style="left:2%; top:63%; width:48%; height:13%;"></span>
+<span class="tag" style="left:2%; top:63%;">2</span>
+<!-- 3 · Password (API key) -->
+<span class="hl" style="left:51%; top:63%; width:39%; height:13%;"></span>
+<span class="tag" style="left:51%; top:63%;">3</span>
+<!-- 4 · Connect -->
+<span class="hl" style="left:76.5%; top:82.5%; width:21%; height:8%;"></span>
+<span class="tag" style="left:76.5%; top:82.5%;">4</span>
+</div>
+<figcaption>① 协议 mqtt:// · 主机 · 端口 1883 · ② 用户名 = 应用程序 ID @ttn · ③ 密码 = API 密钥 · ④ 连接</figcaption>
+</figure>
+<div class="note">
+<span class="ic">🔌</span>
+<div class="bd">使用这些设置： <b>协议</b> <code>mqtt://</code>,
+        <b>主持人</b> <code>eu1.cloud.thethings.network</code> （匹配您的地区），
+        <b>港口</b> <code>1883</code>。这 <b>用户名</b> 是您的应用程序 ID
+        与 <code>@ttn</code> 附加（与应用程序相同的规则！），以及 <b>密码</b>
+        是您的 API 密钥。打 <b>连接</b> — 如果它连接并且您看到主题
+        出现，您的凭据就可以使用了。</div>
+</div>
+<!-- ============================ STEP 4 ============================ -->
+<div class="step"><div class="num">4</div><h2>从 Loko 应用程序连接</h2></div>
+<p class="lead">打开 Loko 应用程序，转到 <b>LoRaWAN (TTN)</b> 工作表，然后输入
+       您的凭据。选择您所在的地区 <b>快速选择</b> 按钮（EU1 /
+       NAM1 / AU1)，然后粘贴应用程序 ID 和 API 密钥。</p>
+<figure>
+<div class="shot appshot">
+<picture>
+<source srcset="/images/lorawan/app-lorawan-settings.webp" type="image/webp"/>
+<img alt="Loko app LoRaWAN settings sheet" height="960" loading="lazy" src="/images/lorawan/app-lorawan-settings.png" width="800"/>
+</picture>
+<!-- 1 · Application ID field (with the @ttn suffix appended onto the value) -->
+<span class="hl" style="left:29%; top:56%; width:42%; height:4.5%;"></span>
+<span class="tag" style="left:29%; top:56%;">1</span>
+<span class="append" style="left:43%; top:58.2%;">@ttn</span>
+<!-- 2 · API key field -->
+<span class="hl" style="left:29%; top:63.5%; width:42%; height:4.5%;"></span>
+<span class="tag" style="left:29%; top:63.5%;">2</span>
+<!-- 3 · Save -->
+<span class="hl red" style="left:29%; top:69%; width:21%; height:4%;"></span>
+<span class="tag red" style="left:29%; top:69%;">3</span>
+</div>
+<figcaption>① 应用程序 ID（添加@ttn！） · ② API 密钥 · ③ 保存</figcaption>
+</figure>
+<div class="note crit">
+<span class="ic">⚠️</span>
+<div class="bd"><b>重要——添加 <code>@ttn</code> 到您的应用程序 ID。</b>
+        在应用程序的应用程序 ID 字段中，附加 <code>@ttn</code> 到最后
+        您在步骤 1 中记下的 ID。如果没有此后缀，连接将会失败。</div>
+</div>
+<div class="ttnbox">
+<div class="small">所以你的应用程序ID变成</div>
+<div class="big">demolokoappid<span class="suf">@ttn</span></div>
+</div>
+<p>轻敲 <b>节省</b>。当纸张顶部的状态指示灯变为
+       <b style="color:var(--accent)">● 已连接</b>，该应用程序已在网络上运行并且
+       您的跟踪器位置将开始到达地图上。</p>
+<!-- ============================ DONE ============================ -->
+<div class="done">
+<h2>🎉 您已连接！</h2>
+<p>您的 Loko Air 设备现在通过 TTN 将其位置传输到
+         应用程序。从这里您可以设置地理围栏、查看存档的曲目并下载
+         该领域的离线地图。</p>
+</div>
+<div class="note">
+<span class="ic">💬</span>
+<div class="bd"><b>需要帮助吗？</b> 如果您在设置过程中遇到任何问题，请检查我们的
+        <a href="/#faq">常见问题解答部分</a> 或联系我们的支持团队 - 我们随时为您提供帮助
+        你就连接上了。</div>
+</div>
+</div>
 </main>
 <div id="site-footer"></div>
 <script defer="" src="/js/analytics.js"></script>

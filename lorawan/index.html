@@ -372,6 +372,35 @@
     .done h2 { margin: 0 0 var(--spacing-xs); font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; }
     .done p { color: var(--text-secondary); max-width: 520px; margin: 0 auto; }
 
+    /* ---------- next guide link ---------- */
+    .next-guide {
+      display: block;
+      margin: 0 0 var(--spacing-lg);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-secondary);
+      text-decoration: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .next-guide:hover { border-color: var(--accent); box-shadow: var(--shadow-md); text-decoration: none; }
+    .next-guide .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .next-guide .title {
+      display: block;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--text-primary);
+      margin: 4px 0 2px;
+    }
+    .next-guide .sub { font-size: 0.9375rem; color: var(--text-secondary); }
+
     @media (max-width: 600px) {
       .lorawan-container { padding: var(--spacing-lg) 0; }
       .lorawan-hero h1 { font-size: 2rem; }
@@ -453,6 +482,15 @@
   </header>
 
   <div class="lorawan-content">
+
+    <!-- ============================ OTHER GUIDE ============================ -->
+    <a class="next-guide" href="/lorawan-chirpstack/">
+      <span class="eyebrow">Self-hosting your own network server?</span>
+      <span class="title">How to connect Loko to ChirpStack →</span>
+      <span class="sub">The same setup on a self-hosted ChirpStack instance — bring a gateway online,
+        create a device profile with Cayenne&nbsp;LPP, add your devices and chart their
+        measurements as gauges.</span>
+    </a>
 
     <!-- ============================ INTRO ============================ -->
     <p>Loko receives your tracker positions over <b>LoRaWAN</b>, a long-range,
