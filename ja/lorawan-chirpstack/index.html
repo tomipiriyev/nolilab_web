@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<link href="/css/partials.css" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>Loko を ChirpStack に接続する方法 |セルフホスト型 LoRaWAN ガイド |ノリラボ</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="Loko Air トラッカーをセルフホスト型 ChirpStack LoRaWAN ネットワーク サーバーに接続します。ステップバイステップ ガイド — ゲートウェイをオンラインにし、Cayenne LPP でデバイス プロファイルを作成し、デバイスを追加し、OTAA 結合を確認し、測定値をゲージとしてグラフ化します。" name="description"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link href="https://www.nolilab.com/ja/lorawan-chirpstack/" rel="canonical"/>
+<link href="https://www.nolilab.com/lorawan-chirpstack/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/lorawan-chirpstack/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/es/lorawan-chirpstack/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/lorawan-chirpstack/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/lorawan-chirpstack/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/lorawan-chirpstack/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/lorawan-chirpstack/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="Loko を ChirpStack に接続する方法 |セルフホスト型 LoRaWAN ガイド |ノリラボ" property="og:title"/>
+<meta content="Loko Air トラッカーをセルフホスト型 ChirpStack LoRaWAN ネットワーク サーバー (ゲートウェイ、デバイス プロファイル、アプリケーション、デバイス、ゲージ) に接続します。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/lorawan-chirpstack/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/lorawan-chirpstack/chirpstack-app-devices.png" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Loko を ChirpStack に接続する方法 |セルフホスト型 LoRaWAN ガイド |ノリラボ" name="twitter:title"/>
+<meta content="Loko Air トラッカーをセルフホスト型 ChirpStack LoRaWAN ネットワーク サーバー (ゲートウェイ、デバイス プロファイル、アプリケーション、デバイス、ゲージ) に接続します。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/lorawan-chirpstack/chirpstack-app-devices.png" name="twitter:image"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'IBM Plex Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --font-sans: 'IBM Plex Sans', 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+      /* annotation-only colours for the numbered callouts drawn over screenshots */
+      --hl: #d29922;
+      --hl-red: #cf222e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* ---------- layout ---------- */
+    .lorawan-container {
+      padding: var(--spacing-xl) 0;
+      background-color: var(--bg-primary);
+      overflow-x: hidden;
+    }
+
+    .lorawan-content {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+
+    .lorawan-content > p {
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .lorawan-content b,
+    .lorawan-content strong { color: var(--text-primary); font-weight: 600; }
+
+    .lorawan-content a { color: var(--accent); text-decoration: none; }
+    .lorawan-content a:hover { text-decoration: underline; }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 2px 7px;
+      color: var(--text-primary);
+    }
+
+    /* ---------- hero ---------- */
+    .lorawan-hero {
+      text-align: center;
+      padding: 0 var(--spacing-md) var(--spacing-lg);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: var(--spacing-xl);
+      max-width: 1120px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .lorawan-hero .kicker {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      letter-spacing: 3px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .lorawan-hero h1 {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .lorawan-hero p {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .lorawan-hero .meta {
+      margin-top: var(--spacing-md);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    /* ---------- requirements box ---------- */
+    .req {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: 0 0 var(--spacing-md);
+    }
+
+    .req h3 {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .req ul { list-style: none; }
+
+    .req li {
+      display: flex;
+      gap: 12px;
+      padding: 9px 0;
+      align-items: flex-start;
+    }
+
+    .req li:not(:last-child) { border-bottom: 1px solid var(--border); }
+    .req li .dot { flex: 0 0 auto; color: var(--accent); font-weight: 700; }
+    .req li > div > b { display: block; }
+    .req li span { color: var(--text-secondary); font-size: 0.9375rem; }
+
+    /* ---------- step badge ---------- */
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: var(--spacing-xl) 0 var(--spacing-xs);
+      scroll-margin-top: 24px;
+    }
+
+    .step .num {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background: rgba(35, 134, 54, 0.08);
+      border: 1px solid rgba(35, 134, 54, 0.25);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 1.125rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step h2 {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .lead {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin: 0 0 var(--spacing-md);
+    }
+
+    /* ---------- field list ---------- */
+    .fields {
+      list-style: none;
+      margin: var(--spacing-md) 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg-secondary);
+      padding: var(--spacing-xs) var(--spacing-md);
+    }
+    .fields li {
+      padding: 10px 0;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    .fields li:not(:last-child) { border-bottom: 1px solid var(--border); }
+
+    /* ---------- figure + overlay highlights ---------- */
+    figure { margin: var(--spacing-md) 0 var(--spacing-sm); }
+
+    .shot {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .shot img { display: block; width: 100%; height: auto; }
+
+    /* highlight ring drawn over a region (positioned in %) */
+    .hl {
+      position: absolute;
+      border: 3px solid var(--hl);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.6), 0 0 18px 3px rgba(210,153,34,.4);
+      pointer-events: none;
+    }
+    .hl.red {
+      border-color: var(--hl-red);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.6), 0 0 18px 3px rgba(207,34,46,.4);
+    }
+    .hl.green {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.6), 0 0 18px 3px rgba(35,134,54,.4);
+    }
+
+    /* little numbered tag attached to a highlight */
+    .tag {
+      position: absolute;
+      z-index: 5;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--hl);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      transform: translate(-50%,-50%);
+    }
+    .tag.red { background: var(--hl-red); }
+    .tag.green { background: var(--accent); }
+
+    figcaption {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-top: var(--spacing-sm);
+      font-family: var(--font-mono);
+    }
+
+    /* ---------- callout / note ---------- */
+    .note {
+      display: flex;
+      gap: 14px;
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      background: rgba(35, 134, 54, 0.06);
+    }
+    .note .ic { flex: 0 0 auto; font-size: 20px; line-height: 1.3; }
+    .note .bd { font-size: 0.9375rem; color: var(--text-secondary); }
+    .note .bd b { color: var(--text-primary); }
+    .note.warn { border-left-color: var(--hl); background: rgba(210,153,34,.07); }
+    .note.crit { border-left-color: var(--hl-red); background: rgba(207,34,46,.06); }
+
+    /* ---------- checklist ---------- */
+    .checklist {
+      margin: var(--spacing-md) 0;
+      padding: var(--spacing-lg);
+      border: 1px dashed var(--accent);
+      border-radius: var(--radius-md);
+      background: rgba(35, 134, 54, 0.05);
+    }
+    .checklist h3 {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-sm);
+    }
+    .checklist ul { list-style: none; }
+    .checklist li {
+      display: flex;
+      gap: 10px;
+      padding: 7px 0;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    .checklist li .box { flex: 0 0 auto; color: var(--accent); font-weight: 700; font-family: var(--font-mono); }
+
+    /* ---------- finish ---------- */
+    .done {
+      margin-top: var(--spacing-xl);
+      padding: var(--spacing-xl);
+      text-align: center;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+    .done h2 { margin: 0 0 var(--spacing-xs); font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; }
+    .done p { color: var(--text-secondary); max-width: 520px; margin: 0 auto; }
+
+    /* ---------- next guide link ---------- */
+    .next-guide {
+      display: block;
+      margin: var(--spacing-lg) 0 0;
+      padding: var(--spacing-md) var(--spacing-lg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-secondary);
+      text-decoration: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .next-guide:hover { border-color: var(--accent); box-shadow: var(--shadow-md); text-decoration: none; }
+    .next-guide .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .next-guide .title {
+      display: block;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--text-primary);
+      margin: 4px 0 2px;
+    }
+    .next-guide .sub { font-size: 0.9375rem; color: var(--text-secondary); }
+
+    @media (max-width: 600px) {
+      .lorawan-container { padding: var(--spacing-lg) 0; }
+      .lorawan-hero h1 { font-size: 1.75rem; }
+      .step .num { width: 40px; height: 40px; font-size: 1.125rem; }
+      .step h2 { font-size: 1.25rem; }
+    }
+  </style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Loko をセルフホスト型 ChirpStack LoRaWAN ネットワークに接続する方法",
+  "description": "Loko Air GPS トラッカーをセルフホスト型 ChirpStack LoRaWAN ネットワーク サーバーに接続するためのステップバイステップの手順: ゲートウェイをオンラインにし、OTAA および Cayenne LPP コーデックを使用してデバイス プロファイルを作成し、アプリケーションを作成し、デバイスを追加し、結合を確認し、測定値をゲージとして視覚化します。",
+  "url": "https://www.nolilab.com/lorawan-chirpstack/",
+  "datePublished": "2026-07-25",
+  "dateModified": "2026-07-25",
+  "totalTime": "PT20M",
+  "image": "https://www.nolilab.com/images/lorawan-chirpstack/chirpstack-app-devices.png",
+  "author": {
+    "@type": "Person",
+    "name": "タムリーハ・ピリエフ",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ノリラボ",
+    "url": "https://www.nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
+    }
+  },
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "Loko Air GPS トラッカーとその DevEUI、JoinEUI、およびアプリケーション キー"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "ChirpStack サーバーに接続できる LoRaWAN ゲートウェイ"
+    }
+  ],
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "実行中の ChirpStack ネットワーク サーバー"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "ゲートウェイがオンラインであることを確認してください",
+      "text": "「テナント」→「ゲートウェイ」を開き、少なくとも 1 つのゲートウェイが緑色の「オンライン」ステータスを示していることを確認します。リストが空の場合は、「ゲートウェイの追加」をクリックし、16 文字の 16 進数のゲートウェイ ID と一致するリージョンを登録します。",
+      "url": "https://www.nolilab.com/lorawan-chirpstack/#step-1",
+      "image": "https://www.nolilab.com/images/lorawan-chirpstack/chirpstack-gateways.png"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "デバイスプロファイルを作成する",
+      "text": "[テナント] → [デバイス プロファイル] を開き、[デバイス プロファイルの追加] をクリックします。 [全般] タブで、名前、地域、MAC バージョンを設定します。 [参加] タブで [デバイスが OTAA をサポートしている] を有効にします。 [ペイロード コーデック] タブで [Cayenne LPP] を選択し、[送信] を選択します。",
+      "url": "https://www.nolilab.com/lorawan-chirpstack/#step-2",
+      "image": "https://www.nolilab.com/images/lorawan-chirpstack/chirpstack-profile-general.png"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "アプリケーションを作成する",
+      "text": "「テナント」→「アプリケーション」を開き、「アプリケーションの追加」をクリックします。 Loko などの名前を付けて保存します。アプリケーションはデバイスをグループ化するコンテナーです。",
+      "url": "https://www.nolilab.com/lorawan-chirpstack/#step-3",
+      "image": "https://www.nolilab.com/images/lorawan-chirpstack/chirpstack-applications.png"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "デバイスを追加する",
+      "text": "アプリケーションを開き、[デバイスの追加] をクリックして、名前、デバイス EUI (DevEUI)、参加 EUI、および手順 2 のデバイス プロファイルを入力します。送信して、[OTAA キー] タブにアプリケーション キーを入力します。",
+      "url": "https://www.nolilab.com/lorawan-chirpstack/#step-4",
+      "image": "https://www.nolilab.com/images/lorawan-chirpstack/chirpstack-add-device.png"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "結合を確認し、フレームを監視します",
+      "text": "デバイスの DevEUI をクリックして開き、LoRaWAN フレーム タブを選択します。正常なデバイスでは、JoinRequest に続いて JoinAccept、UnconfirmedDataUp および UnconfirmedDataDown フレームが表示されます。",
+      "url": "https://www.nolilab.com/lorawan-chirpstack/#step-5",
+      "image": "https://www.nolilab.com/images/lorawan-chirpstack/chirpstack-lorawan-frames.png"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "測定値をゲージとして視覚化する",
+      "text": "[テナント] → [デバイス プロファイル] → 自分のプロファイル → [測定] を開きます。自動キー検出をオンにして、関心のある各キーをゲージの種類に設定して送信します。その後、値がデバイスのダッシュボードにゲージとしてレンダリングされます。",
+      "url": "https://www.nolilab.com/lorawan-chirpstack/#step-6",
+      "image": "https://www.nolilab.com/images/lorawan-chirpstack/chirpstack-measurements.png"
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "セットアップガイド",
+      "item": "https://www.nolilab.com/setup-guides/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "LoRaWAN の統合",
+      "item": "https://www.nolilab.com/lorawan/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "ChirpStack",
+      "item": "https://www.nolilab.com/lorawan-chirpstack/"
+    }
+  ]
+}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="lorawan-container">
+<!-- ============================ HERO ============================ -->
+<header class="lorawan-hero">
+<div class="kicker">Loko・セットアップガイド</div>
+<h1>Loko を ChirpStack に接続する</h1>
+<p>独自の LoRaWAN ネットワーク サーバーを実行しますか? Loko Air トラッカーを入手する方法は次のとおりです。
+       自己ホスト型で結合、デコード、チャート化 <b>ChirpStack</b> インスタンス — 6 回
+       短いステップ。</p>
+<div class="meta">～20分・初心者向け</div>
+</header>
+<div class="lorawan-content">
+<!-- ============================ INTRO ============================ -->
+<p>Loko Air トラッカーはわかりやすく語る <b>LoRaWAN</b>したがって、どのネットワークサーバーでも動作します。
+       モノネットワークだけではありません。データを自分で保管したい場合
+       インフラ、 <a href="https://www.chirpstack.io/" rel="noopener" target="_blank">ChirpStack</a>
+       は、自分でホストできる無料のオープンソース LoRaWAN ネットワーク サーバーです。</p>
+<p>以下のすべては内部で起こります <b>テナント</b> ChirpStack Web のセクション
+       コンソール。サイドバーには 2 つのナビゲーション グループがあります。 <b>ネットワークサーバー</b> グローバルを保持し、
+       すべてのテナントのサーバー全体の設定、 <b>テナント</b> あなたのためにすべてを保持します
+       独自の組織 — すべての作業はそこで行われます。</p>
+<!-- ============================ REQUIREMENTS ============================ -->
+<div class="req">
+<h3>必要なもの</h3>
+<ul>
+<li><span class="dot">▸</span><div><b>実行中の ChirpStack インスタンス</b><span>ログインできるもの (このガイドでは <code>admin</code> アカウント）。</span></div></li>
+<li><span class="dot">▸</span><div><b>LoRaWAN ゲートウェイ</b><span>ChirpStack サーバーにアクセスできるほか、 <b>ゲートウェイID</b>.</span></div></li>
+<li><span class="dot">▸</span><div><b>Loko Air デバイスの認証情報</b><span>の <b>DevEUI</b>, <b>JoinEUI (AppEUI)</b> そして <b>アプリケーションキー</b> デバイス上で programm を実行しました。</span></div></li>
+</ul>
+</div>
+<div class="note">
+<span class="ic">🎯</span>
+<div class="bd">最後には、 <b>オンラインゲートウェイ</b>、というデバイス。
+        完了します <b>参加する</b>、およびデコードされた測定値は次のようにレンダリングされます。 <b>ゲージ</b> に
+        デバイスのダッシュボード。</div>
+</div>
+<!-- ============================ STEP 1 ============================ -->
+<div class="step" id="step-1"><div class="num">1</div><h2>ゲートウェイがオンラインであることを確認してください</h2></div>
+<p class="lead">開ける <b>テナント → ゲートウェイ</b>。を表示するゲートウェイが少なくとも 1 つ必要です。
+       緑 <b>オンライン</b> デバイスが参加する前のステータス。リストが空の場合は、
+       <b>ゲートウェイの追加</b> そしてあなたのものを登録してください。</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-gateways.webp" type="image/webp"/>
+<img alt="ChirpStack Gateways list showing gateway ID and online status" height="841" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-gateways.png" width="1680"/>
+</picture>
+<!-- 1 · Gateways nav -->
+<span class="hl" style="left:2%; top:83.5%; width:8.5%; height:3.2%;"></span>
+<span class="tag" style="left:2%; top:83.5%;">1</span>
+<!-- 2 · Add gateway button -->
+<span class="hl" style="left:80.6%; top:15%; width:7.8%; height:4.2%;"></span>
+<span class="tag" style="left:80.6%; top:15%;">2</span>
+<!-- 3 · Gateway ID -->
+<span class="hl" style="left:43.5%; top:31%; width:9%; height:4.8%;"></span>
+<span class="tag" style="left:43.5%; top:31%;">3</span>
+<!-- 4 · Offline status (warning) -->
+<span class="hl red" style="left:22%; top:31%; width:6%; height:4.8%;"></span>
+<span class="tag red" style="left:22%; top:31%;">4</span>
+</div>
+<figcaption>① ゲートウェイ · ② ゲートウェイの追加 · ③ ゲートウェイ ID · ④ ステータス (緑色になる必要があります)</figcaption>
+</figure>
+<div class="note">
+<span class="ic">🆔</span>
+<div class="bd">ゲートウェイを追加するときに指定する必要があるのは、
+        <b>ゲートウェイID</b> — 16 文字の 16 進数の EUI のようなもの <code>782184ffff9f3249</code>。
+        ゲートウェイのディスプレイ、ラベル、または管理ページ/マニュアルで見つけてください。また、
+        一致するものを選ぶ <b>地域</b> （例えば。 <code>EU868</code>）。</div>
+</div>
+<div class="note crit">
+<span class="ic">⚠️</span>
+<div class="bd"><b>緑を待ちます。</b> 上のスクリーンショットでは、ゲートウェイが赤色で表示されています。
+        <b>オフライン</b> 点（④）。まで続行しないでください <b>最後に見た</b> アップデートとステータス
+        ターン <b>オンライン</b> — オフライン ゲートウェイは無線トラフィックを受信しないため、何も送信されません。
+        ぜひ参加してください。</div>
+</div>
+<!-- ============================ STEP 2 ============================ -->
+<div class="step" id="step-2"><div class="num">2</div><h2>デバイスプロファイルを作成する</h2></div>
+<p class="lead">デバイス プロファイルは、デバイスのクラスがどのように動作するかを記述します (領域、
+       LoRaWAN のバージョン、参加方法、ペイロード コーデック。開ける
+       <b>テナント → デバイスプロファイル</b> そしてクリックしてください <b>デバイスプロファイルの追加</b>.</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-device-profiles.webp" type="image/webp"/>
+<img alt="ChirpStack Device profiles list with the Add device profile button" height="838" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-device-profiles.png" width="1680"/>
+</picture>
+<!-- 1 · Device Profiles nav -->
+<span class="hl" style="left:2%; top:77.8%; width:8.5%; height:3.2%;"></span>
+<span class="tag" style="left:2%; top:77.8%;">1</span>
+<!-- 2 · Add device profile button -->
+<span class="hl" style="left:88.8%; top:15%; width:9.4%; height:3.6%;"></span>
+<span class="tag" style="left:88.8%; top:15%;">2</span>
+</div>
+<figcaption>①デバイスプロファイルを開く・②デバイスプロファイルを追加</figcaption>
+</figure>
+<p>で <b>一般的な</b> タブで、名前、地域、名前などの必須項目を入力します。
+       LoRaWAN Loko Air が使用する MAC バージョン。</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-profile-general.webp" type="image/webp"/>
+<img alt="ChirpStack Add device profile General tab with name, region and MAC version" height="839" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-profile-general.png" width="1680"/>
+</picture>
+<!-- 1 · Name -->
+<span class="hl" style="left:20.8%; top:35.5%; width:77%; height:3.6%;"></span>
+<span class="tag" style="left:20.8%; top:35.5%;">1</span>
+<!-- 2 · Region -->
+<span class="hl" style="left:20.8%; top:70.5%; width:37.5%; height:3.8%;"></span>
+<span class="tag" style="left:20.8%; top:70.5%;">2</span>
+<!-- 3 · MAC version -->
+<span class="hl" style="left:20.8%; top:81%; width:37.5%; height:3.8%;"></span>
+<span class="tag" style="left:20.8%; top:81%;">3</span>
+</div>
+<figcaption>① 名前 (例: Generic-OTAA-EU868) · ② 地域 (EU868) · ③ MAC バージョン</figcaption>
+</figure>
+<div class="note">
+<span class="ic">📡</span>
+<div class="bd">を選択してください <b>地域</b> そして <b>MACバージョン</b> Lokoに一致するもの
+        航空とゲートウェイ (例: <code>EU868</code> そして <code>LoRaWAN 1.0.3</code>）。
+        離れる <b>地域パラメータのリビジョン</b> そして <b>ADRアルゴリズム</b> 彼らのところで
+        デフォルト。</div>
+</div>
+<p>に切り替えます <b>参加（OTAA / ABP）</b> タブを押してオンにします <b>デバイスは OTAA をサポートします</b> —
+       Loko Air トラッカーは無線で参加します。</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-profile-otaa.webp" type="image/webp"/>
+<img alt="ChirpStack device profile Join OTAA tab with Device supports OTAA enabled" height="843" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-profile-otaa.png" width="1680"/>
+</picture>
+<!-- 1 · Join tab -->
+<span class="hl" style="left:25.2%; top:25.5%; width:9%; height:5%;"></span>
+<span class="tag" style="left:25.2%; top:25.5%;">1</span>
+<!-- 2 · Device supports OTAA toggle -->
+<span class="hl" style="left:20.8%; top:37%; width:4.5%; height:6%;"></span>
+<span class="tag" style="left:20.8%; top:37%;">2</span>
+</div>
+<figcaption>① 参加（OTAA / ABP）タブ・② デバイスが OTAA をサポート = オン</figcaption>
+</figure>
+<p>最後に、 <b>ペイロードコーデック</b> タブをクリックして選択します <b>カイエンLPP</b>、その後
+       クリック <b>提出する</b>.</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-profile-codec.webp" type="image/webp"/>
+<img alt="ChirpStack device profile Payload codec tab set to Cayenne LPP" height="832" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-profile-codec.png" width="1680"/>
+</picture>
+<!-- 1 · Payload codec tab -->
+<span class="hl" style="left:44.5%; top:26%; width:7.5%; height:5%;"></span>
+<span class="tag" style="left:44.5%; top:26%;">1</span>
+<!-- 2 · Codec dropdown = Cayenne LPP -->
+<span class="hl" style="left:20.8%; top:38%; width:76%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:38%;">2</span>
+<!-- 3 · Submit -->
+<span class="hl" style="left:20.8%; top:45.5%; width:5%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:45.5%;">3</span>
+</div>
+<figcaption>①ペイロードコーデックタブ・②Cayenne LPP・③送信</figcaption>
+</figure>
+<div class="note">
+<span class="ic">🧩</span>
+<div class="bd"><b>Cayenne LPP</b> ChirpStack が生のデータを自動的にデコードできるようにします。
+        ペイロードを名前付きの測定値 (GPS の位置、バッテリーなど) にロードします。これが、
+        ステップ 6 のゲージを使用することも可能です。</div>
+</div>
+<!-- ============================ STEP 3 ============================ -->
+<div class="step" id="step-3"><div class="num">3</div><h2>アプリケーションを作成する</h2></div>
+<p class="lead">開ける <b>テナント→申込み</b> そしてクリックしてください <b>アプリケーションの追加</b>。
+       名前を付けます (例: <code>Loko</code>) して保存します。アプリケーションはまさに
+       デバイスをグループ化するコンテナ。</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-applications.webp" type="image/webp"/>
+<img alt="ChirpStack Applications list with the Add application button" height="849" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-applications.png" width="1680"/>
+</picture>
+<!-- 1 · Applications nav -->
+<span class="hl" style="left:2%; top:93.2%; width:8.5%; height:3.4%;"></span>
+<span class="tag" style="left:2%; top:93.2%;">1</span>
+<!-- 2 · Add application button -->
+<span class="hl" style="left:88.8%; top:15.8%; width:9.6%; height:4%;"></span>
+<span class="tag" style="left:88.8%; top:15.8%;">2</span>
+</div>
+<figcaption>①アプリケーションを開く・②アプリケーションを追加</figcaption>
+</figure>
+<!-- ============================ STEP 4 ============================ -->
+<div class="step" id="step-4"><div class="num">4</div><h2>デバイスを追加する</h2></div>
+<p class="lead">作成したアプリケーションをクリックして開きます。それはに着陸します
+       <b>デバイス</b> タブ。 <b>デバイスの追加</b> ボタンが表示されます。デバイスが存在すると、
+       彼らの <b>DevEUI</b> そして <b>デバイスプロファイル</b> クリック可能なリンクとして表示します。</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-app-devices.webp" type="image/webp"/>
+<img alt="ChirpStack application Devices tab listing a Loko device" height="832" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-app-devices.png" width="1680"/>
+</picture>
+<!-- 1 · Add device button -->
+<span class="hl" style="left:81.8%; top:36.5%; width:6.8%; height:4%;"></span>
+<span class="tag" style="left:81.8%; top:36.5%;">1</span>
+<!-- 2 · DevEUI link -->
+<span class="hl" style="left:39.4%; top:51%; width:9%; height:4.2%;"></span>
+<span class="tag" style="left:39.4%; top:51%;">2</span>
+<!-- 3 · Device profile link -->
+<span class="hl" style="left:64.8%; top:51%; width:9.5%; height:4.2%;"></span>
+<span class="tag" style="left:64.8%; top:51%;">3</span>
+</div>
+<figcaption>①デバイスの追加 ・②DevEUI（デバイスを開く） ・③デバイスプロファイル</figcaption>
+</figure>
+<p>クリック <b>デバイスの追加</b> Loko Air から詳細を入力し、
+       <b>提出する</b>:</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-add-device.webp" type="image/webp"/>
+<img alt="ChirpStack Add device form with name, Device EUI, Join EUI and device profile" height="845" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-add-device.png" width="1680"/>
+</picture>
+<!-- 1 · Name -->
+<span class="hl" style="left:20.8%; top:38.5%; width:76%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:38.5%;">1</span>
+<!-- 2 · Device EUI -->
+<span class="hl" style="left:20.8%; top:62.5%; width:37.8%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:62.5%;">2</span>
+<!-- 3 · Join EUI -->
+<span class="hl" style="left:60.4%; top:62.5%; width:37.8%; height:4%;"></span>
+<span class="tag" style="left:60.4%; top:62.5%;">3</span>
+<!-- 4 · Device profile -->
+<span class="hl" style="left:20.8%; top:73%; width:76%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:73%;">4</span>
+<!-- 5 · Submit -->
+<span class="hl" style="left:20.8%; top:90.5%; width:5.2%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:90.5%;">5</span>
+</div>
+<figcaption>① 名前 · ② デバイス EUI (DevEUI) · ③ EUI に参加 · ④ デバイス プロファイル · ⑤ 送信</figcaption>
+</figure>
+<ul class="fields">
+<li><b>名前</b> — フレンドリーな名前、例: <code>Loko1</code>.</li>
+<li><b>デバイス EUI (EUI64)</b> — <b>DevEUI</b> Loko Air デバイスから。</li>
+<li><b>EUI (EUI64) に参加する</b> — <b>JoinEUI / AppEUI</b> デバイスから。</li>
+<li><b>デバイスプロファイル</b> — ステップ 2 でプロファイルを選択します (<code>Generic-OTAA-EU868</code>）。</li>
+</ul>
+<div class="note warn">
+<span class="ic">🔑</span>
+<div class="bd"><b>次にアプリケーション キーが来ます。</b> プロファイルはOTAAを使用しているため、
+        送信後、ChirpStack は <b>OTAA キー</b> タブ。を入力（または貼り付け）します。
+        デバイスの <b>アプリケーションキー（AppKey）</b> そこで送信してください。</div>
+</div>
+<div class="note crit">
+<span class="ic">⚠️</span>
+<div class="bd"><b>すべてが物理デバイスと一致する必要があります。</b> の <b>DevEUI</b>,
+        <b>JoinEUI</b> そして <b>AppKey</b> 入力する内容は、programm で実行されたものと同じである必要があります
+        Loko Air — そうしないと、参加は警告なしに失敗します。ごとにこの手順を繰り返します
+        あなたが所有するトラッカー。</div>
+</div>
+<!-- ============================ STEP 5 ============================ -->
+<div class="step" id="step-5"><div class="num">5</div><h2>参加を確認し、フレームを監視します</h2></div>
+<p class="lead">アプリケーションのデバイスリストに戻り、デバイスの <b>DevEUI</b> に
+       それを開いてタブを探索します — <b>OTAA キー</b>, <b>アクティベーション</b>, <b>イベント</b>
+       そして <b>LoRaWAN フレーム</b>。フレーム ビューには、生の無線トラフィックがリアルタイムで表示されます。</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-lorawan-frames.webp" type="image/webp"/>
+<img alt="ChirpStack device LoRaWAN frames showing JoinRequest and JoinAccept" height="859" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-lorawan-frames.png" width="1680"/>
+</picture>
+<!-- 1 · LoRaWAN frames tab -->
+<span class="hl" style="left:57.5%; top:12.5%; width:8%; height:4.5%;"></span>
+<span class="tag" style="left:57.5%; top:12.5%;">1</span>
+<!-- 2 · JoinRequest / JoinAccept sequence -->
+<span class="hl green" style="left:34%; top:44%; width:20%; height:11%;"></span>
+<span class="tag green" style="left:34%; top:44%;">2</span>
+</div>
+<figcaption>① LoRaWAN フレームタブ・② JoinRequest → JoinAccept の順にデータフレーム</figcaption>
+</figure>
+<div class="note">
+<span class="ic">✅</span>
+<div class="bd">正常なデバイスでは、 <b>参加リクエスト</b> 続いて
+        <b>参加同意する</b>、 それから <b>未確認データアップ</b> / <b>未確認データダウン</b>
+        フレーム — それぞれに次の内容がリストされています <b>DevEUI</b> そして <b>ゲートウェイ ID</b> 受け取ったのは
+        彼ら。ただ見ることができれば <b>参加リクエスト</b> 繰り返しますが、DevEUI を再確認してください /
+        JoinEUI / AppKey およびゲートウェイがオンラインであること。</div>
+</div>
+<!-- ============================ STEP 6 ============================ -->
+<div class="step" id="step-6"><div class="num">6</div><h2>測定値をゲージとして視覚化する</h2></div>
+<p class="lead">デコードされたデータが流れると（Cayenne LPP コーデックのおかげで）、
+       開く <b>テナント → デバイス プロファイル → プロファイル → 測定</b>。と
+       <b>測定キーを自動検出</b> オンでは、ChirpStack が持つキーをリストします。
+       見られる — など <code>Battery_Voltage</code>, <code>gpsLocation_1_latitude</code> そして
+       <code>gpsLocation_1_longitude</code> — 気になるものを設定してください <b>ゲージ</b>.</p>
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan-chirpstack/chirpstack-measurements.webp" type="image/webp"/>
+<img alt="ChirpStack device profile Measurements tab with keys set to Gauge" height="854" loading="lazy" src="/images/lorawan-chirpstack/chirpstack-measurements.png" width="1680"/>
+</picture>
+<!-- 1 · Measurements tab -->
+<span class="hl" style="left:69.5%; top:20%; width:8%; height:4.5%;"></span>
+<span class="tag" style="left:69.5%; top:20%;">1</span>
+<!-- 2 · Auto-detect toggle -->
+<span class="hl" style="left:20.8%; top:59.5%; width:4.5%; height:5.5%;"></span>
+<span class="tag" style="left:20.8%; top:59.5%;">2</span>
+<!-- 3 · a Gauge selector -->
+<span class="hl" style="left:40.8%; top:72.5%; width:18.5%; height:4.5%;"></span>
+<span class="tag" style="left:40.8%; top:72.5%;">3</span>
+</div>
+<figcaption>① 測定タブ · ② 自動検出キー · ③ 種類をゲージに設定</figcaption>
+</figure>
+<div class="note">
+<span class="ic">📊</span>
+<div class="bd">右を選択してください <b>親切</b> 各キーについて: <b>ゲージ</b> 読書用
+        電圧、温度、位置など。 <b>カウンタ</b> 継続的に増加する場合
+        カウンター。 <b>絶対</b> 各アップリンクでリセットされるカウンタの場合。 <b>弦</b> のために
+        テキストまたはブール値。友好的にしてあげてください <b>測定名</b>、 クリック
+        <b>提出する</b>、値はデバイスのゲージやグラフとしてレンダリングされます。
+        <b>ダッシュボード</b>.</div>
+</div>
+<!-- ============================ CHECKLIST ============================ -->
+<div class="checklist">
+<h3>クイックチェックリスト</h3>
+<ul>
+<li><span class="box">☐</span><div>ゲートウェイが追加され表示されています <b>緑 / オンライン</b></div></li>
+<li><span class="box">☐</span><div>作成されたデバイス プロファイル — リージョン、MAC バージョン、 <b>OTAA搭載</b>, <b>Cayenne LPP</b> コーデック</div></li>
+<li><span class="box">☐</span><div>アプリケーションが作成されました</div></li>
+<li><span class="box">☐</span><div>マッチングして追加されたデバイス <b>DevEUI</b> + <b>JoinEUI</b></div></li>
+<li><span class="box">☐</span><div><b>アプリケーションキー</b> OTAA キータブに入力</div></li>
+<li><span class="box">☐</span><div><b>参加リクエスト</b> / <b>参加同意する</b> LoRaWAN フレームの下にデータ フレームが表示されます</div></li>
+<li><span class="box">☐</span><div>測定値の設定 <b>ゲージ</b> データを視覚化する</div></li>
+</ul>
+</div>
+<!-- ============================ DONE ============================ -->
+<div class="done">
+<h2>🎉 準備完了です!</h2>
+<p>ゲートウェイがオンラインになり、Loko Air デバイスが接続され、デコードされました
+         測定値はゲージとして視覚化されます。ここからさらにデバイスを追加できます。
+         統合を連携してデータをプッシュしたり、その上にダッシュボードを構築したりできます。
+         ChirpStack API。</p>
+</div>
+<a class="next-guide" data-langlink="" href="/lorawan/">
+<span class="eyebrow">ホスト型ネットワークをご希望ですか?</span>
+<span class="title">Loko を The Things Network に接続 →</span>
+<span class="sub">4 ステップの TTN セットアップ — アプリケーションの作成、デバイスの登録、API キーの生成、Loko アプリからの接続。</span>
+</a>
+<div class="note">
+<span class="ic">💬</span>
+<div class="bd"><b>助けが必要ですか?</b> セットアップ中に問題が発生した場合は、次の点を確認してください。
+        <a href="/#faq">よくある質問セクション</a> またはサポートチームにお問い合わせください — 私たちがお手伝いいたします
+        つながります。</div>
+</div>
+</div>
+</main>
+<div id="site-footer"></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
