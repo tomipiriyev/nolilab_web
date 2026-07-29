@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/partials.css"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LokoHUB — Off-Grid Solar LoRaWAN Gateway &amp; Sensor Station | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="LokoHUB is a solar-powered, all-weather LoRa station that collects and visualises data from sensors up to 40 km away — no mains power, no network infrastructure. ESP32-S3 + SX1302 8-channel gateway, 4G LTE backhaul, open hardware and firmware. Launching on Crowd Supply." name="description"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link href="https://www.nolilab.com/lokohub/" rel="canonical"/>
+<link href="https://www.nolilab.com/lokohub/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/lokohub/" hreflang="x-default" rel="alternate"/>
+<meta content="website" property="og:type"/>
+<meta content="LokoHUB — Off-Grid Solar LoRaWAN Gateway &amp; Sensor Station" property="og:title"/>
+<meta content="An off-grid, all-weather station that collects and visualises data from sensors up to 40 km away. Solar powered, rugged, open source. Launching on Crowd Supply." property="og:description"/>
+<meta content="https://www.nolilab.com/lokohub/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/lokohub/lokohub-station-solar-panel.jpg" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="LokoHUB — Off-Grid Solar LoRaWAN Gateway &amp; Sensor Station" name="twitter:title"/>
+<meta content="An off-grid, all-weather station that collects and visualises data from sensors up to 40 km away. Solar powered, rugged, open source." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/lokohub/lokohub-station-solar-panel.jpg" name="twitter:image"/>
+<style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --border: #d0d7de;
+      --font-mono: 'IBM Plex Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+      --font-sans: 'IBM Plex Sans', 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* ---------- layout ---------- */
+    .hub-container { padding: var(--spacing-xl) 0; overflow-x: hidden; }
+
+    .hub-content {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+
+    .hub-section { margin-top: var(--spacing-xl); }
+
+    .hub-section > h2 {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .hub-section > p { color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+
+    .hub-content a { color: var(--accent); text-decoration: none; }
+    .hub-content a:hover { text-decoration: underline; }
+
+    .hub-content b, .hub-content strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ---------- hero ---------- */
+    .hub-hero {
+      max-width: 1120px;
+      margin: 0 auto var(--spacing-xl);
+      padding: 0 var(--spacing-md) var(--spacing-lg);
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hub-hero .kicker {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      letter-spacing: 3px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .hub-hero h1 {
+      font-family: var(--font-mono);
+      font-size: 2.75rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .hub-hero .lede {
+      color: var(--text-secondary);
+      font-size: 1.1875rem;
+      max-width: 720px;
+      margin: 0 auto var(--spacing-lg);
+    }
+
+    /* ---------- status badge + CTA ---------- */
+    .hub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      margin-bottom: var(--spacing-md);
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .hub-badge .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(35,134,54,0.18);
+    }
+
+    .hub-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      justify-content: center;
+    }
+
+    .hub-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-xs);
+      padding: 0.8rem 1.6rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hub-btn-primary {
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      color: #fff;
+    }
+    .hub-btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      box-shadow: var(--shadow-md);
+      text-decoration: none;
+    }
+    .hub-content a.hub-btn-primary { color: #fff; }
+
+    .hub-btn-secondary {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+    .hub-btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .hub-content a.hub-btn-secondary { color: var(--text-primary); }
+    .hub-content a.hub-btn-secondary:hover { color: var(--accent); }
+
+    .hub-cta-note {
+      margin-top: var(--spacing-sm);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    /* ---------- figures ---------- */
+    .hub-figure { margin: var(--spacing-lg) 0; }
+
+    .hub-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-secondary);
+    }
+
+    .hub-figure figcaption {
+      margin-top: var(--spacing-xs);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    /* ---------- stat strip ---------- */
+    .hub-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px;
+      margin: var(--spacing-lg) 0 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .hub-stat {
+      padding: var(--spacing-md);
+      background: var(--bg-primary);
+      text-align: center;
+    }
+
+    .hub-stat .val {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+
+    .hub-stat .lbl {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    /* ---------- use-case cards ---------- */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(238px, 1fr));
+      gap: var(--spacing-md);
+    }
+
+    .hub-card {
+      padding: var(--spacing-md);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-primary);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hub-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+
+    .hub-card h3 {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .hub-card p { font-size: 0.9375rem; color: var(--text-secondary); }
+
+    .hub-card .ic { font-size: 22px; line-height: 1.2; display: block; margin-bottom: var(--spacing-xs); }
+
+    /* ---------- spec table ---------- */
+    .hub-specs {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .hub-specs h3 {
+      padding: 0.7rem var(--spacing-md);
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .hub-specs h3:not(:first-child) { border-top: 1px solid var(--border); }
+
+    .spec-row {
+      display: flex;
+      gap: var(--spacing-md);
+      padding: 0.75rem var(--spacing-md);
+      font-size: 0.9375rem;
+    }
+
+    .spec-row:not(:last-child) { border-bottom: 1px solid var(--border); }
+
+    .spec-row .k {
+      flex: 0 0 210px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .spec-row .v { color: var(--text-secondary); }
+
+    .spec-row .v ul { list-style: none; }
+    .spec-row .v li { padding: 1px 0; }
+    .spec-row .v li::before { content: "· "; color: var(--accent); }
+
+    /* ---------- software feature list ---------- */
+    .hub-list { list-style: none; }
+    .hub-list li {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    .hub-list li:not(:last-child) { border-bottom: 1px solid var(--border); }
+    .hub-list li::before { content: "✓"; color: var(--accent); font-weight: 700; flex: 0 0 auto; }
+
+    /* ---------- notes / licence blocks ---------- */
+    .hub-note {
+      display: flex;
+      gap: 14px;
+      margin-top: var(--spacing-md);
+      padding: var(--spacing-md);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-md);
+      background: rgba(35, 134, 54, 0.06);
+    }
+    .hub-note .ic { flex: 0 0 auto; font-size: 20px; line-height: 1.3; }
+    .hub-note .bd { font-size: 0.9375rem; color: var(--text-secondary); }
+    .hub-note .bd b { color: var(--text-primary); }
+
+    /* ---------- FAQ ---------- */
+    .hub-faq details {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-xs);
+      background: var(--bg-primary);
+    }
+    .hub-faq summary {
+      cursor: pointer;
+      padding: 0.9rem var(--spacing-md);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      list-style: none;
+    }
+    .hub-faq summary::-webkit-details-marker { display: none; }
+    .hub-faq summary::after { content: "+"; float: right; color: var(--accent); font-family: var(--font-mono); }
+    .hub-faq details[open] summary::after { content: "−"; }
+    .hub-faq details[open] summary { border-bottom: 1px solid var(--border); }
+    .hub-faq .ans {
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+    }
+
+    /* ---------- closing CTA ---------- */
+    .hub-final {
+      margin-top: var(--spacing-xl);
+      padding: var(--spacing-xl) var(--spacing-md);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-secondary);
+      text-align: center;
+    }
+    .hub-final h2 {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+    .hub-final p {
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin: 0 auto var(--spacing-lg);
+    }
+
+    @media (max-width: 720px) {
+      .hub-container { padding: var(--spacing-lg) 0; }
+      .hub-hero h1 { font-size: 1.875rem; }
+      .hub-hero .lede { font-size: 1rem; }
+      .spec-row { flex-direction: column; gap: 2px; }
+      .spec-row .k { flex: none; }
+      .hub-btn { width: 100%; }
+    }
+  </style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "LokoHUB",
+  "alternateName": "LokoHUB Station",
+  "url": "https://www.nolilab.com/lokohub/",
+  "image": "https://www.nolilab.com/images/lokohub/lokohub-station-solar-panel.jpg",
+  "description": "LokoHUB is an off-grid, all-weather data collection and visualisation station. A solar-powered, rugged hub gathers data from sensors up to 40 km away over LoRa and works independently of mains electricity and network infrastructure.",
+  "category": "LoRaWAN gateway / IoT sensor station",
+  "brand": { "@type": "Brand", "name": "nolilab" },
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Tallinn", "addressCountry": "EE" }
+  },
+  "releaseDate": "2026",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.crowdsupply.com/nolilab/lokohub",
+    "availability": "https://schema.org/PreOrder",
+    "seller": { "@type": "Organization", "name": "Crowd Supply" }
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Main processor", "value": "ESP32-S3" },
+    { "@type": "PropertyValue", "name": "LoRa gateway", "value": "Semtech SX1302, 8-channel" },
+    { "@type": "PropertyValue", "name": "Cellular module", "value": "SIM7600G-H (4G LTE / GNSS)" },
+    { "@type": "PropertyValue", "name": "Sensor range", "value": "Up to 40 km" },
+    { "@type": "PropertyValue", "name": "Power", "value": "Solar 5–34 V, supercapacitor storage" },
+    { "@type": "PropertyValue", "name": "Weight", "value": "2 kg" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How far away can LokoHUB collect sensor data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A single LokoHUB station collects data from sensors up to 40 km away using its 8-channel Semtech SX1302 LoRa gateway. Real range depends on terrain, antenna height and line of sight." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does LokoHUB need mains power or an internet connection?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. LokoHUB runs on solar power with supercapacitor storage and backhauls over 4G LTE via its SIM7600G-H module. It works independently of electricity and fixed network infrastructure, and can log to an on-board SD card when there is no cellular coverage." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is LokoHUB open source?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Hardware design files (schematics, PCB layouts, enclosure) are released under CC BY-NC-SA 4.0. The firmware and self-hosted dashboard are open source under PolyForm Noncommercial 1.0.0. Commercial use requires a separate agreement, and the managed cloud version is closed source." }
+    },
+    {
+      "@type": "Question",
+      "name": "When can I buy LokoHUB?",
+      "acceptedAnswer": { "@type": "Answer", "text": "LokoHUB is launching on Crowd Supply. The campaign page is live and you can subscribe there to be notified the moment it goes on sale." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I run several LokoHUB stations together?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The software supports multi-station deployment and aggregates data from all stations into one dashboard." }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.nolilab.com" },
+    { "@type": "ListItem", "position": 2, "name": "LokoHUB", "item": "https://www.nolilab.com/lokohub/" }
+  ]
+}
+</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="hub-container">
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hub-hero">
+    <div class="kicker">nolilab · Off-grid IoT</div>
+    <h1>LokoHUB</h1>
+    <p class="lede">An off-grid, all-weather station that collects and visualises data
+      from sensors up to 40&nbsp;km away — with no mains power and no network
+      infrastructure of any kind.</p>
+
+    <div class="hub-badge"><span class="dot"></span>Launching soon on Crowd Supply</div>
+
+    <div class="hub-cta-row">
+      <a class="hub-btn hub-btn-primary" href="https://www.crowdsupply.com/nolilab/lokohub" rel="noopener" target="_blank">Coming Soon on Crowd Supply →</a>
+      <a class="hub-btn hub-btn-secondary" href="#specifications">See the specs</a>
+    </div>
+    <p class="hub-cta-note">Subscribe on the campaign page to be notified the moment LokoHUB goes on sale.</p>
+  </header>
+
+  <div class="hub-content">
+
+    <figure class="hub-figure">
+      <picture>
+        <source srcset="/images/lokohub/lokohub-station-solar-panel.avif" type="image/avif"/>
+        <source srcset="/images/lokohub/lokohub-station-solar-panel.webp" type="image/webp"/>
+        <img alt="LokoHUB station open on a pole mount, showing the internal boards and supercapacitor bank above its solar panel" height="900" src="/images/lokohub/lokohub-station-solar-panel.jpg" width="1600"/>
+      </picture>
+      <figcaption>One pole, one solar panel, one station — everything needed to run a sensor network with no grid connection.</figcaption>
+    </figure>
+
+    <div class="hub-stats">
+      <div class="hub-stat"><span class="val">40 km</span><span class="lbl">Sensor range</span></div>
+      <div class="hub-stat"><span class="val">8 ch</span><span class="lbl">LoRa gateway (SX1302)</span></div>
+      <div class="hub-stat"><span class="val">Solar</span><span class="lbl">Off-grid power, 5–34 V</span></div>
+      <div class="hub-stat"><span class="val">4G LTE</span><span class="lbl">Cellular backhaul + GNSS</span></div>
+      <div class="hub-stat"><span class="val">2 kg</span><span class="lbl">All-weather enclosure</span></div>
+    </div>
+
+    <!-- ============================ WHAT IT IS ============================ -->
+    <section class="hub-section">
+      <h2>What LokoHUB is</h2>
+      <p><b>LokoHUB</b> is an off-grid, all-weather data collection and visualisation system
+        designed for remote and challenging environments. The LokoHUB Station is a
+        solar-powered, rugged hub that gathers data from multiple sensors up to 40&nbsp;km away
+        over LoRa. It works completely independently of electricity and network
+        infrastructure, which makes it suited to agriculture, environmental monitoring,
+        infrastructure management and security applications.</p>
+      <p>What sets LokoHUB apart is the combination of long-range capability, extreme
+        durability and open-source software — giving you full control to adapt the system to
+        your own sensors and workflows. Whether it is deployed in deserts, mountains or rural
+        farmland, LokoHUB delivers centralised insight from areas other systems cannot reach.</p>
+    </section>
+
+    <!-- ============================ USE CASES ============================ -->
+    <section class="hub-section">
+      <h2>Capture data in the harshest conditions</h2>
+      <p>LokoHUB brings reliable data collection to places where traditional infrastructure
+        simply cannot reach. On a large remote farm, monitoring soil moisture, weather and
+        livestock movement is close to impossible without power or coverage. A single
+        solar-powered station gathers data from sensors across a 40&nbsp;km radius — giving
+        actionable insight to improve yields, manage water efficiently and track animals in
+        real time.</p>
+
+      <div class="hub-grid">
+        <article class="hub-card">
+          <span class="ic">🌾</span>
+          <h3>Agriculture</h3>
+          <p>Soil moisture, weather stations, irrigation valves and livestock trackers across
+            a whole estate, aggregated at one station.</p>
+        </article>
+        <article class="hub-card">
+          <span class="ic">🏔️</span>
+          <h3>Environmental monitoring</h3>
+          <p>Deploy in mountains, forests or deserts to track climate and wildlife data
+            without worrying about battery swaps or connectivity.</p>
+        </article>
+        <article class="hub-card">
+          <span class="ic">🚨</span>
+          <h3>Disaster response</h3>
+          <p>Monitor remote areas after floods or fires so emergency services get faster,
+            better-informed situational awareness.</p>
+        </article>
+        <article class="hub-card">
+          <span class="ic">🏗️</span>
+          <h3>Infrastructure &amp; security</h3>
+          <p>Pipelines, water systems, remote sites and perimeters — continuous telemetry
+            from assets far outside any network footprint.</p>
+        </article>
+      </div>
+
+      <figure class="hub-figure">
+        <picture>
+          <source srcset="/images/lokohub/lokohub-field-deployment.avif" type="image/avif"/>
+          <source srcset="/images/lokohub/lokohub-field-deployment.webp" type="image/webp"/>
+          <img alt="Two LokoHUB deployments side by side: a mast-mounted station on a city rooftop, and a twin-solar-panel station in a snow-covered ploughed field" height="1200" loading="lazy" src="/images/lokohub/lokohub-field-deployment.jpg" width="1600"/>
+        </picture>
+        <figcaption>The same station on an urban rooftop and in a snowbound field — built for extreme temperatures, rain, dust and snow.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============================ HARDWARE ============================ -->
+    <section class="hub-section">
+      <h2>Built to stay outdoors</h2>
+      <p>Inside the sealed enclosure sits a supercapacitor bank rather than a conventional
+        battery pack, an ESP32-S3 main board, the SX1302 LoRa concentrator and a SIM7600G-H
+        cellular modem. Supercapacitors tolerate the wide temperature swings and constant
+        charge cycling that kill lithium cells in outdoor deployments, so the station keeps
+        running through cold nights and long overcast stretches.</p>
+
+      <figure class="hub-figure">
+        <picture>
+          <source srcset="/images/lokohub/lokohub-supercapacitor-bank.avif" type="image/avif"/>
+          <source srcset="/images/lokohub/lokohub-supercapacitor-bank.webp" type="image/webp"/>
+          <img alt="Interior of the LokoHUB enclosure showing the supercapacitor bank on the left and the ESP32-S3, LoRa concentrator and cellular boards on the right" height="900" loading="lazy" src="/images/lokohub/lokohub-supercapacitor-bank.jpg" width="1600"/>
+        </picture>
+        <figcaption>Supercapacitor energy storage alongside the ESP32-S3, SX1302 LoRa concentrator and SIM7600G-H modem.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============================ SOFTWARE ============================ -->
+    <section class="hub-section">
+      <h2>One dashboard for every station</h2>
+      <p>Stations report into a single web dashboard for real-time monitoring and historical
+        data visualisation — a live map of stations and sensors, uptime and uplink status,
+        alerts, and reports. Run it as a managed cloud service or host the whole stack
+        yourself.</p>
+
+      <figure class="hub-figure">
+        <picture>
+          <source srcset="/images/lokohub/lokohub-dashboard-map.avif" type="image/avif"/>
+          <source srcset="/images/lokohub/lokohub-dashboard-map.webp" type="image/webp"/>
+          <img alt="LokoHUB web dashboard showing a satellite world map with station and sensor overlays, a network overview panel with uptime and uplink status, and a live alerts panel" height="902" loading="lazy" src="/images/lokohub/lokohub-dashboard-map.jpg" width="1600"/>
+        </picture>
+        <figcaption>The LokoHUB dashboard — stations, sensors, coverage zones and movement trails on one live map.</figcaption>
+      </figure>
+
+      <ul class="hub-list">
+        <li>Centralised dashboard for real-time monitoring and historical data visualisation.</li>
+        <li>Open-source platform — fully configurable for custom workflows and sensor types.</li>
+        <li>Multi-station deployment with data aggregation across the whole fleet.</li>
+        <li>Firmware optimised for low-power, long-term operation in remote areas.</li>
+        <li>Local SD-card logging so no data is lost while the station is out of cellular coverage.</li>
+      </ul>
+
+      <div class="hub-note">
+        <span class="ic">🖥️</span>
+        <div class="bd"><b>Already have a station?</b> The dashboard lives at
+          <a href="https://lokohub.nolilab.com" rel="noopener" target="_blank">lokohub.nolilab.com</a>.</div>
+      </div>
+    </section>
+
+    <!-- ============================ SPECIFICATIONS ============================ -->
+    <section class="hub-section" id="specifications">
+      <h2>Features &amp; specifications</h2>
+
+      <div class="hub-specs">
+        <h3>Core electronics</h3>
+        <div class="spec-row"><span class="k">Main processor</span><span class="v">ESP32-S3</span></div>
+        <div class="spec-row"><span class="k">LoRa gateway</span><span class="v">Semtech SX1302 chipset — 8-channel LoRa gateway</span></div>
+        <div class="spec-row"><span class="k">Cellular module</span><span class="v">SIM7600G-H (4G LTE / GNSS)</span></div>
+        <div class="spec-row"><span class="k">Sensor range</span><span class="v">Up to 40 km, line-of-sight dependent</span></div>
+
+        <h3>Ports</h3>
+        <div class="spec-row"><span class="k">Power in</span><span class="v">
+          <ul>
+            <li>Solar panel input, 5–34 V</li>
+            <li>External DC input, 5–34 V</li>
+            <li>Battery port (supports 4.2 V supercapacitors)</li>
+          </ul></span></div>
+        <div class="spec-row"><span class="k">Data &amp; storage</span><span class="v">
+          <ul>
+            <li>USB Type-C — ESP32-S3 main MCU</li>
+            <li>USB Type-C — SIM7600G-H module</li>
+            <li>SD card slot for local data storage</li>
+            <li>SIM card slot</li>
+          </ul></span></div>
+        <div class="spec-row"><span class="k">Antenna connectors</span><span class="v">
+          <ul>
+            <li>GNSS</li>
+            <li>LoRa</li>
+            <li>GSM / LTE</li>
+            <li>2.4 GHz Wi-Fi</li>
+          </ul></span></div>
+
+        <h3>Physical</h3>
+        <div class="spec-row"><span class="k">Dimensions</span><span class="v">35 × 25 × 20 cm (13.8 × 9.8 × 7.9 in)</span></div>
+        <div class="spec-row"><span class="k">Weight</span><span class="v">2 kg (4.4 lbs)</span></div>
+        <div class="spec-row"><span class="k">Environment</span><span class="v">All-weather enclosure — rated for extreme temperatures, rain, dust and snow</span></div>
+      </div>
+    </section>
+
+    <!-- ============================ OPEN SOURCE ============================ -->
+    <section class="hub-section">
+      <h2>Open source</h2>
+      <p>LokoHUB is fully open source — both hardware and software.</p>
+
+      <div class="hub-specs">
+        <h3>Licensing</h3>
+        <div class="spec-row"><span class="k">Hardware</span><span class="v">Design files (schematics, PCB layouts, enclosure) under
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener nofollow" target="_blank">CC BY-NC-SA 4.0</a>.
+          Free to study, modify and build for personal and non-commercial use with attribution and share-alike. Commercial use requires a separate agreement.</span></div>
+        <div class="spec-row"><span class="k">Software — self-hosted</span><span class="v">Firmware and the self-hosted dashboard under
+          <a href="https://polyformproject.org/licenses/noncommercial/1.0.0/" rel="noopener nofollow" target="_blank">PolyForm Noncommercial 1.0.0</a>.
+          Install, modify and run the full stack on your own infrastructure at no cost for non-commercial use.</span></div>
+        <div class="spec-row"><span class="k">Software — cloud</span><span class="v">A managed cloud version with a web-based administration panel is available as a hosted service. This version is closed source.</span></div>
+      </div>
+
+      <div class="hub-note">
+        <span class="ic">📦</span>
+        <div class="bd"><b>All hardware design files, firmware and self-hosted software</b> are at
+          <a href="https://github.com/tomipiriyev/LokoHUB" rel="noopener" target="_blank">github.com/tomipiriyev/LokoHUB</a>.</div>
+      </div>
+    </section>
+
+    <!-- ============================ RELATED ============================ -->
+    <section class="hub-section">
+      <h2>Part of the Loko ecosystem</h2>
+      <p>LokoHUB is the station side of the same LoRa network the Loko trackers run on. If
+        you are looking for the field devices rather than the hub, start here:</p>
+      <div class="hub-grid">
+        <article class="hub-card">
+          <h3>Loko GPS Tracker</h3>
+          <p>Long-range GPS tracking with no SIM card and no subscription —
+            <a href="/lora-gps-tracker/">see the tracker</a>.</p>
+        </article>
+        <article class="hub-card">
+          <h3>LoRaWAN integration</h3>
+          <p>Connect Loko devices to <a href="/lorawan/">The Things Network</a> or a
+            self-hosted <a href="/chirpstack/">ChirpStack</a> server.</p>
+        </article>
+        <article class="hub-card">
+          <h3>Specifications</h3>
+          <p>Radio, battery and enclosure figures for the tracker hardware on the
+            <a href="/specifications/">specifications page</a>.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================ FAQ ============================ -->
+    <section class="hub-section hub-faq">
+      <h2>Frequently asked questions</h2>
+
+      <details>
+        <summary>How far away can LokoHUB collect sensor data?</summary>
+        <div class="ans">A single LokoHUB station collects data from sensors up to 40 km away
+          using its 8-channel Semtech SX1302 LoRa gateway. Real-world range depends on terrain,
+          antenna height and line of sight.</div>
+      </details>
+
+      <details>
+        <summary>Does LokoHUB need mains power or an internet connection?</summary>
+        <div class="ans">No. LokoHUB runs on solar power with supercapacitor storage and
+          backhauls over 4G LTE via its SIM7600G-H module. It works independently of
+          electricity and fixed network infrastructure, and logs to an on-board SD card when
+          there is no cellular coverage.</div>
+      </details>
+
+      <details>
+        <summary>Is LokoHUB open source?</summary>
+        <div class="ans">Yes. Hardware design files are released under CC BY-NC-SA 4.0, and
+          the firmware and self-hosted dashboard under PolyForm Noncommercial 1.0.0.
+          Commercial use requires a separate agreement; the managed cloud version is closed
+          source.</div>
+      </details>
+
+      <details>
+        <summary>Can I run several LokoHUB stations together?</summary>
+        <div class="ans">Yes. The software supports multi-station deployment and aggregates
+          data from every station into a single dashboard.</div>
+      </details>
+
+      <details>
+        <summary>When can I buy LokoHUB?</summary>
+        <div class="ans">LokoHUB is launching on Crowd Supply. The campaign page is live —
+          subscribe there and you will be notified the moment it goes on sale.</div>
+      </details>
+    </section>
+
+    <!-- ============================ FINAL CTA ============================ -->
+    <section class="hub-final">
+      <h2>Be first to get a LokoHUB</h2>
+      <p>The Crowd Supply campaign is live and launching soon. Sign up there for launch
+        notification and project updates — we only send useful ones, and you can unsubscribe
+        at any time.</p>
+      <div class="hub-cta-row">
+        <a class="hub-btn hub-btn-primary" href="https://www.crowdsupply.com/nolilab/lokohub" rel="noopener" target="_blank">Coming Soon on Crowd Supply →</a>
+        <a class="hub-btn hub-btn-secondary" href="/contact/">Talk to us about a deployment</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+<div id="site-footer"></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
