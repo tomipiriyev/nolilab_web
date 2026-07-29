@@ -79,9 +79,9 @@
     .hub-section { margin-top: var(--spacing-xl); }
 
     .hub-section > h2 {
-      font-family: var(--font-mono);
+      font-family: var(--font-sans);
       font-size: 1.5rem;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: -0.01em;
       margin-bottom: var(--spacing-sm);
     }
@@ -113,18 +113,19 @@
     }
 
     .hub-hero h1 {
-      font-family: var(--font-mono);
-      font-size: 2.75rem;
-      font-weight: 700;
-      line-height: 1.1;
+      font-family: var(--font-sans);
+      font-size: 2.5rem;
+      font-weight: 500;
+      line-height: 1.15;
       letter-spacing: -0.02em;
+      color: var(--text-primary);
       margin-bottom: var(--spacing-md);
     }
 
     .hub-hero .lede {
       color: var(--text-secondary);
-      font-size: 1.1875rem;
-      max-width: 720px;
+      font-size: 1.125rem;
+      max-width: 640px;
       margin: 0 auto var(--spacing-lg);
     }
 
@@ -277,9 +278,9 @@
     .hub-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
 
     .hub-card h3 {
-      font-family: var(--font-mono);
+      font-family: var(--font-sans);
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 600;
       margin-bottom: var(--spacing-xs);
     }
 
@@ -341,6 +342,24 @@
     .hub-list li:not(:last-child) { border-bottom: 1px solid var(--border); }
     .hub-list li::before { content: "✓"; color: var(--accent); font-weight: 700; flex: 0 0 auto; }
 
+    /* ---------- inline CTA band ---------- */
+    .hub-inline-cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-secondary);
+    }
+    .hub-inline-cta .txt { display: flex; flex-direction: column; }
+    .hub-inline-cta .txt b { font-size: 1rem; }
+    .hub-inline-cta .txt span { font-size: 0.9375rem; color: var(--text-secondary); }
+    .hub-inline-cta .hub-btn { flex: 0 0 auto; }
+
     /* ---------- notes / licence blocks ---------- */
     .hub-note {
       display: flex;
@@ -390,9 +409,9 @@
       text-align: center;
     }
     .hub-final h2 {
-      font-family: var(--font-mono);
+      font-family: var(--font-sans);
       font-size: 1.5rem;
-      font-weight: 700;
+      font-weight: 600;
       margin-bottom: var(--spacing-xs);
     }
     .hub-final p {
@@ -403,7 +422,7 @@
 
     @media (max-width: 720px) {
       .hub-container { padding: var(--spacing-lg) 0; }
-      .hub-hero h1 { font-size: 1.875rem; }
+      .hub-hero h1 { font-size: 2rem; }
       .hub-hero .lede { font-size: 1rem; }
       .spec-row { flex-direction: column; gap: 2px; }
       .spec-row .k { flex: none; }
@@ -645,10 +664,12 @@
         <li>Local SD-card logging so no data is lost while the station is out of cellular coverage.</li>
       </ul>
 
-      <div class="hub-note">
-        <span class="ic">🖥️</span>
-        <div class="bd"><b>Already have a station?</b> The dashboard lives at
-          <a href="https://lokohub.nolilab.com" rel="noopener" target="_blank">lokohub.nolilab.com</a>.</div>
+      <div class="hub-inline-cta">
+        <div class="txt">
+          <b>Already have a station?</b>
+          <span>Sign in to the LokoHUB dashboard to see your network live.</span>
+        </div>
+        <a class="hub-btn hub-btn-primary" href="https://lokohub.nolilab.com" rel="noopener" target="_blank">Open the dashboard →</a>
       </div>
     </section>
 
