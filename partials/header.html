@@ -4,6 +4,20 @@
    Cache-Control immutable/1-year, so a returning visitor would get this partial's
    new markup with a year-old stylesheet. Partials are max-age=0, so markup and
    styles always ship together. */
+/* single-row nav — links never wrap onto a second line. Gaps and the side margin
+   shrink with the viewport so all 11 items stay on one row; below 1200px there
+   isn't room for them at a readable size — even in Russian, the wordiest of the
+   six languages — so the slide-out menu takes over there. No overflow:hidden on
+   this strip: it would clip the LoRaWAN submenu. */
+.nav-links {
+  flex-wrap:nowrap;
+  margin-left:clamp(1rem,2.2vw,3rem);
+  gap:clamp(.6rem,1.2vw,2rem);
+}
+.nav-link {
+  white-space:nowrap;
+  flex:0 0 auto;
+}
 /* nav dropdown — parent link stays clickable, submenu opens on hover/focus */
 .nav-dropdown {
   position:relative;
@@ -66,7 +80,32 @@
 .nav-sublink:hover {
   background:var(--bg-secondary,#f6f8fa);
 }
-@media(max-width:768px){
+@media(max-width:1200px){
+  /* other stylesheets switch to the slide-out menu at 768px; raised to 1200px
+     here because the one-row nav runs out of room well before that — Russian
+     nav labels need the full 1200px container. */
+  .mobile-menu-toggle{display:flex}
+  .nav-links{position:fixed;top:0;left:-100%;width:80%;max-width:300px;height:100vh;
+  margin-left:0;
+  gap:0;
+  padding:80px var(--spacing-md,1.5rem) var(--spacing-md,1.5rem);
+  background:var(--bg-primary,#fff);
+  flex-direction:column;
+  align-items:stretch;
+  box-shadow:var(--shadow-lg,0 10px 15px rgba(0,0,0,.12));
+  transition:left .3s ease;
+  z-index:1000;
+  overflow-y:auto;
+  border-right:1px solid var(--border,#d0d7de)}
+  .nav-links.active{left:0}
+  .nav-link{width:100%;padding:var(--spacing-md,1.5rem);
+  border-bottom:1px solid var(--border,#d0d7de);
+  text-align:left;
+  font-size:1rem}
+  body.menu-open{overflow:hidden}
+  body.menu-open::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.5);
+  z-index:999}
   /* dropdown flattens into an indented group inside the slide-out menu */
   .nav-dropdown{display:block;width:100%}
   .nav-caret{display:none}
@@ -85,7 +124,7 @@
 </style>
   <div class="container nav-container">
     <a href="/" class="logo">nolilab</a>
-    <div class="nav-links" style="flex: 0 1 auto; margin-left: 3rem;">
+    <div class="nav-links">
       <a href="/#shop" class="nav-link" data-i18n="shop">Shop</a>
       <a href="/specifications/" class="nav-link" data-i18n="specs">Specs</a>
       <a href="/software/" class="nav-link" data-i18n="software">Software</a>

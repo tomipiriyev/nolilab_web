@@ -26,17 +26,23 @@ header {
   text-decoration:none;
   flex-shrink:0;
 }
+/* Nav is a single row at every width — it never wraps to a second line.
+   Gaps flex with the viewport; below 1200px the slide-out menu takes over.
+   (partials/header.html carries the same rules inline so returning visitors
+   holding a year-cached copy of this file still get a one-row header.) */
 .nav-links {
   display:flex;
-  gap:var(--spacing-lg,2rem);
+  gap:clamp(.6rem,1.2vw,2rem);
+  margin-left:clamp(1rem,2.2vw,3rem);
   align-items:center;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
 }
 .nav-link {
   color:var(--text-secondary,#57606a);
   text-decoration:none;
   font-weight:500;
   font-size:.875rem;
+  white-space:nowrap;
   transition:color .2s ease;
 }
 .nav-link:hover {
@@ -128,7 +134,8 @@ header {
 .mobile-menu-toggle.active span:nth-child(3) {
   transform:rotate(-45deg) translate(7px,-6px);
 }
-@media(max-width:768px) {
+/* 1200px, not 768px: 11 nav items stop fitting on one row well above tablet width */
+@media(max-width:1200px) {
   .nav-container{flex-direction:row;
   justify-content:space-between}.mobile-menu-toggle{display:flex}.nav-links{position:fixed;
   top:0;
@@ -136,6 +143,7 @@ header {
   width:80%;
   max-width:300px;
   height:100vh;
+  margin-left:0;
   background:var(--bg-primary,#fff);
   flex-direction:column;
   align-items:stretch;
