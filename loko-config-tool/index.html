@@ -46,7 +46,7 @@
 }
 </script>
 <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
-<link href="styles.css?v=20260727b" rel="stylesheet"/>
+<link href="styles.css?v=20260803" rel="stylesheet"/>
 <style>
   /* ── Site design tokens (light theme, matches nolilab site chrome) ── */
   :root {
@@ -569,6 +569,27 @@
 <option value="4">Stationary</option>
 </select>
 </div>
+<div class="field sleep-window-field">
+<div class="toggle-row">
+<span>Daily Sleep Window</span>
+<label class="toggle" for="sleepWindowEnabled">
+<input aria-label="Enable daily sleep window" id="sleepWindowEnabled" type="checkbox"/>
+<span class="toggle-track"></span>
+</label>
+</div>
+<div class="sleep-window-row">
+<div class="field">
+<label for="sleepStart">Sleep Start (UTC, 24h)</label>
+<input autocomplete="off" disabled="" id="sleepStart" inputmode="numeric" maxlength="5" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" placeholder="22:00" spellcheck="false" type="text" value="22:00"/>
+</div>
+<div class="field">
+<label for="sleepEnd">Sleep End (UTC, 24h)</label>
+<input autocomplete="off" disabled="" id="sleepEnd" inputmode="numeric" maxlength="5" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" placeholder="07:30" spellcheck="false" type="text" value="07:30"/>
+</div>
+</div>
+<p class="field-copy">The device stops waking up between these times.</p>
+<p aria-live="polite" class="field-copy" id="sleepWindowSummary"></p>
+</div>
 </div>
 <div class="mode-switch-group">
 <div class="mode-header">Transmit Mode</div>
@@ -932,7 +953,7 @@
 </main>
 <div id="site-footer"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=20260727b"></script>
+<script src="app.js?v=20260803"></script>
 <script>
   // Hide compat banner in supported browsers
   if ('serial' in navigator) {

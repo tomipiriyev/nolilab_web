@@ -308,6 +308,33 @@ input[type="checkbox"]:focus {
     align-items: center;
 }
 
+.sleep-window-row {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+.sleep-window-row .field+.field {
+    margin-top: 0;
+}
+
+.sleep-window-field input:disabled {
+    background: rgba(217, 220, 227, 0.4);
+    color: var(--muted);
+    cursor: not-allowed;
+}
+
+.sleep-window-row input {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+}
+
+#sleepWindowSummary:empty {
+    display: none;
+}
+
 .mode-switch-group {
     flex-basis: 100%;
     display: grid;
@@ -924,6 +951,10 @@ button:disabled:hover {
     }
 
     .inline-input-group {
+        grid-template-columns: 1fr;
+    }
+
+    .sleep-window-row {
         grid-template-columns: 1fr;
     }
 }

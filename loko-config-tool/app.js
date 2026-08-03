@@ -58,6 +58,10 @@ const wakeUpPeriodInput = document.getElementById("wakeUpPeriod");
 const wakeUpPeriodUnitSelect = document.getElementById("wakeUpPeriodUnit");
 const sendEveryInput = document.getElementById("sendEvery");
 const saveEveryInput = document.getElementById("saveEvery");
+const sleepWindowToggle = document.getElementById("sleepWindowEnabled");
+const sleepStartInput = document.getElementById("sleepStart");
+const sleepEndInput = document.getElementById("sleepEnd");
+const sleepWindowSummary = document.getElementById("sleepWindowSummary");
 const timingSummary = document.getElementById("timingSummary");
 const readGnssTraceButton = document.getElementById("readGnssTraceButton");
 const eraseGnssTraceButton = document.getElementById("eraseGnssTraceButton");
@@ -78,6 +82,16 @@ const connectionSensitiveControls = [
 const WAKE_UP_PERIOD_MAX_SECONDS = 43200;
 const SEND_SAVE_MULT_MAX = 200;
 const GNSS_MODE_MAX = 4;
+const SLEEP_WINDOW_OFF = "off";
+const SLEEP_WINDOW_DEFAULT_START = "22:00";
+const SLEEP_WINDOW_DEFAULT_END = "07:30";
+const DEVICE_INFO_TIMEOUT_MS = 1000;
+// A `reset` reboots the device. Boot time varies, and an `info` sent too early
+// is simply dropped by a device that is not listening yet, so the refresh that
+// follows a reset retries a few times instead of relying on one long wait.
+const DEVICE_REBOOT_DELAY_MS = 1200;
+const DEVICE_INFO_AFTER_REBOOT_TIMEOUT_MS = 2000;
+const DEVICE_INFO_AFTER_REBOOT_ATTEMPTS = 3;
 const ERASE_TRACE_CONFIRM_WINDOW_MS = 3000;
 const GNSS_TRACE_OUTPUT_MAX_LINES = 4000;
 const GNSS_TRACE_OUTPUT_FLUSH_INTERVAL_MS = 50;
@@ -118,6 +132,10 @@ let gnssTraceMap = null;
 let gnssTraceLayer = null;
 let gnssTraceSelectionLayer = null;
 let selectedGnssTraceRecordNumber = null;
+// The sleep window is only pushed to the device once the user has touched the
+// controls, so a firmware whose `info` dump omits it never gets an unsolicited
+// `sleep set off` on every save.
+let sleepWindowDirty = false;
 let eraseTraceConfirmArmed = false;
 let eraseTraceConfirmTimer = null;
 let resetConfirmArmed = false;
@@ -212,6 +230,7 @@ function syncControlsAvailability() {
 
     syncModeTabsAvailability();
     syncP2pEncryptionKeyUi();
+    syncSleepWindowUi();
 }
 
 function handleP2pEncryptionKeyInput() {
@@ -222,6 +241,180 @@ function handleP2pEncryptionKeyInput() {
 
     p2pEncryptionKey = sanitized;
     syncP2pEncryptionKeyUi();
+}
+
+function isValidTimeOfDay(value) {
+    return /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+}
+
+function formatMinutesAsTimeOfDay(minutes) {
+    const normalized = ((Math.round(minutes) % 1440) + 1440) % 1440;
+    const hours = Math.floor(normalized / 60);
+    return `${String(hours).padStart(2, "0")}:${String(normalized % 60).padStart(2, "0")}`;
+}
+
+function timeOfDayToMinutes(value) {
+    const [hours, minutes] = value.split(":").map(Number);
+    return hours * 60 + minutes;
+}
+
+// Accepts "22:00", "22:00:00" and raw minutes-since-midnight ("1320").
+function normalizeTimeOfDay(raw) {
+    if (raw === null || raw === undefined) {
+        return null;
+    }
+
+    const value = String(raw).trim();
+    if (/^\d{1,2}:\d{2}(:\d{2})?$/.test(value)) {
+        const [hours, minutes] = value.split(":");
+        const candidate = `${hours.padStart(2, "0")}:${minutes}`;
+        return isValidTimeOfDay(candidate) ? candidate : null;
+    }
+
+    if (/^\d+$/.test(value)) {
+        const minutes = Number(value);
+        return minutes >= 0 && minutes < 1440 ? formatMinutesAsTimeOfDay(minutes) : null;
+    }
+
+    return null;
+}
+
+// A native <input type="time"> renders am/pm on locales that use it and offers
+// no way to override that, so the times are plain text fields masked to strict
+// 24-hour HH:MM here. Typing "930" is read as 09:30, not an invalid hour 93.
+function maskTimeDigits(value) {
+    const digits = value.replace(/\D/g, "").slice(0, 4);
+    return digits.length >= 2 && Number(digits.slice(0, 2)) > 23
+        ? `0${digits.slice(0, 3)}`
+        : digits;
+}
+
+function sanitizeTimeOfDayInput(input) {
+    const digits = maskTimeDigits(input.value);
+    const formatted = digits.length > 2 ? `${digits.slice(0, 2)}:${digits.slice(2)}` : digits;
+
+    if (formatted !== input.value) {
+        input.value = formatted;
+    }
+}
+
+// Runs on blur: pad a partial entry and clamp out-of-range values so the field
+// always ends up as a real time of day.
+function commitTimeOfDayInput(input, fallback) {
+    const digits = maskTimeDigits(input.value);
+    if (digits.length === 0) {
+        input.value = fallback;
+        return;
+    }
+
+    const hourDigits = digits.length === 1 ? `0${digits}` : digits.slice(0, 2);
+    const minuteDigits = digits.length > 2 ? digits.slice(2).padEnd(2, "0") : "00";
+    const hours = Math.min(Number(hourDigits), 23);
+    const minutes = Math.min(Number(minuteDigits), 59);
+    input.value = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+}
+
+// Canonical form used both for comparison against the device config and as the
+// `sleep set` argument list: either "off" or "HH:MM HH:MM".
+function getSleepWindowValue() {
+    if (!sleepWindowToggle.checked) {
+        return SLEEP_WINDOW_OFF;
+    }
+
+    const start = normalizeTimeOfDay(sleepStartInput.value);
+    const end = normalizeTimeOfDay(sleepEndInput.value);
+    if (!start || !end || start === end) {
+        return null;
+    }
+
+    return `${start} ${end}`;
+}
+
+function formatSleepWindowDuration(start, end) {
+    const startMinutes = timeOfDayToMinutes(start);
+    const endMinutes = timeOfDayToMinutes(end);
+    const spanMinutes = endMinutes > startMinutes ? endMinutes - startMinutes : 1440 - startMinutes + endMinutes;
+    return formatDurationLabel(spanMinutes * 60);
+}
+
+function updateSleepWindowSummary() {
+    if (!sleepWindowSummary) {
+        return;
+    }
+
+    if (!sleepWindowToggle.checked) {
+        sleepWindowSummary.textContent = "Sleep window disabled — the device wakes up around the clock.";
+        return;
+    }
+
+    const window = getSleepWindowValue();
+    if (!window) {
+        sleepWindowSummary.textContent = "Enter a valid start and end time (they must differ).";
+        return;
+    }
+
+    const [start, end] = window.split(" ");
+    sleepWindowSummary.textContent =
+        `Asleep ${start}–${end} UTC (${formatSleepWindowDuration(start, end)}), ` +
+        `awake ${end}–${start} UTC.`;
+}
+
+function syncSleepWindowUi() {
+    const enabled = Boolean(connectedPort) && sleepWindowToggle.checked;
+    sleepStartInput.disabled = !enabled;
+    sleepEndInput.disabled = !enabled;
+    updateSleepWindowSummary();
+}
+
+function applySleepWindowConfig(value) {
+    if (value === SLEEP_WINDOW_OFF) {
+        sleepWindowToggle.checked = false;
+    } else {
+        const [start, end] = value.split(" ");
+        sleepWindowToggle.checked = true;
+        sleepStartInput.value = start;
+        sleepEndInput.value = end;
+    }
+
+    sleepWindowDirty = false;
+    syncSleepWindowUi();
+}
+
+// Tolerant of the shapes firmware may print the window in:
+//   sleep_window = 22:00-07:30 | off
+//   sleep_start = 22:00        sleep_end = 07:30
+//   sleep_start_min = 1320     sleep_end_min = 450
+function parseSleepWindowConfig(buffer) {
+    const combined = parseStringConfigField(buffer, "sleep_window");
+    if (combined !== null) {
+        if (/^(off|disabled|none)$/i.test(combined)) {
+            return SLEEP_WINDOW_OFF;
+        }
+
+        const parts = combined.split(/\s*(?:-|–|to|\s)\s*/i).filter(Boolean);
+        if (parts.length >= 2) {
+            const start = normalizeTimeOfDay(parts[0]);
+            const end = normalizeTimeOfDay(parts[1]);
+            if (start && end) {
+                return `${start} ${end}`;
+            }
+        }
+    }
+
+    const start = normalizeTimeOfDay(
+        parseStringConfigField(buffer, "sleep_start") ?? parseNumericConfigField(buffer, "sleep_start_min")
+    );
+    const end = normalizeTimeOfDay(
+        parseStringConfigField(buffer, "sleep_end") ?? parseNumericConfigField(buffer, "sleep_end_min")
+    );
+
+    if (start && end) {
+        const enabledFlag = parseNumericConfigField(buffer, "is_sleep_window_enabled")
+            ?? parseNumericConfigField(buffer, "sleep_enabled");
+        return enabledFlag === 0 ? SLEEP_WINDOW_OFF : `${start} ${end}`;
+    }
+
+    return null;
 }
 
 function syncLorawanRegionUi(region) {
@@ -260,7 +453,8 @@ function createEmptyDeviceConfig() {
         is_extended_packet: null,
         lorawan_region: null,
         dev_eui: null,
-        app_eui: null
+        app_eui: null,
+        sleep_window: null
     };
 }
 
@@ -932,6 +1126,9 @@ function syncConfigFieldToControl(field, value) {
         case "app_eui":
             appEuiInput.value = value.toUpperCase().slice(0, 16);
             break;
+        case "sleep_window":
+            applySleepWindowConfig(value);
+            break;
         default:
             break;
     }
@@ -962,6 +1159,12 @@ function parseDeviceConfig(buffer) {
     if (appEui !== null) {
         deviceConfig.app_eui = appEui;
         syncConfigFieldToControl("app_eui", appEui);
+    }
+
+    const sleepWindow = parseSleepWindowConfig(buffer);
+    if (sleepWindow !== null) {
+        deviceConfig.sleep_window = sleepWindow;
+        syncConfigFieldToControl("sleep_window", sleepWindow);
     }
 }
 
@@ -1246,6 +1449,13 @@ function buildSaveCommands() {
         updatedConfigFields.gnss_mode = gnssMode;
     }
 
+    const sleepWindow = getSleepWindowValue();
+    const sleepWindowKnown = deviceConfig.sleep_window !== null && deviceConfig.sleep_window !== undefined;
+    if (sleepWindow && (sleepWindowKnown ? deviceConfig.sleep_window !== sleepWindow : sleepWindowDirty)) {
+        commands.push(`sleep set ${sleepWindow}`);
+        updatedConfigFields.sleep_window = sleepWindow;
+    }
+
     if (differsFromConfig("is_p2p_encrypted", p2pEncrypted)) {
         commands.push(`p2p encryption ${p2pEncrypted}`);
         updatedConfigFields.is_p2p_encrypted = p2pEncrypted;
@@ -1365,6 +1575,27 @@ async function drainSerialInput(idleTimeoutMs = 10, maxDrainMs = 10) {
     return drainedBuffer;
 }
 
+// Reads are raced against timeouts in several places. Abandoning the loser of
+// that race leaves an in-flight reader.read() whose chunk would otherwise be
+// swallowed by nobody, so the pending promise is cached and handed to the next
+// reader instead of starting a second, competing read.
+let pendingSerialRead = null;
+
+function readSerialChunk() {
+    if (!pendingSerialRead) {
+        const read = reader.read();
+        pendingSerialRead = read;
+        const clear = () => {
+            if (pendingSerialRead === read) {
+                pendingSerialRead = null;
+            }
+        };
+        read.then(clear, clear);
+    }
+
+    return pendingSerialRead;
+}
+
 async function sendSerialCommandAndWaitForOk(command, timeoutMs = 2000, lineEnding = "\r", onLine = null, trimResponseBuffer = true) {
     if (!connectedPort || !connectedPort.writable || !reader) {
         throw new Error("Serial connection is not ready.");
@@ -1389,7 +1620,7 @@ async function sendSerialCommandAndWaitForOk(command, timeoutMs = 2000, lineEndi
     while (connectedPort && Date.now() < deadline) {
         const remainingMs = deadline - Date.now();
         const readResult = await Promise.race([
-            reader.read(),
+            readSerialChunk(),
             new Promise((_, reject) => {
                 window.setTimeout(() => reject(new Error(`Timeout waiting for OK after: ${command}`)), remainingMs);
             })
@@ -1423,6 +1654,12 @@ async function sendSerialCommandAndWaitForOk(command, timeoutMs = 2000, lineEndi
                 if (trimmedLine === "OK") {
                     return responseBuffer;
                 }
+
+                // The device answered but refused the command — no OK is coming,
+                // so surface its own wording instead of stalling until timeout.
+                if (trimmedLine.startsWith("ERROR")) {
+                    throw new Error(`Device rejected "${command}" — ${trimmedLine}`);
+                }
             }
         }
 
@@ -1434,10 +1671,14 @@ async function sendSerialCommandAndWaitForOk(command, timeoutMs = 2000, lineEndi
     throw new Error(`Did not receive OK after: ${command}`);
 }
 
-async function requestDeviceInfo() {
+// `alertOnTimeout` belongs to the connect-time probe only: there a silent port
+// really does mean the wrong device was picked. After a `reset` the device is
+// merely rebooting, so the caller passes a longer timeout and handles the miss
+// itself instead of accusing the user of choosing the wrong port.
+async function requestDeviceInfo({ timeoutMs = DEVICE_INFO_TIMEOUT_MS, alertOnTimeout = true } = {}) {
     if (!connectedPort || !connectedPort.writable || !reader) {
         setConnectionState(true, "Connected. Device info stream unavailable.");
-        return;
+        return false;
     }
 
     try {
@@ -1461,14 +1702,26 @@ async function requestDeviceInfo() {
         };
 
         let timedOut = false;
+        let releaseWait = () => { };
+        // Without alertOnTimeout nothing cancels the reader, so the timeout has
+        // to break the read itself or the loop waits on a silent device forever.
+        const timeoutSignal = new Promise((resolve) => { releaseWait = resolve; });
         const timeoutId = setTimeout(async () => {
             timedOut = true;
-            await disconnectPort();
-            window.alert("No response... Possibly selected port is not a Loko-AIR device port.");
-        }, 1000);
+            if (alertOnTimeout) {
+                await disconnectPort();
+                window.alert("No response... Possibly selected port is not a Loko-AIR device port.");
+            }
+            releaseWait(null);
+        }, timeoutMs);
 
         while (connectedPort && !timedOut) {
-            const { value, done } = await reader.read();
+            const readResult = await Promise.race([readSerialChunk(), timeoutSignal]);
+            if (!readResult) {
+                break;
+            }
+
+            const { value, done } = readResult;
             const chunk = decoder.decode(value ?? new Uint8Array(), { stream: !done });
 
             if (chunk) {
@@ -1489,28 +1742,57 @@ async function requestDeviceInfo() {
 
         flushPendingDeviceInfo(deviceInfoState);
         clearTimeout(timeoutId);
+        releaseWait(null);
 
         if (timedOut || !connectedPort) {
-            return;
+            return false;
         }
 
         const statusText = resolveDeviceInfoStatus(deviceInfoState.buffer);
         if (statusText) {
             setConnectionState(true, statusText);
-            return;
+            return true;
         }
 
         setConnectionState(true, "Connected, but Loko version was not received.");
+        return false;
     } catch (error) {
         if (!connectedPort) {
-            return;
+            return false;
         }
 
         setConnectionState(true, `Connected, info read failed: ${error.message || "unknown error"}`);
+        return false;
     }
 }
 
+// Used after any command that reboots the device (`reset`, `erase`). Never
+// alerts or drops the port: the settings were already acknowledged, so failing
+// to re-read them is cosmetic.
+async function refreshDeviceInfoAfterReboot() {
+    for (let attempt = 0; attempt < DEVICE_INFO_AFTER_REBOOT_ATTEMPTS; attempt += 1) {
+        await delay(DEVICE_REBOOT_DELAY_MS);
+
+        if (!connectedPort) {
+            return false;
+        }
+
+        const refreshed = await requestDeviceInfo({
+            timeoutMs: DEVICE_INFO_AFTER_REBOOT_TIMEOUT_MS,
+            alertOnTimeout: false
+        });
+
+        if (refreshed) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 async function disconnectPort() {
+    pendingSerialRead = null;
+
     if (reader) {
         await reader.cancel().catch(() => { });
         reader.releaseLock();
@@ -1545,6 +1827,7 @@ async function connectPort() {
         });
 
         if (connectedPort.readable) {
+            pendingSerialRead = null;
             reader = connectedPort.readable.getReader();
         }
 
@@ -1579,6 +1862,10 @@ function resetForm() {
     sendEveryInput.value = "0";
     saveEveryInput.value = "0";
     gnssModeSelect.value = "0";
+    sleepWindowToggle.checked = false;
+    sleepStartInput.value = SLEEP_WINDOW_DEFAULT_START;
+    sleepEndInput.value = SLEEP_WINDOW_DEFAULT_END;
+    sleepWindowDirty = false;
     devEuiInput.value = "";
     appEuiInput.value = "";
     appKeyInput.value = "";
@@ -1586,6 +1873,7 @@ function resetForm() {
     syncModeToggle();
     syncOutputs();
     syncP2pEncryptionKeyUi();
+    syncSleepWindowUi();
     saveStatus.textContent = "Defaults restored.";
 }
 
@@ -1624,6 +1912,24 @@ idFormatToggle.addEventListener("change", () => {
     applyIdFormatToInputs();
 });
 p2pEncryptedToggle.addEventListener("change", syncP2pEncryptionKeyUi);
+sleepWindowToggle.addEventListener("change", () => {
+    sleepWindowDirty = true;
+    syncSleepWindowUi();
+});
+[
+    { input: sleepStartInput, fallback: SLEEP_WINDOW_DEFAULT_START },
+    { input: sleepEndInput, fallback: SLEEP_WINDOW_DEFAULT_END }
+].forEach(({ input, fallback }) => {
+    input.addEventListener("input", () => {
+        sleepWindowDirty = true;
+        sanitizeTimeOfDayInput(input);
+        updateSleepWindowSummary();
+    });
+    input.addEventListener("change", () => {
+        commitTimeOfDayInput(input, fallback);
+        updateSleepWindowSummary();
+    });
+});
 
 gnssTraceOutputBody.addEventListener("click", (event) => {
     const clickedRow = event.target.closest("tr[data-record-number]");
@@ -1843,6 +2149,11 @@ saveButton.addEventListener("click", async () => {
         return;
     }
 
+    if (getSleepWindowValue() === null) {
+        saveStatus.textContent = "Sleep window needs a valid start and end time (HH:MM UTC), and they must differ.";
+        return;
+    }
+
     const { commands, updatedConfigFields } = buildSaveCommands();
     if (commands.length === 0) {
         saveStatus.textContent = "No changes detected. Nothing to save.";
@@ -1851,6 +2162,7 @@ saveButton.addEventListener("click", async () => {
 
     saveButton.disabled = true;
     saveStatus.textContent = "Sending settings to device...";
+    let saveSucceeded = false;
 
     try {
         for (const [index, command] of commands.entries()) {
@@ -1867,13 +2179,29 @@ saveButton.addEventListener("click", async () => {
         });
 
         saveStatus.textContent = "Settings saved successfully.";
+        saveSucceeded = true;
     } catch (error) {
         saveStatus.textContent = `Save failed: ${error.message || "unknown error"}`;
     } finally {
         saveButton.disabled = false;
     }
 
-    await requestDeviceInfo();
+    // Re-reading `info` after a failed save only produces a second, misleading
+    // failure ("not a Loko-AIR device port") and drops the connection, hiding
+    // the real error above. Stay connected so the save can be retried.
+    if (!saveSucceeded) {
+        return;
+    }
+
+    // The settings were already ACKed one by one; this refresh is a bonus, so a
+    // device that is slow to come back from `reset` must not undo the save
+    // message or drop the port.
+    saveStatus.textContent = "Settings saved. Waiting for the device to restart...";
+    const refreshed = await refreshDeviceInfoAfterReboot();
+
+    saveStatus.textContent = refreshed
+        ? "Settings saved successfully."
+        : "Settings saved successfully. Device did not report back after restarting — reconnect to re-read it.";
 });
 
 resetButton.addEventListener("click", async () => {
@@ -1911,7 +2239,9 @@ resetButton.addEventListener("click", async () => {
         syncControlsAvailability();
         resetResetConfirmationUi();
     }
-    await requestDeviceInfo();
+
+    // `erase` restarts the device too — same reboot handling as a save.
+    await refreshDeviceInfoAfterReboot();
 });
 
 window.addEventListener("beforeunload", () => {
@@ -1933,6 +2263,7 @@ syncOutputs();
 syncModeToggle();
 syncIdFormatUi();
 syncP2pEncryptionKeyUi();
+syncSleepWindowUi();
 syncWakeUpPeriodConstraints();
 updateBatteryEstimate();
 activateMainTab("configuration");
