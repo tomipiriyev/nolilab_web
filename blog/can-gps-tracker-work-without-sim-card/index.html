@@ -200,6 +200,126 @@
 </section>
 <section class="content-block">
 <div class="container">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 350" role="img" aria-label="Diagram: GPS satellites send positioning signals to a tracker (no SIM needed). The tracker then sends data either via cellular — SIM card, cell tower, cloud app with monthly fees — or via LoRa radio directly to a phone with no SIM and no monthly fees." style="width:100%;height:auto;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;">
+
+  <!-- Title -->
+  <text x="450" y="26" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="14" font-weight="600" fill="#24292e">How GPS Tracking Works: With and Without a SIM Card</text>
+
+  <!-- ═══ GPS Satellites ═══ -->
+  <!-- Satellite 1 -->
+  <g transform="translate(280,58)">
+    <rect x="-24" y="-15" width="48" height="30" rx="5" fill="#57606a" fill-opacity="0.12" stroke="#57606a" stroke-width="1"/>
+    <rect x="-38" y="-6" width="12" height="12" rx="1" fill="#57606a" fill-opacity="0.2" stroke="#57606a" stroke-width="0.7"/>
+    <rect x="26" y="-6" width="12" height="12" rx="1" fill="#57606a" fill-opacity="0.2" stroke="#57606a" stroke-width="0.7"/>
+    <text x="0" y="4" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" font-weight="600" fill="#57606a">GPS</text>
+  </g>
+  <!-- Satellite 2 -->
+  <g transform="translate(450,48)">
+    <rect x="-24" y="-15" width="48" height="30" rx="5" fill="#57606a" fill-opacity="0.12" stroke="#57606a" stroke-width="1"/>
+    <rect x="-38" y="-6" width="12" height="12" rx="1" fill="#57606a" fill-opacity="0.2" stroke="#57606a" stroke-width="0.7"/>
+    <rect x="26" y="-6" width="12" height="12" rx="1" fill="#57606a" fill-opacity="0.2" stroke="#57606a" stroke-width="0.7"/>
+    <text x="0" y="4" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" font-weight="600" fill="#57606a">GPS</text>
+  </g>
+  <!-- Satellite 3 -->
+  <g transform="translate(620,58)">
+    <rect x="-24" y="-15" width="48" height="30" rx="5" fill="#57606a" fill-opacity="0.12" stroke="#57606a" stroke-width="1"/>
+    <rect x="-38" y="-6" width="12" height="12" rx="1" fill="#57606a" fill-opacity="0.2" stroke="#57606a" stroke-width="0.7"/>
+    <rect x="26" y="-6" width="12" height="12" rx="1" fill="#57606a" fill-opacity="0.2" stroke="#57606a" stroke-width="0.7"/>
+    <text x="0" y="4" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" font-weight="600" fill="#57606a">GPS</text>
+  </g>
+
+  <!-- GPS signal annotation -->
+  <text x="450" y="95" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" fill="#57606a" font-style="italic">GPS signals — no SIM needed for positioning</text>
+
+  <!-- GPS signal lines (dashed grey) -->
+  <line x1="280" y1="73" x2="425" y2="125" stroke="#57606a" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.55"/>
+  <line x1="450" y1="63" x2="450" y2="125" stroke="#57606a" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.55"/>
+  <line x1="620" y1="73" x2="475" y2="125" stroke="#57606a" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.55"/>
+  <!-- Arrowheads -->
+  <polygon points="425,125 420,115 430,115" fill="#57606a" opacity="0.55"/>
+  <polygon points="450,125 445,115 455,115" fill="#57606a" opacity="0.55"/>
+  <polygon points="475,125 470,115 480,115" fill="#57606a" opacity="0.55"/>
+
+  <!-- ═══ Tracker Device ═══ -->
+  <rect x="375" y="125" width="150" height="52" rx="8" fill="#ffffff" stroke="#24292e" stroke-width="1.5"/>
+  <text x="450" y="148" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="600" fill="#24292e">GPS Tracker</text>
+  <text x="450" y="165" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" fill="#57606a">knows its position</text>
+
+  <!-- Divider annotation -->
+  <text x="450" y="202" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="500" fill="#24292e">How does it send that position?</text>
+
+  <!-- ═══ LEFT: Cellular Path (orange) ═══ -->
+  <text x="210" y="222" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="600" fill="#e65100">Cellular Path</text>
+
+  <!-- Arrow from tracker to SIM -->
+  <path d="M400,177 Q340,210 260,235" fill="none" stroke="#e65100" stroke-width="1.4" stroke-dasharray="5,3"/>
+  <polygon points="260,235 270,229 266,240" fill="#e65100"/>
+
+  <!-- SIM Card box -->
+  <rect x="170" y="237" width="90" height="38" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1.2"/>
+  <text x="215" y="254" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="600" fill="#e65100">SIM Card</text>
+  <text x="215" y="268" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#e65100">required</text>
+
+  <!-- Arrow SIM → Tower -->
+  <line x1="170" y1="256" x2="118" y2="256" stroke="#e65100" stroke-width="1.2"/>
+  <polygon points="118,256 126,251 126,261" fill="#e65100"/>
+
+  <!-- Cell Tower -->
+  <g transform="translate(85,248)">
+    <line x1="0" y1="-16" x2="0" y2="24" stroke="#e65100" stroke-width="2"/>
+    <line x1="-14" y1="-6" x2="0" y2="-16" stroke="#e65100" stroke-width="1.5"/>
+    <line x1="14" y1="-6" x2="0" y2="-16" stroke="#e65100" stroke-width="1.5"/>
+    <line x1="-9" y1="4" x2="0" y2="-4" stroke="#e65100" stroke-width="1"/>
+    <line x1="9" y1="4" x2="0" y2="-4" stroke="#e65100" stroke-width="1"/>
+    <circle cx="0" cy="-16" r="2.5" fill="#e65100"/>
+  </g>
+  <text x="85" y="286" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#e65100">Cell Tower</text>
+
+  <!-- Arrow Tower → Cloud -->
+  <line x1="85" y1="290" x2="85" y2="302" stroke="#e65100" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="85,302 81,295 89,295" fill="#e65100"/>
+
+  <!-- Cloud / App with fees -->
+  <rect x="30" y="304" width="110" height="34" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1.2"/>
+  <text x="85" y="319" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="600" fill="#e65100">Cloud / App</text>
+  <text x="85" y="332" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#e65100">+ monthly fees</text>
+
+  <!-- ═══ RIGHT: LoRa Path (green) ═══ -->
+  <text x="690" y="222" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="600" fill="#238636">LoRa Path (Loko)</text>
+
+  <!-- Arrow from tracker to LoRa radio -->
+  <path d="M500,177 Q570,210 640,235" fill="none" stroke="#238636" stroke-width="1.4" stroke-dasharray="5,3"/>
+  <polygon points="640,235 630,229 634,240" fill="#238636"/>
+
+  <!-- LoRa Radio box -->
+  <rect x="620" y="237" width="110" height="38" rx="5" fill="#e6f9ec" stroke="#238636" stroke-width="1.2"/>
+  <text x="675" y="254" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="600" fill="#238636">LoRa Radio</text>
+  <text x="675" y="268" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#238636">no SIM needed</text>
+
+  <!-- Radio waves -->
+  <g transform="translate(748,256)" opacity="0.6">
+    <path d="M0,-7 A10,10 0 0,1 0,7" fill="none" stroke="#238636" stroke-width="1.2"/>
+    <path d="M4,-12 A16,16 0 0,1 4,12" fill="none" stroke="#238636" stroke-width="1"/>
+    <path d="M8,-17 A22,22 0 0,1 8,17" fill="none" stroke="#238636" stroke-width="0.8"/>
+  </g>
+
+  <!-- Arrow LoRa → Phone -->
+  <line x1="730" y1="256" x2="778" y2="256" stroke="#238636" stroke-width="1.2"/>
+  <polygon points="778,256 770,251 770,261" fill="#238636"/>
+
+  <!-- Phone box -->
+  <rect x="782" y="237" width="90" height="38" rx="5" fill="#e6f9ec" stroke="#238636" stroke-width="1.2"/>
+  <text x="827" y="254" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="600" fill="#238636">Phone</text>
+  <text x="827" y="268" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" fill="#238636">via Bluetooth</text>
+
+  <!-- No fees label -->
+  <text x="827" y="292" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" font-weight="600" fill="#238636">✓ no monthly fees</text>
+
+</svg>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
 <h2>Quick Comparison</h2>
 <table class="compare-table">
 <thead><tr><th>System</th><th>What it does</th><th>Needs SIM?</th></tr></thead>
