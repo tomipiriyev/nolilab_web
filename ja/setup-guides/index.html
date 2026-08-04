@@ -478,79 +478,79 @@
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
-  "@type": "ハウツー",
+  "@type": "HowTo",
   "name": "Loko GPS トラッカーのセットアップ方法",
   "description": "Loko GPS トラッカー システムの完全なセットアップ ガイド。 Loko 航空および地上ユニットを構成し、Web コンフィギュレーターを介してパラメーターを設定し、モバイル アプリとペアリングします。",
   "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
   "totalTime": "PT15M",
   "supply": [
     {
-      "@type": "供給方法",
+      "@type": "HowToSupply",
       "name": "Loko 航空ユニット (GPS + LoRa 送信機)"
     },
     {
-      "@type": "供給方法",
+      "@type": "HowToSupply",
       "name": "Loko Groundユニット (LoRa 受信機)"
     },
     {
-      "@type": "供給方法",
+      "@type": "HowToSupply",
       "name": "地上ユニット用 18650 リチウムイオン電池 (ユーザー提供)"
     },
     {
-      "@type": "供給方法",
+      "@type": "HowToSupply",
       "name": "USB Type-Cケーブル"
     }
   ],
   "tool": [
     {
-      "@type": "ハウツーツール",
+      "@type": "HowToTool",
       "name": "Chrome または Edge ブラウザ (Web シリアル API が必要)"
     },
     {
-      "@type": "ハウツーツール",
+      "@type": "HowToTool",
       "name": "Loko アプリ (iOS または Android)"
     }
   ],
   "step": [
     {
-      "@type": "手順の説明",
+      "@type": "HowToStep",
       "position": 1,
       "name": "Webコンフィギュレーターを開く",
       "text": "Chrome または Edge を開いて、nolilab.com/loko-config-tool/ に移動します。",
       "url": "https://www.nolilab.com/loko-config-tool/"
     },
     {
-      "@type": "手順の説明",
+      "@type": "HowToStep",
       "position": 2,
       "name": "Loko Air を USB 経由で接続する",
       "text": "Loko Air を USB Type-C 経由でコンピューターに接続します。 [構成] タブで [接続] をクリックし、ブラウザにシリアル アクセスを許可します。"
     },
     {
-      "@type": "手順の説明",
+      "@type": "HowToStep",
       "position": 3,
       "name": "航空ユニットのパラメータを設定して保存する",
       "text": "transfer_mode、frequency、id1、id2、wake_up_period、gnss_mode、および tx_power を設定します。 「変更を保存」をクリックします。"
     },
     {
-      "@type": "手順の説明",
+      "@type": "HowToStep",
       "position": 4,
       "name": "Loko Airの電源を入れる",
       "text": "USBを取り外します。 LED が赤色に点滅するまで電源ボタンを押し続けます (ユニットがアクティブになります)。"
     },
     {
-      "@type": "手順の説明",
+      "@type": "HowToStep",
       "position": 5,
       "name": "バッテリーを挿入し、Loko Ground を接続します。",
       "text": "18650 リチウムイオン電池を地上ユニットに挿入します。 USB 経由でコンピュータに接続し、コンフィギュレータで [地上ユニット] タブを開き、[接続] をクリックします。"
     },
     {
-      "@type": "手順の説明",
+      "@type": "HowToStep",
       "position": 6,
       "name": "地上ユニットの設定を一致させて送信します",
       "text": "「読み取り」をクリックして現在の設定をロードします。 id2 とfrequency_hz を航空ユニットと一致するように設定します。 「送信」をクリックして、USB を取り外します。"
     },
     {
-      "@type": "手順の説明",
+      "@type": "HowToStep",
       "position": 7,
       "name": "Ground ユニットの電源を入れてアプリとペアリングする",
       "text": "LEDが青色に点灯するまで電源ボタンを押し続けます。 Loko アプリを開き、[設定] に移動して、地上ユニットを選択します。 GPS の修正を待ちます — 場所が地図上に表示されます。"

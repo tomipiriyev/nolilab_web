@@ -478,79 +478,79 @@
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
-  "@type": "Comment faire",
+  "@type": "HowTo",
   "name": "Comment configurer le tracker Loko GPS",
   "description": "Guide de configuration complet pour le système de suivi Loko GPS. Configurez les unités Loko Air et Ground, définissez les paramètres via le configurateur Web et associez-les à l'application mobile.",
   "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
   "totalTime": "PT15M",
   "supply": [
     {
-      "@type": "Comment s'approvisionner",
+      "@type": "HowToSupply",
       "name": "Unité aérienne Loko (émetteur GPS + LoRa)"
     },
     {
-      "@type": "Comment s'approvisionner",
+      "@type": "HowToSupply",
       "name": "Unité au sol Loko (récepteur LoRa)"
     },
     {
-      "@type": "Comment s'approvisionner",
+      "@type": "HowToSupply",
       "name": "Cellule Li-ion 18650 pour unité au sol (fournie par l'utilisateur)"
     },
     {
-      "@type": "Comment s'approvisionner",
+      "@type": "HowToSupply",
       "name": "Câble USB Type-C"
     }
   ],
   "tool": [
     {
-      "@type": "CommentOutil",
+      "@type": "HowToTool",
       "name": "Navigateur Chrome ou Edge (API Web Serial requise)"
     },
     {
-      "@type": "CommentOutil",
+      "@type": "HowToTool",
       "name": "Application Loko (iOS ou Android)"
     }
   ],
   "step": [
     {
-      "@type": "CommentÉtape",
+      "@type": "HowToStep",
       "position": 1,
       "name": "Ouvrez le configurateur Web",
       "text": "Ouvrez Chrome ou Edge et accédez à nolilab.com/loko-config-tool/",
       "url": "https://www.nolilab.com/loko-config-tool/"
     },
     {
-      "@type": "CommentÉtape",
+      "@type": "HowToStep",
       "position": 2,
       "name": "Connectez le Loko Air via USB",
       "text": "Connectez le Loko Air à l'ordinateur via USB Type-C. Cliquez sur Connecter dans l'onglet Configuration et accordez l'accès série au navigateur."
     },
     {
-      "@type": "CommentÉtape",
+      "@type": "HowToStep",
       "position": 3,
       "name": "Définir les paramètres de l'unité aérienne et enregistrer",
       "text": "Configurez transmission_mode, fréquence, id1, id2, wake_up_period, gnss_mode et tx_power. Cliquez sur Enregistrer les modifications."
     },
     {
-      "@type": "CommentÉtape",
+      "@type": "HowToStep",
       "position": 4,
       "name": "Allumer le Loko Air",
       "text": "Débranchez l'USB. Maintenez le bouton d'alimentation enfoncé jusqu'à ce que la LED clignote en rouge : l'unité est active."
     },
     {
-      "@type": "CommentÉtape",
+      "@type": "HowToStep",
       "position": 5,
       "name": "Insérez la batterie et connectez le Loko Ground",
       "text": "Insérez une cellule Li-ion 18650 dans l'unité au sol. Connectez-vous à l'ordinateur via USB, ouvrez l'onglet Ground Unit dans le configurateur et cliquez sur Connect."
     },
     {
-      "@type": "CommentÉtape",
+      "@type": "HowToStep",
       "position": 6,
       "name": "Faire correspondre les paramètres de l'unité terrestre et envoyer",
       "text": "Cliquez sur Lire pour charger les paramètres actuels. Définissez id2 et Frequency_hz pour qu'ils correspondent à l'unité aérienne. Cliquez sur Envoyer, puis déconnectez l'USB."
     },
     {
-      "@type": "CommentÉtape",
+      "@type": "HowToStep",
       "position": 7,
       "name": "Allumez l'unité au sol et associez-la à l'application",
       "text": "Maintenez le bouton d'alimentation enfoncé jusqu'à ce que la LED soit bleue fixe. Ouvrez l'application Loko, accédez à Paramètres et sélectionnez l'unité au sol. Attendez le correctif GPS - l'emplacement apparaît sur la carte."
