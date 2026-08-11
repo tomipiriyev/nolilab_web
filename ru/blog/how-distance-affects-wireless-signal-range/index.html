@@ -2,356 +2,157 @@
 
 <html lang="ru">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Как расстояние влияет на дальность беспроводного сигнала | nolilab Блог</title>
-<link href="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
+<title>Как расстояние влияет на диапазон беспроводного сигнала | Блог nolilab</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Понимание того, как закон обратных квадратов влияет на дальность беспроводного сигнала и что это означает для систем GPS-отслеживания." name="description"/>
-<style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #24292e;
-      --text-secondary: #57606a;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
-      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    /* Header */
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-lg);
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    /* Article */
-    article {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: var(--spacing-xl) var(--spacing-md);
-    }
-
-    .article-header {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-meta {
-      display: flex;
-      gap: var(--spacing-md);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.2;
-    }
-
-    .article-image {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-content {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .article-content h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin: var(--spacing-xl) 0 var(--spacing-md);
-      letter-spacing: -0.01em;
-    }
-
-    .article-content h3 {
-      font-size: 1.375rem;
-      font-weight: 600;
-      margin: var(--spacing-lg) 0 var(--spacing-sm);
-    }
-
-    .article-content p {
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-content ul,
-    .article-content ol {
-      margin: var(--spacing-md) 0;
-      padding-left: var(--spacing-lg);
-    }
-
-    .article-content li {
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .article-content strong {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .article-content code {
-      background: var(--bg-secondary);
-      padding: 0.2em 0.4em;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      font-size: 0.9em;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      margin-bottom: var(--spacing-lg);
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--accent-hover);
-    }
-
-    /* Footer */
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .article-title {
-        font-size: 2rem;
-      }
-
-      .article-content {
-        font-size: 1rem;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
-<script type="application/ld+json">
-{
+<meta content="Понимание того, как закон обратных квадратов влияет на дальность беспроводного сигнала и что это означает для систем слежения GPS." name="description"/>
+<link href="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/how-distance-affects-wireless-signal-range/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="x-default" rel="alternate"/>
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "How Distance Affects Wireless Signal Range",
-  "description": "Understanding how the inverse square law affects wireless signal range and what it means for GPS tracking systems.",
-  "url": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range",
-  "datePublished": "2026-02-07",
-  "dateModified": "2026-02-07",
-  "author": {
-    "@type": "Person",
-    "name": "Tamleykha Piriyev"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "nolilab",
-    "url": "https://www.nolilab.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Дом",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Блог",
+      "item": "https://www.nolilab.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Как расстояние влияет на диапазон беспроводного сигнала",
+      "item": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/"
     }
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https://www.nolilab.com/cdn/shop/articles/radio-signal-range-by-distance.png?v=1770467347&width;=1920"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range"
-  }
-}
-</script>
-<style>
-  @font-face {
-    font-family: 'Inter-fallback';
-    src: local('Arial');
-    ascent-override: 90.44%;
-    descent-override: 22.52%;
-    line-gap-override: 0%;
-    size-adjust: 107.64%;
-  }
-</style>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/" />
+  ]
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <article>
-<a class="back-link" href="/ru/blog/">
+<a class="back-link" href="/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Вернуться в блог
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> February 7, 2026</span>
-<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+<span><i class="far fa-calendar"></i> 7 февраля 2026 г.</span>
+<span><i class="far fa-user"></i> Тамлейха Пириев</span>
 </div>
-<h1 class="article-title">Как расстояние влияет на дальность беспроводного сигнала</h1>
+<h1 class="article-title">Как расстояние влияет на диапазон беспроводного сигнала</h1>
 </div>
-<img alt="Radio Signal Range Diagram" class="article-image" src="https://www.nolilab.com/cdn/shop/articles/radio-signal-range-by-distance.png?v=1770467347&amp;width;=1920"/>
+<img alt="Radio Signal Range Diagram" class="article-image" height="512" src="/images/radio-wave.webp" width="512"/>
 <div class="article-content">
 <h2>Введение</h2>
-<p>В статье рассматривается распространение радиоволн в беспроводных системах с акцентом на то, что «закон обратных квадратов» принципиально ограничивает дальность связи по мере увеличения расстояния.</p>
+<p>В статье рассматривается, как радиоволны распространяются в беспроводных системах, подчеркивая, что «закон обратных квадратов» существенно ограничивает дальность связи по мере увеличения расстояния.</p>
 <h2>Как распространяются радиосигналы</h2>
-<p>Передатчики излучают энергию во всех направлениях, создавая расширяющийся сферический волновой фронт, а не сфокусированные лучи. Распределение сигнала растёт квадратично, тогда как расстояние увеличивается линейно — это и является математической основой ограничений дальности.</p>
+<p>Передатчики излучают энергию во всех направлениях, создавая расширяющийся сферический волновой фронт, а не сфокусированные лучи. Распределение сигнала растет квадратично, а расстояние увеличивается линейно — математическая основа ограничений дальности действия.</p>
 <h2>Закон обратных квадратов</h2>
-<p>Формула площади поверхности сферы: <strong>A = 4πr²</strong></p>
-<p>Ключевой принцип: при удвоении расстояния площадь распределения сигнала увеличивается вчетверо, снижая плотность мощности на 75%. В статье отмечается: «удвоение расстояния уменьшает уровень принятого сигнала до одной четверти».</p>
-<h2>Практические последствия для реальных систем</h2>
-<p><strong>Три критических фактора:</strong></p>
+<p>Формула площади поверхности сферы: <strong>А = 4πr²</strong></p>
+<p>Ключевой принцип: когда расстояние увеличивается вдвое, зона распространения сигнала увеличивается в четыре раза, что снижает плотность мощности на 75%. В статье отмечается: «удвоение расстояния снижает мощность принимаемого сигнала на четверть».</p>
+<h2>Последствия для реальной системы</h2>
+<p><strong>Три решающих фактора:</strong></p>
 <ol>
-<li><strong>Нелинейное масштабирование дальности</strong> — Для удвоения эффективной дальности (теоретически в свободном пространстве) мощность передатчика необходимо увеличить в четыре раза</li>
-<li><strong>Важность чувствительности приёмника</strong> — Улучшение уровня шумового пола зачастую эффективнее увеличения мощности</li>
-<li><strong>Конструкция антенны</strong> — Направленные антенны концентрируют энергию, компенсируя потери на распространение</li>
+<li><strong>Нелинейное масштабирование диапазона</strong> — Увеличение мощности передачи в четыре раза только удваивает эффективную дальность (теоретическое свободное пространство)</li>
+<li><strong>Важность чувствительности приемника</strong> — Улучшение уровня шума часто превосходит увеличение мощности.</li>
+<li><strong>Конструкция антенны</strong> — Направленные антенны концентрируют энергию, противодействуя потерям на растекание.</li>
 </ol>
-<h2>Потери в окружающей среде</h2>
-<p>В реальных условиях развёртывания возникают дополнительные потери из-за препятствий, многолучевого замирания, атмосферного поглощения, неэффективности антенн и несоответствия поляризации — зачастую превышающие теоретические прогнозы.</p>
-<h2>Практические применения (БПЛА, IoT, трекеры)</h2>
+<h2>Экологические потери</h2>
+<p>Реальные развертывания испытывают дополнительное ухудшение качества из-за препятствий, многолучевого замирания, атмосферного поглощения, неэффективности антенн и несоответствия поляризации, что часто превышает теоретические прогнозы.</p>
+<h2>Практическое применение (БПЛА, IoT, трекеры)</h2>
 <ul>
-<li>Более высокое расположение антенн снижает потери на препятствия</li>
-<li>Более низкие скорости передачи данных улучшают отношение сигнал/шум</li>
-<li>Технологии с расширенным спектром (LoRa) жертвуют полосой пропускания ради увеличения дальности</li>
+<li>Более высокое размещение антенны снижает потери на препятствия</li>
+<li>Более низкие скорости передачи данных улучшают соотношение сигнал/шум</li>
+<li>Технологии расширения спектра (LoRa) жертвуют полосой пропускания ради увеличения дальности действия</li>
 </ul>
-<h2>Заключение</h2>
-<p>«Расстояние — враг радиосвязи» — этот принцип принципиально определяет инженерные решения в области оптимизации антенн, выбора метода модуляции и размещения систем.</p>
+<h3>Заключение</h3>
+<p>«Расстояние — враг радиосвязи» фундаментально определяет инженерные решения, касающиеся оптимизации антенны, выбора модуляции и размещения системы.</p>
 </div>
 </article>
+<div class="product-cta">
+<p class="product-cta-heading">Ознакомьтесь с трекером Loko GPS</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">См. трекер Loko GPS</a>
+<a class="product-cta-link" href="/gps/">Руководство по технологиям GPS и LoRa</a>
+<a class="product-cta-link" href="/specifications/">Технические характеристики Loko</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">Похожие статьи</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/radio-line-of-sight/">
+<h3>Радио прямой видимости</h3>
+<span class="rp-cta">Читать дальше →</span>
+</a>
+<a class="related-post-card" href="/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/">
+<h3>Полное руководство по радио GPS: функции, преимущества и приложения</h3>
+<span class="rp-cta">Читать дальше →</span>
+</a>
+<a class="related-post-card" href="/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/">
+<h3>Трекер Loko GPS: изучение преимуществ спутниковых систем GPS, GLONASS и GALILEO</h3>
+<span class="rp-cta">Читать дальше →</span>
+</a>
+</div>
+</section>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/ru/">nolilab</a></li><li><a href="/ru/accessories/">Accessories</a></li><li><a href="/ru/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ru/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ru/battery-life/">Battery Life</a></li><li><a href="/ru/blog/">Blog</a></li><li><a href="/ru/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/ru/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ru/chirpstack/">ChirpStack</a></li><li><a href="/ru/contact/">Contact</a></li><li><a href="/ru/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ru/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ru/farms/">Farm GPS</a></li><li><a href="/ru/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ru/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ru/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ru/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ru/gps/">GPS & LoRa</a></li><li><a href="/ru/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ru/hiking/">Hiking GPS</a></li><li><a href="/ru/how-gps-works/">How GPS Works</a></li><li><a href="/ru/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ru/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ru/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ru/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ru/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ru/lorawan/">LoRaWAN</a></li><li><a href="/ru/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ru/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ru/open-source/">Open Source</a></li><li><a href="/ru/privacy/">Privacy</a></li><li><a href="/ru/search-rescue/">Search & Rescue</a></li><li><a href="/ru/setup-guides/">Setup</a></li><li><a href="/ru/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ru/software/">Software</a></li><li><a href="/ru/specifications/">Specs</a></li><li><a href="/ru/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ru/uk/">GPS Tracker UK</a></li><li><a href="/ru/uk/farms/">UK Farm GPS</a></li><li><a href="/ru/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ru/usa/">GPS Tracker USA</a></li><li><a href="/ru/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+  </script>
 <script defer="" src="/js/analytics.js"></script>
-<script defer="" src="/js/layout.js"></script>
 </body>
 </html>

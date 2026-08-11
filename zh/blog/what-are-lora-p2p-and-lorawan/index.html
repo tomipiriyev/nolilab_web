@@ -2,29 +2,38 @@
 
 <html lang="zh">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>什么是LoRa P2P和LoRaWAN？ | nolilab博客</title>
+<title>LoRa P2P 与 LoRaWAN：主要差异解释 | nolilab</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="远距离IoT通信需要能够跨越广阔距离传输数据的技术。了解LoRa P2P和LoRaWAN。" name="description"/>
+<meta content="LoRa P2P 可直接连接高达 20km 的设备 — 无需基础设施。比较 LoRa P2P 与 LoRaWAN：Loko 如何使用 P2P 进行离线 GPS 跟踪。" name="description"/>
 <link href="https://www.nolilab.com/zh/blog/what-are-lora-p2p-and-lorawan/" rel="canonical"/>
-<meta content="https://www.nolilab.com/zh/blog/what-are-lora-p2p-and-lorawan" property="og:url"/>
+<link href="https://www.nolilab.com/blog/what-are-lora-p2p-and-lorawan/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/what-are-lora-p2p-and-lorawan/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/what-are-lora-p2p-and-lorawan/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/what-are-lora-p2p-and-lorawan/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/what-are-lora-p2p-and-lorawan/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/what-are-lora-p2p-and-lorawan/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/what-are-lora-p2p-and-lorawan/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="什么是LoRa P2P和LoRaWAN？ | nolilab博客" property="og:title"/>
-<meta content="远距离IoT通信需要能够跨越广阔距离传输数据的技术。了解LoRa P2P和LoRaWAN。" property="og:description"/>
+<meta content="LoRa P2P 与 LoRaWAN：主要差异解释 | nolilab" property="og:title"/>
+<meta content="LoRa P2P 可直接连接高达 20km 的设备 — 无需基础设施。比较 LoRa P2P 与 LoRaWAN：Loko 如何使用 P2P 进行离线 GPS 跟踪。" property="og:description"/>
+<meta content="https://www.nolilab.com/zh/blog/what-are-lora-p2p-and-lorawan/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/lora-p2p-communication-diagram.webp" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="什么是LoRa P2P和LoRaWAN？ | nolilab博客" name="twitter:title"/>
-<meta content="远距离IoT通信需要能够跨越广阔距离传输数据的技术。了解LoRa P2P和LoRaWAN。" name="twitter:description"/>
+<meta content="LoRa P2P 与 LoRaWAN：主要差异解释 | nolilab" name="twitter:title"/>
+<meta content="LoRa P2P 可直接连接高达 20km 的设备 — 无需基础设施。比较 LoRa P2P 与 LoRaWAN：Loko 如何使用 P2P 进行离线 GPS 跟踪。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/lora-p2p-communication-diagram.webp" name="twitter:image"/>
 <style>
     :root {
       --bg-primary: #ffffff;
@@ -235,9 +244,202 @@
       color: var(--text-primary);
     }
 
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
     @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
       .nav-links {
-        display: none;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
       }
 
       .article-title {
@@ -253,19 +455,123 @@
         text-align: center;
       }
     }
+  
+    /* Related Posts */
+    .related-posts {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .related-posts-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+    .related-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .related-post-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem 1.1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .related-post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+    .related-post-card h3 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
+    }
+    .related-post-card .rp-cta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .related-posts-grid { grid-template-columns: 1fr; }
+    }
+  
+    /* Product CTA */
+    .product-cta {
+      max-width: 800px;
+      margin: 0 auto 0;
+      padding: 1.5rem 1rem 1.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .product-cta-heading {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.9rem;
+    }
+    .product-cta-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .product-cta-link {
+      display: inline-block;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      background: var(--bg-primary);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .product-cta-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .product-cta-link.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .product-cta-link.primary:hover {
+      background: var(--accent-hover, var(--accent));
+      border-color: var(--accent-hover, var(--accent));
+      color: #fff;
+    }
   </style>
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "What are LoRa P2P and LoRaWAN?",
-  "description": "Long-range IoT communication requires technologies that enable devices to transmit data across vast distances. Learn about LoRa P2P and LoRaWAN.",
-  "url": "https://www.nolilab.com/blog/what-are-lora-p2p-and-lorawan",
+  "headline": "什么是 LoRa、P2P 和 LoRaWAN？",
+  "description": "LoRa P2P 可直接连接高达 20km 的设备 — 无需基础设施。比较 LoRa P2P 与 LoRaWAN：Loko 如何使用 P2P 进行离线 GPS 跟踪。",
+  "url": "https://www.nolilab.com/zh/blog/what-are-lora-p2p-and-lorawan/",
   "datePublished": "2023-11-21",
   "dateModified": "2023-11-21",
   "author": {
-    "@type": "Organization",
-    "name": "nolilab"
+    "@type": "Person",
+    "name": "塔姆雷哈·皮里耶夫",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
   },
   "publisher": {
     "@type": "Organization",
@@ -278,62 +584,65 @@
   },
   "image": {
     "@type": "ImageObject",
-    "url": "https://www.nolilab.com/cdn/shop/articles/tmp_2d771d17-142f-4ef3-90a8-b50b826612c5.png?v=1700563147&width=1920"
+    "url": "/images/lora-p2p-通信-diagram.webp"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.nolilab.com/blog/what-are-lora-p2p-and-lorawan"
+    "@id": "https://www.nolilab.com/zh/blog/what-are-lora-p2p-and-lorawan/"
+  },
+  "inLanguage": "zh",
+  "@id": "https://www.nolilab.com/zh/blog/what-are-lora-p2p-and-lorawan/#article",
+  "translationOfWork": {
+    "@id": "https://www.nolilab.com/blog/what-are-lora-p2p-and-lorawan/#article"
   }
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "LoRa P2P和LoRaWAN有什么区别？",
+      "name": "LoRa、P2P 和 LoRaWAN 有什么区别？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa P2P（点对点）在没有任何基础设施的情况下直接连接追踪器和基站两个设备。LoRaWAN添加了包含网关、网络服务器和云应用的网络层。LoRa P2P更简单、无费用、可在任何地方使用；LoRaWAN需要网关基础设施，但可实现大规模IoT网络。"
+        "text": "LoRa P2P（点对点）直接连接两个设备 - 跟踪器和基站 - 无需任何基础设施。 LoRaWAN 添加了一个包含网关、网络服务器和云应用程序的网络层。 LoRa P2P 更简单，无需任何费用，可在任何地方使用； LoRaWAN 需要网关基础设施，但可实现大规模 IoT 网络。"
       }
     },
     {
       "@type": "Question",
-      "name": "什么是LoRa无线电技术？",
+      "name": "什么是 LoRa 无线电技术？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa（长距离）是一种使用线性调频扩频（CSS）的无线调制技术。它在亚GHz频率（欧洲868 MHz，美国915 MHz）上运行，以极低功耗实现2至20公里的通信距离，专为需要长电池寿命和远距离通信的IoT设备设计。"
+        "text": "LoRa（长距离）是一种使用线性调频扩频 (CSS) 的无线调制技术。它以 sub-GHz 频率运行（欧洲为 868 MHz，美国为 915 MHz），并以极低的功耗实现 2–20km 的范围。它专为需要长电池寿命和远距离通信的 IoT 设备而设计。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRa P2P需要订阅或互联网连接吗？",
+      "name": "LoRa P2P 是否需要订阅或互联网连接？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "不需要。LoRa P2P通信完全离线且无需订阅。Loko GPS追踪器使用LoRa P2P直接与基站通信，无需SIM卡、Wi-Fi或互联网。这使其在没有移动或互联网覆盖的偏远地区也能可靠工作。"
+        "text": "不会。LoRa P2P 通信是完全离线且免订阅的。 Loko GPS 跟踪器使用 LoRa P2P 直接与其基站通信 - 无需 SIM 卡、无需 Wi-Fi、无需互联网。这使得它在没有移动或互联网覆盖的偏远地区可靠。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRa P2P能通信多远？",
+      "name": "LoRa P2P 可以通讯多远？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa P2P在视距良好的开阔平坦地形上可通信最远20公里。在城市环境或有障碍物的地区，典型通信距离为2至5公里。通信距离取决于天线高度、地形、频率和扩频因子设置。"
+        "text": "LoRa P2P 在开阔、平坦的视线范围内最多可以通信 20km。在城市环境或有障碍物的区域，典型范围为 2–5km。范围取决于天线高度、地形、频率和扩频因子设置——扩频因子越高，数据速率越低，范围越远。"
       }
     },
     {
       "@type": "Question",
-      "name": "GPS追踪用LoRa P2P还是LoRaWAN更好？",
+      "name": "GPS 跟踪哪个更好：LoRa、P2P 或 LoRaWAN？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "对于个人GPS追踪（宠物、无人机、户外装备），LoRa P2P更好——无需基础设施即可在任何地方工作，无月费，通信范围2至20公里。LoRaWAN更适合车队管理或智慧城市应用，即需要大量设备向中央服务器大面积报告的场景。"
+        "text": "对于个人 GPS 跟踪（宠物、无人机、户外装备），LoRa P2P 更好 - 它可以在没有基础设施的任何地方工作，没有月费，并提供 2-20km 范围。 LoRaWAN 更适合车队管理或智能城市应用，在这些应用中，许多设备需要向大面积的中央服务器报告。"
       }
     }
-  ]
-}
-</script>
+  ],
+  "inLanguage": "zh"
+}</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';
@@ -344,78 +653,149 @@
     size-adjust: 107.64%;
   }
 </style>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/blog/what-are-lora-p2p-and-lorawan/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/blog/what-are-lora-p2p-and-lorawan/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/blog/what-are-lora-p2p-and-lorawan/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/blog/what-are-lora-p2p-and-lorawan/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/blog/what-are-lora-p2p-and-lorawan/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/blog/what-are-lora-p2p-and-lorawan/" />
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "博客",
+      "item": "https://www.nolilab.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "LoRa P2P 与 LoRaWAN：主要差异解释",
+      "item": "https://www.nolilab.com/blog/what-are-lora-p2p-and-lorawan/"
+    }
+  ],
+  "inLanguage": "zh"
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <article>
-<a class="back-link" href="/zh/blog/">
+<a class="back-link" href="/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 返回博客
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> November 21, 2023</span>
+<span><i class="far fa-calendar"></i> 2023 年 11 月 21 日</span>
 <span><i class="far fa-user"></i> <a class="author-link" href="/author/tamleykha-piriyev/" rel="author">nolilab</a></span>
 </div>
-<h1 class="article-title">什么是LoRa P2P和LoRaWAN？</h1>
+<h1 class="article-title">什么是 LoRa、P2P 和 LoRaWAN？</h1>
 </div>
-<img alt="LoRa P2P and LoRaWAN" class="article-image" src="https://www.nolilab.com/cdn/shop/articles/tmp_2d771d17-142f-4ef3-90a8-b50b826612c5.png?v=1700563147&amp;width=1920"/>
+<img alt="LoRa P2P and LoRaWAN" class="article-image" height="720" src="/images/lora-p2p-communication-diagram.webp" width="960"/>
 <div class="article-content">
-<h2>简介</h2>
-<p>远距离IoT通信需要能够跨越广阔距离传输数据的技术。LoRa、LoRa P2P和LoRaWAN是专为此类通信设计的无线技术，提供低功耗、远距离解决方案。Loko GPS追踪器是这些技术在追踪和资产管理中的实际应用典范。</p>
-<h2>了解LoRa技术</h2>
-<p>LoRa作为低功耗广域网的射频调制技术发挥作用。其基础建立在线性调频扩频调制之上，提供远距离通信、低功耗以及强抗干扰性。使用LoRa的电池供电设备可运行长达十年，同时在城市和农村保持可靠连接。</p>
-<h2>LoRa P2P与LoRaWAN：基础知识</h2>
-<p><strong>LoRa P2P</strong>无需集中式基础设施即可实现设备间直接传输，以最小延迟支持实时数据交换。相反，<strong>LoRaWAN</strong>作为基于LoRa技术的开放协议运行，支持大规模网络和建筑内深度通信。</p>
+<h2>介绍</h2>
+<p>远距离 IoT 通信需要使设备能够远距离传输数据的技术。 LoRa、LoRa、P2P 和 LoRaWAN 是旨在促进此类通信的无线电技术，提供低功耗、长距离解决方案。 Loko GPS 跟踪器例证了这些技术在跟踪和资产管理方面的实际应用。</p>
+<h3>了解 LoRa 技术</h3>
+<p>LoRa 用作低功耗广域网的射频调制技术。其基础基于线性调频扩频调制，可提供远距离通信、低功耗和强大的抗干扰能力。采用 LoRa 的电池供电设备可以运行长达十年，同时保持可靠的城市和乡村连接。</p>
+<h2>LoRa P2P 与 LoRaWAN：基础知识</h2>
+<p><strong>LoRa P2P</strong> 无需集中式基础设施即可实现设备到设备的直接传输，支持以最小延迟进行实时数据交换。反过来， <strong>LoRaWAN</strong> 作为基于 LoRa 技术的开放协议运行，支持大规模网络和深度建筑物内通信。</p>
 <p><strong>主要区别包括：</strong></p>
 <ul>
-<li>网络结构不同（点对点与分层结构）</li>
-<li>可扩展性不同（小型应用与大规模部署）</li>
-<li>用例取决于设备数量、距离要求和架构偏好</li>
+<li>网络结构各不相同（点对点与分层）</li>
+<li>可扩展性不同（较小的应用程序与广泛的部署）</li>
+<li>使用案例取决于设备数量、范围要求和架构偏好</li>
 </ul>
-<h2>LoRaWAN网络组件</h2>
-<p>LoRaWAN系统由六个基本要素构成：</p>
+<h2>LoRaWAN 网络组件</h2>
+<p>LoRaWAN 系统包含六个基本要素：</p>
 <ol>
-<li><strong>终端设备：</strong>传输/接收数据的传感器和执行器</li>
-<li><strong>网关：</strong>接收和传输LoRa射频消息的中间设备</li>
-<li><strong>网络服务器：</strong>管理参数并确保消息真实性</li>
-<li><strong>应用服务器：</strong>处理传感器数据并生成设备有效载荷</li>
-<li><strong>加入服务器：</strong>管理设备激活程序</li>
-<li><strong>设备类别（A、B、C）：</strong>提供不同的功耗和通信灵活性</li>
+<li><strong>终端设备：</strong> 传感器和执行器传输/接收数据</li>
+<li><strong>网关：</strong> 接收和发送 LoRa RF 消息的中介</li>
+<li><strong>网络服务器：</strong> 管理参数并确保消息真实性</li>
+<li><strong>应用服务器：</strong> 处理传感器数据并生成设备有效负载</li>
+<li><strong>加入服务器：</strong> 管理设备激活程序</li>
+<li><strong>设备类别（A、B、C）：</strong> 提供不同的功耗和通信灵活性</li>
 </ol>
-<h2>LoRa P2P通信的优势</h2>
-<p>LoRa P2P提供三大主要优势：将LoRaWAN覆盖范围扩展至偏远地区、通过消除集中式服务器降低基础设施成本，以及提供无需维护复杂性的灵活网络设计。</p>
-<h2>LoRaWAN网络的安全性</h2>
-<p>LoRaWAN采用两种关键安全机制：设备加入期间的双向认证确保只有授权设备才能连接，以及消息认证防止数据篡改和未经授权的修改。</p>
-<h2>Loko GPS追踪器：实际应用</h2>
-<p>该设备通过以下特性展示了LoRa的实际应用：</p>
+<h2>LoRa P2P 通信的优点</h2>
+<p>LoRa P2P 具有三个主要优势：将 LoRaWAN 的覆盖范围扩展到偏远地区、通过消除集中式服务器来降低基础设施成本以及提供灵活的网络设计且无需维护复杂性。</p>
+<h2>LoRaWAN 网络的安全性</h2>
+<p>LoRaWAN 采用两种关键的安全机制：设备加入期间的相互身份验证确保只有授权的设备才能连接，消息身份验证可防止数据篡改和未经授权的修改。</p>
+<h2>Loko GPS 跟踪器：实际应用</h2>
+<p>该器件演示了实用的 LoRa 实现：</p>
 <ul>
 <li>多卫星兼容性（GPS、GLONASS、GALILEO）</li>
-<li>防水、防尘和抗冲击</li>
-<li>超过5公里范围，电池续航超过30天</li>
-<li>紧凑的12克设计（30 x 23毫米）</li>
+<li>防水、防尘、防撞</li>
+<li>续航里程超过 5 公里，电池寿命长达 1 年</li>
+<li>紧凑型 12 克设计 (30 x 23 mm)</li>
 </ul>
-<h2>结论</h2>
-<p>了解LoRa P2P和LoRaWAN之间的区别有助于组织为特定IoT需求选择合适的通信解决方案。</p>
+<h3>结论</h3>
+<p>了解 LoRa、P2P 和 LoRaWAN 的区别有助于组织针对特定 IoT 要求选择合适的通信解决方案。</p>
 </div>
 </article>
-<aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
-<h3 style="margin:0 0 1rem;font-size:1rem;font-weight:600">相关文章</h3>
-<ul style="margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:0.5rem">
-<li><a href="/zh/blog/lora-lorawan-a-simple-guide/">LoRa与LoRaWAN：简明指南</a></li>
-<li><a href="/zh/blog/radio-line-of-sight/">无线电视距</a></li>
-</ul>
-</aside>
+<div class="product-cta">
+<p class="product-cta-heading">探索 Loko GPS 跟踪器</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">查看 Loko GPS 跟踪器</a>
+<a class="product-cta-link" href="/gps/">GPS 和 LoRa 技术指南</a>
+<a class="product-cta-link" href="/lorawan/">LoRaWAN 设置指南</a>
+<a class="product-cta-link" href="/specifications/">Loko 规格</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">相关文章</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/lora-lorawan-a-simple-guide/">
+<h3>LoRa 和 LoRaWAN：简单指南</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+<a class="related-post-card" href="/blog/how-to-set-up-lorawan/">
+<h3>如何设置 LoRaWAN</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+<a class="related-post-card" href="/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/">
+<h3>与 Loko GPS 跟踪器的远距离通信：探索 LoRa 无线电技术的强大功能</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+</div>
+</section>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/zh/">nolilab</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+  </script>
 <script defer="" src="/js/analytics.js"></script>
-<script defer="" src="/js/layout.js"></script>
 </body>
 </html>

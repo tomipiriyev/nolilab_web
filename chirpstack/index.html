@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <title>How to Connect Loko to ChirpStack | Self-Hosted LoRaWAN Guide | nolilab</title>
@@ -21,12 +21,19 @@
 <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
 <link href="https://www.nolilab.com/chirpstack/" rel="canonical"/>
 <link href="https://www.nolilab.com/chirpstack/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/chirpstack/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/es/chirpstack/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/chirpstack/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/chirpstack/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/ru/chirpstack/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/chirpstack/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/chirpstack/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/chirpstack/" hreflang="x-default" rel="alternate"/>
+
+
+
+
+
+
+
 <meta content="article" property="og:type"/>
 <meta content="How to Connect Loko to ChirpStack | Self-Hosted LoRaWAN Guide | nolilab" property="og:title"/>
 <meta content="Connect your Loko Air trackers to a self-hosted ChirpStack LoRaWAN network server — gateway, device profile, application, devices and gauges." property="og:description"/>
@@ -512,403 +519,363 @@
 }
 </script>
 
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/" />
+
+
+
+
 </head>
 <body>
 <div id="site-header"></div>
 <main class="lorawan-container">
-
-  <!-- ============================ HERO ============================ -->
-  <header class="lorawan-hero">
-    <div class="kicker">Loko · Setup Guide</div>
-    <h1>Connecting Loko to ChirpStack</h1>
-    <p>Run your own LoRaWAN network server? Here's how to get your Loko&nbsp;Air trackers
+<!-- ============================ HERO ============================ -->
+<header class="lorawan-hero">
+<div class="kicker">Loko · Setup Guide</div>
+<h1>Connecting Loko to ChirpStack</h1>
+<p>Run your own LoRaWAN network server? Here's how to get your Loko Air trackers
        joined, decoded and charted on a self-hosted <b>ChirpStack</b> instance — in six
        short steps.</p>
-    <div class="meta">~20 min · Beginner friendly</div>
-  </header>
-
-  <div class="lorawan-content">
-
-    <!-- ============================ INTRO ============================ -->
-    <p>Loko Air trackers speak plain <b>LoRaWAN</b>, so they work with any network server —
-       not just The&nbsp;Things&nbsp;Network. If you'd rather keep your data on your own
+<div class="meta">~20 min · Beginner friendly</div>
+</header>
+<div class="lorawan-content">
+<!-- ============================ INTRO ============================ -->
+<p>Loko Air trackers speak plain <b>LoRaWAN</b>, so they work with any network server —
+       not just The Things Network. If you'd rather keep your data on your own
        infrastructure, <a href="https://www.chirpstack.io/" rel="noopener" target="_blank">ChirpStack</a>
        is a free, open-source LoRaWAN network server you can host yourself.</p>
-    <p>Everything below happens inside the <b>Tenant</b> section of the ChirpStack web
+<p>Everything below happens inside the <b>Tenant</b> section of the ChirpStack web
        console. The sidebar has two navigation groups: <b>Network Server</b> holds global,
        server-wide settings for all tenants, while <b>Tenant</b> holds everything for your
        own organisation — that's where all the work happens.</p>
-
-    <!-- ============================ REQUIREMENTS ============================ -->
-    <div class="req">
-      <h3>What you'll need</h3>
-      <ul>
-        <li><span class="dot">▸</span><div><b>A running ChirpStack instance</b><span>One you can log in to (this guide uses the <code>admin</code> account).</span></div></li>
-        <li><span class="dot">▸</span><div><b>A LoRaWAN gateway</b><span>That can reach your ChirpStack server — plus its <b>Gateway ID</b>.</span></div></li>
-        <li><span class="dot">▸</span><div><b>Your Loko Air device credentials</b><span>The <b>DevEUI</b>, <b>JoinEUI (AppEUI)</b> and <b>Application Key</b> programmed on the device.</span></div></li>
-      </ul>
-    </div>
-
-    <div class="note">
-      <span class="ic">🎯</span>
-      <div class="bd">By the end you'll have an <b>online gateway</b>, a device that
+<!-- ============================ REQUIREMENTS ============================ -->
+<div class="req">
+<h3>What you'll need</h3>
+<ul>
+<li><span class="dot">▸</span><div><b>A running ChirpStack instance</b><span>One you can log in to (this guide uses the <code>admin</code> account).</span></div></li>
+<li><span class="dot">▸</span><div><b>A LoRaWAN gateway</b><span>That can reach your ChirpStack server — plus its <b>Gateway ID</b>.</span></div></li>
+<li><span class="dot">▸</span><div><b>Your Loko Air device credentials</b><span>The <b>DevEUI</b>, <b>JoinEUI (AppEUI)</b> and <b>Application Key</b> programmed on the device.</span></div></li>
+</ul>
+</div>
+<div class="note">
+<span class="ic">🎯</span>
+<div class="bd">By the end you'll have an <b>online gateway</b>, a device that
         completes its <b>join</b>, and decoded measurements rendered as <b>gauges</b> on
         the device dashboard.</div>
-    </div>
-
-    <!-- ============================ STEP 1 ============================ -->
-    <div class="step" id="step-1"><div class="num">1</div><h2>Make sure a gateway is online</h2></div>
-    <p class="lead">Open <b>Tenant → Gateways</b>. You need at least one gateway showing a
+</div>
+<!-- ============================ STEP 1 ============================ -->
+<div class="step" id="step-1"><div class="num">1</div><h2>Make sure a gateway is online</h2></div>
+<p class="lead">Open <b>Tenant → Gateways</b>. You need at least one gateway showing a
        green <b>Online</b> status before any device can join. If the list is empty, click
        <b>Add gateway</b> and register yours.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-gateways.webp">
-          <img src="/images/chirpstack/chirpstack-gateways.png" alt="ChirpStack Gateways list showing gateway ID and online status" loading="lazy" width="1680" height="841">
-        </picture>
-        <!-- 1 · Gateways nav -->
-        <span class="hl"  style="left:2%; top:83.5%; width:8.5%; height:3.2%;"></span>
-        <span class="tag" style="left:2%; top:83.5%;">1</span>
-        <!-- 2 · Add gateway button -->
-        <span class="hl"  style="left:80.6%; top:15%; width:7.8%; height:4.2%;"></span>
-        <span class="tag" style="left:80.6%; top:15%;">2</span>
-        <!-- 3 · Gateway ID -->
-        <span class="hl"  style="left:43.5%; top:31%; width:9%; height:4.8%;"></span>
-        <span class="tag" style="left:43.5%; top:31%;">3</span>
-        <!-- 4 · Offline status (warning) -->
-        <span class="hl red"  style="left:22%; top:31%; width:6%; height:4.8%;"></span>
-        <span class="tag red" style="left:22%; top:31%;">4</span>
-      </div>
-      <figcaption>① Gateways  ·  ② Add gateway  ·  ③ Gateway ID  ·  ④ Status (must turn green)</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">🆔</span>
-      <div class="bd">The one thing you must provide when adding a gateway is its
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-gateways.webp" type="image/webp"/>
+<img alt="ChirpStack Gateways list showing gateway ID and online status" height="841" loading="lazy" src="/images/chirpstack/chirpstack-gateways.png" width="1680"/>
+</picture>
+<!-- 1 · Gateways nav -->
+<span class="hl" style="left:2%; top:83.5%; width:8.5%; height:3.2%;"></span>
+<span class="tag" style="left:2%; top:83.5%;">1</span>
+<!-- 2 · Add gateway button -->
+<span class="hl" style="left:80.6%; top:15%; width:7.8%; height:4.2%;"></span>
+<span class="tag" style="left:80.6%; top:15%;">2</span>
+<!-- 3 · Gateway ID -->
+<span class="hl" style="left:43.5%; top:31%; width:9%; height:4.8%;"></span>
+<span class="tag" style="left:43.5%; top:31%;">3</span>
+<!-- 4 · Offline status (warning) -->
+<span class="hl red" style="left:22%; top:31%; width:6%; height:4.8%;"></span>
+<span class="tag red" style="left:22%; top:31%;">4</span>
+</div>
+<figcaption>① Gateways  ·  ② Add gateway  ·  ③ Gateway ID  ·  ④ Status (must turn green)</figcaption>
+</figure>
+<div class="note">
+<span class="ic">🆔</span>
+<div class="bd">The one thing you must provide when adding a gateway is its
         <b>Gateway ID</b> — a 16-character hex EUI like <code>782184ffff9f3249</code>.
         Find it on the gateway's display, on a label, or in its admin page / manual. Also
         pick the matching <b>Region</b> (e.g. <code>EU868</code>).</div>
-    </div>
-
-    <div class="note crit">
-      <span class="ic">⚠️</span>
-      <div class="bd"><b>Wait for green.</b> In the screenshot above the gateway shows a red
+</div>
+<div class="note crit">
+<span class="ic">⚠️</span>
+<div class="bd"><b>Wait for green.</b> In the screenshot above the gateway shows a red
         <b>Offline</b> dot (④). Don't continue until <b>Last seen</b> updates and the status
         turns <b>Online</b> — an offline gateway receives no radio traffic, so nothing will
         ever join.</div>
-    </div>
-
-    <!-- ============================ STEP 2 ============================ -->
-    <div class="step" id="step-2"><div class="num">2</div><h2>Create a device profile</h2></div>
-    <p class="lead">A device profile describes how a class of devices behaves — region,
+</div>
+<!-- ============================ STEP 2 ============================ -->
+<div class="step" id="step-2"><div class="num">2</div><h2>Create a device profile</h2></div>
+<p class="lead">A device profile describes how a class of devices behaves — region,
        LoRaWAN version, join method and payload codec. Open
        <b>Tenant → Device Profiles</b> and click <b>Add device profile</b>.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-device-profiles.webp">
-          <img src="/images/chirpstack/chirpstack-device-profiles.png" alt="ChirpStack Device profiles list with the Add device profile button" loading="lazy" width="1680" height="838">
-        </picture>
-        <!-- 1 · Device Profiles nav -->
-        <span class="hl"  style="left:2%; top:77.8%; width:8.5%; height:3.2%;"></span>
-        <span class="tag" style="left:2%; top:77.8%;">1</span>
-        <!-- 2 · Add device profile button -->
-        <span class="hl"  style="left:88.8%; top:15%; width:9.4%; height:3.6%;"></span>
-        <span class="tag" style="left:88.8%; top:15%;">2</span>
-      </div>
-      <figcaption>① Open Device Profiles  ·  ② Add device profile</figcaption>
-    </figure>
-
-    <p>On the <b>General</b> tab, fill in the essentials — a name, your region and the
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-device-profiles.webp" type="image/webp"/>
+<img alt="ChirpStack Device profiles list with the Add device profile button" height="838" loading="lazy" src="/images/chirpstack/chirpstack-device-profiles.png" width="1680"/>
+</picture>
+<!-- 1 · Device Profiles nav -->
+<span class="hl" style="left:2%; top:77.8%; width:8.5%; height:3.2%;"></span>
+<span class="tag" style="left:2%; top:77.8%;">1</span>
+<!-- 2 · Add device profile button -->
+<span class="hl" style="left:88.8%; top:15%; width:9.4%; height:3.6%;"></span>
+<span class="tag" style="left:88.8%; top:15%;">2</span>
+</div>
+<figcaption>① Open Device Profiles  ·  ② Add device profile</figcaption>
+</figure>
+<p>On the <b>General</b> tab, fill in the essentials — a name, your region and the
        LoRaWAN MAC version your Loko Air uses.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-profile-general.webp">
-          <img src="/images/chirpstack/chirpstack-profile-general.png" alt="ChirpStack Add device profile General tab with name, region and MAC version" loading="lazy" width="1680" height="839">
-        </picture>
-        <!-- 1 · Name -->
-        <span class="hl"  style="left:20.8%; top:35.5%; width:77%; height:3.6%;"></span>
-        <span class="tag" style="left:20.8%; top:35.5%;">1</span>
-        <!-- 2 · Region -->
-        <span class="hl"  style="left:20.8%; top:70.5%; width:37.5%; height:3.8%;"></span>
-        <span class="tag" style="left:20.8%; top:70.5%;">2</span>
-        <!-- 3 · MAC version -->
-        <span class="hl"  style="left:20.8%; top:81%; width:37.5%; height:3.8%;"></span>
-        <span class="tag" style="left:20.8%; top:81%;">3</span>
-      </div>
-      <figcaption>① Name (e.g. Generic-OTAA-EU868)  ·  ② Region (EU868)  ·  ③ MAC version</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">📡</span>
-      <div class="bd">Choose the <b>Region</b> and <b>MAC version</b> that match your Loko
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-profile-general.webp" type="image/webp"/>
+<img alt="ChirpStack Add device profile General tab with name, region and MAC version" height="839" loading="lazy" src="/images/chirpstack/chirpstack-profile-general.png" width="1680"/>
+</picture>
+<!-- 1 · Name -->
+<span class="hl" style="left:20.8%; top:35.5%; width:77%; height:3.6%;"></span>
+<span class="tag" style="left:20.8%; top:35.5%;">1</span>
+<!-- 2 · Region -->
+<span class="hl" style="left:20.8%; top:70.5%; width:37.5%; height:3.8%;"></span>
+<span class="tag" style="left:20.8%; top:70.5%;">2</span>
+<!-- 3 · MAC version -->
+<span class="hl" style="left:20.8%; top:81%; width:37.5%; height:3.8%;"></span>
+<span class="tag" style="left:20.8%; top:81%;">3</span>
+</div>
+<figcaption>① Name (e.g. Generic-OTAA-EU868)  ·  ② Region (EU868)  ·  ③ MAC version</figcaption>
+</figure>
+<div class="note">
+<span class="ic">📡</span>
+<div class="bd">Choose the <b>Region</b> and <b>MAC version</b> that match your Loko
         Air and your gateway (e.g. <code>EU868</code> and <code>LoRaWAN 1.0.3</code>).
         Leave <b>Regional parameters revision</b> and <b>ADR algorithm</b> at their
         defaults.</div>
-    </div>
-
-    <p>Switch to the <b>Join (OTAA / ABP)</b> tab and turn on <b>Device supports OTAA</b> —
+</div>
+<p>Switch to the <b>Join (OTAA / ABP)</b> tab and turn on <b>Device supports OTAA</b> —
        Loko Air trackers join over the air.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-profile-otaa.webp">
-          <img src="/images/chirpstack/chirpstack-profile-otaa.png" alt="ChirpStack device profile Join OTAA tab with Device supports OTAA enabled" loading="lazy" width="1680" height="843">
-        </picture>
-        <!-- 1 · Join tab -->
-        <span class="hl"  style="left:25.2%; top:25.5%; width:9%; height:5%;"></span>
-        <span class="tag" style="left:25.2%; top:25.5%;">1</span>
-        <!-- 2 · Device supports OTAA toggle -->
-        <span class="hl"  style="left:20.8%; top:37%; width:4.5%; height:6%;"></span>
-        <span class="tag" style="left:20.8%; top:37%;">2</span>
-      </div>
-      <figcaption>① Join (OTAA / ABP) tab  ·  ② Device supports OTAA = on</figcaption>
-    </figure>
-
-    <p>Finally, open the <b>Payload codec</b> tab and select <b>Cayenne&nbsp;LPP</b>, then
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-profile-otaa.webp" type="image/webp"/>
+<img alt="ChirpStack device profile Join OTAA tab with Device supports OTAA enabled" height="843" loading="lazy" src="/images/chirpstack/chirpstack-profile-otaa.png" width="1680"/>
+</picture>
+<!-- 1 · Join tab -->
+<span class="hl" style="left:25.2%; top:25.5%; width:9%; height:5%;"></span>
+<span class="tag" style="left:25.2%; top:25.5%;">1</span>
+<!-- 2 · Device supports OTAA toggle -->
+<span class="hl" style="left:20.8%; top:37%; width:4.5%; height:6%;"></span>
+<span class="tag" style="left:20.8%; top:37%;">2</span>
+</div>
+<figcaption>① Join (OTAA / ABP) tab  ·  ② Device supports OTAA = on</figcaption>
+</figure>
+<p>Finally, open the <b>Payload codec</b> tab and select <b>Cayenne LPP</b>, then
        click <b>Submit</b>.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-profile-codec.webp">
-          <img src="/images/chirpstack/chirpstack-profile-codec.png" alt="ChirpStack device profile Payload codec tab set to Cayenne LPP" loading="lazy" width="1680" height="832">
-        </picture>
-        <!-- 1 · Payload codec tab -->
-        <span class="hl"  style="left:44.5%; top:26%; width:7.5%; height:5%;"></span>
-        <span class="tag" style="left:44.5%; top:26%;">1</span>
-        <!-- 2 · Codec dropdown = Cayenne LPP -->
-        <span class="hl"  style="left:20.8%; top:38%; width:76%; height:4%;"></span>
-        <span class="tag" style="left:20.8%; top:38%;">2</span>
-        <!-- 3 · Submit -->
-        <span class="hl"  style="left:20.8%; top:45.5%; width:5%; height:4%;"></span>
-        <span class="tag" style="left:20.8%; top:45.5%;">3</span>
-      </div>
-      <figcaption>① Payload codec tab  ·  ② Cayenne LPP  ·  ③ Submit</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">🧩</span>
-      <div class="bd"><b>Cayenne LPP</b> lets ChirpStack automatically decode the raw
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-profile-codec.webp" type="image/webp"/>
+<img alt="ChirpStack device profile Payload codec tab set to Cayenne LPP" height="832" loading="lazy" src="/images/chirpstack/chirpstack-profile-codec.png" width="1680"/>
+</picture>
+<!-- 1 · Payload codec tab -->
+<span class="hl" style="left:44.5%; top:26%; width:7.5%; height:5%;"></span>
+<span class="tag" style="left:44.5%; top:26%;">1</span>
+<!-- 2 · Codec dropdown = Cayenne LPP -->
+<span class="hl" style="left:20.8%; top:38%; width:76%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:38%;">2</span>
+<!-- 3 · Submit -->
+<span class="hl" style="left:20.8%; top:45.5%; width:5%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:45.5%;">3</span>
+</div>
+<figcaption>① Payload codec tab  ·  ② Cayenne LPP  ·  ③ Submit</figcaption>
+</figure>
+<div class="note">
+<span class="ic">🧩</span>
+<div class="bd"><b>Cayenne LPP</b> lets ChirpStack automatically decode the raw
         payload into named measurements (GPS position, battery, etc.) — which is what makes
-        the gauges in Step&nbsp;6 possible.</div>
-    </div>
-
-    <!-- ============================ STEP 3 ============================ -->
-    <div class="step" id="step-3"><div class="num">3</div><h2>Create an application</h2></div>
-    <p class="lead">Open <b>Tenant → Applications</b> and click <b>Add application</b>.
+        the gauges in Step 6 possible.</div>
+</div>
+<!-- ============================ STEP 3 ============================ -->
+<div class="step" id="step-3"><div class="num">3</div><h2>Create an application</h2></div>
+<p class="lead">Open <b>Tenant → Applications</b> and click <b>Add application</b>.
        Give it a name (e.g. <code>Loko</code>) and save. An application is just the
        container that groups your devices together.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-applications.webp">
-          <img src="/images/chirpstack/chirpstack-applications.png" alt="ChirpStack Applications list with the Add application button" loading="lazy" width="1680" height="849">
-        </picture>
-        <!-- 1 · Applications nav -->
-        <span class="hl"  style="left:2%; top:93.2%; width:8.5%; height:3.4%;"></span>
-        <span class="tag" style="left:2%; top:93.2%;">1</span>
-        <!-- 2 · Add application button -->
-        <span class="hl"  style="left:88.8%; top:15.8%; width:9.6%; height:4%;"></span>
-        <span class="tag" style="left:88.8%; top:15.8%;">2</span>
-      </div>
-      <figcaption>① Open Applications  ·  ② Add application</figcaption>
-    </figure>
-
-    <!-- ============================ STEP 4 ============================ -->
-    <div class="step" id="step-4"><div class="num">4</div><h2>Add your devices</h2></div>
-    <p class="lead">Click the application you just created to open it. It lands on the
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-applications.webp" type="image/webp"/>
+<img alt="ChirpStack Applications list with the Add application button" height="849" loading="lazy" src="/images/chirpstack/chirpstack-applications.png" width="1680"/>
+</picture>
+<!-- 1 · Applications nav -->
+<span class="hl" style="left:2%; top:93.2%; width:8.5%; height:3.4%;"></span>
+<span class="tag" style="left:2%; top:93.2%;">1</span>
+<!-- 2 · Add application button -->
+<span class="hl" style="left:88.8%; top:15.8%; width:9.6%; height:4%;"></span>
+<span class="tag" style="left:88.8%; top:15.8%;">2</span>
+</div>
+<figcaption>① Open Applications  ·  ② Add application</figcaption>
+</figure>
+<!-- ============================ STEP 4 ============================ -->
+<div class="step" id="step-4"><div class="num">4</div><h2>Add your devices</h2></div>
+<p class="lead">Click the application you just created to open it. It lands on the
        <b>Devices</b> tab, where an <b>Add device</b> button appears. Once devices exist,
        their <b>DevEUI</b> and <b>Device profile</b> show as clickable links.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-app-devices.webp">
-          <img src="/images/chirpstack/chirpstack-app-devices.png" alt="ChirpStack application Devices tab listing a Loko device" loading="lazy" width="1680" height="832">
-        </picture>
-        <!-- 1 · Add device button -->
-        <span class="hl"  style="left:81.8%; top:36.5%; width:6.8%; height:4%;"></span>
-        <span class="tag" style="left:81.8%; top:36.5%;">1</span>
-        <!-- 2 · DevEUI link -->
-        <span class="hl"  style="left:39.4%; top:51%; width:9%; height:4.2%;"></span>
-        <span class="tag" style="left:39.4%; top:51%;">2</span>
-        <!-- 3 · Device profile link -->
-        <span class="hl"  style="left:64.8%; top:51%; width:9.5%; height:4.2%;"></span>
-        <span class="tag" style="left:64.8%; top:51%;">3</span>
-      </div>
-      <figcaption>① Add device  ·  ② DevEUI (opens the device)  ·  ③ Device profile</figcaption>
-    </figure>
-
-    <p>Click <b>Add device</b> and fill in the details from your Loko Air, then
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-app-devices.webp" type="image/webp"/>
+<img alt="ChirpStack application Devices tab listing a Loko device" height="832" loading="lazy" src="/images/chirpstack/chirpstack-app-devices.png" width="1680"/>
+</picture>
+<!-- 1 · Add device button -->
+<span class="hl" style="left:81.8%; top:36.5%; width:6.8%; height:4%;"></span>
+<span class="tag" style="left:81.8%; top:36.5%;">1</span>
+<!-- 2 · DevEUI link -->
+<span class="hl" style="left:39.4%; top:51%; width:9%; height:4.2%;"></span>
+<span class="tag" style="left:39.4%; top:51%;">2</span>
+<!-- 3 · Device profile link -->
+<span class="hl" style="left:64.8%; top:51%; width:9.5%; height:4.2%;"></span>
+<span class="tag" style="left:64.8%; top:51%;">3</span>
+</div>
+<figcaption>① Add device  ·  ② DevEUI (opens the device)  ·  ③ Device profile</figcaption>
+</figure>
+<p>Click <b>Add device</b> and fill in the details from your Loko Air, then
        <b>Submit</b>:</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-add-device.webp">
-          <img src="/images/chirpstack/chirpstack-add-device.png" alt="ChirpStack Add device form with name, Device EUI, Join EUI and device profile" loading="lazy" width="1680" height="845">
-        </picture>
-        <!-- 1 · Name -->
-        <span class="hl"  style="left:20.8%; top:38.5%; width:76%; height:4%;"></span>
-        <span class="tag" style="left:20.8%; top:38.5%;">1</span>
-        <!-- 2 · Device EUI -->
-        <span class="hl"  style="left:20.8%; top:62.5%; width:37.8%; height:4%;"></span>
-        <span class="tag" style="left:20.8%; top:62.5%;">2</span>
-        <!-- 3 · Join EUI -->
-        <span class="hl"  style="left:60.4%; top:62.5%; width:37.8%; height:4%;"></span>
-        <span class="tag" style="left:60.4%; top:62.5%;">3</span>
-        <!-- 4 · Device profile -->
-        <span class="hl"  style="left:20.8%; top:73%; width:76%; height:4%;"></span>
-        <span class="tag" style="left:20.8%; top:73%;">4</span>
-        <!-- 5 · Submit -->
-        <span class="hl"  style="left:20.8%; top:90.5%; width:5.2%; height:4%;"></span>
-        <span class="tag" style="left:20.8%; top:90.5%;">5</span>
-      </div>
-      <figcaption>① Name  ·  ② Device EUI (DevEUI)  ·  ③ Join EUI  ·  ④ Device profile  ·  ⑤ Submit</figcaption>
-    </figure>
-
-    <ul class="fields">
-      <li><b>Name</b> — a friendly name, e.g. <code>Loko1</code>.</li>
-      <li><b>Device EUI (EUI64)</b> — the <b>DevEUI</b> from your Loko Air device.</li>
-      <li><b>Join EUI (EUI64)</b> — the <b>JoinEUI / AppEUI</b> from your device.</li>
-      <li><b>Device profile</b> — select the profile from Step&nbsp;2 (<code>Generic-OTAA-EU868</code>).</li>
-    </ul>
-
-    <div class="note warn">
-      <span class="ic">🔑</span>
-      <div class="bd"><b>The Application Key comes next.</b> Because the profile uses OTAA,
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-add-device.webp" type="image/webp"/>
+<img alt="ChirpStack Add device form with name, Device EUI, Join EUI and device profile" height="845" loading="lazy" src="/images/chirpstack/chirpstack-add-device.png" width="1680"/>
+</picture>
+<!-- 1 · Name -->
+<span class="hl" style="left:20.8%; top:38.5%; width:76%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:38.5%;">1</span>
+<!-- 2 · Device EUI -->
+<span class="hl" style="left:20.8%; top:62.5%; width:37.8%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:62.5%;">2</span>
+<!-- 3 · Join EUI -->
+<span class="hl" style="left:60.4%; top:62.5%; width:37.8%; height:4%;"></span>
+<span class="tag" style="left:60.4%; top:62.5%;">3</span>
+<!-- 4 · Device profile -->
+<span class="hl" style="left:20.8%; top:73%; width:76%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:73%;">4</span>
+<!-- 5 · Submit -->
+<span class="hl" style="left:20.8%; top:90.5%; width:5.2%; height:4%;"></span>
+<span class="tag" style="left:20.8%; top:90.5%;">5</span>
+</div>
+<figcaption>① Name  ·  ② Device EUI (DevEUI)  ·  ③ Join EUI  ·  ④ Device profile  ·  ⑤ Submit</figcaption>
+</figure>
+<ul class="fields">
+<li><b>Name</b> — a friendly name, e.g. <code>Loko1</code>.</li>
+<li><b>Device EUI (EUI64)</b> — the <b>DevEUI</b> from your Loko Air device.</li>
+<li><b>Join EUI (EUI64)</b> — the <b>JoinEUI / AppEUI</b> from your device.</li>
+<li><b>Device profile</b> — select the profile from Step 2 (<code>Generic-OTAA-EU868</code>).</li>
+</ul>
+<div class="note warn">
+<span class="ic">🔑</span>
+<div class="bd"><b>The Application Key comes next.</b> Because the profile uses OTAA,
         after you Submit, ChirpStack opens the <b>OTAA keys</b> tab. Enter (or paste) the
         device's <b>Application Key (AppKey)</b> there and Submit.</div>
-    </div>
-
-    <div class="note crit">
-      <span class="ic">⚠️</span>
-      <div class="bd"><b>Everything must match the physical device.</b> The <b>DevEUI</b>,
+</div>
+<div class="note crit">
+<span class="ic">⚠️</span>
+<div class="bd"><b>Everything must match the physical device.</b> The <b>DevEUI</b>,
         <b>JoinEUI</b> and <b>AppKey</b> you enter must be identical to what's programmed on
         the Loko Air — otherwise the join will silently fail. Repeat this step for every
         tracker you own.</div>
-    </div>
-
-    <!-- ============================ STEP 5 ============================ -->
-    <div class="step" id="step-5"><div class="num">5</div><h2>Confirm the join &amp; watch the frames</h2></div>
-    <p class="lead">Back in the application's device list, click a device's <b>DevEUI</b> to
+</div>
+<!-- ============================ STEP 5 ============================ -->
+<div class="step" id="step-5"><div class="num">5</div><h2>Confirm the join &amp; watch the frames</h2></div>
+<p class="lead">Back in the application's device list, click a device's <b>DevEUI</b> to
        open it, then explore the tabs — <b>OTAA keys</b>, <b>Activation</b>, <b>Events</b>
        and <b>LoRaWAN frames</b>. The frames view shows the raw radio traffic in real time.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-lorawan-frames.webp">
-          <img src="/images/chirpstack/chirpstack-lorawan-frames.png" alt="ChirpStack device LoRaWAN frames showing JoinRequest and JoinAccept" loading="lazy" width="1680" height="859">
-        </picture>
-        <!-- 1 · LoRaWAN frames tab -->
-        <span class="hl"  style="left:57.5%; top:12.5%; width:8%; height:4.5%;"></span>
-        <span class="tag" style="left:57.5%; top:12.5%;">1</span>
-        <!-- 2 · JoinRequest / JoinAccept sequence -->
-        <span class="hl green"  style="left:34%; top:44%; width:20%; height:11%;"></span>
-        <span class="tag green" style="left:34%; top:44%;">2</span>
-      </div>
-      <figcaption>① LoRaWAN frames tab  ·  ② JoinRequest → JoinAccept, then data frames</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">✅</span>
-      <div class="bd">A healthy device shows a <b>JoinRequest</b> followed by a
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-lorawan-frames.webp" type="image/webp"/>
+<img alt="ChirpStack device LoRaWAN frames showing JoinRequest and JoinAccept" height="859" loading="lazy" src="/images/chirpstack/chirpstack-lorawan-frames.png" width="1680"/>
+</picture>
+<!-- 1 · LoRaWAN frames tab -->
+<span class="hl" style="left:57.5%; top:12.5%; width:8%; height:4.5%;"></span>
+<span class="tag" style="left:57.5%; top:12.5%;">1</span>
+<!-- 2 · JoinRequest / JoinAccept sequence -->
+<span class="hl green" style="left:34%; top:44%; width:20%; height:11%;"></span>
+<span class="tag green" style="left:34%; top:44%;">2</span>
+</div>
+<figcaption>① LoRaWAN frames tab  ·  ② JoinRequest → JoinAccept, then data frames</figcaption>
+</figure>
+<div class="note">
+<span class="ic">✅</span>
+<div class="bd">A healthy device shows a <b>JoinRequest</b> followed by a
         <b>JoinAccept</b>, then <b>UnconfirmedDataUp</b> / <b>UnconfirmedDataDown</b>
-        frames — each listing the <b>DevEUI</b> and the <b>Gateway&nbsp;ID</b> that received
+        frames — each listing the <b>DevEUI</b> and the <b>Gateway ID</b> that received
         them. If you only ever see <b>JoinRequest</b> repeating, re-check the DevEUI /
         JoinEUI / AppKey and that your gateway is online.</div>
-    </div>
-
-    <!-- ============================ STEP 6 ============================ -->
-    <div class="step" id="step-6"><div class="num">6</div><h2>Visualise measurements as gauges</h2></div>
-    <p class="lead">Once decoded data is flowing (thanks to the Cayenne&nbsp;LPP codec),
+</div>
+<!-- ============================ STEP 6 ============================ -->
+<div class="step" id="step-6"><div class="num">6</div><h2>Visualise measurements as gauges</h2></div>
+<p class="lead">Once decoded data is flowing (thanks to the Cayenne LPP codec),
        open <b>Tenant → Device Profiles → your profile → Measurements</b>. With
        <b>Automatically detect measurement keys</b> on, ChirpStack lists the keys it has
        seen — such as <code>Battery_Voltage</code>, <code>gpsLocation_1_latitude</code> and
        <code>gpsLocation_1_longitude</code> — so set the ones you care about to <b>Gauge</b>.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/chirpstack/chirpstack-measurements.webp">
-          <img src="/images/chirpstack/chirpstack-measurements.png" alt="ChirpStack device profile Measurements tab with keys set to Gauge" loading="lazy" width="1680" height="854">
-        </picture>
-        <!-- 1 · Measurements tab -->
-        <span class="hl"  style="left:69.5%; top:20%; width:8%; height:4.5%;"></span>
-        <span class="tag" style="left:69.5%; top:20%;">1</span>
-        <!-- 2 · Auto-detect toggle -->
-        <span class="hl"  style="left:20.8%; top:59.5%; width:4.5%; height:5.5%;"></span>
-        <span class="tag" style="left:20.8%; top:59.5%;">2</span>
-        <!-- 3 · a Gauge selector -->
-        <span class="hl"  style="left:40.8%; top:72.5%; width:18.5%; height:4.5%;"></span>
-        <span class="tag" style="left:40.8%; top:72.5%;">3</span>
-      </div>
-      <figcaption>① Measurements tab  ·  ② Auto-detect keys  ·  ③ Set kind to Gauge</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">📊</span>
-      <div class="bd">Pick the right <b>kind</b> for each key: <b>Gauge</b> for readings
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/chirpstack/chirpstack-measurements.webp" type="image/webp"/>
+<img alt="ChirpStack device profile Measurements tab with keys set to Gauge" height="854" loading="lazy" src="/images/chirpstack/chirpstack-measurements.png" width="1680"/>
+</picture>
+<!-- 1 · Measurements tab -->
+<span class="hl" style="left:69.5%; top:20%; width:8%; height:4.5%;"></span>
+<span class="tag" style="left:69.5%; top:20%;">1</span>
+<!-- 2 · Auto-detect toggle -->
+<span class="hl" style="left:20.8%; top:59.5%; width:4.5%; height:5.5%;"></span>
+<span class="tag" style="left:20.8%; top:59.5%;">2</span>
+<!-- 3 · a Gauge selector -->
+<span class="hl" style="left:40.8%; top:72.5%; width:18.5%; height:4.5%;"></span>
+<span class="tag" style="left:40.8%; top:72.5%;">3</span>
+</div>
+<figcaption>① Measurements tab  ·  ② Auto-detect keys  ·  ③ Set kind to Gauge</figcaption>
+</figure>
+<div class="note">
+<span class="ic">📊</span>
+<div class="bd">Pick the right <b>kind</b> for each key: <b>Gauge</b> for readings
         like voltage, temperature or position; <b>Counter</b> for continuously incrementing
         counters; <b>Absolute</b> for counters that reset on each uplink; <b>String</b> for
         text or boolean values. Give it a friendly <b>Measurement name</b>, click
         <b>Submit</b>, and the values render as gauges and charts on the device's
         <b>Dashboard</b>.</div>
-    </div>
-
-    <!-- ============================ CHECKLIST ============================ -->
-    <div class="checklist">
-      <h3>Quick checklist</h3>
-      <ul>
-        <li><span class="box">☐</span><div>Gateway added and showing <b>green / Online</b></div></li>
-        <li><span class="box">☐</span><div>Device profile created — region, MAC version, <b>OTAA on</b>, <b>Cayenne LPP</b> codec</div></li>
-        <li><span class="box">☐</span><div>Application created</div></li>
-        <li><span class="box">☐</span><div>Device added with matching <b>DevEUI</b> + <b>JoinEUI</b></div></li>
-        <li><span class="box">☐</span><div><b>Application Key</b> entered on the OTAA keys tab</div></li>
-        <li><span class="box">☐</span><div><b>JoinRequest</b> / <b>JoinAccept</b> and data frames visible under LoRaWAN frames</div></li>
-        <li><span class="box">☐</span><div>Measurements set to <b>Gauge</b> to visualise the data</div></li>
-      </ul>
-    </div>
-
-    <!-- ============================ DONE ============================ -->
-    <div class="done">
-      <h2>🎉 You're up and running!</h2>
-      <p>Your gateway is online, your Loko Air device has joined, and its decoded
+</div>
+<!-- ============================ CHECKLIST ============================ -->
+<div class="checklist">
+<h3>Quick checklist</h3>
+<ul>
+<li><span class="box">☐</span><div>Gateway added and showing <b>green / Online</b></div></li>
+<li><span class="box">☐</span><div>Device profile created — region, MAC version, <b>OTAA on</b>, <b>Cayenne LPP</b> codec</div></li>
+<li><span class="box">☐</span><div>Application created</div></li>
+<li><span class="box">☐</span><div>Device added with matching <b>DevEUI</b> + <b>JoinEUI</b></div></li>
+<li><span class="box">☐</span><div><b>Application Key</b> entered on the OTAA keys tab</div></li>
+<li><span class="box">☐</span><div><b>JoinRequest</b> / <b>JoinAccept</b> and data frames visible under LoRaWAN frames</div></li>
+<li><span class="box">☐</span><div>Measurements set to <b>Gauge</b> to visualise the data</div></li>
+</ul>
+</div>
+<!-- ============================ DONE ============================ -->
+<div class="done">
+<h2>🎉 You're up and running!</h2>
+<p>Your gateway is online, your Loko Air device has joined, and its decoded
          measurements are visualised as gauges. From here you can add more devices,
          wire up Integrations to push data onward, or build dashboards on top of the
          ChirpStack API.</p>
-    </div>
-
-    <a class="next-guide" data-langlink="" href="/lorawan/">
-      <span class="eyebrow">Prefer a hosted network?</span>
-      <span class="title">Connecting Loko to The Things Network →</span>
-      <span class="sub">The four-step TTN setup — create an application, register devices, generate an API key and connect from the Loko app.</span>
-    </a>
-
-    <div class="note">
-      <span class="ic">💬</span>
-      <div class="bd"><b>Need help?</b> If you hit any issues during setup, check our
+</div>
+<a class="next-guide" data-langlink="" href="/lorawan/">
+<span class="eyebrow">Prefer a hosted network?</span>
+<span class="title">Connecting Loko to The Things Network →</span>
+<span class="sub">The four-step TTN setup — create an application, register devices, generate an API key and connect from the Loko app.</span>
+</a>
+<div class="note">
+<span class="ic">💬</span>
+<div class="bd"><b>Need help?</b> If you hit any issues during setup, check our
         <a href="/#faq">FAQ section</a> or contact our support team — we're here to help
         you get connected.</div>
-    </div>
-
-  </div>
+</div>
+</div>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/">nolilab</a></li><li><a href="/accessories/">Accessories</a></li><li><a href="/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/battery-life/">Battery Life</a></li><li><a href="/blog/">Blog</a></li><li><a href="/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/chirpstack/">ChirpStack</a></li><li><a href="/contact/">Contact</a></li><li><a href="/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/farms/">Farm GPS</a></li><li><a href="/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/gps/">GPS & LoRa</a></li><li><a href="/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/hiking/">Hiking GPS</a></li><li><a href="/how-gps-works/">How GPS Works</a></li><li><a href="/hunting-dogs/">Hunting Dogs</a></li><li><a href="/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/lorawan/">LoRaWAN</a></li><li><a href="/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/open-source/">Open Source</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/search-rescue/">Search & Rescue</a></li><li><a href="/setup-guides/">Setup</a></li><li><a href="/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/software/">Software</a></li><li><a href="/specifications/">Specs</a></li><li><a href="/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>

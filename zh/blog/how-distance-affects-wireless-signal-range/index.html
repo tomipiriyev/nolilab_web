@@ -2,537 +2,69 @@
 
 <html lang="zh">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
-<meta content="该文章研究了无线电波在无线系统中的传播方式，强调“平方反比定律”从根本上限制了随着距离增加的通信范围。" name="description"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>距离如何影响无线信号范围 |诺利实验室博客</title>
+<title>距离如何影响无线信号范围 | nolilab 博客</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
 <meta content="了解平方反比定律如何影响无线信号范围以及它对 GPS 跟踪系统的意义。" name="description"/>
-<link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
-<meta content="article" property="og:type"/>
-<meta content="距离如何影响无线信号范围 |诺利实验室博客" property="og:title"/>
-<meta content="了解平方反比定律如何影响无线信号范围以及它对 GPS 跟踪系统的意义。" property="og:description"/>
-<meta content="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range" property="og:url"/>
-<meta content="https://www.nolilab.com/images/radio-wave.webp" property="og:image"/>
-<meta content="nolilab" property="og:site_name"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="距离如何影响无线信号范围 |诺利实验室博客" name="twitter:title"/>
-<meta content="了解平方反比定律如何影响无线信号范围以及它对 GPS 跟踪系统的意义。" name="twitter:description"/>
-<meta content="https://www.nolilab.com/images/radio-wave.webp" name="twitter:image"/>
-<style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #24292e;
-      --text-secondary: #57606a;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
-      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    /* Header */
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-lg);
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    /* Article */
-    article {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: var(--spacing-xl) var(--spacing-md);
-    }
-
-    .article-header {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-meta {
-      display: flex;
-      gap: var(--spacing-md);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.2;
-    }
-
-    .article-image {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-content {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .article-content h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin: var(--spacing-xl) 0 var(--spacing-md);
-      letter-spacing: -0.01em;
-    }
-
-    .article-content h3 {
-      font-size: 1.375rem;
-      font-weight: 600;
-      margin: var(--spacing-lg) 0 var(--spacing-sm);
-    }
-
-    .article-content p {
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-content ul,
-    .article-content ol {
-      margin: var(--spacing-md) 0;
-      padding-left: var(--spacing-lg);
-    }
-
-    .article-content li {
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .article-content strong {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .article-content code {
-      background: var(--bg-secondary);
-      padding: 0.2em 0.4em;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      font-size: 0.9em;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      margin-bottom: var(--spacing-lg);
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--accent-hover);
-    }
-
-    /* Footer */
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-
-    .language-selector {
-      margin-left: var(--spacing-sm);
-    }
-
-    .language-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.75rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .language-btn:hover {
-      border-color: var(--accent);
-      background: var(--bg-primary);
-    }
-
-    .language-btn i {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .language-btn .fa-chevron-down {
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-    }
-
-    .language-selector:hover .fa-chevron-down {
-      transform: rotate(180deg);
-    }
-
-    .current-lang {
-      font-family: var(--font-mono);
-      font-weight: 600;
-    }
-
-    .language-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      right: 0;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
-      z-index: 1000;
-    }
-
-    .language-selector:hover .language-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .language-option {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .language-option:last-child {
-      border-bottom: none;
-    }
-
-    .language-option:hover {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-
-    .language-option .lang-code {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 0.8rem;
-      min-width: 28px;
-      color: var(--accent);
-    }
-
-    .language-option .lang-name {
-      font-size: 0.875rem;
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: var(--spacing-xs);
-      z-index: 1001;
-      margin-left: auto;
-    }
-
-    .mobile-menu-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--bg-primary);
-        flex-direction: column;
-        gap: 0;
-        padding: 80px var(--spacing-md) var(--spacing-md);
-        box-shadow: var(--shadow-lg);
-        transition: left 0.3s ease;
-        z-index: 1000;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-      }
-
-      .nav-links.active {
-        left: 0;
-      }
-
-      .nav-link {
-        width: 100%;
-        padding: var(--spacing-md);
-        border-bottom: 1px solid var(--border);
-        text-align: left;
-        font-size: 1rem;
-      }
-
-      .language-selector {
-        position: static;
-        margin-left: var(--spacing-sm);
-      }
-
-      .language-dropdown {
-        left: 0;
-        right: auto;
-        min-width: 160px;
-      }
-
-      /* Overlay when menu is open */
-      body.menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      .article-title {
-        font-size: 2rem;
-      }
-
-      .article-content {
-        font-size: 1rem;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "How Distance Affects Wireless Signal Range",
-  "description": "Understanding how the inverse square law affects wireless signal range and what it means for GPS tracking systems.",
-  "url": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range",
-  "datePublished": "2026-02-07",
-  "dateModified": "2026-02-07",
-  "author": {
-    "@type": "Person",
-    "name": "Tamleykha Piriyev"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "nolilab",
-    "url": "https://www.nolilab.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
-    }
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "/images/radio-wave.webp"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range"
-  }
-}
-</script>
-<style>
-  @font-face {
-    font-family: 'Inter-fallback';
-    src: local('Arial');
-    ascent-override: 90.44%;
-    descent-override: 22.52%;
-    line-gap-override: 0%;
-    size-adjust: 107.64%;
-  }
-</style>
-<script defer="" src="/js/layout.js"></script><link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-distance-affects-wireless-signal-range/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="x-default" rel="alternate"/>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/" />
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "博客",
+      "item": "https://www.nolilab.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "距离如何影响无线信号范围",
+      "item": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/"
+    }
+  ]
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <article>
-<a class="back-link" href="/zh/blog/">
+<a class="back-link" href="/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 返回博客
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> February 7, 2026</span>
-<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+<span><i class="far fa-calendar"></i> 2026 年 2 月 7 日</span>
+<span><i class="far fa-user"></i> 塔姆雷哈·皮里耶夫</span>
 </div>
 <h1 class="article-title">距离如何影响无线信号范围</h1>
 </div>
-<img alt="Radio Signal Range Diagram" class="article-image" src="/images/radio-wave.webp"/>
+<img alt="Radio Signal Range Diagram" class="article-image" height="512" src="/images/radio-wave.webp" width="512"/>
 <div class="article-content">
 <h2>介绍</h2>
 <p>该文章研究了无线电波在无线系统中的传播方式，强调“平方反比定律”从根本上限制了随着距离增加的通信范围。</p>
@@ -544,24 +76,49 @@
 <h2>真实系统的影响</h2>
 <p><strong>三个关键因素：</strong></p>
 <ol>
-<li><strong>Non-linear range scaling</strong>— 发射功率增加四倍只会使有效范围增加一倍（理论自由空间） </li>
-<li><strong>Receiver sensitivity importance</strong>— 本底噪声的改善通常胜过功率的增加 </li>
-<li><strong>Antenna design</strong>— 定向天线集中能量，抵消传播损耗 </li>
+<li><strong>非线性范围缩放</strong> — 发射功率增加四倍只会使有效范围增加一倍（理论自由空间）</li>
+<li><strong>接收器灵敏度的重要性</strong> — 本底噪声的改善通常胜过功率的增加</li>
+<li><strong>天线设计</strong> — 定向天线集中能量，抵消传播损耗</li>
 </ol>
 <h2>环境损失</h2>
 <p>现实世界的部署会因障碍物、多径衰落、大气吸收、天线效率低下和极化失配而遭受额外的退化，通常超出理论预测。</p>
-<h2>实际应用（无人机、物联网、跟踪器）</h2>
+<h2>实际应用（无人机、IoT、跟踪器）</h2>
 <ul>
 <li>较高的天线放置位置可减少障碍损耗</li>
 <li>较低的数据速率可提高信噪比</li>
 <li>扩频技术 (LoRa) 牺牲带宽以扩大范围</li>
 </ul>
-<h2>结论</h2>
+<h3>结论</h3>
 <p>“距离是无线电通信的敌人”从根本上推动了围绕天线优化、调制选择和系统布局的工程决策。</p>
 </div>
 </article>
+<div class="product-cta">
+<p class="product-cta-heading">探索 Loko GPS 跟踪器</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">查看 Loko GPS 跟踪器</a>
+<a class="product-cta-link" href="/gps/">GPS 和 LoRa 技术指南</a>
+<a class="product-cta-link" href="/specifications/">Loko 规格</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">相关文章</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/radio-line-of-sight/">
+<h3>无线电视距</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+<a class="related-post-card" href="/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/">
+<h3>GPS 无线电综合指南：特性、优点和应用</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+<a class="related-post-card" href="/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/">
+<h3>Loko GPS 跟踪器：探索 GPS、GLONASS 和 GALILEO 卫星系统的优势</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+</div>
+</section>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/zh/">nolilab</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

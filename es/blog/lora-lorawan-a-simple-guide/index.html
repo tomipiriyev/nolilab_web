@@ -2,10 +2,10 @@
 
 <html lang="es">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>LoRa y LoRaWAN para rastreo GPS | Guía sencilla | nolilab</title>
+<title>LoRa frente a LoRaWAN para el rastreador Loko GPS | Guía GPS sin conexión</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
@@ -15,15 +15,25 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Aprenda la diferencia entre LoRa P2P y LoRaWAN para rastreo GPS: alcance, gateways, consumo, datos y por qué Loko usa LoRa P2P." name="description"/>
+<meta content="Comprenda LoRa frente a LoRaWAN para el seguimiento de GPS y por qué Loko GPS Tracker utiliza LoRa P2P para el seguimiento fuera de línea sin puerta de enlace, SIM ni tarifa mensual." name="description"/>
 <link href="https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/lora-lorawan-a-simple-guide/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/ru/blog/lora-lorawan-a-simple-guide/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/blog/lora-lorawan-a-simple-guide/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="LoRa frente a LoRaWAN para el rastreador Loko GPS | Guía GPS sin conexión" property="og:title"/>
+<meta content="Comprenda LoRa frente a LoRaWAN para el seguimiento de GPS y por qué Loko GPS Tracker utiliza LoRa P2P para el seguimiento fuera de línea sin puerta de enlace, SIM ni tarifa mensual." property="og:description"/>
+<meta content="https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/lorawan-network-architecture.webp" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="LoRa frente a LoRaWAN para el rastreador Loko GPS | Guía GPS sin conexión" name="twitter:title"/>
+<meta content="Comprenda LoRa frente a LoRaWAN para el seguimiento de GPS y por qué Loko GPS Tracker utiliza LoRa P2P para el seguimiento fuera de línea sin puerta de enlace, SIM ni tarifa mensual." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/lorawan-network-architecture.webp" name="twitter:image"/>
 <style>
     :root {
       --bg-primary: #ffffff;
@@ -287,9 +297,202 @@
       color: var(--text-primary);
     }
 
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
     @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
       .nav-links {
-        display: none;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
       }
 
       .article-title {
@@ -305,19 +508,123 @@
         text-align: center;
       }
     }
+  
+    /* Related Posts */
+    .related-posts {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .related-posts-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+    .related-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .related-post-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem 1.1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .related-post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+    .related-post-card h3 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
+    }
+    .related-post-card .rp-cta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .related-posts-grid { grid-template-columns: 1fr; }
+    }
+  
+    /* Product CTA */
+    .product-cta {
+      max-width: 800px;
+      margin: 0 auto 0;
+      padding: 1.5rem 1rem 1.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .product-cta-heading {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.9rem;
+    }
+    .product-cta-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .product-cta-link {
+      display: inline-block;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      background: var(--bg-primary);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .product-cta-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .product-cta-link.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .product-cta-link.primary:hover {
+      background: var(--accent-hover, var(--accent));
+      border-color: var(--accent-hover, var(--accent));
+      color: #fff;
+    }
   </style>
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "LoRa & LoRaWAN: A Simple Guide",
-  "description": "A wireless communication technology designed for long-range, low-power, and reliable data transmission with strong interference resistance.",
-  "url": "https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide",
+  "headline": "LoRa vs LoRaWAN para el rastreador Loko GPS",
+  "description": "Comprenda LoRa frente a LoRaWAN para el seguimiento de GPS y por qué Loko GPS Tracker utiliza LoRa P2P para el seguimiento fuera de línea sin puerta de enlace, SIM ni tarifa mensual.",
+  "url": "https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/",
   "datePublished": "2025-03-26",
-  "dateModified": "2025-03-26",
+  "dateModified": "2026-03-25",
   "author": {
     "@type": "Person",
-    "name": "Tamleykha Piriyev"
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
   },
   "publisher": {
     "@type": "Organization",
@@ -330,16 +637,19 @@
   },
   "image": {
     "@type": "ImageObject",
-    "url": "https://www.nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&width;=1920"
+    "url": "https://www.nolilab.com/images/lorawan-network-architecture.webp"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide"
+    "@id": "https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/"
+  },
+  "inLanguage": "es",
+  "@id": "https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/#article",
+  "translationOfWork": {
+    "@id": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/#article"
   }
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
@@ -348,23 +658,23 @@
       "name": "¿Qué es la modulación LoRa y cómo funciona?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa usa modulación por espectro ensanchado chirp (CSS), codificando datos variando continuamente la frecuencia de una señal (chirps). Esto hace las señales muy resistentes al ruido e interferencias. El receptor puede recuperar la señal incluso cuando está 20dB por debajo del nivel de ruido, lo que permite el excepcional alcance y penetración de LoRa."
+        "text": "LoRa utiliza modulación de espectro ensanchado de chirridos (CSS), codificando datos variando continuamente la frecuencia de una señal (chirridos). Esto hace que las señales sean altamente resistentes al ruido y las interferencias. El receptor puede recuperar la señal incluso cuando está 20 dB por debajo del nivel de ruido, lo que permite el alcance y la penetración excepcionales por los que se conoce al LoRa."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Qué es el factor de dispersión en LoRa?",
+      "name": "¿Qué es un factor de dispersión en LoRa?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "El factor de dispersión (SF) en LoRa controla el equilibrio entre alcance y tasa de datos. SF7 ofrece la mayor tasa de datos (~5,5kbps) con menor alcance. SF12 proporciona el máximo alcance con la menor tasa de datos (~250bps). Los factores de dispersión más altos también mejoran la sensibilidad del receptor."
+        "text": "El factor de dispersión (SF) en LoRa controla el equilibrio entre rango y velocidad de datos. SF7 ofrece la velocidad de datos más alta (~5,5 kbps) en rangos más cortos. SF12 proporciona un alcance máximo a la velocidad de datos más baja (~250 bps). Los factores de dispersión más altos también mejoran la sensibilidad del receptor, lo que permite decodificar las señales a mayores distancias y a través de más obstáculos."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Qué frecuencia usa LoRa?",
+      "name": "¿Qué frecuencia utiliza LoRa?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa opera en bandas ISM sin licencia: 868 MHz en Europa, 915 MHz en Norteamérica y 433 MHz en Asia. Estas frecuencias sub-GHz se propagan más lejos y penetran mejor los obstáculos que 2,4 GHz (Wi-Fi/Bluetooth) o frecuencias celulares, contribuyendo a las capacidades de largo alcance de LoRa."
+        "text": "LoRa opera en bandas ISM sin licencia: 868 MHz en Europa, 915 MHz en Norteamérica y 433 MHz en Asia. Estas frecuencias sub-GHz se propagan más lejos y penetran obstáculos mejor que las frecuencias celulares o de 2,4 GHz (Wi-Fi/Bluetooth), lo que contribuye a las capacidades de largo alcance de LoRa."
       }
     },
     {
@@ -372,20 +682,20 @@
       "name": "¿Cuánta energía consume un dispositivo LoRa?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Los dispositivos LoRa están diseñados para mínimo consumo de energía. En modo transmisión, un módulo LoRa típico consume 20–40mA. En modo suspensión, el consumo cae a menos de 1μA. Esta ultra-baja corriente en suspensión permite que dispositivos como Loko GPS Tracker logren más de 30 días de vida útil de la batería."
+        "text": "Los dispositivos LoRa están diseñados para un consumo de energía mínimo. En modo de transmisión, un módulo LoRa típico consume entre 20 y 40 mA. En modo de suspensión, el consumo cae por debajo de 1μA. Esta corriente de suspensión ultrabaja permite que dispositivos como el rastreador Loko GPS alcancen hasta 1 año de duración de la batería, incluso mientras transmiten periódicamente posiciones GPS."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Cuál es la tasa de datos máxima de LoRa?",
+      "name": "¿Cuál es la velocidad de datos máxima de LoRa?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "La tasa de datos máxima de LoRa es aproximadamente 27kbps usando SF7 con un ancho de banda de 500kHz. En uso IoT típico con SF9-SF12, las tasas de datos son 250bps–1760bps. LoRa está diseñado para paquetes de datos pequeños e infrecuentes — coordenadas GPS, lecturas de sensores, actualizaciones de estado."
+        "text": "La velocidad de datos máxima de LoRa es de aproximadamente 27 kbps usando SF7 con un ancho de banda de 500 kHz. En el uso típico de IoT con SF9-SF12, las velocidades de datos son de 250 bps a 1760 bps. LoRa está diseñado para paquetes de datos pequeños y poco frecuentes (coordenadas GPS, lecturas de sensores, actualizaciones de estado), no para aplicaciones de streaming o de gran ancho de banda."
       }
     }
-  ]
-}
-</script>
+  ],
+  "inLanguage": "es"
+}</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';
@@ -396,90 +706,173 @@
     size-adjust: 107.64%;
   }
 </style>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/blog/lora-lorawan-a-simple-guide/" />
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Hogar",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.nolilab.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "LoRa y LoRaWAN: Una guía sencilla",
+      "item": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/"
+    }
+  ],
+  "inLanguage": "es"
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <article>
-<a class="back-link" href="/es/blog/">
-<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Volver al Blog
+<a class="back-link" href="/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Volver al blog
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> March 26, 2025</span>
+<span><i class="far fa-calendar"></i> 26 de marzo de 2025</span>
 <span><i class="far fa-user"></i> Tamleykha Piriyev</span>
 </div>
-<h1 class="article-title">LoRa y LoRaWAN: Una guía sencilla</h1>
+<h1 class="article-title">LoRa vs LoRaWAN para el rastreador Loko GPS</h1>
 </div>
-<img alt="LoRa Spreading Factor" class="article-image" src="https://www.nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&amp;width;=1920"/>
+<img alt="LoRa Spreading Factor" class="article-image" height="720" src="/images/lorawan-network-architecture.webp" width="960"/>
 <div class="article-content">
-<h2>Interfaz de radio LoRa / LoRaWAN. Modulación</h2>
-<p>LoRa (Long Range) es una tecnología de comunicación inalámbrica diseñada para la transmisión de datos de largo alcance, bajo consumo y alta fiabilidad con fuerte resistencia a las interferencias, lo que la hace adecuada para aplicaciones IoT y redes de área amplia de bajo consumo.</p>
-<p><strong>AM</strong> - Modulación de Amplitud<br/>
-<strong>FM</strong> - Modulación de Frecuencia</p>
+<h2>Por qué LoRa P2P es importante para el seguimiento de GPS sin conexión</h2>
+<p>LoRa y LoRaWAN a menudo se confunden, pero resuelven diferentes problemas de seguimiento. Loko GPS Tracker utiliza LoRa P2P porque el rastreador puede enviar coordenadas GPS directamente a su receptor, sin puerta de enlace, tarjeta SIM, red celular o plan de datos mensual.</p>
+<p><strong>Para el seguimiento de GPS, la decisión clave es LoRa P2P vs LoRaWAN.</strong> Loko usa LoRa P2P para que el rastreador se comunique directamente con su receptor sin puerta de enlace, sin tarjeta SIM y sin plan de datos mensual. Ver el <a href="/lora-gps-tracker/">Página del rastreador Loko LoRa GPS</a> para la explicación a nivel de producto.</p>
+<p><strong>SOY</strong> - Modulación de amplitud<br/>
+<strong>FM</strong> - Modulación de frecuencia</p>
 <img alt="AM/FM Modulation Animation" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Amfm3-en-de.gif?v=1743011265"/>
-<p><strong>Modulación:</strong> El proceso consiste en codificar información en una señal portadora variando su frecuencia, amplitud o fase, lo que permite la transmisión de señales útiles a distancia.</p>
-<p><strong>Modulación de Amplitud (AM):</strong> La amplitud de la señal portadora varía en proporción a la señal de información, mientras que la frecuencia y la fase permanecen constantes.</p>
-<p><strong>Modulación de Frecuencia (FM):</strong> La frecuencia de la señal portadora varía en proporción a la señal de información, mientras que su amplitud permanece constante.</p>
-<p>LoRa emplea una técnica de modulación combinada basada en la modulación lineal de frecuencia (espectro ensanchado de tipo chirp, CSS), donde la frecuencia de la señal aumenta o disminuye continuamente dentro de un rango definido.</p>
+<p><strong>Modulación:</strong> El proceso implica codificar información en una señal portadora variando su frecuencia, amplitud o fase, lo que permite la transmisión de señales útiles a distancia.</p>
+<p><strong>Modulación de amplitud (AM):</strong> La amplitud de la señal portadora varía en proporción a la señal de información mientras que la frecuencia y la fase permanecen constantes.</p>
+<p><strong>Modulación de frecuencia (FM):</strong> La frecuencia de la señal portadora varía en proporción a la señal de información mientras su amplitud permanece constante.</p>
+<p>LoRa emplea una técnica de modulación combinada basada en modulación de frecuencia lineal (espectro ensanchado de chirrido, CSS), donde la frecuencia de la señal aumenta o disminuye continuamente dentro de un rango definido.</p>
 <img alt="LoRa Modulation Diagram - Linear Frequency Modulation" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora2.png?v=1743011098"/>
-<p>La modulación LoRaWAN utiliza LFM (modulación lineal de frecuencia) o CSS (espectro ensanchado de tipo chirp).</p>
-<h2>Interfaz de radio LoRa / LoRaWAN. Modulación</h2>
-<p>La modulación chirp en LoRa consiste en interrupciones irregulares del ciclo, lo que significa que el ciclo puede detenerse en cualquier punto en lugar de a intervalos de tiempo iguales. Esto crea desplazamientos temporales que mejoran la robustez y la resistencia al ruido.</p>
+<p>La modulación LoRaWAN utiliza LFM (modulación de frecuencia lineal) o CSS (espectro ensanchado de chirrido).</p>
+<h2>Modulación de chirrido LoRa: pausas de ciclo y resistencia al ruido</h2>
+<p>La modulación de chirrido en LoRa consiste en pausas de ciclo irregulares, lo que significa que el ciclo puede detenerse en cualquier punto en lugar de en intervalos de tiempo iguales. Esto crea cambios de tiempo, mejorando la robustez y la resistencia al ruido.</p>
 <img alt="LoRa Signal Chirp - Cycle Breaking and Time Shifts" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora1.png?v=1743011137"/>
-<p>La modulación LoRaWAN se produce "rompiendo" el ciclo en puntos intermedios, interpretados como desplazamientos temporales.</p>
+<p>La modulación LoRaWAN se produce "rompiendo" el ciclo en puntos intermedios, interpretados como cambios de tiempo.</p>
 <h2>Interfaz de radio. Factor de dispersión</h2>
-<p><strong>Factor de dispersión (SF):</strong> Representa la "velocidad" del cambio de frecuencia en las señales LFM. Los valores SF más altos indican cambios de frecuencia más lentos.</p>
+<p><strong>Factor de dispersión (FS):</strong> Representa la "velocidad" del cambio de frecuencia en las señales LFM. Los valores de SF más altos indican cambios de frecuencia más lentos.</p>
 <img alt="Spreading Factor Comparison" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sf.png?v=1743010750"/>
-<p>Cambiar el SF en una unidad equivale a duplicar el tiempo del ciclo (Chirp). Para SF=7 y un ancho de banda de 125 kHz, la duración del chirp es de 1,024 milisegundos.</p>
-<p>La longitud del chirp afecta al ruido de la señal, mejorando el reconocimiento de la señal en la salida. Esto permite la detección de señales con menor energía y niveles de RSSI reducidos.</p>
+<p>Cambiar el SF en una unidad significa duplicar el tiempo del ciclo (Chirp). Para SF=7 y un ancho de banda de 125 kHz, la duración del chirrido es de 1,024 milisegundos.</p>
+<p>La longitud del chirrido afecta el ruido de la señal, mejorando el reconocimiento de la señal en la salida. Esto permite la detección de señales con menor energía y niveles reducidos de RSSI.</p>
 <img alt="LoRa Signal Preamble Examples" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/1_RdkCF2t6XsG7LA8nKLeGGg.webp?v=1743011173"/>
 <img alt="LoRa Preamble Technical Diagram" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Preamble-1_jpg.webp?v=1743011201"/>
-<p>El concepto se simplifica así: <strong>Piensa en el SF como una "lente de zoom": un SF más alto "hace zoom" para mayor alcance pero envía datos más lentamente.</strong></p>
-<p><strong>Principio clave:</strong> Mayor Factor de dispersión = Mayor alcance pero datos más lentos.</p>
+<p>El concepto se simplifica: <strong>Piense en SF como una 'lente de zoom': un SF más alto 'se acerca' para un alcance más largo pero envía datos más lentamente.</strong></p>
+<p><strong>Principio clave:</strong> Factor de dispersión más alto = rango más largo pero datos más lentos.</p>
 <h2>Codificación de datos</h2>
-<p><strong>Codificación:</strong> Añadir información redundante (de control) a los datos de usuario transmitidos para aumentar la probabilidad de recepción exitosa.</p>
-<p>El nivel de redundancia está determinado por la relación de tasa de código (CR), como 4/5, lo que significa que por cada 5 bits transmitidos, 4 bits son datos útiles y 1 bit es un bit de control (redundante).</p>
-<p>LoRaWAN emplea una tasa de código del 4/5 al 4/8.</p>
-<p>Las tasas de transmisión de datos (bps) para un ancho de banda de canal de 125 kHz dependen del Factor de dispersión (SF) y la Tasa de código (CR).</p>
+<p><strong>Codificación:</strong> Agregar información redundante (control) a los datos del usuario transmitidos para aumentar la probabilidad de una recepción exitosa.</p>
+<p>El nivel de redundancia está determinado por la relación de velocidad de codificación (CR), como 4/5, lo que significa que por cada 5 bits transmitidos, 4 bits son datos útiles y 1 bit es un bit de control (redundante).</p>
+<p>LoRaWAN emplea Coderate de 4/5 a 4/8.</p>
+<p>Las velocidades de transmisión de datos (bps) para el ancho de banda del canal de 125 kHz dependen del factor de dispersión (SF) y CodeRate (CR).</p>
 <img alt="Data Transmission Rate Chart - bps for 125 kHz Channel" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Screenshot_2025-03-26_at_19.52.36.png?v=1743011226"/>
 <h2>Muestra de señal LoRa</h2>
 <img alt="Example of LoRa Signal Waveform" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Example-of-LoRa-Signal.jpg?v=1743011304"/>
 <img alt="LoRa Signal Analysis" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sensors-20-04034-g001-550.jpg?v=1743011334"/>
 <img alt="LoRa Modulation Educational Material" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/maxresdefault.jpg?v=1743011354"/>
-<h2>La interdependencia entre la tasa de datos y la distancia de propagación</h2>
-<p>La relación entre el factor de dispersión, la tasa de datos y la distancia de propagación es fundamental para el rendimiento de LoRa. Los factores de dispersión más altos permiten una comunicación de mayor alcance, pero a costa de reducir las tasas de transmisión de datos.</p>
+<h2>La interdependencia de la velocidad de datos y la distancia de propagación</h2>
+<p>La relación entre el factor de dispersión, la velocidad de datos y la distancia de propagación es fundamental para el rendimiento de LoRa. Los factores de dispersión más altos permiten una comunicación de mayor alcance, pero a costa de velocidades de transmisión de datos reducidas.</p>
 <img alt="Spreading Factor vs Data Rate and Range" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm.png?v=1743011384"/>
 <h2>Conclusión</h2>
-<p>Las tecnologías LoRa y LoRaWAN proporcionan soluciones potentes para la comunicación inalámbrica de largo alcance y bajo consumo. Comprender los conceptos clave de modulación, factores de dispersión y codificación de datos es esencial para optimizar los despliegues de LoRa y lograr el mejor equilibrio entre alcance, consumo de energía y rendimiento de datos.</p>
+<p>Las tecnologías LoRa y LoRaWAN brindan soluciones potentes para comunicaciones inalámbricas de largo alcance y bajo consumo. Comprender los conceptos clave de modulación, factores de dispersión y codificación de datos es esencial para optimizar sus implementaciones LoRa y lograr el mejor equilibrio entre alcance, consumo de energía y rendimiento de datos.</p>
 <div class="references">
 <h3>Referencias</h3>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Signal_modulation" target="_blank">Wikipedia: Signal Modulation</a></li>
-<li><a href="https://www.researchgate.net/figure/Example-of-LoRa-Signal_fig2_348345539" target="_blank">ResearchGate: Example of LoRa Signal</a></li>
-<li><a href="https://www.youtube.com/watch?v=yHocu_n2udI" target="_blank">YouTube: LoRa Tutorial</a></li>
-<li><a href="https://www.researchgate.net/figure/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless_fig7_324043563" target="_blank">ResearchGate: LoRa Spreading Factor, SF, Bitrates and Time on Air</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Signal_modulation" target="_blank">Wikipedia: modulación de señal</a></li>
+<li><a href="https://www.researchgate.net/figure/Example-of-LoRa-Signal_fig2_348345539" target="_blank">ResearchGate: ejemplo de señal LoRa</a></li>
+<li><a href="https://www.youtube.com/watch?v=yHocu_n2udI" target="_blank">YouTube: Tutorial LoRa</a></li>
+<li><a href="https://www.researchgate.net/figure/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless_fig7_324043563" target="_blank">ResearchGate: factor de dispersión LoRa, SF, tasas de bits y tiempo en el aire</a></li>
 </ul>
 </div>
 </div>
 </article>
-<aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
-<h3 style="margin:0 0 1rem;font-size:1rem;font-weight:600">Artículos relacionados</h3>
-<ul style="margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:0.5rem">
-<li><a href="/es/blog/what-are-lora-p2p-and-lorawan/">¿Qué son LoRa P2P y LoRaWAN?</a></li>
-<li><a href="/es/blog/discover-the-worlds-smallest-gps-tracker-introducing-the-loko-gps-tracker-by-nolilab-1/">Descubra el rastreador GPS más pequeño del mundo: presentamos Loko GPS Tracker de nolilab</a></li>
-</ul>
-</aside>
+<div class="product-cta">
+<p class="product-cta-heading">Explora el rastreador Loko GPS</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">Ver el rastreador Loko GPS</a>
+<a class="product-cta-link" href="/gps/">Guía de tecnología GPS y LoRa</a>
+<a class="product-cta-link" href="/lorawan/">Guía de configuración de LoRaWAN</a>
+<a class="product-cta-link" href="/specifications/">Especificaciones de Loko</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">Artículos relacionados</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/what-are-lora-p2p-and-lorawan/">
+<h3>¿Qué son LoRa P2P y LoRaWAN?</h3>
+<span class="rp-cta">Leer más →</span>
+</a>
+<a class="related-post-card" href="/blog/how-to-set-up-lorawan/">
+<h3>Cómo configurar LoRaWAN</h3>
+<span class="rp-cta">Leer más →</span>
+</a>
+<a class="related-post-card" href="/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/">
+<h3>Comunicación de largo alcance con el rastreador Loko GPS: exploración del poder de la tecnología de radio LoRa</h3>
+<span class="rp-cta">Leer más →</span>
+</a>
+</div>
+</section>
+<!-- CTA -->
+<div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p>LoRa y LoRaWAN impulsan la próxima generación de seguimiento GPS de bajo consumo y largo alcance, sin plan celular ni tarifas mensuales.</p>
+<p><strong>Loko GPS Tracker utiliza LoRa P2P para un seguimiento directo y sin suscripción hasta 20km.</strong></p>
+<br/>
+<a class="cta-btn" href="/shop/">Comprar Loko →</a>
+</div>
+</div>
+</div>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/es/">nolilab</a></li><li><a href="/es/accessories/">Accessories</a></li><li><a href="/es/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/es/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/es/battery-life/">Battery Life</a></li><li><a href="/es/blog/">Blog</a></li><li><a href="/es/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/es/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/es/chirpstack/">ChirpStack</a></li><li><a href="/es/contact/">Contact</a></li><li><a href="/es/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/es/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/es/farms/">Farm GPS</a></li><li><a href="/es/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/es/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/es/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/es/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/es/gps/">GPS & LoRa</a></li><li><a href="/es/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/es/hiking/">Hiking GPS</a></li><li><a href="/es/how-gps-works/">How GPS Works</a></li><li><a href="/es/hunting-dogs/">Hunting Dogs</a></li><li><a href="/es/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/es/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/es/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/es/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/es/lorawan/">LoRaWAN</a></li><li><a href="/es/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/es/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/es/open-source/">Open Source</a></li><li><a href="/es/privacy/">Privacy</a></li><li><a href="/es/search-rescue/">Search & Rescue</a></li><li><a href="/es/setup-guides/">Setup</a></li><li><a href="/es/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/es/software/">Software</a></li><li><a href="/es/specifications/">Specs</a></li><li><a href="/es/tractive-alternative/">Tractive Alternative</a></li><li><a href="/es/uk/">GPS Tracker UK</a></li><li><a href="/es/uk/farms/">UK Farm GPS</a></li><li><a href="/es/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/es/usa/">GPS Tracker USA</a></li><li><a href="/es/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+  </script>
 <script defer="" src="/js/analytics.js"></script>
-<script defer="" src="/js/layout.js"></script>
 </body>
 </html>

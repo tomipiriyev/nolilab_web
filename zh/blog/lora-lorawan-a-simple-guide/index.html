@@ -2,29 +2,38 @@
 
 <html lang="zh">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>LoRa与LoRaWAN：简明指南 | nolilab博客</title>
+<title>Loko GPS 跟踪器的 LoRa 与 LoRaWAN |离线 GPS 指南</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="一种专为远距离、低功耗和可靠数据传输而设计的无线通信技术，具有强抗干扰性。" name="description"/>
+<meta content="了解用于 GPS 跟踪的 LoRa 与 LoRaWAN 的比较，以及为什么 Loko GPS 跟踪器使用 LoRa P2P 进行离线跟踪，无需网关、SIM 或月费。" name="description"/>
 <link href="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/" rel="canonical"/>
-<meta content="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide" property="og:url"/>
+<link href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/lora-lorawan-a-simple-guide/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/lora-lorawan-a-simple-guide/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="LoRa与LoRaWAN：简明指南 | nolilab博客" property="og:title"/>
-<meta content="一种专为远距离、低功耗和可靠数据传输而设计的无线通信技术，具有强抗干扰性。" property="og:description"/>
+<meta content="Loko GPS 跟踪器的 LoRa 与 LoRaWAN |离线 GPS 指南" property="og:title"/>
+<meta content="了解用于 GPS 跟踪的 LoRa 与 LoRaWAN 的比较，以及为什么 Loko GPS 跟踪器使用 LoRa P2P 进行离线跟踪，无需网关、SIM 或月费。" property="og:description"/>
+<meta content="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/lorawan-network-architecture.webp" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="LoRa与LoRaWAN：简明指南 | nolilab博客" name="twitter:title"/>
-<meta content="一种专为远距离、低功耗和可靠数据传输而设计的无线通信技术，具有强抗干扰性。" name="twitter:description"/>
+<meta content="Loko GPS 跟踪器的 LoRa 与 LoRaWAN |离线 GPS 指南" name="twitter:title"/>
+<meta content="了解用于 GPS 跟踪的 LoRa 与 LoRaWAN 的比较，以及为什么 Loko GPS 跟踪器使用 LoRa P2P 进行离线跟踪，无需网关、SIM 或月费。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/lorawan-network-architecture.webp" name="twitter:image"/>
 <style>
     :root {
       --bg-primary: #ffffff;
@@ -288,9 +297,202 @@
       color: var(--text-primary);
     }
 
+
+    .language-selector {
+      margin-left: var(--spacing-sm);
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-primary);
+    }
+
+    .language-btn i {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .language-btn .fa-chevron-down {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector:hover .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .current-lang {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .language-selector:hover .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .language-option:last-child {
+      border-bottom: none;
+    }
+
+    .language-option:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .language-option .lang-code {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .language-option .lang-name {
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      z-index: 1001;
+      margin-left: auto;
+    }
+
+    .mobile-menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
     @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
       .nav-links {
-        display: none;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-primary);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px var(--spacing-md) var(--spacing-md);
+        box-shadow: var(--shadow-lg);
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link {
+        width: 100%;
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .language-selector {
+        position: static;
+        margin-left: var(--spacing-sm);
+      }
+
+      .language-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+      }
+
+      /* Overlay when menu is open */
+      body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      body.menu-open {
+        overflow: hidden;
       }
 
       .article-title {
@@ -306,19 +508,123 @@
         text-align: center;
       }
     }
+  
+    /* Related Posts */
+    .related-posts {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .related-posts-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+    .related-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .related-post-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem 1.1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .related-post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+    .related-post-card h3 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
+    }
+    .related-post-card .rp-cta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .related-posts-grid { grid-template-columns: 1fr; }
+    }
+  
+    /* Product CTA */
+    .product-cta {
+      max-width: 800px;
+      margin: 0 auto 0;
+      padding: 1.5rem 1rem 1.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .product-cta-heading {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.9rem;
+    }
+    .product-cta-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .product-cta-link {
+      display: inline-block;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      background: var(--bg-primary);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .product-cta-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .product-cta-link.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .product-cta-link.primary:hover {
+      background: var(--accent-hover, var(--accent));
+      border-color: var(--accent-hover, var(--accent));
+      color: #fff;
+    }
   </style>
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "LoRa & LoRaWAN: A Simple Guide",
-  "description": "A wireless communication technology designed for long-range, low-power, and reliable data transmission with strong interference resistance.",
-  "url": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide",
+  "headline": "LoRa 与 LoRaWAN（适用于 Loko GPS 跟踪器）",
+  "description": "了解用于 GPS 跟踪的 LoRa 与 LoRaWAN 的比较，以及为什么 Loko GPS 跟踪器使用 LoRa P2P 进行离线跟踪，无需网关、SIM 或月费。",
+  "url": "https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/",
   "datePublished": "2025-03-26",
-  "dateModified": "2025-03-26",
+  "dateModified": "2026-03-25",
   "author": {
     "@type": "Person",
-    "name": "Tamleykha Piriyev"
+    "name": "塔姆雷哈·皮里耶夫",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
   },
   "publisher": {
     "@type": "Organization",
@@ -331,62 +637,65 @@
   },
   "image": {
     "@type": "ImageObject",
-    "url": "https://www.nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&width=1920"
+    "url": "https://www.nolilab.com/images/lorawan-network-architecture.webp"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide"
+    "@id": "https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/"
+  },
+  "inLanguage": "zh",
+  "@id": "https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/#article",
+  "translationOfWork": {
+    "@id": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/#article"
   }
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "LoRa调制是什么，如何工作？",
+      "name": "什么是 LoRa 调制及其工作原理？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa使用线性调频扩频（CSS）调制，通过连续变化信号频率（调频脉冲）来编码数据。这使信号对噪声和干扰具有极高的抵抗力。接收机甚至在信号低于噪底20dB时也能恢复信号，这实现了LoRa卓越的通信距离和穿透能力。"
+        "text": "LoRa 使用线性调频扩频 (CSS) 调制，通过连续改变信号频率（线性调频）来编码数据。这使得信号具有很强的抗噪声和干扰能力。即使信号低于本底噪声 20dB，接收器也能恢复信号，从而实现 LoRa 闻名的卓越范围和穿透力。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRa中的扩频因子是什么？",
+      "name": "LoRa 中的扩频因子是什么？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa中的扩频因子（SF）控制通信距离与数据速率之间的权衡。SF7提供最高数据速率（约5.5kbps），通信距离较短。SF12以最低数据速率（约250bps）提供最大通信距离。更高的扩频因子还能提高接收机灵敏度。"
+        "text": "LoRa 中的扩频因子 (SF) 控制范围和数据速率之间的权衡。 SF7 在较短距离内提供最高的数据速率 (~5.5kbps)。 SF12 以最低数据速率 (~250bps) 提供最大范围。更高的扩频因子还可以提高接收器灵敏度，从而可以在更远的距离和穿过更多障碍物时对信号进行解码。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRa使用什么频率？",
+      "name": "LoRa 使用什么频率？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa在免授权ISM频段运行：欧洲868 MHz，北美915 MHz，亚洲433 MHz。这些亚GHz频率比2.4 GHz（Wi-Fi/蓝牙）或蜂窝频率传播更远，穿透障碍物能力更强，这是LoRa长距离能力的重要原因。"
+        "text": "LoRa 在免许可 ISM 频段上运行：欧洲为 868 MHz，北美为 915 MHz，亚洲为 433 MHz。这些 sub-GHz 频率比 2.4 GHz（Wi-Fi/蓝牙）或蜂窝频率传播得更远，穿透障碍物的效果更好，有助于 LoRa 的远距离能力。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRa设备消耗多少电量？",
+      "name": "LoRa 设备消耗多少电量？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa设备专为低功耗设计。在发送模式下，典型LoRa模块消耗20至40mA。在休眠模式下，功耗降至1μA以下。这种超低休眠电流使Loko GPS追踪器等设备即使定期传输GPS位置也能实现30天以上的电池寿命。"
+        "text": "LoRa 设备专为实现最低功耗而设计。在发送模式下，典型的 LoRa 模块消耗 20–40mA 电流。在睡眠模式下，功耗降至 1μA 以下。这种超低的睡眠电流使 Loko GPS 跟踪器等设备能够实现长达 1 年的电池寿命，即使在定期传输 GPS 位置时也是如此。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRa的最大数据速率是多少？",
+      "name": "LoRa 的最大数据速率是多少？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "使用500kHz带宽的SF7时，LoRa最大数据速率约为27kbps。在使用SF9-SF12的典型IoT应用中，数据速率为250至1760bps。LoRa专为小型、低频次的数据包设计——GPS坐标、传感器读数、状态更新——而非流媒体或高带宽应用。"
+        "text": "LoRa 使用 SF7 的最大数据速率约为 27kbps，带宽为 500kHz。在 IoT 与 SF9-SF12 配合使用的典型情况下，数据速率为 250bps–1760bps。 LoRa 专为小型、不频繁的数据包（GPS 坐标、传感器读数、状态更新）而设计，不适用于流媒体或高带宽应用。"
       }
     }
-  ]
-}
-</script>
+  ],
+  "inLanguage": "zh"
+}</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';
@@ -397,90 +706,173 @@
     size-adjust: 107.64%;
   }
 </style>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/blog/lora-lorawan-a-simple-guide/" />
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "博客",
+      "item": "https://www.nolilab.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "LoRa &amp; LoRaWAN：简单指南",
+      "item": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/"
+    }
+  ],
+  "inLanguage": "zh"
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <article>
-<a class="back-link" href="/zh/blog/">
+<a class="back-link" href="/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 返回博客
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> March 26, 2025</span>
-<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+<span><i class="far fa-calendar"></i> 2025 年 3 月 26 日</span>
+<span><i class="far fa-user"></i> 塔姆雷哈·皮里耶夫</span>
 </div>
-<h1 class="article-title">LoRa与LoRaWAN：简明指南</h1>
+<h1 class="article-title">LoRa 与 LoRaWAN（适用于 Loko GPS 跟踪器）</h1>
 </div>
-<img alt="LoRa Spreading Factor" class="article-image" src="https://www.nolilab.com/cdn/shop/articles/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm_2788d34b-4e07-46ce-9b6b-73313a95f8f1.png?v=1743333627&amp;width=1920"/>
+<img alt="LoRa Spreading Factor" class="article-image" height="720" src="/images/lorawan-network-architecture.webp" width="960"/>
 <div class="article-content">
-<h2>LoRa / LoRaWAN无线接口——调制</h2>
-<p>LoRa（远距离）代表一种专为远距离、低功耗和可靠数据传输而设计的无线通信技术，具有强抗干扰性，适用于IoT应用和低功耗广域网络。</p>
-<p><strong>AM</strong> - 幅度调制<br/>
-<strong>FM</strong> - 频率调制</p>
+<h2>为什么 LoRa P2P 对于离线 GPS 跟踪很重要</h2>
+<p>LoRa 和 LoRaWAN 经常被混淆，但它们解决不同的跟踪问题。 Loko GPS 跟踪器使用 LoRa P2P，因为跟踪器可以将 GPS 坐标直接发送到接收器，无需网关、SIM 卡、蜂窝网络或每月数据计划。</p>
+<p><strong>对于 GPS 跟踪，关键决策是 LoRa、P2P 与 LoRaWAN。</strong> Loko 使用 LoRa P2P，因此跟踪器直接与您的接收器对话，无需网关、SIM 卡，也没有每月的数据计划。请参阅 <a href="/lora-gps-tracker/">Loko LoRa GPS 跟踪器页面</a> 产品层面的解释。</p>
+<p><strong>是</strong> - 幅度调制<br/>
+<strong>调频</strong> - 频率调制</p>
 <img alt="AM/FM Modulation Animation" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Amfm3-en-de.gif?v=1743011265"/>
-<p><strong>调制：</strong>该过程通过改变载波信号的频率、幅度或相位将信息编码到载波信号上，从而实现有用信号在一定距离上的传输。</p>
-<p><strong>幅度调制（AM）：</strong>载波信号的幅度按照信息信号的比例变化，而频率和相位保持不变。</p>
-<p><strong>频率调制（FM）：</strong>载波信号的频率按照信息信号的比例变化，而幅度保持不变。</p>
-<p>LoRa采用基于线性频率调制（线性调频扩频，CSS）的组合调制技术，信号频率在规定范围内连续增加或减少。</p>
+<p><strong>调制：</strong> 该过程涉及通过改变频率、幅度或相位将信息编码到载波信号上，从而允许远距离传输有用信号。</p>
+<p><strong>调幅 (AM)：</strong> 载波信号的幅度与信息信号成比例地变化，而频率和相位保持恒定。</p>
+<p><strong>调频 (FM)：</strong> 载波信号的频率与信息信号成比例地变化，而其幅度保持恒定。</p>
+<p>LoRa 采用基于线性频率调制（线性调频扩频，CSS）的组合调制技术，其中信号频率在定义的范围内连续增加或减少。</p>
 <img alt="LoRa Modulation Diagram - Linear Frequency Modulation" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora2.png?v=1743011098"/>
-<p>LoRaWAN调制利用LFM（线性频率调制）或CSS（线性调频扩频）。</p>
-<h2>LoRa / LoRaWAN无线接口——调制</h2>
-<p>LoRa中的线性调频调制由不规则的周期中断组成，这意味着周期可以在任何点停止，而不是在等时间间隔处停止。这会产生时间偏移，增强鲁棒性和抗噪声能力。</p>
+<p>LoRaWAN 调制采用 LFM（线性频率调制）或 CSS（线性调频扩频）。</p>
+<h2>LoRa 线性调频脉冲调制：周期中断和抗噪性</h2>
+<p>LoRa 中的线性调频调制由不规则的周期中断组成，这意味着周期可以在任何点停止，而不是以相等的时间间隔停止。这会产生时移，从而增强鲁棒性和抗噪声能力。</p>
 <img alt="LoRa Signal Chirp - Cycle Breaking and Time Shifts" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora1.png?v=1743011137"/>
-<p>LoRaWAN调制通过在中间点"打断"周期来实现，这被解释为时间偏移。</p>
-<h2>无线接口——扩频因子</h2>
-<p><strong>扩频因子（SF）：</strong>表示LFM信号频率变化的"速度"。SF值越高表示频率变化越慢。</p>
+<p>LoRaWAN 调制是通过在中间点“打破”周期来进行的，这被解释为时间偏移。</p>
+<h2>无线电接口。扩频因子</h2>
+<p><strong>扩频因子 (SF)：</strong> 表示 LFM 信号频率变化的“速度”。 SF 值越高表示频率变化越慢。</p>
 <img alt="Spreading Factor Comparison" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sf.png?v=1743010750"/>
-<p>将SF改变一个单位意味着周期（Chirp）时间翻倍。对于SF=7和125 kHz带宽，线性调频持续时间为1.024毫秒。</p>
-<p>线性调频的长度影响信号噪声，增强输出处的信号识别能力。这使得在较低能量和降低的RSSI水平下也能检测到信号。</p>
+<p>将 SF 更改一个单位意味着周期 (Chirp) 时间加倍。对于 SF=7 和 125 kHz 带宽，线性调频脉冲持续时间为 1.024 毫秒。</p>
+<p>线性调频脉冲的长度会影响信号噪声，从而增强输出端的信号识别能力。这允许以更低的能量和更低的 RSSI 电平进行信号检测。</p>
 <img alt="LoRa Signal Preamble Examples" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/1_RdkCF2t6XsG7LA8nKLeGGg.webp?v=1743011173"/>
 <img alt="LoRa Preamble Technical Diagram" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Preamble-1_jpg.webp?v=1743011201"/>
-<p>这个概念可以简化理解：<strong>将SF想象成"变焦镜头"——SF越高，"变焦"越深，传输距离越远，但数据发送越慢。</strong></p>
-<p><strong>关键原则：</strong>扩频因子越高 = 距离越远，但数据传输越慢。</p>
+<p>概念被简化： <strong>将 SF 视为“变焦镜头”——较高的 SF 可“放大”更远的范围，但发送数据的速度较慢。</strong></p>
+<p><strong>关键原理：</strong> 扩频因子越高=范围越远但数据速度越慢。</p>
 <h2>数据编码</h2>
-<p><strong>编码：</strong>向传输的用户数据添加冗余（控制）信息，以提高成功接收的概率。</p>
-<p>冗余级别由编码率（CR）比率决定，例如4/5，这意味着每传输5个比特中，4个比特是有用数据，1个比特是控制（冗余）比特。</p>
-<p>LoRaWAN采用从4/5到4/8的编码率。</p>
-<p>125 kHz信道带宽的数据传输速率（bps）取决于扩频因子（SF）和编码率（CR）。</p>
+<p><strong>编码：</strong> 在传输的用户数据中添加冗余（控制）信息，以增加成功接收的概率。</p>
+<p>冗余程度由码率（CR）比率决定，例如4/5，这意味着每传输5个比特，有4个比特是有用数据，1个比特是控制（冗余）比特。</p>
+<p>LoRaWAN 采用 4/5 至 4/8 的码率。</p>
+<p>125 kHz 信道带宽的数据传输速率 (bps) 取决于扩频因子 (SF) 和码率 (CR)。</p>
 <img alt="Data Transmission Rate Chart - bps for 125 kHz Channel" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Screenshot_2025-03-26_at_19.52.36.png?v=1743011226"/>
-<h2>LoRa信号示例</h2>
+<h2>LoRa 信号样本</h2>
 <img alt="Example of LoRa Signal Waveform" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Example-of-LoRa-Signal.jpg?v=1743011304"/>
 <img alt="LoRa Signal Analysis" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sensors-20-04034-g001-550.jpg?v=1743011334"/>
 <img alt="LoRa Modulation Educational Material" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/maxresdefault.jpg?v=1743011354"/>
-<h2>数据速率与传播距离的相互依赖</h2>
-<p>扩频因子、数据速率和传播距离之间的关系是LoRa性能的基础。更高的扩频因子可以实现更远距离的通信，但代价是数据传输速率降低。</p>
+<h2>数据速率和传播距离的相互依赖性</h2>
+<p>扩频因子、数据速率和传播距离之间的关系是 LoRa 性能的基础。较高的扩频因子可以实现更远的通信距离，但代价是数据传输速率降低。</p>
 <img alt="Spreading Factor vs Data Rate and Range" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm.png?v=1743011384"/>
 <h2>结论</h2>
-<p>LoRa和LoRaWAN技术为远距离、低功耗无线通信提供了强大的解决方案。理解调制、扩频因子和数据编码的关键概念对于优化LoRa部署以及在距离、功耗和数据吞吐量之间实现最佳平衡至关重要。</p>
+<p>LoRa 和 LoRaWAN 技术为远距离、低功耗无线通信提供强大的解决方案。了解调制、扩频因子和数据编码的关键概念对于优化 LoRa 部署以及在范围、功耗和数据吞吐量之间实现最佳平衡至关重要。</p>
 <div class="references">
-<h3>参考资料</h3>
+<h3>参考</h3>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Signal_modulation" target="_blank">Wikipedia: Signal Modulation</a></li>
-<li><a href="https://www.researchgate.net/figure/Example-of-LoRa-Signal_fig2_348345539" target="_blank">ResearchGate: Example of LoRa Signal</a></li>
-<li><a href="https://www.youtube.com/watch?v=yHocu_n2udI" target="_blank">YouTube: LoRa Tutorial</a></li>
-<li><a href="https://www.researchgate.net/figure/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless_fig7_324043563" target="_blank">ResearchGate: LoRa Spreading Factor, SF, Bitrates and Time on Air</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Signal_modulation" target="_blank">维基百科：信号调制</a></li>
+<li><a href="https://www.researchgate.net/figure/Example-of-LoRa-Signal_fig2_348345539" target="_blank">ResearchGate：LoRa 信号示例</a></li>
+<li><a href="https://www.youtube.com/watch?v=yHocu_n2udI" target="_blank">YouTube：LoRa 教程</a></li>
+<li><a href="https://www.researchgate.net/figure/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless_fig7_324043563" target="_blank">ResearchGate：LoRa 扩频因子、SF、比特率和播出时间</a></li>
 </ul>
 </div>
 </div>
 </article>
-<aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
-<h3 style="margin:0 0 1rem;font-size:1rem;font-weight:600">相关文章</h3>
-<ul style="margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:0.5rem">
-<li><a href="/zh/blog/what-are-lora-p2p-and-lorawan/">什么是LoRa P2P和LoRaWAN？</a></li>
-<li><a href="/zh/blog/discover-the-worlds-smallest-gps-tracker-introducing-the-loko-gps-tracker-by-nolilab-1/">发现世界最小的GPS追踪器：介绍noliLab的Loko GPS追踪器</a></li>
-</ul>
-</aside>
+<div class="product-cta">
+<p class="product-cta-heading">探索 Loko GPS 跟踪器</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">查看 Loko GPS 跟踪器</a>
+<a class="product-cta-link" href="/gps/">GPS 和 LoRa 技术指南</a>
+<a class="product-cta-link" href="/lorawan/">LoRaWAN 设置指南</a>
+<a class="product-cta-link" href="/specifications/">Loko 规格</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">相关文章</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/what-are-lora-p2p-and-lorawan/">
+<h3>什么是 LoRa、P2P 和 LoRaWAN？</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+<a class="related-post-card" href="/blog/how-to-set-up-lorawan/">
+<h3>如何设置 LoRaWAN</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+<a class="related-post-card" href="/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/">
+<h3>与 Loko GPS 跟踪器的远距离通信：探索 LoRa 无线电技术的强大功能</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+</div>
+</section>
+<!-- CTA -->
+<div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p>LoRa 和 LoRaWAN 为下一代远程、低功耗 GPS 跟踪提供支持 - 无需蜂窝套餐或月费。</p>
+<p><strong>Loko GPS 跟踪器使用 LoRa P2P 进行直接、免订阅的跟踪，最高可达 20km。</strong></p>
+<br/>
+<a class="cta-btn" href="/shop/">店铺 Loko →</a>
+</div>
+</div>
+</div>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/zh/">nolilab</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+  </script>
 <script defer="" src="/js/analytics.js"></script>
-<script defer="" src="/js/layout.js"></script>
 </body>
 </html>

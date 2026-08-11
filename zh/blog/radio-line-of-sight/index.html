@@ -2,436 +2,192 @@
 
 <html lang="zh">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>无线电视距 | nolilab博客</title>
+<title>无线电瞄准线：GPS 和 LoRa 范围指南</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display;=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="了解无线电视距原理及其对GPS追踪和无人机操作无线通信系统的影响。" name="description"/>
+<meta content="了解无线电视线对于 GPS 和 LoRa 跟踪意味着什么。地形如何影响 Loko 的 20km 范围 - 以及如何最大化它。" name="description"/>
 <link href="https://www.nolilab.com/zh/blog/radio-line-of-sight/" rel="canonical"/>
-<meta content="https://www.nolilab.com/zh/blog/radio-line-of-sight" property="og:url"/>
-<meta content="article" property="og:type"/>
-<meta content="无线电视距 | nolilab博客" property="og:title"/>
-<meta content="了解无线电视距原理及其对GPS追踪和无人机操作无线通信系统的影响。" property="og:description"/>
-<meta content="nolilab" property="og:site_name"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="无线电视距 | nolilab博客" name="twitter:title"/>
-<meta content="了解无线电视距原理及其对GPS追踪和无人机操作无线通信系统的影响。" name="twitter:description"/>
-<style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #24292e;
-      --text-secondary: #57606a;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-lg);
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    article {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: var(--spacing-xl) var(--spacing-md);
-    }
-
-    .article-header {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-meta {
-      display: flex;
-      gap: var(--spacing-md);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.2;
-    }
-
-    .article-image {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-content {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .article-content h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin: var(--spacing-xl) 0 var(--spacing-md);
-      letter-spacing: -0.01em;
-    }
-
-    .article-content h3 {
-      font-size: 1.375rem;
-      font-weight: 600;
-      margin: var(--spacing-lg) 0 var(--spacing-sm);
-    }
-
-    .article-content p {
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-content ul,
-    .article-content ol {
-      margin: var(--spacing-md) 0;
-      padding-left: var(--spacing-lg);
-    }
-
-    .article-content li {
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .article-content strong {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      margin-bottom: var(--spacing-lg);
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--accent-hover);
-    }
-
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .article-title {
-        font-size: 2rem;
-      }
-
-      .article-content {
-        font-size: 1rem;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
-<script type="application/ld+json">
-{
+<link href="https://www.nolilab.com/blog/radio-line-of-sight/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/radio-line-of-sight/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/radio-line-of-sight/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/radio-line-of-sight/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/radio-line-of-sight/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/radio-line-of-sight/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/radio-line-of-sight/" hreflang="x-default" rel="alternate"/>
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Radio Line of Sight",
-  "description": "Understanding radio line of sight principles and their impact on wireless communication systems for GPS tracking and drone operations.",
-  "url": "https://www.nolilab.com/blog/radio-line-of-sight",
-  "datePublished": "2023-11-21",
-  "dateModified": "2023-11-21",
-  "author": {
-    "@type": "Organization",
-    "name": "nolilab"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "nolilab",
-    "url": "https://www.nolilab.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
-    }
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https://www.nolilab.com/cdn/shop/articles/photo-1467932268859-422ba9924d04.jpg?v=1700562740&width=1920"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.nolilab.com/blog/radio-line-of-sight"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "BreadcrumbList",
+  "itemListElement": [
     {
-      "@type": "Question",
-      "name": "什么是无线电视距？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "无线电视距（LOS）是指发射机和接收机之间无障碍物的直线传播路径。任何物理障碍物——山丘、建筑物或树木——都会削弱或阻断信号，从而降低GPS追踪器等无线设备的有效通信距离。"
-      }
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
     },
     {
-      "@type": "Question",
-      "name": "地形如何影响GPS和LoRa追踪器的通信距离？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "地形是限制GPS和LoRa追踪器通信距离的主要因素。山丘和山谷会阻断直接无线电路径，而茂密的森林会衰减信号。Loko GPS追踪器在开阔平坦的地形且视距良好的情况下，通信距离可达20公里，但在山区或城市环境中距离会大幅降低。"
-      }
+      "@type": "ListItem",
+      "position": 2,
+      "name": "博客",
+      "item": "https://www.nolilab.com/blog/"
     },
     {
-      "@type": "Question",
-      "name": "什么是菲涅耳区？它对无线通信距离为何重要？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "菲涅耳区是围绕发射机和接收机之间直接无线电路径的椭圆形空间。为了达到最佳信号强度，第一菲涅耳区至少60%的空间必须无障碍物。即使略微偏离直接路径的物体，如果侵入该区域，也会导致明显的信号损失。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "如何最大化GPS追踪器的通信距离？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "最大化GPS追踪器通信距离的方法：1）将接收器（基站）安装在尽可能高的位置——即使多几米的高度也能大幅扩展覆盖范围。2）避免安装在大型金属结构或建筑物附近。3）如果设备支持，使用外置天线。4）选择追踪器与基站之间障碍物最少的开阔地形。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Loko GPS追踪器在没有视距的情况下能工作吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Loko GPS追踪器采用LoRa P2P无线技术，凭借亚GHz频率和线性调频扩频调制，在非视距条件下的表现优于Wi-Fi或蓝牙。但与所有无线设备一样，信号穿过固体障碍物时通信距离会降低。在典型的户外使用中有部分遮挡时，Loko可可靠覆盖2至5公里。"
-      }
+      "@type": "ListItem",
+      "position": 3,
+      "name": "无线电瞄准线：GPS 和 LoRa 范围指南",
+      "item": "https://www.nolilab.com/blog/radio-line-of-sight/"
     }
   ]
-}
-</script>
-<style>
-  @font-face {
-    font-family: 'Inter-fallback';
-    src: local('Arial');
-    ascent-override: 90.44%;
-    descent-override: 22.52%;
-    line-gap-override: 0%;
-    size-adjust: 107.64%;
-  }
-</style>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/blog/radio-line-of-sight/" />
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <article>
-<a class="back-link" href="/zh/blog/">
+<a class="back-link" href="/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 返回博客
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> November 21, 2023</span>
+<span><i class="far fa-calendar"></i> 2023 年 11 月 21 日</span>
 <span><i class="far fa-user"></i> <a class="author-link" href="/author/tamleykha-piriyev/" rel="author">nolilab</a></span>
 </div>
-<h1 class="article-title">无线电视距</h1>
+<h1 class="article-title">无线电视线：它如何影响 GPS 和 LoRa 跟踪范围</h1>
 </div>
-<img alt="Radio Communication Tower" class="article-image" src="https://www.nolilab.com/cdn/shop/articles/photo-1467932268859-422ba9924d04.jpg?v=1700562740&amp;width=1920"/>
+<img alt="Radio Communication Tower" class="article-image" height="512" src="/images/radio-wave-signal.webp" width="512"/>
 <div class="article-content">
-<h2>简介</h2>
-<p>无线电视距是无线通信系统的一个关键方面，它决定了设备之间的有效信号路径。理解这一概念对于GPS追踪、远程监控和无人机操作至关重要，因为最佳信号强度能够增强系统可靠性和性能。</p>
-<h2>无线电视距基础</h2>
+<h2>介绍</h2>
+<p>无线电视线是无线通信系统的一个重要方面，它决定了设备之间的有效信号路径。事实证明，理解这一概念对于 GPS 跟踪、远程监控和无人机操作至关重要，因为最佳信号强度可以增强系统可靠性和性能。</p>
+<h2>无线电视距基础知识</h2>
 <h3>定义</h3>
-<p>无线电视距是指无线电信号在发射器和接收器之间直接传播的无障碍路径。这条直接路径对于可靠的无线通信至关重要，因为障碍物会显著降低甚至完全阻断信号传输。</p>
+<p>无线电视线代表无线电信号在发射器和接收器之间直接传播的无障碍路径。这种直接路径是可靠无线通信的基础，因为障碍物会显着降低或完全阻止信号传输。</p>
 <h3>信号传播</h3>
-<p>无线电信号通常以直线从发射器传播到接收器，类似于光线。然而，在较远距离上，信号会遇到自然障碍——特别是地球曲率、山丘或其他阻断传输的地形特征。与可以通过衍射绕过障碍物的低频信号不同，GPS追踪中使用的频率（通常在GHz范围内）需要相对清晰的传播路径。</p>
-<h2>影响无线电视距的因素</h2>
-<p>几个关键变量影响无线电视距的有效性：</p>
-<h3>1. 地形与地貌</h3>
-<p>丘陵、山谷和山脉会形成阻断直接信号路径的物理障碍。即使是轻微的地形变化也会在天线高度较低时显著影响距离。高位部署——将天线置于山顶或高层建筑上——能够显著改善视距覆盖范围。</p>
-<h3>2. 障碍物与建筑结构</h3>
-<p>建筑物、塔楼、茂密植被以及其他人工或自然结构会导致信号反射、吸收或完全阻断。金属结构尤其麻烦，会在其后方形成完全的信号阴影。城市环境中多个反射面造成的多径干扰带来复杂的挑战。</p>
+<p>无线电信号通常以直线从发射器传输到接收器，类似于光线。然而，在较远的范围内，信号会遇到自然障碍，特别是地球的曲率、丘陵或其他阻碍传输的地形特征。与可以通过衍射绕过障碍物的低频信号不同，GPS 跟踪中使用的频率（通常在 GHz 范围内）需要相对清晰的路径。</p>
+<h2>影响无线电视线的因素</h2>
+<p>几个关键变量会影响无线电视线有效性：</p>
+<h3>1. 地形与地形</h3>
+<p>丘陵、山谷和山脉会造成物理障碍，阻碍直接信号路径。即使是平缓的地形变化也会显着影响天线高度较低的范围。高架定位（将天线放置在山顶或高层建筑上）可显着改善视线覆盖范围。</p>
+<h3>2. 障碍物和建筑物</h3>
+<p>建筑物、塔楼、茂密的植被以及其他人造或自然结构会导致信号反射、吸收或完全阻塞。事实证明，金属结构的问题尤其严重，会在其后面产生完整的信号阴影。城市环境面临着复杂的挑战，多个反射表面会导致多径干扰。</p>
 <h3>3. 大气条件</h3>
-<p>温度、湿度和降水会影响信号传播特性。大雨、雾和雪会衰减（削弱）无线电信号，尤其是在较高频率下。温度逆温有时会通过大气波导效应创造不寻常的传播条件，将范围延伸到正常视距之外。</p>
-<h3>4. 频率与功率</h3>
-<p>较高频率通常受到更大衰减，需要更清晰的视距，而较低频率能够更好地穿透障碍物并绕过阻碍进行衍射。增加发射功率可以扩展范围，但无法完全克服视距限制——当面临完全障碍时，功率翻倍只能略微改善范围。</p>
+<p>温度、湿度和降水会影响信号传播特性。大雨、大雾和大雪会削弱无线电信号，尤其是较高频率的信号。逆温有时会产生不寻常的传播条件，通过大气管道将范围延伸到正常视线之外。</p>
+<h3>4. 频率和功率</h3>
+<p>较高的频率通常会遭受更大的衰减并需要更清晰的视线，而较低的频率可以更好地穿透障碍物并在障碍物周围衍射。增加发射功率可以扩大覆盖范围，但不能完全克服视线限制——当面对完全障碍物时，加倍功率只能略微改善覆盖范围。</p>
 <h2>无线电视距的应用</h2>
-<h3>GPS追踪与导航</h3>
-<p>像Loko GPS追踪器这样的系统依赖于对卫星（用于定位）和地面站（用于数据通信）的清晰视距。Loko采用的LoRa无线技术在最佳视距条件下可提供超过5公里的扩展范围，使其非常适合开阔地形中的追踪应用。</p>
-<h3>通信系统</h3>
-<p>蜂窝网络、无线互联网提供商和点对点通信链路都依赖于视距原理。塔台选址会考虑地形分析以最大化覆盖区域。</p>
-<h3>远程监控与SCADA系统</h3>
-<p>工业监控系统需要传感器和中央站之间的可靠通信。视距计算确保关键基础设施监控的充足覆盖。</p>
+<h3>GPS 跟踪和导航</h3>
+<p>Loko GPS 跟踪器等系统依赖于卫星（用于定位）和地面站（用于数据通信）的清晰视线。 Loko 采用的 LoRa 无线电技术可在最佳视线条件下提供超过 5 公里的扩展范围，使其成为开阔地形中跟踪应用的理想选择。</p>
+<h3>通讯系统</h3>
+<p>蜂窝网络、无线互联网提供商和点对点通信链路都依赖于视线原理。塔的放置考虑地形分析以最大化覆盖区域。</p>
+<h3>远程监控和 SCADA 系统</h3>
+<p>工业监控系统需要传感器和中心站之间的可靠通信。视线计算可确保关键基础设施监控的足够覆盖范围。</p>
 <h3>无人机操作与控制</h3>
-<p>无人机飞行员必须保持视距（视觉和无线电）以确保安全操作和法规合规。了解无线电视距有助于飞行员预测控制信号可能减弱或中断的位置。</p>
-<h2>计算视距</h2>
-<p>确定无线电视距有三种主要方法：</p>
+<p>无人机飞行员必须保持视线（视觉和无线电），以确保安全操作和遵守法规。了解无线电视线有助于飞行员预测控制信号可能减弱或失效的位置。</p>
+<h2>计算视线</h2>
+<p>确定无线电视线存在三种主要方法：</p>
 <h3>几何计算</h3>
-<p>利用三角学和地球曲率数据，工程师根据天线高度计算理论视距距离。由于大气折射，无线电地平线延伸超过视觉地平线，通常使用4/3地球半径模型进行计算。</p>
+<p>使用三角学和地球曲率数据，工程师根据天线高度计算理论视距。由于大气折射，射电地平线延伸到视地平线之外，通常使用 4/3 地球半径模型计算。</p>
 <h3>经验模型</h3>
-<p>基于在各种地形和条件下收集的实验数据，Longley-Rice或Okumura-Hata等经验模型比纯几何计算更准确地预测信号传播。</p>
+<p>基于在各种地形和条件下收集的实验数据，Longley-Rice 或 Okumura-Hata 模型等经验模型比纯几何计算更准确地预测信号传播。</p>
 <h3>计算机模拟</h3>
-<p>现代规划工具使用详细的地形数据库和复杂算法来模拟信号传播。这些模拟考虑了地形、植被、建筑物和大气效应。</p>
+<p>现代规划工具使用详细的地形数据库和复杂的算法来模拟信号传播。这些模拟考虑了地形、植被、建筑物和大气影响。</p>
 <h3>可用工具</h3>
 <ul>
-<li><strong>Google Earth：</strong>提供地形高程数据和基本视距可视化</li>
-<li><strong>Radio Mobile：</strong>用于详细无线电传播建模的免费软件</li>
-<li><strong>GIS软件包：</strong>提供全面地形分析和传播预测的专业工具</li>
+<li><strong>谷歌地球：</strong> 提供地形高程数据和基本视线可视化</li>
+<li><strong>无线电移动：</strong> 用于详细无线电传播建模的免费软件</li>
+<li><strong>地理信息系统软件包：</strong> 提供全面地形分析和传播预测的专业工具</li>
 </ul>
-<h2>改善视距</h2>
-<p>几种策略可以提高无线电视距性能：</p>
-<h3>1. 优化天线位置和高度</h3>
-<p>提高天线高度可显著扩展视距范围。即使适度提高高度——将天线安装在屋顶而非地面——也能显著改善覆盖范围。Loko GPS追踪器受益于高位安装，最大化其5公里以上的距离潜力。</p>
+<h2>改善视线</h2>
+<p>有几种策略可以增强无线电视线性能：</p>
+<h3>1. 优化天线放置和仰角</h3>
+<p>升起的天线显着扩展了视线范围。即使是适度的海拔增加（将天线安装在屋顶而不是地面上）也会极大地提高覆盖范围。 Loko GPS 跟踪器受益于升高的安装位置，最大限度地发挥其 5 公里以上范围的潜力。</p>
 <h3>2. 安装信号放大器和中继器</h3>
-<p>当直接视距不可实现时，中继站可以绕过障碍物转发信号。信号放大器可以增强微弱信号，但无法克服完全阻断。</p>
+<p>当无法实现直接视线时，中继站会绕过障碍物中继信号。信号放大器可以增强微弱的信号，但它们无法克服完全的障碍物。</p>
 <h3>3. 探索替代技术</h3>
 <ul>
-<li><strong>卫星通信：</strong>完全绕过地面视距限制</li>
-<li><strong>光纤网络：</strong>提供独立于无线电传播挑战的可靠连接</li>
-<li><strong>网状网络：</strong>多个节点动态中继信号，绕过障碍物路由</li>
+<li><strong>卫星通讯：</strong> 完全绕过地面视线限制</li>
+<li><strong>光纤网络：</strong> 提供可靠的连接，不受无线电传播挑战的影响</li>
+<li><strong>网状网络：</strong> 多个节点中继信号，动态绕过障碍物</li>
 </ul>
-<h2>结论</h2>
-<p>了解无线电视距挑战有助于做出明智的系统设计决策，最终确保无线应用的最佳性能。无论是部署像Loko系统这样的GPS追踪器、建立通信网络还是操作无人机，视距考量从根本上影响可靠性和覆盖范围。</p>
-<p>通过仔细分析地形、选择合适的频率、优化天线位置，并在必要时采用距离扩展技术，即使在具有挑战性的环境中也能最大化无线通信系统的有效性。</p>
+<h3>结论</h3>
+<p>了解无线电视线挑战有助于做出明智的系统设计决策，最终确保无线应用的最佳性能。无论是部署 Loko 系统等 GPS 跟踪器、建立通信网络还是操作无人机，视线考虑因素都会从根本上影响可靠性和覆盖范围。</p>
+<p>通过仔细分析地形、选择适当的频率、优化天线放置以及在必要时采用范围扩展技术，即使在充满挑战的环境中，您也可以最大限度地提高无线通信系统的效率。</p>
 </div>
 </article>
-<aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
-<h3 style="margin:0 0 1rem;font-size:1rem;font-weight:600">相关文章</h3>
-<ul style="margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:0.5rem">
-<li><a href="/zh/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1/">无人机爱好者的福音：专为迷你无人机打造的终极GPS追踪器</a></li>
-<li><a href="/zh/blog/lora-lorawan-a-simple-guide/">LoRa与LoRaWAN：简明指南</a></li>
-</ul>
-</aside>
+<div class="product-cta">
+<p class="product-cta-heading">探索 Loko GPS 跟踪器</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">查看 Loko GPS 跟踪器</a>
+<a class="product-cta-link" href="/gps/">GPS 和 LoRa 技术指南</a>
+<a class="product-cta-link" href="/specifications/">Loko 规格</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">相关文章</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/how-distance-affects-wireless-signal-range/">
+<h3>距离如何影响无线信号范围</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+<a class="related-post-card" href="/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/">
+<h3>GPS 无线电综合指南：特性、优点和应用</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+<a class="related-post-card" href="/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/">
+<h3>全天电离层高度的变化如何影响 GPS 信号质量？</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+<a class="related-post-card" href="/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1/">
+<h3>最佳无人机 GPS 跟踪器：轻量级、离线且无月费</h3>
+<span class="rp-cta">阅读更多→</span>
+</a>
+</div>
+</section>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/zh/">nolilab</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // Close menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // Close menu when clicking overlay
+      document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+  </script>
 <script defer="" src="/js/analytics.js"></script>
-<script defer="" src="/js/layout.js"></script>
 </body>
 </html>

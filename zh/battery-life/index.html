@@ -38,11 +38,11 @@
 <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
 <link href="https://www.nolilab.com/zh/battery-life/" rel="canonical"/>
 <link href="https://www.nolilab.com/battery-life/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/battery-life/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/es/battery-life/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/battery-life/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/battery-life/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/ru/battery-life/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/battery-life/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/battery-life/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/battery-life/" hreflang="x-default" rel="alternate"/>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -58,7 +58,7 @@
     },
     {
       "@type": "Question",
-      "name": "Loko 如何实现长达 1 年的电池寿命？",
+      "name": "Loko如何实现长达1年的电池寿命？",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Loko 使用 LoRa 无线电而不是蜂窝网络。 LoRa 的传输峰值电流仅为 20-40 毫安，而蜂窝网络的传输电流为 200-500mA，传输电流大约减少了 10 倍。结合深度睡眠模式（两次传输之间消耗的电流小于 1 微安），Loko 的总平均电流消耗大大低于任何蜂窝跟踪器。小型充电电池的使用寿命长达 1 年。"
@@ -69,7 +69,7 @@
       "name": "Loko GPS Air 需要多久充电一次？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "按照正常的更新间隔，Loko Air 大约每月需要充电一次。与需要每天或每周充电的蜂窝跟踪器相比，这是可用性方面的根本区别 - 特别是对于频繁访问跟踪器不方便的部署，例如狗项圈、农用车辆或远程部署的传感器。"
+        "text": "在正常的更新间隔下，Loko Air 大约每月需要充电一次。与需要每天或每周充电的蜂窝跟踪器相比，这是可用性方面的根本区别 - 特别是对于频繁访问跟踪器不方便的部署，例如狗项圈、农用车辆或远程部署的传感器。"
       }
     },
     {
@@ -231,13 +231,6 @@
   }
 </style>
 <script defer="" src="/js/layout.js"></script>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/battery-life/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/battery-life/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/battery-life/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/battery-life/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/battery-life/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/battery-life/" />
 </head>
 <body>
 <div id="site-header"></div>
@@ -247,9 +240,9 @@
 <div class="container">
 <h1>Loko GPS 跟踪器电池寿命：1 年离线 LoRa 跟踪</h1>
 <p class="subtitle">为什么 Loko GPS 跟踪器可持续使用长达 1 年，而蜂窝 GPS 跟踪器通常可持续使用 1-7 天。</p>
-<p>如果您要比较 GPS 跟踪器的电池寿命，有用的问题不仅仅是电池尺寸。这取决于跟踪器是否使用蜂窝数据或低功耗 LoRa 无线电。 Loko GPS 跟踪器专为离线 LoRa 跟踪而设计，因此可以运行长达 1 年，无需 SIM 卡、没有蜂窝网络套餐，也无需支付月费。</p>
+<p>如果您要比较 GPS 跟踪器的电池寿命，有用的问题不仅仅是电池尺寸。这取决于跟踪器是否使用蜂窝数据或低功耗 LoRa 无线电。 Loko GPS 跟踪器专为离线 LoRa 跟踪而设计，因此可以运行长达 1 年，无需 SIM 卡，无需蜂窝网络套餐，也无需支付月费。</p>
 <p><strong>蜂窝 GPS 追踪器可持续 1-7 天。</strong> LoRa GPS 追踪器（如 Loko）的使用寿命长达 1 年。差异归结为一个因素：无线电发射器消耗多少功率。</p>
-<p>本页解释了 GPS 跟踪器电池寿命背后的物理和工程原理，展示了真实的比较数据，并准确地告诉您 Loko 如何在 15g 设备中实现长达 1 年的电池寿命。</p>
+<p>本页解释了 GPS 追踪器电池寿命背后的物理和工程原理，展示了真实的比较数据，并准确地告诉您 Loko 如何在 15g 设备中实现长达 1 年的电池寿命。</p>
 <div class="cta-block">
 <p><strong>正在寻找真正的追踪器？</strong> 在深入研究电池数学之前，请参阅 Loko 的 LoRa GPS 硬件、软件下载和设置流程。</p>
 <a class="cta-btn" href="/lora-gps-tracker/">请参阅 Loko GPS 跟踪器 →</a>
@@ -298,7 +291,7 @@
 </thead>
 <tbody>
 <tr class="highlight-row">
-<td>Loko Air（诺利实验室）</td>
+<td>Loko Air (nolilab)</td>
 <td>长达 1 年</td>
 <td>LoRa（LPWAN）</td>
 <td>〜12</td>
@@ -342,7 +335,7 @@
 </tbody>
 </table>
 <p>*AirTag 和 Tile Mate 使用蓝牙信标 - 它们不是 GPS 跟踪器，并且不具备独立于附近手机的实时定位功能。它们的长电池寿命反映了蓝牙极低的功耗，但它们无法在偏远地区进行跟踪。</p>
-<p>Garmin inReach Mini 2 使用铱星卫星 communication，提供全球覆盖，但订阅价格为 15-65 美元/月，跟踪模式下电池续航时间为 2 周。</p>
+<p>Garmin inReach Mini 2 使用铱星卫星通信，提供全球覆盖，但订阅费为 15-65 美元/月，跟踪模式电池续航时间为 2 周。</p>
 <p><strong>在真正的实时 GPS 跟踪器中，Loko 长达 1 年的电池寿命在这个价格和尺寸上是无与伦比的。</strong></p>
 </div>
 </div>
@@ -357,7 +350,7 @@
       蜂窝连接 + 传输：~300mA × 5 秒 = 0.417 mAh<br/>
       周期之间的睡眠：~0.1mA × 22 秒 = 0.00061 mAh<br/>
 <strong>每 30 秒周期：~0.43 mAh |每天：~51.8 mAh</strong><br/>
-      使用 400mAh 电池：大约 7.7 天</p>
+      使用 200mAh 电池：大约 3.9 天</p>
 </div>
 <div class="power-callout">
 <p><strong>Loko LoRa GPS 跟踪器，每 30 秒更新一次：</strong><br/>
@@ -365,10 +358,10 @@
       LoRa 传输：~35mA × 0.1 秒 = 0.001 mAh<br/>
       周期之间的深度睡眠：~0.001mA × 26.9 秒 = 0.0000075 mAh<br/>
 <strong>每 30 秒周期：~0.018 mAh |每天：~2.15 mAh</strong><br/>
-      使用 400mAh 电池：大约 186 天</p>
+      使用 200mAh 电池：大约 93 天</p>
 </div>
 <p>数字不言而喻。在相同的更新间隔和相似的电池容量下，LoRa跟踪器的续航时间约为 <strong>长 24 倍</strong> 比蜂窝跟踪器。这不是一个极端情况——它是无线电物理学的基本结果。</p>
-<p>实际上，Loko 的电池容量针对 15 克以下的尺寸进行了优化，这限制了总容量。在实际更新间隔（因使用案例而异）下，Loko 的持续更新时间长达 1 年。</p>
+<p>实际上，Loko 的电池容量针对 15g 以下的尺寸进行了优化，这限制了总容量。在实际更新间隔（因使用案例而异）下，Loko 的持续更新时间长达 1 年。</p>
 </div>
 </div>
 <!-- How Loko achieves up to 1 year -->
@@ -378,10 +371,10 @@
 <p>Loko 卓越的电池寿命是多项工程决策共同作用的结果：</p>
 <ul>
 <li><strong>LoRa 无线电的核心：</strong> LoRa 相对于蜂窝网络的基本选择决定了大部分效率增益。峰值传输电流为 20–40mA，而蜂窝传输电流为 200–500mA，每次传输只消耗一小部分能量。</li>
-<li><strong>优化深度睡眠固件：</strong> Loko Air 大部分时间都处于深度睡眠状态，消耗的电流小于 1 微安。微控制器、GPS 芯片和 LoRa 无线电均在更新周期之间进入最低功耗状态。 1μA 的睡眠电流意味着 1mAh 电池容量可睡眠 1,000 小时。</li>
+<li><strong>优化深度睡眠固件：</strong> Loko Air 的大部分时间都处于深度睡眠状态，消耗的电流小于 1 微安。微控制器、GPS 芯片和 LoRa 无线电均在更新周期之间进入最低功耗状态。 1μA 的睡眠电流意味着 1mAh 电池容量可睡眠 1,000 小时。</li>
 <li><strong>高效的 GPS 采集：</strong> Loko 配置为在可能的情况下使用辅助 GPS，从而减少首次定位时间，从而减少 GPS 芯片在高功率采集模式下花费的时间。使用全部三个卫星星座（GPS + GLONASS + Galileo）可提供更多卫星开销，从而加快修复速度。</li>
 <li><strong>自适应更新率：</strong> 开源固件可以配置为当跟踪器检测到其静止时（通过加速计）降低更新频率，从而在实践中进一步延长电池寿命。</li>
-<li><strong>无云保持活动：</strong> 蜂窝跟踪器必须定期 ping 云服务器以维持连接状态，即使没有发生任何变化。 Loko 的 P2P 无线电架构不需要此类保持活动 — 唯一的传输是协调数据包。</li>
+<li><strong>无云保持活动：</strong> 蜂窝跟踪器必须定期 ping 云服务器以维持连接状态，即使没有任何变化。 Loko 的 P2P 无线电架构不需要此类保持活动 — 唯一的传输是协调数据包。</li>
 </ul>
 </div>
 </div>
@@ -409,12 +402,12 @@
 <p>大多数 GPS 跟踪器使用蜂窝 (4G/LTE) 无线电来传输位置数据。蜂窝调制解调器在主动传输期间消耗 200-500 毫安的电流，这是一个巨大的电流消耗，会迅速耗尽小电池。即使采用积极的睡眠模式，周期性的蜂窝唤醒也会使袖珍设备无法实现数周的电池寿命。</p>
 </div>
 <div class="faq-item">
-<h3>Loko 如何实现长达 1 年的电池寿命？</h3>
+<h3>Loko如何实现长达1年的电池寿命？</h3>
 <p>Loko 使用 LoRa 无线电而不是蜂窝网络。 LoRa 的传输峰值电流仅为 20-40 毫安，而蜂窝网络的传输电流为 200-500mA，传输电流大约减少了 10 倍。结合深度睡眠模式（两次传输之间消耗的电流小于 1 微安），Loko 的总平均电流消耗大大低于任何蜂窝跟踪器。小型充电电池的使用寿命长达 1 年。</p>
 </div>
 <div class="faq-item">
 <h3>Loko GPS Air 需要多久充电一次？</h3>
-<p>按照正常的更新间隔，Loko Air 大约每月需要充电一次。与需要每天或每周充电的蜂窝跟踪器相比，这是可用性方面的根本区别 - 特别是对于频繁访问跟踪器不方便的部署，例如狗项圈、农用车辆或远程部署的传感器。</p>
+<p>在正常的更新间隔下，Loko Air 大约每月需要充电一次。与需要每天或每周充电的蜂窝跟踪器相比，这是可用性方面的根本区别 - 特别是对于频繁访问跟踪器不方便的部署，例如狗项圈、农用车辆或远程部署的传感器。</p>
 </div>
 <div class="faq-item">
 <h3>我可以进一步延长 Loko 的电池寿命吗？</h3>
@@ -439,7 +432,7 @@
 </div>
 </div>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/zh/">nolilab</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>

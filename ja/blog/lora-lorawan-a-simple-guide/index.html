@@ -2,31 +2,37 @@
 
 <html lang="ja">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
-<meta content="LoRa (Long Range) は、強力な耐干渉性を備えた長距離、低電力、信頼性の高いデータ伝送用に設計された無線通信技術を表しており、IoT アプリケーションや低電力広域ネットワークに適しています。" name="description"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>LoRa と LoRaWAN: シンプルなガイド |ノリラボのブログ</title>
+<title>Loko GPS トラッカーの LoRa と LoRaWAN の比較 |オフライン GPS ガイド</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="強力な耐干渉性を備え、長距離、低電力、信頼性の高いデータ送信を目的として設計されたワイヤレス通信テクノロジー。" name="description"/>
-<link href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" rel="canonical"/>
+<meta content="GPS 追跡における LoRa と LoRaWAN、およびゲートウェイ、SIM、月額料金なしでオフライン追跡に Loko GPS Tracker が LoRa P2P を使用する理由を理解します。" name="description"/>
+<link href="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/lora-lorawan-a-simple-guide/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/lora-lorawan-a-simple-guide/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="LoRa と LoRaWAN: シンプルなガイド |ノリラボのブログ" property="og:title"/>
-<meta content="強力な耐干渉性を備え、長距離、低電力、信頼性の高いデータ送信を目的として設計されたワイヤレス通信テクノロジー。" property="og:description"/>
-<meta content="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide" property="og:url"/>
+<meta content="Loko GPS トラッカーの LoRa と LoRaWAN の比較 |オフライン GPS ガイド" property="og:title"/>
+<meta content="GPS 追跡における LoRa と LoRaWAN、およびゲートウェイ、SIM、月額料金なしでオフライン追跡に Loko GPS Tracker が LoRa P2P を使用する理由を理解します。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/lorawan-network-architecture.webp" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="LoRa と LoRaWAN: シンプルなガイド |ノリラボのブログ" name="twitter:title"/>
-<meta content="強力な耐干渉性を備え、長距離、低電力、信頼性の高いデータ送信を目的として設計されたワイヤレス通信テクノロジー。" name="twitter:description"/>
+<meta content="Loko GPS トラッカーの LoRa と LoRaWAN の比較 |オフライン GPS ガイド" name="twitter:title"/>
+<meta content="GPS 追跡における LoRa と LoRaWAN、およびゲートウェイ、SIM、月額料金なしでオフライン追跡に Loko GPS Tracker が LoRa P2P を使用する理由を理解します。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/lorawan-network-architecture.webp" name="twitter:image"/>
 <style>
     :root {
@@ -502,19 +508,123 @@
         text-align: center;
       }
     }
+  
+    /* Related Posts */
+    .related-posts {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .related-posts-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+    .related-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .related-post-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem 1.1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .related-post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+    .related-post-card h3 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
+    }
+    .related-post-card .rp-cta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .related-posts-grid { grid-template-columns: 1fr; }
+    }
+  
+    /* Product CTA */
+    .product-cta {
+      max-width: 800px;
+      margin: 0 auto 0;
+      padding: 1.5rem 1rem 1.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .product-cta-heading {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.9rem;
+    }
+    .product-cta-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .product-cta-link {
+      display: inline-block;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      background: var(--bg-primary);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .product-cta-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .product-cta-link.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .product-cta-link.primary:hover {
+      background: var(--accent-hover, var(--accent));
+      border-color: var(--accent-hover, var(--accent));
+      color: #fff;
+    }
   </style>
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "LoRa & LoRaWAN: A Simple Guide",
-  "description": "A wireless communication technology designed for long-range, low-power, and reliable data transmission with strong interference resistance.",
-  "url": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide",
+  "headline": "Loko GPS トラッカーの LoRa と LoRaWAN",
+  "description": "GPS 追跡における LoRa と LoRaWAN、およびゲートウェイ、SIM、月額料金なしでオフライン追跡に Loko GPS Tracker が LoRa P2P を使用する理由を理解します。",
+  "url": "https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/",
   "datePublished": "2025-03-26",
-  "dateModified": "2025-03-26",
+  "dateModified": "2026-03-25",
   "author": {
     "@type": "Person",
-    "name": "Tamleykha Piriyev"
+    "name": "タムリーカ・ピリエフ",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
   },
   "publisher": {
     "@type": "Organization",
@@ -527,62 +637,65 @@
   },
   "image": {
     "@type": "ImageObject",
-    "url": "/images/lorawan-network-architecture.webp"
+    "url": "https://www.nolilab.com/images/lorawan-network-architecture.webp"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide"
+    "@id": "https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/"
+  },
+  "inLanguage": "ja",
+  "@id": "https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/#article",
+  "translationOfWork": {
+    "@id": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/#article"
   }
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "LoRa変調とはどのように機能しますか？",
+      "name": "LoRa 変調とは何ですか?またどのように機能しますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRaはチャープスペクトラム拡散（CSS）変調を使用し、信号の周波数を連続的に変化させることでデータをエンコードします。これによりノイズや干渉に対して非常に耐性が高くなります。受信機はノイズフロアより20dB低い状態でも信号を復元でき、LoRaが誇る優れた通信範囲と障害物透過性を実現します。"
+        "text": "LoRa は、チャープ スペクトラム拡散 (CSS) 変調を使用し、信号 (チャープ) の周波数を連続的に変化させることでデータをエンコードします。これにより、信号はノイズや干渉に対して非常に耐性のあるものになります。レシーバーは、ノイズフロアより 20dB 低い場合でも信号を回復できるため、LoRa で知られる並外れた範囲と透過性が可能になります。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRaにおけるスプレッディングファクターとは何ですか？",
+      "name": "LoRa の拡散率とは何ですか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRaのスプレッディングファクター（SF）は、通信範囲とデータレートのトレードオフを制御します。SF7は最高データレート（約5.5kbps）で通信範囲は短め。SF12は最小データレート（約250bps）で最大通信範囲を提供します。スプレッディングファクターが高いほど受信感度も向上します。"
+        "text": "LoRa の拡散率 (SF) は、通信範囲とデータ レートの間のトレードオフを制御します。 SF7 は、短距離では最高のデータ レート (~5.5kbps) を提供します。 SF12 は、最低のデータ レート (~250bps) で最大の範囲を提供します。拡散率が高くなると受信機の感度も向上し、より遠くからでも、より多くの障害物を通過しても信号をデコードできるようになります。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRaはどの周波数を使用しますか？",
+      "name": "LoRa はどの周波数を使用しますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRaはライセンスフリーのISMバンドで動作します：ヨーロッパで868MHz、北米で915MHz、アジアで433MHz。これらのサブGHz周波数はWi-Fi/Bluetooth（2.4GHz）や携帯周波数よりも遠くまで伝播し、障害物をより良く通過します。"
+        "text": "LoRa は、ライセンス不要の ISM バンドで動作します。ヨーロッパでは 868 MHz、北米では 915 MHz、アジアでは 433 MHz です。これらのサブ GHz 周波数は、2.4 GHz (Wi-Fi/Bluetooth) やセルラー周波数よりもさらに伝播し、障害物を透過し、LoRa の長距離機能に貢献します。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRaデバイスの消費電力はどれくらいですか？",
+      "name": "LoRa デバイスはどのくらいの電力を消費しますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRaデバイスは低消費電力を念頭に設計されています。送信モードでは典型的なLoRaモジュールは20〜40mAを消費します。スリープモードでは1μA未満に低下します。この超低スリープ電流により、Loko GPSトラッカーはGPS位置を定期的に送信しながらも30日以上のバッテリー寿命を実現します。"
+        "text": "LoRa デバイスは、消費電力を最小限に抑えるように設計されています。送信モードでは、一般的な LoRa モジュールは 20 ～ 40mA を消費します。スリープモードでは、消費電力は 1μA 未満に低下します。この超低スリープ電流により、Loko GPS Tracker などのデバイスは、GPS 位置を定期的に送信している場合でも、最長 1 年間のバッテリー寿命を実現できます。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRaの最大データレートはどれくらいですか？",
+      "name": "LoRaの最大データレートはどれくらいですか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRaの最大データレートは500kHz帯域幅のSF7を使用して約27kbpsです。SF9-SF12の一般的なIoT使用では250bps〜1760bpsです。LoRaはGPS座標、センサー読み取り、ステータス更新など小さく頻度の低いデータパケット向けに設計されており、ストリーミングや高帯域幅アプリケーション向けではありません。"
+        "text": "LoRa の最大データ レートは、500kHz 帯域幅の SF7 を使用した場合、約 27kbps です。一般的な IoT を SF9 ～ SF12 と組み合わせて使用​​する場合、データ レートは 250bps ～ 1760bps です。 LoRa は、ストリーミングや高帯域幅アプリケーション向けではなく、GPS 座標、センサー読み取り値、ステータス更新など、小さく頻度の少ないデータ パケット向けに設計されています。"
       }
     }
-  ]
-}
-</script>
+  ],
+  "inLanguage": "ja"
+}</script>
 <style>
   @font-face {
     font-family: 'Inter-fallback';
@@ -593,65 +706,78 @@
     size-adjust: 107.64%;
   }
 </style>
-<script defer="" src="/js/layout.js"></script><link href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" hreflang="ja" rel="alternate"/>
-<link href="https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/" hreflang="es" rel="alternate"/>
-<link href="https://www.nolilab.com/ru/blog/lora-lorawan-a-simple-guide/" hreflang="ru" rel="alternate"/>
-<link href="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/blog/lora-lorawan-a-simple-guide/" hreflang="fr" rel="alternate"/>
-<link href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" hreflang="x-default" rel="alternate"/>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/blog/lora-lorawan-a-simple-guide/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/blog/lora-lorawan-a-simple-guide/" />
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "ブログ",
+      "item": "https://www.nolilab.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "LoRa&amp;LoRa LoRaWAN: 簡単なガイド",
+      "item": "https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/"
+    }
+  ],
+  "inLanguage": "ja"
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <article>
-<a class="back-link" href="/ja/blog/">
+<a class="back-link" href="/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> ブログに戻る
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> March 26, 2025</span>
-<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
+<span><i class="far fa-calendar"></i> 2025 年 3 月 26 日</span>
+<span><i class="far fa-user"></i> タムリーカ・ピリエフ</span>
 </div>
-<h1 class="article-title">LoRa と LoRaWAN: シンプルなガイド</h1>
+<h1 class="article-title">Loko GPS トラッカーの LoRa と LoRaWAN</h1>
 </div>
-<img alt="LoRa Spreading Factor" class="article-image" src="/images/lorawan-network-architecture.webp"/>
+<img alt="LoRa Spreading Factor" class="article-image" height="720" src="/images/lorawan-network-architecture.webp" width="960"/>
 <div class="article-content">
-<h2>無線インターフェイス LoRa / LoraWAN。変調</h2>
-<p>LoRa (Long Range) は、強力な耐干渉性を備えた長距離、低電力、信頼性の高いデータ伝送用に設計された無線通信技術を表しており、IoT アプリケーションや低電力広域ネットワークに適しています。</p>
-<p><strong>AM</strong>- 振幅変調 <br/>
-<strong>FM</strong>- 周波数変調 </p>
+<h2>オフライン GPS トラッキングにとって LoRa P2P が重要な理由</h2>
+<p>LoRa と LoRaWAN はよく混同されますが、解決できるトラッキング問題は異なります。 Loko GPS トラッカーは、ゲートウェイ、SIM カード、セルラー ネットワーク、または月額データ プランを使用せずに、GPS 座標を受信機に直接送信できるため、LoRa P2P を使用します。</p>
+<p><strong>GPS トラッキングの場合、重要な決定は LoRa P2P と LoRaWAN です。</strong> Loko は LoRa P2P を使用するため、トラッカーはゲートウェイ、SIM カード、月額データ プランなしで受信機と直接通信します。を参照してください。 <a href="/lora-gps-tracker/">Loko LoRa GPS トラッカー ページ</a> 製品レベルの説明については、</p>
+<p><strong>午前</strong> - 振幅変調<br/>
+<strong>FM</strong> - 周波数変調</p>
 <img alt="AM/FM Modulation Animation" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Amfm3-en-de.gif?v=1743011265"/>
-<p><strong>Modulation:</strong>このプロセスには、周波数、振幅、または位相を変化させることによって搬送信号上に情報をエンコードすることが含まれ、これにより、有用な信号を長距離にわたって送信できるようになります。 </p>
-<p><strong>Amplitude Modulation (AM):</strong>キャリア信号の振幅は情報信号に比例して変化しますが、周波数と位相は一定のままです。 </p>
-<p><strong>Frequency Modulation (FM):</strong>キャリア信号の周波数は情報信号に比例して変化しますが、その振幅は一定のままです。 </p>
+<p><strong>変調：</strong> このプロセスには、周波数、振幅、または位相を変化させることによって搬送信号上に情報をエンコードすることが含まれ、これにより、有用な信号を長距離にわたって送信できるようになります。</p>
+<p><strong>振幅変調 (AM):</strong> キャリア信号の振幅は情報信号に比例して変化しますが、周波数と位相は一定のままです。</p>
+<p><strong>周波数変調 (FM):</strong> キャリア信号の周波数は情報信号に比例して変化しますが、その振幅は一定のままです。</p>
 <p>LoRa は、信号周波数が定義された範囲内で連続的に増加または減少する、線形周波数変調 (チャープ スペクトラム拡散、CSS) に基づく複合変調技術を採用しています。</p>
 <img alt="LoRa Modulation Diagram - Linear Frequency Modulation" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora2.png?v=1743011098"/>
 <p>LoRaWAN 変調は、LFM (線形周波数変調) または CSS (チャープ スペクトラム拡散) を利用します。</p>
-<h2>無線インターフェイス Lora / LoraWAN。変調</h2>
+<h2>LoRa チャープ変調: サイクル ブレークとノイズ耐性</h2>
 <p>LoRa のチャープ変調は不規則なサイクル ブレークで構成されます。つまり、サイクルは等時間間隔ではなく任意の時点で停止する可能性があります。これにより時間のずれが生じ、堅牢性と耐ノイズ性が向上します。</p>
 <img alt="LoRa Signal Chirp - Cycle Breaking and Time Shifts" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/lora1.png?v=1743011137"/>
 <p>LoRaWAN 変調は、中間点でサイクルを「中断」することによって発生し、タイム シフトとして解釈されます。</p>
 <h2>無線インターフェース。拡散率</h2>
-<p><strong>Spreading Factor (SF):</strong>LFM信号の周波数変化の「速さ」を表します。 SF 値が高いほど、周波数の変化が遅いことを示します。 </p>
+<p><strong>拡散率 (SF):</strong> LFM信号の周波数変化の「速さ」を表します。 SF 値が高いほど、周波数の変化が遅いことを示します。</p>
 <img alt="Spreading Factor Comparison" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/sf.png?v=1743010750"/>
 <p>SF を 1 単位変更すると、サイクル (チャープ) 時間が 2 倍になることを意味します。 SF=7 および 125 kHz 帯域幅の場合、チャープ持続時間は 1.024 ミリ秒です。</p>
 <p>チャープの長さは信号ノイズに影響を与え、出力での信号認識を強化します。これにより、より低いエネルギーと低減された RSSI レベルでの信号検出が可能になります。</p>
 <img alt="LoRa Signal Preamble Examples" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/1_RdkCF2t6XsG7LA8nKLeGGg.webp?v=1743011173"/>
 <img alt="LoRa Preamble Technical Diagram" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Preamble-1_jpg.webp?v=1743011201"/>
-<p>概念は次のように簡略化されています。 <strong>Think of SF as a 'zoom lens'—higher SF 'zooms in' for longer range but sends data slower.</strong></p>
-<p><strong>Key principle:</strong>拡散率が高い = 範囲は長くなりますが、データは遅くなります。 </p>
+<p>概念は次のように簡略化されています。 <strong>SF を「ズーム レンズ」と考えてください。SF が高いほど、より長い範囲に「ズームイン」しますが、データの送信は遅くなります。</strong></p>
+<p><strong>重要な原則:</strong> 拡散率が高い = 範囲は長くなりますが、データは遅くなります。</p>
 <h2>データのエンコーディング</h2>
-<p><strong>Coding:</strong>送信されるユーザー データに冗長 (制御) 情報を追加して、受信成功の確率を高めます。 </p>
+<p><strong>コーディング：</strong> 送信されるユーザー データに冗長 (制御) 情報を追加して、受信成功の確率を高めます。</p>
 <p>冗長性のレベルは、4/5 などのコードレート (CR) 比によって決まります。これは、送信される 5 ビットごとに 4 ビットが有用なデータで、1 ビットが制御 (冗長) ビットであることを意味します。</p>
-<p>LoRaWAN は 4/5 から 4/8 までの Coderate を採用します。</p>
+<p>LoRaWAN は 4/5 から 4/8 の Coderate を採用します。</p>
 <p>125 kHz チャネル帯域幅のデータ伝送速度 (bps) は、拡散率 (SF) とコードレート (CR) によって異なります。</p>
 <img alt="Data Transmission Rate Chart - bps for 125 kHz Channel" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/Screenshot_2025-03-26_at_19.52.36.png?v=1743011226"/>
 <h2>LoRa 信号サンプル</h2>
@@ -662,7 +788,7 @@
 <p>拡散率、データ レート、伝播距離の関係は、LoRa のパフォーマンスの基本です。拡散率が高いと長距離通信が可能になりますが、データ伝送速度が低下します。</p>
 <img alt="Spreading Factor vs Data Rate and Range" src="https://cdn.shopify.com/s/files/1/0781/6190/3949/files/LoRa-Spreading-Factor-SF-Bitrates-and-Time-on-Air-LoRa-is-chosen-as-the-wireless.ppm.png?v=1743011384"/>
 <h2>結論</h2>
-<p>LoRa および LoRaWAN テクノロジーは、長距離低電力無線通信のための強力なソリューションを提供します。 LoRa の導入を最適化し、通信範囲、消費電力、データ スループットの最適なバランスを達成するには、変調、拡散率、データ エンコーディングの主要な概念を理解することが不可欠です。</p>
+<p>LoRa および LoRaWAN テクノロジーは、長距離低電力ワイヤレス通信のための強力なソリューションを提供します。 LoRa の導入を最適化し、通信範囲、消費電力、データ スループットの最適なバランスを達成するには、変調、拡散率、データ エンコーディングの重要な概念を理解することが不可欠です。</p>
 <div class="references">
 <h3>参考文献</h3>
 <ul>
@@ -674,15 +800,45 @@
 </div>
 </div>
 </article>
-<aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
-<h3 style="margin:0 0 1rem;font-size:1rem;font-weight:600">関連記事</h3>
-<ul style="margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:0.5rem">
-<li><a href="/ja/blog/what-are-lora-p2p-and-lorawan/">LoRa P2PとLoRaWANとは何か？</a></li>
-<li><a href="/ja/blog/discover-the-worlds-smallest-gps-tracker-introducing-the-loko-gps-tracker-by-nolilab-1/">世界最小の GPS トラッカーを発見してください: noliLab の Loko GPS トラッカーのご紹介</a></li>
-</ul>
-</aside>
+<div class="product-cta">
+<p class="product-cta-heading">Loko GPS トラッカーを詳しく見る</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">Loko GPS トラッカーを参照</a>
+<a class="product-cta-link" href="/gps/">GPS および LoRa テクノロジー ガイド</a>
+<a class="product-cta-link" href="/lorawan/">LoRaWAN セットアップガイド</a>
+<a class="product-cta-link" href="/specifications/">Lokoの仕様</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">関連記事</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/what-are-lora-p2p-and-lorawan/">
+<h3>LoRa P2P および LoRaWAN とは何ですか?</h3>
+<span class="rp-cta">続きを読む→</span>
+</a>
+<a class="related-post-card" href="/blog/how-to-set-up-lorawan/">
+<h3>LoRaWANのセットアップ方法</h3>
+<span class="rp-cta">続きを読む→</span>
+</a>
+<a class="related-post-card" href="/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/">
+<h3>Loko GPS トラッカーによる長距離通信: LoRa 無線テクノロジーの力を探る</h3>
+<span class="rp-cta">続きを読む→</span>
+</a>
+</div>
+</section>
+<!-- CTA -->
+<div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p>LoRa および LoRaWAN は、携帯電話プランや月額料金なしで、次世代の長距離、低電力 GPS トラッキングを強化します。</p>
+<p><strong>Loko GPS トラッカーは、LoRa P2P を使用して、最大 20km までのサブスクリプション不要の直接追跡を行います。</strong></p>
+<br/>
+<a class="cta-btn" href="/shop/">Loko を購入 →</a>
+</div>
+</div>
+</div>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/ja/">nolilab</a></li><li><a href="/ja/accessories/">Accessories</a></li><li><a href="/ja/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ja/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ja/battery-life/">Battery Life</a></li><li><a href="/ja/blog/">Blog</a></li><li><a href="/ja/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/ja/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ja/chirpstack/">ChirpStack</a></li><li><a href="/ja/contact/">Contact</a></li><li><a href="/ja/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ja/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ja/farms/">Farm GPS</a></li><li><a href="/ja/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ja/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ja/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ja/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ja/gps/">GPS & LoRa</a></li><li><a href="/ja/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ja/hiking/">Hiking GPS</a></li><li><a href="/ja/how-gps-works/">How GPS Works</a></li><li><a href="/ja/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ja/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ja/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ja/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ja/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ja/lorawan/">LoRaWAN</a></li><li><a href="/ja/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ja/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ja/open-source/">Open Source</a></li><li><a href="/ja/privacy/">Privacy</a></li><li><a href="/ja/search-rescue/">Search & Rescue</a></li><li><a href="/ja/setup-guides/">Setup</a></li><li><a href="/ja/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ja/software/">Software</a></li><li><a href="/ja/specifications/">Specs</a></li><li><a href="/ja/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ja/uk/">GPS Tracker UK</a></li><li><a href="/ja/uk/farms/">UK Farm GPS</a></li><li><a href="/ja/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ja/usa/">GPS Tracker USA</a></li><li><a href="/ja/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

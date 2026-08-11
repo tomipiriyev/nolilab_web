@@ -2,7 +2,7 @@
 
 > NoliLab makes the **Loko GPS Tracker** — the world's smallest offline GPS device (28.5 × 20.5 × 5.9 mm, 14 g). It works without SIM cards or cellular networks using direct LoRa P2P radio with 20+ km line-of-sight range and up to 12 months battery life. No subscription, no monthly fees, no cloud account required. All tracking data stays on the user's device. Open-source firmware. Made by Nolilab OÜ, Tallinn, Estonia. Starting at $59.
 
-Last updated: 2026-06-19
+Last updated: 2026-08-10
 
 ## Key Facts
 
@@ -10,7 +10,7 @@ Last updated: 2026-06-19
 - **Range:** 20+ km line-of-sight
 - **Size:** 28.5 × 20.5 × 5.9 mm — smallest GPS tracker in its class
 - **Weight:** 14 g (0.5 oz)
-- **Battery:** 240 mAh Li-ion, USB-C charging (~60 min), 30 days to 12 months depending on update interval
+- **Battery:** 200 mAh Li-ion, USB-C charging (~60 min), 30 days to 12 months depending on update interval
 - **GNSS:** GPS + GLONASS + Galileo + BeiDou, 2.5 m CEP accuracy, 72-channel receiver
 - **Frequencies:** 868 MHz (EU) / 915 MHz (US) / 923 MHz (AS)
 - **Data logger:** 6,500 GPS points stored on-device
@@ -19,86 +19,127 @@ Last updated: 2026-06-19
 - **Desktop:** Free configuration tool for macOS, Windows, Linux
 - **Certifications:** CE, FCC Part 15, RoHS, REACH; LoRaWAN v1.0.3
 - **Privacy:** Zero data collection — no cloud, no accounts, no tracking cookies
-- **Firmware:** Open-source
+- **Firmware:** Open-source, free updates for the life of the device
 
 ## Products & Pricing
 
-- **Loko Starter Kit** — $59: One Air unit (tracker) + one Ground Station. Best for new users.
-- **Loko Air Only** — $149: One Air unit only. For expanding an existing system.
-- **Loko Station** — $99: One Ground Station only. For upgrading a base station.
+- **Loko Air** — $59: One Air unit (the tracker attached to the asset). For expanding an existing system, or pairing with a Ground unit you already own.
+- **Loko Bundle** — $119: One Air unit (tracker) + one Loko Ground receiver. This is the complete system and the right choice for new users.
 
-The Air unit is the GPS tracker attached to the asset being tracked. The Ground Station is the LoRa receiver connected to the mobile app that displays positions.
+The Air unit is the GPS tracker attached to the asset being tracked. The Ground unit is the LoRa receiver connected to the mobile app that displays positions. Hardware is manufactured and sold through Seeed Studio.
 
 ## Use Cases
 
-Loko is used for: drones and FPV aircraft, pets and livestock, farm equipment, fleet management, outdoor adventures (hiking, cycling, skiing), valuables, and any asset in areas without cellular coverage.
+Loko is used for: drones and FPV aircraft, pets and livestock, farm equipment, fleet management, outdoor adventures (hiking, cycling, skiing), search and rescue, wildlife research, valuables, and any asset in areas without cellular coverage.
 
 ## Main Pages
 
-- [Home](https://nolilab.com/): Product overview, key features, use cases, pricing, FAQ, and customer testimonials for the Loko GPS Tracker.
-- [Specifications](https://nolilab.com/specifications/): Complete technical specifications — dimensions, weight, GNSS constellations, LoRa parameters, battery, power consumption, environmental ratings, certifications, and product comparison table.
-- [Software & App](https://nolilab.com/software/): Download the Loko mobile app for iOS, Android, and LineageOS. Also the free desktop configuration tool for macOS, Windows, and Linux.
-- [Setup Guides](https://nolilab.com/setup-guides/): Step-by-step instructions for configuring the Air and Ground units, pairing the mobile app, and starting offline GPS tracking.
-- [LoRaWAN](https://nolilab.com/lorawan/): How to connect Loko to The Things Network (TTN) and other LoRaWAN gateways for IoT integration.
-- [LoRaWAN with ChirpStack](https://nolilab.com/chirpstack/): How to connect Loko to a self-hosted ChirpStack LoRaWAN network server — gateway, device profile with Cayenne LPP, application, OTAA device join, and measurement gauges.
-- [3D-Printed Accessories](https://nolilab.com/accessories/): Free CAD files for 3D-printable Loko accessories — collar mounts, drone mounts, belt clips and stands, with suggested print settings.
-- [Firmware upgrade guide](https://nolilab.com/blog/how-to-upgrade-loko-firmware/): How to upgrade Loko open-source firmware for LoRa P2P and LoRaWAN modes.
-- [GPS & LoRa Technology](https://nolilab.com/gps/): Educational guide covering GPS/GNSS fundamentals, LoRa radio, LoRa P2P vs LoRaWAN, radio line-of-sight, and ionospheric effects on signal quality.
-- [Blog](https://nolilab.com/blog/): Technical articles and guides on Loko, LoRa technology, drone tracking, farm equipment GPS, fleet management, and outdoor use cases.
-- [Contact](https://nolilab.com/contact/): Support and sales inquiries — email akio@nolilab.com. Nolilab OÜ, K. A. Hermanni tn 2-9, Tallinn 10115, Estonia.
-- [Privacy Policy](https://nolilab.com/privacy/): Zero data collection policy — all tracking data stays on the user's device with no cloud storage, no accounts required, and no tracking cookies.
+- [Home](https://www.nolilab.com/): Product overview, key features, use cases, pricing, and FAQ for the Loko GPS Tracker.
+- [LoRa GPS Tracker](https://www.nolilab.com/lora-gps-tracker/): The main product guide — how LoRa P2P tracking works, terrain-by-terrain range figures, comparison against cellular and satellite trackers, and setup overview.
+- [Specifications](https://www.nolilab.com/specifications/): Complete technical specifications — dimensions, weight, GNSS constellations, LoRa parameters, battery, power consumption, environmental ratings, certifications, and product comparison table.
+- [How Loko Works](https://www.nolilab.com/how-gps-works/): How the tracker determines and transmits position without internet or cell service.
+- [Battery Life](https://www.nolilab.com/battery-life/): Battery life by update interval, what drives consumption, and how Loko compares to cellular trackers.
+- [Smallest GPS Tracker](https://www.nolilab.com/smallest-gps-tracker/): Size and weight comparison against other GPS trackers.
+- [Software & App](https://www.nolilab.com/software/): Download the Loko mobile app for iOS, Android, and LineageOS. Also the free desktop configuration tool for macOS, Windows, and Linux.
+- [Firmware upgrade guide](https://www.nolilab.com/blog/how-to-upgrade-loko-firmware/): How to upgrade Loko open-source firmware. Loko Air updates via the browser-based STM32 updater; Loko Ground flashes over USB-C from the Loko Config Tool.
+- [Setup Guides](https://www.nolilab.com/setup-guides/): Step-by-step instructions for configuring the Air and Ground units, pairing the mobile app, and starting offline GPS tracking.
+- [LoRaWAN](https://www.nolilab.com/lorawan/): How to connect Loko to The Things Network (TTN) and other LoRaWAN gateways for IoT integration.
+- [LoRaWAN with ChirpStack](https://www.nolilab.com/chirpstack/): How to connect Loko to a self-hosted ChirpStack LoRaWAN network server — gateway, device profile with Cayenne LPP, application, OTAA device join, and measurement gauges.
+- [3D-Printed Accessories](https://www.nolilab.com/accessories/): Free CAD files for 3D-printable Loko accessories — collar mounts, drone mounts, belt clips and stands, with suggested print settings.
+- [Open Source](https://www.nolilab.com/open-source/): Schematics, PCB files, and firmware source published on GitHub.
+- [GPS & LoRa Technology](https://www.nolilab.com/gps/): Educational guide covering GPS/GNSS fundamentals, LoRa radio, LoRa P2P vs LoRaWAN, radio line-of-sight, and ionospheric effects on signal quality.
+- [Blog](https://www.nolilab.com/blog/): Technical articles and guides on Loko, LoRa technology, drone tracking, farm equipment GPS, fleet management, and outdoor use cases.
+- [About the author](https://www.nolilab.com/author/tamleykha-piriyev/): Tamleykha Piriyev — author of the technical guides on this site.
+- [Contact](https://www.nolilab.com/contact/): Support and sales inquiries — email akio@nolilab.com. Nolilab OÜ, K. A. Hermanni tn 2-9, Tallinn 10115, Estonia.
+- [Privacy Policy](https://www.nolilab.com/privacy/): Zero data collection policy — all tracking data stays on the user's device with no cloud storage, no accounts required, and no tracking cookies.
+
+## Comparisons
+
+- [AirTag vs LoRa GPS Tracker](https://www.nolilab.com/airtag-vs-lora/): Honest comparison of Apple AirTag against a LoRa tracker, including where AirTag is the better choice.
+- [Loko vs Tractive](https://www.nolilab.com/loko-vstractive/): Subscription-free LoRa tracking compared against Tractive's cellular subscription model.
+- [Tractive Alternative](https://www.nolilab.com/tractive-alternative/): Tractive alternative without a subscription.
+- [Garmin inReach Alternative](https://www.nolilab.com/garmin-inreach-alternative/): How local LoRa tracking differs from satellite messengers.
+- [LoRa vs Cellular GPS Tracker](https://www.nolilab.com/lora-vs-cellular-gps-tracker/): Radio-based vs cellular tracking trade-offs.
+- [Best GPS Tracker With No Subscription](https://www.nolilab.com/best-gps-tracker-no-subscription/): Buyer's guide to subscription-free tracking options.
+- [GPS Tracker Without Monthly Fee](https://www.nolilab.com/no-monthly-fee/): Why most trackers charge monthly, and what the alternatives are.
+
+## Use-Case Pages
+
+- [Hunting Dogs](https://www.nolilab.com/hunting-dogs/): GPS tracking for hunting dogs without cell service.
+- [Dogs Without Cell Service](https://www.nolilab.com/gps-tracker-for-dogs-without-cell-service/)
+- [Dog GPS Tracker, No Subscription](https://www.nolilab.com/dog-gps-tracker-no-subscription/)
+- [AirTag Alternative for Dogs](https://www.nolilab.com/airtag-alternative-for-dogs/)
+- [Farms](https://www.nolilab.com/farms/): Farm equipment and machinery tracking without internet.
+- [Livestock](https://www.nolilab.com/livestock-gps-tracker/)
+- [Search and Rescue](https://www.nolilab.com/search-rescue/): Off-grid tracking for SAR teams.
+- [Wildlife Research](https://www.nolilab.com/wildlife-gps-tracker/)
+- [Drone Recovery](https://www.nolilab.com/drone-recovery-gps-tracker/): Recovering lost drones and FPV aircraft.
+- [Hiking](https://www.nolilab.com/hiking/) and [Hiking Without Cell Service](https://www.nolilab.com/hiking-gps-tracker-no-cell-service/)
+- [Off-Grid](https://www.nolilab.com/off-grid-gps-tracker/), [Remote Areas](https://www.nolilab.com/gps-tracker-for-remote-areas/), [Without Cell Service](https://www.nolilab.com/gps-tracker-without-cell-service/), [Without Internet](https://www.nolilab.com/gps-tracker-without-internet/), [No SIM Card](https://www.nolilab.com/gps-tracker-no-sim-card/)
+- [Long Range, No Monthly Fee](https://www.nolilab.com/long-range-gps-tracker-no-monthly-fee/)
+
+## Regional Pages
+
+- [United States](https://www.nolilab.com/usa/): 915 MHz operation, FCC Part 15, US use cases.
+- [United Kingdom](https://www.nolilab.com/uk/): 868 MHz operation and UK use cases, with pages for [farms](https://www.nolilab.com/uk/farms/) and [hunting dogs](https://www.nolilab.com/uk/hunting-dogs/).
 
 ## Blog Articles
 
 ### LoRa & Radio Technology
-- [What are LoRa P2P and LoRaWAN?](https://nolilab.com/blog/what-are-lora-p2p-and-lorawan/)
-- [LoRa & LoRaWAN: A Simple Guide](https://nolilab.com/blog/lora-lorawan-a-simple-guide/)
-- [How to Set Up LoRaWAN](https://nolilab.com/blog/how-to-set-up-lorawan/)
-- [Radio Line of Sight](https://nolilab.com/blog/radio-line-of-sight/)
-- [How Distance Affects Wireless Signal Range](https://nolilab.com/blog/how-distance-affects-wireless-signal-range/)
-- [Long-Range Communication with Loko: The Power of LoRa Radio Technology](https://nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/)
-- [Exploring the Benefits of Radio-Based GPS Tracking](https://nolilab.com/blog/exploring-the-benefits-of-radio-based-gps-tracking-with-nolilabs-loko-gps-tracker/)
+- [What are LoRa P2P and LoRaWAN?](https://www.nolilab.com/blog/what-are-lora-p2p-and-lorawan/)
+- [LoRa & LoRaWAN: A Simple Guide](https://www.nolilab.com/blog/lora-lorawan-a-simple-guide/)
+- [GPS vs GSM vs LoRa](https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/): What each technology does and why they are not interchangeable.
+- [How to Set Up LoRaWAN](https://www.nolilab.com/blog/how-to-set-up-lorawan/)
+- [Radio Line of Sight](https://www.nolilab.com/blog/radio-line-of-sight/)
+- [How Distance Affects Wireless Signal Range](https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/)
+- [Long-Range Communication with Loko: The Power of LoRa Radio Technology](https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/)
+- [Exploring the Benefits of Radio-Based GPS Tracking](https://www.nolilab.com/blog/exploring-the-benefits-of-radio-based-gps-tracking-with-nolilabs-loko-gps-tracker/)
+
+### Offline Tracking & Subscriptions
+- [How Offline GPS Tracking Works](https://www.nolilab.com/blog/how-offline-gps-tracking-works/): No SIM, no internet, no monthly fees.
+- [Can a GPS Tracker Work Without a SIM Card?](https://www.nolilab.com/blog/can-gps-tracker-work-without-sim-card/)
+- [Why GPS Trackers Need Subscriptions](https://www.nolilab.com/blog/why-gps-trackers-need-subscriptions/)
+- [Why AirTags Fail in Remote Areas](https://www.nolilab.com/blog/why-airtags-fail-in-remote-areas/)
 
 ### GPS & Satellite Systems
-- [A Comprehensive Guide to GPS Radio: Features, Benefits & Applications](https://nolilab.com/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/)
-- [How Does Ionosphere Altitude Impact GPS Signal Quality?](https://nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/)
-- [Loko GPS Tracker: GPS, GLONASS, and Galileo Satellite Systems](https://nolilab.com/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/)
+- [A Comprehensive Guide to GPS Radio: Features, Benefits & Applications](https://www.nolilab.com/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/)
+- [How Does Ionosphere Altitude Impact GPS Signal Quality?](https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/)
+- [Loko GPS Tracker: GPS, GLONASS, and Galileo Satellite Systems](https://www.nolilab.com/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/)
 
 ### Product & Setup
-- [Discover the World's Smallest GPS Tracker — Loko by NoliLab](https://nolilab.com/blog/discover-the-worlds-smallest-gps-tracker-introducing-the-loko-gps-tracker-by-nolilab-1/)
-- [How to Upgrade Loko Firmware](https://nolilab.com/blog/how-to-upgrade-loko-firmware/)
-- [Maximize Tracking with +5km Range and +30 Days Battery Life](https://nolilab.com/blog/maximize-tracking-capabilities-with-5km-range-and-30-days-battery-life-in-gps-trackers/)
+- [Discover the World's Smallest GPS Tracker — Loko by NoliLab](https://www.nolilab.com/blog/discover-the-worlds-smallest-gps-tracker-introducing-the-loko-gps-tracker-by-nolilab-1/)
+- [How to Upgrade Loko Firmware](https://www.nolilab.com/blog/how-to-upgrade-loko-firmware/)
+- [LoRa GPS Tracker for Dogs](https://www.nolilab.com/blog/lora-gps-tracker-for-dogs/)
+- [Maximize Tracking with +5km Range and +30 Days Battery Life](https://www.nolilab.com/blog/maximize-tracking-capabilities-with-5km-range-and-30-days-battery-life-in-gps-trackers/)
 
 ### Drone Tracking
-- [Drone Enthusiasts: The Ultimate GPS Tracker for Mini-Drones](https://nolilab.com/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1/)
-- [Enhance Drone Flight Safety with Loko GPS Tracker](https://nolilab.com/blog/enhance-the-safety-of-your-drone-flights-with-the-compact-loko-gps-tracker-by-nolilab-your-reliable-backup-tracking-solution/)
-- [Why Drone Enthusiasts Should Consider Using GPS Trackers](https://nolilab.com/blog/why-drone-enthusiasts-should-consider-using-gps-trackers/)
+- [Drone Enthusiasts: The Ultimate GPS Tracker for Mini-Drones](https://www.nolilab.com/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1/)
+- [Enhance Drone Flight Safety with Loko GPS Tracker](https://www.nolilab.com/blog/enhance-the-safety-of-your-drone-flights-with-the-compact-loko-gps-tracker-by-nolilab-your-reliable-backup-tracking-solution/)
+- [Why Drone Enthusiasts Should Consider Using GPS Trackers](https://www.nolilab.com/blog/why-drone-enthusiasts-should-consider-using-gps-trackers/)
 
 ### Farm & Fleet
-- [GPS Tracking for Farm Equipment](https://nolilab.com/blog/gps-tracking-for-farm-equipment/)
-- [Comparing Affordable Farm Equipment GPS Tracking Systems](https://nolilab.com/blog/comparing-the-top-affordable-farm-equipment-gps-tracking-systems-1/)
-- [Real-Time Farm Equipment Tracking Made Easy with Loko](https://nolilab.com/blog/real-time-farm-equipment-tracking-made-easy-with-nolilabs-loko-gps-tracker/)
-- [Using GPS Tracking for Effective Fleet Management](https://nolilab.com/blog/using-gps-tracking-for-effective-fleet-management-1/)
+- [GPS Tracking for Farm Equipment](https://www.nolilab.com/blog/gps-tracking-for-farm-equipment/)
+- [Comparing Affordable Farm Equipment GPS Tracking Systems](https://www.nolilab.com/blog/comparing-the-top-affordable-farm-equipment-gps-tracking-systems-1/)
+- [Real-Time Farm Equipment Tracking Made Easy with Loko](https://www.nolilab.com/blog/real-time-farm-equipment-tracking-made-easy-with-nolilabs-loko-gps-tracker/)
+- [Using GPS Tracking for Effective Fleet Management](https://www.nolilab.com/blog/using-gps-tracking-for-effective-fleet-management-1/)
 
 ### Outdoor Adventures
-- [Enhance Your Outdoor Adventures with Loko GPS Tracker](https://nolilab.com/blog/enhance-your-outdoor-adventures-with-nolilabs-loko-gps-tracker/)
-- [How Loko's Long-Range Communication Makes It Perfect for Outdoor Adventures](https://nolilab.com/blog/how-loko-gps-trackers-long-range-communication-and-durability-make-it-perfect-for-outdoor-adventures/)
+- [Enhance Your Outdoor Adventures with Loko GPS Tracker](https://www.nolilab.com/blog/enhance-your-outdoor-adventures-with-nolilabs-loko-gps-tracker/)
+- [How Loko's Long-Range Communication Makes It Perfect for Outdoor Adventures](https://www.nolilab.com/blog/how-loko-gps-trackers-long-range-communication-and-durability-make-it-perfect-for-outdoor-adventures/)
 
 ## Languages
 
-The site is available in English (default), Japanese (`/ja/`), Spanish (`/es/`), Russian (`/ru/`), French (`/fr/`), and Chinese (`/zh/`). All pages follow the same URL structure with the language prefix.
+The site is available in English (default), Japanese (`/ja/`), Spanish (`/es/`), Russian (`/ru/`), French (`/fr/`), and Chinese (`/zh/`). Translated pages follow the same URL structure with the language prefix, are self-canonical, and are linked to their English original by hreflang. The full URL list is in [sitemap.xml](https://www.nolilab.com/sitemap.xml).
 
 ## Press Coverage
 
-- [Loko GPS Tracker — Hackaday.io Project](https://hackaday.io/project/166619-loko-offline-gps-tracker-with-270-days-battery): Official project page on Hackaday.io featuring the Loko offline GPS tracker with 270-day battery life.
+- [Loko GPS Tracker — Hackaday.io Project](https://hackaday.io/project/166619-loko-offline-gps-tracker-with-270-days-battery): Official project page on Hackaday.io.
 - [2025 Pet Hacks Contest: Loko Tracks Fido with LoRa and GPS](https://hackaday.com/2025/05/22/2025-pet-hacks-contest-loko-tracks-fido-with-lora-and-gps/) — Hackaday, May 2025: Editorial feature on Loko as a pet tracking solution using LoRa and GPS.
 - [Low Power Mode for Custom GPS Tracker](https://hackaday.com/2022/03/28/low-power-mode-for-custom-gps-tracker/) — Hackaday, March 2022: Coverage of Loko's low-power GPS tracking technology.
-- [GPS Tracker for Wildlife](https://wildlabs.net/discussion/gps-tracker-wildlife) — WILDLABS: Community discussion featuring Loko as a GPS tracking solution for wildlife research and conservation.
-- [Loko: The Tiniest GPS Tracker with Built-in LoRa-E5 Module](https://www.seeedstudio.com/blog/2024/04/01/loko-the-tiniest-gps-tracker-with-built-in-lora-e5-module-can-track-any-wild-animals-and-drones-with-seeed-fusion-pcba/) — SeeedStudio Blog, April 2024: Feature article on Loko by SeeedStudio, the global electronics distributor that manufactures and sells Loko hardware.
-- [Loko Open-Source GPS Tracker with LoRaWAN](https://www.electromaker.io/project/view/loko-open-source-gps-tracker-with-lorawan) — Electromaker.io: Project feature on the Loko open-source GPS tracker with LoRaWAN support.
-- [Dronee's Loko Is a Tiny Open Source LoRa Asset Tracker](https://www.hackster.io/news/dronee-s-loko-is-a-tiny-open-source-lora-asset-tracker) — Hackster.io: Editorial coverage of Loko as an open-source LoRa asset tracker.
+- [Loko: The Tiniest GPS Tracker with Built-in LoRa-E5 Module](https://www.seeedstudio.com/blog/2024/04/01/loko-the-tiniest-gps-tracker-with-built-in-lora-e5-module-can-track-any-wild-animals-and-drones-with-seeed-fusion-pcba/) — SeeedStudio Blog, April 2024: Feature article by the distributor that manufactures and sells Loko hardware.
+- [Loko Open-Source GPS Tracker with LoRaWAN](https://www.electromaker.io/project/view/loko-open-source-gps-tracker-with-lorawan) — Electromaker.io: Project feature.
 - [Loko GPS Tracker — Antratek](https://www.antratek.com/loko-gps-tracker) — Antratek: European electronics distributor carrying the Loko GPS Tracker.
-- [Loko on Crowd Supply](https://www.crowdsupply.com/nolilab/loko) — Crowd Supply: Official product listing for Loko by Nolilab on the leading open-source hardware crowdfunding and fulfillment platform.
+- [Loko on Crowd Supply](https://www.crowdsupply.com/nolilab/loko) — Crowd Supply: Official product listing on the open-source hardware crowdfunding and fulfillment platform.
 
 ## Company
 

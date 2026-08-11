@@ -2,548 +2,97 @@
 
 <html lang="es">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
-<meta a="" c"="" comunicación="" con="" content="El Loko GPS Tracker presenta una solución liviana que utiliza tecnología de radio LoRa, que ofrece " distancia"="" larga="" name="description" rastreo="" un="" y=""/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Comunicación de largo alcance con el rastreador GPS Loko: exploración del poder de la tecnología de radio LoRa | Blog de nolilab</title>
+<title>Loko LoRa GPS: 20km Comunicación de largo alcance</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Descubra cómo la tecnología de radio LoRa permite el rastreo GPS de largo alcance con un consumo de energía mínimo y sin tarifas mensuales." name="description"/>
-<link href="https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" rel="canonical"/>
-<meta content="article" property="og:type"/>
-<meta content="Comunicación de largo alcance con el rastreador GPS Loko: exploración del poder de la tecnología de radio LoRa | Blog de nolilab" property="og:title"/>
-<meta content="Descubra cómo la tecnología de radio LoRa permite el rastreo GPS de largo alcance con un consumo de energía mínimo y sin tarifas mensuales." property="og:description"/>
-<meta content="https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1" property="og:url"/>
-<meta content="https://www.nolilab.com/images/lora-p2p-communication-diagram.webp" property="og:image"/>
-<meta content="nolilab" property="og:site_name"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="Comunicación de largo alcance con el rastreador GPS Loko: exploración del poder de la tecnología de radio LoRa | Blog de nolilab" name="twitter:title"/>
-<meta content="Descubra cómo la tecnología de radio LoRa permite el rastreo GPS de largo alcance con un consumo de energía mínimo y sin tarifas mensuales." name="twitter:description"/>
-<meta content="https://www.nolilab.com/images/lora-p2p-communication-diagram.webp" name="twitter:image"/>
-<style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #24292e;
-      --text-secondary: #57606a;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-lg);
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    article {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: var(--spacing-xl) var(--spacing-md);
-    }
-
-    .article-header {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-meta {
-      display: flex;
-      gap: var(--spacing-md);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.2;
-    }
-
-    .article-image {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-content {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .article-content h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin: var(--spacing-xl) 0 var(--spacing-md);
-      letter-spacing: -0.01em;
-    }
-
-    .article-content h3 {
-      font-size: 1.375rem;
-      font-weight: 600;
-      margin: var(--spacing-lg) 0 var(--spacing-sm);
-    }
-
-    .article-content p {
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-content ul,
-    .article-content ol {
-      margin: var(--spacing-md) 0;
-      padding-left: var(--spacing-lg);
-    }
-
-    .article-content li {
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .article-content strong {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      margin-bottom: var(--spacing-lg);
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--accent-hover);
-    }
-
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-
-    .language-selector {
-      margin-left: var(--spacing-sm);
-    }
-
-    .language-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.75rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .language-btn:hover {
-      border-color: var(--accent);
-      background: var(--bg-primary);
-    }
-
-    .language-btn i {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .language-btn .fa-chevron-down {
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-    }
-
-    .language-selector:hover .fa-chevron-down {
-      transform: rotate(180deg);
-    }
-
-    .current-lang {
-      font-family: var(--font-mono);
-      font-weight: 600;
-    }
-
-    .language-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      right: 0;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
-      z-index: 1000;
-    }
-
-    .language-selector:hover .language-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .language-option {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .language-option:last-child {
-      border-bottom: none;
-    }
-
-    .language-option:hover {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-
-    .language-option .lang-code {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 0.8rem;
-      min-width: 28px;
-      color: var(--accent);
-    }
-
-    .language-option .lang-name {
-      font-size: 0.875rem;
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: var(--spacing-xs);
-      z-index: 1001;
-      margin-left: auto;
-    }
-
-    .mobile-menu-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--bg-primary);
-        flex-direction: column;
-        gap: 0;
-        padding: 80px var(--spacing-md) var(--spacing-md);
-        box-shadow: var(--shadow-lg);
-        transition: left 0.3s ease;
-        z-index: 1000;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-      }
-
-      .nav-links.active {
-        left: 0;
-      }
-
-      .nav-link {
-        width: 100%;
-        padding: var(--spacing-md);
-        border-bottom: 1px solid var(--border);
-        text-align: left;
-        font-size: 1rem;
-      }
-
-      .language-selector {
-        position: static;
-        margin-left: var(--spacing-sm);
-      }
-
-      .language-dropdown {
-        left: 0;
-        right: auto;
-        min-width: 160px;
-      }
-
-      /* Overlay when menu is open */
-      body.menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      .article-title {
-        font-size: 2rem;
-      }
-
-      .article-content {
-        font-size: 1rem;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Long-Range Communication with the Loko GPS Tracker: Exploring the Power of LoRa Radio Technology",
-  "description": "Discover how LoRa radio technology enables long-range GPS tracking with minimal power consumption and no monthly fees.",
-  "url": "https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1",
-  "datePublished": "2023-10-12",
-  "dateModified": "2023-10-12",
-  "author": {
-    "@type": "Organization",
-    "name": "nolilab"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "nolilab",
-    "url": "https://www.nolilab.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
-    }
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "/images/lora-p2p-communication-diagram.webp"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1"
-  }
-}
-</script>
-<style>
-  @font-face {
-    font-family: 'Inter-fallback';
-    src: local('Arial');
-    ascent-override: 90.44%;
-    descent-override: 22.52%;
-    line-gap-override: 0%;
-    size-adjust: 107.64%;
-  }
-</style>
-<script defer="" src="/js/layout.js"></script><link href="https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="ja" rel="alternate"/>
+<meta content="Descubra cómo la tecnología de radio LoRa permite el seguimiento de GPS de largo alcance con un consumo de energía mínimo y sin tarifas mensuales." name="description"/>
+<link href="https://www.nolilab.com/es/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/ru/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" hreflang="x-default" rel="alternate"/>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/" />
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Hogar",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.nolilab.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Loko LoRa GPS: 20km Comunicación de largo alcance",
+      "item": "https://www.nolilab.com/blog/long-range-communication-with-the-loko-gps-tracker-exploring-the-power-of-lora-radio-technology-1/"
+    }
+  ]
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <article>
-<a class="back-link" href="/es/blog/">
-<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Volver al Blog
+<a class="back-link" href="/blog/">
+<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Volver al blog
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> October 12, 2023</span>
+<span><i class="far fa-calendar"></i> 12 de octubre de 2023</span>
 <span><i class="far fa-user"></i> <a class="author-link" href="/author/tamleykha-piriyev/" rel="author">nolilab</a></span>
 </div>
-<h1 class="article-title">Comunicación de largo alcance con el rastreador GPS Loko: exploración del poder de la tecnología de radio LoRa</h1>
+<h1 class="article-title">Comunicación de largo alcance con el rastreador Loko GPS: exploración del poder de la tecnología de radio LoRa</h1>
 </div>
-<img alt="LoRa Radio Technology" class="article-image" src="/images/lora-p2p-communication-diagram.webp"/>
+<img alt="LoRa Radio Technology" class="article-image" height="720" src="/images/lora-p2p-communication-diagram.webp" width="960"/>
 <div class="article-content">
+<div style="background:#fff3cd;border:1.5px solid #f0ad4e;border-radius:8px;padding:0.875rem 1.125rem;margin-bottom:1.75rem;font-size:0.875rem;line-height:1.5;">
+<strong>⚠️ Actualización de especificaciones (2025):</strong> Este artículo fue escrito durante la etapa inicial del prototipo. El actual Loko GPS Tracker pesa <strong>14 gramos</strong>, medidas <strong>28,5 × 20,5 × 5,9 mm</strong>, y entrega hasta <strong>20 Gama km LoRa</strong> en condiciones de línea de visión. <a href="/specifications/" style="color:#856404;font-weight:600;">Ver especificaciones actuales →</a>
+</div>
 <h2>Introducción</h2>
-<p>El Loko GPS Tracker presenta una solución liviana que utiliza tecnología de radio LoRa, que ofrece "rastreo y comunicación a larga distancia" con un consumo mínimo de energía. Este enfoque innovador elimina las tarifas de suscripción mensual y al mismo tiempo proporciona un seguimiento confiable a través de distancias que superan con creces las soluciones Bluetooth tradicionales.</p>
-<h2>Entendiendo la tecnología LoRa</h2>
-<p>LoRa (Long Range) es una técnica de modulación inalámbrica diseñada específicamente para comunicaciones a larga distancia con bajo consumo de energía. A diferencia de las soluciones celulares que requieren infraestructura de red y suscripciones, LoRa opera en frecuencias de radio sin licencia, lo que permite la comunicación directa de dispositivo a dispositivo sin sistemas intermediarios.</p>
+<p>El rastreador Loko GPS presenta una solución liviana que utiliza la tecnología de radio LoRa, que ofrece "comunicación y seguimiento a larga distancia" con un consumo mínimo de energía. Este enfoque innovador elimina las tarifas de suscripción mensual y al mismo tiempo proporciona un seguimiento confiable a través de distancias que superan con creces las soluciones Bluetooth tradicionales.</p>
+<h3>Comprender la tecnología LoRa</h3>
+<p>LoRa (Long Range) es una técnica de modulación inalámbrica diseñada específicamente para comunicaciones de larga distancia con bajo consumo de energía. A diferencia de las soluciones celulares que requieren infraestructura de red y suscripciones, LoRa opera en frecuencias de radio sin licencia, lo que permite la comunicación directa de dispositivo a dispositivo sin sistemas intermediarios.</p>
 <h3>Ventajas clave de LoRa</h3>
 <ul>
-<li><strong>Extended Range:</strong>Distancias de comunicación superiores a 5 kilómetros en condiciones óptimas </li>
-<li><strong>Low Power Consumption:</strong>Permite meses de funcionamiento con baterías pequeñas. </li>
-<li><strong>Obstacle Penetration:</strong>Propagación de señal superior a través de edificios, vegetación y terreno. </li>
-<li><strong>No Infrastructure Required:</strong>Funciona independientemente de torres de telefonía móvil o redes WiFi. </li>
-<li><strong>Unlicensed Spectrum:</strong>Opera en bandas ISM sin tarifas de licencia ni restricciones </li>
+<li><strong>Rango extendido:</strong> Distancias de comunicación superiores a 5 kilómetros en condiciones óptimas</li>
+<li><strong>Bajo consumo de energía:</strong> Permite meses de funcionamiento con baterías pequeñas.</li>
+<li><strong>Penetración de obstáculos:</strong> Propagación de señal superior a través de edificios, vegetación y terreno.</li>
+<li><strong>No se requiere infraestructura:</strong> Funciona independientemente de torres de telefonía móvil o redes WiFi.</li>
+<li><strong>Espectro sin licencia:</strong> Opera en bandas ISM sin tarifas de licencia ni restricciones</li>
 </ul>
 <h2>Componentes del sistema Loko</h2>
 <h3>Unidad Aérea (Transmisor)</h3>
-<p>El rastreador ultraligero pesa 12 gramos y proporciona una duración de batería impresionante: un alcance que se extiende hasta 250 días por carga dependiendo de la configuración del intervalo de transmisión. Este transmisor compacto se conecta a cualquier cosa que necesite rastrear, determina continuamente la posición a través de satélites GPS y transmite datos de ubicación a través de radio LoRa a la unidad terrestre.</p>
+<p>El rastreador ultraligero pesa 14 gramos y proporciona una duración de batería impresionante: un alcance que se extiende hasta 250 días por carga dependiendo de la configuración del intervalo de transmisión. Este transmisor compacto se conecta a cualquier cosa que necesite rastrear, determinando continuamente la posición a través de los satélites GPS y transmitiendo datos de ubicación a través de la radio LoRa a la unidad terrestre.</p>
 <h3>Unidad de tierra (receptor)</h3>
-<p>La Unidad Terrestre funciona como centro de comunicaciones y recibe transmisiones LoRa de hasta 30 Unidades Aéreas simultáneamente. Transmite datos a través de Bluetooth a aplicaciones de teléfonos inteligentes, donde los usuarios pueden visualizar posiciones en mapas interactivos. Esta arquitectura permite implementaciones escalables desde el seguimiento de un solo dispositivo hasta la gestión integral de flotas.</p>
+<p>La Unidad Terrestre funciona como centro de comunicaciones, recibiendo transmisiones LoRa de hasta 30 Unidades Aéreas simultáneamente. Transmite datos a través de Bluetooth a aplicaciones de teléfonos inteligentes, donde los usuarios pueden visualizar posiciones en mapas interactivos. Esta arquitectura permite implementaciones escalables desde el seguimiento de un solo dispositivo hasta la gestión integral de flotas.</p>
 <h2>Características y capacidades</h2>
 <h3>Construcción robusta</h3>
 <p>El sistema proporciona un diseño resistente a golpes, al agua y al polvo, adecuado para entornos exteriores hostiles. Ya sea conectado a drones, equipos exteriores o vehículos, el rastreador resiste impactos, humedad y escombros que dañarían soluciones menos robustas.</p>
 <h3>Aplicación móvil Loko</h3>
 <p>La aplicación complementaria incluye visualización de mapas 2D que muestra las posiciones de todas las unidades rastreadas en tiempo real. Los usuarios pueden configurar intervalos de transmisión, ver datos de seguimiento históricos y personalizar los parámetros de alerta a través de una interfaz intuitiva disponible para plataformas iOS y Android.</p>
-<h3>Integración de la red LoRaWAN</h3>
-<p>Más allá del seguimiento entre pares, Loko admite la integración con redes LoRaWAN existentes. Esto permite implementaciones a gran escala en las que múltiples rastreadores se comunican con una infraestructura de red centralizada para aplicaciones como agricultura inteligente, gestión de activos o monitoreo ambiental.</p>
+<h3>Integración de red LoRaWAN</h3>
+<p>Más allá del seguimiento de igual a igual, el Loko admite la integración con redes LoRaWAN existentes. Esto permite implementaciones a gran escala en las que múltiples rastreadores se comunican con una infraestructura de red centralizada para aplicaciones como agricultura inteligente, gestión de activos o monitoreo ambiental.</p>
 <h2>Desarrollo de código abierto</h2>
 <p>Los esquemas de la placa, el código fuente del firmware y el software están disponibles en GitHub, lo que permite la colaboración y personalización de la comunidad. Esta transparencia proporciona varias ventajas:</p>
 <h3>Innovación comunitaria</h3>
@@ -559,27 +108,27 @@
 <p>La asociación con Mouser Electronics proporciona distribución mundial a través de canales de suministro de productos electrónicos establecidos. Los clientes se benefician del envío confiable, el soporte técnico y la integración de Mouser con los procesos de adquisición existentes.</p>
 <h2>Antecedentes de la organización</h2>
 <p>noliLab es una empresa estonia de tecnología de consumo especializada en dispositivos IoT y soluciones de seguimiento. El equipo combina experiencia en diseño electrónico, desarrollo de firmware y fabricación para ofrecer soluciones prácticas para los desafíos de seguimiento del mundo real.</p>
-<h2>Aplicaciones de destino</h2>
+<h3>Aplicaciones de destino</h3>
 <h3>Seguimiento y recuperación de drones</h3>
-<p>Conecte el rastreador de 12 gramos a drones para monitorear el vuelo en tiempo real y recuperarse después de un accidente. El alcance ampliado garantiza la conectividad incluso cuando los drones vuelan más allá de la línea de visión, mientras que el peso mínimo no afecta significativamente el tiempo de vuelo.</p>
+<p>Conecte el rastreador de 14 gramos a drones para monitorear el vuelo en tiempo real y recuperarse después de un accidente. El alcance ampliado garantiza la conectividad incluso cuando los drones vuelan más allá de la línea de visión, mientras que el peso mínimo no afecta significativamente el tiempo de vuelo.</p>
 <h3>Monitoreo de activos</h3>
-<p>Realice un seguimiento de equipos, herramientas e inventario valiosos en sitios de trabajo, almacenes o propiedades grandes. La duración prolongada de la batería elimina la recarga constante, mientras que la comunicación LoRa funciona de manera confiable en entornos industriales donde la cobertura WiFi o celular puede no ser confiable.</p>
+<p>Realice un seguimiento de equipos, herramientas e inventario valiosos en sitios de trabajo, almacenes o propiedades grandes. La duración extendida de la batería elimina la recarga constante, mientras que la comunicación LoRa funciona de manera confiable en entornos industriales donde la cobertura WiFi o celular puede no ser confiable.</p>
 <h3>Actividades al aire libre y deportes de aventura</h3>
 <p>Los excursionistas, escaladores y entusiastas del campo utilizan el rastreador para navegar y compartir ubicaciones de emergencia en áreas remotas sin cobertura celular. La construcción robusta soporta condiciones duras, mientras que la duración prolongada de la batería admite expediciones de varios días.</p>
 <h3>Seguimiento de activos comerciales</h3>
 <p>Las empresas implementan rastreadores Loko en flotas, equipos de alquiler o contenedores de envío. La capacidad de monitorear 30 unidades por estación terrestre permite un seguimiento rentable a escala sin tarifas de suscripción mensuales que se acumulan rápidamente en grandes implementaciones.</p>
-<h2>Comparando LoRa con tecnologías alternativas</h2>
+<h2>Comparación de LoRa con tecnologías alternativas</h2>
 <h3>frente a Bluetooth</h3>
-<p>Bluetooth proporciona conectividad de corto alcance (normalmente menos de 100 metros) adecuada para redes de área personal. El alcance de más de 5 kilómetros de LoRa lo hace muy superior para aplicaciones de seguimiento donde el transmisor y el receptor pueden estar significativamente separados.</p>
+<p>Bluetooth proporciona conectividad de corto alcance (normalmente menos de 100 metros) adecuada para redes de área personal. El alcance de más de 5 kilómetros del LoRa lo hace muy superior para aplicaciones de seguimiento donde el transmisor y el receptor pueden estar significativamente separados.</p>
 <h3>versus celular</h3>
-<p>Los rastreadores de telefonía móvil requieren tarjetas SIM, suscripciones de datos mensuales y cobertura confiable de torres de telefonía móvil. LoRa elimina costos y funciones continuos en áreas remotas donde no existe infraestructura celular. Sin embargo, la telefonía móvil ofrece un alcance ilimitado a través de una cobertura de red global.</p>
+<p>Los rastreadores de telefonía móvil requieren tarjetas SIM, suscripciones de datos mensuales y cobertura confiable de torres de telefonía móvil. LoRa elimina los costos y funciones continuos en áreas remotas donde no existe infraestructura celular. Sin embargo, la telefonía móvil ofrece un alcance ilimitado a través de una cobertura de red global.</p>
 <h3>frente a WiFi</h3>
-<p>WiFi ofrece un gran ancho de banda en distancias cortas pero requiere una infraestructura de punto de acceso. LoRa sacrifica el ancho de banda por alcance y simplicidad, lo que lo hace ideal para transmitir pequeños paquetes de datos (coordenadas GPS) a largas distancias sin infraestructura.</p>
+<p>WiFi ofrece un gran ancho de banda en distancias cortas pero requiere una infraestructura de punto de acceso. LoRa sacrifica ancho de banda por alcance y simplicidad, lo que lo hace ideal para transmitir pequeños paquetes de datos (coordenadas GPS) a largas distancias sin infraestructura.</p>
 <h2>Consideraciones técnicas</h2>
 <h3>Bandas de frecuencia</h3>
 <p>LoRa opera en diferentes frecuencias según la región:</p>
 <ul>
-<li>América del Norte: 902-928 MHz (banda ISM)</li>
+<li>Norteamérica: 902-928 MHz (banda ISM)</li>
 <li>Europa: 863-870 MHz</li>
 <li>Asia: 915-928 MHz (varía según el país)</li>
 </ul>
@@ -587,12 +136,12 @@
 <h3>Compensaciones de velocidad de datos</h3>
 <p>LoRa logra un alcance extendido sacrificando la velocidad de datos. Si bien no es adecuado para transmisión de video o audio, sobresale en la transmisión de pequeños paquetes de datos como coordenadas GPS, lecturas de sensores o actualizaciones de estado, precisamente lo que requieren las aplicaciones de seguimiento.</p>
 <h3>Consideraciones sobre la línea de visión</h3>
-<p>Si bien LoRa penetra los obstáculos mejor que las tecnologías de mayor frecuencia, el alcance óptimo requiere caminos relativamente claros entre el transmisor y el receptor. Los entornos urbanos con edificios densos o terreno montañoso pueden reducir el alcance efectivo en comparación con las áreas abiertas.</p>
-<h2>Empezando</h2>
+<p>Si bien LoRa atraviesa obstáculos mejor que las tecnologías de mayor frecuencia, el alcance óptimo requiere caminos relativamente claros entre el transmisor y el receptor. Los entornos urbanos con edificios densos o terreno montañoso pueden reducir el alcance efectivo en comparación con las áreas abiertas.</p>
+<h3>Empezando</h3>
 <h3>Configuración inicial</h3>
 <ol>
 <li>Cargue unidades aéreas y terrestres mediante USB tipo C</li>
-<li>Descarga la aplicación Loko para iOS o Android</li>
+<li>Descargue la aplicación Loko para iOS o Android</li>
 <li>Encienda la unidad de tierra y emparéjela con un teléfono inteligente a través de Bluetooth</li>
 <li>Activar unidad aérea y configurar el intervalo de transmisión</li>
 <li>Verifique la comunicación observando las actualizaciones de posición en la aplicación</li>
@@ -604,13 +153,39 @@
 <li>Rango de prueba en su entorno específico antes de implementaciones críticas</li>
 <li>Mantenga el firmware actualizado para obtener las últimas funciones y mejoras</li>
 </ul>
-<h2>Conclusión</h2>
-<p>La tecnología de radio LoRa transforma el rastreo por GPS al brindar un alcance extendido y una duración excepcional de la batería sin tarifas de suscripción mensuales. El Loko GPS Tracker demuestra la implementación práctica de esta tecnología, proporcionando una solución confiable para el rastreo de drones, monitoreo de activos, actividades al aire libre y aplicaciones comerciales.</p>
-<p>Ya sea que sea un entusiasta de los drones que busca capacidades de recuperación confiables, un aventurero al aire libre que necesita un seguimiento más allá de la cobertura celular o una empresa que administra activos valiosos, la combinación de comunicación LoRa y posicionamiento GPS ofrece un seguimiento de nivel profesional sin las limitaciones y los costos continuos de las alternativas basadas en celulares.</p>
+<h3>Conclusión</h3>
+<p>La tecnología de radio LoRa transforma el seguimiento GPS al ofrecer un alcance extendido y una duración excepcional de la batería sin tarifas de suscripción mensuales. El rastreador Loko GPS demuestra la implementación práctica de esta tecnología, proporcionando una solución confiable para el seguimiento de drones, monitoreo de activos, actividades al aire libre y aplicaciones comerciales.</p>
+<p>Ya sea que sea un entusiasta de los drones que busca capacidades de recuperación confiables, un aventurero al aire libre que necesita un seguimiento más allá de la cobertura celular o una empresa que administra activos valiosos, la combinación de la comunicación LoRa y el posicionamiento GPS ofrece un seguimiento de nivel profesional sin las limitaciones y los costos continuos de las alternativas basadas en celulares.</p>
 </div>
 </article>
+<div class="product-cta">
+<p class="product-cta-heading">Explora el rastreador Loko GPS</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">Ver el rastreador Loko GPS</a>
+<a class="product-cta-link" href="/specifications/">Especificaciones de Loko</a>
+<a class="product-cta-link" href="/gps/">Guía de tecnología GPS y LoRa</a>
+<a class="product-cta-link" href="/lorawan/">Guía de configuración de LoRaWAN</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">Artículos relacionados</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/lora-lorawan-a-simple-guide/">
+<h3>LoRa y LoRaWAN: una guía sencilla</h3>
+<span class="rp-cta">Leer más →</span>
+</a>
+<a class="related-post-card" href="/blog/what-are-lora-p2p-and-lorawan/">
+<h3>¿Qué son LoRa P2P y LoRaWAN?</h3>
+<span class="rp-cta">Leer más →</span>
+</a>
+<a class="related-post-card" href="/blog/how-to-set-up-lorawan/">
+<h3>Cómo configurar LoRaWAN</h3>
+<span class="rp-cta">Leer más →</span>
+</a>
+</div>
+</section>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/es/">nolilab</a></li><li><a href="/es/accessories/">Accessories</a></li><li><a href="/es/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/es/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/es/battery-life/">Battery Life</a></li><li><a href="/es/blog/">Blog</a></li><li><a href="/es/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/es/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/es/chirpstack/">ChirpStack</a></li><li><a href="/es/contact/">Contact</a></li><li><a href="/es/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/es/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/es/farms/">Farm GPS</a></li><li><a href="/es/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/es/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/es/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/es/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/es/gps/">GPS & LoRa</a></li><li><a href="/es/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/es/hiking/">Hiking GPS</a></li><li><a href="/es/how-gps-works/">How GPS Works</a></li><li><a href="/es/hunting-dogs/">Hunting Dogs</a></li><li><a href="/es/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/es/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/es/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/es/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/es/lorawan/">LoRaWAN</a></li><li><a href="/es/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/es/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/es/open-source/">Open Source</a></li><li><a href="/es/privacy/">Privacy</a></li><li><a href="/es/search-rescue/">Search & Rescue</a></li><li><a href="/es/setup-guides/">Setup</a></li><li><a href="/es/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/es/software/">Software</a></li><li><a href="/es/specifications/">Specs</a></li><li><a href="/es/tractive-alternative/">Tractive Alternative</a></li><li><a href="/es/uk/">GPS Tracker UK</a></li><li><a href="/es/uk/farms/">UK Farm GPS</a></li><li><a href="/es/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/es/usa/">GPS Tracker USA</a></li><li><a href="/es/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

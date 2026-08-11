@@ -2,579 +2,77 @@
 
 <html lang="ja">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
-<meta content="無線見通し線は、デバイス間の有効な信号経路を決定する無線通信システムの重要な側面です。最適な信号強度によりシステムの信頼性とパフォーマンスが向上するため、この概念を理解することは GPS 追跡、遠隔監視、ドローン操作にとって不可欠であることがわかります。" name="description"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>無線見通し |ノリラボのブログ</title>
+<title>無線見通し線: GPS および LoRa 範囲ガイド</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="無線見通し線の原理と、GPS 追跡およびドローン運用のための無線通信システムへの影響を理解します。" name="description"/>
-<link href="https://www.nolilab.com/blog/radio-line-of-sight/" rel="canonical"/>
-<meta content="article" property="og:type"/>
-<meta content="無線見通し |ノリラボのブログ" property="og:title"/>
-<meta content="無線見通し線の原理と、GPS 追跡およびドローン運用のための無線通信システムへの影響を理解します。" property="og:description"/>
-<meta content="https://www.nolilab.com/blog/radio-line-of-sight" property="og:url"/>
-<meta content="https://www.nolilab.com/images/radio-wave-signal.webp" property="og:image"/>
-<meta content="nolilab" property="og:site_name"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="無線見通し |ノリラボのブログ" name="twitter:title"/>
-<meta content="無線見通し線の原理と、GPS 追跡およびドローン運用のための無線通信システムへの影響を理解します。" name="twitter:description"/>
-<meta content="https://www.nolilab.com/images/radio-wave-signal.webp" name="twitter:image"/>
-<style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #24292e;
-      --text-secondary: #57606a;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-lg);
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    article {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: var(--spacing-xl) var(--spacing-md);
-    }
-
-    .article-header {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-meta {
-      display: flex;
-      gap: var(--spacing-md);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.2;
-    }
-
-    .article-image {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-content {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .article-content h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin: var(--spacing-xl) 0 var(--spacing-md);
-      letter-spacing: -0.01em;
-    }
-
-    .article-content h3 {
-      font-size: 1.375rem;
-      font-weight: 600;
-      margin: var(--spacing-lg) 0 var(--spacing-sm);
-    }
-
-    .article-content p {
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-content ul,
-    .article-content ol {
-      margin: var(--spacing-md) 0;
-      padding-left: var(--spacing-lg);
-    }
-
-    .article-content li {
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .article-content strong {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      margin-bottom: var(--spacing-lg);
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--accent-hover);
-    }
-
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-
-    .language-selector {
-      margin-left: var(--spacing-sm);
-    }
-
-    .language-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.75rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .language-btn:hover {
-      border-color: var(--accent);
-      background: var(--bg-primary);
-    }
-
-    .language-btn i {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .language-btn .fa-chevron-down {
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-    }
-
-    .language-selector:hover .fa-chevron-down {
-      transform: rotate(180deg);
-    }
-
-    .current-lang {
-      font-family: var(--font-mono);
-      font-weight: 600;
-    }
-
-    .language-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      right: 0;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
-      z-index: 1000;
-    }
-
-    .language-selector:hover .language-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .language-option {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .language-option:last-child {
-      border-bottom: none;
-    }
-
-    .language-option:hover {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-
-    .language-option .lang-code {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 0.8rem;
-      min-width: 28px;
-      color: var(--accent);
-    }
-
-    .language-option .lang-name {
-      font-size: 0.875rem;
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: var(--spacing-xs);
-      z-index: 1001;
-      margin-left: auto;
-    }
-
-    .mobile-menu-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--bg-primary);
-        flex-direction: column;
-        gap: 0;
-        padding: 80px var(--spacing-md) var(--spacing-md);
-        box-shadow: var(--shadow-lg);
-        transition: left 0.3s ease;
-        z-index: 1000;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-      }
-
-      .nav-links.active {
-        left: 0;
-      }
-
-      .nav-link {
-        width: 100%;
-        padding: var(--spacing-md);
-        border-bottom: 1px solid var(--border);
-        text-align: left;
-        font-size: 1rem;
-      }
-
-      .language-selector {
-        position: static;
-        margin-left: var(--spacing-sm);
-      }
-
-      .language-dropdown {
-        left: 0;
-        right: auto;
-        min-width: 160px;
-      }
-
-      /* Overlay when menu is open */
-      body.menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      .article-title {
-        font-size: 2rem;
-      }
-
-      .article-content {
-        font-size: 1rem;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Radio Line of Sight",
-  "description": "Understanding radio line of sight principles and their impact on wireless communication systems for GPS tracking and drone operations.",
-  "url": "https://www.nolilab.com/blog/radio-line-of-sight",
-  "datePublished": "2023-11-21",
-  "dateModified": "2023-11-21",
-  "author": {
-    "@type": "Organization",
-    "name": "nolilab"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "nolilab",
-    "url": "https://www.nolilab.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
-    }
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "/images/radio-wave-signal.webp"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.nolilab.com/blog/radio-line-of-sight"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "無線見通し線とは何ですか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "無線見通し線（LOS）とは、送信機と受信機の間に障害物のない直線的な経路のことです。丘、建物、樹木などの障害物がこの経路上にあると、電波が弱まったりブロックされたりし、GPSトラッカーなどの無線機器の有効範囲が低下します。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "地形はGPSおよびLoRaトラッカーの通信範囲にどう影響しますか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "地形は無線通信範囲を制限する主要な要因です。丘や谷は直接の電波経路を遮断し、密林は電波を減衰させます。Loko GPSトラッカーは、開けた平地で見通しが良い場合に最大20kmの通信範囲を達成しますが、山岳地帯や都市環境では範囲が大幅に低下します。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "フレネルゾーンとは何ですか？なぜ無線通信範囲に重要なのですか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "フレネルゾーンは、送信機と受信機の間の直接電波経路を囲む楕円形の空間です。最適な信号強度のためには、第1フレネルゾーンの少なくとも60%が障害物から解放されている必要があります。直接経路から少しずれた障害物でも、このゾーンに侵入すると大きな信号損失を引き起こす可能性があります。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "GPSトラッカーの通信範囲を最大化するにはどうすればよいですか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "GPSトラッカーの通信範囲を最大化するには：1）受信機（基地局）をできるだけ高い場所に設置する — 数メートルの高さの違いでもカバレッジが大幅に広がります。2）大きな金属構造物や建物の近くへの設置を避ける。3）デバイスが対応している場合は外部アンテナを使用する。4）トラッカーと基地局の間に障害物が少ない開けた地形を選ぶ。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Loko GPSトラッカーは見通しなしで動作しますか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Loko GPSトラッカーはLoRa P2P無線技術を使用しており、サブGHz周波数とチャープスペクトラム拡散変調のおかげで、Wi-FiやBluetoothよりも非見通し条件で優れたパフォーマンスを発揮します。ただし、すべての無線機器と同様に、固体障害物を通じた通信では範囲が低下します。屋外での一般的な使用では、Lokoは2〜5kmをカバーします。"
-      }
-    }
-  ]
-}
-</script>
-<style>
-  @font-face {
-    font-family: 'Inter-fallback';
-    src: local('Arial');
-    ascent-override: 90.44%;
-    descent-override: 22.52%;
-    line-gap-override: 0%;
-    size-adjust: 107.64%;
-  }
-</style>
-<script defer="" src="/js/layout.js"></script><link href="https://www.nolilab.com/blog/radio-line-of-sight/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/blog/radio-line-of-sight/" hreflang="ja" rel="alternate"/>
+<meta content="GPS および LoRa 追跡における無線見通し線の意味について説明します。地形が Loko の 20km 範囲に与える影響と、それを最大化する方法。" name="description"/>
+<link href="https://www.nolilab.com/ja/blog/radio-line-of-sight/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/radio-line-of-sight/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/radio-line-of-sight/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/radio-line-of-sight/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/radio-line-of-sight/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/ru/blog/radio-line-of-sight/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/blog/radio-line-of-sight/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/blog/radio-line-of-sight/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/radio-line-of-sight/" hreflang="x-default" rel="alternate"/>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/blog/radio-line-of-sight/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/blog/radio-line-of-sight/" />
+<script defer="" src="/js/layout.js"></script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "家",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "ブログ",
+      "item": "https://www.nolilab.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "無線見通し線: GPS および LoRa 範囲ガイド",
+      "item": "https://www.nolilab.com/blog/radio-line-of-sight/"
+    }
+  ]
+}</script>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <article>
-<a class="back-link" href="/ja/blog/">
+<a class="back-link" href="/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> ブログに戻る
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> November 21, 2023</span>
+<span><i class="far fa-calendar"></i> 2023年11月21日</span>
 <span><i class="far fa-user"></i> <a class="author-link" href="/author/tamleykha-piriyev/" rel="author">nolilab</a></span>
 </div>
-<h1 class="article-title">無線見通し線</h1>
+<h1 class="article-title">無線見通し線: GPS および LoRa の追跡範囲に与える影響</h1>
 </div>
-<img alt="Radio Communication Tower" class="article-image" src="/images/radio-wave-signal.webp"/>
+<img alt="Radio Communication Tower" class="article-image" height="512" src="/images/radio-wave-signal.webp" width="512"/>
 <div class="article-content">
 <h2>導入</h2>
-<p>無線見通し線は、デバイス間の有効な信号経路を決定する無線通信システムの重要な側面です。最適な信号強度によりシステムの信頼性とパフォーマンスが向上するため、この概念を理解することは GPS 追跡、遠隔監視、ドローン操作にとって不可欠であることがわかります。</p>
+<p>無線見通し線は、デバイス間の有効な信号経路を決定する無線通信システムの重要な側面です。最適な信号強度によりシステムの信頼性とパフォーマンスが向上するため、この概念を理解することは GPS 追跡、リモート監視、およびドローン操作にとって不可欠であることがわかります。</p>
 <h2>無線見通し線の基本</h2>
 <h3>意味</h3>
 <p>無線見通し線は、無線信号が送信機と受信機の間を直接通過する障害物のない経路を表します。障害物によって信号伝送が大幅に劣化したり完全にブロックされたりするため、この直接パスは信頼性の高い無線通信の基礎となります。</p>
 <h3>信号の伝播</h3>
-<p>無線信号は通常、光線と同様に、送信機から受信機まで直線で移動します。ただし、通信範囲が広がると、信号は自然の障害物、具体的には地球の曲率、丘、または送信を妨げるその他の地形に遭遇します。回折によって障害物の周りで曲がる可能性がある低周波信号とは異なり、GPS 追跡で使用される周波数 (通常は GHz 範囲) は、比較的明確な経路を必要とします。</p>
+<p>無線信号は通常、光線と同様に、送信機から受信機まで直線で移動します。ただし、通信範囲が広がると、信号は自然の障害物、具体的には地球の曲率、丘、その他の地形などの伝送を妨げる障害物に遭遇します。回折によって障害物の周囲で曲がる可能性がある低周波信号とは異なり、GPS トラッキングで使用される周波数 (通常は GHz 範囲) は、比較的明確なパスを必要とします。</p>
 <h2>無線見通しに影響を与える要因</h2>
 <p>いくつかの重要な変数が無線見通し線の有効性に影響します。</p>
 <h3>1. 地形と地形</h3>
@@ -584,29 +82,29 @@
 <h3>3. 大気条件</h3>
 <p>温度、湿度、降水量は信号伝播特性に影響を与えます。大雨、霧、雪は、特に高周波数の無線信号を減衰（弱める）する可能性があります。温度の逆転により異常な伝播条件が発生し、大気ダクトを通じて通常の見通し線を超えて範囲が広がることがあります。</p>
 <h3>4. 周波数と電力</h3>
-<p>一般に、周波数が高いほど減衰が大きくなり、より鮮明な見通し線が必要になりますが、周波数が低いほど障害物を透過しやすく、障害物の周囲で回折することができます。送信出力を増加すると通信範囲は広がりますが、見通し線の制限を完全に克服することはできません。完全な障害物に直面した場合、出力を 2 倍にしても通信範囲はわずかに改善されるだけです。</p>
+<p>一般に、周波数が高いほど減衰が大きくなり、より鮮明な見通し線が必要になりますが、周波数が低いほど障害物を透過し、障害物の周囲で回折することができます。送信出力を増加すると通信範囲は広がりますが、見通し線の制限を完全に克服することはできません。完全な障害物に直面した場合、出力を 2 倍にしても通信範囲はわずかに改善されるだけです。</p>
 <h2>無線見通し線の応用</h2>
-<h3>GPS追跡とナビゲーション</h3>
-<p>Loko GPS Tracker のようなシステムは、衛星 (位置決定用) と地上局 (データ通信用) の両方に対する明確な見通し線に依存しています。 Loko が採用している LoRa 無線技術は、最適な見通し条件下で 5 キロメートルを超える長距離通信を実現し、開けた地形での追跡アプリケーションに最適です。</p>
+<h3>GPS の追跡とナビゲーション</h3>
+<p>Loko GPS Tracker のようなシステムは、衛星 (位置決定用) と地上局 (データ通信用) の両方に対する明確な見通し線に依存しています。 Loko で採用されている LoRa 無線テクノロジーは、最適な見通し条件下で 5 キロメートルを超える延長範囲を提供し、開けた地形でのアプリケーションの追跡に最適です。</p>
 <h3>通信システム</h3>
 <p>携帯電話ネットワーク、ワイヤレス インターネット プロバイダー、ポイントツーポイント通信リンクはすべて、見通し線の原則に依存しています。タワーの配置では、カバーエリアを最大化するために地形分析が考慮されます。</p>
 <h3>リモート監視とSCADAシステム</h3>
-<p>産業用監視システムには、センサーと中央ステーション間の信頼性の高い通信が必要です。見通し線の計算により、重要なインフラストラクチャの監視に適切な範囲が保証されます。</p>
+<p>産業用監視システムには、センサーと中央ステーション間の信頼性の高い通信が必要です。見通し線の計算により、重要なインフラストラクチャの監視に適切な範囲が確保されます。</p>
 <h3>ドローンの運用と制御</h3>
 <p>ドローンのパイロットは、安全な操作と規制遵守のために、見通し線 (視覚と無線の両方) を維持する必要があります。無線見通し線を理解することは、パイロットが制御信号が弱くなるか失敗する可能性がある場所を予測するのに役立ちます。</p>
 <h2>視線の計算</h2>
-<p>無線見通し線を決定するには、次の 3 つの主な方法論が存在します。</p>
+<p>無線見通し距離を決定するには、次の 3 つの主な方法論が存在します。</p>
 <h3>幾何学的計算</h3>
-<p>エンジニアは、三角法と地球の曲率データを使用して、アンテナの高さに基づいて理論上の見通し距離を計算します。電波地平線は、大気の屈折により視覚地平線を超えて広がります。これは通常、地球半径 4/3 モデルで計算されます。</p>
+<p>エンジニアは、三角法と地球の曲率データを使用して、アンテナの高さに基づいて理論上の見通し距離を計算します。電波地平線は、大気の屈折により視覚地平線を超えて広がります。通常、地球半径 4/3 モデルで計算されます。</p>
 <h3>経験的モデル</h3>
 <p>さまざまな地形や条件にわたって収集された実験データに基づいて、Longley-Rice モデルや Okumura-Hata モデルなどの経験的モデルは、純粋な幾何学的計算よりも正確に信号伝播を予測します。</p>
 <h3>コンピュータシミュレーション</h3>
-<p>最新の計画ツールは、詳細な地形データベースと高度なアルゴリズムを使用して、信号伝播をモデル化します。これらのシミュレーションでは、地形、植生、建物、大気の影響が考慮されます。</p>
+<p>最新の計画ツールは、詳細な地形データベースと洗練されたアルゴリズムを使用して、信号伝播をモデル化します。これらのシミュレーションでは、地形、植生、建物、大気の影響が考慮されます。</p>
 <h3>利用可能なツール</h3>
 <ul>
-<li><strong>Google Earth:</strong>地形の標高データと基本的な見通し線の視覚化を提供します </li>
-<li><strong>Radio Mobile:</strong>詳細な電波伝播モデリングのための無料ソフトウェア </li>
-<li><strong>GIS Software Packages:</strong>包括的な地形分析と伝播予測を提供するプロフェッショナル ツール </li>
+<li><strong>グーグルアース：</strong> 地形の標高データと基本的な見通し線の視覚化を提供します</li>
+<li><strong>無線モバイル:</strong> 詳細な電波伝播モデリングのための無料ソフトウェア</li>
+<li><strong>GIS ソフトウェア パッケージ:</strong> 包括的な地形分析と伝播予測を提供するプロフェッショナル ツール</li>
 </ul>
 <h2>視線の改善</h2>
 <p>いくつかの戦略により、無線見通し線のパフォーマンスを向上させることができます。</p>
@@ -616,24 +114,46 @@
 <p>直接の見通し線が達成できない場合、中継局は障害物を避けて信号を中継します。信号増幅器は弱い信号を増幅しますが、障害物を完全に克服することはできません。</p>
 <h3>3. 代替技術の探索</h3>
 <ul>
-<li><strong>Satellite Communication:</strong>地上の見通し線の制限を完全に回避します </li>
-<li><strong>Fiber-Optic Networks:</strong>無線伝播の問題に依存しない信頼性の高い接続を提供します </li>
-<li><strong>Mesh Networking:</strong>複数のノードが信号を中継し、障害物を回避して動的にルーティングします </li>
+<li><strong>衛星通信:</strong> 地上の見通し線の制限を完全に回避します</li>
+<li><strong>光ファイバーネットワーク:</strong> 無線伝播の問題に依存しない信頼性の高い接続を提供します</li>
+<li><strong>メッシュネットワーキング:</strong> 複数のノードが信号を中継し、障害物を回避して動的にルーティングします</li>
 </ul>
-<h2>結論</h2>
-<p>無線見通し線の課題を理解することで、情報に基づいたシステム設計の決定が可能になり、最終的にはワイヤレス アプリケーション全体で最適なパフォーマンスが保証されます。 Loko システムのような GPS トラッカーの導入、通信ネットワークの確立、またはドローンの操作のいずれにおいても、見通し線に関する考慮事項は信頼性とカバー範囲に根本的に影響します。</p>
+<h3>結論</h3>
+<p>無線見通し線の課題を理解することで、情報に基づいたシステム設計の決定が可能になり、最終的にはワイヤレス アプリケーション全体で最適なパフォーマンスが保証されます。 Loko システムのような GPS トラッカーの展開、通信ネットワークの確立、またはドローンの操作のいずれにおいても、見通し線に関する考慮事項は信頼性とカバー範囲に根本的に影響します。</p>
 <p>地形を注意深く分析し、適切な周波数を選択し、アンテナの配置を最適化し、必要に応じて範囲拡張テクノロジーを採用することで、困難な環境でもワイヤレス通信システムの効果を最大化できます。</p>
 </div>
 </article>
-<aside class="related-articles" style="margin:2rem 0;padding:1.5rem;background:var(--bg-secondary,#f6f8fa);border-radius:var(--radius,8px);border:1px solid var(--border,#d0d7de)">
-<h3 style="margin:0 0 1rem;font-size:1rem;font-weight:600">関連記事</h3>
-<ul style="margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:0.5rem">
-<li><a href="/ja/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1/">ドローン愛好家が喜ぶ: ミニドローン用の究極の GPS トラッカー</a></li>
-<li><a href="/ja/blog/lora-lorawan-a-simple-guide/">LoRa と LoRaWAN: シンプルなガイド</a></li>
-</ul>
-</aside>
+<div class="product-cta">
+<p class="product-cta-heading">Loko GPS トラッカーを詳しく見る</p>
+<div class="product-cta-links">
+<a class="product-cta-link primary" href="/lora-gps-tracker/">Loko GPS トラッカーを参照</a>
+<a class="product-cta-link" href="/gps/">GPS および LoRa テクノロジー ガイド</a>
+<a class="product-cta-link" href="/specifications/">Lokoの仕様</a>
+</div>
+</div>
+<section class="related-posts">
+<h3 class="related-posts-heading">関連記事</h3>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/blog/how-distance-affects-wireless-signal-range/">
+<h3>距離が無線信号範囲に与える影響</h3>
+<span class="rp-cta">続きを読む→</span>
+</a>
+<a class="related-post-card" href="/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/">
+<h3>GPS 無線の総合ガイド: 機能、利点、アプリケーション</h3>
+<span class="rp-cta">続きを読む→</span>
+</a>
+<a class="related-post-card" href="/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/">
+<h3>1 日を通しての電離層高度の変化は GPS 信号品質にどのような影響を与えますか?</h3>
+<span class="rp-cta">続きを読む→</span>
+</a>
+<a class="related-post-card" href="/blog/drone-enthusiasts-rejoice-the-ultimate-gps-tracker-for-your-mini-drones-1/">
+<h3>ドローンに最適な GPS トラッカー: 軽量、オフライン、月額料金なし</h3>
+<span class="rp-cta">続きを読む→</span>
+</a>
+</div>
+</section>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/ja/">nolilab</a></li><li><a href="/ja/accessories/">Accessories</a></li><li><a href="/ja/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ja/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ja/battery-life/">Battery Life</a></li><li><a href="/ja/blog/">Blog</a></li><li><a href="/ja/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/ja/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ja/chirpstack/">ChirpStack</a></li><li><a href="/ja/contact/">Contact</a></li><li><a href="/ja/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ja/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ja/farms/">Farm GPS</a></li><li><a href="/ja/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ja/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ja/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ja/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ja/gps/">GPS & LoRa</a></li><li><a href="/ja/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ja/hiking/">Hiking GPS</a></li><li><a href="/ja/how-gps-works/">How GPS Works</a></li><li><a href="/ja/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ja/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ja/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ja/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ja/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ja/lorawan/">LoRaWAN</a></li><li><a href="/ja/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ja/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ja/open-source/">Open Source</a></li><li><a href="/ja/privacy/">Privacy</a></li><li><a href="/ja/search-rescue/">Search & Rescue</a></li><li><a href="/ja/setup-guides/">Setup</a></li><li><a href="/ja/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ja/software/">Software</a></li><li><a href="/ja/specifications/">Specs</a></li><li><a href="/ja/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ja/uk/">GPS Tracker UK</a></li><li><a href="/ja/uk/farms/">UK Farm GPS</a></li><li><a href="/ja/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ja/usa/">GPS Tracker USA</a></li><li><a href="/ja/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

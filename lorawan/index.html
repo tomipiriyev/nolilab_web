@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <title>LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab</title>
@@ -18,16 +18,23 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
 <meta content="Connect your Loko Air trackers to The Things Network (TTN). Step-by-step LoRaWAN setup guide — create a TTN application, register devices, generate an API key, and go live in the Loko app." name="description"/>
-<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots">
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
 <link href="https://www.nolilab.com/lorawan/" rel="canonical"/>
 <link href="https://www.nolilab.com/lorawan/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/lorawan/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/es/lorawan/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/lorawan/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/lorawan/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/ru/lorawan/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/lorawan/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/lorawan/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/lorawan/" hreflang="x-default" rel="alternate"/>
-<meta content="article" property="og:type"/>
+
+
+
+
+
+
+
+<meta content="article" property="og:type">
 <meta content="LoRaWAN Setup Guide for Loko GPS Tracker | TTN Integration | nolilab" property="og:title"/>
 <meta content="Connect your Loko Air trackers to The Things Network (TTN). Step-by-step LoRaWAN setup guide — create a TTN application, register devices, generate an API key, and go live in the Loko app." property="og:description"/>
 <meta content="https://www.nolilab.com/lorawan/" property="og:url"/>
@@ -468,269 +475,240 @@
 }
 </script>
 
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/" />
+
+
+
+
 </head>
 <body>
 <div id="site-header"></div>
 <main class="lorawan-container">
-
-  <!-- ============================ HERO ============================ -->
-  <header class="lorawan-hero">
-    <div class="kicker">Loko · Setup Guide</div>
-    <h1>Connecting Loko to the LoRaWAN Network</h1>
-    <p>Pair your Loko&nbsp;Air trackers with The&nbsp;Things&nbsp;Network (TTN) and start
+<!-- ============================ HERO ============================ -->
+<header class="lorawan-hero">
+<div class="kicker">Loko · Setup Guide</div>
+<h1>Connecting Loko to the LoRaWAN Network</h1>
+<p>Pair your Loko Air trackers with The Things Network (TTN) and start
        receiving live positions in the app — in four short steps.</p>
-    <div class="meta">~10 min · Beginner friendly</div>
-  </header>
-
-  <div class="lorawan-content">
-
-    <!-- ============================ OTHER GUIDE ============================ -->
-    <a class="next-guide" data-langlink="" href="/chirpstack/">
-      <span class="eyebrow">Self-hosting your own network server?</span>
-      <span class="title">How to connect Loko to ChirpStack →</span>
-      <span class="sub">The same setup on a self-hosted ChirpStack instance — bring a gateway online,
-        create a device profile with Cayenne&nbsp;LPP, add your devices and chart their
+<div class="meta">~10 min · Beginner friendly</div>
+</header>
+<div class="lorawan-content">
+<!-- ============================ OTHER GUIDE ============================ -->
+<a class="next-guide" data-langlink="" href="/chirpstack/">
+<span class="eyebrow">Self-hosting your own network server?</span>
+<span class="title">How to connect Loko to ChirpStack →</span>
+<span class="sub">The same setup on a self-hosted ChirpStack instance — bring a gateway online,
+        create a device profile with Cayenne LPP, add your devices and chart their
         measurements as gauges.</span>
-    </a>
-
-    <!-- ============================ INTRO ============================ -->
-    <p>Loko receives your tracker positions over <b>LoRaWAN</b>, a long-range,
+</a>
+<!-- ============================ INTRO ============================ -->
+<p>Loko receives your tracker positions over <b>LoRaWAN</b>, a long-range,
        low-power radio network. To bridge those radio messages to your phone, the app
        connects to <b>The Things Network (TTN)</b> — a free, global LoRaWAN community
        network.</p>
-    <p>Setup happens in two places: first you create an <b>application</b> on the TTN
+<p>Setup happens in two places: first you create an <b>application</b> on the TTN
        console and register your devices, then you paste two credentials into the Loko
        app. Here's everything you need.</p>
-
-    <!-- ============================ REQUIREMENTS ============================ -->
-    <div class="req">
-      <h3>What you'll need</h3>
-      <ul>
-        <li><span class="dot">▸</span><div><b>A free TTN account</b><span>Sign up at <a href="https://www.thethingsnetwork.org/" rel="noopener" target="_blank">thethingsnetwork.org</a> if you don't have one.</span></div></li>
-        <li><span class="dot">▸</span><div><b>Your Loko Air device details</b><span>The DevEUI / JoinEUI / keys — you set these yourself when registering the device.</span></div></li>
-        <li><span class="dot">▸</span><div><b>The Loko app installed</b><span>On the phone you'll use to track your devices.</span></div></li>
-      </ul>
-    </div>
-
-    <div class="note">
-      <span class="ic">🎯</span>
-      <div class="bd">By the end you'll have two values — an <b>Application&nbsp;ID</b> and an
-        <b>API&nbsp;Key</b> — which are the only things the app needs to go live.</div>
-    </div>
-
-    <!-- ============================ STEP 1 ============================ -->
-    <div class="step"><div class="num">1</div><h2>Create an application on TTN</h2></div>
-    <p class="lead">Log in to the TTN console, open the <b>Applications</b> section and
+<!-- ============================ REQUIREMENTS ============================ -->
+<div class="req">
+<h3>What you'll need</h3>
+<ul>
+<li><span class="dot">▸</span><div><b>A free TTN account</b><span>Sign up at <a href="https://www.thethingsnetwork.org/" rel="noopener" target="_blank">thethingsnetwork.org</a> if you don't have one.</span></div></li>
+<li><span class="dot">▸</span><div><b>Your Loko Air device details</b><span>The DevEUI / JoinEUI / keys — you set these yourself when registering the device.</span></div></li>
+<li><span class="dot">▸</span><div><b>The Loko app installed</b><span>On the phone you'll use to track your devices.</span></div></li>
+</ul>
+</div>
+<div class="note">
+<span class="ic">🎯</span>
+<div class="bd">By the end you'll have two values — an <b>Application ID</b> and an
+        <b>API Key</b> — which are the only things the app needs to go live.</div>
+</div>
+<!-- ============================ STEP 1 ============================ -->
+<div class="step"><div class="num">1</div><h2>Create an application on TTN</h2></div>
+<p class="lead">Log in to the TTN console, open the <b>Applications</b> section and
        click <b>+ Add application</b>. Give it an ID and a name, then click
        <b>Create application</b>.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-create-application.webp">
-          <img src="/images/lorawan/ttn-create-application.png" alt="TTN Create application page" loading="lazy" width="1680" height="877">
-        </picture>
-        <!-- 1 · Application ID field -->
-        <span class="hl"  style="left:21.0%; top:35.5%; width:27%; height:5.5%;"></span>
-        <span class="tag" style="left:21.0%; top:35.5%;">1</span>
-        <!-- 2 · Create button -->
-        <span class="hl"  style="left:20.8%; top:92.5%; width:13%; height:5.5%;"></span>
-        <span class="tag" style="left:20.8%; top:92.5%;">2</span>
-      </div>
-      <figcaption>① Choose your Application ID  ·  ② Click Create application</figcaption>
-    </figure>
-
-    <div class="note warn">
-      <span class="ic">📝</span>
-      <div class="bd"><b>Write down your Application ID.</b> You'll need it for the app.
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-create-application.webp" type="image/webp"/>
+<img alt="TTN Create application page" height="877" loading="lazy" src="/images/lorawan/ttn-create-application.png" width="1680"/>
+</picture>
+<!-- 1 · Application ID field -->
+<span class="hl" style="left:21.0%; top:35.5%; width:27%; height:5.5%;"></span>
+<span class="tag" style="left:21.0%; top:35.5%;">1</span>
+<!-- 2 · Create button -->
+<span class="hl" style="left:20.8%; top:92.5%; width:13%; height:5.5%;"></span>
+<span class="tag" style="left:20.8%; top:92.5%;">2</span>
+</div>
+<figcaption>① Choose your Application ID  ·  ② Click Create application</figcaption>
+</figure>
+<div class="note warn">
+<span class="ic">📝</span>
+<div class="bd"><b>Write down your Application ID.</b> You'll need it for the app.
         In the example above it's <code>demolokoappid</code>. The ID must be lowercase and
         can't be changed later.</div>
-    </div>
-
-    <!-- ============================ STEP 2 ============================ -->
-    <div class="step"><div class="num">2</div><h2>Register your Loko Air devices</h2></div>
-    <p class="lead">In the left sidebar open <b>End devices</b>, then click
+</div>
+<!-- ============================ STEP 2 ============================ -->
+<div class="step"><div class="num">2</div><h2>Register your Loko Air devices</h2></div>
+<p class="lead">In the left sidebar open <b>End devices</b>, then click
        <b>Register end device</b>.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-end-devices.webp">
-          <img src="/images/lorawan/ttn-end-devices.png" alt="TTN End devices page" loading="lazy" width="1680" height="834">
-        </picture>
-        <!-- 1 · End devices nav -->
-        <span class="hl"  style="left:1.5%; top:33.5%; width:18%; height:6%;"></span>
-        <span class="tag" style="left:1.5%; top:33.5%;">1</span>
-        <!-- 2 · Register end device button -->
-        <span class="hl"  style="left:86%; top:14.5%; width:13.5%; height:6%;"></span>
-        <span class="tag" style="left:86%; top:14.5%;">2</span>
-      </div>
-      <figcaption>① Open End devices  ·  ② Register end device</figcaption>
-    </figure>
-
-    <p>On the registration screen, choose <b>“Enter end device specifics manually”</b>,
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-end-devices.webp" type="image/webp"/>
+<img alt="TTN End devices page" height="834" loading="lazy" src="/images/lorawan/ttn-end-devices.png" width="1680"/>
+</picture>
+<!-- 1 · End devices nav -->
+<span class="hl" style="left:1.5%; top:33.5%; width:18%; height:6%;"></span>
+<span class="tag" style="left:1.5%; top:33.5%;">1</span>
+<!-- 2 · Register end device button -->
+<span class="hl" style="left:86%; top:14.5%; width:13.5%; height:6%;"></span>
+<span class="tag" style="left:86%; top:14.5%;">2</span>
+</div>
+<figcaption>① Open End devices  ·  ② Register end device</figcaption>
+</figure>
+<p>On the registration screen, choose <b>“Enter end device specifics manually”</b>,
        then fill in the device details from your Loko Air (frequency plan, LoRaWAN
        version and the provisioning info such as JoinEUI / DevEUI).</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-register-device.webp">
-          <img src="/images/lorawan/ttn-register-device.png" alt="TTN Register end device page" loading="lazy" width="1680" height="861">
-        </picture>
-        <!-- 1 · Enter manually radio -->
-        <span class="hl"  style="left:21.2%; top:38%; width:30%; height:5.5%;"></span>
-        <span class="tag" style="left:21.2%; top:38%;">1</span>
-        <!-- 2 · Provisioning / JoinEUI -->
-        <span class="hl"  style="left:21.2%; top:90%; width:24%; height:7.5%;"></span>
-        <span class="tag" style="left:21.2%; top:90%;">2</span>
-      </div>
-      <figcaption>① Enter end device specifics manually  ·  ② Fill in your device's provisioning info</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">📡</span>
-      <div class="bd">Pick the <b>frequency plan</b> for your region (e.g. <i>Europe 863–870&nbsp;MHz</i>)
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-register-device.webp" type="image/webp"/>
+<img alt="TTN Register end device page" height="861" loading="lazy" src="/images/lorawan/ttn-register-device.png" width="1680"/>
+</picture>
+<!-- 1 · Enter manually radio -->
+<span class="hl" style="left:21.2%; top:38%; width:30%; height:5.5%;"></span>
+<span class="tag" style="left:21.2%; top:38%;">1</span>
+<!-- 2 · Provisioning / JoinEUI -->
+<span class="hl" style="left:21.2%; top:90%; width:24%; height:7.5%;"></span>
+<span class="tag" style="left:21.2%; top:90%;">2</span>
+</div>
+<figcaption>① Enter end device specifics manually  ·  ② Fill in your device's provisioning info</figcaption>
+</figure>
+<div class="note">
+<span class="ic">📡</span>
+<div class="bd">Pick the <b>frequency plan</b> for your region (e.g. <i>Europe 863–870 MHz</i>)
         and match the <b>LoRaWAN version</b> to your Loko Air. Repeat this step for every
         tracker you own.</div>
-    </div>
-
-    <!-- ============================ STEP 3 ============================ -->
-    <div class="step"><div class="num">3</div><h2>Create an API key</h2></div>
-    <p class="lead">Back in the sidebar, open <b>API keys</b> and click
+</div>
+<!-- ============================ STEP 3 ============================ -->
+<div class="step"><div class="num">3</div><h2>Create an API key</h2></div>
+<p class="lead">Back in the sidebar, open <b>API keys</b> and click
        <b>+ Add API key</b>. Grant it the rights to read application traffic, then save.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/ttn-api-keys.webp">
-          <img src="/images/lorawan/ttn-api-keys.png" alt="TTN API keys page" loading="lazy" width="1680" height="834">
-        </picture>
-        <!-- 1 · API keys nav -->
-        <span class="hl"  style="left:1.5%; top:62.5%; width:18%; height:6%;"></span>
-        <span class="tag" style="left:1.5%; top:62.5%;">1</span>
-        <!-- 2 · Add API key button -->
-        <span class="hl"  style="left:86%; top:15%; width:13.5%; height:6%;"></span>
-        <span class="tag" style="left:86%; top:15%;">2</span>
-      </div>
-      <figcaption>① Open API keys  ·  ② Add API key</figcaption>
-    </figure>
-
-    <div class="note crit">
-      <span class="ic">🔑</span>
-      <div class="bd"><b>Copy the API key immediately.</b> TTN shows the full key only
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/ttn-api-keys.webp" type="image/webp"/>
+<img alt="TTN API keys page" height="834" loading="lazy" src="/images/lorawan/ttn-api-keys.png" width="1680"/>
+</picture>
+<!-- 1 · API keys nav -->
+<span class="hl" style="left:1.5%; top:62.5%; width:18%; height:6%;"></span>
+<span class="tag" style="left:1.5%; top:62.5%;">1</span>
+<!-- 2 · Add API key button -->
+<span class="hl" style="left:86%; top:15%; width:13.5%; height:6%;"></span>
+<span class="tag" style="left:86%; top:15%;">2</span>
+</div>
+<figcaption>① Open API keys  ·  ② Add API key</figcaption>
+</figure>
+<div class="note crit">
+<span class="ic">🔑</span>
+<div class="bd"><b>Copy the API key immediately.</b> TTN shows the full key only
         <b>once</b>, right after you create it. Save it somewhere safe — if you lose it
         you'll have to generate a new one.</div>
-    </div>
-
-    <!-- ============================ OPTIONAL: MQTT EXPLORER ============================ -->
-    <div class="step">
-      <div class="num">✓</div>
-      <h2>Optional — test with MQTT Explorer</h2>
-    </div>
-    <p class="lead">Before putting the credentials into Loko, you can verify they work
+</div>
+<!-- ============================ OPTIONAL: MQTT EXPLORER ============================ -->
+<div class="step">
+<div class="num">✓</div>
+<h2>Optional — test with MQTT Explorer</h2>
+</div>
+<p class="lead">Before putting the credentials into Loko, you can verify they work
        with any open-source MQTT client — for example
-       <a href="https://mqtt-explorer.com/" rel="noopener" target="_blank">MQTT&nbsp;Explorer</a>. It connects straight to
+       <a href="https://mqtt-explorer.com/" rel="noopener" target="_blank">MQTT Explorer</a>. It connects straight to
        TTN's MQTT server and shows the raw uplink messages, which is a quick way to
        confirm everything is set up correctly.</p>
-
-    <figure>
-      <div class="shot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/mqtt-explorer-connection.webp">
-          <img src="/images/lorawan/mqtt-explorer-connection.png" alt="MQTT Explorer connection settings for TTN" loading="lazy" width="1322" height="878">
-        </picture>
-        <!-- 1 · Protocol + Host + Port row -->
-        <span class="hl"  style="left:2%; top:41.5%; width:96%; height:13%;"></span>
-        <span class="tag" style="left:2%; top:41.5%;">1</span>
-        <!-- 2 · Username (@ttn) -->
-        <span class="hl"  style="left:2%; top:63%; width:48%; height:13%;"></span>
-        <span class="tag" style="left:2%; top:63%;">2</span>
-        <!-- 3 · Password (API key) -->
-        <span class="hl"  style="left:51%; top:63%; width:39%; height:13%;"></span>
-        <span class="tag" style="left:51%; top:63%;">3</span>
-        <!-- 4 · Connect -->
-        <span class="hl"  style="left:76.5%; top:82.5%; width:21%; height:8%;"></span>
-        <span class="tag" style="left:76.5%; top:82.5%;">4</span>
-      </div>
-      <figcaption>① Protocol mqtt:// · Host · Port 1883  ·  ② Username = App ID @ttn  ·  ③ Password = API key  ·  ④ Connect</figcaption>
-    </figure>
-
-    <div class="note">
-      <span class="ic">🔌</span>
-      <div class="bd">Use these settings: <b>Protocol</b> <code>mqtt://</code>,
+<figure>
+<div class="shot">
+<picture>
+<source srcset="/images/lorawan/mqtt-explorer-connection.webp" type="image/webp"/>
+<img alt="MQTT Explorer connection settings for TTN" height="878" loading="lazy" src="/images/lorawan/mqtt-explorer-connection.png" width="1322"/>
+</picture>
+<!-- 1 · Protocol + Host + Port row -->
+<span class="hl" style="left:2%; top:41.5%; width:96%; height:13%;"></span>
+<span class="tag" style="left:2%; top:41.5%;">1</span>
+<!-- 2 · Username (@ttn) -->
+<span class="hl" style="left:2%; top:63%; width:48%; height:13%;"></span>
+<span class="tag" style="left:2%; top:63%;">2</span>
+<!-- 3 · Password (API key) -->
+<span class="hl" style="left:51%; top:63%; width:39%; height:13%;"></span>
+<span class="tag" style="left:51%; top:63%;">3</span>
+<!-- 4 · Connect -->
+<span class="hl" style="left:76.5%; top:82.5%; width:21%; height:8%;"></span>
+<span class="tag" style="left:76.5%; top:82.5%;">4</span>
+</div>
+<figcaption>① Protocol mqtt:// · Host · Port 1883  ·  ② Username = App ID @ttn  ·  ③ Password = API key  ·  ④ Connect</figcaption>
+</figure>
+<div class="note">
+<span class="ic">🔌</span>
+<div class="bd">Use these settings: <b>Protocol</b> <code>mqtt://</code>,
         <b>Host</b> <code>eu1.cloud.thethings.network</code> (match your region),
-        <b>Port</b> <code>1883</code>. The <b>Username</b> is your Application&nbsp;ID
+        <b>Port</b> <code>1883</code>. The <b>Username</b> is your Application ID
         with <code>@ttn</code> appended (same rule as the app!), and the <b>Password</b>
-        is your API&nbsp;key. Hit <b>Connect</b> — if it connects and you see topics
+        is your API key. Hit <b>Connect</b> — if it connects and you see topics
         appear, your credentials are good to go.</div>
-    </div>
-
-    <!-- ============================ STEP 4 ============================ -->
-    <div class="step"><div class="num">4</div><h2>Connect from the Loko app</h2></div>
-    <p class="lead">Open the Loko app, go to the <b>LoRaWAN (TTN)</b> sheet, and enter
+</div>
+<!-- ============================ STEP 4 ============================ -->
+<div class="step"><div class="num">4</div><h2>Connect from the Loko app</h2></div>
+<p class="lead">Open the Loko app, go to the <b>LoRaWAN (TTN)</b> sheet, and enter
        your credentials. Pick your region with the <b>Quick select</b> buttons (EU1 /
        NAM1 / AU1), then paste the Application ID and API key.</p>
-
-    <figure>
-      <div class="shot appshot">
-        <picture>
-          <source type="image/webp" srcset="/images/lorawan/app-lorawan-settings.webp">
-          <img src="/images/lorawan/app-lorawan-settings.png" alt="Loko app LoRaWAN settings sheet" loading="lazy" width="800" height="960">
-        </picture>
-        <!-- 1 · Application ID field (with the @ttn suffix appended onto the value) -->
-        <span class="hl"  style="left:29%; top:56%; width:42%; height:4.5%;"></span>
-        <span class="tag" style="left:29%; top:56%;">1</span>
-        <span class="append" style="left:43%; top:58.2%;">@ttn</span>
-        <!-- 2 · API key field -->
-        <span class="hl"  style="left:29%; top:63.5%; width:42%; height:4.5%;"></span>
-        <span class="tag" style="left:29%; top:63.5%;">2</span>
-        <!-- 3 · Save -->
-        <span class="hl red"  style="left:29%; top:69%; width:21%; height:4%;"></span>
-        <span class="tag red" style="left:29%; top:69%;">3</span>
-      </div>
-      <figcaption>① Application ID (add @ttn!)  ·  ② API key  ·  ③ Save</figcaption>
-    </figure>
-
-    <div class="note crit">
-      <span class="ic">⚠️</span>
-      <div class="bd"><b>Important — add <code>@ttn</code> to your Application ID.</b>
-        In the app's Application&nbsp;ID field, append <code>@ttn</code> to the end of the
-        ID you noted in Step&nbsp;1. Without this suffix the connection will fail.</div>
-    </div>
-
-    <div class="ttnbox">
-      <div class="small">So your Application ID becomes</div>
-      <div class="big">demolokoappid<span class="suf">@ttn</span></div>
-    </div>
-
-    <p>Tap <b>Save</b>. When the status indicator at the top of the sheet turns to
+<figure>
+<div class="shot appshot">
+<picture>
+<source srcset="/images/lorawan/app-lorawan-settings.webp" type="image/webp"/>
+<img alt="Loko app LoRaWAN settings sheet" height="960" loading="lazy" src="/images/lorawan/app-lorawan-settings.png" width="800"/>
+</picture>
+<!-- 1 · Application ID field (with the @ttn suffix appended onto the value) -->
+<span class="hl" style="left:29%; top:56%; width:42%; height:4.5%;"></span>
+<span class="tag" style="left:29%; top:56%;">1</span>
+<span class="append" style="left:43%; top:58.2%;">@ttn</span>
+<!-- 2 · API key field -->
+<span class="hl" style="left:29%; top:63.5%; width:42%; height:4.5%;"></span>
+<span class="tag" style="left:29%; top:63.5%;">2</span>
+<!-- 3 · Save -->
+<span class="hl red" style="left:29%; top:69%; width:21%; height:4%;"></span>
+<span class="tag red" style="left:29%; top:69%;">3</span>
+</div>
+<figcaption>① Application ID (add @ttn!)  ·  ② API key  ·  ③ Save</figcaption>
+</figure>
+<div class="note crit">
+<span class="ic">⚠️</span>
+<div class="bd"><b>Important — add <code>@ttn</code> to your Application ID.</b>
+        In the app's Application ID field, append <code>@ttn</code> to the end of the
+        ID you noted in Step 1. Without this suffix the connection will fail.</div>
+</div>
+<div class="ttnbox">
+<div class="small">So your Application ID becomes</div>
+<div class="big">demolokoappid<span class="suf">@ttn</span></div>
+</div>
+<p>Tap <b>Save</b>. When the status indicator at the top of the sheet turns to
        <b style="color:var(--accent)">● Connected</b>, the app is live on the network and
        your tracker positions will start arriving on the map.</p>
-
-    <!-- ============================ DONE ============================ -->
-    <div class="done">
-      <h2>🎉 You're connected!</h2>
-      <p>Your Loko Air devices are now streaming their positions through TTN into the
+<!-- ============================ DONE ============================ -->
+<div class="done">
+<h2>🎉 You're connected!</h2>
+<p>Your Loko Air devices are now streaming their positions through TTN into the
          app. From here you can set up geofences, view archived tracks, and download
          offline maps for the field.</p>
-    </div>
-
-    <div class="note">
-      <span class="ic">💬</span>
-      <div class="bd"><b>Need help?</b> If you hit any issues during setup, check our
+</div>
+<div class="note">
+<span class="ic">💬</span>
+<div class="bd"><b>Need help?</b> If you hit any issues during setup, check our
         <a href="/#faq">FAQ section</a> or contact our support team — we're here to help
         you get connected.</div>
-    </div>
-
-  </div>
+</div>
+</div>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/">nolilab</a></li><li><a href="/accessories/">Accessories</a></li><li><a href="/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/battery-life/">Battery Life</a></li><li><a href="/blog/">Blog</a></li><li><a href="/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/chirpstack/">ChirpStack</a></li><li><a href="/contact/">Contact</a></li><li><a href="/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/farms/">Farm GPS</a></li><li><a href="/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/gps/">GPS & LoRa</a></li><li><a href="/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/hiking/">Hiking GPS</a></li><li><a href="/how-gps-works/">How GPS Works</a></li><li><a href="/hunting-dogs/">Hunting Dogs</a></li><li><a href="/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/lorawan/">LoRaWAN</a></li><li><a href="/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/open-source/">Open Source</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/search-rescue/">Search & Rescue</a></li><li><a href="/setup-guides/">Setup</a></li><li><a href="/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/software/">Software</a></li><li><a href="/specifications/">Specs</a></li><li><a href="/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>

@@ -2,10 +2,10 @@
 
 <html lang="fr">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | nolilab</title>
+<title>Guide technologique GPS et LoRa | LoRa P2P vs LoRaWAN expliqué | nolilab</title>
 <link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
 <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
 <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
@@ -18,98 +18,94 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." name="description"/>
+<meta content="LoRa P2P vs LoRaWAN : comment la radio peer-to-peer permet le suivi GPS hors ligne 20km sans cellulaire. Couvre la ligne de mire, l'ionosphère et la portée du signal." name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <!-- Open Graph Meta Tags for Social Sharing -->
-<meta content="website" property="og:type"/>
-<meta content="GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | nolilab" property="og:title"/>
-<meta content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." property="og:description"/>
-<meta content="https://www.nolilab.com/gps" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="Guide technologique GPS et LoRa | LoRa P2P vs LoRaWAN expliqué | nolilab" property="og:title"/>
+<meta content="LoRa P2P vs LoRaWAN : comment la radio peer-to-peer permet le suivi GPS hors ligne 20km sans cellulaire. Couvre la ligne de mire, l'ionosphère et la portée du signal." property="og:description"/>
+<meta content="https://www.nolilab.com/fr/gps/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="Loko GPS Tracker and Technology Guide" property="og:image:alt"/>
 <meta content="nolilab" property="og:site_name"/>
-<meta content="en_US" property="og:locale"/>
+<meta content="fr_FR" property="og:locale"/>
 <!-- Twitter Card Meta Tags -->
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="GPS &amp; LoRa Technology Guide | LoRa P2P vs LoRaWAN Explained | nolilab" name="twitter:title"/>
-<meta content="Learn about GPS and LoRa technology: radio line of sight, LoRa P2P vs LoRaWAN, ionosphere effects on GPS, and how offline GPS tracking works without cellular networks." name="twitter:description"/>
+<meta content="Guide technologique GPS et LoRa | LoRa P2P vs LoRaWAN expliqué | nolilab" name="twitter:title"/>
+<meta content="LoRa P2P vs LoRaWAN : comment la radio peer-to-peer permet le suivi GPS hors ligne 20km sans cellulaire. Couvre la ligne de mire, l'ionosphère et la portée du signal." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
 <!-- Additional SEO Meta Tags -->
 <meta content="GPS glossary, LoRa technology, GPS terms, LoRa explanation, P2P communication, radio technology" name="keywords"/>
 <meta content="nolilab" name="author"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
-<!-- Canonical URL -->
 <link href="https://www.nolilab.com/fr/gps/" rel="canonical"/>
 <link href="https://www.nolilab.com/gps/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/gps/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/es/gps/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/gps/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/gps/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/ru/gps/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/gps/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/gps/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/gps/" hreflang="x-default" rel="alternate"/>
+<!-- Canonical URL -->
 <!-- Schema.org Structured Data (JSON-LD) - Glossary/Educational Content -->
-<script type="application/ld+json">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is GPS?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "GPS (Global Positioning System) is a satellite-based navigation system that provides location and time information in all weather conditions."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is LoRa?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "LoRa (Long Range) is a wireless modulation technique that enables long-range, low-power communication for Internet of Things (IoT) applications."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is LoRa P2P?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "LoRa P2P (Peer-to-Peer) is direct device-to-device communication using LoRa technology without requiring a central server or internet connection."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the difference between LoRa and LoRaWAN?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "LoRa is a modulation technique, while LoRaWAN is a networking protocol. LoRa P2P is direct communication; LoRaWAN uses a gateway and cloud architecture."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Qu’est-ce que GPS ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPS (Global Positioning System) est un système de navigation par satellite qui fournit des informations de localisation et d'heure dans toutes les conditions météorologiques."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu’est-ce que LoRa ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa (Long Range) est une technique de modulation sans fil qui permet une communication longue portée et à faible consommation pour les applications Internet des objets (IoT)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que LoRa P2P ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa P2P (Peer-to-Peer) est une communication directe d'appareil à appareil utilisant la technologie LoRa sans nécessiter de serveur central ni de connexion Internet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre LoRa et LoRaWAN ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LoRa est une technique de modulation, tandis que LoRaWAN est un protocole réseau. LoRa P2P est une communication directe ; LoRaWAN utilise une passerelle et une architecture cloud."
+      }
     }
-    </script>
+  ]
+}</script>
 <!-- Breadcrumb Schema -->
-<script type="application/ld+json">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
     {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.nolilab.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Glossary",
-          "item": "https://www.nolilab.com/gps.html"
-        }
-      ]
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Maison",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Glossaire",
+      "item": "https://www.nolilab.com/gps/"
     }
-    </script>
+  ]
+}</script>
 <meta content="#0d1117" name="theme-color"/>
 <style>
       :root {
@@ -715,13 +711,7 @@
     size-adjust: 107.64%;
   }
 </style>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/gps/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/gps/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/gps/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/gps/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/gps/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/gps/" />
+<script defer="" src="/js/layout.js"></script>
 </head>
 <body>
 <!-- Header -->
@@ -730,8 +720,8 @@
 <!-- Page Hero -->
 <div class="page-hero">
 <div class="container">
-<h1>Guide des technologies GPS et LoRa</h1>
-<p>Ligne de visée radio, LoRa P2P vs LoRaWAN, effets de l'ionosphère sur le GPS et fonctionnement du suivi GPS hors ligne sans réseaux cellulaires.</p>
+<h1>Guide technologique GPS et LoRa</h1>
+<p>Ligne de visée radio, LoRa P2P vs LoRaWAN, effets de l'ionosphère sur GPS et fonctionnement du suivi GPS hors ligne sans réseaux cellulaires.</p>
 </div>
 </div>
 <!-- Main Content -->
@@ -742,37 +732,37 @@
 <!-- Card 1 -->
 <div class="topic-card">
 <picture> <source srcset="/images/optimized/loko-5km-long-range-gps-icon.avif" type="image/avif"/><source srcset="/images/optimized/loko-5km-long-range-gps-icon.webp" type="image/webp"/>
-<img alt="Radio Line of Sight" class="topic-card-icon" loading="lazy" src="/images/optimized/loko-5km-long-range-gps-icon.png"/>
+<img alt="Radio Line of Sight" class="topic-card-icon" height="512" loading="lazy" src="/images/optimized/loko-5km-long-range-gps-icon.png" width="512"/>
 </picture>
 <h2>Ligne de visée radio et propagation du signal</h2>
 <p class="lead">Chemin direct entre les antennes d'émission et de réception sans obstructions.</p>
 <p>Dans les technologies GPS et LoRa, la communication en visibilité directe est cruciale pour une portée optimale. Les ondes radio peuvent légèrement contourner les obstacles, mais les grandes barrières réduisent considérablement la force du signal.</p>
-<p>Le tracker GPS Loko atteint une portée allant jusqu'à 20 km dans des conditions de visibilité directe idéales grâce à la technologie LoRa.</p>
+<p>Loko GPS Tracker atteint une portée jusqu'à 20km dans des conditions de visibilité directe idéales grâce à la technologie LoRa.</p>
 </div>
 <!-- Card 2 -->
 <div class="topic-card">
 <picture> <source srcset="/images/optimized/loko-30-day-battery-life-icon.avif" type="image/avif"/><source srcset="/images/optimized/loko-30-day-battery-life-icon.webp" type="image/webp"/>
-<img alt="Ionosphere" class="topic-card-icon" loading="lazy" src="/images/optimized/loko-30-day-battery-life-icon.png"/>
+<img alt="Ionosphere" class="topic-card-icon" height="512" loading="lazy" src="/images/optimized/loko-30-day-battery-life-icon.png" width="512"/>
 </picture>
-<h2>Ionosphère et qualité du signal GPS</h2>
-<p class="lead">Couche de l'atmosphère terrestre qui affecte la qualité et la précision du signal GPS.</p>
-<p>Les retards ionosphériques peuvent provoquer des erreurs de positionnement GPS, notamment en cas de forte activité solaire. Loko utilise plusieurs constellations (GPS, GLONASS, Galileo, BeiDou) pour atténuer ces erreurs.</p>
+<h2>Qualité du signal ionosphère et GPS</h2>
+<p class="lead">Une couche de l'atmosphère terrestre qui affecte la qualité et la précision du signal GPS.</p>
+<p>Les retards ionosphériques peuvent provoquer des erreurs de positionnement du GPS, en particulier en cas de forte activité solaire. Loko utilise plusieurs constellations (GPS, GLONASS, Galileo, BeiDou) pour atténuer ces erreurs.</p>
 <p>Comprendre les variations d’altitude de l’ionosphère permet d’optimiser les performances des trackers dans toutes les régions.</p>
 </div>
 <!-- Card 3 -->
 <div class="topic-card">
-<img alt="LoRa vs LoRaWAN" class="topic-card-icon" loading="lazy" src="/images/optimized/offline-map.svg"/>
-<h2>LoRa contre LoRaWAN et communication P2P</h2>
-<p class="lead">LoRa est la couche physique ; LoRaWAN est le protocole réseau situé au-dessus.</p>
-<p>P2P LoRa crée des connexions directes d'appareil à appareil sans aucune infrastructure nécessaire. Loko utilise à la fois le P2P et LoRaWAN pour une flexibilité maximale dans n'importe quel environnement.</p>
-<p>La communication P2P directe le rend idéal pour le suivi à distance sans serveurs externes.</p>
+<img alt="LoRa vs LoRaWAN" class="topic-card-icon" height="800" loading="lazy" src="/images/optimized/offline-map.svg" width="800"/>
+<h2>Communication LoRa contre LoRaWAN et P2P</h2>
+<p class="lead">LoRa est la couche physique ; LoRaWAN est le protocole réseau situé au-dessus.</p>
+<p>P2P LoRa crée des connexions directes d'appareil à appareil sans aucune infrastructure nécessaire. Loko utilise à la fois P2P et LoRaWAN pour une flexibilité maximale dans n'importe quel environnement.</p>
+<p>La communication directe P2P le rend idéal pour le suivi à distance sans serveurs externes.</p>
 </div>
 </div>
 <hr class="section-divider"/>
 <div class="modulation-header">
 <p class="section-label">Documentation technique</p>
-<h2>Modulation LoRa expliquée</h2>
-<p>Techniques qui permettent les capacités à longue portée de Loko :</p>
+<h2>La modulation LoRa expliquée</h2>
+<p>Techniques qui permettent les capacités à longue portée du Loko :</p>
 </div>
 <div class="feature-grid">
 <div class="feature-card">
@@ -789,13 +779,48 @@
 </div>
 </div>
 <div class="doc-hub-footer">
-<p>Pour les spécifications complètes, voir<a href="../#specifications">Spécifications techniques du traceur GPS Loko</a>— Paramètres RF, paramètres GNSS et configuration avancée.</p>
+<p>Pour les spécifications complètes, voir <a href="/specifications/">Spécifications techniques du traqueur Loko GPS</a> — Paramètres RF, paramètres GNSS et configuration avancée.</p>
 </div>
 </div>
 </div>
 <!-- Footer -->
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/fr/">nolilab</a></li><li><a href="/fr/accessories/">Accessories</a></li><li><a href="/fr/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/fr/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/fr/battery-life/">Battery Life</a></li><li><a href="/fr/blog/">Blog</a></li><li><a href="/fr/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/fr/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/fr/chirpstack/">ChirpStack</a></li><li><a href="/fr/contact/">Contact</a></li><li><a href="/fr/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/fr/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/fr/farms/">Farm GPS</a></li><li><a href="/fr/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/fr/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/fr/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/fr/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/fr/gps/">GPS & LoRa</a></li><li><a href="/fr/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/fr/hiking/">Hiking GPS</a></li><li><a href="/fr/how-gps-works/">How GPS Works</a></li><li><a href="/fr/hunting-dogs/">Hunting Dogs</a></li><li><a href="/fr/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/fr/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/fr/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/fr/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/fr/lorawan/">LoRaWAN</a></li><li><a href="/fr/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/fr/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/fr/open-source/">Open Source</a></li><li><a href="/fr/privacy/">Privacy</a></li><li><a href="/fr/search-rescue/">Search & Rescue</a></li><li><a href="/fr/setup-guides/">Setup</a></li><li><a href="/fr/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/fr/software/">Software</a></li><li><a href="/fr/specifications/">Specs</a></li><li><a href="/fr/tractive-alternative/">Tractive Alternative</a></li><li><a href="/fr/uk/">GPS Tracker UK</a></li><li><a href="/fr/uk/farms/">UK Farm GPS</a></li><li><a href="/fr/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/fr/usa/">GPS Tracker USA</a></li><li><a href="/fr/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<script>
+      // Mobile Menu Toggle
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+          mobileMenuToggle.classList.toggle('active');
+          navLinks.classList.toggle('active');
+          document.body.classList.toggle('menu-open');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('menu-open');
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (document.body.classList.contains('menu-open') &&
+              !navLinks.contains(e.target) &&
+              !mobileMenuToggle.contains(e.target)) {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('menu-open');
+          }
+        });
+      }
+
+    // Set light theme
+    document.documentElement.setAttribute('data-theme', 'light');
+
+    </script>
 <script defer="" src="/js/analytics.js"></script>
-<script defer="" src="/js/layout.js"></script>
-</body></html>
+</body>
+</html>

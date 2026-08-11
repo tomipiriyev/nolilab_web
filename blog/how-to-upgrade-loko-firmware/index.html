@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>How to Upgrade Loko Firmware | nolilab Blog</title>
@@ -16,602 +16,15 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
 <meta content="Step-by-step guide to upgrading the firmware on your Loko Air and Loko Ground GPS tracking devices." name="description"/>
-<link href="https://www.nolilab.com/blog/how-to-upgrade-loko-firmware/" rel="canonical">
+<link href="https://www.nolilab.com/blog/how-to-upgrade-loko-firmware/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-to-upgrade-loko-firmware/" hreflang="en" rel="alternate"/>
-<link href="https://www.nolilab.com/ja/blog/how-to-upgrade-loko-firmware/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-to-upgrade-loko-firmware/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/how-to-upgrade-loko-firmware/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/how-to-upgrade-loko-firmware/" hreflang="ja" rel="alternate"/>
 <link href="https://www.nolilab.com/ru/blog/how-to-upgrade-loko-firmware/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/blog/how-to-upgrade-loko-firmware/" hreflang="zh" rel="alternate"/>
-<link href="https://www.nolilab.com/fr/blog/how-to-upgrade-loko-firmware/" hreflang="fr" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/how-to-upgrade-loko-firmware/" hreflang="x-default" rel="alternate"/>
-<meta content="article" property="og:type"/>
-<meta content="How to Upgrade Loko Firmware | nolilab Blog" property="og:title"/>
-<meta content="Step-by-step guide to upgrading the firmware on your Loko Air and Loko Ground GPS tracking devices." property="og:description"/>
-<meta content="https://www.nolilab.com/blog/how-to-upgrade-loko-firmware/" property="og:url"/>
-<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
-<meta content="nolilab" property="og:site_name"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="How to Upgrade Loko Firmware | nolilab Blog" name="twitter:title"/>
-<meta content="Step-by-step guide to upgrading the firmware on your Loko Air and Loko Ground GPS tracking devices." name="twitter:description"/>
-<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
-<style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #24292e;
-      --text-secondary: #57606a;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
-      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    /* Header */
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-lg);
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    /* Article */
-    article {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: var(--spacing-xl) var(--spacing-md);
-    }
-
-    .article-header {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-meta {
-      display: flex;
-      gap: var(--spacing-md);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.2;
-    }
-
-    .article-image {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-content {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .article-content h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin: var(--spacing-xl) 0 var(--spacing-md);
-      letter-spacing: -0.01em;
-    }
-
-    .article-content h3 {
-      font-size: 1.375rem;
-      font-weight: 600;
-      margin: var(--spacing-lg) 0 var(--spacing-sm);
-    }
-
-    .article-content p {
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-content ul,
-    .article-content ol {
-      margin: var(--spacing-md) 0;
-      padding-left: var(--spacing-lg);
-    }
-
-    .article-content li {
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .article-content strong {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .article-content code {
-      background: var(--bg-secondary);
-      padding: 0.2em 0.4em;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      font-size: 0.9em;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      margin-bottom: var(--spacing-lg);
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--accent-hover);
-    }
-
-    /* Footer */
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-
-    .language-selector {
-      margin-left: var(--spacing-sm);
-    }
-
-    .language-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.75rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .language-btn:hover {
-      border-color: var(--accent);
-      background: var(--bg-primary);
-    }
-
-    .language-btn i {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .language-btn .fa-chevron-down {
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-    }
-
-    .language-selector:hover .fa-chevron-down {
-      transform: rotate(180deg);
-    }
-
-    .current-lang {
-      font-family: var(--font-mono);
-      font-weight: 600;
-    }
-
-    .language-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      right: 0;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
-      z-index: 1000;
-    }
-
-    .language-selector:hover .language-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .language-option {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .language-option:last-child {
-      border-bottom: none;
-    }
-
-    .language-option:hover {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-
-    .language-option .lang-code {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 0.8rem;
-      min-width: 28px;
-      color: var(--accent);
-    }
-
-    .language-option .lang-name {
-      font-size: 0.875rem;
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: var(--spacing-xs);
-      z-index: 1001;
-      margin-left: auto;
-    }
-
-    .mobile-menu-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--bg-primary);
-        flex-direction: column;
-        gap: 0;
-        padding: 80px var(--spacing-md) var(--spacing-md);
-        box-shadow: var(--shadow-lg);
-        transition: left 0.3s ease;
-        z-index: 1000;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-      }
-
-      .nav-links.active {
-        left: 0;
-      }
-
-      .nav-link {
-        width: 100%;
-        padding: var(--spacing-md);
-        border-bottom: 1px solid var(--border);
-        text-align: left;
-        font-size: 1rem;
-      }
-
-      .language-selector {
-        position: static;
-        margin-left: var(--spacing-sm);
-      }
-
-      .language-dropdown {
-        left: 0;
-        right: auto;
-        min-width: 160px;
-      }
-
-      /* Overlay when menu is open */
-      body.menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      .article-title {
-        font-size: 2rem;
-      }
-
-      .article-content {
-        font-size: 1rem;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  
-    /* Related Posts */
-    .related-posts {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2.5rem 1rem 3rem;
-      border-top: 1px solid var(--border);
-    }
-    .related-posts-heading {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 1.25rem;
-      color: var(--text-primary);
-    }
-    .related-posts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    .related-post-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 1rem 1.1rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      text-decoration: none;
-      color: var(--text-primary);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-    .related-post-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--accent);
-    }
-    .related-post-card h3 {
-      font-size: 0.875rem;
-      font-weight: 500;
-      line-height: 1.45;
-      margin-bottom: 0.6rem;
-      color: var(--text-primary);
-    }
-    .related-post-card .rp-cta {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 500;
-    }
-    @media (max-width: 640px) {
-      .related-posts-grid { grid-template-columns: 1fr; }
-    }
-  
-    /* Product CTA */
-    .product-cta {
-      max-width: 800px;
-      margin: 0 auto 0;
-      padding: 1.5rem 1rem 1.75rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-    .product-cta-heading {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.9rem;
-    }
-    .product-cta-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-    .product-cta-link {
-      display: inline-block;
-      padding: 0.45rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-      background: var(--bg-primary);
-      transition: border-color 0.15s ease, color 0.15s ease;
-    }
-    .product-cta-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    .product-cta-link.primary {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-    .product-cta-link.primary:hover {
-      background: var(--accent-hover, var(--accent));
-      border-color: var(--accent-hover, var(--accent));
-      color: #fff;
-    }
-  </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "How to Upgrade Loko Firmware",
-  "description": "Step-by-step guide to upgrading the firmware on your Loko Air and Loko Ground GPS tracking devices.",
-  "url": "https://www.nolilab.com/blog/how-to-upgrade-loko-firmware/",
-  "datePublished": "2025-07-16",
-  "dateModified": "2025-07-16",
-  "author": {
-      "@type": "Person",
-      "name": "Tamleykha Piriyev",
-      "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
-      "sameAs": ["https://www.linkedin.com/in/tomi-piriyev-33593354/", "https://github.com/tomipiriyev"]
-    },
-  "publisher": {
-    "@type": "Organization",
-    "name": "nolilab",
-    "url": "https://www.nolilab.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
-    }
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.nolilab.com/blog/how-to-upgrade-loko-firmware"
-  }
-}
-</script>
-<style>
-  @font-face {
-    font-family: 'Inter-fallback';
-    src: local('Arial');
-    ascent-override: 90.44%;
-    descent-override: 22.52%;
-    line-gap-override: 0%;
-    size-adjust: 107.64%;
-  }
-</style>
-</link><script defer="" src="/js/layout.js"></script>
+<script defer="" src="/js/layout.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -624,12 +37,11 @@
 }
 </script>
 
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/how-to-upgrade-loko-firmware/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/how-to-upgrade-loko-firmware/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/how-to-upgrade-loko-firmware/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/how-to-upgrade-loko-firmware/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/how-to-upgrade-loko-firmware/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/how-to-upgrade-loko-firmware/" />
+
+
+
+
+
 </head>
 <body>
 <div id="site-header"></div>
@@ -648,59 +60,59 @@
 <div class="article-content">
 <p>Keeping your Loko GPS Tracker up to date ensures optimal performance and access to the latest features. This comprehensive guide walks you through the firmware upgrade process for both Loko Air and Loko Ground units.</p>
 <!-- SVG Diagram: Firmware Upgrade Flow -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" style="width:100%;height:auto;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;margin-bottom:1.5rem;" role="img" aria-label="5-step firmware upgrade flow: Loko Air device, Bluetooth connection, firmware download, installation progress, and completion">
-  <text x="450" y="28" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="600" fill="#24292e">Firmware Upgrade Flow</text>
-  <!-- Step 1: Device -->
-  <circle cx="100" cy="110" r="35" fill="#e8f5e9" stroke="#238636" stroke-width="2"/>
-  <rect x="85" y="95" width="30" height="20" rx="4" fill="#238636"/>
-  <line x1="100" y1="95" x2="100" y2="85" stroke="#238636" stroke-width="2"/>
-  <circle cx="100" cy="82" r="3" fill="#238636"/>
-  <text x="100" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#24292e">Loko Air</text>
-  <text x="100" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#57606a">Device</text>
-  <text x="100" y="60" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#57606a"></text>
-  <!-- Arrow 1→2 -->
-  <line x1="140" y1="110" x2="195" y2="110" stroke="#57606a" stroke-width="2" stroke-dasharray="6,4"/>
-  <polygon points="195,105 205,110 195,115" fill="#57606a"/>
-  <!-- Step 2: Connect -->
-  <circle cx="250" cy="110" r="35" fill="#e8f5e9" stroke="#238636" stroke-width="2"/>
-  <path d="M240 100 Q250 90 260 100 M240 120 Q250 130 260 120" fill="none" stroke="#238636" stroke-width="2"/>
-  <text x="250" y="113" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="500" fill="#238636">BT</text>
-  <text x="250" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#24292e">Connect</text>
-  <text x="250" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#57606a">Bluetooth</text>
-  <text x="250" y="60" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#57606a">②</text>
-  <!-- Arrow 2→3 -->
-  <line x1="290" y1="110" x2="345" y2="110" stroke="#57606a" stroke-width="2" stroke-dasharray="6,4"/>
-  <polygon points="345,105 355,110 345,115" fill="#57606a"/>
-  <!-- Step 3: Download -->
-  <circle cx="400" cy="110" r="35" fill="#e8f5e9" stroke="#238636" stroke-width="2"/>
-  <line x1="400" y1="95" x2="400" y2="120" stroke="#238636" stroke-width="2.5"/>
-  <polygon points="393,115 400,125 407,115" fill="#238636"/>
-  <text x="400" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#24292e">Download</text>
-  <text x="400" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#57606a">Firmware</text>
-  <text x="400" y="60" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#57606a">③</text>
-  <!-- Arrow 3→4 -->
-  <line x1="440" y1="110" x2="495" y2="110" stroke="#57606a" stroke-width="2" stroke-dasharray="6,4"/>
-  <polygon points="495,105 505,110 495,115" fill="#57606a"/>
-  <!-- Step 4: Install -->
-  <circle cx="550" cy="110" r="35" fill="#e8f5e9" stroke="#238636" stroke-width="2"/>
-  <rect x="525" y="105" width="50" height="12" rx="3" fill="#d0d7de"/>
-  <rect x="525" y="105" width="35" height="12" rx="3" fill="#238636"/>
-  <text x="550" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#24292e">Install</text>
-  <text x="550" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#57606a">Updating...</text>
-  <text x="550" y="60" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#57606a">④</text>
-  <!-- Arrow 4→5 -->
-  <line x1="590" y1="110" x2="645" y2="110" stroke="#57606a" stroke-width="2" stroke-dasharray="6,4"/>
-  <polygon points="645,105 655,110 645,115" fill="#57606a"/>
-  <!-- Step 5: Done -->
-  <circle cx="700" cy="110" r="35" fill="#e8f5e9" stroke="#238636" stroke-width="2"/>
-  <circle cx="700" cy="110" r="35" fill="#238636" opacity="0.1"/>
-  <path d="M688 110 L696 118 L714 100" fill="none" stroke="#238636" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="700" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#24292e">Done</text>
-  <text x="700" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#238636" font-weight="500">Complete ✓</text>
-  <text x="700" y="60" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#57606a">⑤</text>
-  <!-- Bottom note -->
-  <text x="450" y="220" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#57606a">Total process takes approximately 5–10 minutes. Do not disconnect during installation.</text>
-  <text x="450" y="240" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#57606a">Works with STM32CubeProgrammer or the Loko Config Tool (browser-based).</text>
+<svg aria-label="5-step firmware upgrade flow: Loko Air device, Bluetooth connection, firmware download, installation progress, and completion" role="img" style="width:100%;height:auto;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;margin-bottom:1.5rem;" viewbox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+<text fill="#24292e" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="450" y="28">Firmware Upgrade Flow</text>
+<!-- Step 1: Device -->
+<circle cx="100" cy="110" fill="#e8f5e9" r="35" stroke="#238636" stroke-width="2"></circle>
+<rect fill="#238636" height="20" rx="4" width="30" x="85" y="95"></rect>
+<line stroke="#238636" stroke-width="2" x1="100" x2="100" y1="95" y2="85"></line>
+<circle cx="100" cy="82" fill="#238636" r="3"></circle>
+<text fill="#24292e" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="100" y="160">Loko Air</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="100" y="175">Device</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="12" font-weight="500" text-anchor="middle" x="100" y="60"></text>
+<!-- Arrow 1→2 -->
+<line stroke="#57606a" stroke-dasharray="6,4" stroke-width="2" x1="140" x2="195" y1="110" y2="110"></line>
+<polygon fill="#57606a" points="195,105 205,110 195,115"></polygon>
+<!-- Step 2: Connect -->
+<circle cx="250" cy="110" fill="#e8f5e9" r="35" stroke="#238636" stroke-width="2"></circle>
+<path d="M240 100 Q250 90 260 100 M240 120 Q250 130 260 120" fill="none" stroke="#238636" stroke-width="2"></path>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="250" y="113">BT</text>
+<text fill="#24292e" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="250" y="160">Connect</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="250" y="175">Bluetooth</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="12" font-weight="500" text-anchor="middle" x="250" y="60">②</text>
+<!-- Arrow 2→3 -->
+<line stroke="#57606a" stroke-dasharray="6,4" stroke-width="2" x1="290" x2="345" y1="110" y2="110"></line>
+<polygon fill="#57606a" points="345,105 355,110 345,115"></polygon>
+<!-- Step 3: Download -->
+<circle cx="400" cy="110" fill="#e8f5e9" r="35" stroke="#238636" stroke-width="2"></circle>
+<line stroke="#238636" stroke-width="2.5" x1="400" x2="400" y1="95" y2="120"></line>
+<polygon fill="#238636" points="393,115 400,125 407,115"></polygon>
+<text fill="#24292e" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="400" y="160">Download</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="400" y="175">Firmware</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="12" font-weight="500" text-anchor="middle" x="400" y="60">③</text>
+<!-- Arrow 3→4 -->
+<line stroke="#57606a" stroke-dasharray="6,4" stroke-width="2" x1="440" x2="495" y1="110" y2="110"></line>
+<polygon fill="#57606a" points="495,105 505,110 495,115"></polygon>
+<!-- Step 4: Install -->
+<circle cx="550" cy="110" fill="#e8f5e9" r="35" stroke="#238636" stroke-width="2"></circle>
+<rect fill="#d0d7de" height="12" rx="3" width="50" x="525" y="105"></rect>
+<rect fill="#238636" height="12" rx="3" width="35" x="525" y="105"></rect>
+<text fill="#24292e" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="550" y="160">Install</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="550" y="175">Updating...</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="12" font-weight="500" text-anchor="middle" x="550" y="60">④</text>
+<!-- Arrow 4→5 -->
+<line stroke="#57606a" stroke-dasharray="6,4" stroke-width="2" x1="590" x2="645" y1="110" y2="110"></line>
+<polygon fill="#57606a" points="645,105 655,110 645,115"></polygon>
+<!-- Step 5: Done -->
+<circle cx="700" cy="110" fill="#e8f5e9" r="35" stroke="#238636" stroke-width="2"></circle>
+<circle cx="700" cy="110" fill="#238636" opacity="0.1" r="35"></circle>
+<path d="M688 110 L696 118 L714 100" fill="none" stroke="#238636" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<text fill="#24292e" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="700" y="160">Done</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="700" y="175">Complete ✓</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="12" font-weight="500" text-anchor="middle" x="700" y="60">⑤</text>
+<!-- Bottom note -->
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="10" text-anchor="middle" x="450" y="220">Total process takes approximately 5–10 minutes. Do not disconnect during installation.</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="10" text-anchor="middle" x="450" y="240">Works with STM32CubeProgrammer or the Loko Config Tool (browser-based).</text>
 </svg>
 <h2>Upgrading Loko Air Firmware</h2>
 <p>Follow these 15 steps carefully to update your Loko Air device firmware:</p>
@@ -769,7 +181,7 @@
 </div>
 </section>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/">nolilab</a></li><li><a href="/accessories/">Accessories</a></li><li><a href="/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/battery-life/">Battery Life</a></li><li><a href="/blog/">Blog</a></li><li><a href="/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/chirpstack/">ChirpStack</a></li><li><a href="/contact/">Contact</a></li><li><a href="/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/farms/">Farm GPS</a></li><li><a href="/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/gps/">GPS & LoRa</a></li><li><a href="/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/hiking/">Hiking GPS</a></li><li><a href="/how-gps-works/">How GPS Works</a></li><li><a href="/hunting-dogs/">Hunting Dogs</a></li><li><a href="/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/lorawan/">LoRaWAN</a></li><li><a href="/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/open-source/">Open Source</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/search-rescue/">Search & Rescue</a></li><li><a href="/setup-guides/">Setup</a></li><li><a href="/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/software/">Software</a></li><li><a href="/specifications/">Specs</a></li><li><a href="/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

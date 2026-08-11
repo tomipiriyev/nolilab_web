@@ -2,7 +2,7 @@
 
 <html lang="ja">
 <head>
-<link rel="stylesheet" href="/css/partials.css"/>
+<link href="/css/partials.css" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
@@ -14,6 +14,13 @@
 <meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
 <meta content="#ffffff" name="theme-color"/>
 <link href="https://www.nolilab.com/ja/gps-tracker-for-remote-areas/" rel="canonical"/>
+<link href="https://www.nolilab.com/gps-tracker-for-remote-areas/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/gps-tracker-for-remote-areas/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/gps-tracker-for-remote-areas/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/gps-tracker-for-remote-areas/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/gps-tracker-for-remote-areas/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/gps-tracker-for-remote-areas/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/gps-tracker-for-remote-areas/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="遠隔地用 GPS トラッカー | GSM またはインターネットなし | Loko" property="og:title"/>
 <meta content="遠隔地で GPS 追跡が必要ですか? Loko は、ローカル長距離追跡に GSM、SIM カード、またはインターネットの代わりに LoRa 無線を使用します。" property="og:description"/>
@@ -37,7 +44,7 @@
       "name": "GPS 追跡は遠隔地でも機能しますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "はい、トラッカーに空の可視性があり、ローカル携帯電話基地局に依存しない communication メソッドが備わっている場合は可能です。"
+        "text": "はい、トラッカーに空の可視性があり、地元の携帯電話の塔に依存しない通信方法があれば可能です。"
       }
     },
     {
@@ -53,7 +60,7 @@
       "name": "インフラストラクチャに依存しない追跡とは何を意味しますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "つまり、ローカル追跡には携帯電話の塔、Wi-Fi、クラウドリレーなどの公共ネットワークが必要ありません。"
+        "text": "つまり、ローカル追跡には携帯電話の塔、Wi-Fi、クラウドリレーなどの公衆ネットワークが必要ありません。"
       }
     },
     {
@@ -145,13 +152,6 @@
   }
 </style>
 <script defer="" src="/js/layout.js"></script>
-
-<link rel="alternate" hreflang="en" href="https://www.nolilab.com/gps-tracker-for-remote-areas/" />
-<link rel="alternate" hreflang="ja" href="https://www.nolilab.com/ja/gps-tracker-for-remote-areas/" />
-<link rel="alternate" hreflang="es" href="https://www.nolilab.com/es/gps-tracker-for-remote-areas/" />
-<link rel="alternate" hreflang="ru" href="https://www.nolilab.com/ru/gps-tracker-for-remote-areas/" />
-<link rel="alternate" hreflang="zh" href="https://www.nolilab.com/zh/gps-tracker-for-remote-areas/" />
-<link rel="alternate" hreflang="fr" href="https://www.nolilab.com/fr/gps-tracker-for-remote-areas/" />
 </head>
 <body>
 <div id="site-header"></div>
@@ -161,7 +161,7 @@
 <h1>遠隔地用 GPS トラッカー</h1>
 <p class="subtitle">通常のネットワークが消滅した場所をインフラストラクチャに依存せずに追跡します。</p>
 <p>遠隔地追跡には単純な問題があります。多くの GPS トラッカーは、遠隔地に不足している正確なインフラストラクチャに依存しています。</p>
-<p>Loko はその依存関係を回避します。トラッカーは衛星位置を受信し、LoRa 無線を使用してローカルに送信するため、通常の GSM およびインターネットの範囲を超えて動作できます。</p>
+<p>Loko はその依存関係を回避します。トラッカーは衛星位置を受信し、LoRa 無線を使用してローカルに送信するため、通常の GSM およびインターネット カバレッジを超えて動作できます。</p>
 </div>
 </section>
 <section class="content-block">
@@ -173,7 +173,7 @@
 <tr><td>GSM をカバーしていない</td><td>報告を停止する</td><td>引き続きローカルでレポートできます</td></tr>
 <tr><td>インターネットなし</td><td>アプリ/クラウドが失敗する可能性がある</td><td>ローカル Bluetooth レシーバーのワークフロー</td></tr>
 <tr><td>長距離のローカルリカバリ</td><td>通信事業者に依存</td><td>LoRa 視線依存</td></tr>
-<tr><td>購読料</td><td>Common</td><td>携帯電話の契約なし</td></tr>
+<tr><td>購読料</td><td>一般</td><td>携帯電話の契約なし</td></tr>
 <tr><td>プライバシー</td><td>クラウドベース</td><td>ローカル P2P トラッキング</td></tr>
 </tbody>
 </table>
@@ -183,7 +183,7 @@
 <div class="container">
 <h2>インフラストラクチャに依存しない追跡</h2>
 <p>インフラストラクチャに依存しない追跡とは、トラッカーがローカル位置の更新のためにモバイルタワー、Wi-Fi ルーター、またはクラウドサーバーに依存しないことを意味します。</p>
-<p>Loko はその原則に基づいて設計されています。GPS は測位用、LoRa は communication 用、Bluetooth は電話接続用です。</p>
+<p>Loko は、その原則に基づいて設計されています。GPS は測位用、LoRa は通信用、Bluetooth は電話接続用です。</p>
 </div>
 </section>
 <section class="content-block">
@@ -211,7 +211,7 @@
 <div class="faq-grid">
 <div class="faq-item">
 <h3>GPS 追跡は遠隔地でも機能しますか?</h3>
-<p>はい、トラッカーに空の可視性があり、ローカル携帯電話基地局に依存しない communication メソッドが備わっている場合は可能です。</p>
+<p>はい、トラッカーに空の可視性があり、地元の携帯電話の塔に依存しない通信方法があれば可能です。</p>
 </div>
 <div class="faq-item">
 <h3>LokoはGSMを使用しますか?</h3>
@@ -219,7 +219,7 @@
 </div>
 <div class="faq-item">
 <h3>インフラストラクチャに依存しない追跡とは何を意味しますか?</h3>
-<p>つまり、ローカル追跡には携帯電話の塔、Wi-Fi、クラウドリレーなどの公共ネットワークが必要ありません。</p>
+<p>つまり、ローカル追跡には携帯電話の塔、Wi-Fi、クラウドリレーなどの公衆ネットワークが必要ありません。</p>
 </div>
 <div class="faq-item">
 <h3>Loko は遠隔地の農場やトレイルに適していますか?</h3>
@@ -237,7 +237,7 @@
 </div>
 </section>
 </main>
-<div id="site-footer"></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links"><ul><li><a href="/ja/">nolilab</a></li><li><a href="/ja/accessories/">Accessories</a></li><li><a href="/ja/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ja/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ja/battery-life/">Battery Life</a></li><li><a href="/ja/blog/">Blog</a></li><li><a href="/ja/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/ja/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ja/chirpstack/">ChirpStack</a></li><li><a href="/ja/contact/">Contact</a></li><li><a href="/ja/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ja/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ja/farms/">Farm GPS</a></li><li><a href="/ja/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ja/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ja/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ja/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ja/gps/">GPS & LoRa</a></li><li><a href="/ja/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ja/hiking/">Hiking GPS</a></li><li><a href="/ja/how-gps-works/">How GPS Works</a></li><li><a href="/ja/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ja/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ja/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ja/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ja/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ja/lorawan/">LoRaWAN</a></li><li><a href="/ja/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ja/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ja/open-source/">Open Source</a></li><li><a href="/ja/privacy/">Privacy</a></li><li><a href="/ja/search-rescue/">Search & Rescue</a></li><li><a href="/ja/setup-guides/">Setup</a></li><li><a href="/ja/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ja/software/">Software</a></li><li><a href="/ja/specifications/">Specs</a></li><li><a href="/ja/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ja/uk/">GPS Tracker UK</a></li><li><a href="/ja/uk/farms/">UK Farm GPS</a></li><li><a href="/ja/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ja/usa/">GPS Tracker USA</a></li><li><a href="/ja/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>
