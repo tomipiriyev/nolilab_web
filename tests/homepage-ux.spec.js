@@ -183,13 +183,34 @@ test.describe('footer', () => {
     await expect(page.locator('.footer-group a[href="/ru/hunting-dogs/"]')).toHaveCount(1);
   });
 
-  test('the crawler-only nav fallback is in the DOM but never painted', async ({ browser }) => {
+  // The fallback is clipped rather than display:none, so Playwright still
+  // calls it "visible" — what matters is that it occupies no perceivable area
+  // while keeping every anchor in the DOM for non-JS crawlers.
+  test('the crawler-only nav fallback keeps its links but takes up no space', async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto('/');
-    await expect(page.locator('.nav-fallback')).toHaveCount(1);
-    await expect(page.locator('.nav-fallback')).toBeHidden();
+
+    const nav = page.locator('.nav-fallback');
+    await expect(nav).toHaveCount(1);
+    await expect(nav.locator('a')).toHaveCount(48);
+
+    const box = await nav.boundingBox();
+    expect(box.width).toBeLessThanOrEqual(1);
+    expect(box.height).toBeLessThanOrEqual(1);
+
+    // and it must not push the page around
+    const overflow = await page.evaluate(() =>
+      document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow).toBe(0);
+
     await context.close();
+  });
+
+  test('layout.js removes the fallback once the real footer lands', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('footer')).toBeVisible({ timeout: 5_000 });
+    await expect(page.locator('.nav-fallback')).toHaveCount(0);
   });
 });
 
