@@ -1,52 +1,82 @@
 <footer>
   <div class="footer-container">
     <a href="/" class="footer-logo">nolilab</a>
-    <div class="footer-links">
-      <a href="/" class="footer-link" data-i18n="home">Home</a>
-      <a href="/#shop" class="footer-link" data-i18n="shop">Shop</a>
-      <a href="/software/" class="footer-link" data-i18n="software">Software</a>
-      <a href="/setup-guides/" class="footer-link" data-i18n="setupGuides">Setup Guides</a>
-      <a href="/lorawan/" class="footer-link">LoRaWAN</a>
-        <a href="/accessories/" class="footer-link" data-i18n="accessories">Accessories</a>
-      <a href="/#faq" class="footer-link">FAQ</a>
-      <a href="/blog/" class="footer-link">Blog</a>
-      <a href="/gps/" class="footer-link">GPS &amp; LoRa</a>
-      <a href="/contact/" class="footer-link" data-i18n="contact">Contact</a>
-      <a href="/hunting-dogs/" class="footer-link" data-i18n="huntingDogs">Hunting Dogs</a>
-      <a href="/farms/" class="footer-link" data-i18n="farmGps">Farm GPS</a>
-      <a href="/search-rescue/" class="footer-link" data-i18n="searchRescue">Search &amp; Rescue</a>
-      <a href="/lora-gps-tracker/" class="footer-link" data-i18n="loraGps">LoRa GPS</a>
-      <a href="/lokohub/" class="footer-link">LokoHUB</a>
-      <a href="/privacy/" class="footer-link" data-i18n="privacy">Privacy</a>
-      <a href="/no-monthly-fee/" class="footer-link" data-i18n="noMonthlyFee">No Monthly Fee</a>
-      <a href="/airtag-vs-lora/" class="footer-link" data-i18n="airtagVsLora">AirTag vs LoRa</a>
-      <a href="/hiking/" class="footer-link" data-i18n="hikingGps">Hiking GPS</a>
-      <a href="/open-source/" class="footer-link" data-i18n="openSource">Open Source</a>
-      <a href="/how-gps-works/" class="footer-link" data-i18n="howGpsWorks">How GPS Works</a>
-      <a href="/smallest-gps-tracker/" class="footer-link" data-i18n="smallestTracker">Smallest Tracker</a>
-      <a href="/battery-life/" class="footer-link" data-i18n="batteryLife">Battery Life</a>
-      <a href="/gps-tracker-no-sim-card/" class="footer-link" data-i18n="noSimGps">No SIM GPS</a>
-      <a href="/gps-tracker-without-internet/" class="footer-link" data-i18n="noInternetGps">No Internet GPS</a>
-      <a href="/dog-gps-tracker-no-subscription/" class="footer-link" data-i18n="dogGpsNoFee">Dog GPS No Fee</a>
-      <a href="/airtag-alternative-for-dogs/" class="footer-link" data-i18n="airtagDogAlternative">AirTag Dog Alternative</a>
-      <a href="/drone-recovery-gps-tracker/" class="footer-link" data-i18n="droneRecoveryGps">Drone Recovery GPS</a>
-      <a href="/uk/" class="footer-link">GPS Tracker UK</a>
-      <a href="/livestock-gps-tracker/" class="footer-link" data-i18n="livestockGps">Livestock GPS</a>
-      <a href="/usa/" class="footer-link">GPS Tracker USA</a>
-      <a href="/uk/farms/" class="footer-link">UK Farm GPS</a>
-      <a href="/uk/hunting-dogs/" class="footer-link">UK Hunting Dog GPS</a>
-      <a href="/loko-vstractive/" class="footer-link">Loko vs Tractive</a>
-      <a href="/hiking-gps-tracker-no-cell-service/" class="footer-link" data-i18n="noCellHikingGps">No Cell Hiking GPS</a>
-      <a href="/lora-vs-cellular-gps-tracker/" class="footer-link" data-i18n="loraVsCellular">LoRa vs Cellular</a>
-      <a href="/wildlife-gps-tracker/" class="footer-link" data-i18n="wildlifeGps">Wildlife GPS</a>
-      <a href="/off-grid-gps-tracker/" class="footer-link" data-i18n="offGridGps">Off-Grid GPS</a>
-      <a href="/gps-tracker-for-remote-areas/" class="footer-link" data-i18n="remoteAreaGps">Remote Area GPS</a>
-      <a href="/tractive-alternative/" class="footer-link" data-i18n="tractiveAlternative">Tractive Alternative</a>
-      <a href="/garmin-inreach-alternative/" class="footer-link" data-i18n="inreachAlternative">inReach Alternative</a>
-      <a href="/loko-config-tool/" class="footer-link">Config Tool</a>
-      <a href="/blog/how-offline-gps-tracking-works/" class="footer-link">Offline GPS Tracker</a>
-      <a href="/blog/lora-gps-tracker-for-dogs/" class="footer-link">GPS for Dogs</a>
+    <!-- 44 links, previously one flat unlabelled row that measured 3,365px tall on a
+         phone. Grouped into four named columns with the long tail behind a <details>
+         toggle. Every link stays in the DOM on every page, so internal linking is
+         unchanged — only the visual weight is. applyLangPrefix() in layout.js keys off
+         the .footer-link class on each <a>, not the container, so grouping is free. -->
+    <div class="footer-groups">
+      <nav class="footer-group" aria-labelledby="footer-group-usecase">
+        <h3 class="footer-group-title" id="footer-group-usecase" data-i18n="footerByUseCase">By Use Case</h3>
+        <ul>
+          <li><a href="/hunting-dogs/" class="footer-link" data-i18n="huntingDogs">Hunting Dogs</a></li>
+          <li><a href="/farms/" class="footer-link" data-i18n="farmGps">Farm GPS</a></li>
+          <li><a href="/hiking/" class="footer-link" data-i18n="hikingGps">Hiking GPS</a></li>
+          <li><a href="/search-rescue/" class="footer-link" data-i18n="searchRescue">Search &amp; Rescue</a></li>
+          <li><a href="/livestock-gps-tracker/" class="footer-link" data-i18n="livestockGps">Livestock GPS</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-group" aria-labelledby="footer-group-region">
+        <h3 class="footer-group-title" id="footer-group-region" data-i18n="footerByRegion">By Region</h3>
+        <ul>
+          <li><a href="/usa/" class="footer-link">GPS Tracker USA</a></li>
+          <li><a href="/uk/" class="footer-link">GPS Tracker UK</a></li>
+          <li><a href="/uk/farms/" class="footer-link">UK Farm GPS</a></li>
+          <li><a href="/uk/hunting-dogs/" class="footer-link">UK Hunting Dog GPS</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-group" aria-labelledby="footer-group-compare">
+        <h3 class="footer-group-title" id="footer-group-compare" data-i18n="footerCompare">Compare</h3>
+        <ul>
+          <li><a href="/airtag-vs-lora/" class="footer-link" data-i18n="airtagVsLora">AirTag vs LoRa</a></li>
+          <li><a href="/lora-vs-cellular-gps-tracker/" class="footer-link" data-i18n="loraVsCellular">LoRa vs Cellular</a></li>
+          <li><a href="/loko-vstractive/" class="footer-link">Loko vs Tractive</a></li>
+          <li><a href="/tractive-alternative/" class="footer-link" data-i18n="tractiveAlternative">Tractive Alternative</a></li>
+          <li><a href="/garmin-inreach-alternative/" class="footer-link" data-i18n="inreachAlternative">inReach Alternative</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-group" aria-labelledby="footer-group-resources">
+        <h3 class="footer-group-title" id="footer-group-resources" data-i18n="footerResources">Resources</h3>
+        <ul>
+          <li><a href="/blog/" class="footer-link">Blog</a></li>
+          <li><a href="/setup-guides/" class="footer-link" data-i18n="setupGuides">Setup Guides</a></li>
+          <li><a href="/software/" class="footer-link" data-i18n="software">Software</a></li>
+          <li><a href="/accessories/" class="footer-link" data-i18n="accessories">Accessories</a></li>
+          <li><a href="/loko-config-tool/" class="footer-link">Config Tool</a></li>
+          <li><a href="/contact/" class="footer-link" data-i18n="contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
+    <details class="footer-more">
+      <summary data-i18n="footerShowAll">Show all links</summary>
+      <div class="footer-more-links">
+        <a href="/" class="footer-link" data-i18n="home">Home</a>
+        <a href="/#shop" class="footer-link" data-i18n="shop">Shop</a>
+        <a href="/#faq" class="footer-link">FAQ</a>
+        <a href="/lorawan/" class="footer-link">LoRaWAN</a>
+        <a href="/lokohub/" class="footer-link">LokoHUB</a>
+        <a href="/gps/" class="footer-link">GPS &amp; LoRa</a>
+        <a href="/lora-gps-tracker/" class="footer-link" data-i18n="loraGps">LoRa GPS</a>
+        <a href="/no-monthly-fee/" class="footer-link" data-i18n="noMonthlyFee">No Monthly Fee</a>
+        <a href="/open-source/" class="footer-link" data-i18n="openSource">Open Source</a>
+        <a href="/how-gps-works/" class="footer-link" data-i18n="howGpsWorks">How GPS Works</a>
+        <a href="/smallest-gps-tracker/" class="footer-link" data-i18n="smallestTracker">Smallest Tracker</a>
+        <a href="/battery-life/" class="footer-link" data-i18n="batteryLife">Battery Life</a>
+        <a href="/gps-tracker-no-sim-card/" class="footer-link" data-i18n="noSimGps">No SIM GPS</a>
+        <a href="/gps-tracker-without-internet/" class="footer-link" data-i18n="noInternetGps">No Internet GPS</a>
+        <a href="/dog-gps-tracker-no-subscription/" class="footer-link" data-i18n="dogGpsNoFee">Dog GPS No Fee</a>
+        <a href="/airtag-alternative-for-dogs/" class="footer-link" data-i18n="airtagDogAlternative">AirTag Dog Alternative</a>
+        <a href="/drone-recovery-gps-tracker/" class="footer-link" data-i18n="droneRecoveryGps">Drone Recovery GPS</a>
+        <a href="/hiking-gps-tracker-no-cell-service/" class="footer-link" data-i18n="noCellHikingGps">No Cell Hiking GPS</a>
+        <a href="/wildlife-gps-tracker/" class="footer-link" data-i18n="wildlifeGps">Wildlife GPS</a>
+        <a href="/off-grid-gps-tracker/" class="footer-link" data-i18n="offGridGps">Off-Grid GPS</a>
+        <a href="/gps-tracker-for-remote-areas/" class="footer-link" data-i18n="remoteAreaGps">Remote Area GPS</a>
+        <a href="/blog/how-offline-gps-tracking-works/" class="footer-link">Offline GPS Tracker</a>
+        <a href="/blog/lora-gps-tracker-for-dogs/" class="footer-link">GPS for Dogs</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy">Privacy</a>
+      </div>
+    </details>
     <div class="footer-social">
       <a href="https://x.com/noli_lab" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -144,12 +174,74 @@
       flex-shrink: 0;
     }
 
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--spacing-xs, 0.5rem) var(--spacing-md, 1.5rem);
+    /* Four named columns replacing the old flat 44-link row. These styles live
+       here rather than in /css/partials.css for the same reason the nav
+       dropdown's do: /css/* is Cache-Control immutable for a year, so a
+       returning visitor would get this partial's new markup with a year-old
+       stylesheet. Partials are max-age=0, so markup and styles ship together. */
+    .footer-groups {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--spacing-md, 1.5rem) var(--spacing-lg, 2rem);
       flex: 1;
       min-width: 0;
+    }
+
+    .footer-group-title {
+      margin: 0 0 0.6rem;
+      font-family: var(--font-mono, 'SF Mono', monospace);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-primary, #24292e);
+    }
+
+    .footer-group ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    /* The long tail — 24 more links, collapsed by default so the footer reads
+       as a short index rather than a wall. All of them stay in the DOM. */
+    .footer-more {
+      flex: 0 0 100%;
+      margin: 0;
+    }
+
+    .footer-more > summary {
+      list-style: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 44px;
+      padding: 0.5rem 0;
+      font-family: var(--font-mono, 'SF Mono', monospace);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary, #57606a);
+      transition: color 0.2s ease;
+    }
+
+    .footer-more > summary::-webkit-details-marker { display: none; }
+    .footer-more > summary::after { content: '+'; font-size: 0.95rem; line-height: 1; }
+    .footer-more[open] > summary::after { content: '\2212'; }
+    .footer-more > summary:hover { color: var(--text-primary, #24292e); }
+    .footer-more > summary:focus-visible {
+      outline: 2px solid var(--accent, #238636);
+      outline-offset: 2px;
+    }
+
+    .footer-more-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem var(--spacing-md, 1.5rem);
+      padding-top: var(--spacing-xs, 0.5rem);
     }
 
     .footer-link {
@@ -305,22 +397,48 @@
         font-size: 1.5rem;
       }
 
-      .footer-links {
-        display: flex;
+      /* Two columns of grouped links instead of 44 stacked 44px rows. That
+         layout made the footer 3,365px tall on a 390px phone — four full
+         screens, taller than any content section on the page. */
+      .footer-groups {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--spacing-md, 1.5rem);
+        width: 100%;
+        text-align: left;
+      }
+
+      .footer-group ul {
+        gap: 0;
+      }
+
+      .footer-more-links {
         flex-direction: column;
+        gap: 0;
         width: 100%;
       }
 
-      .footer-link {
-        padding: var(--spacing-sm, 1rem);
-        min-height: 44px;
+      /* Hairline dividers make a two-column list scannable on a phone; the
+         last row in each group drops its rule so the column doesn't dangle. */
+      .footer-group .footer-link {
+        padding: var(--spacing-xs, 0.5rem) 0;
+        min-height: 40px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         border-bottom: 1px solid var(--border, #d0d7de);
       }
 
-      .footer-link:last-child {
+      .footer-group li:last-child .footer-link {
+        border-bottom: none;
+      }
+
+      .footer-more-links .footer-link {
+        padding: var(--spacing-sm, 1rem) 0;
+        min-height: 44px;
+        border-bottom: 1px solid var(--border, #d0d7de);
+      }
+
+      .footer-more-links .footer-link:last-child {
         border-bottom: none;
       }
 
@@ -344,6 +462,12 @@
 
       .footer-copyright {
         margin-top: 0;
+      }
+    }
+
+    @media (max-width: 359px) {
+      .footer-groups {
+        grid-template-columns: 1fr;
       }
     }
   </style>
