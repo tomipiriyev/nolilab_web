@@ -62,15 +62,66 @@ test.describe('use-case grid', () => {
 
 test.describe('image loading', () => {
   // No use-case card is above the fold, so none of them may claim hero
-  // priority or load ahead of the images a visitor can actually see.
-  test('every use-case image loads lazily', async ({ page }) => {
+  // priority or load ahead of the images a visitor can actually see. Asserted
+  // against the served HTML, because the warm-up in home.js flips the
+  // attribute to eager once the page has loaded.
+  test('every use-case image ships lazily', async ({ page, request }) => {
+    const html = await (await request.get('/')).text();
+    const section = html.slice(html.indexOf('class="use-case-grid"'), html.indexOf('</section>', html.indexOf('use-case-grid')));
+    expect(section.match(/loading="lazy"/g)).toHaveLength(6);
+    expect(section).not.toContain('fetchpriority');
+  });
+
+  // A lazy image that never enters the viewport keeps showing its 20px
+  // placeholder — a blurred photo, which is what full-page screenshot captures
+  // record. home.js promotes the stragglers once the page is idle.
+  test('placeholders resolve on their own without any scrolling', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'load' });
+    const decoded = () => page.evaluate(() =>
+      [...document.querySelectorAll('.use-case-image img')].filter((el) => el.complete && el.naturalWidth).length);
+
+    await expect.poll(decoded, { timeout: 10_000 }).toBe(6);
+
+    // ...and the warm-up must not race the initial render: nothing below the
+    // fold may be fetched before the load event.
+    const early = await page.evaluate(() => {
+      const load = performance.timing.loadEventStart - performance.timing.navigationStart;
+      return performance.getEntriesByType('resource')
+        .filter((r) => /military-training|hiking-adventure/.test(r.name) && r.startTime < load).length;
+    });
+    expect(early).toBe(0);
+  });
+
+  /* Three of these AVIFs were 12-tile grid images that Chromium decoded to a
+     fully transparent bitmap. Every load-based signal said healthy — 200
+     response, correct naturalWidth, load fired, img.decode() resolved — while
+     the visitor saw the LQIP through an empty <img>, i.e. a photo that looked
+     permanently blurred. Safari rendered them fine. Only painting the pixels
+     catches it, so paint them. */
+  test('every use-case image actually paints pixels in this browser', async ({ page }) => {
     await page.goto('/');
-    const imgs = page.locator('.use-case-image img');
-    await expect(imgs).toHaveCount(6);
-    for (let i = 0; i < 6; i++) {
-      await expect(imgs.nth(i)).toHaveAttribute('loading', 'lazy');
-    }
-    await expect(page.locator('.use-case-image img[fetchpriority]')).toHaveCount(0);
+    const blank = await page.evaluate(async () => {
+      const out = [];
+      for (const img of document.querySelectorAll('.use-case-image img')) {
+        for (const url of [...img.closest('picture').querySelectorAll('source')].map((s) => s.srcset)) {
+          const probe = new Image();
+          probe.src = url;
+          try { await probe.decode(); } catch { out.push(url + ' (decode threw)'); continue; }
+
+          const c = document.createElement('canvas');
+          c.width = 60; c.height = 40;
+          const ctx = c.getContext('2d');
+          ctx.drawImage(probe, 0, 0, 60, 40);
+          const d = ctx.getImageData(0, 0, 60, 40).data;
+          let sum = 0, sum2 = 0, n = 0;
+          for (let i = 0; i < d.length; i += 4) { sum += d[i]; sum2 += d[i] * d[i]; n++; }
+          const sd = Math.sqrt(sum2 / n - (sum / n) ** 2);
+          if (sd < 2) out.push(`${url} (flat, stddev ${sd.toFixed(1)})`);
+        }
+      }
+      return out;
+    });
+    expect(blank).toEqual([]);
   });
 
   test('every use-case image has a blur-up placeholder behind it', async ({ page }) => {
