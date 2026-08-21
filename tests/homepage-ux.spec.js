@@ -1,11 +1,12 @@
 /**
- * Homepage UX tests — use-case tabs, image loading, footer groups, mobile hero.
+ * Homepage UX tests — the use-case grid, image loading, footer groups, mobile hero.
  *
- * The tabs replaced six stacked full-width sections that measured 5,072px on
- * desktop. The thing most worth protecting here is that all six panels still
- * ship in the HTML: this page is the site's main SEO/GEO asset, and a
- * regression to JS-built panels would delete five use cases from the view of
- * every non-JS AI crawler without any visible symptom.
+ * The six use cases render as a card grid: all of them on the page at once,
+ * image over content, two columns on desktop and one on mobile. The thing most
+ * worth protecting here is that all six ship in the HTML and are visible
+ * without JS — this page is the site's main SEO/GEO asset, and a regression to
+ * JS-revealed cards would delete five use cases from the view of every non-JS
+ * AI crawler without any visible symptom.
  */
 
 const { test, expect } = require('@playwright/test');
@@ -13,18 +14,17 @@ const { test, expect } = require('@playwright/test');
 const LANGS = ['/', '/es/', '/fr/', '/ja/', '/ru/', '/zh/'];
 const SLUGS = ['pets', 'research', 'drones', 'agriculture', 'tactical', 'outdoor'];
 
-test.describe('use-case tabs', () => {
+test.describe('use-case grid', () => {
   for (const path of LANGS) {
-    test(`${path} ships all six panels and shows exactly one`, async ({ page }) => {
+    test(`${path} shows all six use cases`, async ({ page }) => {
       await page.goto(path);
-      await expect(page.locator('.use-case-panel')).toHaveCount(6);
-      await expect(page.locator('.use-case-tab')).toHaveCount(6);
-      await expect(page.locator('.use-case-panel:visible')).toHaveCount(1);
-      await expect(page.locator('#uc-panel-pets')).toBeVisible();
+      await expect(page.locator('.use-case-item')).toHaveCount(6);
+      await expect(page.locator('.use-case-item:visible')).toHaveCount(6);
+      await expect(page.locator('.use-case-tab')).toHaveCount(0);
 
-      // Tab labels come from each file's own translated category pill, so none
-      // of them may fall back to the English string on a translated page.
-      const labels = await page.locator('.use-case-tab').allTextContents();
+      // Each card keeps its own translated category pill.
+      const labels = await page.locator('.use-case-category').allTextContents();
+      expect(labels).toHaveLength(6);
       expect(labels.every((l) => l.trim().length > 0)).toBe(true);
       if (path !== '/') {
         expect(labels.join('|')).not.toContain('Pet Safety');
@@ -32,76 +32,45 @@ test.describe('use-case tabs', () => {
     });
   }
 
-  test('clicking a tab swaps the panel and updates aria state', async ({ page }) => {
+  test('the cards lay out two per row on desktop, one on mobile', async ({ page }) => {
     await page.goto('/');
-    await page.locator('#uc-tab-drones').click();
+    const columns = () => page.locator('.use-case-grid').evaluate(
+      (el) => getComputedStyle(el).gridTemplateColumns.split(' ').length);
 
-    await expect(page.locator('#uc-panel-drones')).toBeVisible();
-    await expect(page.locator('#uc-panel-pets')).toBeHidden();
-    await expect(page.locator('#uc-tab-drones')).toHaveAttribute('aria-selected', 'true');
-    await expect(page.locator('#uc-tab-pets')).toHaveAttribute('aria-selected', 'false');
-    await expect(page.locator('.use-case-panel:visible')).toHaveCount(1);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    expect(await columns()).toBe(2);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    expect(await columns()).toBe(1);
   });
 
-  test('arrow keys move between tabs, Home and End jump to the ends', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('#uc-tab-pets').focus();
-
-    await page.keyboard.press('ArrowRight');
-    await expect(page.locator('#uc-tab-research')).toBeFocused();
-    await expect(page.locator('#uc-panel-research')).toBeVisible();
-
-    await page.keyboard.press('End');
-    await expect(page.locator('#uc-tab-outdoor')).toBeFocused();
-    await expect(page.locator('#uc-panel-outdoor')).toBeVisible();
-
-    // wraps forward off the end
-    await page.keyboard.press('ArrowRight');
-    await expect(page.locator('#uc-tab-pets')).toBeFocused();
-
-    await page.keyboard.press('Home');
-    await expect(page.locator('#uc-tab-pets')).toBeFocused();
-  });
-
-  test('only the selected tab is in the tab order', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('#uc-tab-agriculture').click();
-    for (const slug of SLUGS) {
-      await expect(page.locator(`#uc-tab-${slug}`)).toHaveAttribute(
-        'tabindex', slug === 'agriculture' ? '0' : '-1');
-    }
-  });
-
-  test('#uc-<slug> deep links open that panel', async ({ page }) => {
+  test('#uc-<slug> deep links still resolve, now natively', async ({ page }) => {
     await page.goto('/#uc-tactical');
-    await expect(page.locator('#uc-panel-tactical')).toBeVisible();
-    await expect(page.locator('#uc-tab-tactical')).toHaveAttribute('aria-selected', 'true');
+    const card = page.locator('#uc-tactical');
+    await expect(card).toBeVisible();
+    await expect(card).toBeInViewport();
   });
 
-  test('an unknown hash falls back to the first panel', async ({ page }) => {
-    await page.goto('/#uc-nonsense');
-    await expect(page.locator('#uc-panel-pets')).toBeVisible();
-    await expect(page.locator('.use-case-panel:visible')).toHaveCount(1);
-  });
-
-  test('with JS disabled all six panels render as a stack', async ({ browser }) => {
+  test('with JS disabled all six cards still render', async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto('/');
-    await expect(page.locator('.use-case-panel:visible')).toHaveCount(6);
-    // a tab strip nothing can operate must not be shown
-    await expect(page.locator('.use-case-tabs')).toBeHidden();
+    await expect(page.locator('.use-case-item:visible')).toHaveCount(6);
     await context.close();
   });
 });
 
 test.describe('image loading', () => {
-  test('the first panel loads eagerly, the rest lazily', async ({ page }) => {
+  // No use-case card is above the fold, so none of them may claim hero
+  // priority or load ahead of the images a visitor can actually see.
+  test('every use-case image loads lazily', async ({ page }) => {
     await page.goto('/');
-    const first = page.locator('#uc-panel-pets img');
-    await expect(first).not.toHaveAttribute('loading', 'lazy');
-    await expect(first).toHaveAttribute('fetchpriority', 'high');
-    await expect(page.locator('#uc-panel-drones img')).toHaveAttribute('loading', 'lazy');
+    const imgs = page.locator('.use-case-image img');
+    await expect(imgs).toHaveCount(6);
+    for (let i = 0; i < 6; i++) {
+      await expect(imgs.nth(i)).toHaveAttribute('loading', 'lazy');
+    }
+    await expect(page.locator('.use-case-image img[fetchpriority]')).toHaveCount(0);
   });
 
   test('every use-case image has a blur-up placeholder behind it', async ({ page }) => {
@@ -121,10 +90,10 @@ test.describe('image loading', () => {
     const mismatches = [];
 
     for (const slug of SLUGS) {
-      // A lazy image inside a hidden panel never decodes, so naturalWidth
-      // stays 0 until its tab is opened.
-      await page.locator(`#uc-tab-${slug}`).click();
-      const img = page.locator(`#uc-panel-${slug} .use-case-image img`);
+      // A lazy image only decodes once it is near the viewport, so scroll to
+      // each card before reading naturalWidth.
+      const img = page.locator(`#uc-${slug} .use-case-image img`);
+      await img.scrollIntoViewIfNeeded();
       await expect(img).toHaveClass(/is-loaded/);
 
       const result = await img.evaluate((el) => ({
