@@ -68,6 +68,8 @@ const eraseGnssTraceButton = document.getElementById("eraseGnssTraceButton");
 const exportGnssTraceButton = document.getElementById("exportGnssTraceButton");
 const exportGnssTraceCsvButton = document.getElementById("exportGnssTraceCsvButton");
 const gnssTraceOutputBody = document.getElementById("gnssTraceOutputBody");
+const gnssTraceSelectAllCheckbox = document.getElementById("gnssTraceSelectAll");
+const gnssTraceSelectionSummary = document.getElementById("gnssTraceSelectionSummary");
 const gnssTraceOutputTableWrap = document.querySelector(".gnss-trace-table-wrap");
 const gnssTraceProgress = document.getElementById("gnssTraceProgress");
 const gnssTraceProgressLabel = document.getElementById("gnssTraceProgressLabel");
@@ -132,6 +134,8 @@ let gnssTraceMap = null;
 let gnssTraceLayer = null;
 let gnssTraceSelectionLayer = null;
 let selectedGnssTraceRecordNumber = null;
+const gnssTraceExportSelection = new Set();
+const gnssTraceKnownRecordNumbers = new Set();
 // The sleep window is only pushed to the device once the user has touched the
 // controls, so a firmware whose `info` dump omits it never gets an unsolicited
 // `sleep set off` on every save.
@@ -481,9 +485,71 @@ function setGnssTraceRecordsBuffer(records) {
         }
     }
 
-    syncGnssTraceExportButtonState();
+    // The parsed buffer is the authoritative record set once a read finishes —
+    // rows trimmed out of the table are still exportable, rows that never
+    // parsed are not.
+    gnssTraceKnownRecordNumbers.clear();
+    gnssTraceRecordsBuffer.forEach((record) => gnssTraceKnownRecordNumbers.add(record.recordNumber));
+    gnssTraceExportSelection.forEach((recordNumber) => {
+        if (!gnssTraceKnownRecordNumbers.has(recordNumber)) {
+            gnssTraceExportSelection.delete(recordNumber);
+        }
+    });
+    gnssTraceKnownRecordNumbers.forEach((recordNumber) => gnssTraceExportSelection.add(recordNumber));
+
+    syncGnssTraceSelectionUi();
     renderGnssTraceMap(gnssTraceRecordsBuffer);
     syncSelectedGnssTraceRow();
+}
+
+function resetGnssTraceSelection() {
+    gnssTraceExportSelection.clear();
+    gnssTraceKnownRecordNumbers.clear();
+}
+
+function getSelectedGnssTraceRecords() {
+    return gnssTraceRecordsBuffer.filter((record) => gnssTraceExportSelection.has(record.recordNumber));
+}
+
+function setGnssTraceRecordSelected(recordNumber, isSelected) {
+    if (isSelected) {
+        gnssTraceExportSelection.add(recordNumber);
+    } else {
+        gnssTraceExportSelection.delete(recordNumber);
+    }
+}
+
+// Rows appended by appendGnssTraceRows() are already built in their correct
+// selection state, so streaming flushes pass syncRows = false to skip the
+// per-row pass over what can be thousands of rows.
+function syncGnssTraceSelectionUi(syncRows = true) {
+    const totalRecords = gnssTraceKnownRecordNumbers.size;
+    const selectedCount = gnssTraceExportSelection.size;
+
+    if (syncRows && gnssTraceOutputBody) {
+        [...gnssTraceOutputBody.querySelectorAll("tr[data-record-number]")].forEach((row) => {
+            const isSelected = gnssTraceExportSelection.has(Number(row.dataset.recordNumber));
+            const checkbox = row.querySelector(".gnss-trace-select-cell input[type=\"checkbox\"]");
+            if (checkbox) {
+                checkbox.checked = isSelected;
+            }
+            row.classList.toggle("gnss-trace-row-unselected", !isSelected);
+        });
+    }
+
+    if (gnssTraceSelectAllCheckbox) {
+        gnssTraceSelectAllCheckbox.disabled = totalRecords === 0;
+        gnssTraceSelectAllCheckbox.checked = totalRecords > 0 && selectedCount === totalRecords;
+        gnssTraceSelectAllCheckbox.indeterminate = selectedCount > 0 && selectedCount < totalRecords;
+    }
+
+    if (gnssTraceSelectionSummary) {
+        gnssTraceSelectionSummary.textContent = totalRecords === 0
+            ? "No records"
+            : `${selectedCount} of ${totalRecords} record${totalRecords === 1 ? "" : "s"} selected`;
+    }
+
+    syncGnssTraceExportButtonState();
 }
 
 function syncGnssTraceExportButtonState() {
@@ -491,9 +557,9 @@ function syncGnssTraceExportButtonState() {
         return;
     }
 
-    const hasRecords = gnssTraceRecordsBuffer.length > 0;
-    exportGnssTraceButton.disabled = !hasRecords;
-    exportGnssTraceCsvButton.disabled = !hasRecords;
+    const hasSelection = getSelectedGnssTraceRecords().length > 0;
+    exportGnssTraceButton.disabled = !hasSelection;
+    exportGnssTraceCsvButton.disabled = !hasSelection;
 }
 
 function ensureGnssTraceMap() {
@@ -663,7 +729,10 @@ function renderGnssTraceMap(records) {
 }
 
 function parseGnssTraceLine(line) {
-    const pattern = /^#(\d+)\s+(\d{2}\/\d{2}\/\d{2})\s+(\d{2}:\d{2}:\d{2})\s+(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)$/;
+    // Newer firmware appends a sixth, unlabelled numeric field after hdop
+    // (e.g. "..., 3.10, 3730"). Accept it so those records still parse; it is
+    // captured but not displayed or exported until its meaning is confirmed.
+    const pattern = /^#(\d+)\s+(\d{2}\/\d{2}\/\d{2})\s+(\d{2}:\d{2}:\d{2})\s+(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:,\s*(-?\d+(?:\.\d+)?))?$/;
     const match = line.trim().match(pattern);
 
     if (!match) {
@@ -678,7 +747,8 @@ function parseGnssTraceLine(line) {
         longitude: Number(match[5]),
         alt: Number(match[6]),
         speedMps: Number(match[7]),
-        hdop: Number(match[8])
+        hdop: Number(match[8]),
+        extra: match[9] === undefined ? null : Number(match[9])
     };
 }
 
@@ -716,7 +786,7 @@ function appendGnssTraceMessageRow(message) {
     const row = document.createElement("tr");
     row.className = "gnss-trace-row-message";
     const cell = document.createElement("td");
-    cell.colSpan = 8;
+    cell.colSpan = 9;
     cell.textContent = message;
     row.appendChild(cell);
     gnssTraceOutputBody.appendChild(row);
@@ -733,7 +803,7 @@ function createGnssTraceTableRow(line) {
     if (!parsed) {
         row.className = "gnss-trace-row-message";
         const cell = document.createElement("td");
-        cell.colSpan = 8;
+        cell.colSpan = 9;
         cell.textContent = line;
         row.appendChild(cell);
         return row;
@@ -741,6 +811,17 @@ function createGnssTraceTableRow(line) {
 
     row.className = "gnss-trace-row-record";
     row.dataset.recordNumber = String(parsed.recordNumber);
+    gnssTraceKnownRecordNumbers.add(parsed.recordNumber);
+    gnssTraceExportSelection.add(parsed.recordNumber);
+
+    const selectCell = document.createElement("td");
+    selectCell.className = "gnss-trace-select-cell";
+    const selectCheckbox = document.createElement("input");
+    selectCheckbox.type = "checkbox";
+    selectCheckbox.checked = true;
+    selectCheckbox.setAttribute("aria-label", `Select record ${parsed.recordNumber} for export`);
+    selectCell.appendChild(selectCheckbox);
+    row.appendChild(selectCell);
 
     const cells = [
         String(parsed.recordNumber),
@@ -790,6 +871,8 @@ function appendGnssTraceRows(lines, maxRows) {
     if (gnssTraceOutputTableWrap) {
         gnssTraceOutputTableWrap.scrollTop = gnssTraceOutputTableWrap.scrollHeight;
     }
+
+    syncGnssTraceSelectionUi(false);
 
     return trimmed;
 }
@@ -1932,6 +2015,10 @@ sleepWindowToggle.addEventListener("change", () => {
 });
 
 gnssTraceOutputBody.addEventListener("click", (event) => {
+    if (event.target.closest(".gnss-trace-select-cell")) {
+        return;
+    }
+
     const clickedRow = event.target.closest("tr[data-record-number]");
     if (!clickedRow || !gnssTraceOutputBody.contains(clickedRow)) {
         return;
@@ -1940,6 +2027,31 @@ gnssTraceOutputBody.addEventListener("click", (event) => {
     const recordNumber = Number(clickedRow.dataset.recordNumber);
     selectGnssTraceRecord(recordNumber, true);
 });
+
+gnssTraceOutputBody.addEventListener("change", (event) => {
+    const checkbox = event.target.closest(".gnss-trace-select-cell input[type=\"checkbox\"]");
+    if (!checkbox) {
+        return;
+    }
+
+    const row = checkbox.closest("tr[data-record-number]");
+    if (!row) {
+        return;
+    }
+
+    setGnssTraceRecordSelected(Number(row.dataset.recordNumber), checkbox.checked);
+    syncGnssTraceSelectionUi();
+});
+
+if (gnssTraceSelectAllCheckbox) {
+    gnssTraceSelectAllCheckbox.addEventListener("change", () => {
+        const shouldSelectAll = gnssTraceSelectAllCheckbox.checked;
+        gnssTraceKnownRecordNumbers.forEach((recordNumber) => {
+            setGnssTraceRecordSelected(recordNumber, shouldSelectAll);
+        });
+        syncGnssTraceSelectionUi();
+    });
+}
 
 readGnssTraceButton.addEventListener("click", async () => {
     if (!connectedPort) {
@@ -1952,6 +2064,8 @@ readGnssTraceButton.addEventListener("click", async () => {
     exportGnssTraceCsvButton.disabled = true;
     clearSelectedGnssTraceRecord();
     clearGnssTraceOutputTable();
+    resetGnssTraceSelection();
+    syncGnssTraceSelectionUi();
     appendGnssTraceMessageRow("Reading GNSS trace... Please wait.");
     resetGnssTraceProgress();
 
@@ -2015,12 +2129,13 @@ readGnssTraceButton.addEventListener("click", async () => {
         }
     } catch (error) {
         clearGnssTraceOutputTable();
+        resetGnssTraceSelection();
         appendGnssTraceMessageRow(`Read failed: ${error.message || "unknown error"}`);
         resetGnssTraceProgress();
     } finally {
         readGnssTraceButton.disabled = false;
         eraseGnssTraceButton.disabled = false;
-        syncGnssTraceExportButtonState();
+        syncGnssTraceSelectionUi();
     }
 });
 
@@ -2050,6 +2165,7 @@ eraseGnssTraceButton.addEventListener("click", async () => {
     try {
         await sendSerialCommandAndWaitForOk("gtrace erase", 10000, "\r\n");
         clearSelectedGnssTraceRecord();
+        resetGnssTraceSelection();
         setGnssTraceRecordsBuffer([]);
         clearGnssTraceOutputTable();
         appendGnssTraceMessageRow("GNSS trace erased.");
@@ -2059,27 +2175,29 @@ eraseGnssTraceButton.addEventListener("click", async () => {
     } finally {
         eraseGnssTraceButton.disabled = false;
         readGnssTraceButton.disabled = false;
-        syncGnssTraceExportButtonState();
+        syncGnssTraceSelectionUi();
         resetEraseTraceConfirmationUi();
     }
 });
 
 exportGnssTraceButton.addEventListener("click", () => {
-    if (!gnssTraceRecordsBuffer.length) {
+    const selectedRecords = getSelectedGnssTraceRecords();
+    if (!selectedRecords.length) {
         return;
     }
 
-    const gpx = buildGpxFromTraceRecords(gnssTraceRecordsBuffer);
+    const gpx = buildGpxFromTraceRecords(selectedRecords);
     const fileName = `gnss-trace-${new Date().toISOString().replace(/[:.]/g, "-")}.gpx`;
     downloadTextFile(gpx, fileName, "application/gpx+xml;charset=utf-8");
 });
 
 exportGnssTraceCsvButton.addEventListener("click", () => {
-    if (!gnssTraceRecordsBuffer.length) {
+    const selectedRecords = getSelectedGnssTraceRecords();
+    if (!selectedRecords.length) {
         return;
     }
 
-    const csv = buildCsvFromTraceRecords(gnssTraceRecordsBuffer);
+    const csv = buildCsvFromTraceRecords(selectedRecords);
     const fileName = `gnss-trace-${new Date().toISOString().replace(/[:.]/g, "-")}.csv`;
     downloadTextFile(csv, fileName, "text/csv;charset=utf-8");
 });
@@ -2270,7 +2388,7 @@ activateMainTab("configuration");
 setConnectionState(false, "Browser access to the serial device has not been granted.");
 setPortInfo("serial permission not granted");
 resetGnssTraceProgress();
-syncGnssTraceExportButtonState();
+syncGnssTraceSelectionUi();
 
 // ── Ground Unit ───────────────────────────────────────────────────────────────
 let groundConnectedPort = null;

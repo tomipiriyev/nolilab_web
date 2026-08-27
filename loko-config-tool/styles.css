@@ -662,6 +662,51 @@ input[type="checkbox"]:focus {
     background: rgba(10, 163, 75, 0.14);
 }
 
+.gnss-trace-output-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.gnss-trace-selection-summary {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.gnss-trace-table .gnss-trace-select-col {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.gnss-trace-select-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.gnss-trace-table td.gnss-trace-select-cell {
+    width: 1%;
+    text-align: center;
+}
+
+.gnss-trace-select-all input[type="checkbox"],
+.gnss-trace-select-cell input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.gnss-trace-row-unselected td {
+    opacity: 0.5;
+}
+
 .gnss-trace-row-message td {
     white-space: normal;
     color: var(--muted);
