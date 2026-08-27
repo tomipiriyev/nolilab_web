@@ -729,9 +729,9 @@ function renderGnssTraceMap(records) {
 }
 
 function parseGnssTraceLine(line) {
-    // Newer firmware appends a sixth, unlabelled numeric field after hdop
-    // (e.g. "..., 3.10, 3730"). Accept it so those records still parse; it is
-    // captured but not displayed or exported until its meaning is confirmed.
+    // Newer firmware appends battery voltage in millivolts after hdop
+    // (e.g. "..., 3.10, 3730" = 3.730 V). Older firmware omits it, so the
+    // field is optional and those records parse with batteryMv = null.
     const pattern = /^#(\d+)\s+(\d{2}\/\d{2}\/\d{2})\s+(\d{2}:\d{2}:\d{2})\s+(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:,\s*(-?\d+(?:\.\d+)?))?$/;
     const match = line.trim().match(pattern);
 
@@ -748,7 +748,7 @@ function parseGnssTraceLine(line) {
         alt: Number(match[6]),
         speedMps: Number(match[7]),
         hdop: Number(match[8]),
-        extra: match[9] === undefined ? null : Number(match[9])
+        batteryMv: match[9] === undefined ? null : Number(match[9])
     };
 }
 
@@ -770,6 +770,16 @@ function parseGnssTraceRecords(rawResponse) {
     return records;
 }
 
+function formatBatteryVolts(batteryMv) {
+    if (batteryMv === null || !Number.isFinite(batteryMv)) {
+        return null;
+    }
+
+    // Reported in millivolts; tolerate firmware that already sends volts.
+    const volts = batteryMv > 100 ? batteryMv / 1000 : batteryMv;
+    return volts.toFixed(3);
+}
+
 function clearGnssTraceOutputTable() {
     if (!gnssTraceOutputBody) {
         return;
@@ -786,7 +796,7 @@ function appendGnssTraceMessageRow(message) {
     const row = document.createElement("tr");
     row.className = "gnss-trace-row-message";
     const cell = document.createElement("td");
-    cell.colSpan = 9;
+    cell.colSpan = 10;
     cell.textContent = message;
     row.appendChild(cell);
     gnssTraceOutputBody.appendChild(row);
@@ -803,7 +813,7 @@ function createGnssTraceTableRow(line) {
     if (!parsed) {
         row.className = "gnss-trace-row-message";
         const cell = document.createElement("td");
-        cell.colSpan = 9;
+        cell.colSpan = 10;
         cell.textContent = line;
         row.appendChild(cell);
         return row;
@@ -831,7 +841,8 @@ function createGnssTraceTableRow(line) {
         String(parsed.longitude),
         String(parsed.alt),
         String(parsed.speedMps),
-        String(parsed.hdop)
+        String(parsed.hdop),
+        formatBatteryVolts(parsed.batteryMv) ?? "\u2014"
     ];
 
     cells.forEach((value) => {
@@ -956,12 +967,16 @@ function buildGpxFromTraceRecords(records) {
         const timeIso = formatGpxTimeFromRecord(record);
         const ele = Number.isFinite(record.alt) ? `<ele>${record.alt}</ele>` : "";
         const time = timeIso ? `<time>${timeIso}</time>` : "";
-        return `      <trkpt lat="${record.latitude}" lon="${record.longitude}">\n        ${ele}\n        ${time}\n      </trkpt>`;
+        const volts = formatBatteryVolts(record.batteryMv);
+        const battery = volts
+            ? `<extensions><loko:batteryVolts>${volts}</loko:batteryVolts></extensions>`
+            : "";
+        return `      <trkpt lat="${record.latitude}" lon="${record.longitude}">\n        ${ele}\n        ${time}\n        ${battery}\n      </trkpt>`;
     }).join("\n");
 
     return [
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-        "<gpx version=\"1.1\" creator=\"Loko-AIR Configurator\" xmlns=\"http://www.topografix.com/GPX/1/1\">",
+        "<gpx version=\"1.1\" creator=\"Loko-AIR Configurator\" xmlns=\"http://www.topografix.com/GPX/1/1\" xmlns:loko=\"https://nolilab.com/gpx/v1\">",
         "  <trk>",
         "    <name>Loko-AIR GNSS Trace</name>",
         "    <trkseg>",
@@ -973,7 +988,7 @@ function buildGpxFromTraceRecords(records) {
 }
 
 function buildCsvFromTraceRecords(records) {
-    const header = "recordNumber,date,time,latitude,longitude,alt,speedMps,hdop";
+    const header = "recordNumber,date,time,latitude,longitude,alt,speedMps,hdop,batteryVolts";
     const rows = records.map((record) => [
         record.recordNumber,
         record.date,
@@ -982,7 +997,8 @@ function buildCsvFromTraceRecords(records) {
         record.longitude,
         record.alt,
         record.speedMps,
-        record.hdop
+        record.hdop,
+        formatBatteryVolts(record.batteryMv) ?? ""
     ].join(","));
 
     return [header, ...rows].join("\n");
