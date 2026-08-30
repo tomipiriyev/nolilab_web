@@ -92,7 +92,7 @@ File: `/llms.txt` — **EXISTS** ✅
 |--------|--------|---------|
 | **Wikidata QID** | ✅ Present | Q138751022 — label "Nolilab", aliases "Loko GPS Tracker", P31=company, P2002=Twitter: noli_lab |
 | **Wikipedia article** | ❌ Absent | Major citability gap |
-| **YouTube channel** | ⚠️ Listed in sameAs | youtube.com/@nolilab_loko_gps — verify active content |
+| **YouTube channel** | ⚠️ Listed in sameAs | youtube.com/@LOKO_OFFLINEGPS — verify active content |
 | **Reddit presence** | ❌ Not detected | No branded subreddit or active r/LokoGPS threads |
 | **LinkedIn** | ✅ Present | linkedin.com/company/nolilab |
 | **GitHub** | ✅ Present | github.com/nolilab (open-source firmware) |

@@ -92,7 +92,7 @@ ChatGPT uses Bing's search index and assigns heavy weight to entity-anchored res
 | Wikidata entity with 5+ properties | 10 | 0 | No Wikidata entry found |
 | Bing index coverage of key pages | 10 | 5 | Bing likely indexes the site (Cloudflare/standard site), but coverage is unverified; no Bing Webmaster Tools confirmation |
 | Reddit brand mentions (positive) | 10 | 0 | No confirmed Reddit discussions in r/LoRa, r/GPS, r/drones, or r/homeautomation |
-| YouTube channel with relevant content | 10 | 5 | Official channel exists (@nolilab_loko_gps); no third-party reviews found; subscriber/view count unconfirmed |
+| YouTube channel with relevant content | 10 | 5 | Official channel exists (@LOKO_OFFLINEGPS); no third-party reviews found; subscriber/view count unconfirmed |
 | Authoritative backlinks (.edu, .gov, press) | 15 | 6 | **Hackaday editorial** (May 2025) + **Hackster.io editorial** + **Hackaday.io project page** = maker-community authority links. No .edu, .gov, or mainstream tech press links. |
 | Entity consistency across platforms | 10 | 4 | CRITICAL: Hackaday/Hackster show "12g, 15km" — nolilab.com shows "14g, 20km." Entity data is inconsistent across public sources. ChatGPT will have conflicting spec data. |
 | Content comprehensiveness (2000+ words) | 10 | 5 | Homepage ~3,400 words ✅; LoRa guide ~1,200 words (adequate); farm guide 650 words (thin); signal range article 220 words (very thin) |
@@ -168,7 +168,7 @@ Gemini uses Google's full search index but places extra weight on Google-owned p
 |---|---|---|---|
 | Google Knowledge Panel | 15 | 0 | No Knowledge Panel detected for Nolilab or Loko GPS Tracker |
 | Google Business Profile | 10 | 0 | Not applicable (no retail presence); not configured for the online business; GBP for the registered address could strengthen entity recognition |
-| YouTube channel with topic-relevant content | 20 | 8 | Official channel @nolilab_loko_gps exists; videos present but no confirmed chapters/timestamps; no third-party reviews on YouTube |
+| YouTube channel with topic-relevant content | 20 | 8 | Official channel @LOKO_OFFLINEGPS exists; videos present but no confirmed chapters/timestamps; no third-party reviews on YouTube |
 | Schema.org structured data | 15 | 9 | Product, Organization, FAQPage, BlogPosting all present; logo format error (string not ImageObject); AggregateRating missing; relative image URLs in BlogPosting |
 | Google ecosystem presence | 10 | 0 | No Google Scholar, no Google News inclusion, not in Google Maps |
 | Image optimization (alt text, filenames) | 10 | 7 | WebP/AVIF formats ✅; explicit dimensions ✅; fetchpriority on hero ✅; some missing alt text identified in audit |
@@ -274,7 +274,7 @@ Copilot uses Bing's index (shared with ChatGPT but different selection logic). I
 | 3 | **Implement IndexNow** (key file + API ping on content update) | Medium | 30 min | Bing Copilot, ChatGPT |
 | 4 | **Register in Bing Webmaster Tools** + submit sitemap | Medium | 30 min | ChatGPT, Bing Copilot |
 | 5 | **Fix Organization schema logo** (string → ImageObject with dimensions) | Medium | 30 min | Gemini, Google AIO, Bing |
-| 6 | **Add YouTube video chapters/timestamps** to all existing videos on @nolilab_loko_gps | Medium | 1 hr | Gemini (primary), Perplexity |
+| 6 | **Add YouTube video chapters/timestamps** to all existing videos on @LOKO_OFFLINEGPS | Medium | 1 hr | Gemini (primary), Perplexity |
 | 7 | **Update Hackaday.io project #166619** with current specs + link to SeeedStudio listing | Medium | 30 min | Perplexity, ChatGPT via Bing |
 | 8 | **Complete the "How does Loko work?" FAQ answer** (add Ground Unit + app display explanation) | Medium | 20 min | Google AIO |
 

@@ -216,7 +216,7 @@ The +27 point gain from the previous audit reflects discovery of existing presen
 | Hackster.io | 2022 editorial (credits "Dronee") | Partial — wrong brand name |
 | GitHub tomipiriyev/Loko | ~230 stars, MIT | Present but unlinked to brand entity |
 | Reddit | Absent | Major gap — 46.7% of Perplexity citations |
-| YouTube @nolilab_loko_gps | Channel exists (depth unknown) | Present, unverified |
+| YouTube @LOKO_OFFLINEGPS | Channel exists (depth unknown) | Present, unverified |
 | LinkedIn nolilab | Unclear — search returns "Loko AI" (unrelated) | Unclear |
 
 **Entity consistency:** Cross-source name split (Dronee vs. Nolilab), specs split (12g/10km, 12g/15km, 14g/20km), founder name split (Tamleykha Piriyev / Tomi Piriyev / Akio Sato). AI models averaging conflicting signals will produce wrong answers.

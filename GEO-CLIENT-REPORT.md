@@ -100,7 +100,7 @@ Brand authority is the most impactful factor in whether AI systems cite your con
 | Wikipedia | ❌ No | No article exists for Nolilab or Loko GPS Tracker | **Very High** — Wikipedia is the primary structured knowledge source for all major LLMs |
 | Wikidata | ❌ No | No entity record | **High** — machine-readable entity data used by Google Knowledge Graph and multiple AI systems |
 | LinkedIn | ✅ Yes | Company page exists — 89 followers, 2–10 employees, active posts | **Medium** — Bing and ChatGPT use LinkedIn as an entity validation signal |
-| YouTube | ✅ Partial | Official channel exists (@nolilab_loko_gps) — no third-party review videos found | **High** — Gemini and Perplexity heavily reference YouTube content |
+| YouTube | ✅ Partial | Official channel exists (@LOKO_OFFLINEGPS) — no third-party review videos found | **High** — Gemini and Perplexity heavily reference YouTube content |
 | Reddit | ❌ None confirmed | No threads found in r/LoRa, r/GPS, r/drones, or r/homeautomation | **Very High** — 46.7% of Perplexity's citations come from Reddit; it is one of the most AI-cited platforms |
 | GitHub | ⚠️ Namespace issue | github.com/nolilab is occupied by an unrelated personal account; no official Nolilab org | **Medium** — Open-source hardware on GitHub generates organic citations from the maker community |
 | Google Knowledge Panel | ❌ No | No Knowledge Panel detected for Nolilab or Loko GPS | **High** — signals Google has recognized the brand as a verified entity |
