@@ -562,8 +562,24 @@ function syncGnssTraceExportButtonState() {
     exportGnssTraceCsvButton.disabled = !hasSelection;
 }
 
+function showGnssTraceMapMessage(message) {
+    if (!gnssTraceMapContainer) {
+        return;
+    }
+
+    const note = document.createElement("p");
+    note.className = "gnss-trace-map-message";
+    note.textContent = message;
+    gnssTraceMapContainer.replaceChildren(note);
+}
+
 function ensureGnssTraceMap() {
-    if (gnssTraceMap || !gnssTraceMapContainer || typeof window.L === "undefined") {
+    if (gnssTraceMap || !gnssTraceMapContainer) {
+        return;
+    }
+
+    if (typeof window.L === "undefined") {
+        showGnssTraceMapMessage("The map library could not be loaded, so the trace map is unavailable. The trace table below still lists every recorded fix.");
         return;
     }
 
