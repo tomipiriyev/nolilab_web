@@ -61,7 +61,7 @@
       "name": "Loko 追踪猎犬的距离有多远？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Loko 在开阔区域的射程可达到 km 的 20+。在森林或丘陵地形中，预计有 2-5 个 km，它几乎涵盖了任何狩猎场景。"
+        "text": "Loko 在开阔区域的射程可达到 km 的 20+。在森林或丘陵地带，预计有 2-5 个 km，它几乎涵盖了任何狩猎场景。"
       }
     },
     {
@@ -514,6 +514,60 @@
     line-gap-override: 0%;
     size-adjust: 107.64%;
   }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: var(--spacing-sm);
+  }
+
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    background: var(--bg-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    user-select: none;
+    list-style: none;
+    gap: var(--spacing-sm);
+    transition: background-color 0.15s ease;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 300;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] > .faq-question { background: var(--bg-secondary); }
+  details[open] .faq-question::after { content: '−'; }
+
+  .faq-answer {
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-answer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .faq-answer a:hover { color: var(--accent-hover); }
 </style>
 <script defer="" src="/js/layout.js?v=20260816"></script>
 </head>
@@ -589,7 +643,7 @@
 <div class="container">
 <h2>适合狗狗的超轻量</h2>
 <p>许多 GPS 狗追踪器又大又重。</p>
-<p>Loko Air 重量仅为 15 克，即使对于小型猎犬来说也很舒适。紧凑的设计可防止不适，并让您的狗在长时间狩猎过程中自然移动。</p>
+<p>Loko Air 重量仅为 14 克，即使对于小型猎犬来说也很舒适。紧凑的设计可防止不适，并让您的狗在长时间狩猎过程中自然移动。</p>
 </div>
 </div>
 <!-- Multiple Dogs -->
@@ -701,6 +755,31 @@
 <div style="max-width:800px; margin: 2rem auto 0; padding: 0 1rem;">
 <p style="font-size:0.875rem; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">进一步阅读</p>
 <p><a href="/blog/lora-gps-tracker-for-dogs/" style="color: var(--accent); font-weight: 500;">LoRa GPS 狗狗追踪器：无需 SIM 卡即可离线追踪狗狗 →</a></p>
+</div>
+</div>
+</div>
+<!-- ── FAQ ── -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">常问问题</p>
+<h2>猎人询问有关狗 GPS 追踪的问题</h2>
+<div class="faq-list">
+<details class="faq-item">
+<summary class="faq-question">Loko GPS 追踪器可以在没有手机服务的情况下工作吗？</summary>
+<p class="faq-answer">是的。 Loko 使用 LoRa 无线电技术在您的狗身上的跟踪器和手持接收器之间直接通信 - 无需 SIM 卡，无需蜂窝网络，无需订阅。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Loko 追踪猎犬的距离有多远？</summary>
+<p class="faq-answer">Loko 在开阔区域的射程可达到 km 的 20+。在森林或丘陵地带，预计有 2-5 个 km，它几乎涵盖了任何狩猎场景。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">电池可持续使用多长时间？</summary>
+<p class="faq-answer">电池寿命长达 1 年，使 Loko 非常适合长时间狩猎和扩展部署，无需充电。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Loko 需要订阅吗？</summary>
+<p class="faq-answer">不需要。由于 Loko 通过 LoRa 无线电而不是蜂窝网络进行通信，因此无需支付月费或订阅费。</p>
+</details>
 </div>
 </div>
 </div>

@@ -18,11 +18,11 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Выслеживайте охотничьих собак там, где нет сигнала. Loko использует радиомодуль LoRa — без сотовой связи, без SIM-карты, без подписки. Серия 20km, 14 г, срок службы батареи 1 год." name="description"/>
+<meta content="Выслеживайте охотничьих собак там, где нет сигнала. Loko использует радио LoRa — без сотовой связи, без SIM-карты, без подписки. Серия 20km, 14 г, срок службы батареи 1 год." name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <meta content="article" property="og:type"/>
 <meta content="Трекер GPS для охотничьих собак: сотовый телефон не нужен" property="og:title"/>
-<meta content="Выслеживайте охотничьих собак там, где нет сигнала. Loko использует радиомодуль LoRa — без сотовой связи, без SIM-карты, без подписки. Серия 20km, 14 г, срок службы батареи 1 год." property="og:description"/>
+<meta content="Выслеживайте охотничьих собак там, где нет сигнала. Loko использует радио LoRa — без сотовой связи, без SIM-карты, без подписки. Серия 20km, 14 г, срок службы батареи 1 год." property="og:description"/>
 <meta content="https://www.nolilab.com/ru/hunting-dogs/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="Loko GPS Tracker for Hunting Dogs" property="og:image:alt"/>
@@ -30,7 +30,7 @@
 <meta content="ru_RU" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Трекер GPS для охотничьих собак: сотовый телефон не нужен" name="twitter:title"/>
-<meta content="Выслеживайте охотничьих собак там, где нет сигнала. Loko использует радиомодуль LoRa — без сотовой связи, без SIM-карты, без подписки. Серия 20km, 14 г, срок службы батареи 1 год." name="twitter:description"/>
+<meta content="Выслеживайте охотничьих собак там, где нет сигнала. Loko использует радио LoRa — без сотовой связи, без SIM-карты, без подписки. Серия 20km, 14 г, срок службы батареи 1 год." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
 <meta content="hunting dog GPS tracker, GPS tracker no cell service, offline dog tracker, LoRa dog tracker, no subscription GPS dog tracker" name="keywords"/>
@@ -514,6 +514,60 @@
     line-gap-override: 0%;
     size-adjust: 107.64%;
   }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: var(--spacing-sm);
+  }
+
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    background: var(--bg-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    user-select: none;
+    list-style: none;
+    gap: var(--spacing-sm);
+    transition: background-color 0.15s ease;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 300;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] > .faq-question { background: var(--bg-secondary); }
+  details[open] .faq-question::after { content: '−'; }
+
+  .faq-answer {
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-answer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .faq-answer a:hover { color: var(--accent-hover); }
 </style>
 <script defer="" src="/js/layout.js?v=20260816"></script>
 </head>
@@ -555,7 +609,7 @@
 <div class="device-card">
 <span class="device-num">1</span>
 <h3>Loko Air (прикреплен к собаке)</h3>
-<p>Крошечный передатчик GPS, который отправляет данные о местоположении с помощью радиомодуля LoRa.</p>
+<p>Крошечный передатчик GPS, который отправляет данные о местоположении с помощью радиомодема LoRa.</p>
 </div>
 <div class="device-card">
 <span class="device-num">2</span>
@@ -589,7 +643,7 @@
 <div class="container">
 <h2>Сверхлегкий для собак</h2>
 <p>Многие трекеры для собак GPS большие и тяжелые.</p>
-<p>Loko Air весит всего 15 грамм, что делает его удобным даже для небольших охотничьих собак. Компактный дизайн предотвращает дискомфорт и позволяет вашей собаке двигаться естественно во время длительной охоты.</p>
+<p>Loko Air весит всего 14 грамм, что делает его удобным даже для небольших охотничьих собак. Компактный дизайн предотвращает дискомфорт и позволяет вашей собаке двигаться естественно во время длительной охоты.</p>
 </div>
 </div>
 <!-- Multiple Dogs -->
@@ -701,6 +755,31 @@
 <div style="max-width:800px; margin: 2rem auto 0; padding: 0 1rem;">
 <p style="font-size:0.875rem; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Дальнейшее чтение</p>
 <p><a href="/blog/lora-gps-tracker-for-dogs/" style="color: var(--accent); font-weight: 500;">LoRa GPS Трекер для собак: автономное отслеживание собак без SIM-карты →</a></p>
+</div>
+</div>
+</div>
+<!-- ── FAQ ── -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Часто задаваемые вопросы</p>
+<h2>Вопросы, которые задают охотники об отслеживании собак GPS</h2>
+<div class="faq-list">
+<details class="faq-item">
+<summary class="faq-question">Может ли трекер Loko GPS работать без сотовой связи?</summary>
+<p class="faq-answer">Да. Loko использует радиотехнологию LoRa для прямой связи между трекером на вашей собаке и портативным приемником — без SIM-карты, без сотовой сети, без подписки.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">На каком расстоянии Loko отслеживает охотничьих собак?</summary>
+<p class="faq-answer">Loko обеспечивает дальность действия более 20 km на открытых площадках. В лесу или на холмистой местности ожидайте 2–5 km, которые подходят практически для любого сценария охоты.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Как долго работает батарея?</summary>
+<p class="faq-answer">Срок службы батареи до 1 года, что делает Loko идеальным для длительной охоты и длительного использования без подзарядки.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Требуется ли для Loko подписка?</summary>
+<p class="faq-answer">Нет. Поскольку Loko обменивается данными через радиоканал LoRa, а не через сотовую сеть, ежемесячная плата или подписка не взимаются.</p>
+</details>
 </div>
 </div>
 </div>

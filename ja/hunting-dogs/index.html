@@ -18,11 +18,11 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="信号のないところで狩猟犬を追跡します。 Loko は LoRa 無線を使用します。携帯電話サービス、SIM、サブスクリプションはありません。 20km 範囲、14g、バッテリー 1 年間。" name="description"/>
+<meta content="信号のない場所で狩猟犬を追跡します。 Loko は LoRa 無線を使用します。携帯電話サービス、SIM、サブスクリプションはありません。 20km 範囲、14g、1 年間バッテリー。" name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <meta content="article" property="og:type"/>
 <meta content="狩猟犬用 GPS トラッカー: セルは不要" property="og:title"/>
-<meta content="信号のないところで狩猟犬を追跡します。 Loko は LoRa 無線を使用します。携帯電話サービス、SIM、サブスクリプションはありません。 20km 範囲、14g、バッテリー 1 年間。" property="og:description"/>
+<meta content="信号のない場所で狩猟犬を追跡します。 Loko は LoRa 無線を使用します。携帯電話サービス、SIM、サブスクリプションはありません。 20km 範囲、14g、1 年間バッテリー。" property="og:description"/>
 <meta content="https://www.nolilab.com/ja/hunting-dogs/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="Loko GPS Tracker for Hunting Dogs" property="og:image:alt"/>
@@ -30,7 +30,7 @@
 <meta content="ja_JP" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="狩猟犬用 GPS トラッカー: セルは不要" name="twitter:title"/>
-<meta content="信号のないところで狩猟犬を追跡します。 Loko は LoRa 無線を使用します。携帯電話サービス、SIM、サブスクリプションはありません。 20km 範囲、14g、バッテリー 1 年間。" name="twitter:description"/>
+<meta content="信号のない場所で狩猟犬を追跡します。 Loko は LoRa 無線を使用します。携帯電話サービス、SIM、サブスクリプションはありません。 20km 範囲、14g、1 年間バッテリー。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
 <meta content="hunting dog GPS tracker, GPS tracker no cell service, offline dog tracker, LoRa dog tracker, no subscription GPS dog tracker" name="keywords"/>
@@ -61,7 +61,7 @@
       "name": "Loko は狩猟犬をどこまで追跡しますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Loko は、オープンエリアで 20+ km の範囲を達成します。森林や丘陵地帯では、実質的にあらゆる狩猟シナリオをカバーする 2 ～ 5 台の km が必要です。"
+        "text": "Loko は、オープンエリアで 20+ km の範囲を達成します。森林や丘陵地では、実質的にあらゆる狩猟シナリオをカバーする 2 ～ 5 台の km が必要です。"
       }
     },
     {
@@ -69,7 +69,7 @@
       "name": "バッテリーはどのくらい持続しますか?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "最長 1 年のバッテリー寿命により、Loko は再充電せずに長時間の狩猟や拡張展開に最適です。"
+        "text": "最長 1 年間のバッテリー寿命により、Loko は再充電せずに長時間の狩猟や拡張展開に最適です。"
       }
     },
     {
@@ -514,6 +514,60 @@
     line-gap-override: 0%;
     size-adjust: 107.64%;
   }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: var(--spacing-sm);
+  }
+
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    background: var(--bg-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    user-select: none;
+    list-style: none;
+    gap: var(--spacing-sm);
+    transition: background-color 0.15s ease;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 300;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] > .faq-question { background: var(--bg-secondary); }
+  details[open] .faq-question::after { content: '−'; }
+
+  .faq-answer {
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-answer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .faq-answer a:hover { color: var(--accent-hover); }
 </style>
 <script defer="" src="/js/layout.js?v=20260816"></script>
 </head>
@@ -589,7 +643,7 @@
 <div class="container">
 <h2>犬用超軽量</h2>
 <p>多くの GPS ドッグ トラッカーは大きくて重いです。</p>
-<p>Loko Air の重さはわずか 15 グラムなので、小型の狩猟犬でも快適です。コンパクトなデザインで不快感を防ぎ、長時間の狩猟でも愛犬が自然に動くことができます。</p>
+<p>Loko Air の重さはわずか 14 グラムなので、小型の狩猟犬でも快適です。コンパクトなデザインで不快感を防ぎ、長時間の狩猟でも愛犬が自然に動けるようにします。</p>
 </div>
 </div>
 <!-- Multiple Dogs -->
@@ -701,6 +755,31 @@
 <div style="max-width:800px; margin: 2rem auto 0; padding: 0 1rem;">
 <p style="font-size:0.875rem; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">さらに読む</p>
 <p><a href="/blog/lora-gps-tracker-for-dogs/" style="color: var(--accent); font-weight: 500;">LoRa GPS 犬用トラッカー: SIM カードなしのオフライン犬追跡 →</a></p>
+</div>
+</div>
+</div>
+<!-- ── FAQ ── -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">よくある質問</p>
+<h2>犬の GPS 追跡についてハンターが尋ねる質問</h2>
+<div class="faq-list">
+<details class="faq-item">
+<summary class="faq-question">Loko GPS トラッカーは携帯電話サービスなしでも動作しますか?</summary>
+<p class="faq-answer">はい。 Loko は、LoRa 無線テクノロジーを使用して、犬のトラッカーとハンドヘルド受信機の間で直接通信します。SIM カードや携帯電話ネットワーク、サブスクリプションは必要ありません。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Loko は狩猟犬をどこまで追跡しますか?</summary>
+<p class="faq-answer">Loko は、オープンエリアで 20+ km の範囲を達成します。森林や丘陵地では、実質的にあらゆる狩猟シナリオをカバーする 2 ～ 5 台の km が必要です。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">バッテリーはどのくらい持続しますか?</summary>
+<p class="faq-answer">最長 1 年間のバッテリー寿命により、Loko は再充電せずに長時間の狩猟や拡張展開に最適です。</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Loko にはサブスクリプションが必要ですか?</summary>
+<p class="faq-answer">いいえ。Loko は携帯電話ネットワークではなく LoRa 無線を介して通信するため、月額料金やサブスクリプションは発生しません。</p>
+</details>
 </div>
 </div>
 </div>

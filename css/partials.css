@@ -174,3 +174,7 @@ header {
 .language-option.active .lang-code {
   color:var(--accent);
 }
+
+/* Reserve header height so runtime injection does not shift layout (CLS) */
+#site-header { min-height: 83px; }
+@media (max-width: 768px) { #site-header { min-height: 93px; } }

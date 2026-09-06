@@ -515,6 +515,60 @@
     line-gap-override: 0%;
     size-adjust: 107.64%;
   }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: var(--spacing-sm);
+  }
+
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    background: var(--bg-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    user-select: none;
+    list-style: none;
+    gap: var(--spacing-sm);
+    transition: background-color 0.15s ease;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 300;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] > .faq-question { background: var(--bg-secondary); }
+  details[open] .faq-question::after { content: '−'; }
+
+  .faq-answer {
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-answer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .faq-answer a:hover { color: var(--accent-hover); }
 </style>
 <script defer="" src="/js/layout.js?v=20260816"></script>
 
@@ -595,7 +649,7 @@
 <div class="container">
 <h2>Ultra-Lightweight for Dogs</h2>
 <p>Many GPS dog trackers are large and heavy.</p>
-<p>Loko Air weighs only 15 grams, making it comfortable even for smaller hunting dogs. The compact design prevents discomfort and allows your dog to move naturally during long hunts.</p>
+<p>Loko Air weighs only 14 grams, making it comfortable even for smaller hunting dogs. The compact design prevents discomfort and allows your dog to move naturally during long hunts.</p>
 </div>
 </div>
 <!-- Multiple Dogs -->
@@ -707,6 +761,31 @@
 <div style="max-width:800px; margin: 2rem auto 0; padding: 0 1rem;">
 <p style="font-size:0.875rem; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Further Reading</p>
 <p><a href="/blog/lora-gps-tracker-for-dogs/" style="color: var(--accent); font-weight: 500;">LoRa GPS Tracker for Dogs: Offline Dog Tracking Without a SIM Card →</a></p>
+</div>
+</div>
+</div>
+<!-- ── FAQ ── -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">FAQ</p>
+<h2>Questions Hunters Ask About Dog GPS Tracking</h2>
+<div class="faq-list">
+<details class="faq-item">
+<summary class="faq-question">Can the Loko GPS Tracker work without cell service?</summary>
+<p class="faq-answer">Yes. Loko uses LoRa radio technology to communicate directly between the tracker on your dog and the handheld receiver — no SIM card, no cellular network, no subscription required.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">How far does Loko track hunting dogs?</summary>
+<p class="faq-answer">Loko achieves 20+ km range in open areas. In forests or hilly terrain, expect 2–5 km, which covers virtually any hunting scenario.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">How long does the battery last?</summary>
+<p class="faq-answer">Up to 1 year battery life, making Loko ideal for long hunts and extended deployments without recharging.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">Does Loko require a subscription?</summary>
+<p class="faq-answer">No. Because Loko communicates via LoRa radio rather than a cellular network, there are no monthly fees or subscriptions.</p>
+</details>
 </div>
 </div>
 </div>

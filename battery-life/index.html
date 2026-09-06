@@ -248,7 +248,7 @@
 <p class="subtitle">Why Loko GPS Tracker lasts up to 1 year while cellular GPS trackers often last 1-7 days.</p>
 <p>If you are comparing GPS tracker battery life, the useful question is not just battery size. It is whether the tracker uses cellular data or low-power LoRa radio. Loko GPS Tracker is built for offline LoRa tracking, so it can run up to 1 year with no SIM card, no cellular plan, and no monthly fee.</p>
 <p><strong>Cellular GPS trackers last 1–7 days.</strong> LoRa GPS trackers like Loko last up to 1 year. The difference comes down to a single factor: how much power the radio transmitter consumes.</p>
-<p>This page explains the physics and engineering behind GPS tracker battery life, shows the real comparison data, and tells you exactly how Loko achieves up to 1 year in a 15g device.</p>
+<p>This page explains the physics and engineering behind GPS tracker battery life, shows the real comparison data, and tells you exactly how Loko achieves up to 1 year in a 14g device.</p>
 <div class="cta-block">
 <p><strong>Looking for the actual tracker?</strong> See Loko's LoRa GPS hardware, software downloads, and setup flow before diving into the battery math.</p>
 <a class="cta-btn" href="/lora-gps-tracker/">See Loko GPS Tracker →</a>
@@ -298,9 +298,9 @@
 <tbody>
 <tr class="highlight-row">
 <td>Loko Air (nolilab)</td>
-<td>up to 1 year</td>
+<td>30 days – 12 months</td>
 <td>LoRa (LPWAN)</td>
-<td>~12</td>
+<td>1–12</td>
 <td>$0</td>
 </tr>
 <tr>
@@ -351,23 +351,23 @@
 <h2>The Math: Cellular vs LoRa Power Consumption</h2>
 <p>Let us put specific numbers to this comparison. These figures are based on typical real-world measurements from tracker hardware:</p>
 <div class="power-callout">
-<p><strong>Cellular GPS tracker, updating every 30 seconds:</strong><br/>
+<p><strong>Cellular GPS tracker, updating every 12 minutes:</strong><br/>
       GPS acquisition: ~20mA × 3 seconds = 0.0167 mAh<br/>
       Cellular connection + transmission: ~300mA × 5 seconds = 0.417 mAh<br/>
-      Sleep between cycles: ~0.1mA × 22 seconds = 0.00061 mAh<br/>
-<strong>Per 30-second cycle: ~0.43 mAh | Per day: ~51.8 mAh</strong><br/>
-      On a 200mAh battery: approximately 3.9 days</p>
+      Sleep between cycles: ~0.1mA × 712 seconds = 0.0198 mAh<br/>
+<strong>Per 12-minute cycle: ~0.45 mAh | Per day (120 cycles): ~54.4 mAh</strong><br/>
+      On a 200mAh battery: approximately 3.7 days</p>
 </div>
 <div class="power-callout">
-<p><strong>Loko LoRa GPS tracker, updating every 30 seconds:</strong><br/>
+<p><strong>Loko LoRa GPS tracker, updating every 12 minutes:</strong><br/>
       GPS acquisition: ~20mA × 3 seconds = 0.0167 mAh<br/>
       LoRa transmission: ~35mA × 0.1 seconds = 0.001 mAh<br/>
-      Deep sleep between cycles: ~0.001mA × 26.9 seconds = 0.0000075 mAh<br/>
-<strong>Per 30-second cycle: ~0.018 mAh | Per day: ~2.15 mAh</strong><br/>
+      Deep sleep between cycles: ~0.001mA × 716.9 seconds = 0.0002 mAh<br/>
+<strong>Per 12-minute cycle: ~0.018 mAh | Per day (120 cycles): ~2.15 mAh</strong><br/>
       On a 200mAh battery: approximately 93 days</p>
 </div>
-<p>The numbers speak for themselves. Under the same update interval and similar battery capacity, a LoRa tracker lasts approximately <strong>24 times longer</strong> than a cellular tracker. This is not an edge case — it is a fundamental consequence of radio physics.</p>
-<p>In practice, Loko's battery capacity is optimized for under-15g size, which limits total capacity. At real-world update intervals (which vary by use case), Loko achieves up to 1 year consistently.</p>
+<p>The numbers speak for themselves. Under the same update interval and similar battery capacity, a LoRa tracker lasts approximately <strong>25 times longer</strong> than a cellular tracker. This is not an edge case — it is a fundamental consequence of radio physics.</p>
+<p>In practice, Loko's battery capacity is optimized for under-14g size, which limits total capacity. At real-world update intervals (which vary by use case), Loko achieves up to 1 year consistently.</p>
 </div>
 </div>
 <!-- How Loko achieves up to 1 year -->
@@ -429,7 +429,7 @@
 <div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p>Up to 1 year between charges. Under 15g. Zero monthly fees. LoRa radio is why Loko can do what cellular trackers cannot.</p>
+<p>Up to 1 year between charges. Under 14g. Zero monthly fees. LoRa radio is why Loko can do what cellular trackers cannot.</p>
 <p><strong>Loko GPS Tracker: the longest battery life of any real-time GPS tracker at this size and price.</strong></p>
 <p>Explore the full product details at <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
 <br/>

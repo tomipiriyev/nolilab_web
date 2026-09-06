@@ -514,6 +514,60 @@
     line-gap-override: 0%;
     size-adjust: 107.64%;
   }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: var(--spacing-sm);
+  }
+
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    background: var(--bg-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    user-select: none;
+    list-style: none;
+    gap: var(--spacing-sm);
+    transition: background-color 0.15s ease;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 300;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] > .faq-question { background: var(--bg-secondary); }
+  details[open] .faq-question::after { content: '−'; }
+
+  .faq-answer {
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-answer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .faq-answer a:hover { color: var(--accent-hover); }
 </style>
 <script defer="" src="/js/layout.js?v=20260816"></script>
 </head>
@@ -589,7 +643,7 @@
 <div class="container">
 <h2>Ultraligero para perros</h2>
 <p>Muchos rastreadores de perros GPS son grandes y pesados.</p>
-<p>Loko Air pesa sólo 15 gramos, lo que lo hace cómodo incluso para perros de caza más pequeños. El diseño compacto evita molestias y permite que su perro se mueva con naturalidad durante cacerías largas.</p>
+<p>Loko Air pesa sólo 14 gramos, lo que lo hace cómodo incluso para perros de caza más pequeños. El diseño compacto evita molestias y permite que su perro se mueva con naturalidad durante cacerías largas.</p>
 </div>
 </div>
 <!-- Multiple Dogs -->
@@ -701,6 +755,31 @@
 <div style="max-width:800px; margin: 2rem auto 0; padding: 0 1rem;">
 <p style="font-size:0.875rem; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Lectura adicional</p>
 <p><a href="/blog/lora-gps-tracker-for-dogs/" style="color: var(--accent); font-weight: 500;">LoRa GPS Rastreador para Perros: Seguimiento de Perros Offline Sin Tarjeta SIM →</a></p>
+</div>
+</div>
+</div>
+<!-- ── FAQ ── -->
+<div class="content-block">
+<div class="container">
+<p class="section-label">Preguntas frecuentes</p>
+<h2>Preguntas que hacen los cazadores sobre el seguimiento de perros GPS</h2>
+<div class="faq-list">
+<details class="faq-item">
+<summary class="faq-question">¿Puede el rastreador Loko GPS funcionar sin servicio celular?</summary>
+<p class="faq-answer">Sí. Loko utiliza la tecnología de radio LoRa para comunicarse directamente entre el rastreador de su perro y el receptor de mano: sin tarjeta SIM, sin red celular ni necesidad de suscripción.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">¿Hasta dónde rastrea Loko a los perros de caza?</summary>
+<p class="faq-answer">Loko alcanza un alcance de más de 20 km en áreas abiertas. En bosques o terrenos montañosos, espere entre 2 y 5 km, que cubren prácticamente cualquier escenario de caza.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">¿Cuánto dura la batería?</summary>
+<p class="faq-answer">Hasta 1 año de duración de la batería, lo que hace que Loko sea ideal para cacerías largas y despliegues prolongados sin recarga.</p>
+</details>
+<details class="faq-item">
+<summary class="faq-question">¿Loko requiere una suscripción?</summary>
+<p class="faq-answer">No. Debido a que Loko se comunica a través de la radio LoRa en lugar de una red celular, no hay tarifas ni suscripciones mensuales.</p>
+</details>
 </div>
 </div>
 </div>
