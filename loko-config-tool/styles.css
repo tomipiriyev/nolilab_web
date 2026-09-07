@@ -722,6 +722,46 @@ input[type="checkbox"]:focus {
     background: #dfe6ec;
 }
 
+.gnss-trace-map-head {
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.gnss-trace-map-modes {
+    display: inline-flex;
+    padding: 3px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface-strong);
+}
+
+.gnss-trace-map-mode {
+    min-width: 46px;
+    height: 30px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+.gnss-trace-map-mode.is-active {
+    background: var(--dark);
+    color: white;
+}
+
+.gnss-trace-map-note {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+    font-weight: 600;
+}
+
 .gnss-trace-map-message {
     display: flex;
     align-items: center;
