@@ -110,9 +110,13 @@ const MAPLIBRE_STYLESHEET_URL = "/css/maplibre-gl-5.6.1.css";
 const GNSS_TRACE_3D_PITCH = 62;
 const GNSS_TRACE_3D_MAX_PITCH = 74;
 const METRES_PER_DEGREE_LAT = 111320;
-// fill-extrusion needs a polygon, so each track segment becomes a ribbon a few
-// metres wide. Narrower than this and the wall vanishes at low zoom.
-const GNSS_TRACE_CURTAIN_HALF_WIDTH_M = 3;
+// fill-extrusion needs a polygon, so each track segment becomes a ribbon. The
+// width scales with the track: a fixed 3 m half-width that reads well over a
+// 5 km hike is wider than most segments of a 200 m walk, and those quads then
+// overlap into a solid blob.
+const GNSS_TRACE_CURTAIN_WIDTH_RATIO = 0.01;
+const GNSS_TRACE_CURTAIN_HALF_WIDTH_MIN_M = 1;
+const GNSS_TRACE_CURTAIN_HALF_WIDTH_MAX_M = 8;
 // A real trace covers kilometres of ground but only tens of metres of altitude,
 // so at 1:1 the relief is invisible. The exaggeration is recomputed per trace so
 // the tallest wall is a fixed fraction of the track's ground extent, and the
@@ -864,7 +868,7 @@ function traceMetresBetween(a, b) {
 }
 
 // The four corners of the ribbon under one track segment, as a closed ring.
-function buildCurtainRing(a, b) {
+function buildCurtainRing(a, b, halfWidthM) {
     const midLat = (a.latitude + b.latitude) / 2;
     const cosLat = Math.cos(midLat * (Math.PI / 180)) || 1e-6;
     const dx = (b.longitude - a.longitude) * cosLat;
@@ -876,7 +880,7 @@ function buildCurtainRing(a, b) {
     }
 
     // Perpendicular to the segment, converted back from the local metric frame.
-    const halfWidthDeg = GNSS_TRACE_CURTAIN_HALF_WIDTH_M / METRES_PER_DEGREE_LAT;
+    const halfWidthDeg = halfWidthM / METRES_PER_DEGREE_LAT;
     const offsetLon = ((-dy / length) * halfWidthDeg) / cosLat;
     const offsetLat = (dx / length) * halfWidthDeg;
 
@@ -887,6 +891,37 @@ function buildCurtainRing(a, b) {
         [a.longitude - offsetLon, a.latitude - offsetLat],
         [a.longitude + offsetLon, a.latitude + offsetLat]
     ];
+}
+
+// A stationary device still logs a fix every few seconds, so a parked trace is
+// hundreds of points centimetres apart. One quad per pair would stack overlapping
+// ribbons into a z-fighting blob, so keep only the fixes far enough apart to draw
+// a wall that is longer than it is wide. Every fix still appears as a clickable
+// point and on the ground line — this thins the walls only.
+function thinGnssTraceFixes(fixes, minSpacingM) {
+    const kept = [fixes[0]];
+
+    fixes.slice(1).forEach((fix) => {
+        if (traceMetresBetween(kept[kept.length - 1], fix) >= minSpacingM) {
+            kept.push(fix);
+        }
+    });
+
+    const lastFix = fixes[fixes.length - 1];
+    if (kept[kept.length - 1] !== lastFix) {
+        kept.push(lastFix);
+    }
+
+    return kept;
+}
+
+// 0.24 must not print as "0" — the factor is the caption's whole point.
+function formatExaggeration(value) {
+    if (value >= 10) {
+        return value.toFixed(0);
+    }
+
+    return value >= 1 ? value.toFixed(1) : value.toFixed(2);
 }
 
 function locatedGnssTraceRecords(records) {
@@ -914,16 +949,26 @@ function buildGnssTraceCurtain(records) {
     const targetHeightM = Math.max(extentM * GNSS_TRACE_CURTAIN_TARGET_RATIO, GNSS_TRACE_CURTAIN_MIN_HEIGHT_M);
     const exaggeration = relief > 0 ? Math.min(targetHeightM / relief, GNSS_TRACE_EXAGGERATION_MAX) : 0;
 
+    const halfWidthM = Math.min(
+        Math.max(extentM * GNSS_TRACE_CURTAIN_WIDTH_RATIO, GNSS_TRACE_CURTAIN_HALF_WIDTH_MIN_M),
+        GNSS_TRACE_CURTAIN_HALF_WIDTH_MAX_M
+    );
+    // A wall at least as long as it is wide, so consecutive quads sit end to end
+    // instead of on top of each other.
+    const wallFixes = thinGnssTraceFixes(fixes, halfWidthM * 2);
+
     const walls = [];
-    for (let index = 0; index < fixes.length - 1; index += 1) {
-        const from = fixes[index];
-        const to = fixes[index + 1];
-        const ring = buildCurtainRing(from, to);
+    for (let index = 0; index < wallFixes.length - 1; index += 1) {
+        const from = wallFixes[index];
+        const to = wallFixes[index + 1];
+        const ring = buildCurtainRing(from, to, halfWidthM);
         if (!ring) {
             continue;
         }
 
-        const alt = (altitudes[index] + altitudes[index + 1]) / 2;
+        const fromAlt = Number.isFinite(from.alt) ? from.alt : minAlt;
+        const toAlt = Number.isFinite(to.alt) ? to.alt : minAlt;
+        const alt = (fromAlt + toAlt) / 2;
         // A flat trace still gets a low wall so the track reads as 3D.
         const height = exaggeration > 0
             ? Math.max((alt - minAlt) * exaggeration, 1)
@@ -1153,7 +1198,7 @@ function renderGnssTrace3d(records) {
 
     const altRange = `${curtain.minAlt.toFixed(0)}–${curtain.maxAlt.toFixed(0)} m`;
     const scale = curtain.exaggeration > 0
-        ? `vertical exaggeration ×${curtain.exaggeration.toFixed(0)}`
+        ? `vertical exaggeration ×${formatExaggeration(curtain.exaggeration)}`
         : "flat trace, walls drawn at a fixed height";
     showGnssTraceMapNote(`Altitude ${altRange} · ${scale} · terrain ×${TERRAIN_EXAGGERATION} · drag with the right mouse button to rotate and tilt.`);
 }
