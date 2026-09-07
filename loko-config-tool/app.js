@@ -109,21 +109,13 @@ const MAPLIBRE_SCRIPT_URL = "/js/maplibre-gl-5.6.1.min.js";
 const MAPLIBRE_STYLESHEET_URL = "/css/maplibre-gl-5.6.1.css";
 const GNSS_TRACE_3D_PITCH = 62;
 const GNSS_TRACE_3D_MAX_PITCH = 74;
-const METRES_PER_DEGREE_LAT = 111320;
-// fill-extrusion needs a polygon, so each track segment becomes a ribbon. The
-// width scales with the track: a fixed 3 m half-width that reads well over a
-// 5 km hike is wider than most segments of a 200 m walk, and those quads then
-// overlap into a solid blob.
-const GNSS_TRACE_CURTAIN_WIDTH_RATIO = 0.01;
-const GNSS_TRACE_CURTAIN_HALF_WIDTH_MIN_M = 1;
-const GNSS_TRACE_CURTAIN_HALF_WIDTH_MAX_M = 8;
-// A real trace covers kilometres of ground but only tens of metres of altitude,
-// so at 1:1 the relief is invisible. The exaggeration is recomputed per trace so
-// the tallest wall is a fixed fraction of the track's ground extent, and the
-// factor is reported in the caption under the map.
-const GNSS_TRACE_CURTAIN_TARGET_RATIO = 0.14;
-const GNSS_TRACE_CURTAIN_MIN_HEIGHT_M = 12;
-const GNSS_TRACE_EXAGGERATION_MAX = 400;
+const GNSS_TRACE_POINT_SIZE_PX = 7;
+const GNSS_TRACE_SELECTED_POINT_SIZE_PX = 15;
+const GNSS_TRACE_PICK_RADIUS_PX = 14;
+// Same ramp the 2D map uses, as normalised RGB for the shader.
+const GNSS_TRACE_LOW_COLOR = [0.039, 0.639, 0.294];
+const GNSS_TRACE_HIGH_COLOR = [0.769, 0.541, 0.290];
+const GNSS_TRACE_SELECTED_COLOR = [0.941, 0.702, 0.478];
 // OpenTopoMap carries contour lines and hypsometric tints, so the relief reads
 // as terrain even before the mesh tilts it — a plain OSM raster goes flat and
 // unreadable once the camera pitches. Tiles stop at z17.
@@ -183,6 +175,11 @@ let gnssTraceMapMode = "2d";
 let gnssTraceMap3d = null;
 let gnssTraceMap3dReady = false;
 let maplibreLoadPromise = null;
+let gnssTrace3dGeometry = null;
+let gnssTrace3dGl = null;
+let gnssTrace3dMatrix = null;
+let gnssTrace3dSelectedIndex = -1;
+let gnssTrace3dNeedsRefit = false;
 let selectedGnssTraceRecordNumber = null;
 const gnssTraceExportSelection = new Set();
 const gnssTraceKnownRecordNumbers = new Set();
@@ -859,133 +856,57 @@ function showGnssTraceMapNote(text) {
     gnssTraceMapNote.hidden = !text;
 }
 
-// Metres between two fixes, equirectangular — accurate enough over a track.
-function traceMetresBetween(a, b) {
-    const midLat = ((a.latitude + b.latitude) / 2) * (Math.PI / 180);
-    const dx = (b.longitude - a.longitude) * Math.cos(midLat) * METRES_PER_DEGREE_LAT;
-    const dy = (b.latitude - a.latitude) * METRES_PER_DEGREE_LAT;
-    return Math.hypot(dx, dy);
-}
-
-// The four corners of the ribbon under one track segment, as a closed ring.
-function buildCurtainRing(a, b, halfWidthM) {
-    const midLat = (a.latitude + b.latitude) / 2;
-    const cosLat = Math.cos(midLat * (Math.PI / 180)) || 1e-6;
-    const dx = (b.longitude - a.longitude) * cosLat;
-    const dy = b.latitude - a.latitude;
-    const length = Math.hypot(dx, dy);
-
-    if (!length) {
-        return null;
-    }
-
-    // Perpendicular to the segment, converted back from the local metric frame.
-    const halfWidthDeg = halfWidthM / METRES_PER_DEGREE_LAT;
-    const offsetLon = ((-dy / length) * halfWidthDeg) / cosLat;
-    const offsetLat = (dx / length) * halfWidthDeg;
-
-    return [
-        [a.longitude + offsetLon, a.latitude + offsetLat],
-        [b.longitude + offsetLon, b.latitude + offsetLat],
-        [b.longitude - offsetLon, b.latitude - offsetLat],
-        [a.longitude - offsetLon, a.latitude - offsetLat],
-        [a.longitude + offsetLon, a.latitude + offsetLat]
-    ];
-}
-
-// A stationary device still logs a fix every few seconds, so a parked trace is
-// hundreds of points centimetres apart. One quad per pair would stack overlapping
-// ribbons into a z-fighting blob, so keep only the fixes far enough apart to draw
-// a wall that is longer than it is wide. Every fix still appears as a clickable
-// point and on the ground line — this thins the walls only.
-function thinGnssTraceFixes(fixes, minSpacingM) {
-    const kept = [fixes[0]];
-
-    fixes.slice(1).forEach((fix) => {
-        if (traceMetresBetween(kept[kept.length - 1], fix) >= minSpacingM) {
-            kept.push(fix);
-        }
-    });
-
-    const lastFix = fixes[fixes.length - 1];
-    if (kept[kept.length - 1] !== lastFix) {
-        kept.push(lastFix);
-    }
-
-    return kept;
-}
-
-// 0.24 must not print as "0" — the factor is the caption's whole point.
-function formatExaggeration(value) {
-    if (value >= 10) {
-        return value.toFixed(0);
-    }
-
-    return value >= 1 ? value.toFixed(1) : value.toFixed(2);
-}
-
 function locatedGnssTraceRecords(records) {
     return records.filter((record) => Number.isFinite(record.latitude) && Number.isFinite(record.longitude));
 }
 
-function buildGnssTraceCurtain(records) {
-    const fixes = locatedGnssTraceRecords(records);
-    if (fixes.length < 2) {
+// Every fix becomes a vertex at its own longitude, latitude AND altitude, so the
+// track hangs in space at the height the receiver reported. Altitudes are scaled
+// by the terrain exaggeration, otherwise points sitting on the ground would sink
+// into an exaggerated mesh.
+//
+// Mercator coordinates are around 0.64 while a whole track spans ~1e-6 of that;
+// float32 cannot resolve it. Positions are therefore uploaded relative to the
+// track's centre and the origin is folded back into the matrix at draw time.
+function buildGnssTrace3dGeometry(records) {
+    const fixes = locatedGnssTraceRecords(records).filter((fix) => Number.isFinite(fix.alt));
+    if (!fixes.length) {
         return null;
     }
 
-    const altitudes = fixes.map((fix) => (Number.isFinite(fix.alt) ? fix.alt : 0));
-    const minAlt = Math.min(...altitudes);
-    const maxAlt = Math.max(...altitudes);
-    const relief = maxAlt - minAlt;
-
-    // Ground extent of the whole track, used to scale the vertical exaggeration.
     const lats = fixes.map((fix) => fix.latitude);
     const lons = fixes.map((fix) => fix.longitude);
-    const corner = { latitude: Math.min(...lats), longitude: Math.min(...lons) };
-    const opposite = { latitude: Math.max(...lats), longitude: Math.max(...lons) };
-    const extentM = traceMetresBetween(corner, opposite) || GNSS_TRACE_CURTAIN_MIN_HEIGHT_M;
+    const alts = fixes.map((fix) => fix.alt);
+    const minAlt = Math.min(...alts);
+    const maxAlt = Math.max(...alts);
+    const altSpan = maxAlt - minAlt;
 
-    const targetHeightM = Math.max(extentM * GNSS_TRACE_CURTAIN_TARGET_RATIO, GNSS_TRACE_CURTAIN_MIN_HEIGHT_M);
-    const exaggeration = relief > 0 ? Math.min(targetHeightM / relief, GNSS_TRACE_EXAGGERATION_MAX) : 0;
-
-    const halfWidthM = Math.min(
-        Math.max(extentM * GNSS_TRACE_CURTAIN_WIDTH_RATIO, GNSS_TRACE_CURTAIN_HALF_WIDTH_MIN_M),
-        GNSS_TRACE_CURTAIN_HALF_WIDTH_MAX_M
+    const origin = window.maplibregl.MercatorCoordinate.fromLngLat(
+        [(Math.min(...lons) + Math.max(...lons)) / 2, (Math.min(...lats) + Math.max(...lats)) / 2],
+        minAlt * TERRAIN_EXAGGERATION
     );
-    // A wall at least as long as it is wide, so consecutive quads sit end to end
-    // instead of on top of each other.
-    const wallFixes = thinGnssTraceFixes(fixes, halfWidthM * 2);
 
-    const walls = [];
-    for (let index = 0; index < wallFixes.length - 1; index += 1) {
-        const from = wallFixes[index];
-        const to = wallFixes[index + 1];
-        const ring = buildCurtainRing(from, to, halfWidthM);
-        if (!ring) {
-            continue;
-        }
+    const positions = new Float32Array(fixes.length * 3);
+    const altFractions = new Float32Array(fixes.length);
 
-        const fromAlt = Number.isFinite(from.alt) ? from.alt : minAlt;
-        const toAlt = Number.isFinite(to.alt) ? to.alt : minAlt;
-        const alt = (fromAlt + toAlt) / 2;
-        // A flat trace still gets a low wall so the track reads as 3D.
-        const height = exaggeration > 0
-            ? Math.max((alt - minAlt) * exaggeration, 1)
-            : GNSS_TRACE_CURTAIN_MIN_HEIGHT_M;
-
-        walls.push({
-            type: "Feature",
-            properties: { alt, height, recordNumber: from.recordNumber },
-            geometry: { type: "Polygon", coordinates: [ring] }
-        });
-    }
+    fixes.forEach((fix, index) => {
+        const point = window.maplibregl.MercatorCoordinate.fromLngLat(
+            [fix.longitude, fix.latitude],
+            fix.alt * TERRAIN_EXAGGERATION
+        );
+        positions[index * 3] = point.x - origin.x;
+        positions[index * 3 + 1] = point.y - origin.y;
+        positions[index * 3 + 2] = point.z - origin.z;
+        altFractions[index] = altSpan > 0 ? (fix.alt - minAlt) / altSpan : 0;
+    });
 
     return {
+        fixes,
+        positions,
+        altFractions,
+        origin,
         minAlt,
         maxAlt,
-        exaggeration,
-        walls: { type: "FeatureCollection", features: walls },
         ground: {
             type: "FeatureCollection",
             features: [{
@@ -994,16 +915,225 @@ function buildGnssTraceCurtain(records) {
                 geometry: { type: "LineString", coordinates: fixes.map((fix) => [fix.longitude, fix.latitude]) }
             }]
         },
-        fixes: {
-            type: "FeatureCollection",
-            features: fixes.map((fix) => ({
-                type: "Feature",
-                properties: { recordNumber: fix.recordNumber },
-                geometry: { type: "Point", coordinates: [fix.longitude, fix.latitude] }
-            }))
-        },
         bounds: [[Math.min(...lons), Math.min(...lats)], [Math.max(...lons), Math.max(...lats)]]
     };
+}
+
+// out = a * b, column-major, kept in float64 so folding the origin into the
+// camera matrix does not throw away the precision the relative positions bought.
+function multiplyMat4(out, a, b) {
+    for (let column = 0; column < 4; column += 1) {
+        for (let row = 0; row < 4; row += 1) {
+            out[column * 4 + row] =
+                a[row] * b[column * 4] +
+                a[4 + row] * b[column * 4 + 1] +
+                a[8 + row] * b[column * 4 + 2] +
+                a[12 + row] * b[column * 4 + 3];
+        }
+    }
+
+    return out;
+}
+
+const GNSS_TRACE_3D_VERTEX_SHADER = `
+attribute vec3 a_pos;
+attribute float a_altFraction;
+uniform mat4 u_matrix;
+uniform float u_pointSize;
+varying float v_altFraction;
+void main() {
+    gl_Position = u_matrix * vec4(a_pos, 1.0);
+    gl_PointSize = u_pointSize;
+    v_altFraction = a_altFraction;
+}`;
+
+const GNSS_TRACE_3D_FRAGMENT_SHADER = `
+precision mediump float;
+varying float v_altFraction;
+uniform vec3 u_lowColor;
+uniform vec3 u_highColor;
+uniform vec3 u_overrideColor;
+uniform float u_useOverride;
+uniform float u_round;
+uniform float u_opacity;
+void main() {
+    float alpha = u_opacity;
+    if (u_round > 0.5) {
+        // gl_PointCoord only has meaning for POINTS; feather the rim so the dots
+        // do not alias into squares.
+        float d = length(gl_PointCoord - vec2(0.5));
+        if (d > 0.5) discard;
+        alpha *= smoothstep(0.5, 0.42, d);
+    }
+    vec3 ramp = mix(u_lowColor, u_highColor, clamp(v_altFraction, 0.0, 1.0));
+    gl_FragColor = vec4(mix(ramp, u_overrideColor, u_useOverride), alpha);
+}`;
+
+function compileGnssTrace3dProgram(gl) {
+    const build = (type, source) => {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            throw new Error(gl.getShaderInfoLog(shader));
+        }
+        return shader;
+    };
+
+    const program = gl.createProgram();
+    gl.attachShader(program, build(gl.VERTEX_SHADER, GNSS_TRACE_3D_VERTEX_SHADER));
+    gl.attachShader(program, build(gl.FRAGMENT_SHADER, GNSS_TRACE_3D_FRAGMENT_SHADER));
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        throw new Error(gl.getProgramInfoLog(program));
+    }
+
+    return {
+        program,
+        attributes: {
+            pos: gl.getAttribLocation(program, "a_pos"),
+            altFraction: gl.getAttribLocation(program, "a_altFraction")
+        },
+        uniforms: {
+            matrix: gl.getUniformLocation(program, "u_matrix"),
+            pointSize: gl.getUniformLocation(program, "u_pointSize"),
+            lowColor: gl.getUniformLocation(program, "u_lowColor"),
+            highColor: gl.getUniformLocation(program, "u_highColor"),
+            overrideColor: gl.getUniformLocation(program, "u_overrideColor"),
+            useOverride: gl.getUniformLocation(program, "u_useOverride"),
+            round: gl.getUniformLocation(program, "u_round"),
+            opacity: gl.getUniformLocation(program, "u_opacity")
+        },
+        posBuffer: gl.createBuffer(),
+        altBuffer: gl.createBuffer()
+    };
+}
+
+function uploadGnssTrace3dGeometry() {
+    if (!gnssTrace3dGl || !gnssTrace3dGeometry) {
+        return;
+    }
+
+    const gl = gnssTrace3dGl.context;
+    gl.bindBuffer(gl.ARRAY_BUFFER, gnssTrace3dGl.posBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, gnssTrace3dGeometry.positions, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gnssTrace3dGl.altBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, gnssTrace3dGeometry.altFractions, gl.STATIC_DRAW);
+}
+
+const gnssTrace3dCustomLayer = {
+    id: "gnss-trace-3d",
+    type: "custom",
+    renderingMode: "3d",
+
+    onAdd(map, gl) {
+        gnssTrace3dGl = compileGnssTrace3dProgram(gl);
+        gnssTrace3dGl.context = gl;
+        uploadGnssTrace3dGeometry();
+    },
+
+    onRemove(map, gl) {
+        if (!gnssTrace3dGl) {
+            return;
+        }
+
+        gl.deleteBuffer(gnssTrace3dGl.posBuffer);
+        gl.deleteBuffer(gnssTrace3dGl.altBuffer);
+        gl.deleteProgram(gnssTrace3dGl.program);
+        gnssTrace3dGl = null;
+    },
+
+    render(gl, args) {
+        if (!gnssTrace3dGl || !gnssTrace3dGeometry || !gnssTrace3dGeometry.fixes.length) {
+            return;
+        }
+
+        const origin = gnssTrace3dGeometry.origin;
+        const model = new Float64Array([
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            origin.x, origin.y, origin.z, 1
+        ]);
+        // Kept for click picking, which has to project the same points on the CPU.
+        gnssTrace3dMatrix = multiplyMat4(new Float64Array(16), args.defaultProjectionData.mainMatrix, model);
+
+        const { program, attributes, uniforms } = gnssTrace3dGl;
+        gl.useProgram(program);
+        gl.uniformMatrix4fv(uniforms.matrix, false, new Float32Array(gnssTrace3dMatrix));
+        gl.uniform3fv(uniforms.lowColor, GNSS_TRACE_LOW_COLOR);
+        gl.uniform3fv(uniforms.highColor, GNSS_TRACE_HIGH_COLOR);
+        gl.uniform3fv(uniforms.overrideColor, GNSS_TRACE_SELECTED_COLOR);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, gnssTrace3dGl.posBuffer);
+        gl.enableVertexAttribArray(attributes.pos);
+        gl.vertexAttribPointer(attributes.pos, 3, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, gnssTrace3dGl.altBuffer);
+        gl.enableVertexAttribArray(attributes.altFraction);
+        gl.vertexAttribPointer(attributes.altFraction, 1, gl.FLOAT, false, 0, 0);
+
+        gl.enable(gl.DEPTH_TEST);
+        gl.depthFunc(gl.LEQUAL);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+        const count = gnssTrace3dGeometry.fixes.length;
+
+        // The track itself, joining the fixes in space.
+        gl.uniform1f(uniforms.round, 0);
+        gl.uniform1f(uniforms.useOverride, 0);
+        gl.uniform1f(uniforms.opacity, 0.9);
+        gl.uniform1f(uniforms.pointSize, 1);
+        gl.drawArrays(gl.LINE_STRIP, 0, count);
+
+        // Then a dot per fix.
+        gl.uniform1f(uniforms.round, 1);
+        gl.uniform1f(uniforms.opacity, 1);
+        gl.uniform1f(uniforms.pointSize, GNSS_TRACE_POINT_SIZE_PX * window.devicePixelRatio);
+        gl.drawArrays(gl.POINTS, 0, count);
+
+        if (gnssTrace3dSelectedIndex >= 0 && gnssTrace3dSelectedIndex < count) {
+            gl.uniform1f(uniforms.useOverride, 1);
+            gl.uniform1f(uniforms.pointSize, GNSS_TRACE_SELECTED_POINT_SIZE_PX * window.devicePixelRatio);
+            gl.drawArrays(gl.POINTS, gnssTrace3dSelectedIndex, 1);
+        }
+    }
+};
+
+// Custom layers are invisible to queryRenderedFeatures, so picking projects the
+// fixes with the same matrix the shader used and takes the nearest on screen.
+function pickGnssTrace3dRecord(point) {
+    if (!gnssTrace3dGeometry || !gnssTrace3dMatrix || !gnssTraceMap3d) {
+        return null;
+    }
+
+    const canvas = gnssTraceMap3d.getCanvas();
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const m = gnssTrace3dMatrix;
+    const positions = gnssTrace3dGeometry.positions;
+    let best = null;
+    let bestDistance = GNSS_TRACE_PICK_RADIUS_PX;
+
+    gnssTrace3dGeometry.fixes.forEach((fix, index) => {
+        const x = positions[index * 3];
+        const y = positions[index * 3 + 1];
+        const z = positions[index * 3 + 2];
+        const clipW = m[3] * x + m[7] * y + m[11] * z + m[15];
+        if (clipW <= 0) {
+            return;
+        }
+
+        const screenX = ((m[0] * x + m[4] * y + m[8] * z + m[12]) / clipW * 0.5 + 0.5) * width;
+        const screenY = (1 - ((m[1] * x + m[5] * y + m[9] * z + m[13]) / clipW * 0.5 + 0.5)) * height;
+        const distance = Math.hypot(screenX - point.x, screenY - point.y);
+        if (distance < bestDistance) {
+            bestDistance = distance;
+            best = fix;
+        }
+    });
+
+    return best;
 }
 
 function emptyFeatureCollection() {
@@ -1067,68 +1197,27 @@ function ensureGnssTraceMap3d() {
 
     gnssTraceMap3d.on("load", () => {
         gnssTraceMap3d.addSource("gnss-trace-ground", { type: "geojson", data: emptyFeatureCollection() });
-        gnssTraceMap3d.addSource("gnss-trace-walls", { type: "geojson", data: emptyFeatureCollection() });
-        gnssTraceMap3d.addSource("gnss-trace-fixes", { type: "geojson", data: emptyFeatureCollection() });
-        gnssTraceMap3d.addSource("gnss-trace-selection", { type: "geojson", data: emptyFeatureCollection() });
 
+        // The ground projection of the track. It stays flat on the terrain and
+        // gives the floating points something to be read against.
         gnssTraceMap3d.addLayer({
             id: "gnss-trace-ground",
             type: "line",
             source: "gnss-trace-ground",
-            paint: { "line-color": "#0aa34b", "line-width": 2, "line-opacity": 0.55 }
+            paint: { "line-color": "#0aa34b", "line-width": 2, "line-opacity": 0.4 }
         });
 
-        gnssTraceMap3d.addLayer({
-            id: "gnss-trace-walls",
-            type: "fill-extrusion",
-            source: "gnss-trace-walls",
-            paint: {
-                "fill-extrusion-base": 0,
-                "fill-extrusion-height": ["get", "height"],
-                "fill-extrusion-opacity": 0.78,
-                "fill-extrusion-color": "#0aa34b"
+        gnssTraceMap3d.addLayer(gnssTrace3dCustomLayer);
+
+        gnssTraceMap3d.on("click", (event) => {
+            const fix = pickGnssTrace3dRecord(event.point);
+            if (fix) {
+                selectGnssTraceRecord(fix.recordNumber, false);
             }
         });
 
-        gnssTraceMap3d.addLayer({
-            id: "gnss-trace-fixes",
-            type: "circle",
-            source: "gnss-trace-fixes",
-            paint: {
-                "circle-radius": 3,
-                "circle-color": "#c48a4a",
-                "circle-stroke-color": "#171a20",
-                "circle-stroke-width": 1
-            }
-        });
-
-        gnssTraceMap3d.addLayer({
-            id: "gnss-trace-selection",
-            type: "circle",
-            source: "gnss-trace-selection",
-            paint: {
-                "circle-radius": 7,
-                "circle-color": "#f0b37a",
-                "circle-stroke-color": "#0c5d2d",
-                "circle-stroke-width": 2
-            }
-        });
-
-        ["gnss-trace-fixes", "gnss-trace-walls"].forEach((layerId) => {
-            gnssTraceMap3d.on("click", layerId, (event) => {
-                const recordNumber = event.features?.[0]?.properties?.recordNumber;
-                if (Number.isFinite(Number(recordNumber))) {
-                    selectGnssTraceRecord(Number(recordNumber), false);
-                }
-            });
-
-            gnssTraceMap3d.on("mouseenter", layerId, () => {
-                gnssTraceMap3d.getCanvas().style.cursor = "pointer";
-            });
-
-            gnssTraceMap3d.on("mouseleave", layerId, () => {
-                gnssTraceMap3d.getCanvas().style.cursor = "";
-            });
+        gnssTraceMap3d.on("mousemove", (event) => {
+            gnssTraceMap3d.getCanvas().style.cursor = pickGnssTrace3dRecord(event.point) ? "pointer" : "";
         });
 
         gnssTraceMap3d.on("idle", syncGnssTrace3dCameraElevation);
@@ -1148,10 +1237,18 @@ function syncGnssTrace3dCameraElevation() {
         return;
     }
 
-    const elevation = gnssTraceMap3d.queryTerrainElevation(gnssTraceMap3d.getCenter());
-    if (!Number.isFinite(elevation)) {
+    const terrainElevation = gnssTraceMap3d.queryTerrainElevation(gnssTraceMap3d.getCenter());
+    if (!Number.isFinite(terrainElevation)) {
         return;
     }
+
+    // Sit the camera on the middle of the point cloud so it is centred in frame
+    // rather than pinned to ground level a hundred metres below it, but never
+    // below the terrain or the camera ends up inside the hill.
+    const cloudMidElevation = gnssTrace3dGeometry
+        ? ((gnssTrace3dGeometry.minAlt + gnssTrace3dGeometry.maxAlt) / 2) * TERRAIN_EXAGGERATION
+        : terrainElevation;
+    const elevation = Math.max(terrainElevation, cloudMidElevation);
 
     if (Math.abs(gnssTraceMap3d.getCenterElevation() - elevation) < CAMERA_ELEVATION_EPSILON_M) {
         return;
@@ -1159,6 +1256,11 @@ function syncGnssTrace3dCameraElevation() {
 
     gnssTraceMap3d.setCenterClampedToGround(false);
     gnssTraceMap3d.setCenterElevation(elevation);
+
+    if (gnssTrace3dNeedsRefit) {
+        gnssTrace3dNeedsRefit = false;
+        fitGnssTrace3dBounds();
+    }
 }
 
 function renderGnssTrace3d(records) {
@@ -1166,67 +1268,63 @@ function renderGnssTrace3d(records) {
         return;
     }
 
-    const curtain = buildGnssTraceCurtain(records);
+    gnssTrace3dGeometry = buildGnssTrace3dGeometry(records);
+    uploadGnssTrace3dGeometry();
+    syncSelectedGnssTrace3dMarker();
 
-    if (!curtain) {
-        ["gnss-trace-ground", "gnss-trace-walls", "gnss-trace-fixes"].forEach((sourceId) => {
-            gnssTraceMap3d.getSource(sourceId).setData(emptyFeatureCollection());
-        });
-        syncSelectedGnssTrace3dMarker();
+    if (!gnssTrace3dGeometry) {
+        gnssTraceMap3d.getSource("gnss-trace-ground").setData(emptyFeatureCollection());
         showGnssTraceMapNote("");
+        gnssTraceMap3d.triggerRepaint();
         return;
     }
 
-    gnssTraceMap3d.getSource("gnss-trace-ground").setData(curtain.ground);
-    gnssTraceMap3d.getSource("gnss-trace-walls").setData(curtain.walls);
-    gnssTraceMap3d.getSource("gnss-trace-fixes").setData(curtain.fixes);
+    gnssTraceMap3d.getSource("gnss-trace-ground").setData(gnssTrace3dGeometry.ground);
+    fitGnssTrace3dBounds();
+    syncGnssTrace3dCameraElevation();
+    gnssTraceMap3d.triggerRepaint();
 
-    // Colour the walls across the altitude range actually present in the trace.
-    if (curtain.maxAlt > curtain.minAlt) {
-        gnssTraceMap3d.setPaintProperty("gnss-trace-walls", "fill-extrusion-color", [
-            "interpolate", ["linear"], ["get", "alt"],
-            curtain.minAlt, "#0aa34b",
-            curtain.maxAlt, "#c48a4a"
-        ]);
-    } else {
-        gnssTraceMap3d.setPaintProperty("gnss-trace-walls", "fill-extrusion-color", "#0aa34b");
+    const altRange = `${gnssTrace3dGeometry.minAlt.toFixed(0)}–${gnssTrace3dGeometry.maxAlt.toFixed(0)} m`;
+    showGnssTraceMapNote(`${gnssTrace3dGeometry.fixes.length} fixes · altitude ${altRange}, plotted at true height · terrain ×${TERRAIN_EXAGGERATION} · drag with the right mouse button to rotate and tilt.`);
+}
+
+// fitBounds frames the ground footprint only. Once the fixes are lifted to their
+// true altitude the cloud can sit a hundred metres above the terrain and fly
+// straight off the top of the screen, so the footprint is padded by the height
+// the points stand above the ground before fitting.
+function fitGnssTrace3dBounds() {
+    if (!gnssTrace3dGeometry) {
+        return;
     }
 
-    gnssTraceMap3d.fitBounds(curtain.bounds, { padding: 60, pitch: GNSS_TRACE_3D_PITCH, duration: 0 });
-    syncGnssTrace3dCameraElevation();
-    syncSelectedGnssTrace3dMarker();
+    const [[west, south], [east, north]] = gnssTrace3dGeometry.bounds;
+    const centre = { lng: (west + east) / 2, lat: (south + north) / 2 };
+    gnssTrace3dNeedsRefit = !Number.isFinite(gnssTraceMap3d.queryTerrainElevation(centre));
 
-    const altRange = `${curtain.minAlt.toFixed(0)}–${curtain.maxAlt.toFixed(0)} m`;
-    const scale = curtain.exaggeration > 0
-        ? `vertical exaggeration ×${formatExaggeration(curtain.exaggeration)}`
-        : "flat trace, walls drawn at a fixed height";
-    showGnssTraceMapNote(`Altitude ${altRange} · ${scale} · terrain ×${TERRAIN_EXAGGERATION} · drag with the right mouse button to rotate and tilt.`);
+    // Only the cloud's own vertical extent needs room in the frame; its height
+    // above the ground is absorbed by raising the camera centre to match. The
+    // centre sits mid-cloud, so each edge only has to clear half the extent.
+    const verticalExtentM = (gnssTrace3dGeometry.maxAlt - gnssTrace3dGeometry.minAlt) * TERRAIN_EXAGGERATION;
+    const padDegrees = verticalExtentM / 2 / 111320;
+
+    gnssTraceMap3d.fitBounds(
+        [[west - padDegrees, south - padDegrees], [east + padDegrees, north + padDegrees]],
+        { padding: 40, pitch: GNSS_TRACE_3D_PITCH, duration: 0 }
+    );
 }
 
 function syncSelectedGnssTrace3dMarker() {
-    if (!gnssTraceMap3d || !gnssTraceMap3dReady) {
+    if (!gnssTrace3dGeometry) {
+        gnssTrace3dSelectedIndex = -1;
         return;
     }
 
-    const source = gnssTraceMap3d.getSource("gnss-trace-selection");
-    if (!source) {
-        return;
-    }
+    gnssTrace3dSelectedIndex = gnssTrace3dGeometry.fixes
+        .findIndex((fix) => fix.recordNumber === selectedGnssTraceRecordNumber);
 
-    const selectedRecord = gnssTraceRecordsBuffer.find((record) => record.recordNumber === selectedGnssTraceRecordNumber);
-    if (!selectedRecord || !Number.isFinite(selectedRecord.latitude) || !Number.isFinite(selectedRecord.longitude)) {
-        source.setData(emptyFeatureCollection());
-        return;
+    if (gnssTraceMap3d) {
+        gnssTraceMap3d.triggerRepaint();
     }
-
-    source.setData({
-        type: "FeatureCollection",
-        features: [{
-            type: "Feature",
-            properties: {},
-            geometry: { type: "Point", coordinates: [selectedRecord.longitude, selectedRecord.latitude] }
-        }]
-    });
 }
 
 function setGnssTraceMapMode(mode) {
