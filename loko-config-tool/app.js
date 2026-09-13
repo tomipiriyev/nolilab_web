@@ -77,11 +77,15 @@ const gnssTraceMapContainer = document.getElementById("gnssTraceMap");
 const gnssTraceMap3dContainer = document.getElementById("gnssTraceMap3d");
 const gnssTraceMapModes = document.getElementById("gnssTraceMapModes");
 const gnssTraceMapNote = document.getElementById("gnssTraceMapNote");
+const gnssTracePlayButton = document.getElementById("gnssTracePlayButton");
+const gnssTracePlayLabel = document.getElementById("gnssTracePlayLabel");
+const gnssTracePlaybackSlider = document.getElementById("gnssTracePlaybackSlider");
+const gnssTracePlaybackPosition = document.getElementById("gnssTracePlaybackPosition");
 const saveButton = document.getElementById("saveButton");
 const resetButton = document.getElementById("resetButton");
 const saveStatus = document.getElementById("saveStatus");
 const connectionSensitiveControls = [
-    ...document.querySelectorAll(".mode-card input, .mode-card select, .settings-card input, .settings-card select, .settings-card button, .gnss-trace-card input, .gnss-trace-card select, .gnss-trace-card button:not(.gnss-trace-map-mode)")
+    ...document.querySelectorAll(".mode-card input, .mode-card select, .settings-card input, .settings-card select, .settings-card button, .gnss-trace-card input:not(.gnss-trace-playback-slider), .gnss-trace-card select, .gnss-trace-card button:not(.gnss-trace-map-mode):not(.gnss-trace-playback-button)")
 ];
 
 const WAKE_UP_PERIOD_MAX_SECONDS = 43200;
@@ -112,6 +116,7 @@ const GNSS_TRACE_3D_MAX_PITCH = 74;
 const GNSS_TRACE_POINT_SIZE_PX = 7;
 const GNSS_TRACE_SELECTED_POINT_SIZE_PX = 15;
 const GNSS_TRACE_PICK_RADIUS_PX = 14;
+const GNSS_TRACE_PLAYBACK_INTERVAL_MS = 650;
 // Same ramp the 2D map uses, as normalised RGB for the shader.
 const GNSS_TRACE_LOW_COLOR = [0.039, 0.639, 0.294];
 const GNSS_TRACE_HIGH_COLOR = [0.769, 0.541, 0.290];
@@ -181,6 +186,7 @@ let gnssTrace3dMatrix = null;
 let gnssTrace3dSelectedIndex = -1;
 let gnssTrace3dNeedsRefit = false;
 let selectedGnssTraceRecordNumber = null;
+let gnssTracePlaybackTimer = null;
 const gnssTraceExportSelection = new Set();
 const gnssTraceKnownRecordNumbers = new Set();
 // The sleep window is only pushed to the device once the user has touched the
@@ -522,6 +528,7 @@ function parseStringConfigField(buffer, fieldName) {
 }
 
 function setGnssTraceRecordsBuffer(records) {
+    stopGnssTracePlayback();
     gnssTraceRecordsBuffer = records;
     window.lokoAirGnssTraceRecords = gnssTraceRecordsBuffer;
 
@@ -547,6 +554,7 @@ function setGnssTraceRecordsBuffer(records) {
     syncGnssTraceSelectionUi();
     renderGnssTraceMap(gnssTraceRecordsBuffer);
     syncSelectedGnssTraceRow();
+    syncGnssTracePlaybackUi();
 }
 
 function resetGnssTraceSelection() {
@@ -730,12 +738,14 @@ function selectGnssTraceRecord(recordNumber, shouldPan = true) {
     syncSelectedGnssTraceRow();
     scrollSelectedGnssTraceRowIntoView();
     syncSelectedGnssTraceMarkers(shouldPan);
+    syncGnssTracePlaybackUi();
 }
 
 function clearSelectedGnssTraceRecord() {
     selectedGnssTraceRecordNumber = null;
     syncSelectedGnssTraceRow();
     syncSelectedGnssTraceMarkers(false);
+    syncGnssTracePlaybackUi();
 }
 
 function refreshGnssTraceMapSize() {
@@ -858,6 +868,84 @@ function showGnssTraceMapNote(text) {
 
 function locatedGnssTraceRecords(records) {
     return records.filter((record) => Number.isFinite(record.latitude) && Number.isFinite(record.longitude));
+}
+
+function getPlayableGnssTraceRecords() {
+    return locatedGnssTraceRecords(gnssTraceRecordsBuffer);
+}
+
+function syncGnssTracePlaybackUi() {
+    if (!gnssTracePlayButton || !gnssTracePlaybackSlider || !gnssTracePlaybackPosition) {
+        return;
+    }
+
+    const records = getPlayableGnssTraceRecords();
+    const selectedIndex = records.findIndex((record) => record.recordNumber === selectedGnssTraceRecordNumber);
+    const sliderIndex = selectedIndex >= 0 ? selectedIndex : 0;
+    const hasRecords = records.length > 0;
+
+    gnssTracePlayButton.disabled = !hasRecords;
+    gnssTracePlaybackSlider.disabled = !hasRecords;
+    gnssTracePlaybackSlider.max = String(Math.max(records.length - 1, 0));
+    gnssTracePlaybackSlider.value = String(sliderIndex);
+    gnssTracePlaybackSlider.style.setProperty(
+        "--percent",
+        records.length > 1 ? `${(sliderIndex / (records.length - 1)) * 100}%` : "0%"
+    );
+    gnssTracePlaybackPosition.textContent = hasRecords ? `${sliderIndex + 1} / ${records.length}` : "0 / 0";
+
+    const isPlaying = gnssTracePlaybackTimer !== null;
+    gnssTracePlayButton.setAttribute("aria-label", isPlaying ? "Pause GNSS trace" : "Play GNSS trace");
+    gnssTracePlayButton.setAttribute("aria-pressed", String(isPlaying));
+    gnssTracePlayButton.querySelector(".gnss-trace-playback-icon").textContent = isPlaying ? "❚❚" : "▶";
+    if (gnssTracePlayLabel) {
+        gnssTracePlayLabel.textContent = isPlaying ? "Pause" : "Play";
+    }
+}
+
+function stopGnssTracePlayback() {
+    if (gnssTracePlaybackTimer !== null) {
+        window.clearInterval(gnssTracePlaybackTimer);
+        gnssTracePlaybackTimer = null;
+    }
+    syncGnssTracePlaybackUi();
+}
+
+function stepGnssTracePlayback() {
+    const records = getPlayableGnssTraceRecords();
+    if (!records.length) {
+        stopGnssTracePlayback();
+        return;
+    }
+
+    const currentIndex = records.findIndex((record) => record.recordNumber === selectedGnssTraceRecordNumber);
+    const nextIndex = currentIndex < 0 ? 0 : currentIndex + 1;
+    if (nextIndex >= records.length) {
+        stopGnssTracePlayback();
+        return;
+    }
+
+    selectGnssTraceRecord(records[nextIndex].recordNumber, true);
+}
+
+function toggleGnssTracePlayback() {
+    if (gnssTracePlaybackTimer !== null) {
+        stopGnssTracePlayback();
+        return;
+    }
+
+    const records = getPlayableGnssTraceRecords();
+    if (!records.length) {
+        return;
+    }
+
+    const currentIndex = records.findIndex((record) => record.recordNumber === selectedGnssTraceRecordNumber);
+    if (currentIndex < 0 || currentIndex === records.length - 1) {
+        selectGnssTraceRecord(records[0].recordNumber, true);
+    }
+
+    gnssTracePlaybackTimer = window.setInterval(stepGnssTracePlayback, GNSS_TRACE_PLAYBACK_INTERVAL_MS);
+    syncGnssTracePlaybackUi();
 }
 
 // Every fix becomes a vertex at its own longitude, latitude AND altitude, so the
@@ -2852,6 +2940,24 @@ exportGnssTraceCsvButton.addEventListener("click", () => {
     const fileName = `gnss-trace-${new Date().toISOString().replace(/[:.]/g, "-")}.csv`;
     downloadTextFile(csv, fileName, "text/csv;charset=utf-8");
 });
+
+if (gnssTracePlayButton) {
+    gnssTracePlayButton.addEventListener("click", toggleGnssTracePlayback);
+}
+
+if (gnssTracePlaybackSlider) {
+    gnssTracePlaybackSlider.addEventListener("input", () => {
+        const requestedIndex = Number(gnssTracePlaybackSlider.value);
+        stopGnssTracePlayback();
+        const records = getPlayableGnssTraceRecords();
+        const record = records[requestedIndex];
+        if (record) {
+            selectGnssTraceRecord(record.recordNumber, true);
+        }
+    });
+}
+
+syncGnssTracePlaybackUi();
 
 if (gnssTraceMapModes && is3dTraceViewEnabled()) {
     gnssTraceMapModes.hidden = false;

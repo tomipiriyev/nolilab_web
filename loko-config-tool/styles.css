@@ -762,6 +762,66 @@ input[type="checkbox"]:focus {
     font-weight: 600;
 }
 
+.gnss-trace-playback {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-strong);
+}
+
+.gnss-trace-playback-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 88px;
+    height: 38px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--dark);
+    color: white;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.gnss-trace-playback-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.gnss-trace-playback-icon {
+    width: 1em;
+    font-size: 0.82rem;
+    line-height: 1;
+}
+
+.gnss-trace-playback-slider {
+    min-width: 0;
+    margin-top: 0 !important;
+    cursor: ew-resize;
+}
+
+.gnss-trace-playback-slider:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.gnss-trace-playback-position {
+    min-width: 64px;
+    color: var(--muted);
+    font-size: 0.84rem;
+    font-weight: 800;
+    text-align: right;
+    white-space: nowrap;
+}
+
 .gnss-trace-map-message {
     display: flex;
     align-items: center;
@@ -1085,5 +1145,15 @@ button:disabled:hover {
     .status-meta {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .gnss-trace-playback {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .gnss-trace-playback-position {
+        grid-column: 2;
+        min-width: 0;
+        text-align: left;
     }
 }
