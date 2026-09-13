@@ -113,14 +113,17 @@ const MAPLIBRE_SCRIPT_URL = "/js/maplibre-gl-5.6.1.min.js";
 const MAPLIBRE_STYLESHEET_URL = "/css/maplibre-gl-5.6.1.css";
 const GNSS_TRACE_3D_PITCH = 62;
 const GNSS_TRACE_3D_MAX_PITCH = 74;
-const GNSS_TRACE_POINT_SIZE_PX = 7;
-const GNSS_TRACE_SELECTED_POINT_SIZE_PX = 15;
+const GNSS_TRACE_POINT_OUTLINE_SIZE_PX = 13;
+const GNSS_TRACE_POINT_SIZE_PX = 9;
+const GNSS_TRACE_SELECTED_OUTLINE_SIZE_PX = 25;
+const GNSS_TRACE_SELECTED_POINT_SIZE_PX = 17;
 const GNSS_TRACE_PICK_RADIUS_PX = 14;
 const GNSS_TRACE_PLAYBACK_INTERVAL_MS = 650;
 // Same ramp the 2D map uses, as normalised RGB for the shader.
-const GNSS_TRACE_LOW_COLOR = [0.039, 0.639, 0.294];
-const GNSS_TRACE_HIGH_COLOR = [0.769, 0.541, 0.290];
-const GNSS_TRACE_SELECTED_COLOR = [0.941, 0.702, 0.478];
+const GNSS_TRACE_LOW_COLOR = [0.0, 0.78, 1.0];
+const GNSS_TRACE_HIGH_COLOR = [1.0, 0.0, 0.48];
+const GNSS_TRACE_OUTLINE_COLOR = [0.03, 0.05, 0.09];
+const GNSS_TRACE_SELECTED_COLOR = [1.0, 0.9, 0.0];
 // OpenTopoMap carries contour lines and hypsometric tints, so the relief reads
 // as terrain even before the mesh tilts it — a plain OSM raster goes flat and
 // unreadable once the camera pitches. Tiles stop at z17.
@@ -712,10 +715,18 @@ function syncSelectedGnssTraceMapMarker(shouldPan = false) {
     const latLng = [selectedRecord.latitude, selectedRecord.longitude];
 
     window.L.circleMarker(latLng, {
-        radius: 7,
-        color: "#0c5d2d",
+        radius: 10,
+        color: "#ffffff",
+        weight: 4,
+        fillColor: "#ffe500",
+        fillOpacity: 1
+    }).addTo(gnssTraceSelectionLayer);
+
+    window.L.circleMarker(latLng, {
+        radius: 5,
+        color: "#090d17",
         weight: 2,
-        fillColor: "#f0b37a",
+        fillColor: "#ffe500",
         fillOpacity: 1
     }).addTo(gnssTraceSelectionLayer);
 
@@ -779,9 +790,15 @@ function renderGnssTraceMap(records) {
     }
 
     window.L.polyline(points, {
-        color: "#0aa34b",
-        weight: 3,
-        opacity: 0.9
+        color: "#090d17",
+        weight: 7,
+        opacity: 0.82
+    }).addTo(gnssTraceLayer);
+
+    window.L.polyline(points, {
+        color: "#00c8ff",
+        weight: 4,
+        opacity: 1
     }).addTo(gnssTraceLayer);
 
     records.forEach((record) => {
@@ -790,11 +807,11 @@ function renderGnssTraceMap(records) {
         }
 
         const marker = window.L.circleMarker([record.latitude, record.longitude], {
-            radius: 3,
-            color: "#171a20",
-            weight: 1,
-            fillColor: "#c48a4a",
-            fillOpacity: 0.95
+            radius: 5,
+            color: "#090d17",
+            weight: 2,
+            fillColor: "#ff2f92",
+            fillOpacity: 1
         }).addTo(gnssTraceLayer);
 
         marker.on("click", () => {
@@ -1174,14 +1191,25 @@ const gnssTrace3dCustomLayer = {
         gl.uniform1f(uniforms.pointSize, 1);
         gl.drawArrays(gl.LINE_STRIP, 0, count);
 
-        // Then a dot per fix.
+        // Dark halos keep every fix legible over roads, labels, vegetation, and
+        // contour lines before the bright altitude ramp is drawn on top.
         gl.uniform1f(uniforms.round, 1);
         gl.uniform1f(uniforms.opacity, 1);
+        gl.uniform1f(uniforms.useOverride, 1);
+        gl.uniform3fv(uniforms.overrideColor, GNSS_TRACE_OUTLINE_COLOR);
+        gl.uniform1f(uniforms.pointSize, GNSS_TRACE_POINT_OUTLINE_SIZE_PX * window.devicePixelRatio);
+        gl.drawArrays(gl.POINTS, 0, count);
+
+        gl.uniform1f(uniforms.useOverride, 0);
         gl.uniform1f(uniforms.pointSize, GNSS_TRACE_POINT_SIZE_PX * window.devicePixelRatio);
         gl.drawArrays(gl.POINTS, 0, count);
 
         if (gnssTrace3dSelectedIndex >= 0 && gnssTrace3dSelectedIndex < count) {
             gl.uniform1f(uniforms.useOverride, 1);
+            gl.uniform3fv(uniforms.overrideColor, GNSS_TRACE_OUTLINE_COLOR);
+            gl.uniform1f(uniforms.pointSize, GNSS_TRACE_SELECTED_OUTLINE_SIZE_PX * window.devicePixelRatio);
+            gl.drawArrays(gl.POINTS, gnssTrace3dSelectedIndex, 1);
+            gl.uniform3fv(uniforms.overrideColor, GNSS_TRACE_SELECTED_COLOR);
             gl.uniform1f(uniforms.pointSize, GNSS_TRACE_SELECTED_POINT_SIZE_PX * window.devicePixelRatio);
             gl.drawArrays(gl.POINTS, gnssTrace3dSelectedIndex, 1);
         }
@@ -1292,7 +1320,14 @@ function ensureGnssTraceMap3d() {
             id: "gnss-trace-ground",
             type: "line",
             source: "gnss-trace-ground",
-            paint: { "line-color": "#0aa34b", "line-width": 2, "line-opacity": 0.4 }
+            paint: { "line-color": "#090d17", "line-width": 7, "line-opacity": 0.75 }
+        });
+
+        gnssTraceMap3d.addLayer({
+            id: "gnss-trace-ground-color",
+            type: "line",
+            source: "gnss-trace-ground",
+            paint: { "line-color": "#00c8ff", "line-width": 4, "line-opacity": 1 }
         });
 
         gnssTraceMap3d.addLayer(gnssTrace3dCustomLayer);
