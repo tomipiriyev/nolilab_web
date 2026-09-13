@@ -14,6 +14,18 @@ test.describe('product page', () => {
     await expect(page.locator('header')).toBeVisible({ timeout: 5_000 });
   });
 
+  test('comparison: includes Loko, cellular GPS, and satellite GPS', async ({ page }) => {
+    const comparison = page.getByRole('table', { name: 'Loko compared with cellular and satellite GPS trackers' });
+    await expect(comparison.getByRole('columnheader')).toHaveCount(4);
+    await expect(comparison.getByRole('columnheader', { name: 'Satellite GPS' })).toBeVisible();
+
+    const rows = comparison.locator('.loko-compare-row:not(.loko-compare-row--head)');
+    await expect(rows).toHaveCount(5);
+    for (let index = 0; index < 5; index += 1) {
+      await expect(rows.nth(index).getByRole('cell')).toHaveCount(3);
+    }
+  });
+
   // ── Gallery ──────────────────────────────────────────────────────────────
 
   test('gallery: 6 thumbnails for the default Loko Bundle, first is active', async ({ page }) => {
