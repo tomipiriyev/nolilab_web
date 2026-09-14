@@ -190,7 +190,6 @@ let gnssTrace3dSelectedIndex = -1;
 let gnssTrace3dNeedsRefit = false;
 let selectedGnssTraceRecordNumber = null;
 let gnssTracePlaybackTimer = null;
-let gnssTracePlaybackPointerScrollPosition = null;
 const gnssTraceExportSelection = new Set();
 const gnssTraceKnownRecordNumbers = new Set();
 // The sleep window is only pushed to the device once the user has touched the
@@ -945,7 +944,7 @@ function stepGnssTracePlayback() {
         return;
     }
 
-    selectGnssTraceRecord(records[nextIndex].recordNumber, true, false);
+    selectGnssTraceRecord(records[nextIndex].recordNumber, false, false);
 }
 
 function toggleGnssTracePlayback() {
@@ -961,7 +960,7 @@ function toggleGnssTracePlayback() {
 
     const currentIndex = records.findIndex((record) => record.recordNumber === selectedGnssTraceRecordNumber);
     if (currentIndex < 0 || currentIndex === records.length - 1) {
-        selectGnssTraceRecord(records[0].recordNumber, true, false);
+        selectGnssTraceRecord(records[0].recordNumber, false, false);
     }
 
     gnssTracePlaybackTimer = window.setInterval(stepGnssTracePlayback, GNSS_TRACE_PLAYBACK_INTERVAL_MS);
@@ -2980,23 +2979,7 @@ exportGnssTraceCsvButton.addEventListener("click", () => {
 });
 
 if (gnssTracePlayButton) {
-    gnssTracePlayButton.addEventListener("pointerdown", () => {
-        gnssTracePlaybackPointerScrollPosition = {
-            x: window.scrollX,
-            y: window.scrollY
-        };
-    });
-    gnssTracePlayButton.addEventListener("click", () => {
-        const scrollPosition = gnssTracePlaybackPointerScrollPosition ?? {
-            x: window.scrollX,
-            y: window.scrollY
-        };
-        gnssTracePlaybackPointerScrollPosition = null;
-        toggleGnssTracePlayback();
-        window.requestAnimationFrame(() => {
-            window.scrollTo(scrollPosition.x, scrollPosition.y);
-        });
-    });
+    gnssTracePlayButton.addEventListener("click", toggleGnssTracePlayback);
 }
 
 if (gnssTracePlaybackSlider) {
