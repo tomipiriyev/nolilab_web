@@ -740,14 +740,16 @@ function syncSelectedGnssTraceMarkers(shouldPan = false) {
     syncSelectedGnssTrace3dMarker();
 }
 
-function selectGnssTraceRecord(recordNumber, shouldPan = true) {
+function selectGnssTraceRecord(recordNumber, shouldPan = true, shouldScrollRow = true) {
     if (!Number.isFinite(recordNumber)) {
         return;
     }
 
     selectedGnssTraceRecordNumber = recordNumber;
     syncSelectedGnssTraceRow();
-    scrollSelectedGnssTraceRowIntoView();
+    if (shouldScrollRow) {
+        scrollSelectedGnssTraceRowIntoView();
+    }
     syncSelectedGnssTraceMarkers(shouldPan);
     syncGnssTracePlaybackUi();
 }
@@ -942,7 +944,7 @@ function stepGnssTracePlayback() {
         return;
     }
 
-    selectGnssTraceRecord(records[nextIndex].recordNumber, true);
+    selectGnssTraceRecord(records[nextIndex].recordNumber, true, false);
 }
 
 function toggleGnssTracePlayback() {
@@ -958,7 +960,7 @@ function toggleGnssTracePlayback() {
 
     const currentIndex = records.findIndex((record) => record.recordNumber === selectedGnssTraceRecordNumber);
     if (currentIndex < 0 || currentIndex === records.length - 1) {
-        selectGnssTraceRecord(records[0].recordNumber, true);
+        selectGnssTraceRecord(records[0].recordNumber, true, false);
     }
 
     gnssTracePlaybackTimer = window.setInterval(stepGnssTracePlayback, GNSS_TRACE_PLAYBACK_INTERVAL_MS);
