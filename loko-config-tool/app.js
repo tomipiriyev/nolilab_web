@@ -190,6 +190,7 @@ let gnssTrace3dSelectedIndex = -1;
 let gnssTrace3dNeedsRefit = false;
 let selectedGnssTraceRecordNumber = null;
 let gnssTracePlaybackTimer = null;
+let gnssTracePlaybackPointerScrollPosition = null;
 const gnssTraceExportSelection = new Set();
 const gnssTraceKnownRecordNumbers = new Set();
 // The sleep window is only pushed to the device once the user has touched the
@@ -2979,7 +2980,23 @@ exportGnssTraceCsvButton.addEventListener("click", () => {
 });
 
 if (gnssTracePlayButton) {
-    gnssTracePlayButton.addEventListener("click", toggleGnssTracePlayback);
+    gnssTracePlayButton.addEventListener("pointerdown", () => {
+        gnssTracePlaybackPointerScrollPosition = {
+            x: window.scrollX,
+            y: window.scrollY
+        };
+    });
+    gnssTracePlayButton.addEventListener("click", () => {
+        const scrollPosition = gnssTracePlaybackPointerScrollPosition ?? {
+            x: window.scrollX,
+            y: window.scrollY
+        };
+        gnssTracePlaybackPointerScrollPosition = null;
+        toggleGnssTracePlayback();
+        window.requestAnimationFrame(() => {
+            window.scrollTo(scrollPosition.x, scrollPosition.y);
+        });
+    });
 }
 
 if (gnssTracePlaybackSlider) {
