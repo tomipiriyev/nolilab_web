@@ -5,7 +5,7 @@
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Tracker GPS hors ligne sans SIM ni Internet | Traqueur Loko GPS</title>
+<title>Traceur GPS hors ligne sans SIM ni Internet | Loko</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
@@ -15,7 +15,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Découvrez comment fonctionne un tracker GPS hors ligne sans carte SIM, Internet ou frais. Loko GPS Tracker utilise la radio LoRa P2P pour une portée 20km, des cartes hors ligne et une longue durée de vie de la batterie." name="description"/>
+<meta content="Découvrez comment fonctionne un traceur GPS hors ligne sans carte SIM, Internet ou frais. Loko GPS Tracker utilise la radio LoRa P2P pour une portée 20km, des cartes hors ligne et une longue durée de vie de la batterie." name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <link href="https://www.nolilab.com/fr/blog/how-offline-gps-tracking-works/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-offline-gps-tracking-works/" hreflang="en" rel="alternate"/>
@@ -42,22 +42,22 @@
 </div>
 <img alt="Loko offline GPS tracker device" class="article-image" height="600" loading="eager" src="/images/optimized/loko-gps-tracker-red-transparent.png" width="800"/>
 <div class="article-content">
-<p>Quand les gens recherchent un <strong>traqueur GPS hors ligne</strong>, ils signifient généralement une chose : un appareil qui vous indique où se trouve quelque chose sans dépendre d'un réseau cellulaire, d'une carte SIM ou de frais mensuels. Ce guide explique exactement comment cela fonctionne et pourquoi la radio LoRa le rend possible à des portées allant jusqu'à 20km.</p>
-<p><strong>Réponse courte :</strong> GPS lui-même fonctionne déjà hors ligne. Loko maintient également le reste de la chaîne hors ligne en envoyant la position du tracker à votre récepteur via la radio LoRa P2P. Si vous souhaitez la page produit au lieu de l'explication technique, commencez par le <a href="/fr/lora-gps-tracker/">Traqueur Loko hors ligne GPS</a>.</p>
-<h2>Le problème avec les trackers GPS standard</h2>
-<p>La plupart des trackers GPS sur le marché sont en fait <em>traqueurs cellulaires GPS</em>. Ils déterminent leur position via les satellites GPS – qui fonctionnent toujours – mais transmettent ensuite cette position via un réseau cellulaire 4G ou LTE à un serveur cloud. Votre application téléphonique récupère l'emplacement de ce serveur.</p>
+<p>Quand les gens recherchent un <strong>traceur GPS hors ligne</strong>, ils signifient généralement une chose : un appareil qui vous indique où se trouve quelque chose sans dépendre d'un réseau cellulaire, d'une carte SIM ou de frais mensuels. Ce guide explique exactement comment cela fonctionne et pourquoi la radio LoRa le rend possible à des portées allant jusqu'à 20km.</p>
+<p><strong>Réponse courte :</strong> GPS lui-même fonctionne déjà hors ligne. Loko maintient également le reste de la chaîne hors ligne en envoyant la position du traceur à votre récepteur via la radio LoRa P2P. Si vous souhaitez la page produit au lieu de l'explication technique, commencez par le <a href="/fr/lora-gps-tracker/">Traceur Loko hors ligne GPS</a>.</p>
+<h2>Le problème avec les traceurs GPS standard</h2>
+<p>La plupart des traceurs GPS sur le marché sont en fait <em>traceurs cellulaires GPS</em>. Ils déterminent leur position via les satellites GPS – qui fonctionnent toujours – mais transmettent ensuite cette position via un réseau cellulaire 4G ou LTE à un serveur cloud. Votre application téléphonique récupère l'emplacement de ce serveur.</p>
 <p>Cette architecture a deux conséquences inévitables :</p>
 <ul>
-<li><strong>Pas de signal cellulaire = pas de suivi.</strong> Dans les forêts, les montagnes, les terres agricoles et les zones reculées, la couverture cellulaire est interrompue. Le tracker s'assombrit.</li>
+<li><strong>Pas de signal cellulaire = pas de suivi.</strong> Dans les forêts, les montagnes, les terres agricoles et les zones reculées, la couverture cellulaire est interrompue. Le traceur s'assombrit.</li>
 <li><strong>Frais d'abonnement.</strong> La liaison de données cellulaires nécessite une carte SIM et un forfait de données mensuel. Coût typique : 5 $ à 15 $ par mois, indéfiniment.</li>
 </ul>
-<p>Un tracker GPS hors ligne élimine ces deux problèmes en remplaçant la liaison cellulaire par une connexion radio directe.</p>
+<p>Un traceur GPS hors ligne élimine ces deux problèmes en remplaçant la liaison cellulaire par une connexion radio directe.</p>
 <h2>Comment fonctionne réellement le suivi GPS hors ligne</h2>
-<p>Un tracker GPS hors ligne contient deux systèmes distincts :</p>
+<p>Un traceur GPS hors ligne contient deux systèmes distincts :</p>
 <h3>1. Le système de positionnement GPS</h3>
-<p>GPS (et ses homologues GLONASS, Galileo, BeiDou) fonctionne en recevant des signaux chronométrés provenant de satellites en orbite autour de la Terre. Le tracker calcule sa position en mesurant le temps nécessaire à ces signaux pour arriver de plusieurs satellites. Ceci est entièrement passif : le tracker ne reçoit que des signaux, ne les transmet jamais aux satellites. Cela fonctionne partout sur la planète qui a une vue dégagée sur le ciel. Pas d'internet, pas de SIM, pas d'infrastructure d'aucune sorte.</p>
+<p>GPS (et ses homologues GLONASS, Galileo, BeiDou) fonctionne en recevant des signaux chronométrés provenant de satellites en orbite autour de la Terre. Le traceur calcule sa position en mesurant le temps nécessaire à ces signaux pour arriver de plusieurs satellites. Ceci est entièrement passif : le traceur ne reçoit que des signaux, ne les transmet jamais aux satellites. Cela fonctionne partout sur la planète qui a une vue dégagée sur le ciel. Pas d'internet, pas de SIM, pas d'infrastructure d'aucune sorte.</p>
 <h3>2. La liaison de données radio</h3>
-<p>La position GPS n'est utile que si vous pouvez la recevoir. Un tracker hors ligne a besoin d'un moyen de vous envoyer les coordonnées sans passer par un réseau cellulaire. C'est là qu'intervient la technologie radio.</p>
+<p>La position GPS n'est utile que si vous pouvez la recevoir. Un traceur hors ligne a besoin d'un moyen de vous envoyer les coordonnées sans passer par un réseau cellulaire. C'est là qu'intervient la technologie radio.</p>
 <p>Différentes technologies radio sont utilisées à cet effet :</p>
 <table>
 <tr><th>Technologie</th><th>Gamme</th><th>Autonomie de la batterie</th><th>Coût mensuel</th><th>Fonctionne partout</th></tr>
@@ -69,11 +69,11 @@
 <p>LoRa P2P occupe la position optimale pour la plupart des cas d'utilisation : longue portée, autonomie exceptionnelle de la batterie, coût continu nul et fonctionnement sans infrastructure.</p>
 <h2>Qu'est-ce que LoRa P2P et pourquoi permet-il le suivi hors ligne ?</h2>
 <p><strong>LoRa</strong> signifie Longue Portée. Il s’agit d’une technique de modulation radio – en particulier le spectre étalé par chirp (CSS) – qui code les données en balayant continuellement les fréquences radio sur une bande définie. Ce modèle de balayage rend les signaux LoRa très résistants au bruit et aux interférences, leur permettant d'être décodés même lorsque le signal reçu est bien plus faible que le niveau de bruit de fond.</p>
-<p><strong>LoRa P2P</strong> (peer-to-peer) signifie que le tracker communique directement avec votre récepteur sans aucune infrastructure : pas de passerelle, pas de serveur, pas de réseau. Le tracker Loko GPS envoie sa position directement au récepteur LokoHUB connecté à votre téléphone. Le LokoHUB décode le signal radio et transmet les coordonnées à l'application Loko.</p>
+<p><strong>LoRa P2P</strong> (peer-to-peer) signifie que le traceur communique directement avec votre récepteur sans aucune infrastructure : pas de passerelle, pas de serveur, pas de réseau. Le traceur Loko GPS envoie sa position directement au récepteur LokoHUB connecté à votre téléphone. Le LokoHUB décode le signal radio et transmet les coordonnées à l'application Loko.</p>
 <p>Le chemin complet des données est :</p>
 <ol>
-<li>Satellites GPS → tracker Loko (calcul de position)</li>
-<li>Tracker Loko → Récepteur LokoHUB (via radio LoRa, jusqu'à 20km)</li>
+<li>Satellites GPS → traceur Loko (calcul de position)</li>
+<li>Traceur Loko → Récepteur LokoHUB (via radio LoRa, jusqu'à 20km)</li>
 <li>LokoHUB → Application Loko sur votre téléphone (via Bluetooth ou USB)</li>
 </ol>
 <p>Pas de tour de téléphonie cellulaire. Pas de serveur cloud. Pas d'internet. Les données de localisation ne quittent jamais cette boucle privée.</p>
@@ -83,29 +83,29 @@
 <p>Une puissance de transmission LoRa typique de 14 à 22 dBm (25 à 160 mW) peut atteindre 20km en terrain découvert. Une radio cellulaire émettant avec une puissance similaire couvre à peine quelques centaines de mètres jusqu'à la tour la plus proche. La différence réside dans la modulation : le spectre étalé du LoRa code chaque bit sur des milliers de puces, donnant au récepteur suffisamment de gain de traitement du signal pour extraire les données d'un signal qui semble être du pur bruit pour les récepteurs conventionnels.</p>
 <h3>Autonomie de la batterie</h3>
 <p>Les transmissions LoRa sont extrêmement courtes : généralement 50 à 500 millisecondes par paquet. Entre les transmissions, la puce radio consomme un courant proche de zéro (mode veille). À un intervalle de mise à jour de 60 secondes, la radio est active pendant moins de 0,5 % du temps. Ce cycle de service, combiné à une batterie de 200 mAh, donne jusqu'à 1 an de fonctionnement pour le Loko. Un modem cellulaire maintenant une connexion continue draine la même batterie en quelques heures.</p>
-<h2>Implications pratiques : qui a besoin d'un tracker GPS hors ligne ?</h2>
-<p>Les trackers GPS hors ligne ne sont pas le bon outil pour toutes les situations. Ils constituent le bon outil lorsque :</p>
+<h2>Implications pratiques : qui a besoin d'un traceur GPS hors ligne ?</h2>
+<p>Les traceurs GPS hors ligne ne sont pas le bon outil pour toutes les situations. Ils constituent le bon outil lorsque :</p>
 <ul>
 <li><strong>Vous opérez en dehors de la couverture cellulaire</strong> — forêts, montagnes, terres agricoles, régions sauvages isolées</li>
 <li><strong>Vous voulez zéro frais permanents</strong> - aucun abonnement, jamais</li>
 <li><strong>La durée de vie de la batterie compte</strong> - des mois ou des années, pas des jours</li>
 <li><strong>Questions de confidentialité</strong> — vos données de suivi ne transitent jamais par un serveur tiers</li>
-<li><strong>Vous avez besoin de redondance</strong> - un tracker de sauvegarde qui fonctionne lorsque votre téléphone n'a pas de signal</li>
+<li><strong>Vous avez besoin de redondance</strong> - un traceur de sauvegarde qui fonctionne lorsque votre téléphone n'a pas de signal</li>
 </ul>
 <p>Cas d'utilisation courants de Loko : chiens de chasse et chiens de travail, équipements agricoles, drones, bateaux et kayaks dans les zones reculées, sécurité personnelle lors des expéditions de randonnée et d'escalade et actifs de grande valeur stockés dans des endroits sans couverture cellulaire.</p>
 <h2>Limites du suivi GPS hors ligne</h2>
-<p>Comprendre ce que les trackers hors ligne ne peuvent pas faire est aussi important que savoir ce qu'ils peuvent :</p>
+<p>Comprendre ce que les traceurs hors ligne ne peuvent pas faire est aussi important que savoir ce qu'ils peuvent :</p>
 <ul>
 <li><strong>La portée est limitée.</strong> 20km est le maximum dans des conditions idéales. Les forêts denses et les montagnes réduisent ce phénomène. Si l'actif se déplace au-delà de la portée radio, vous perdez le signal.</li>
-<li><strong>Pas d'accès au cloud en temps réel.</strong> Le tracker fait rapport à votre récepteur LokoHUB, pas à un serveur. Si vous souhaitez voir l'emplacement à 500km, LoRa P2P ne peut pas le fournir. (Pour un accès multipoint, LoRaWAN avec une passerelle peut étendre la portée.)</li>
+<li><strong>Pas d'accès au cloud en temps réel.</strong> Le traceur fait rapport à votre récepteur LokoHUB, pas à un serveur. Si vous souhaitez voir l'emplacement à 500km, LoRa P2P ne peut pas le fournir. (Pour un accès multipoint, LoRaWAN avec une passerelle peut étendre la portée.)</li>
 <li><strong>Dépend de la ligne de vue.</strong> Comme toutes les radios, LoRa fonctionne mieux avec un chemin clair entre l'émetteur et le récepteur. Le terrain et les bâtiments réduisent la portée.</li>
 </ul>
 </div>
 </article>
 <div class="product-cta">
-<p class="product-cta-heading">Le tracker GPS hors ligne</p>
+<p class="product-cta-heading">Le traceur GPS hors ligne</p>
 <div class="product-cta-links">
-<a class="product-cta-link primary" href="/fr/lora-gps-tracker/">Voir le traqueur Loko GPS</a>
+<a class="product-cta-link primary" href="/fr/lora-gps-tracker/">Voir le traceur Loko GPS</a>
 <a class="product-cta-link" href="/fr/no-monthly-fee/">Aucun détail sur les frais mensuels</a>
 <a class="product-cta-link" href="/fr/battery-life/">Comparaison de la durée de vie de la batterie</a>
 <a class="product-cta-link" href="/fr/specifications/">Spécifications complètes</a>

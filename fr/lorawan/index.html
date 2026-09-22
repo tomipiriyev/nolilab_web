@@ -5,7 +5,7 @@
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>Guide de configuration LoRaWAN pour Loko GPS Tracker | Intégration TTN | nolilab</title>
+<title>Guide LoRaWAN pour le traceur GPS Loko : intégration TTN</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
@@ -17,7 +17,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Connectez vos trackers Loko Air au The Things Network (TTN). Guide de configuration étape par étape de LoRaWAN : créez une application TTN, enregistrez les appareils, générez une clé API et lancez la mise en ligne dans l'application Loko." name="description"/>
+<meta content="Connectez vos traceurs Loko Air au The Things Network (TTN). Guide de configuration étape par étape de LoRaWAN : créez une application TTN, enregistrez les appareils, générez une clé API et lancez la mise en ligne dans l'application Loko." name="description"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
 <link href="https://www.nolilab.com/fr/lorawan/" rel="canonical"/>
 <link href="https://www.nolilab.com/lorawan/" hreflang="en" rel="alternate"/>
@@ -28,14 +28,14 @@
 <link href="https://www.nolilab.com/zh/lorawan/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/lorawan/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="Guide de configuration LoRaWAN pour Loko GPS Tracker | Intégration TTN | nolilab" property="og:title"/>
-<meta content="Connectez vos trackers Loko Air au The Things Network (TTN). Guide de configuration étape par étape de LoRaWAN : créez une application TTN, enregistrez les appareils, générez une clé API et lancez la mise en ligne dans l'application Loko." property="og:description"/>
+<meta content="Guide LoRaWAN pour le traceur GPS Loko : intégration TTN" property="og:title"/>
+<meta content="Connectez vos traceurs Loko Air au The Things Network (TTN). Guide de configuration étape par étape de LoRaWAN : créez une application TTN, enregistrez les appareils, générez une clé API et lancez la mise en ligne dans l'application Loko." property="og:description"/>
 <meta content="https://www.nolilab.com/fr/lorawan/" property="og:url">
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Guide de configuration LoRaWAN pour Loko GPS Tracker | Intégration TTN | nolilab" name="twitter:title"/>
-<meta content="Connectez vos trackers Loko Air au The Things Network (TTN). Guide de configuration étape par étape de LoRaWAN : créez une application TTN, enregistrez les appareils, générez une clé API et lancez la mise en ligne dans l'application Loko." name="twitter:description"/>
+<meta content="Guide LoRaWAN pour le traceur GPS Loko : intégration TTN" name="twitter:title"/>
+<meta content="Connectez vos traceurs Loko Air au The Things Network (TTN). Guide de configuration étape par étape de LoRaWAN : créez une application TTN, enregistrez les appareils, générez une clé API et lancez la mise en ligne dans l'application Loko." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
     :root {
@@ -422,7 +422,7 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "Connexion du Loko au réseau LoRaWAN",
-  "description": "Connectez vos trackers Loko Air au The Things Network (TTN). Guide de configuration étape par étape de LoRaWAN : créez une application TTN, enregistrez les appareils, générez une clé API et lancez la mise en ligne dans l'application Loko.",
+  "description": "Connectez vos traceurs Loko Air au The Things Network (TTN). Guide de configuration étape par étape de LoRaWAN : créez une application TTN, enregistrez les appareils, générez une clé API et lancez la mise en ligne dans l'application Loko.",
   "url": "https://www.nolilab.com/fr/lorawan/",
   "datePublished": "2024-05-22",
   "dateModified": "2026-07-01",
@@ -450,7 +450,7 @@
   },
   "about": {
     "@type": "Product",
-    "name": "Traqueur Loko GPS",
+    "name": "Traceur Loko GPS",
     "url": "https://www.nolilab.com"
   },
   "proficiencyLevel": "Débutant",
@@ -495,7 +495,7 @@
 <header class="lorawan-hero">
 <div class="kicker">Loko · Guide de configuration</div>
 <h1>Connexion du Loko au réseau LoRaWAN</h1>
-<p>Associez vos trackers Loko Air avec The Things Network (TTN) et démarrez
+<p>Associez vos traceurs Loko Air avec The Things Network (TTN) et démarrez
        recevoir des positions en direct dans l'application - en quatre étapes courtes.</p>
 <div class="meta">~10 min · Adapté aux débutants</div>
 </header>
@@ -509,7 +509,7 @@
         mesures comme jauges.</span>
 </a>
 <!-- ============================ INTRO ============================ -->
-<p>Loko reçoit les positions de votre tracker sur <b>LoRaWAN</b>, une longue portée,
+<p>Loko reçoit les positions de votre traceur sur <b>LoRaWAN</b>, une longue portée,
        réseau radio de faible puissance. Pour relier ces messages radio à votre téléphone, l'application
        se connecte à <b>The Things Network (TTN)</b> — une LoRaWAN community gratuite et mondiale
        réseau.</p>
@@ -597,7 +597,7 @@
 <span class="ic">📡</span>
 <div class="bd">Choisissez le <b>plan de fréquence</b> pour votre région (par ex. <i>Europe 863-870 MHz</i>)
         et correspondre à <b>Version LoRaWAN</b> à votre Loko Air. Répétez cette étape pour chaque
-        tracker que vous possédez.</div>
+        traceur que vous possédez.</div>
 </div>
 <!-- ============================ STEP 3 ============================ -->
 <div class="step"><div class="num">3</div><h2>Créer une clé API</h2></div>
@@ -700,7 +700,7 @@
 </div>
 <p>Robinet <b>Sauvegarder</b>. Lorsque l'indicateur d'état en haut de la feuille devient
        <b style="color:var(--accent)">● Connecté</b>, l'application est en direct sur le réseau et
-       Les positions de votre tracker commenceront à arriver sur la carte.</p>
+       Les positions de votre traceur commenceront à arriver sur la carte.</p>
 <!-- ============================ DONE ============================ -->
 <div class="done">
 <h2>🎉 Vous êtes connecté !</h2>
