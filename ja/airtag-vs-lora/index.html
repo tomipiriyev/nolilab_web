@@ -5,7 +5,7 @@
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>AirTag 対 GPS トラッカー |オフライン LoRa の代替品 | Loko GPS トラッカー</title>
+<title>AirTagとLoRa GPSトラッカーの比較：通信距離とカバー範囲 | Loko</title>
 <link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
 <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
 <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
@@ -18,19 +18,19 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="AirTag と実際の GPS トラッカーを比較してください。 Loko GPS トラッカーは GPS および LoRa 無線を使用し、近くに iPhone がなくても動作し、Android をサポートし、最大 20km をオフラインで追跡します。" name="description"/>
+<meta content="AirTagと本格的なGPSトラッカーを比較します。Loko GPS TrackerはGPSとLoRa無線を使用し、近くにiPhoneがなくても動作します。Androidに対応し、オフラインで最大20kmまで追跡できます。" name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <meta content="article" property="og:type"/>
-<meta content="AirTag 対 GPS トラッカー |オフライン LoRa の代替品 | Loko GPS トラッカー" property="og:title"/>
-<meta content="AirTag と実際の GPS トラッカーを比較してください。 Loko GPS トラッカーは GPS および LoRa 無線を使用し、近くに iPhone がなくても動作し、Android をサポートし、最大 20km をオフラインで追跡します。" property="og:description"/>
+<meta content="AirTagとLoRa GPSトラッカーの比較：通信距離とカバー範囲 | Loko" property="og:title"/>
+<meta content="AirTagと本格的なGPSトラッカーを比較します。Loko GPS TrackerはGPSとLoRa無線を使用し、近くにiPhoneがなくても動作します。Androidに対応し、オフラインで最大20kmまで追跡できます。" property="og:description"/>
 <meta content="https://www.nolilab.com/ja/airtag-vs-lora/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="AirTag vs LoRa GPS Tracker Comparison" property="og:image:alt"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="ja_JP" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="AirTag 対 GPS トラッカー |オフライン LoRa の代替品 | Loko GPS トラッカー" name="twitter:title"/>
-<meta content="AirTag と実際の GPS トラッカーを比較してください。 Loko GPS トラッカーは GPS および LoRa 無線を使用し、近くに iPhone がなくても動作し、Android をサポートし、最大 20km をオフラインで追跡します。" name="twitter:description"/>
+<meta content="AirTagとLoRa GPSトラッカーの比較：通信距離とカバー範囲 | Loko" name="twitter:title"/>
+<meta content="AirTagと本格的なGPSトラッカーを比較します。Loko GPS TrackerはGPSとLoRa無線を使用し、近くにiPhoneがなくても動作します。Androidに対応し、オフラインで最大20kmまで追跡できます。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
 <meta content="AirTag vs GPS tracker, AirTag vs LoRa, AirTag alternative, GPS tracker without iPhone, AirTag range limitation" name="keywords"/>
@@ -44,50 +44,48 @@
 <link href="https://www.nolilab.com/ru/airtag-vs-lora/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/airtag-vs-lora/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/airtag-vs-lora/" hreflang="x-default" rel="alternate"/>
-
-
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "AirTag と LoRa GPS トラッカーの主な違いは何ですか?",
+      "name": "AirTagとLoRa GPSトラッカーの主な違いは何ですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AirTag は Bluetooth と Apple のクラウドソーシングによる Find My ネットワークを使用します。その位置を中継するのは近くの iPhone に依存します。 Loko のような LoRa GPS トラッカーは、実際の GPS 衛星と専用の長距離無線リンクを使用します。 Loko は、近くに電話や人がいない遠隔地でも動作します。エアタグはそうではありません。"
+        "text": "AirTagはBluetoothとAppleのクラウドソーシング型Find Myネットワークを利用し、近くのiPhoneに位置情報を中継してもらう必要があります。LokoのようなLoRa GPSトラッカーは、実際のGPS衛星と専用の長距離無線リンクを使用します。Lokoは周囲にスマートフォンも人もいない遠隔地で動作しますが、AirTagは動作しません。"
       }
     },
     {
       "@type": "Question",
-      "name": "AirTag は遠隔地や森林でも機能しますか?",
+      "name": "AirTagは遠隔地や森林でも動作しますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "いいえ、AirTag はタグの Bluetooth 範囲 (約 10 メートル) 内を歩いている他の iPhone ユーザーに依存しています。人里離れた森林、山道、田舎の農場では、何キロも周囲に誰もいないかもしれません。このような環境では、AirTag は事実上動作を停止します。 Loko GPS Tracker は、GPS 衛星が見える場所ならどこでも動作します。人は必要ありません。"
+        "text": "いいえ。AirTagは、タグのBluetooth通信範囲（約10m）内を通るほかのiPhoneユーザーに依存しています。人里離れた森林、登山道、地方の農場では、何マイルにもわたって誰もいないことがあります。このような環境では、AirTagは事実上機能しなくなります。Loko GPS TrackerはGPS衛星を捕捉できる場所ならどこでも動作し、人が近くにいる必要はありません。"
       }
     },
     {
       "@type": "Question",
-      "name": "AirTag には GPS がありますか?",
+      "name": "AirTagにGPSは搭載されていますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "いいえ、AirTag には GPS チップは含まれていません。 Bluetooth Low Energy を使用して近くの iPhone と mmunicate を行い、iPhone は独自の GPS を使用しておおよその位置を報告します。これは、衛星信号から直接独自の座標を計算する真の GPS トラッカーとは根本的に異なります。"
+        "text": "いいえ。AirTagにはGPSチップが搭載されていません。Bluetooth Low Energyで近くのiPhoneと通信し、そのiPhoneのGPSを使っておおよその位置を報告します。これは、衛星信号から自らの座標を直接算出する本格的なGPSトラッカーとは根本的に異なります。"
       }
     },
     {
       "@type": "Question",
-      "name": "AirTag と Loko の有効範囲はどれくらいですか?",
+      "name": "AirTagとLokoの実用的な通信距離はどのくらいですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AirTag の直接精密検出範囲は、超広帯域を使用すると約 30 ～ 100 メートルです。クラウドソーシングによる Find My 範囲は理論上無制限ですが、他の iPhone がたまたま通り過ぎた場合にのみ機能します。 Loko は、他の人のデバイスから完全に独立して、開けた地形で最大 20km の直接無線範囲を備えています。"
+        "text": "AirTagの直接的な「正確な場所を見つける」機能の通信距離は、Ultra Widebandを使用して約30～100メートルです。クラウドソーシング型Find Myの範囲は理論上無制限ですが、ほかのiPhoneが偶然近くを通った場合にしか機能しません。Lokoは、ほかの人のデバイスに一切依存せず、開けた地形で最大20kmの直接無線通信が可能です。"
       }
     },
     {
       "@type": "Question",
-      "name": "ペット、荷物、アウトドア用品の追跡にはどれが適していますか?",
+      "name": "ペット、手荷物、アウトドア用品の追跡にはどちらが適していますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "それはあなたがどこにいるかによって異なります。 AirTag は、常に近くに iPhone ユーザーがいる密集した都市環境で優れています。遠隔地にいるペット、ハイキング用品、または交通量の少ない場所に行き着く可能性のあるものについては、Loko のような LoRa GPS トラッカーは、他の人のデバイスに依存しないため、はるかに信頼性が高くなります。"
+        "text": "利用場所によって異なります。AirTagは、周囲に常にiPhoneユーザーがいる人口密度の高い都市部では非常に優れています。遠隔地にいるペット、ハイキング用品、または人通りの少ない場所に行く可能性がある物には、LokoのようなLoRa GPSトラッカーのほうがはるかに信頼できます。ほかの人のデバイスに依存しないためです。"
       }
     }
   ]
@@ -99,13 +97,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "家",
+      "name": "ホーム",
       "item": "https://www.nolilab.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "AirTag 対 LoRa GPS トラッカー",
+      "name": "AirTagとLoRa GPSトラッカーの比較",
       "item": "https://www.nolilab.com/airtag-vs-lora/"
     }
   ]
@@ -268,12 +266,6 @@
   }
 </style>
 <script defer="" src="/js/layout.js?v=20260906"></script>
-
-
-
-
-
-
 </head>
 <body>
 <div id="site-header"></div>
@@ -281,84 +273,84 @@
 <!-- Hero -->
 <div class="page-hero">
 <div class="container">
-<h1>AirTag と LoRa GPS トラッカー: 正直な比較</h1>
-<p class="subtitle">まったく異なる 2 つのテクノロジーが同じ問題をまったく異なる方法で解決</p>
-<p>Apple AirTag は、世界で最も人気のあるアイテム トラッカーの 1 つです。月額料金なしで 29 ドルというのは、無敵の取引のように思えます。しかし、AirTag は GPS トラッカーではありません。そして、その違いは現実の世界では非常に重要です。</p>
-<p><strong>AirTag は、他の人の iPhone に依存して動作する Bluetooth ビーコンです。</strong> 都市部では通常はそれで大丈夫です。ハイキングコース、人里離れた農場、または iPhone の人通りが少ない場所では、AirTag が完全に機能しない可能性があります。</p>
-<p>Loko のような LoRa GPS トラッカーは動作が異なります。測位には本物の GPS 衛星を使用し、送信には専用の長距離無線リンクを使用します。クラウドソーシング、他のデバイスへの依存、デッドゾーンはありません。</p>
-<p>このページでは、正直な比較を示します。</p>
+<h1>AirTagとLoRa GPSトラッカー：率直な比較</h1>
+<p class="subtitle">同じ問題をまったく異なる方法で解決する、2つの大きく異なる技術</p>
+<p>Apple AirTagは、世界で最も人気のあるアイテムトラッカーの一つです。月額料金なしで$29という、他にないほど魅力的な製品に見えます。しかし、AirTagはGPSトラッカーではありません。この違いは実際の利用環境で極めて重要です。</p>
+<p><strong>AirTagは、ほかの人のiPhoneに依存して動作するBluetoothビーコンです。</strong> 都市では通常、問題なく機能します。しかし、登山道、人里離れた農場、またはiPhoneユーザーの往来が少ない場所では、AirTagがまったく機能しないことがあります。</p>
+<p>LokoのようなLoRa GPSトラッカーは仕組みが異なります。測位には実際のGPS衛星を、送信には専用の長距離無線リンクを使用します。クラウドソーシングも、ほかのデバイスへの依存も、圏外もありません。</p>
+<p>このページでは、両者を率直に比較します。</p>
 <div class="cta-block">
-<p><strong>遠隔地向けに AirTag の代替手段が必要ですか?</strong> Loko は、近くの電話の代わりに本物の GPS と直接 LoRa 無線を使用します。</p>
-<a class="cta-btn" href="/lora-gps-tracker/">Loko GPS トラッカーを参照→</a>
+<p><strong>遠隔地で使えるAirTagの代替品をお探しですか？</strong> Lokoは近くのスマートフォンではなく、実際のGPSと直接接続のLoRa無線を使用します。</p>
+<a class="cta-btn" href="/ja/lora-gps-tracker/">Loko GPSトラッカーを見る →</a>
 </div>
 </div>
 </div>
 <!-- How AirTag works -->
 <div class="content-block">
 <div class="container">
-<h2>AirTag の仕組みと遠隔地で失敗する理由</h2>
-<p>AirTag には、近くの方向を正確に検出するための Bluetooth Low Energy (BLE) 無線と超広帯域 (UWB) チップが含まれています。 GPSは含まれておりません。実際に位置情報を取得する方法は次のとおりです。</p>
+<h2>AirTagの仕組みと、遠隔地で機能しない理由</h2>
+<p>AirTagには、Bluetooth Low Energy（BLE）無線と、近距離で正確な方向を特定するためのUltra Wideband（UWB）チップが搭載されています。GPSは搭載されていません。実際に位置情報が届く仕組みは次のとおりです：</p>
 <ol>
-<li>AirTag は回転する Bluetooth 信号をブロードキャストします。</li>
-<li>iOS 14.5 以降を実行している近くの iPhone は、その信号を静かに検出します。</li>
-<li>その iPhone は独自の GPS を使用して、AirTag を検出した場所を記録します</li>
-<li>その位置情報は匿名で Apple のサーバーにアップロードされます</li>
-<li>「探す」アプリで最後に検出された場所を確認できます</li>
+<li>AirTagが変化し続けるBluetooth信号を発信します</li>
+<li>近くにあるiOS 14.5以降を搭載したiPhoneが、その信号をバックグラウンドで検出します</li>
+<li>そのiPhoneが自身のGPSを使用して、AirTagを検出した場所を記録します</li>
+<li>その位置情報が匿名でAppleのサーバーにアップロードされます</li>
+<li>Find Myアプリで最後に検出された位置を確認できます</li>
 </ol>
-<p>このアーキテクチャ (クラウドソーシング ロケーションと呼ばれる) は、iPhone が密集している場所で見事に機能します。混雑した空港、ショッピング モール、または都市近郊では、いたるところに iPhone があり、AirTag の位置情報は頻繁に更新されます。</p>
-<p>致命的な欠陥は文明を離れた瞬間に現れます。森林、山間の渓谷、田園地帯、または定期的に iPhone の人が通らない場所では、AirTag は何時間も何日も検出されないことがあります。犬が人里離れた森に逃げ込んだ場合、AirTag は犬が最後に検出された場所、つまり私道である可能性のある場所を表示します。</p>
-<p><strong>また、AirTag は Apple デバイスでのみ動作します。</strong> Android ユーザーは、AirTag や Find My ネットワークをまったく使用できません。クラウドソーシング ネットワークには iPhone のみが含まれており、Samsung、Google Pixel、その他の Android ユーザーは参加していません。</p>
+<p>クラウドソーシング測位と呼ばれるこの仕組みは、iPhoneの密度が高い場所で非常にうまく機能します。混雑した空港、ショッピングモール、都市部の住宅街にはiPhoneが至る所にあるため、AirTagの位置情報が頻繁に更新されます。</p>
+<p>人里を離れた途端、致命的な弱点が現れます。森林、山間の谷、地方の農地、またはiPhoneユーザーが定期的に通らない地域では、AirTagが何時間、場合によっては何日も検出されないことがあります。愛犬が人里離れた森林へ走り込んだ場合、AirTagに表示されるのは最後に検出された位置であり、それは自宅の車道かもしれません。</p>
+<p><strong>また、AirTagはAppleデバイスでしか使用できません。</strong> Androidユーザーは、AirTagもFind Myネットワークも一切利用できません。クラウドソーシングネットワークに含まれるのはiPhoneだけで、Samsung、Google Pixel、その他のAndroidユーザーは参加しません。</p>
 </div>
 </div>
 <!-- How LoRa GPS works -->
 <div class="content-block">
 <div class="container">
-<h2>LoRa GPS の仕組み — 直接、独立、どこでも</h2>
-<p>Loko のような LoRa GPS トラッカーは、インフラストラクチャや他人のデバイスを必要としない、まったく異なるアーキテクチャを使用しています。</p>
-<p>信号チェーンは完全に自己完結型です。</p>
+<h2>LoRa GPSの仕組み：直接接続、独立動作、どこでも追跡</h2>
+<p>LokoのようなLoRa GPSトラッカーは、インフラもほかの人のデバイスも必要としない、まったく異なる仕組みを採用しています。</p>
+<p>信号経路は完全に自己完結しています：</p>
 <ol>
-<li>Loko Air トラッカーは、地球を周回する衛星から GPS 信号を直接受信します。</li>
-<li>独自の正確な座標 (緯度、経度、高度) を計算します。</li>
-<li>これらの座標は LoRa 無線経由で Loko Ground レシーバーに直接送信されます。</li>
-<li>Loko Ground は Bluetooth 経由でデータを携帯電話に送信します</li>
-<li>Loko アプリは、オフライン マップ上にアセットの位置を表示します</li>
+<li>Loko Airトラッカーが、地球を周回する衛星からGPS信号を直接受信します</li>
+<li>自らの正確な座標（緯度、経度、高度）を算出します</li>
+<li>その座標をLoRa無線でLoko Ground受信機へ直接送信します</li>
+<li>Loko GroundがBluetooth経由でスマートフォンへデータを送信します</li>
+<li>Lokoアプリは、オフラインマップ上に資産の位置を表示します</li>
 </ol>
-<p>このチェーンのどの時点にもインターネットは関与しません。クラウド サーバー、SIM カード、携帯電話ネットワークはなく、他人の携帯電話に依存することもありません。 Loko Air と Loko Ground 間の直接 LoRa 無線リンクは、最大で動作します。 <strong>開けた地形では 20km</strong>.</p>
-<p>つまり、Loko は、ロンドン中心部にいても、人里離れたヒマラヤのトレイルにいても、同じように機能します。唯一の要件は、GPS 衛星が見えることです。つまり、衛星は基本的に地球の表面のどこにでも存在します。</p>
+<p>この一連の通信でインターネットが介在することは一切ありません。クラウドサーバーもSIMカードも携帯電話回線も不要で、他人のスマートフォンにも依存しません。Loko AirとLoko Groundを結ぶLoRaの直接無線通信は、最大 <strong>開けた地形で20km</strong>.</p>
+<p>つまりLokoは、ロンドン中心部でもヒマラヤの人里離れた登山道でも、まったく同じように機能します。必要なのはGPS衛星を捕捉できることだけです。これは地球上のほぼすべての場所で可能です。</p>
 </div>
 </div>
 <!-- Big comparison table -->
 <div class="content-block">
 <div class="container">
-<h2>完全な比較: AirTag と Loko LoRa GPS</h2>
+<h2>徹底比較：AirTag対Loko LoRa GPS</h2>
 <table class="compare-table">
 <thead>
 <tr>
-<th>特徴</th>
-<th>アップルエアタグ</th>
-<th>Loko (LoRa GPS)</th>
+<th>機能</th>
+<th>Apple AirTag</th>
+<th>Loko（LoRa GPS）</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>テクノロジー</td>
-<td>Bluetooth + UWB、クラウドソース</td>
-<td>GPS + LoRa 無線、直接 P2P</td>
+<td>技術</td>
+<td>Bluetooth + UWB、クラウドソーシング方式</td>
+<td>GPS + LoRa無線、P2Pへ直接通信</td>
 </tr>
 <tr>
-<td>本物のGPSチップを搭載</td>
+<td>実際のGPSチップを搭載</td>
 <td class="no">いいえ</td>
 <td class="yes">はい</td>
 </tr>
 <tr>
-<td>遠隔地での作業</td>
-<td class="no">いいえ - 近くに iPhone が必要です</td>
-<td class="yes">はい - どこでも使えます</td>
+<td>遠隔地での動作</td>
+<td class="no">いいえ — 近くにiPhoneが必要です</td>
+<td class="yes">はい — どこでも機能します</td>
 </tr>
 <tr>
-<td>直接無線範囲</td>
-<td>~100m Bluetooth</td>
-<td>最大 20km LoRa</td>
+<td>直接無線通信の到達距離</td>
+<td>約100m（Bluetooth）</td>
+<td>最大20km（LoRa）</td>
 </tr>
 <tr>
 <td>月額費用</td>
@@ -366,33 +358,33 @@
 <td class="yes">$0</td>
 </tr>
 <tr>
-<td>近くに電話がなくても動作します</td>
+<td>近くにスマートフォンがなくても機能</td>
 <td class="no">いいえ</td>
 <td class="yes">はい</td>
 </tr>
 <tr>
 <td>リアルタイム更新</td>
-<td>ネットワーク密度に依存します</td>
-<td class="yes">はい、ダイレクトラジオです</td>
+<td>ネットワーク密度に左右されます</td>
+<td class="yes">はい、直接無線通信です</td>
 </tr>
 <tr>
-<td>Androidで動作します</td>
+<td>Androidに対応</td>
 <td class="no">いいえ</td>
-<td class="yes">はい (iOS および Android)</td>
+<td class="yes">はい（iOSとAndroid）</td>
 </tr>
 <tr>
-<td>重さ</td>
+<td>重量</td>
 <td>11g</td>
 <td>14g未満</td>
 </tr>
 <tr>
-<td>バッテリー寿命</td>
-<td>～1 年 (CR2032)</td>
-<td>1年まで</td>
+<td>バッテリー駆動時間</td>
+<td>約1年（CR2032）</td>
+<td>最長1年</td>
 </tr>
 <tr>
-<td>GPS コンスタレーションのサポート</td>
-<td>該当なし (GPS なし)</td>
+<td>対応GPS衛星システム</td>
+<td>該当なし（GPS非搭載）</td>
 <td>GPS、GLONASS、Galileo</td>
 </tr>
 <tr>
@@ -407,58 +399,58 @@
 <!-- When AirTag wins vs when Loko wins -->
 <div class="content-block">
 <div class="container">
-<h2>AirTag が勝った場合と Loko が勝った場合</h2>
+<h2>AirTagが適する場合とLokoが適する場合</h2>
 <div class="verdict-grid">
 <div class="verdict-card">
-<h3>AirTag は次の場合に適しています。</h3>
+<h3>AirTagが適しているのは、次の場合です：</h3>
 <ul>
-<li>あなたはiPhoneのトラフィックが多い密集した都市部にいます</li>
-<li>できるだけ安価なハードウェア (29 ドル) が必要です</li>
-<li>あなたはすでに Apple エコシステムに深く関わっています</li>
-<li>超高精度の近距離方向探知（10m未満）が必要です</li>
-<li>主要空港で荷物を追跡している場合</li>
-<li>長期的なパッシブ追跡は許容されます（リアルタイムではありません）</li>
+<li>iPhoneの通信量が多い人口密集都市部で使用する場合</li>
+<li>できるだけ安価なハードウェア（$29）が必要な場合</li>
+<li>すでにAppleエコシステムを幅広く利用している場合</li>
+<li>近距離（&lt;10m）で極めて高精度な方向検知が必要な場合</li>
+<li>主要空港で手荷物を追跡する場合</li>
+<li>長期間の受動的な追跡で問題ない場合（リアルタイムではありません）</li>
 </ul>
 </div>
 <div class="verdict-card">
-<h3>Loko LoRa GPS は、次の場合に優れています。</h3>
+<h3>Loko LoRa GPSが適しているのは、次の場合です：</h3>
 <ul>
-<li>あなたは遠隔地、森林、農場にいる</li>
-<li>クラウドソースの履歴ではなく、リアルタイムの位置情報の更新が必要です</li>
-<li>Android スマートフォン、または iOS と Android を組み合わせて使用​​している</li>
-<li>実際の 20km の直接無線範囲が必要です</li>
-<li>屋外でペット、家畜、ドローンを追跡している場合</li>
-<li>周囲に人がいない状態で作業するにはトラッカーが必要です</li>
+<li>僻地、森林、農場で使用する場合</li>
+<li>クラウドソーシングによる過去の位置情報ではなく、リアルタイムの位置更新が必要な場合</li>
+<li>Androidスマートフォン、またはiOSとAndroidの両方を使用する場合</li>
+<li>実際に20km届く直接無線通信が必要な場合</li>
+<li>屋外でペット、家畜、ドローンを追跡する場合</li>
+<li>周囲に人がまったくいなくてもトラッカーが機能する必要がある場合</li>
 </ul>
 </div>
 </div>
-<p>正直な summary: AirTag は、トラッカーの装いをした賢い Bluetooth ビーコンです。 iPhone がどこにでもある都市部のユースケースでは、驚くほどうまく機能します。屋外や遠隔地の使用例では、基本的にこのタスクには適していません。</p>
-<p>Loko は、真の GPS トラッカーです。他のデバイスに依存せずに正確な座標を認識しており、それらの座標を 20km 無線リンク経由で直接ユーザーに送信します。クラウドソーシングもクラウドも妥協もありません。</p>
+<p>率直にまとめると、AirTagはトラッカーを装った巧妙なBluetoothビーコンです。iPhoneが至る所にある都市部では、驚くほどうまく機能します。しかし、屋外や僻地での用途には根本的に適していません。</p>
+<p>Lokoは本物のGPSトラッカーです。他のデバイスに依存せず正確な座標を把握し、その座標を20kmの無線通信でユーザーへ直接送信します。クラウドソーシングもクラウドも妥協もありません。</p>
 </div>
 </div>
 <!-- FAQ -->
 <div class="content-block">
 <div class="container">
-<h2>AirTag と LoRa GPS トラッカー: FAQ</h2>
+<h2>AirTag対LoRa GPSトラッカー：よくある質問</h2>
 <div class="faq-item">
-<h3>AirTag と LoRa GPS トラッカーの主な違いは何ですか?</h3>
-<p>AirTag は Bluetooth と Apple のクラウドソーシングによる Find My ネットワークを使用します。その位置を中継するのは近くの iPhone に依存します。 Loko のような LoRa GPS トラッカーは、実際の GPS 衛星と専用の長距離無線リンクを使用します。 Loko は、近くに電話や人がいない遠隔地でも動作します。エアタグはそうではありません。</p>
+<h3>AirTagとLoRa GPSトラッカーの主な違いは何ですか？</h3>
+<p>AirTagはBluetoothとAppleのクラウドソーシング型Find Myネットワークを利用し、近くのiPhoneに位置情報を中継してもらう必要があります。LokoのようなLoRa GPSトラッカーは、実際のGPS衛星と専用の長距離無線リンクを使用します。Lokoは周囲にスマートフォンも人もいない遠隔地で動作しますが、AirTagは動作しません。</p>
 </div>
 <div class="faq-item">
-<h3>AirTag は遠隔地や森林でも機能しますか?</h3>
-<p>いいえ、AirTag はタグの Bluetooth 範囲 (約 10 メートル) 内を歩いている他の iPhone ユーザーに依存しています。人里離れた森林、山道、田舎の農場では、何キロも周囲に誰もいないかもしれません。このような環境では、AirTag は事実上動作を停止します。 Loko GPS Tracker は、GPS 衛星が見える場所ならどこでも動作します。人は必要ありません。</p>
+<h3>AirTagは遠隔地や森林でも動作しますか？</h3>
+<p>いいえ。AirTagは、タグのBluetooth通信範囲（約10m）内を通るほかのiPhoneユーザーに依存しています。人里離れた森林、登山道、地方の農場では、何マイルにもわたって誰もいないことがあります。このような環境では、AirTagは事実上機能しなくなります。Loko GPS TrackerはGPS衛星を捕捉できる場所ならどこでも動作し、人が近くにいる必要はありません。</p>
 </div>
 <div class="faq-item">
-<h3>AirTag には GPS がありますか?</h3>
-<p>いいえ、AirTag には GPS チップは含まれていません。 Bluetooth Low Energy を使用して近くの iPhone と mmunicate を行い、iPhone は独自の GPS を使用しておおよその位置を報告します。これは、衛星信号から直接独自の座標を計算する真の GPS トラッカーとは根本的に異なります。</p>
+<h3>AirTagにGPSは搭載されていますか？</h3>
+<p>いいえ。AirTagにはGPSチップが搭載されていません。Bluetooth Low Energyで近くのiPhoneと通信し、そのiPhoneのGPSを使っておおよその位置を報告します。これは、衛星信号から自らの座標を直接算出する本格的なGPSトラッカーとは根本的に異なります。</p>
 </div>
 <div class="faq-item">
-<h3>AirTag と Loko の有効範囲はどれくらいですか?</h3>
-<p>AirTag の直接精密検出範囲は、超広帯域を使用すると約 30 ～ 100 メートルです。クラウドソーシングによる Find My 範囲は理論上無制限ですが、他の iPhone がたまたま通り過ぎた場合にのみ機能します。 Loko は、他の人のデバイスから完全に独立して、開けた地形で最大 20km の直接無線範囲を備えています。</p>
+<h3>AirTagとLokoの実用的な通信距離はどのくらいですか？</h3>
+<p>AirTagの直接的な「正確な場所を見つける」機能の通信距離は、Ultra Widebandを使用して約30～100メートルです。クラウドソーシング型Find Myの範囲は理論上無制限ですが、ほかのiPhoneが偶然近くを通った場合にしか機能しません。Lokoは、ほかの人のデバイスに一切依存せず、開けた地形で最大20kmの直接無線通信が可能です。</p>
 </div>
 <div class="faq-item">
-<h3>ペット、荷物、アウトドア用品の追跡にはどれが適していますか?</h3>
-<p>それはあなたがどこにいるかによって異なります。 AirTag は、常に近くに iPhone ユーザーがいる密集した都市環境で優れています。遠隔地にいるペット、ハイキング用品、または交通量の少ない場所に行き着く可能性のあるものについては、Loko のような LoRa GPS トラッカーは、他の人のデバイスに依存しないため、はるかに信頼性が高くなります。</p>
+<h3>ペット、手荷物、アウトドア用品の追跡にはどちらが適していますか？</h3>
+<p>利用場所によって異なります。AirTagは、周囲に常にiPhoneユーザーがいる人口密度の高い都市部では非常に優れています。遠隔地にいるペット、ハイキング用品、または人通りの少ない場所に行く可能性がある物には、LokoのようなLoRa GPSトラッカーのほうがはるかに信頼できます。ほかの人のデバイスに依存しないためです。</p>
 </div>
 </div>
 </div>
@@ -466,11 +458,11 @@
 <div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p>AirTag は優れた Bluetooth ビーコンです。 Loko は、本物の GPS トラッカーです。現実世界（屋外、遠隔地、他人の携帯電話に依存しない）で信頼できる位置情報が必要な場合、明確な選択肢があります。</p>
-<p><strong>Loko GPS トラッカー: 本物の GPS、20km の範囲、月額料金なし、どこでも使用できます。</strong></p>
-<p>製品の詳細については、次の URL をご覧ください。 <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
+<p>AirTagは優れたBluetoothビーコンです。Lokoは本物のGPSトラッカーです。屋外や僻地など、他人のスマートフォンに依存せず現実の環境で確実に位置を把握する必要があるなら、選択肢は明らかです。</p>
+<p><strong>Loko GPSトラッカー：本物のGPS、20kmの通信距離、月額料金なし、どこでも機能します。</strong></p>
+<p>製品の詳しい情報はこちら： <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
 <br/>
-<a class="cta-btn" href="/#shop">Loko を購入する →</a>
+<a class="cta-btn" href="/ja/#shop">Lokoを購入 →</a>
 </div>
 </div>
 </div>

@@ -44,18 +44,16 @@
 <link href="https://www.nolilab.com/ru/how-gps-works/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/how-gps-works/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/how-gps-works/" hreflang="x-default" rel="alternate"/>
-
-
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "¿GPS requiere Internet para funcionar?",
+      "name": "¿GPS necesita internet para funcionar?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Los satélites GPS transmiten señales continuamente mediante transmisión de radio unidireccional: los satélites no reciben nada de su dispositivo y no hay Internet involucrado. Su receptor GPS calcula su posición únicamente a partir de diferencias de tiempo en las señales recibidas de múltiples satélites. Sin embargo, la mayoría de los rastreadores commercial GPS aún necesitan Internet o celular para transmitir esa ubicación a su teléfono."
+        "text": "No. Los satélites GPS emiten señales continuamente mediante una transmisión de radio unidireccional: los satélites no reciben nada de tu dispositivo y no interviene internet. Tu receptor GPS calcula su posición únicamente a partir de las diferencias temporales entre las señales recibidas de varios satélites. Sin embargo, la mayoría de los rastreadores GPS comerciales siguen necesitando internet o cobertura móvil para enviar esa ubicación a tu teléfono."
       }
     },
     {
@@ -63,15 +61,15 @@
       "name": "¿Cuántos satélites GPS hay?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "La constelación estadounidense GPS tiene 31 satélites operativos según recuentos recientes. En cualquier lugar determinado de la superficie de la Tierra, normalmente se pueden ver entre 6 y 12 satélites simultáneamente. Los dispositivos GPS necesitan al menos 4 satélites para fijar una posición en 3D (latitud, longitud, altitud). Los rastreadores modernos como Loko utilizan múltiples constelaciones: GPS, GLONASS (Rusia, 24 satélites) y Galileo (UE, 30 satélites), lo que brinda acceso a más de 60 satélites simultáneamente para lograr soluciones más rápidas y precisas."
+        "text": "Según los recuentos recientes, la constelación estadounidense GPS tiene 31 satélites operativos. Desde cualquier punto de la superficie terrestre, normalmente puedes ver entre 6 y 12 satélites al mismo tiempo. Los dispositivos GPS necesitan al menos 4 satélites para determinar una posición 3D (latitud, longitud y altitud). Los rastreadores modernos como Loko utilizan varias constelaciones —GPS, GLONASS (Rusia, 24 satélites) y Galileo (UE, 30 satélites)—, lo que permite acceder a más de 60 satélites simultáneamente para obtener posiciones con mayor rapidez y precisión."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Por qué la mayoría de los rastreadores GPS necesitan datos móviles si GPS funciona sin conexión?",
+      "name": "¿Por qué la mayoría de los rastreadores GPS necesitan cobertura móvil si GPS funciona sin conexión?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPS le dice al rastreador dónde está. Pero, ¿cómo llega esa ubicación a tu teléfono? La mayoría de los rastreadores utilizan una tarjeta SIM y datos móviles para enviar coordenadas a un servidor en la nube, que luego su teléfono consulta a través de Internet. El GPS en sí está fuera de línea, pero la capa de transmisión es celular. Loko reemplaza el celular con radio LoRa, un enlace de radio directo que tampoco requiere Internet."
+        "text": "GPS indica al rastreador dónde está. Pero ¿cómo llega esa ubicación a tu teléfono? La mayoría de los rastreadores utilizan una tarjeta SIM y datos móviles para enviar las coordenadas a un servidor en la nube, que tu teléfono consulta después a través de internet. GPS en sí funciona sin conexión, pero la capa de transmisión usa la red móvil. Loko sustituye la conexión móvil por la radio LoRa: un enlace de radio directo que tampoco necesita internet."
       }
     },
     {
@@ -79,15 +77,15 @@
       "name": "¿Cuál es la diferencia entre GPS, GLONASS y Galileo?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPS es el sistema de navegación por satélite de EE. UU. (31 satélites). GLONASS es el equivalente de Rusia (24 satélites). Galileo es el sistema de la Unión Europea (30 satélites operativos a partir de 2024). Cada sistema utiliza diferentes frecuencias y planos orbitales. El uso de los tres simultáneamente, como lo hace Loko, aumenta drásticamente la cantidad de satélites visibles, mejorando la precisión de la posición, reduciendo el tiempo para la primera localización y manteniendo el seguimiento en entornos donde una constelación puede tener una geometría deficiente."
+        "text": "GPS es el sistema estadounidense de navegación por satélite (31 satélites). GLONASS es su equivalente ruso (24 satélites). Galileo es el sistema de la Unión Europea (30 satélites operativos en 2024). Cada sistema utiliza frecuencias y planos orbitales diferentes. Usar los tres a la vez —como hace Loko— aumenta considerablemente el número de satélites visibles, lo que mejora la precisión de la posición, reduce el tiempo hasta la primera localización y mantiene el rastreo en entornos donde una de las constelaciones podría tener una geometría poco favorable."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Cómo funciona Loko completamente fuera de línea?",
+      "name": "¿Cómo funciona Loko completamente sin conexión?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "La cadena de señal de Loko no implica Internet en ningún paso: los satélites GPS/GLONASS/Galileo transmiten señales de radio → El receptor de Loko Air calcula las coordenadas → Loko Air transmite las coordenadas a través de la radio LoRa (un enlace de radio directo, como un walkie-talkie) → Loko Ground recibe la señal LoRa → Loko Ground envía las coordenadas a su teléfono a través de Bluetooth → La aplicación Loko muestra la posición en un mapa sin conexión. Del satélite a la pantalla, todo es radio local."
+        "text": "La cadena de señal de Loko no utiliza internet en ningún paso: los satélites GPS/GLONASS/Galileo emiten señales de radio → el receptor de Loko Air calcula las coordenadas → Loko Air transmite las coordenadas por radio LoRa (un enlace de radio directo, como un walkie-talkie) → Loko Ground recibe la señal LoRa → Loko Ground envía las coordenadas a tu teléfono mediante Bluetooth → la aplicación Loko muestra la posición en un mapa sin conexión. Desde el satélite hasta la pantalla, todo funciona mediante radio local."
       }
     }
   ]
@@ -99,13 +97,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Hogar",
+      "name": "Inicio",
       "item": "https://www.nolilab.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Cómo funciona GPS sin Internet",
+      "name": "Cómo funciona GPS sin internet",
       "item": "https://www.nolilab.com/how-gps-works/"
     }
   ]
@@ -222,12 +220,6 @@
   }
 </style>
 <script defer="" src="/js/layout.js?v=20260906"></script>
-
-
-
-
-
-
 </head>
 <body>
 <div id="site-header"></div>
@@ -236,116 +228,116 @@
 <div class="page-hero">
 <div class="container">
 <h1>Cómo funciona el GPS sin internet ni tarjeta SIM</h1>
-<p class="subtitle">Loko GPS Tracker utiliza satélites GPS más radio LoRa, por lo que el seguimiento funciona sin SIM, Wi-Fi, servicio celular ni tarifas mensuales.</p>
-<p>Un receptor GPS calcula su posición directamente con las señales de los satélites, por lo que no necesita internet ni tarjeta SIM. Para mostrar esa posición en un teléfono sí hace falta transmitirla: Loko utiliza radio LoRa directa en lugar de una red móvil.</p>
-<p>La confusión surge porque <strong>la mayoría de los rastreadores GPS comerciales necesitan internet para enviar la ubicación al teléfono</strong> – pero esa es una elección del fabricante, no un requisito del propio GPS. Comprender esta distinción es la clave para comprender por qué Loko GPS Tracker funciona perfectamente sin cobertura celular, sin Wi-Fi y sin plan de datos.</p>
+<p class="subtitle">Los receptores GPS calculan la ubicación a partir de señales satelitales, por lo que GPS en sí no necesita Wi-Fi, datos móviles ni una tarjeta SIM.</p>
+<p><strong>GPS funciona sin internet porque los satélites transmiten directamente al receptor datos de tiempo y órbita.</strong> El receptor compara las señales de varios satélites para calcular su posición. Solo se necesita conexión a internet cuando un dispositivo usa mapas en línea, almacenamiento en la nube o una red móvil para enviar esa posición a otro lugar.</p>
+<p>La confusión surge porque <strong>la mayoría de los rastreadores GPS comerciales sí necesitan internet para enviar tu ubicación al teléfono</strong> —pero eso es una decisión del fabricante, no un requisito de GPS. Entender esta diferencia es clave para comprender por qué Loko GPS Tracker funciona perfectamente sin cobertura móvil, Wi-Fi ni plan de datos.</p>
 <div class="cta-block">
-<p><strong>¿Necesita un rastreador GPS que permanezca fuera de línea de un extremo a otro?</strong> Loko envía posiciones GPS por radio LoRa en lugar de datos móviles.</p>
-<a class="cta-btn" href="/lora-gps-tracker/">Ver Rastreador GPS sin conexión →</a>
+<p><strong>¿Necesitas un rastreador GPS que funcione sin conexión de principio a fin?</strong> Descubre cómo un <a href="/es/gps-tracker-without-internet/">rastreador GPS sin internet</a> envía posiciones GPS mediante la radio local LoRa en lugar de usar datos móviles.</p>
+<a class="cta-btn" href="/es/lora-gps-tracker/">Ver el rastreador GPS sin conexión →</a>
 </div>
 </div>
 </div>
 <!-- GPS satellites explained simply -->
 <div class="content-block">
 <div class="container">
-<h2>Satélites GPS: explicados de forma sencilla</h2>
-<p>El Sistema de Posicionamiento Global (GPS) es una constelación de satélites operados por la Fuerza Espacial de los Estados Unidos. Así es como funciona en el nivel más fundamental:</p>
+<h2>Satélites GPS: explicación sencilla</h2>
+<p>El Sistema de Posicionamiento Global (GPS) es una constelación de satélites operada por la Fuerza Espacial de Estados Unidos. Así funciona en su nivel más básico:</p>
 <ul>
-<li><strong>31 satélites orbitan la Tierra</strong> a una altitud de aproximadamente 20.200 km, en órbita terrestre media</li>
-<li>Cada satélite lleva un reloj atómico extremadamente preciso y <strong>transmite continuamente una señal de radio</strong> que incluye la identificación del satélite, su posición actual en órbita y una marca de tiempo precisa</li>
-<li>Estas señales viajan a la velocidad de la luz hacia la superficie de la Tierra.</li>
-<li>Un receptor GPS en tierra recibe señales de múltiples satélites simultáneamente</li>
-<li>Al medir el <strong>tiempo que tardó en llegar cada señal</strong>, el receptor calcula la distancia a cada satélite</li>
-<li>Con distancias de al menos 4 satélites, el receptor puede calcular su posición 3D exacta (latitud, longitud, altitud) mediante un proceso llamado trilateración.</li>
+<li><strong>31 satélites orbitan la Tierra</strong> a una altitud aproximada de 20.200 km, en la órbita terrestre media</li>
+<li>Cada satélite lleva un reloj atómico de altísima precisión y <strong>emite continuamente una señal de radio</strong> que incluye la identificación del satélite, su posición actual en órbita y una marca temporal precisa</li>
+<li>Estas señales viajan a la velocidad de la luz hacia la superficie terrestre</li>
+<li>Un receptor GPS en tierra recibe simultáneamente señales de varios satélites</li>
+<li>Al medir el <strong>tiempo que tarda en llegar cada señal</strong>, el receptor calcula la distancia a cada satélite</li>
+<li>Con las distancias a al menos 4 satélites, el receptor puede calcular su posición 3D exacta (latitud, longitud y altitud) mediante un proceso llamado trilateración</li>
 </ul>
-<p>El punto crítico: <strong>todo este proceso es unidireccional</strong>. Los satélites transmiten. Su receptor recibe. Su receptor nunca transmite nada a los satélites. Los satélites no tienen idea de que su dispositivo existe. No hay conexión a Internet involucrada en ningún paso.</p>
-<p>GPS funciona de la misma manera ya sea que estés en el centro de una ciudad o en una montaña remota. A los satélites no les importa. Sólo están transmitiendo.</p>
+<p>El punto clave: <strong>todo este proceso es unidireccional</strong>. Los satélites emiten. Tu receptor recibe. Tu receptor nunca transmite nada de vuelta a los satélites. Los satélites ni siquiera saben que tu dispositivo existe. No interviene ninguna conexión a internet en ningún paso.</p>
+<p>GPS funciona igual tanto en el centro de una ciudad como en una montaña remota. A los satélites les da igual. Simplemente emiten señales.</p>
 </div>
 </div>
 <!-- Why GPS itself needs no internet -->
 <div class="content-block">
 <div class="container">
-<h2>Por qué GPS no necesita Internet</h2>
-<p>GPS es fundamentalmente un sistema pasivo de solo recepción para usuarios finales. La cadena de señales de los satélites a su receptor implica únicamente ondas de radio que viajan a través de la atmósfera. Sin conexión de red, sin servidor, sin plan de datos.</p>
-<p>La navegación GPS integrada en su automóvil ha funcionado sin conexión durante décadas. Las unidades GPS dedicadas a caminatas, como los dispositivos Garmin eTrex, siempre han funcionado sin celular. Los sistemas de navegación de aviación calculan la posición sin conexión a Internet. Todos estos utilizan las mismas señales satelitales GPS, no se requiere Internet.</p>
-<p>El estándar GPS incluso evita deliberadamente el cifrado o el control de acceso en la banda de señal civil (L1, 1575.42 MHz): está diseñado intencionalmente para que cualquier persona con un receptor compatible lo pueda recibir, en cualquier lugar de la Tierra, de forma gratuita.</p>
-<p>Un chip receptor GPS cuesta unos pocos dólares. Consume una modesta cantidad de energía. Y calcula coordenadas de posición precisas a partir únicamente de ondas de radio del espacio: sin suscripción, sin conexión, sin nube.</p>
+<h2>Por qué GPS no necesita internet</h2>
+<p>Para los usuarios finales, GPS es fundamentalmente un sistema pasivo que solo recibe señales. La cadena de señal desde los satélites hasta tu receptor solo utiliza ondas de radio que atraviesan la atmósfera. Sin conexión de red, sin servidor y sin plan de datos.</p>
+<p>La navegación GPS integrada en tu coche lleva décadas funcionando sin conexión. Los dispositivos GPS específicos para senderismo, como los Garmin eTrex, siempre han funcionado sin cobertura móvil. Los sistemas de navegación aérea calculan la posición sin conexión a internet. Todos utilizan las mismas señales satelitales GPS, sin necesidad de internet.</p>
+<p>El estándar GPS incluso prescinde deliberadamente del cifrado y el control de acceso en la banda de señal civil (L1, 1575,42 MHz): está diseñado expresamente para que cualquier persona con un receptor compatible pueda recibirla gratis en cualquier lugar de la Tierra.</p>
+<p>Un chip receptor GPS cuesta unos pocos dólares. Consume poca energía. Y calcula coordenadas de posición precisas usando únicamente ondas de radio procedentes del espacio: sin suscripción, conexión ni nube.</p>
 </div>
 </div>
 <!-- What DOES need internet -->
 <div class="content-block">
 <div class="container">
-<h2>Qué SÍ necesita Internet: la mayoría de los rastreadores Commercial GPS</h2>
-<p>Entonces, si el propio GPS está desconectado, ¿por qué la mayoría de los rastreadores GPS necesitan un plan de datos móviles?</p>
-<p>La respuesta está en la segunda parte del problema: <strong>obtener su ubicación desde el rastreador a su teléfono</strong>.</p>
-<p>GPS le dice al rastreador dónde está. Pero un rastreador sentado en un campo, en el collar de un perro o en un dron está físicamente separado de usted. Alguien necesita transmitir esas coordenadas GPS a su dispositivo. Esa transmisión es donde la mayoría de los fabricantes introducen la dependencia de Internet.</p>
-<p>La arquitectura típica de un rastreador celular GPS:</p>
+<h2>Lo que SÍ necesita internet: la mayoría de los rastreadores GPS comerciales</h2>
+<p>Entonces, si GPS funciona sin conexión, ¿por qué la mayoría de los rastreadores GPS necesitan un plan de datos móviles?</p>
+<p>La respuesta está en la segunda parte del problema: <strong>transmitir tu ubicación desde el rastreador hasta tu teléfono</strong>.</p>
+<p>GPS le indica al rastreador dónde está. Pero un rastreador situado en un campo, en el collar de un perro o en un dron está físicamente separado de ti. Es necesario transmitir esas coordenadas GPS a tu dispositivo. Es en esa transmisión donde la mayoría de los fabricantes introducen la dependencia de internet.</p>
+<p>La arquitectura habitual de un rastreador GPS con conexión móvil:</p>
 <ol>
-<li>El chip GPS calcula las coordenadas (sin conexión, no se necesita Internet)</li>
-<li>Una tarjeta SIM integrada se conecta a una red celular (requiere un plan de datos)</li>
-<li>Las coordenadas se cargan en el servidor en la nube del fabricante (requiere Internet)</li>
-<li>La aplicación de su teléfono consulta el servidor en la nube a través de Internet (requiere Internet)</li>
-<li>La aplicación muestra la ubicación en un mapa.</li>
+<li>El chip GPS calcula las coordenadas (sin conexión, no necesita internet)</li>
+<li>Una tarjeta SIM integrada se conecta a una red móvil (requiere un plan de datos)</li>
+<li>Las coordenadas se cargan en el servidor en la nube del fabricante (requiere internet)</li>
+<li>La aplicación de tu teléfono consulta el servidor en la nube a través de internet (requiere internet)</li>
+<li>La aplicación muestra la ubicación en un mapa</li>
 </ol>
-<p>Todos los pasos 2, 3 y 4 requieren infraestructura de Internet. Si se elimina la cobertura celular, toda la cadena se rompe después del paso 1. Es por eso que los rastreadores celulares GPS fallan en áreas remotas, no porque GPS dejó de funcionar, sino porque la capa de transmisión perdió conectividad.</p>
-<p><strong>Esta es una elección arquitectónica, no una necesidad técnica.</strong> Existe otra forma de transmitir coordenadas GPS sin Internet.</p>
+<p>Los pasos 2, 3 y 4 requieren infraestructura de internet. Si desaparece la cobertura móvil, toda la cadena se interrumpe después del paso 1. Por eso los rastreadores GPS con conexión móvil fallan en zonas remotas: no porque GPS haya dejado de funcionar, sino porque la capa de transmisión perdió la conectividad. Esa misma tarjeta SIM explica por qué la mayoría de los rastreadores para mascotas incluyen un plan mensual; un <a href="/es/dog-gps-tracker-no-subscription/">rastreador para perros sin suscripción</a> tiene que transmitir sus coordenadas de otra manera.</p>
+<p><strong>Es una elección de arquitectura, no una necesidad técnica.</strong> Hay otra forma de transmitir coordenadas GPS sin internet.</p>
 </div>
 </div>
 <!-- How LoRa replaces cellular -->
 <div class="content-block">
 <div class="container">
-<h2>Cómo LoRa reemplaza el celular para transmitir coordenadas</h2>
-<p>La radio LoRa (largo alcance) es una tecnología de transmisión alternativa que puede transportar datos de coordenadas GPS a largas distancias sin ninguna infraestructura celular.</p>
-<p>LoRa utiliza bandas de radio ISM sin licencia (868 MHz en Europa, 915 MHz en Norteamérica) para transmitir pequeños paquetes de datos, incluidas las coordenadas GPS, directamente de un dispositivo a otro. Es una radio punto a punto, similar en concepto a un walkie-talkie, pero con un alcance mucho mayor y un consumo de energía mucho menor.</p>
-<p>Una radio LoRa que transmite a 14 dBm puede enviar de manera confiable un paquete de coordenadas GPS a través de 15 a 20km de terreno abierto. No es necesario que el receptor esté conectado a Internet, a una torre de telefonía móvil ni a ninguna infraestructura. Sólo necesita estar dentro del alcance de la radio.</p>
-<p>Esto es exactamente lo que hace Loko. Las coordenadas GPS calculadas por el rastreador aéreo Loko se transmiten a través de LoRa al receptor terrestre Loko que tiene en la mano, sin pasar por Internet. La capa de transmisión está tan fuera de línea como la capa de recepción GPS.</p>
+<h2>Cómo LoRa sustituye la conexión móvil para transmitir coordenadas</h2>
+<p>La radio LoRa (largo alcance) es una tecnología de transmisión alternativa que permite enviar datos de coordenadas GPS a largas distancias sin ninguna infraestructura móvil.</p>
+<p>LoRa utiliza bandas de radio ISM sin licencia (868 MHz en Europa y 915 MHz en Norteamérica) para transmitir pequeños paquetes de datos —incluidas las coordenadas GPS— directamente de un dispositivo a otro. Es una comunicación de radio punto a punto, similar en concepto a un walkie-talkie, pero con mucho más alcance y un consumo de energía muy inferior.</p>
+<p>Una radio LoRa que transmite a 14 dBm puede enviar de forma fiable un paquete de coordenadas GPS a través de 15–20km de terreno abierto. El receptor no necesita conectarse a internet, a una torre de telefonía móvil ni a ninguna infraestructura. Solo tiene que estar dentro del alcance de la radio.</p>
+<p>Esto es exactamente lo que hace Loko. Las coordenadas GPS calculadas por el rastreador Loko Air se transmiten mediante LoRa al receptor Loko Ground que llevas contigo, evitando internet por completo. La capa de transmisión funciona tan sin conexión como la capa de recepción GPS. Si estás comparando este sistema con un collar para perros con conexión móvil, consulta cómo una <a href="/es/tractive-alternative/">alternativa a Tractive para lugares sin cobertura</a> se compara en cobertura, alcance y tarifas.</p>
 </div>
 </div>
 <!-- The full offline chain -->
 <div class="content-block">
 <div class="container">
 <h2>La cadena completa sin conexión: del satélite a la pantalla</h2>
-<p>Aquí está la ruta completa de la señal en el sistema Loko; tenga en cuenta que cada paso es radio local sin participación de Internet:</p>
+<p>Esta es la ruta completa de la señal en el sistema Loko. Observa que cada paso utiliza comunicación de radio local sin intervención de internet:</p>
 <div class="chain-step">
 <div class="step-num">1</div>
 <div class="step-content">
 <h3>Satélites GPS / GLONASS / Galileo</h3>
-<p>Más de 31 satélites transmiten señales de sincronización de radio desde 20 000 km de altitud. Sin internet. Transmisión unidireccional, gratuita para todos.</p>
+<p>Más de 31 satélites emiten señales horarias por radio desde una altitud de 20.000 km. Sin internet. Transmisión unidireccional y gratuita para todos.</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">2</div>
 <div class="step-content">
-<h3>Receptor Loko Air GPS</h3>
-<p>El rastreador de menos de 14 g recibe señales de múltiples constelaciones de satélites y calcula coordenadas precisas. Todo el cálculo local, no se necesita red.</p>
+<h3>Receptor GPS Loko Air</h3>
+<p>El rastreador de menos de 14 g recibe señales de varias constelaciones de satélites y calcula coordenadas precisas. Todo el procesamiento se realiza localmente, sin necesidad de red.</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">3</div>
 <div class="step-content">
-<h3>Transmisión de radio LoRa</h3>
-<p>Loko Air transmite el paquete de coordenadas a través de la radio LoRa. Transmisión directa punto a punto hasta 20km. Sin tarjeta SIM, sin red celular, sin internet.</p>
+<h3>Transmisión por radio LoRa</h3>
+<p>Loko Air transmite el paquete de coordenadas mediante radio LoRa. Transmisión directa punto a punto de hasta 20km. Sin tarjeta SIM, red móvil ni internet.</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">4</div>
 <div class="step-content">
-<h3>Receptor de tierra Loko</h3>
-<p>Recibe el paquete LoRa, decodifica las coordenadas. Un dispositivo de bolsillo que llevas. Todavía no hay internet.</p>
+<h3>Receptor Loko Ground</h3>
+<p>Recibe el paquete LoRa y decodifica las coordenadas. Es un dispositivo de bolsillo que llevas contigo. Sigue sin necesitar internet.</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">5</div>
 <div class="step-content">
 <h3>Bluetooth a tu teléfono</h3>
-<p>Loko Ground envía las coordenadas a tu smartphone a través de Bluetooth. Radio local de corto alcance, no se requiere Internet.</p>
+<p>Loko Ground envía las coordenadas a tu smartphone mediante Bluetooth. Comunicación de radio local de corto alcance, sin necesidad de internet.</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">6</div>
 <div class="step-content">
-<h3>Aplicación Loko: mapa sin conexión</h3>
-<p>La aplicación Loko muestra la ubicación en un mapa sin conexión predescargado en su dispositivo. Posición en tiempo real, cero internet. Del satélite a tu pantalla, totalmente local.</p>
+<h3>Aplicación Loko — mapa sin conexión</h3>
+<p>La aplicación Loko muestra la ubicación en un mapa sin conexión descargado previamente en tu dispositivo. Posición en tiempo real, sin internet. Del satélite a tu pantalla, todo de forma local.</p>
 </div>
 </div>
 </div>
@@ -355,24 +347,24 @@
 <div class="container">
 <h2>Cómo funciona GPS: preguntas frecuentes</h2>
 <div class="faq-item">
-<h3>¿GPS requiere Internet para funcionar?</h3>
-<p>No. Los satélites GPS transmiten señales continuamente mediante transmisión de radio unidireccional: los satélites no reciben nada de su dispositivo y no hay Internet involucrado. Su receptor GPS calcula su posición únicamente a partir de diferencias de tiempo en las señales recibidas de múltiples satélites. Sin embargo, la mayoría de los rastreadores commercial GPS aún necesitan Internet o celular para transmitir esa ubicación a su teléfono.</p>
+<h3>¿GPS necesita internet para funcionar?</h3>
+<p>No. Los satélites GPS emiten señales continuamente mediante una transmisión de radio unidireccional: los satélites no reciben nada de tu dispositivo y no interviene internet. Tu receptor GPS calcula su posición únicamente a partir de las diferencias temporales entre las señales recibidas de varios satélites. Sin embargo, la mayoría de los rastreadores GPS comerciales siguen necesitando internet o cobertura móvil para enviar esa ubicación a tu teléfono.</p>
 </div>
 <div class="faq-item">
 <h3>¿Cuántos satélites GPS hay?</h3>
-<p>La constelación estadounidense GPS tiene 31 satélites operativos según recuentos recientes. En cualquier lugar determinado de la superficie de la Tierra, normalmente se pueden ver entre 6 y 12 satélites simultáneamente. Los dispositivos GPS necesitan al menos 4 satélites para fijar una posición en 3D (latitud, longitud, altitud). Los rastreadores modernos como Loko utilizan múltiples constelaciones: GPS, GLONASS (Rusia, 24 satélites) y Galileo (UE, 30 satélites), lo que brinda acceso a más de 60 satélites simultáneamente para lograr soluciones más rápidas y precisas.</p>
+<p>Según los recuentos recientes, la constelación estadounidense GPS tiene 31 satélites operativos. Desde cualquier punto de la superficie terrestre, normalmente puedes ver entre 6 y 12 satélites al mismo tiempo. Los dispositivos GPS necesitan al menos 4 satélites para determinar una posición 3D (latitud, longitud y altitud). Los rastreadores modernos como Loko utilizan varias constelaciones —GPS, GLONASS (Rusia, 24 satélites) y Galileo (UE, 30 satélites)—, lo que permite acceder a más de 60 satélites simultáneamente para obtener posiciones con mayor rapidez y precisión.</p>
 </div>
 <div class="faq-item">
-<h3>¿Por qué la mayoría de los rastreadores GPS necesitan datos móviles si GPS funciona sin conexión?</h3>
-<p>GPS le dice al rastreador dónde está. Pero, ¿cómo llega esa ubicación a tu teléfono? La mayoría de los rastreadores utilizan una tarjeta SIM y datos móviles para enviar coordenadas a un servidor en la nube, que luego su teléfono consulta a través de Internet. El GPS en sí está fuera de línea, pero la capa de transmisión es celular. Loko reemplaza el celular con radio LoRa, un enlace de radio directo que tampoco requiere Internet.</p>
+<h3>¿Por qué la mayoría de los rastreadores GPS necesitan cobertura móvil si GPS funciona sin conexión?</h3>
+<p>GPS indica al rastreador dónde está. Pero ¿cómo llega esa ubicación a tu teléfono? La mayoría de los rastreadores utilizan una tarjeta SIM y datos móviles para enviar las coordenadas a un servidor en la nube, que tu teléfono consulta después a través de internet. GPS en sí funciona sin conexión, pero la capa de transmisión usa la red móvil. Loko sustituye la conexión móvil por la radio LoRa: un enlace de radio directo que tampoco necesita internet.</p>
 </div>
 <div class="faq-item">
 <h3>¿Cuál es la diferencia entre GPS, GLONASS y Galileo?</h3>
-<p>GPS es el sistema de navegación por satélite de EE. UU. (31 satélites). GLONASS es el equivalente de Rusia (24 satélites). Galileo es el sistema de la Unión Europea (30 satélites operativos a partir de 2024). Cada sistema utiliza diferentes frecuencias y planos orbitales. El uso de los tres simultáneamente, como lo hace Loko, aumenta drásticamente la cantidad de satélites visibles, mejorando la precisión de la posición, reduciendo el tiempo para la primera localización y manteniendo el seguimiento en entornos donde una constelación puede tener una geometría deficiente.</p>
+<p>GPS es el sistema estadounidense de navegación por satélite (31 satélites). GLONASS es su equivalente ruso (24 satélites). Galileo es el sistema de la Unión Europea (30 satélites operativos en 2024). Cada sistema utiliza frecuencias y planos orbitales diferentes. Usar los tres a la vez —como hace Loko— aumenta considerablemente el número de satélites visibles, lo que mejora la precisión de la posición, reduce el tiempo hasta la primera localización y mantiene el rastreo en entornos donde una de las constelaciones podría tener una geometría poco favorable.</p>
 </div>
 <div class="faq-item">
-<h3>¿Cómo funciona Loko completamente fuera de línea?</h3>
-<p>La cadena de señal de Loko no implica Internet en ningún paso: los satélites GPS/GLONASS/Galileo transmiten señales de radio → El receptor de Loko Air calcula las coordenadas → Loko Air transmite las coordenadas a través de la radio LoRa (un enlace de radio directo, como un walkie-talkie) → Loko Ground recibe la señal LoRa → Loko Ground envía las coordenadas a su teléfono a través de Bluetooth → La aplicación Loko muestra la posición en un mapa sin conexión. Del satélite a la pantalla, todo es radio local.</p>
+<h3>¿Cómo funciona Loko completamente sin conexión?</h3>
+<p>La cadena de señal de Loko no utiliza internet en ningún paso: los satélites GPS/GLONASS/Galileo emiten señales de radio → el receptor de Loko Air calcula las coordenadas → Loko Air transmite las coordenadas por radio LoRa (un enlace de radio directo, como un walkie-talkie) → Loko Ground recibe la señal LoRa → Loko Ground envía las coordenadas a tu teléfono mediante Bluetooth → la aplicación Loko muestra la posición en un mapa sin conexión. Desde el satélite hasta la pantalla, todo funciona mediante radio local.</p>
 </div>
 </div>
 </div>
@@ -380,11 +372,11 @@
 <div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p>GPS siempre ha estado desconectado. Loko se asegura de que el resto de la cadena de seguimiento también lo sea: desde el satélite hasta su pantalla, no se requiere Internet.</p>
-<p><strong>Loko GPS Tracker: el completo sistema de seguimiento offline.</strong></p>
-<p>Explore los detalles completos del producto en <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
+<p>GPS siempre ha funcionado sin conexión. Loko garantiza que el resto de la cadena de seguimiento también lo haga: del satélite a tu pantalla, sin necesidad de internet.</p>
+<p><strong>Rastreador GPS Loko: el sistema completo de seguimiento sin conexión.</strong></p>
+<p>Consulta todos los detalles del producto en <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
 <br/>
-<a class="cta-btn" href="/#shop">Comprar Loko →</a>
+<a class="cta-btn" href="/shop/">Comprar Loko →</a>
 </div>
 </div>
 </div>

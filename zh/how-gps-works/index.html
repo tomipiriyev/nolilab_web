@@ -5,7 +5,7 @@
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>Loko GPS 追踪器如何离线工作 | GPS 不带互联网</title>
+<title>GPS 如何在无互联网或蜂窝服务的情况下工作 | NoliLab</title>
 <link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
 <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
 <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
@@ -18,19 +18,19 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="GPS 可以离线工作，但大多数跟踪器需要蜂窝网络来发送位置。了解 Loko GPS 跟踪器如何使用 LoRa 无线电进行 GPS 跟踪，无需互联网、SIM 卡或费用。" name="description"/>
+<meta content="GPS 通过直接接收卫星信号，无需互联网即可工作。了解追踪器为何可能仍需蜂窝网络服务，以及离线追踪如何运作。" name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <meta content="article" property="og:type"/>
-<meta content="Loko GPS 追踪器如何离线工作 | GPS 不带互联网" property="og:title"/>
-<meta content="GPS 可以离线工作，但大多数跟踪器需要蜂窝网络来发送位置。了解 Loko GPS 跟踪器如何使用 LoRa 无线电进行 GPS 跟踪，无需互联网、SIM 卡或费用。" property="og:description"/>
+<meta content="GPS 如何在无互联网或蜂窝服务的情况下工作 | NoliLab" property="og:title"/>
+<meta content="GPS 通过直接接收卫星信号，无需互联网即可工作。了解追踪器为何可能仍需蜂窝网络服务，以及离线追踪如何运作。" property="og:description"/>
 <meta content="https://www.nolilab.com/zh/how-gps-works/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="How GPS Works Without Internet" property="og:image:alt"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="zh_CN" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Loko GPS 追踪器如何离线工作 | GPS 不带互联网" name="twitter:title"/>
-<meta content="GPS 可以离线工作，但大多数跟踪器需要蜂窝网络来发送位置。了解 Loko GPS 跟踪器如何使用 LoRa 无线电进行 GPS 跟踪，无需互联网、SIM 卡或费用。" name="twitter:description"/>
+<meta content="GPS 如何在无互联网或蜂窝服务的情况下工作 | NoliLab" name="twitter:title"/>
+<meta content="GPS 通过直接接收卫星信号，无需互联网即可工作。了解追踪器为何可能仍需蜂窝网络服务，以及离线追踪如何运作。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
 <meta content="how GPS works, GPS without internet, GPS offline, GPS satellites explained, how GPS trackers work" name="keywords"/>
@@ -44,34 +44,32 @@
 <link href="https://www.nolilab.com/ru/how-gps-works/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/how-gps-works/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/how-gps-works/" hreflang="x-default" rel="alternate"/>
-
-
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "GPS 需要互联网才能工作吗？",
+      "name": "GPS 是否需要互联网才能工作？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "不会。GPS 卫星使用单向无线电传输连续广播信号 — 卫星不会从您的设备接收任何信息，也不涉及互联网。您的 GPS 接收器纯粹根据从多个卫星接收到的信号的定时差异来计算其位置。然而，大多数 commercial GPS 跟踪器仍然需要互联网或蜂窝网络才能将该位置传输到您的手机。"
+        "text": "不需要。GPS 卫星通过单向无线电传输持续广播信号——卫星不会接收来自您设备的任何信息，整个过程也不涉及互联网。您的 GPS 接收器完全根据多颗卫星信号的时间差计算自身位置。不过，大多数商用 GPS 追踪器仍需通过互联网或蜂窝网络将位置信息发送到您的手机。"
       }
     },
     {
       "@type": "Question",
-      "name": "有多少颗 GPS 卫星？",
+      "name": "GPS 有多少颗卫星？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "截至最近统计，美国 GPS 星座拥有 31 颗运行卫星。在地球表面的任何给定位置，您通常可以同时看到 6-12 颗卫星。 GPS 设备需要至少 4 颗卫星才能进行 3D 定位（纬度、经度、高度）。 Loko 等现代跟踪器使用多个星座 — GPS、GLONASS（俄罗斯，24 个卫星）和 Galileo（欧盟，30 个卫星） — 可同时访问 60 多个卫星，以实现更快、更准确的定位。"
+        "text": "根据近期统计，美国 GPS 星座有 31 颗在轨运行卫星。在地球表面的任意位置，通常都能同时看到 6–12 颗卫星。GPS 设备至少需要 4 颗卫星才能完成三维定位（纬度、经度、海拔）。Loko 等现代追踪器使用多个卫星星座——GPS、GLONASS（俄罗斯，24 颗卫星）和 Galileo（欧盟，30 颗卫星）——因此可以同时接入 60 多颗卫星，实现更快、更精确的定位。"
       }
     },
     {
       "@type": "Question",
-      "name": "如果 GPS 离线工作，为什么大多数 GPS 跟踪器需要蜂窝网络？",
+      "name": "既然 GPS 可以离线工作，为什么大多数 GPS 追踪器仍需要蜂窝网络？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPS 告诉跟踪器它所在的位置。但该位置如何到达您的手机呢？大多数跟踪器使用 SIM 卡和蜂窝数据将坐标发送到云服务器，然后您的手机通过互联网进行查询。 GPS本身是离线的，但传输层是蜂窝的。 Loko 用 LoRa 无线电取代了蜂窝网络，这是一种无需互联网的直接无线电链路。"
+        "text": "GPS 会告诉追踪器它在哪里。但这个位置如何传到您的手机？大多数追踪器使用 SIM 卡和蜂窝数据将坐标发送到云服务器，再由您的手机通过互联网查询。GPS 本身离线工作，但传输层使用的是蜂窝网络。Loko 以 LoRa 无线电取代蜂窝网络——这是一种同样无需互联网的直接无线电链路。"
       }
     },
     {
@@ -79,15 +77,15 @@
       "name": "GPS、GLONASS 和 Galileo 有什么区别？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPS 是美国卫星导航系统（31 颗卫星）。 GLONASS 是俄罗斯的同类产品（24 颗卫星）。 Galileo 是欧盟的系统（截至 2024 年有 30 颗运行卫星）。每个系统使用不同的频率和轨道平面。同时使用这三颗卫星（如 Loko 那样）可显着增加可见卫星的数量，提高定位精度，缩短首次定位时间，并在一个星座可能几何形状较差的环境中保持跟踪。"
+        "text": "GPS 是美国的卫星导航系统（31 颗卫星）。GLONASS 是俄罗斯的同类系统（24 颗卫星）。Galileo 是欧盟的系统（截至 2024 年有 30 颗在轨运行卫星）。每套系统使用不同的频率和轨道平面。像 Loko 一样同时使用这三套系统，可大幅增加可见卫星数量，从而提高定位精度、缩短首次定位时间，并在某一星座几何分布不佳的环境中保持追踪。"
       }
     },
     {
       "@type": "Question",
-      "name": "Loko如何完全离线工作？",
+      "name": "Loko 如何实现完全离线工作？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Loko 的信号链在任何步骤都不涉及互联网： GPS/GLONASS/Galileo 卫星广播无线电信号 → Loko Air 的接收器计算坐标 → Loko Air 通过 LoRa 无线电（直接无线电链路，如对讲机）传输坐标 → Loko Ground 接收 LoRa 信号 → Loko Ground 通过蓝牙将坐标发送到您的手机 → Loko应用程序在离线地图上显示位置。从卫星到屏幕，一切都是本地广播。"
+        "text": "Loko 的信号链在任何环节都不涉及互联网：GPS/GLONASS/Galileo 卫星广播无线电信号 → Loko Air 的接收器计算坐标 → Loko Air 通过 LoRa 无线电传输坐标（像对讲机一样的直接无线电链路）→ Loko Ground 接收 LoRa 信号 → Loko Ground 通过 Bluetooth 将坐标发送到您的手机 → Loko 应用在离线地图上显示位置。从卫星到屏幕，全程均使用本地无线电通信。"
       }
     }
   ]
@@ -99,13 +97,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "家",
+      "name": "首页",
       "item": "https://www.nolilab.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "GPS 如何在没有互联网的情况下工作",
+      "name": "GPS 如何在无互联网的情况下工作",
       "item": "https://www.nolilab.com/how-gps-works/"
     }
   ]
@@ -222,12 +220,6 @@
   }
 </style>
 <script defer="" src="/js/layout.js?v=20260906"></script>
-
-
-
-
-
-
 </head>
 <body>
 <div id="site-header"></div>
@@ -235,117 +227,117 @@
 <!-- Hero -->
 <div class="page-hero">
 <div class="container">
-<h1>Loko GPS 跟踪器如何在没有互联网或手机服务的情况下工作</h1>
-<p class="subtitle">Loko GPS 跟踪器使用 GPS 卫星和 LoRa 无线电，因此无需 SIM、Wi-Fi、手机服务或月费即可进行跟踪。</p>
-<p>GPS 不需要互联网或手机服务。 Loko GPS 跟踪器使用离线 GPS 信号，然后通过 LoRa 无线电而不是蜂窝数据发送位置，因此完整的跟踪链从卫星到应用程序保持离线状态。</p>
-<p>造成混乱的原因是 <strong>大多数 commercial GPS 追踪器确实需要互联网才能将您的位置传输到手机上</strong> — 但这是制造商的选择，而不是 GPS 本身的要求。了解这种区别是理解为什么 Loko GPS Tracker 在没有蜂窝覆盖、没有 Wi-Fi 和没有数据计划的情况下完美工作的关键。</p>
+<h1>GPS 如何在无互联网或蜂窝网络的情况下工作</h1>
+<p class="subtitle">GPS 接收器根据卫星信号计算位置，因此 GPS 本身不需要 Wi-Fi、移动数据或 SIM 卡。</p>
+<p><strong>GPS 无需互联网即可工作，因为卫星会将时间和轨道数据直接广播给接收器。</strong> 接收器通过比较多颗卫星的信号来计算自身位置。只有当设备使用在线地图、云存储或蜂窝网络将该位置发送到其他地方时，才需要互联网连接。</p>
+<p>之所以会产生困惑，是因为 <strong>大多数商用 GPS 追踪器确实需要互联网才能将您的位置发送到手机</strong> ——但这是制造商的选择，并非 GPS 本身的要求。理解这一区别，是了解 Loko GPS Tracker 为何在没有蜂窝网络覆盖、Wi-Fi 和数据套餐的情况下仍能正常工作的关键。</p>
 <div class="cta-block">
-<p><strong>需要端到端保持离线状态的 GPS 跟踪器吗？</strong> Loko 通过 LoRa 无线电而不是蜂窝数据发送 GPS 位置。</p>
-<a class="cta-btn" href="/lora-gps-tracker/">请参阅离线 GPS 跟踪器 →</a>
+<p><strong>需要一款从端到端全程离线的 GPS 追踪器？</strong> 了解 <a href="/zh/gps-tracker-without-internet/">无需互联网的 GPS 追踪器</a> 如何通过本地 LoRa 无线电而非蜂窝数据发送 GPS 位置信息。</p>
+<a class="cta-btn" href="/zh/lora-gps-tracker/">查看离线 GPS 追踪器 →</a>
 </div>
 </div>
 </div>
 <!-- GPS satellites explained simply -->
 <div class="content-block">
 <div class="container">
-<h2>GPS 卫星：简单解释</h2>
-<p>全球定位系统 (GPS) 是由美国太空部队运营的一组卫星。以下是它在最基本层面上的工作原理：</p>
+<h2>GPS 卫星：简单说明</h2>
+<p>全球定位系统（GPS）是由美国太空军运营的卫星星座。其最基本的工作原理如下：</p>
 <ul>
-<li><strong>31 颗卫星绕地球运行</strong> 高度约 20,200 km，位于中地球轨道</li>
-<li>每颗卫星都携带极其精确的原子钟 <strong>连续广播无线电信号</strong> 其中包括卫星的 ID、当前在轨道上的位置以及精确的时间戳</li>
-<li>这些信号以光速传播到地球表面</li>
-<li>地面上的 GPS 接收器同时接收来自多个卫星的信号</li>
-<li>通过测量 <strong>每个信号到达所花费的时间</strong>，接收器计算到每个卫星的距离</li>
-<li>通过与至少 4 颗卫星的距离，接收器可以通过称为三边测量的过程计算其精确的 3D 位置（纬度、经度、高度）</li>
+<li><strong>31 颗卫星环绕地球运行</strong> ，位于约 20,200 km 高的中地球轨道</li>
+<li>每颗卫星都搭载一个精度极高的原子钟，并 <strong>持续广播无线电信号</strong> ，其中包含卫星 ID、当前轨道位置和精确时间戳</li>
+<li>这些信号以光速传向地球表面</li>
+<li>地面的 GPS 接收器同时接收多颗卫星的信号</li>
+<li>通过测量 <strong>每个信号到达所用的时间</strong>，接收器计算出它与每颗卫星之间的距离</li>
+<li>获得至少 4 颗卫星的距离后，接收器便可通过一种称为三边测量的过程，计算出自身精确的三维位置（纬度、经度、海拔）</li>
 </ul>
-<p>关键点： <strong>整个过程是单向的</strong>。卫星广播。您的接收器收到。您的接收器永远不会将任何内容传输回卫星。卫星不知道您的设备存在。任何步骤都不涉及互联网连接。</p>
-<p>无论您是在市中心还是在偏远山区，GPS 的工作方式都是相同的。卫星不在乎。他们只是在广播。</p>
+<p>关键在于： <strong>整个过程都是单向的</strong>。卫星负责广播，您的接收器负责接收。接收器绝不会向卫星回传任何信息。卫星根本不知道您的设备存在。整个过程的任何环节都不涉及互联网连接。</p>
+<p>无论您身处市中心还是偏远山区，GPS 的工作方式都完全相同。卫星并不在意，它们只是不停地广播信号。</p>
 </div>
 </div>
 <!-- Why GPS itself needs no internet -->
 <div class="content-block">
 <div class="container">
-<h2>为什么GPS本身不需要互联网</h2>
-<p>GPS 本质上是一个面向最终用户的无源、仅接收系统。从卫星到接收器的信号链仅涉及穿过大气层的无线电波。没有网络连接，没有服务器，没有数据计划。</p>
-<p>您汽车的内置 GPS 导航已离线工作数十年。 Garmin eTrex 等专用远足 GPS 设备始终无需蜂窝网络即可工作。航空导航系统在没有互联网连接的情况下计算位置。所有这些都使用相同的 GPS 卫星信号 - 无需互联网。</p>
-<p>GPS 标准甚至故意避免对民用信号频段（L1，1575.42 MHz）进行加密或访问控制 - 它的设计目的是让任何拥有兼容接收器的人在地球上任何地方都可以免费接收。</p>
-<p>一个 GPS 接收器芯片的成本为几美元。它消耗适量的电力。它仅通过来自太空的无线电波来计算精确的位置坐标——无需订阅、无需连接、无需云。</p>
+<h2>为什么 GPS 本身不需要互联网</h2>
+<p>对终端用户而言，GPS 本质上是一套被动、只接收的系统。从卫星到接收器的信号链只涉及穿过大气层传播的无线电波。无需网络连接、服务器或数据套餐。</p>
+<p>汽车内置的 GPS 导航系统数十年来一直可以离线工作。Garmin eTrex 等专用徒步 GPS 设备也始终无需蜂窝网络即可工作。航空导航系统无需互联网连接便能计算位置。它们都使用相同的 GPS 卫星信号——无需互联网。</p>
+<p>GPS 标准甚至特意不对民用信号频段（L1，1575.42 MHz）进行加密或访问控制——其设计初衷就是让地球上任何地方的任何人都能使用兼容接收器免费接收信号。</p>
+<p>一枚 GPS 接收芯片只需几美元，功耗也不高。它仅凭来自太空的无线电波就能计算出精确的位置坐标——无需订阅、无需连接、无需云服务。</p>
 </div>
 </div>
 <!-- What DOES need internet -->
 <div class="content-block">
 <div class="container">
-<h2>需要什么互联网：大多数 Commercial GPS 跟踪器</h2>
-<p>那么，如果 GPS 本身离线，为什么大多数 GPS 跟踪器需要蜂窝数据计划？</p>
-<p>答案就在问题的第二部分： <strong>将您的位置从跟踪器获取到您的手机</strong>.</p>
-<p>GPS 告诉跟踪器它所在的位置。但坐在田野里、狗项圈上或无人机上的追踪器在物理上与你是分开的。有人需要将这些 GPS 坐标传输到您的设备。这种传输是大多数制造商引入互联网依赖性的地方。</p>
-<p>蜂窝 GPS 跟踪器的典型架构：</p>
+<h2>真正需要互联网的是：大多数商用 GPS 追踪器</h2>
+<p>既然 GPS 本身可以离线工作，为什么大多数 GPS 追踪器还需要蜂窝数据套餐？</p>
+<p>答案在于问题的第二部分： <strong>将追踪器的位置传送到你的手机</strong>.</p>
+<p>GPS 会告诉追踪器它在哪里。但放在野外、狗项圈或无人机上的追踪器与你在物理上是分离的，因此需要将这些 GPS 坐标传送到你的设备。正是在传输环节，大多数制造商引入了对互联网的依赖。</p>
+<p>蜂窝网络 GPS 追踪器的典型架构：</p>
 <ol>
-<li>GPS芯片计算坐标（离线，无需互联网）</li>
-<li>嵌入式 SIM 卡连接到蜂窝网络（需要数据计划）</li>
-<li>坐标上传到制造商的云服务器（需要互联网）</li>
-<li>您的手机应用程序通过互联网查询云服务器（需要互联网）</li>
-<li>该应用程序在地图上显示位置</li>
+<li>GPS 芯片计算坐标（离线完成，无需互联网）</li>
+<li>内置 SIM 卡连接蜂窝网络（需要数据套餐）</li>
+<li>坐标上传至制造商的云服务器（需要互联网）</li>
+<li>手机应用通过互联网查询云服务器（需要互联网）</li>
+<li>应用在地图上显示位置</li>
 </ol>
-<p>步骤 2、3 和 4 都需要互联网基础设施。在步骤 1 后，移除蜂窝覆盖范围，整个链条就会断裂。这就是蜂窝 GPS 跟踪器在偏远地区失败的原因 - 不是因为 GPS 停止工作，而是因为传输层失去了连接。</p>
-<p><strong>这是一种架构选择，而不是技术上的必然。</strong> 还有另一种无需互联网即可传输 GPS 坐标的方法。</p>
+<p>第 2、3、4 步都依赖互联网基础设施。一旦失去蜂窝网络覆盖，整条链路就会在第 1 步后中断。这就是蜂窝网络 GPS 追踪器在偏远地区失效的原因——不是 GPS 停止了工作，而是传输层失去了连接。同一张 SIM 卡也正是大多数宠物追踪器需要按月付费的原因；一款 <a href="/zh/dog-gps-tracker-no-subscription/">无需订阅的狗狗追踪器</a> 必须通过其他方式传送坐标。</p>
+<p><strong>这是一种架构选择，并非技术上的必然要求。</strong> 还有另一种无需互联网即可传输 GPS 坐标的方法。</p>
 </div>
 </div>
 <!-- How LoRa replaces cellular -->
 <div class="content-block">
 <div class="container">
-<h2>LoRa 如何取代蜂窝传输坐标</h2>
-<p>LoRa（长距离）无线电是一种替代传输技术，无需任何蜂窝基础设施即可长距离传输 GPS 坐标数据。</p>
-<p>LoRa 使用未经许可的 ISM 无线电频段（欧洲为 868 MHz，北美为 915 MHz）将小数据包（包括 GPS 坐标）直接从一台设备传输到另一台设备。它是点对点无线电，其概念与对讲机类似，但范围更大、功耗更低。</p>
-<p>以 14 dBm 进行发射的 LoRa 无线电可以在 15-20km 的开放地形上可靠地发送 GPS 坐标数据包。接收器不需要连接到互联网、蜂窝塔或任何基础设施。它只需要在无线电范围内即可。</p>
-<p>这正是 Loko 的作用。 Loko Air跟踪器计算出的 GPS 坐标通过 LoRa 传输到您手中的 Loko Ground接收器 - 完全绕过互联网。传输层与 GPS 接收层一样离线。</p>
+<h2>LoRa 如何取代蜂窝网络传输坐标</h2>
+<p>LoRa（远距离）无线电是一种替代传输技术，无需任何蜂窝网络基础设施，即可远距离传送 GPS 坐标数据。</p>
+<p>LoRa 使用免许可的 ISM 无线电频段（欧洲为 868 MHz，北美为 915 MHz）直接在设备之间传输包括 GPS 坐标在内的小型数据包。它采用点对点无线通信，原理类似对讲机，但传输距离远得多，功耗也低得多。</p>
+<p>一台以 14 dBm 功率发射的 LoRa 无线电设备，可以在开阔地带可靠地将 GPS 坐标数据包传输 15–20km。接收器无需连接互联网、蜂窝基站或任何基础设施，只需处于无线电覆盖范围内。</p>
+<p>这正是 Loko 的工作方式。Loko Air 追踪器计算出的 GPS 坐标通过 LoRa 传送到你手中的 Loko Ground 接收器——完全绕过互联网。传输层与 GPS 接收层一样，都能离线工作。如果你正在将其与蜂窝网络狗项圈进行比较，不妨了解一下 <a href="/zh/tractive-alternative/">离网型 Tractive 替代方案</a> 在覆盖范围、传输距离和费用方面的表现。</p>
 </div>
 </div>
 <!-- The full offline chain -->
 <div class="content-block">
 <div class="container">
-<h2>完整的线下链条：从卫星到屏幕</h2>
-<p>这是 Loko 系统中的完整信号路径 - 请注意，每一步都是本地无线电，没有互联网参与：</p>
+<h2>完整的离线链路：从卫星到屏幕</h2>
+<p>以下是 Loko 系统的完整信号路径——请注意，每一步都使用本地无线通信，完全不涉及互联网：</p>
 <div class="chain-step">
 <div class="step-num">1</div>
 <div class="step-content">
 <h3>GPS / GLONASS / Galileo 卫星</h3>
-<p>超过 31 颗卫星从 20,000 km 高度广播无线电授时信号。没有互联网。单向广播，对任何人免费。</p>
+<p>31 颗以上卫星从 20,000 km 高空广播无线电授时信号。无需互联网。单向广播，任何人均可免费使用。</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">2</div>
 <div class="step-content">
 <h3>Loko Air GPS 接收器</h3>
-<p>14g以下跟踪器接收来自多个卫星星座的信号并计算精确坐标。所有本地计算，无需网络。</p>
+<p>这款不足 14g 的追踪器接收多个卫星星座的信号并计算精确坐标。全部在本地完成计算，无需网络。</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">3</div>
 <div class="step-content">
 <h3>LoRa 无线电传输</h3>
-<p>Loko Air 通过 LoRa 无线电传输坐标数据包。直接点对点传输高达20km。没有 SIM 卡、没有蜂窝网络、没有互联网。</p>
+<p>Loko Air 通过 LoRa 无线电发送坐标数据包。直接点对点传输距离最远可达 20km。无需 SIM 卡、蜂窝网络或互联网。</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">4</div>
 <div class="step-content">
-<h3>Loko Ground接收器</h3>
-<p>接收LoRa数据包，解码坐标。您随身携带的口袋大小的设备。仍然没有互联网。</p>
+<h3>Loko Ground 接收器</h3>
+<p>接收 LoRa 数据包并解码坐标。它是一款可随身携带的口袋大小设备，依然无需互联网。</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">5</div>
 <div class="step-content">
-<h3>蓝牙连接到您的手机</h3>
-<p>Loko Ground 通过蓝牙将坐标发送到您的智能手机。本地短程广播，无需互联网。</p>
+<h3>通过 Bluetooth 连接手机</h3>
+<p>Loko Ground 通过 Bluetooth 将坐标发送到你的智能手机。这是本地短距离无线通信，无需互联网。</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">6</div>
 <div class="step-content">
-<h3>Loko 应用程序 — 离线地图</h3>
-<p>Loko 应用程序在预先下载到您设备的离线地图上显示位置。实时位置，零网络。从卫星到屏幕，完全本地化。</p>
+<h3>Loko 应用——离线地图</h3>
+<p>Loko 应用会在预先下载到设备的离线地图上显示位置。实时定位，完全无需互联网。从卫星到屏幕，整个过程均在本地完成。</p>
 </div>
 </div>
 </div>
@@ -353,26 +345,26 @@
 <!-- FAQ -->
 <div class="content-block">
 <div class="container">
-<h2>GPS 的工作原理：常见问题解答</h2>
+<h2>GPS 工作原理：常见问题</h2>
 <div class="faq-item">
-<h3>GPS 需要互联网才能工作吗？</h3>
-<p>不会。GPS 卫星使用单向无线电传输连续广播信号 — 卫星不会从您的设备接收任何信息，也不涉及互联网。您的 GPS 接收器纯粹根据从多个卫星接收到的信号的定时差异来计算其位置。然而，大多数 commercial GPS 跟踪器仍然需要互联网或蜂窝网络才能将该位置传输到您的手机。</p>
+<h3>GPS 是否需要互联网才能工作？</h3>
+<p>不需要。GPS 卫星通过单向无线电传输持续广播信号——卫星不会接收来自您设备的任何信息，整个过程也不涉及互联网。您的 GPS 接收器完全根据多颗卫星信号的时间差计算自身位置。不过，大多数商用 GPS 追踪器仍需通过互联网或蜂窝网络将位置信息发送到您的手机。</p>
 </div>
 <div class="faq-item">
-<h3>有多少颗 GPS 卫星？</h3>
-<p>截至最近统计，美国 GPS 星座拥有 31 颗运行卫星。在地球表面的任何给定位置，您通常可以同时看到 6-12 颗卫星。 GPS 设备需要至少 4 颗卫星才能进行 3D 定位（纬度、经度、高度）。 Loko 等现代跟踪器使用多个星座 — GPS、GLONASS（俄罗斯，24 个卫星）和 Galileo（欧盟，30 个卫星） — 可同时访问 60 多个卫星，以实现更快、更准确的定位。</p>
+<h3>GPS 有多少颗卫星？</h3>
+<p>根据近期统计，美国 GPS 星座有 31 颗在轨运行卫星。在地球表面的任意位置，通常都能同时看到 6–12 颗卫星。GPS 设备至少需要 4 颗卫星才能完成三维定位（纬度、经度、海拔）。Loko 等现代追踪器使用多个卫星星座——GPS、GLONASS（俄罗斯，24 颗卫星）和 Galileo（欧盟，30 颗卫星）——因此可以同时接入 60 多颗卫星，实现更快、更精确的定位。</p>
 </div>
 <div class="faq-item">
-<h3>如果 GPS 离线工作，为什么大多数 GPS 跟踪器需要蜂窝网络？</h3>
-<p>GPS 告诉跟踪器它所在的位置。但该位置如何到达您的手机呢？大多数跟踪器使用 SIM 卡和蜂窝数据将坐标发送到云服务器，然后您的手机通过互联网进行查询。 GPS本身是离线的，但传输层是蜂窝的。 Loko 用 LoRa 无线电取代了蜂窝网络，这是一种无需互联网的直接无线电链路。</p>
+<h3>既然 GPS 可以离线工作，为什么大多数 GPS 追踪器仍需要蜂窝网络？</h3>
+<p>GPS 会告诉追踪器它在哪里。但这个位置如何传到您的手机？大多数追踪器使用 SIM 卡和蜂窝数据将坐标发送到云服务器，再由您的手机通过互联网查询。GPS 本身离线工作，但传输层使用的是蜂窝网络。Loko 以 LoRa 无线电取代蜂窝网络——这是一种同样无需互联网的直接无线电链路。</p>
 </div>
 <div class="faq-item">
 <h3>GPS、GLONASS 和 Galileo 有什么区别？</h3>
-<p>GPS 是美国卫星导航系统（31 颗卫星）。 GLONASS 是俄罗斯的同类产品（24 颗卫星）。 Galileo 是欧盟的系统（截至 2024 年有 30 颗运行卫星）。每个系统使用不同的频率和轨道平面。同时使用这三颗卫星（如 Loko 那样）可显着增加可见卫星的数量，提高定位精度，缩短首次定位时间，并在一个星座可能几何形状较差的环境中保持跟踪。</p>
+<p>GPS 是美国的卫星导航系统（31 颗卫星）。GLONASS 是俄罗斯的同类系统（24 颗卫星）。Galileo 是欧盟的系统（截至 2024 年有 30 颗在轨运行卫星）。每套系统使用不同的频率和轨道平面。像 Loko 一样同时使用这三套系统，可大幅增加可见卫星数量，从而提高定位精度、缩短首次定位时间，并在某一星座几何分布不佳的环境中保持追踪。</p>
 </div>
 <div class="faq-item">
-<h3>Loko如何完全离线工作？</h3>
-<p>Loko 的信号链在任何步骤都不涉及互联网： GPS/GLONASS/Galileo 卫星广播无线电信号 → Loko Air 的接收器计算坐标 → Loko Air 通过 LoRa 无线电（直接无线电链路，如对讲机）传输坐标 → Loko Ground 接收 LoRa 信号 → Loko Ground 通过蓝牙将坐标发送到您的手机 → Loko应用程序在离线地图上显示位置。从卫星到屏幕，一切都是本地广播。</p>
+<h3>Loko 如何实现完全离线工作？</h3>
+<p>Loko 的信号链在任何环节都不涉及互联网：GPS/GLONASS/Galileo 卫星广播无线电信号 → Loko Air 的接收器计算坐标 → Loko Air 通过 LoRa 无线电传输坐标（像对讲机一样的直接无线电链路）→ Loko Ground 接收 LoRa 信号 → Loko Ground 通过 Bluetooth 将坐标发送到您的手机 → Loko 应用在离线地图上显示位置。从卫星到屏幕，全程均使用本地无线电通信。</p>
 </div>
 </div>
 </div>
@@ -380,11 +372,11 @@
 <div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p>GPS一直处于离线状态。 Loko 确保跟踪链的其余部分也是如此 - 从卫星到您的屏幕，零互联网需求。</p>
-<p><strong>Loko GPS 跟踪器：完整的离线跟踪系统。</strong></p>
-<p>了解完整的产品详细信息，请访问 <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
+<p>GPS 始终都能离线工作。Loko 确保追踪链路的其余环节也同样离线——从卫星到屏幕，全程无需互联网。</p>
+<p><strong>Loko GPS 追踪器：完整的离线追踪系统。</strong></p>
+<p>前往以下页面了解完整产品详情： <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
 <br/>
-<a class="cta-btn" href="/#shop">店铺 Loko →</a>
+<a class="cta-btn" href="/shop/">购买 Loko →</a>
 </div>
 </div>
 </div>
