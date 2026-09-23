@@ -9,6 +9,16 @@
    isn't room for them at a readable size — even in Russian, the wordiest of the
    six languages — so the slide-out menu takes over there. No overflow:hidden on
    this strip: it would clip the LoRaWAN submenu. */
+/* image wordmark — sized here so the nav row keeps its measured width */
+.logo {
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+}
+.logo img {
+  height:20px;
+  width:auto;
+}
 .nav-links {
   flex-wrap:nowrap;
   margin-left:clamp(1rem,2.2vw,3rem);
@@ -123,7 +133,7 @@
 }
 </style>
   <div class="container nav-container">
-    <a href="/" class="logo">nolilab</a>
+    <a href="/" class="logo"><picture><source srcset="/images/optimized/nolilab-logo.avif" type="image/avif"><source srcset="/images/optimized/nolilab-logo.webp" type="image/webp"><img src="/images/optimized/nolilab-logo.png" alt="NoliLab" width="171" height="20"></picture></a>
     <div class="nav-links">
       <a href="/#shop" class="nav-link" data-i18n="shop">Shop</a>
       <a href="/specifications/" class="nav-link" data-i18n="specs">Specs</a>

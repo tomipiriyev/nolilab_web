@@ -1,6 +1,6 @@
 <footer>
   <div class="footer-container">
-    <a href="/" class="footer-logo">nolilab</a>
+    <a href="/" class="footer-logo"><picture><source srcset="/images/optimized/nolilab-logo.avif" type="image/avif"><source srcset="/images/optimized/nolilab-logo.webp" type="image/webp"><img src="/images/optimized/nolilab-logo.png" alt="NoliLab" width="154" height="18"></picture></a>
     <!-- 44 links, previously one flat unlabelled row that measured 3,365px tall on a
          phone. Grouped into four named columns with the long tail behind a <details>
          toggle. Every link stays in the DOM on every page, so internal linking is
@@ -165,13 +165,14 @@
     }
 
     .footer-logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono, 'SF Mono', monospace);
-      letter-spacing: -0.02em;
-      color: var(--text-primary, #24292e);
-      text-decoration: none;
+      display: flex;
+      align-items: center;
       flex-shrink: 0;
+    }
+
+    .footer-logo img {
+      height: 18px;
+      width: auto;
     }
 
     /* Four named columns replacing the old flat 44-link row. These styles live
@@ -393,8 +394,8 @@
         gap: var(--spacing-lg, 2rem);
       }
 
-      .footer-logo {
-        font-size: 1.5rem;
+      .footer-logo img {
+        height: 22px;
       }
 
       /* Two columns of grouped links instead of 44 stacked 44px rows. That
