@@ -16,7 +16,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Learn how daily ionosphere changes affect GPS accuracy, why electron content matters more than altitude alone, and what helps reduce positioning errors." name="description"/>
+<meta content="How the ionosphere’s day–night changes in altitude and electron content affect GPS accuracy, how large the errors get, and what reduces them." name="description"/>
 <link href="https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="es" rel="alternate"/>
@@ -39,7 +39,7 @@
 </script>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="How Daily Ionosphere Changes Affect GPS Accuracy"/>
-<meta property="og:description" content="Learn how daily ionosphere changes affect GPS accuracy, why electron content matters more than altitude alone, and what helps reduce positioning errors."/>
+<meta property="og:description" content="How the ionosphere’s day–night changes in altitude and electron content affect GPS accuracy, how large the errors get, and what reduces them."/>
 <meta property="og:url" content="https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/"/>
 <meta property="og:image" content="https://www.nolilab.com/images/optimized/ionosphere-impact-gps.webp"/>
 <meta property="og:image:alt" content="Illustration of Earth's atmosphere and the overlapping ionosphere"/>
@@ -49,7 +49,7 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "How Daily Ionosphere Changes Affect GPS Accuracy",
-  "description": "Learn how daily ionosphere changes affect GPS accuracy, why electron content matters more than altitude alone, and what helps reduce positioning errors.",
+  "description": "How the ionosphere’s day–night changes in altitude and electron content affect GPS accuracy, how large the errors get, and what reduces them.",
   "url": "https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/",
   "datePublished": "2023-11-21",
   "dateModified": "2026-10-03",
@@ -81,7 +81,7 @@
 <div class="article-header">
 <p class="article-eyebrow">GPS explained</p>
 <h1 id="article-title">How Daily Ionosphere Changes Affect GPS Accuracy</h1>
-<p class="article-deck">The ionosphere changes between day and night. For GPS, the key is how many free electrons a signal crosses—and how unevenly they are distributed.</p>
+<p class="article-deck">The ionosphere’s layers change between day and night. For GPS, what matters most is how many free electrons a signal crosses, and how unevenly they are spread.</p>
 <div class="article-meta">
 <span>By <a href="/author/tamleykha-piriyev/" rel="author">Tamleykha Piriyev</a></span>
 <span>Published <time datetime="2023-11-21">November 21, 2023</time></span>
@@ -89,14 +89,14 @@
 </div>
 </div>
 <div class="article-summary">
-<p><strong>The short answer:</strong> Daily changes in the ionosphere alter GPS signal travel time and can introduce positioning errors. Layer altitude influences the path through the ionosphere, but altitude alone cannot predict accuracy. The main factors are total electron content along that path, signal frequency, and small-scale irregularities. Nighttime often brings less ionization, yet disturbances after sunset can still disrupt reception.</p>
+<p><strong>The short answer:</strong> The ionosphere spans roughly 60 to 500 km above the ground. By day it has D, E, and F regions; at night the D region disappears, the E region weakens, and mainly the F layer remains. These changes alter how long GPS signals take to arrive. The size of the error depends mainly on the total electron content along the signal path: on the GPS L1 frequency, from under a meter to tens of meters before correction. Nighttime usually brings less delay, but near the equator the F layer rises after sunset and can break up into plasma bubbles that disrupt reception.</p>
 </div>
 <nav class="article-toc" aria-label="On this page">
 <p class="toc-title">On this page</p>
 <ol>
-<li><a href="#altitude-and-electrons">Why altitude is only part of the story</a></li>
-<li><a href="#daily-cycle">What changes from day to night?</a></li>
-<li><a href="#gps-effects">Delay, tracking disruption, and satellite elevation</a></li>
+<li><a href="#altitude-and-electrons">How the ionosphere’s altitude changes from day to night</a></li>
+<li><a href="#daily-cycle">What changes through the day?</a></li>
+<li><a href="#gps-effects">How the ionosphere affects GPS measurements</a></li>
 <li><a href="#reduce-errors">What helps reduce GPS errors?</a></li>
 <li><a href="#loko-tracking">What this means for Loko tracking</a></li>
 <li><a href="#sources">Sources and further reading</a></li>
@@ -108,61 +108,82 @@
 </figure>
 <div class="article-content">
 <section aria-labelledby="altitude-and-electrons">
-<h2 id="altitude-and-electrons">Why altitude is only part of the story</h2>
-<p>The ionosphere is a region of the upper atmosphere where solar radiation creates free electrons and ions. Its D, E, and F regions change with sunlight and atmospheric conditions. The lower regions weaken substantially at night, while the F region persists. These are changing density regions, not solid shells moving up and down together. <a href="https://www.swpc.noaa.gov/phenomena/ionosphere">NOAA explains the ionosphere’s structure</a>.</p>
-<p>For GPS, a more useful measure is <strong>total electron content (TEC)</strong>: the number of electrons along a signal’s path. Layer height affects which regions a slanted signal crosses, but a higher layer does not automatically mean a larger error. Latitude, season, solar activity, and geomagnetic conditions also change TEC. <a href="https://www.swpc.noaa.gov/phenomena/total-electron-content">NOAA’s TEC overview</a> explains this connection.</p>
+<h2 id="altitude-and-electrons">How the ionosphere’s altitude changes from day to night</h2>
+<p>The ionosphere is the part of the upper atmosphere where solar radiation strips electrons from atoms, leaving free electrons and ions. It starts about 60 to 70 km above the ground and can extend to around 500 km. <a href="https://scied.ucar.edu/learning-zone/atmosphere/ionosphere">UCAR’s ionosphere guide describes its layers</a>.</p>
+<div class="table-wrapper" role="region" aria-label="Ionospheric regions by day and night" tabindex="0">
+<table>
+<caption>Approximate altitude of each ionospheric region</caption>
+<thead><tr><th scope="col">Region</th><th scope="col">Approximate altitude</th><th scope="col">Daytime</th><th scope="col">Night</th></tr></thead>
+<tbody>
+<tr><th scope="row">D</th><td>60–90 km</td><td>Present</td><td>Disappears</td></tr>
+<tr><th scope="row">E</th><td>90–150 km</td><td>Present</td><td>Weakens sharply</td></tr>
+<tr><th scope="row">F</th><td>150–500 km</td><td>Often splits into F1 and F2 layers</td><td>A single F layer remains</td></tr>
+</tbody>
+</table>
+</div>
+<p>As the lower regions fade after sunset, the remaining ionization sits higher, mostly in the F layer. The boundaries vary with latitude, season, and solar activity, so these figures are typical ranges, not fixed limits.</p>
+<h3>Why altitude alone does not set the GPS error</h3>
+<p>GPS satellites orbit at about 20,200 km, so every GPS signal passes through the whole ionosphere. Layer height changes the geometry: where a slanted signal crosses the densest part, and how long its path through that part is. A higher layer does not automatically mean a larger error.</p>
+<p>A more useful measure is <strong>total electron content (TEC)</strong>: the number of electrons in a column one square meter in cross-section along the signal path. It is counted in TEC units; 1 TECU equals 10¹⁶ electrons per square meter. Vertical TEC can range from a few to several hundred TECU, depending on local time, latitude, season, solar activity, and geomagnetic conditions. <a href="https://www.spaceweather.gov/phenomena/total-electron-content">NOAA’s TEC overview explains these factors</a>.</p>
+<p>On the GPS L1 frequency (1575.42 MHz), each TECU adds about 0.16 m of delay. A vertical path can therefore add anything from under a meter to tens of meters of range error before correction.</p>
 </section>
 <section aria-labelledby="daily-cycle">
-<h2 id="daily-cycle">What changes from day to night?</h2>
-<p>Sunlight produces ionization during the day. After dark, recombination reduces electron density, although the ionosphere does not disappear. The table describes a general pattern, not a schedule for predicting GPS accuracy at a particular location.</p>
+<h2 id="daily-cycle">What changes through the day?</h2>
+<p>Sunlight builds up ionization during the day. After dark, electrons and ions recombine and electron density falls, but the ionosphere does not disappear. The table describes a general pattern, not a schedule for predicting GPS accuracy at a particular place.</p>
 <div class="table-wrapper" role="region" aria-label="Daily ionosphere changes" tabindex="0">
 <table>
 <caption>Typical daily changes and their possible GPS effects</caption>
 <thead><tr><th scope="col">Local time</th><th scope="col">Ionospheric change</th><th scope="col">Possible GPS effect</th></tr></thead>
 <tbody>
-<tr><th scope="row">Morning and daytime</th><td>Solar radiation replenishes free electrons.</td><td>Higher electron content can increase uncorrected signal delay.</td></tr>
-<tr><th scope="row">After sunset</th><td>Overall ionization falls, but equatorial irregularities can develop.</td><td>Rapid fluctuations can disrupt tracking even as average electron content decreases.</td></tr>
-<tr><th scope="row">Night</th><td>Electron density is generally lower; the F region remains.</td><td>Delay may decrease, but reliable reception is not guaranteed.</td></tr>
-<tr><th scope="row">Disturbed conditions, any time</th><td>Space weather can change the usual pattern.</td><td>Corrections may leave larger residual errors, or receivers may lose signal lock.</td></tr>
+<tr><th scope="row">Morning to early afternoon</th><td>Solar radiation adds free electrons, and electron content rises toward an afternoon peak.</td><td>Uncorrected delay grows. The GPS broadcast correction model places the daily peak at 14:00 local time.</td></tr>
+<tr><th scope="row">After sunset</th><td>Overall ionization falls. Near the magnetic equator, the F layer can rise and become unstable.</td><td>Rapid signal fluctuations can disrupt tracking even as the average delay decreases.</td></tr>
+<tr><th scope="row">Night</th><td>Electron density is lower, and mainly the F layer remains.</td><td>Delay is usually smallest. The broadcast model uses a constant night-time value of 5 ns, about 1.5 m.</td></tr>
+<tr><th scope="row">Disturbed conditions, any time</th><td>Space weather can override the usual pattern.</td><td>Errors can grow to tens of meters, and receivers may lose lock.</td></tr>
 </tbody>
 </table>
 </div>
-<p>There is no universal “best GPS hour.” In particular, NOAA describes <a href="https://www.swpc.noaa.gov/impacts/space-weather-and-gps-systems">equatorial instabilities that are strongest just after sunset</a>. A simple rule that nighttime GPS is always better would miss this effect.</p>
+<h3>The evening rise of the equatorial F layer</h3>
+<p>The clearest case where a change in ionospheric altitude directly degrades GPS comes just after sunset near the magnetic equator. There, a brief strengthening of the eastward electric field, called the pre-reversal enhancement, lifts the F layer higher. At that height there are fewer collisions with neutral gas, and the bottom of the layer can become unstable. The result is plasma bubbles: regions of depleted electron density that make GPS signals scintillate.</p>
+<p>Plasma bubbles usually develop around 19:00 local time and are most frequent around 21:00 to 22:00. <a href="https://angeo.copernicus.org/articles/38/611/2020/">Kepkar et al. (2020) describe this pattern from satellite data</a>.</p>
+<p>There is no universal “best GPS hour,” and a rule that nighttime GPS is always better misses this evening effect. <a href="https://www.spaceweather.gov/impacts/space-weather-and-gps-systems">NOAA notes that equatorial instabilities are most severe just after sunset</a>.</p>
 </section>
 <section aria-labelledby="gps-effects">
 <h2 id="gps-effects">How the ionosphere affects GPS measurements</h2>
 <h3>1. A range error without a weak signal</h3>
 <p>GPS estimates distance from signal timing. The ionosphere delays the ranging code, making an uncorrected satellite distance appear too long. Carrier-phase measurements experience the opposite first-order effect: a phase advance. A receiver can therefore show a strong signal while its measurements still need correction.</p>
-<p>The first-order code delay increases with TEC and decreases with the square of signal frequency. This frequency dependence is what lets dual-frequency receivers estimate and remove most of the effect. See <a href="https://gssc.esa.int/navipedia/index.php/Ionospheric_Delay">ESA Navipedia’s ionospheric delay explanation</a>.</p>
+<p>The first-order code delay increases with TEC and decreases with the square of the signal frequency. This frequency dependence is what lets dual-frequency receivers estimate and remove most of the effect. <a href="https://gssc.esa.int/navipedia/index.php/Ionospheric_Delay">ESA Navipedia explains the ionospheric delay</a>.</p>
 <h3>2. Rapid fluctuations and loss of tracking</h3>
-<p>Small, uneven patches of electron density can cause <strong>scintillation</strong>: rapid changes in signal strength and phase. Severe scintillation can break a receiver’s lock on a satellite and interrupt position updates. It is more common at low and high latitudes than at middle latitudes. <a href="https://www.swpc.noaa.gov/phenomena/ionospheric-scintillation">NOAA’s scintillation guide</a> distinguishes this disruption from a smooth delay.</p>
+<p>Small, uneven patches of electron density can cause <strong>scintillation</strong>: rapid changes in signal strength and phase. Severe scintillation can break a receiver’s lock on a satellite and interrupt position updates. It is more common at low and high latitudes than at middle latitudes. <a href="https://www.spaceweather.gov/phenomena/ionospheric-scintillation">NOAA’s scintillation guide distinguishes this disruption from a smooth delay</a>.</p>
 <h3>3. Longer paths near the horizon</h3>
-<p>A low-elevation satellite’s signal generally takes a longer route through the ionosphere than an overhead signal. Correction models account for this geometry. The same ionosphere can therefore affect different satellites by different amounts; the resulting position error also depends on their arrangement in the sky.</p>
+<p>A satellite low on the horizon sends its signal on a longer, slanted path through the ionosphere. In the broadcast correction model, a satellite 5° above the horizon sees about three times the delay of one directly overhead. The same ionosphere can therefore affect different satellites by different amounts, and the resulting position error also depends on how the satellites are arranged in the sky.</p>
 </section>
 <section aria-labelledby="reduce-errors">
 <h2 id="reduce-errors">What helps reduce GPS errors?</h2>
 <ul>
-<li><strong>Broadcast correction models.</strong> Single-frequency GPS receivers can use the Klobuchar model. It is designed to remove about half the ionospheric range error on a worldwide RMS basis, not a guaranteed percentage for each fix. <a href="https://gssc.esa.int/navipedia/index.php/Klobuchar_Ionospheric_Model">ESA documents the model and its limits</a>.</li>
-<li><strong>Dual-frequency measurements.</strong> Combining two frequencies removes the dominant ionospheric delay term. It does not guarantee continuous tracking during severe scintillation.</li>
-<li><strong>More usable satellites.</strong> Tracking several constellations can improve availability and geometry. Multi-constellation reception is different from dual-frequency correction: signals from every constellation still cross the ionosphere.</li>
+<li><strong>Broadcast correction models.</strong> Single-frequency GPS receivers can apply the Klobuchar model, whose coefficients the satellites broadcast. It removes about half of the ionospheric range error on average (RMS, worldwide); individual fixes can do better or worse. <a href="https://gssc.esa.int/navipedia/index.php/Klobuchar_Ionospheric_Model">ESA documents the model and its limits</a>.</li>
+<li><strong>Dual-frequency measurements.</strong> Because the delay depends on frequency, combining two frequencies removes the first-order term, which is more than 99.9% of the ionospheric effect. It does not prevent loss of lock during severe scintillation.</li>
+<li><strong>More usable satellites.</strong> Tracking several constellations improves availability and geometry, which helps when some satellites are low or briefly lose lock. Signals from every constellation still cross the ionosphere, so this does not replace correction.</li>
 <li><strong>Check the whole reception environment.</strong> Give the antenna a clear view of the sky and follow its mounting guidance. Buildings, terrain, and reflections can cause problems unrelated to space weather.</li>
-<li><strong>Check conditions for precision work.</strong> Review NOAA’s space-weather information and your receiver’s quality indicators. A valid-looking coordinate alone does not show whether it meets your accuracy requirement.</li>
+<li><strong>Check conditions for precision work.</strong> Review NOAA’s space-weather information and your receiver’s quality indicators, such as the number of satellites in use. A valid-looking coordinate alone does not show whether it meets your accuracy requirement.</li>
 </ul>
 </section>
 <section aria-labelledby="loko-tracking">
 <h2 id="loko-tracking">What this means for Loko tracking</h2>
-<p>A tracker has two separate jobs: calculate a location from satellite signals, then deliver that location to you. Loko uses a LoRa radio link for the second job. That link does not remove an ionospheric error from a GPS fix or restore a missing satellite measurement.</p>
-<p>If an update is missing or a location looks wrong, check both satellite reception and the tracker-to-receiver radio path. Our <a href="/gps/">GPS and LoRa guide</a> explains the two links; the <a href="/specifications/">Loko specifications</a> describe the hardware’s capabilities.</p>
+<p>A tracker has two separate jobs: calculate a location from satellite signals, then deliver that location to you. Loko’s receiver tracks GPS, GLONASS, Galileo, and BeiDou satellites, which improves availability and geometry. Loko then sends the position over a LoRa radio link. That link carries the fix as calculated; it cannot remove an ionospheric error or restore a missing satellite measurement.</p>
+<p>Near the equator, occasional evening gaps or jumps in position can come from scintillation rather than from the tracker or the radio link. If an update is missing or a location looks wrong, check both satellite reception and the tracker-to-receiver radio path. Our <a href="/gps/">GPS and LoRa guide</a> explains the two links, and the <a href="/specifications/">Loko specifications</a> list the supported satellite systems.</p>
 </section>
 <section class="article-sources" aria-labelledby="sources">
 <h2 id="sources">Sources and further reading</h2>
 <ul>
-<li><a href="https://www.swpc.noaa.gov/phenomena/ionosphere">NOAA: Ionosphere</a></li>
-<li><a href="https://www.swpc.noaa.gov/phenomena/total-electron-content">NOAA: Total Electron Content</a></li>
-<li><a href="https://www.swpc.noaa.gov/impacts/space-weather-and-gps-systems">NOAA: Space Weather and GPS Systems</a></li>
-<li><a href="https://www.swpc.noaa.gov/phenomena/ionospheric-scintillation">NOAA: Ionospheric Scintillation</a></li>
+<li><a href="https://scied.ucar.edu/learning-zone/atmosphere/ionosphere">UCAR Center for Science Education: The Ionosphere</a></li>
+<li><a href="https://www.spaceweather.gov/phenomena/ionosphere">NOAA: Ionosphere</a></li>
+<li><a href="https://www.spaceweather.gov/phenomena/total-electron-content">NOAA: Total Electron Content</a></li>
+<li><a href="https://www.spaceweather.gov/impacts/space-weather-and-gps-systems">NOAA: Space Weather and GPS Systems</a></li>
+<li><a href="https://www.spaceweather.gov/phenomena/ionospheric-scintillation">NOAA: Ionospheric Scintillation</a></li>
 <li><a href="https://gssc.esa.int/navipedia/index.php/Ionospheric_Delay">ESA Navipedia: Ionospheric Delay</a></li>
 <li><a href="https://gssc.esa.int/navipedia/index.php/Klobuchar_Ionospheric_Model">ESA Navipedia: Klobuchar Ionospheric Model</a></li>
+<li><a href="https://gssc.esa.int/navipedia/index.php/GPS_Space_Segment">ESA Navipedia: GPS Space Segment</a></li>
+<li><a href="https://angeo.copernicus.org/articles/38/611/2020/">Kepkar et al. (2020): Occurrence climatology of equatorial plasma bubbles, Annales Geophysicae</a></li>
 </ul>
 </section>
 </div>

@@ -3,20 +3,20 @@
 <html lang="fr">
 <head>
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
-<meta content="La précision du GPS ne dépend pas uniquement de la position des satellites : l'ionosphère terrestre joue un rôle essentiel dans la qualité du signal. " name="description"/>
+<link href="/css/blog-article.css?v=20261003" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Ionosphère et GPS : l’effet de son altitude sur le signal</title>
+<title>Comment les variations quotidiennes de l’ionosphère affectent le GPS</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Découvrez comment les variations d'altitude ionosphérique tout au long de la journée affectent la qualité du signal GPS et la précision de la navigation." name="description"/>
+<meta content="Comment les variations jour-nuit d’altitude et d’électrons de l’ionosphère affectent la précision du GPS, l’ampleur des erreurs et ce qui les réduit." name="description"/>
 <link href="https://www.nolilab.com/fr/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="es" rel="alternate"/>
@@ -25,451 +25,51 @@
 <link href="https://www.nolilab.com/ru/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="x-default" rel="alternate"/>
+<script defer="" src="/js/layout.js?v=20260906"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://www.nolilab.com/fr/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.nolilab.com/fr/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Comment les variations quotidiennes de l’ionosphère affectent le GPS",
+      "item": "https://www.nolilab.com/fr/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/"
+    }
+  ]
+}
+</script>
 <meta content="article" property="og:type"/>
-<meta content="Ionosphère et GPS : l’effet de son altitude sur le signal" property="og:title"/>
-<meta content="Découvrez comment les variations d'altitude ionosphérique tout au long de la journée affectent la qualité du signal GPS et la précision de la navigation." property="og:description"/>
-<meta content="https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality" property="og:url"/>
+<meta content="fr_FR" property="og:locale"/>
+<meta content="Comment les variations quotidiennes de l’ionosphère affectent le GPS" property="og:title"/>
+<meta content="Comment les variations jour-nuit d’altitude et d’électrons de l’ionosphère affectent la précision du GPS, l’ampleur des erreurs et ce qui les réduit." property="og:description"/>
+<meta content="https://www.nolilab.com/fr/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/ionosphere-impact-gps.webp" property="og:image"/>
-<meta content="nolilab" property="og:site_name"/>
+<meta content="Illustration de l’atmosphère terrestre et de l’ionosphère qui la chevauche" property="og:image:alt"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Ionosphère et GPS : l’effet de son altitude sur le signal" name="twitter:title"/>
-<meta content="Découvrez comment les variations d'altitude ionosphérique tout au long de la journée affectent la qualité du signal GPS et la précision de la navigation." name="twitter:description"/>
-<meta content="https://www.nolilab.com/images/optimized/ionosphere-impact-gps.webp" name="twitter:image"/>
-<style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #24292e;
-      --text-secondary: #57606a;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-lg);
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    article {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: var(--spacing-xl) var(--spacing-md);
-    }
-
-    .article-header {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-meta {
-      display: flex;
-      gap: var(--spacing-md);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.2;
-    }
-
-    .article-image {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-content {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .article-content h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin: var(--spacing-xl) 0 var(--spacing-md);
-      letter-spacing: -0.01em;
-    }
-
-    .article-content h3 {
-      font-size: 1.375rem;
-      font-weight: 600;
-      margin: var(--spacing-lg) 0 var(--spacing-sm);
-    }
-
-    .article-content p {
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-content ul,
-    .article-content ol {
-      margin: var(--spacing-md) 0;
-      padding-left: var(--spacing-lg);
-    }
-
-    .article-content li {
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .article-content strong {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .article-content code {
-      background: var(--bg-secondary);
-      padding: 0.2em 0.4em;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      font-size: 0.9em;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      margin-bottom: var(--spacing-lg);
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--accent-hover);
-    }
-
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-
-    .language-selector {
-      margin-left: var(--spacing-sm);
-    }
-
-    .language-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.75rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .language-btn:hover {
-      border-color: var(--accent);
-      background: var(--bg-primary);
-    }
-
-    .language-btn i {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .language-btn .fa-chevron-down {
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-    }
-
-    .language-selector:hover .fa-chevron-down {
-      transform: rotate(180deg);
-    }
-
-    .current-lang {
-      font-family: var(--font-mono);
-      font-weight: 600;
-    }
-
-    .language-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      right: 0;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
-      z-index: 1000;
-    }
-
-    .language-selector:hover .language-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .language-option {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .language-option:last-child {
-      border-bottom: none;
-    }
-
-    .language-option:hover {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-
-    .language-option .lang-code {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 0.8rem;
-      min-width: 28px;
-      color: var(--accent);
-    }
-
-    .language-option .lang-name {
-      font-size: 0.875rem;
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: var(--spacing-xs);
-      z-index: 1001;
-      margin-left: auto;
-    }
-
-    .mobile-menu-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--bg-primary);
-        flex-direction: column;
-        gap: 0;
-        padding: 80px var(--spacing-md) var(--spacing-md);
-        box-shadow: var(--shadow-lg);
-        transition: left 0.3s ease;
-        z-index: 1000;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-      }
-
-      .nav-links.active {
-        left: 0;
-      }
-
-      .nav-link {
-        width: 100%;
-        padding: var(--spacing-md);
-        border-bottom: 1px solid var(--border);
-        text-align: left;
-        font-size: 1rem;
-      }
-
-      .language-selector {
-        position: static;
-        margin-left: var(--spacing-sm);
-      }
-
-      .language-dropdown {
-        left: 0;
-        right: auto;
-        min-width: 160px;
-      }
-
-      /* Overlay when menu is open */
-      body.menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      .article-title {
-        font-size: 2rem;
-      }
-
-      .article-content {
-        font-size: 1rem;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Quel est l'impact du changement d'altitude de l'ionosphère au cours de la journée sur la qualité du signal GPS ?",
-  "description": "La précision du GPS ne dépend pas uniquement de la position des satellites : l'ionosphère terrestre joue un rôle essentiel dans la qualité du signal. ",
+  "headline": "Comment les variations quotidiennes de l’ionosphère affectent le GPS",
+  "description": "Comment les variations jour-nuit d’altitude et d’électrons de l’ionosphère affectent la précision du GPS, l’ampleur des erreurs et ce qui les réduit.",
   "url": "https://www.nolilab.com/fr/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/",
   "datePublished": "2023-11-21",
-  "dateModified": "2023-11-21",
+  "dateModified": "2026-10-03",
+  "inLanguage": "fr",
   "author": {
     "@type": "Person",
     "@id": "https://www.nolilab.com/author/tamleykha-piriyev/#person",
@@ -482,142 +82,152 @@
   },
   "publisher": {
     "@type": "Organization",
-    "name": "nolilab",
-    "url": "https://www.nolilab.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.nolilab.com/images/nolilab-logo-2.png"
-    }
+    "name": "NoliLab",
+    "url": "https://www.nolilab.com/"
   },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https://www.nolilab.com/images/loko-gps-system-diagram.webp"
-  },
+  "image": "https://www.nolilab.com/images/optimized/ionosphere-impact-gps.webp",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://www.nolilab.com/fr/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/"
   },
-  "inLanguage": "fr",
   "@id": "https://www.nolilab.com/fr/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/#article",
   "translationOfWork": {
     "@id": "https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/#article"
   }
-}</script>
-<style>
-  @font-face {
-    font-family: 'Inter-fallback';
-    src: local('Arial');
-    ascent-override: 90.44%;
-    descent-override: 22.52%;
-    line-gap-override: 0%;
-    size-adjust: 107.64%;
-  }
-</style>
-<script defer="" src="/js/layout.js?v=20260906"></script>
+}
+</script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Aller à l’article</a>
 <div id="site-header"></div>
-<main>
-<article>
-<a class="back-link" href="/fr/blog/">
-<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Retour au Blog
-    </a>
+<main class="blog-article" id="main-content">
+<a class="back-link" href="/fr/blog/">← Retour au blog</a>
+<article aria-labelledby="article-title">
 <div class="article-header">
+<p class="article-eyebrow">Le GPS expliqué</p>
+<h1 id="article-title">Comment les variations quotidiennes de l’ionosphère affectent le GPS</h1>
+<p class="article-deck">Les couches de l’ionosphère changent entre le jour et la nuit. Pour le GPS, l’essentiel est le nombre d’électrons libres qu’un signal traverse, et l’irrégularité de leur répartition.</p>
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> November 21, 2023</span>
-<span><i class="far fa-user"></i> <a class="author-link" href="/fr/author/tamleykha-piriyev/" rel="author">nolilab</a></span>
+<span>Par <a href="/fr/author/tamleykha-piriyev/" rel="author">Tamleykha Piriyev</a></span>
+<span>Publié le <time datetime="2023-11-21">21 novembre 2023</time></span>
+<span>Mis à jour le <time datetime="2026-10-03">3 octobre 2026</time></span>
 </div>
-<h1 class="article-title">Quel est l'impact du changement d'altitude de l'ionosphère au cours de la journée sur la qualité du signal GPS ?</h1>
 </div>
-<img alt="Earth's Ionosphere and Atmosphere" class="article-image" src="/images/optimized/ionosphere-impact-gps.webp"/>
+<div class="article-summary">
+<p><strong>En bref :</strong> L’ionosphère s’étend d’environ 60 à 500 km au-dessus du sol. Le jour, elle comprend les régions D, E et F ; la nuit, la région D disparaît, la région E s’affaiblit et il reste principalement la couche F. Ces changements modifient le temps que mettent les signaux GPS à arriver. L’ampleur de l’erreur dépend surtout du contenu électronique total le long du trajet du signal : sur la fréquence L1 du GPS, de moins d’un mètre à plusieurs dizaines de mètres avant correction. La nuit apporte généralement moins de retard, mais près de l’équateur la couche F s’élève après le coucher du soleil et peut se fragmenter en bulles de plasma qui perturbent la réception.</p>
+</div>
+<nav aria-label="Sur cette page" class="article-toc">
+<p class="toc-title">Sur cette page</p>
+<ol>
+<li><a href="#altitude-and-electrons">Comment l’altitude de l’ionosphère change entre le jour et la nuit</a></li>
+<li><a href="#daily-cycle">Qu’est-ce qui change au fil de la journée ?</a></li>
+<li><a href="#gps-effects">Comment l’ionosphère affecte les mesures GPS</a></li>
+<li><a href="#reduce-errors">Qu’est-ce qui aide à réduire les erreurs GPS ?</a></li>
+<li><a href="#loko-tracking">Ce que cela signifie pour le suivi avec Loko</a></li>
+<li><a href="#sources">Sources et lectures complémentaires</a></li>
+</ol>
+</nav>
+<figure class="article-figure">
+<img alt="Illustration des couches de l’atmosphère terrestre, avec l’ionosphère qui en chevauche plusieurs" class="article-image" decoding="async" height="1158" src="/images/optimized/ionosphere-impact-gps.webp" width="1760"/>
+<figcaption>L’ionosphère chevauche d’autres régions de l’atmosphère. Sa densité électronique et ses limites varient ; cette illustration offre une vue d’ensemble, pas une carte des conditions actuelles.</figcaption>
+</figure>
 <div class="article-content">
-<h2>Introduction</h2>
-<p>La précision du GPS ne dépend pas uniquement de la position des satellites : l'ionosphère terrestre joue un rôle essentiel dans la qualité du signal. L'ionosphère, comprenant les couches D, E et F, est caractérisée par des changements dynamiques d'altitude tout au long de la journée et au fil des saisons, affectant directement la manière dont les signaux GPS atteignent les récepteurs au sol.</p>
-<h2>L'ionosphère : un bref aperçu</h2>
-<p>L'ionosphère s'étend d'environ 48 kilomètres à 965 kilomètres au-dessus du niveau de la mer et contient des particules chargées électriquement créées par le rayonnement solaire. Cette région atmosphérique se compose de trois couches primaires, chacune ayant des caractéristiques distinctes :</p>
-<h3>Couche D</h3>
-<p>La couche ionosphérique la plus basse absorbe les ondes radio hautes fréquences moyennes et inférieures. Cette couche existe principalement pendant la journée et se dissipe la nuit lorsque le rayonnement solaire diminue.</p>
-<h3>Couche E</h3>
-<p>La couche intermédiaire réfléchit les ondes radio jusqu'à 50 MHz, en particulier lors d'événements sporadiques intenses. Comme pour la couche D, la densité de la couche E varie considérablement entre le jour et la nuit.</p>
-<h3>Couche F</h3>
-<p>La couche la plus haute et la plus importante pour le GPS contient la plus grande densité électronique et s'avère cruciale pour la propagation radio des ondes célestes. Pendant la journée, il se divise en sous-couches F1 et F2 ; la nuit, ces couches fusionnent en une seule couche F.</p>
-<h2>Signaux GPS et ionosphère</h2>
-<p>Les satellites GPS transmettent des signaux sur des fréquences spécifiques (L1 à 1 575,42 MHz et L2 à 1 227,60 MHz) qui doivent traverser l'ionosphère avant d'atteindre les récepteurs au sol. Lorsque les signaux traversent des particules ionisées, ils subissent une réfraction (flexion et ralentissement), ce qui introduit des erreurs de positionnement.</p>
-<p>Différents modèles ont été développés pour compenser les effets ionosphériques sur les signaux GPS. Le modèle Klobuchar, mis en œuvre dans la plupart des récepteurs GPS civils, réduit les erreurs ionosphériques d'environ 50 à 60 % grâce aux paramètres diffusés dans le message de navigation GPS.</p>
-<h2>Facteurs affectant l'altitude de l'ionosphère</h2>
-<p>Trois influences principales modifient continuellement les conditions ionosphériques :</p>
-<h3>1. Activité solaire</h3>
-<p>Les fluctuations du rayonnement solaire modifient considérablement les densités électroniques et les altitudes des couches. Pendant le pic d'activité solaire (maximum solaire), l'ionosphère devient plus turbulente avec des densités électroniques plus élevées, provoquant des retards plus importants dans le signal GPS. À l’inverse, les périodes minimales solaires présentent des conditions ionosphériques plus stables et prévisibles.</p>
-<h3>2. Activité géomagnétique</h3>
-<p>Les interactions du champ magnétique terrestre avec les particules solaires chargées provoquent des changements structurels dans l'ionosphère. Les tempêtes géomagnétiques peuvent déclencher de soudaines perturbations ionosphériques, dégradant temporairement la précision du GPS dans de vastes régions géographiques.</p>
-<h3>3. Phénomènes perturbateurs</h3>
-<p>Les perturbations ionosphériques soudaines et les événements d’absorption de la calotte polaire créent des interférences de signal importantes. Ces phénomènes, souvent déclenchés par des éruptions solaires ou des éjections de masse coronale, peuvent provoquer des changements rapides de la densité ionosphérique en quelques minutes, voire quelques heures.</p>
-<h2>Impact sur la qualité du signal GPS</h2>
-<p>Les changements d'altitude ionosphérique créent plusieurs défis en termes de précision du GPS :</p>
-<h3>Qualité du signal variable</h3>
-<p>Comme la densité ionosphérique fluctue au cours de la journée, les signaux GPS subissent différents degrés de retard. Les retards maximaux se produisent généralement à midi lorsque le rayonnement solaire atteint son maximum, tandis que les conditions nocturnes assurent généralement une propagation du signal plus stable.</p>
-<h3>Réfraction dépendante de la fréquence</h3>
-<p>Différentes fréquences GPS subissent différents niveaux de retard ionosphérique. Les récepteurs bi-fréquence exploitent cet effet pour calculer et supprimer la plupart des erreurs ionosphériques, obtenant ainsi une précision nettement meilleure que les récepteurs mono-fréquence.</p>
-<h3>Erreurs dépendantes de l'altitude</h3>
-<p>Les angles d'élévation des satellites affectent la longueur du trajet du signal à travers l'ionosphère. Les signaux provenant de satellites à basse altitude traversent une plus grande ionosphère et subissent des retards plus importants que les signaux provenant de satellites aériens.</p>
-<h2>La solution de suivi GPS Loko</h2>
-<p>Les traceurs GPS modernes comme le Loko compensent les effets ionosphériques grâce à l'intégration multi-systèmes :</p>
+<section aria-labelledby="altitude-and-electrons">
+<h2 id="altitude-and-electrons">Comment l’altitude de l’ionosphère change entre le jour et la nuit</h2>
+<p>L’ionosphère est la partie de la haute atmosphère où le rayonnement solaire arrache des électrons aux atomes, laissant des électrons libres et des ions. Elle commence à environ 60 à 70 km du sol et peut s’étendre jusqu’à environ 500 km. <a href="https://scied.ucar.edu/learning-zone/atmosphere/ionosphere">Le guide de l’UCAR sur l’ionosphère décrit ses couches</a>.</p>
+<div aria-label="Régions ionosphériques le jour et la nuit" class="table-wrapper" role="region" tabindex="0">
+<table>
+<caption>Altitude approximative de chaque région ionosphérique</caption>
+<thead><tr><th scope="col">Région</th><th scope="col">Altitude approximative</th><th scope="col">Jour</th><th scope="col">Nuit</th></tr></thead>
+<tbody>
+<tr><th scope="row">D</th><td>60–90 km</td><td>Présente</td><td>Disparaît</td></tr>
+<tr><th scope="row">E</th><td>90–150 km</td><td>Présente</td><td>S’affaiblit fortement</td></tr>
+<tr><th scope="row">F</th><td>150–500 km</td><td>Se divise souvent en couches F1 et F2</td><td>Il ne reste qu’une seule couche F</td></tr>
+</tbody>
+</table>
+</div>
+<p>À mesure que les régions inférieures s’estompent après le coucher du soleil, l’ionisation restante se situe plus haut, surtout dans la couche F. Les limites varient selon la latitude, la saison et l’activité solaire : ces chiffres sont des plages typiques, pas des limites fixes.</p>
+<h3>Pourquoi l’altitude seule ne détermine pas l’erreur GPS</h3>
+<p>Les satellites GPS orbitent à environ 20 200 km : chaque signal GPS traverse donc toute l’ionosphère. La hauteur des couches modifie la géométrie : l’endroit où un signal oblique traverse la partie la plus dense, et la longueur de son trajet dans cette partie. Une couche plus haute n’entraîne pas automatiquement une erreur plus grande.</p>
+<p>Une mesure plus utile est le <strong>contenu électronique total (TEC)</strong> : le nombre d’électrons dans une colonne d’un mètre carré de section le long du trajet du signal. Il se mesure en unités TEC ; 1 TECU vaut 10¹⁶ électrons par mètre carré. Le TEC vertical peut aller de quelques unités à plusieurs centaines de TECU, selon l’heure locale, la latitude, la saison, l’activité solaire et les conditions géomagnétiques. <a href="https://www.spaceweather.gov/phenomena/total-electron-content">La présentation du TEC par la NOAA explique ces facteurs</a>.</p>
+<p>Sur la fréquence L1 du GPS (1575,42 MHz), chaque TECU ajoute environ 0,16 m de retard. Un trajet vertical peut donc ajouter de moins d’un mètre à plusieurs dizaines de mètres d’erreur de distance avant correction.</p>
+</section>
+<section aria-labelledby="daily-cycle">
+<h2 id="daily-cycle">Qu’est-ce qui change au fil de la journée ?</h2>
+<p>La lumière du soleil accroît l’ionisation pendant la journée. Après la tombée de la nuit, électrons et ions se recombinent et la densité électronique diminue, mais l’ionosphère ne disparaît pas. Le tableau décrit une tendance générale, pas un calendrier permettant de prédire la précision du GPS en un lieu donné.</p>
+<div aria-label="Variations quotidiennes de l’ionosphère" class="table-wrapper" role="region" tabindex="0">
+<table>
+<caption>Variations quotidiennes typiques et leurs effets possibles sur le GPS</caption>
+<thead><tr><th scope="col">Heure locale</th><th scope="col">Évolution de l’ionosphère</th><th scope="col">Effet possible sur le GPS</th></tr></thead>
+<tbody>
+<tr><th scope="row">Du matin au début d’après-midi</th><td>Le rayonnement solaire ajoute des électrons libres, et le contenu électronique augmente jusqu’à un pic l’après-midi.</td><td>Le retard non corrigé augmente. Le modèle de correction diffusé par le GPS place le pic quotidien à 14 h, heure locale.</td></tr>
+<tr><th scope="row">Après le coucher du soleil</th><td>L’ionisation globale diminue. Près de l’équateur magnétique, la couche F peut s’élever et devenir instable.</td><td>Des fluctuations rapides du signal peuvent perturber la poursuite, même si le retard moyen diminue.</td></tr>
+<tr><th scope="row">Nuit</th><td>La densité électronique est plus faible ; il reste principalement la couche F.</td><td>Le retard est généralement minimal. Le modèle diffusé utilise une valeur nocturne constante de 5 ns, soit environ 1,5 m.</td></tr>
+<tr><th scope="row">Conditions perturbées, à toute heure</th><td>La météo spatiale peut bouleverser le schéma habituel.</td><td>Les erreurs peuvent atteindre plusieurs dizaines de mètres, et les récepteurs peuvent perdre le verrouillage.</td></tr>
+</tbody>
+</table>
+</div>
+<h3>La remontée de la couche F équatoriale en soirée</h3>
+<p>Le cas le plus net où un changement d’altitude de l’ionosphère dégrade directement le GPS survient juste après le coucher du soleil près de l’équateur magnétique. Là, un bref renforcement du champ électrique dirigé vers l’est, appelé renforcement pré-inversion, soulève la couche F. À cette altitude, les collisions avec le gaz neutre sont plus rares et la base de la couche peut devenir instable. Il en résulte des bulles de plasma : des zones appauvries en électrons qui font scintiller les signaux GPS.</p>
+<p>Les bulles de plasma se forment généralement vers 19 h, heure locale, et sont les plus fréquentes vers 21 h–22 h. <a href="https://angeo.copernicus.org/articles/38/611/2020/">Kepkar et al. (2020) décrivent cette tendance à partir de données satellitaires</a>.</p>
+<p>Il n’existe pas de « meilleure heure pour le GPS » universelle, et la règle selon laquelle le GPS fonctionne toujours mieux la nuit ignore cet effet du soir. <a href="https://www.spaceweather.gov/impacts/space-weather-and-gps-systems">La NOAA indique que les instabilités équatoriales sont les plus fortes juste après le coucher du soleil</a>.</p>
+</section>
+<section aria-labelledby="gps-effects">
+<h2 id="gps-effects">Comment l’ionosphère affecte les mesures GPS</h2>
+<h3>1. Une erreur de distance sans signal faible</h3>
+<p>Le GPS estime les distances à partir du temps de propagation du signal. L’ionosphère retarde le code de mesure de distance, si bien qu’une distance au satellite non corrigée paraît trop longue. Les mesures de phase de la porteuse subissent l’effet inverse au premier ordre : une avance de phase. Un récepteur peut donc afficher un signal fort alors que ses mesures doivent encore être corrigées.</p>
+<p>Le retard de code du premier ordre augmente avec le TEC et diminue avec le carré de la fréquence du signal. C’est cette dépendance à la fréquence qui permet aux récepteurs bifréquence d’estimer et de supprimer l’essentiel de l’effet. <a href="https://gssc.esa.int/navipedia/index.php/Ionospheric_Delay">ESA Navipedia explique le retard ionosphérique</a>.</p>
+<h3>2. Fluctuations rapides et perte de poursuite</h3>
+<p>De petites zones irrégulières de densité électronique peuvent provoquer une <strong>scintillation</strong> : des variations rapides de l’intensité et de la phase du signal. Une forte scintillation peut faire perdre à un récepteur le verrouillage sur un satellite et interrompre les mises à jour de position. Elle est plus fréquente aux basses et hautes latitudes qu’aux latitudes moyennes. <a href="https://www.spaceweather.gov/phenomena/ionospheric-scintillation">Le guide de la NOAA sur la scintillation distingue cette perturbation d’un retard régulier</a>.</p>
+<h3>3. Des trajets plus longs près de l’horizon</h3>
+<p>Un satellite bas sur l’horizon envoie son signal sur un trajet plus long et oblique à travers l’ionosphère. Dans le modèle de correction diffusé, un satellite à 5° au-dessus de l’horizon subit environ trois fois le retard d’un satellite au zénith. La même ionosphère peut donc affecter différemment chaque satellite, et l’erreur de position qui en résulte dépend aussi de leur disposition dans le ciel.</p>
+</section>
+<section aria-labelledby="reduce-errors">
+<h2 id="reduce-errors">Qu’est-ce qui aide à réduire les erreurs GPS ?</h2>
 <ul>
-<li><strong>Multiple Satellite Systems:</strong>L'accès au GPS, au GLONASS et à GALILEO fournit des données de positionnement redondantes, améliorant ainsi la précision lorsque les perturbations ionosphériques affectent les systèmes satellitaires individuels </li>
-<li><strong>LoRa Radio Technology:</strong>La connectivité à portée étendue sur 5 kilomètres garantit que les données de position parviennent au récepteur même lorsque les conditions ionosphériques dégradent la qualité du signal satellite. </li>
-<li><strong>Robust Construction:</strong>La résistance à l'eau, à la poussière et aux chocs garantit un fonctionnement fiable quelles que soient les conditions environnementales </li>
-<li><strong>Extended Battery Life:</strong>Une autonomie de plus de 30 jours avec seulement 12 grammes garantit un suivi continu sans recharge fréquente </li>
+<li><strong>Modèles de correction diffusés.</strong> Les récepteurs GPS monofréquence peuvent appliquer le modèle de Klobuchar, dont les satellites diffusent les coefficients. Il supprime en moyenne environ la moitié de l’erreur de distance ionosphérique (RMS, à l’échelle mondiale) ; une position donnée peut faire mieux ou moins bien. <a href="https://gssc.esa.int/navipedia/index.php/Klobuchar_Ionospheric_Model">L’ESA documente le modèle et ses limites</a>.</li>
+<li><strong>Mesures bifréquence.</strong> Comme le retard dépend de la fréquence, combiner deux fréquences supprime le terme du premier ordre, qui représente plus de 99,9 % de l’effet ionosphérique. Cela n’empêche pas la perte de verrouillage en cas de forte scintillation.</li>
+<li><strong>Davantage de satellites utilisables.</strong> Suivre plusieurs constellations améliore la disponibilité et la géométrie, ce qui aide lorsque certains satellites sont bas ou perdent brièvement le verrouillage. Les signaux de toutes les constellations traversent tout de même l’ionosphère : cela ne remplace donc pas la correction.</li>
+<li><strong>Examinez l’ensemble de l’environnement de réception.</strong> Offrez à l’antenne une vue dégagée du ciel et respectez ses consignes de montage. Les bâtiments, le relief et les réflexions peuvent causer des problèmes sans rapport avec la météo spatiale.</li>
+<li><strong>Vérifiez les conditions pour les travaux de précision.</strong> Consultez les informations de météo spatiale de la NOAA et les indicateurs de qualité de votre récepteur, comme le nombre de satellites utilisés. Une coordonnée d’apparence valide ne montre pas à elle seule qu’elle répond à vos exigences de précision.</li>
 </ul>
-<h2>Atténuer les effets ionosphériques</h2>
-<p>Plusieurs stratégies permettent de minimiser les impacts ionosphériques sur la précision du GPS :</p>
+</section>
+<section aria-labelledby="loko-tracking">
+<h2 id="loko-tracking">Ce que cela signifie pour le suivi avec Loko</h2>
+<p>Un traceur a deux tâches distinctes : calculer une position à partir des signaux satellites, puis vous la transmettre. Le récepteur de Loko suit les satellites GPS, GLONASS, Galileo et BeiDou, ce qui améliore la disponibilité et la géométrie. Loko envoie ensuite la position par une liaison radio LoRa. Cette liaison transmet la position telle qu’elle a été calculée ; elle ne peut ni supprimer une erreur ionosphérique ni rétablir une mesure satellite manquante.</p>
+<p>Près de l’équateur, des interruptions ou des sauts de position occasionnels en soirée peuvent venir de la scintillation plutôt que du traceur ou de la liaison radio. Si une mise à jour manque ou si une position semble fausse, vérifiez à la fois la réception satellite et le trajet radio entre le traceur et le récepteur. Notre <a href="/fr/gps/">guide GPS et LoRa</a> explique les deux liaisons, et les <a href="/fr/specifications/">caractéristiques techniques de Loko</a> indiquent les systèmes satellitaires pris en charge.</p>
+</section>
+<section aria-labelledby="sources" class="article-sources">
+<h2 id="sources">Sources et lectures complémentaires</h2>
 <ul>
-<li>Utilisez des récepteurs GPS multifréquences lorsqu'un positionnement précis est essentiel</li>
-<li>Intégrez plusieurs constellations de satellites (GPS, GLONASS, GALILEO) pour la redondance</li>
-<li>Appliquez des modèles de correction ionosphérique comme Klobuchar ou des algorithmes plus avancés</li>
-<li>Surveiller les prévisions météorologiques spatiales lors de la planification d'activités nécessitant une grande précision GPS</li>
-<li>Évitez de vous fier uniquement aux satellites à basse altitude, qui subissent des retards ionosphériques plus importants</li>
+<li><a href="https://scied.ucar.edu/learning-zone/atmosphere/ionosphere">UCAR Center for Science Education : l’ionosphère</a></li>
+<li><a href="https://www.spaceweather.gov/phenomena/ionosphere">NOAA : ionosphère</a></li>
+<li><a href="https://www.spaceweather.gov/phenomena/total-electron-content">NOAA : contenu électronique total</a></li>
+<li><a href="https://www.spaceweather.gov/impacts/space-weather-and-gps-systems">NOAA : météo spatiale et systèmes GPS</a></li>
+<li><a href="https://www.spaceweather.gov/phenomena/ionospheric-scintillation">NOAA : scintillation ionosphérique</a></li>
+<li><a href="https://gssc.esa.int/navipedia/index.php/Ionospheric_Delay">ESA Navipedia : retard ionosphérique</a></li>
+<li><a href="https://gssc.esa.int/navipedia/index.php/Klobuchar_Ionospheric_Model">ESA Navipedia : modèle ionosphérique de Klobuchar</a></li>
+<li><a href="https://gssc.esa.int/navipedia/index.php/GPS_Space_Segment">ESA Navipedia : segment spatial du GPS</a></li>
+<li><a href="https://angeo.copernicus.org/articles/38/611/2020/">Kepkar et al. (2020) : Occurrence climatology of equatorial plasma bubbles, Annales Geophysicae</a></li>
 </ul>
-<h2>Conclusion</h2>
-<p>Comprendre les effets ionosphériques permet d'optimiser les systèmes de navigation pour des performances fiables malgré les variations atmosphériques. Alors que les changements quotidiens d'altitude dans l'ionosphère créent des défis pour la qualité du signal GPS, les récepteurs modernes utilisent des algorithmes de correction sophistiqués et un suivi multi-constellation pour maintenir un positionnement précis.</p>
-<p>Pour les utilisateurs de systèmes de suivi GPS comme le Loko GPS Tracker, la combinaison de l'intégration multi-satellite et du traitement avancé du signal garantit des données de localisation fiables même lorsque les conditions ionosphériques fluctuent tout au long de la journée. Cette résilience rend la technologie GPS moderne fiable pour des applications allant des loisirs de plein air à la gestion de flotte commerciale.</p>
+</section>
 </div>
 </article>
+<aside aria-labelledby="product-heading" class="product-cta">
+<h2 id="product-heading">Découvrir le suivi GPS Loko</h2>
+<p>Découvrez comment le positionnement par satellite et une liaison radio LoRa directe fonctionnent ensemble.</p>
+<a class="product-cta-link" href="/fr/lora-gps-tracker/">Découvrir le traceur GPS Loko →</a>
+</aside>
+<section aria-labelledby="related-heading" class="related-posts">
+<h2 id="related-heading">À lire aussi</h2>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/fr/how-gps-works/">Comment fonctionne le GPS <span aria-hidden="true">→</span></a>
+<a class="related-post-card" href="/fr/blog/radio-line-of-sight/">Qu’est-ce qui affecte la ligne de visée radio ? <span aria-hidden="true">→</span></a>
+<a class="related-post-card" href="/fr/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/">GPS, GLONASS et Galileo <span aria-hidden="true">→</span></a>
+</div>
+</section>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/fr/">nolilab</a></li><li><a href="/fr/accessories/">Accessories</a></li><li><a href="/fr/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/fr/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/fr/battery-life/">Battery Life</a></li><li><a href="/fr/blog/">Blog</a></li><li><a href="/fr/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/fr/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/fr/chirpstack/">ChirpStack</a></li><li><a href="/fr/contact/">Contact</a></li><li><a href="/fr/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/fr/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/fr/farms/">Farm GPS</a></li><li><a href="/fr/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/fr/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/fr/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/fr/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/fr/gps/">GPS & LoRa</a></li><li><a href="/fr/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/fr/hiking/">Hiking GPS</a></li><li><a href="/fr/how-gps-works/">How GPS Works</a></li><li><a href="/fr/hunting-dogs/">Hunting Dogs</a></li><li><a href="/fr/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/fr/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/fr/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/fr/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/fr/lorawan/">LoRaWAN</a></li><li><a href="/fr/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/fr/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/fr/open-source/">Open Source</a></li><li><a href="/fr/privacy/">Privacy</a></li><li><a href="/fr/search-rescue/">Search & Rescue</a></li><li><a href="/fr/setup-guides/">Setup</a></li><li><a href="/fr/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/fr/software/">Software</a></li><li><a href="/fr/specifications/">Specs</a></li><li><a href="/fr/tractive-alternative/">Tractive Alternative</a></li><li><a href="/fr/uk/">GPS Tracker UK</a></li><li><a href="/fr/uk/farms/">UK Farm GPS</a></li><li><a href="/fr/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/fr/usa/">GPS Tracker USA</a></li><li><a href="/fr/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
-<script>
-    // Mobile Menu Toggle
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const body = document.body;
-
-    if (mobileMenuToggle) {
-      mobileMenuToggle.addEventListener('click', () => {
-        mobileMenuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        body.classList.toggle('menu-open');
-      });
-
-      // Close menu when clicking on a link
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenuToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          body.classList.remove('menu-open');
-        });
-      });
-
-      // Close menu when clicking overlay
-      document.addEventListener('click', (e) => {
-        if (body.classList.contains('menu-open') &&
-            !navLinks.contains(e.target) &&
-            !mobileMenuToggle.contains(e.target)) {
-          mobileMenuToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          body.classList.remove('menu-open');
-        }
-      });
-    }
-  </script>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/fr/">Home</a></li><li><a href="/fr/accessories/">Accessories</a></li><li><a href="/fr/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/fr/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/fr/battery-life/">Battery Life</a></li><li><a href="/fr/blog/">Blog</a></li><li><a href="/fr/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/fr/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/fr/chirpstack/">ChirpStack</a></li><li><a href="/fr/contact/">Contact</a></li><li><a href="/fr/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/fr/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/fr/farms/">Farm GPS</a></li><li><a href="/fr/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/fr/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/fr/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/fr/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/fr/gps/">GPS & LoRa</a></li><li><a href="/fr/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/fr/hiking/">Hiking GPS</a></li><li><a href="/fr/how-gps-works/">How GPS Works</a></li><li><a href="/fr/hunting-dogs/">Hunting Dogs</a></li><li><a href="/fr/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/fr/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/fr/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/fr/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/fr/lorawan/">LoRaWAN</a></li><li><a href="/fr/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/fr/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/fr/open-source/">Open Source</a></li><li><a href="/fr/privacy/">Privacy</a></li><li><a href="/fr/search-rescue/">Search & Rescue</a></li><li><a href="/fr/setup-guides/">Setup</a></li><li><a href="/fr/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/fr/software/">Software</a></li><li><a href="/fr/specifications/">Specs</a></li><li><a href="/fr/tractive-alternative/">Tractive Alternative</a></li><li><a href="/fr/uk/">GPS Tracker UK</a></li><li><a href="/fr/uk/farms/">UK Farm GPS</a></li><li><a href="/fr/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/fr/usa/">GPS Tracker USA</a></li><li><a href="/fr/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>

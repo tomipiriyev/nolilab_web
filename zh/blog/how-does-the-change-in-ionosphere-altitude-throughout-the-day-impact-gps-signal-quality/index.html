@@ -3,20 +3,20 @@
 <html lang="zh">
 <head>
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
-<meta content="GPS 精度不仅仅取决于卫星位置，地球电离层对信号质量也起着至关重要的作用。电离层由 D、E 和 F 层组成，其特点是全天和跨季节的动态高度变化，直接影响 GPS 信号到达地面接收器的方式。" name="description"/>
+<link href="/css/blog-article.css?v=20261003" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>一天中电离层高度的变化如何影响 GPS 信号质量？诺利实验室博客</title>
+<title>电离层的昼夜变化如何影响GPS精度</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;am;p;display=swap" rel="stylesheet"/></noscript>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="探索全天电离层高度变化如何影响 GPS 信号质量和导航精度。" name="description"/>
+<meta content="电离层的高度和电子含量在昼夜间如何变化，又如何影响GPS精度？了解误差有多大，以及哪些方法可以减小误差。" name="description"/>
 <link href="https://www.nolilab.com/zh/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="es" rel="alternate"/>
@@ -25,451 +25,51 @@
 <link href="https://www.nolilab.com/ru/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="ru" rel="alternate"/>
 <link href="https://www.nolilab.com/zh/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" hreflang="x-default" rel="alternate"/>
+<script defer="" src="/js/layout.js?v=20260906"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.nolilab.com/zh/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "博客",
+      "item": "https://www.nolilab.com/zh/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "电离层的昼夜变化如何影响GPS精度",
+      "item": "https://www.nolilab.com/zh/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/"
+    }
+  ]
+}
+</script>
 <meta content="article" property="og:type"/>
-<meta content="一天中电离层高度的变化如何影响 GPS 信号质量？诺利实验室博客" property="og:title"/>
-<meta content="探索全天电离层高度变化如何影响 GPS 信号质量和导航精度。" property="og:description"/>
-<meta content="https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality" property="og:url"/>
+<meta content="zh_CN" property="og:locale"/>
+<meta content="电离层的昼夜变化如何影响GPS精度" property="og:title"/>
+<meta content="电离层的高度和电子含量在昼夜间如何变化，又如何影响GPS精度？了解误差有多大，以及哪些方法可以减小误差。" property="og:description"/>
+<meta content="https://www.nolilab.com/zh/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/ionosphere-impact-gps.webp" property="og:image"/>
-<meta content="nolilab" property="og:site_name"/>
+<meta content="地球大气及与之重叠的电离层示意图" property="og:image:alt"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="一天中电离层高度的变化如何影响 GPS 信号质量？诺利实验室博客" name="twitter:title"/>
-<meta content="探索全天电离层高度变化如何影响 GPS 信号质量和导航精度。" name="twitter:description"/>
-<meta content="https://www.nolilab.com/images/optimized/ionosphere-impact-gps.webp" name="twitter:image"/>
-<style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f6f8fa;
-      --text-primary: #24292e;
-      --text-secondary: #57606a;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --border: #d0d7de;
-      --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-    }
-
-    header {
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-lg);
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 500;
-      font-family: var(--font-mono);
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    article {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: var(--spacing-xl) var(--spacing-md);
-    }
-
-    .article-header {
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-meta {
-      display: flex;
-      gap: var(--spacing-md);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.2;
-    }
-
-    .article-image {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .article-content {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .article-content h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin: var(--spacing-xl) 0 var(--spacing-md);
-      letter-spacing: -0.01em;
-    }
-
-    .article-content h3 {
-      font-size: 1.375rem;
-      font-weight: 600;
-      margin: var(--spacing-lg) 0 var(--spacing-sm);
-    }
-
-    .article-content p {
-      margin-bottom: var(--spacing-md);
-    }
-
-    .article-content ul,
-    .article-content ol {
-      margin: var(--spacing-md) 0;
-      padding-left: var(--spacing-lg);
-    }
-
-    .article-content li {
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .article-content strong {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .article-content code {
-      background: var(--bg-secondary);
-      padding: 0.2em 0.4em;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      font-size: 0.9em;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      margin-bottom: var(--spacing-lg);
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--accent-hover);
-    }
-
-    footer {
-      padding: var(--spacing-xl) 0;
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-sm);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-
-    .footer-logo {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
-
-
-    .language-selector {
-      margin-left: var(--spacing-sm);
-    }
-
-    .language-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.75rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .language-btn:hover {
-      border-color: var(--accent);
-      background: var(--bg-primary);
-    }
-
-    .language-btn i {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .language-btn .fa-chevron-down {
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-    }
-
-    .language-selector:hover .fa-chevron-down {
-      transform: rotate(180deg);
-    }
-
-    .current-lang {
-      font-family: var(--font-mono);
-      font-weight: 600;
-    }
-
-    .language-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      right: 0;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
-      z-index: 1000;
-    }
-
-    .language-selector:hover .language-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .language-option {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .language-option:last-child {
-      border-bottom: none;
-    }
-
-    .language-option:hover {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-
-    .language-option .lang-code {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 0.8rem;
-      min-width: 28px;
-      color: var(--accent);
-    }
-
-    .language-option .lang-name {
-      font-size: 0.875rem;
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: var(--spacing-xs);
-      z-index: 1001;
-      margin-left: auto;
-    }
-
-    .mobile-menu-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--bg-primary);
-        flex-direction: column;
-        gap: 0;
-        padding: 80px var(--spacing-md) var(--spacing-md);
-        box-shadow: var(--shadow-lg);
-        transition: left 0.3s ease;
-        z-index: 1000;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-      }
-
-      .nav-links.active {
-        left: 0;
-      }
-
-      .nav-link {
-        width: 100%;
-        padding: var(--spacing-md);
-        border-bottom: 1px solid var(--border);
-        text-align: left;
-        font-size: 1rem;
-      }
-
-      .language-selector {
-        position: static;
-        margin-left: var(--spacing-sm);
-      }
-
-      .language-dropdown {
-        left: 0;
-        right: auto;
-        min-width: 160px;
-      }
-
-      /* Overlay when menu is open */
-      body.menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      .article-title {
-        font-size: 2rem;
-      }
-
-      .article-content {
-        font-size: 1rem;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "全天电离层高度的变化如何影响 GPS 信号质量？",
-  "description": "GPS 精度不仅仅取决于卫星位置，地球电离层对信号质量也起着至关重要的作用。电离层由 D、E 和 F 层组成，其特点是全天和跨季节的动态高度变化，直接影响 GPS 信号到达地面接收器的方式。",
+  "headline": "电离层的昼夜变化如何影响GPS精度",
+  "description": "电离层的高度和电子含量在昼夜间如何变化，又如何影响GPS精度？了解误差有多大，以及哪些方法可以减小误差。",
   "url": "https://www.nolilab.com/zh/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/",
   "datePublished": "2023-11-21",
-  "dateModified": "2023-11-21",
+  "dateModified": "2026-10-03",
+  "inLanguage": "zh",
   "author": {
     "@type": "Person",
     "@id": "https://www.nolilab.com/author/tamleykha-piriyev/#person",
@@ -482,142 +82,152 @@
   },
   "publisher": {
     "@type": "Organization",
-    "name": "nolilab",
-    "url": "https://www.nolilab.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.nolilab.com/images/nolilab-logo-2.png"
-    }
+    "name": "NoliLab",
+    "url": "https://www.nolilab.com/"
   },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https://www.nolilab.com/images/loko-gps-system-diagram.webp"
-  },
+  "image": "https://www.nolilab.com/images/optimized/ionosphere-impact-gps.webp",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://www.nolilab.com/zh/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/"
   },
-  "inLanguage": "zh",
   "@id": "https://www.nolilab.com/zh/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/#article",
   "translationOfWork": {
     "@id": "https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/#article"
   }
-}</script>
-<style>
-  @font-face {
-    font-family: 'Inter-fallback';
-    src: local('Arial');
-    ascent-override: 90.44%;
-    descent-override: 22.52%;
-    line-gap-override: 0%;
-    size-adjust: 107.64%;
-  }
-</style>
-<script defer="" src="/js/layout.js?v=20260906"></script>
+}
+</script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳转到文章</a>
 <div id="site-header"></div>
-<main>
-<article>
-<a class="back-link" href="/zh/blog/">
-<svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 返回博客
-    </a>
+<main class="blog-article" id="main-content">
+<a class="back-link" href="/zh/blog/">← 返回博客</a>
+<article aria-labelledby="article-title">
 <div class="article-header">
+<p class="article-eyebrow">GPS详解</p>
+<h1 id="article-title">电离层的昼夜变化如何影响GPS精度</h1>
+<p class="article-deck">电离层的各层在昼夜之间不断变化。对GPS而言，最重要的是信号穿过多少自由电子，以及这些电子分布得有多不均匀。</p>
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> November 21, 2023</span>
-<span><i class="far fa-user"></i> <a class="author-link" href="/zh/author/tamleykha-piriyev/" rel="author">nolilab</a></span>
+<span>作者 <a href="/zh/author/tamleykha-piriyev/" rel="author">Tamleykha Piriyev</a></span>
+<span>发布于 <time datetime="2023-11-21">2023年11月21日</time></span>
+<span>更新于 <time datetime="2026-10-03">2026年10月3日</time></span>
 </div>
-<h1 class="article-title">全天电离层高度的变化如何影响 GPS 信号质量？</h1>
 </div>
-<img alt="Earth's Ionosphere and Atmosphere" class="article-image" src="/images/optimized/ionosphere-impact-gps.webp"/>
+<div class="article-summary">
+<p><strong>简要回答：</strong>电离层大约位于地面以上60至500 km。白天有D、E、F三个区域；夜间D区消失，E区减弱，主要只剩F层。这些变化会改变GPS信号到达所需的时间。误差大小主要取决于信号路径上的总电子含量：在GPS L1频率上，校正前从不到1米到数十米不等。夜间延迟通常较小，但在赤道附近，F层会在日落后抬升，并可能破碎成等离子体泡，干扰接收。</p>
+</div>
+<nav aria-label="本页内容" class="article-toc">
+<p class="toc-title">本页内容</p>
+<ol>
+<li><a href="#altitude-and-electrons">电离层高度在昼夜间如何变化</a></li>
+<li><a href="#daily-cycle">一天之中会发生哪些变化？</a></li>
+<li><a href="#gps-effects">电离层如何影响GPS测量</a></li>
+<li><a href="#reduce-errors">哪些方法有助于减小GPS误差？</a></li>
+<li><a href="#loko-tracking">这对Loko追踪意味着什么</a></li>
+<li><a href="#sources">来源与延伸阅读</a></li>
+</ol>
+</nav>
+<figure class="article-figure">
+<img alt="地球大气分层示意图，电离层与其中多个层重叠" class="article-image" decoding="async" height="1158" src="/images/optimized/ionosphere-impact-gps.webp" width="1760"/>
+<figcaption>电离层与大气的其他区域相互重叠。其电子密度和边界都在变化；此图仅为概览，而非当前状况的地图。</figcaption>
+</figure>
 <div class="article-content">
-<h2>介绍</h2>
-<p>GPS 精度不仅仅取决于卫星位置，地球电离层对信号质量也起着至关重要的作用。电离层由 D、E 和 F 层组成，其特点是全天和跨季节的动态高度变化，直接影响 GPS 信号到达地面接收器的方式。</p>
-<h2>电离层：简要概述</h2>
-<p>电离层海拔约 48 公里至 965 公里，包含太阳辐射产生的带电粒子。该大气区域由三个主要层组成，每个层都有独特的特征：</p>
-<h3>D层</h3>
-<p>最低的电离层吸收中频和低频无线电波。该层主要存在于白天，并在夜间太阳辐射减少时消散。</p>
-<h3>E层</h3>
-<p>中间层反射高达 50 MHz 的无线电波，特别是在强烈的偶发事件期间。与 D 层一样，E 层的密度在白天和夜间也有显着变化。</p>
-<h3>F层</h3>
-<p>GPS 的最高和最重要的层包含最大的电子密度，并且对于天波无线电传播至关重要。在白天，它分裂成 F1 和 F2 子层；到了晚上，这些层合并成一个 F 层。</p>
-<h2>GPS 信号和电离层</h2>
-<p>GPS 卫星以特定频率（1575.42 MHz 的 L1 和 1227.60 MHz 的 L2）传输信号，这些信号在到达地面接收器之前必须穿过电离层。当信号穿过电离粒子时，它们会经历折射（弯曲和减慢），从而引入定位误差。</p>
-<p>人们已经开发了各种模型来补偿电离层对 GPS 信号的影响。 Klobuchar 模型在大多数民用 GPS 接收器中实现，利用 GPS 导航消息中广播的参数，可将电离层误差减少约 50-60%。</p>
-<h2>影响电离层高度的因素</h2>
-<p>三个主要影响不断改变电离层条件：</p>
-<h3>1. 太阳活动</h3>
-<p>太阳辐射的波动极大地改变了电子密度和层高度。在太阳活动高峰（太阳活动极大期）期间，电离层变得更加动荡，电子密度更高，导致 GPS 信号延迟更大。相反，太阳极小期的电离层条件更加稳定、可预测。</p>
-<h3>2. 地磁活动</h3>
-<p>Earth's magnetic field interactions with charged solar particles cause structural changes in the ionosphere. Geomagnetic storms can trigger sudden ionospheric disturbances, temporarily degrading GPS accuracy across large geographic regions.</p>
-<h3>3. 破坏性现象</h3>
-<p>突然的电离层扰动和极冠吸收事件会产生显着的信号干扰。这些现象通常由太阳耀斑或日冕物质抛射引发，可能导致电离层密度在几分钟到几小时内迅速变化。</p>
-<h2>对 GPS 信号质量的影响</h2>
-<p>电离层高度的变化给 GPS 精度带来了多项挑战：</p>
-<h3>可变的信号质量</h3>
-<p>由于电离层密度全天波动，GPS 信号会出现不同程度的延迟。最大延迟通常发生在中午太阳辐射达到峰值时，而夜间条件通常会提供更稳定的信号传播。</p>
-<h3>频率相关折射</h3>
-<p>不同的 GPS 频率会经历不同量的电离层延迟。双频接收器利用这种效应来计算和消除大多数电离层误差，实现比单频接收器明显更好的精度。</p>
-<h3>与海拔相关的误差</h3>
-<p>卫星仰角影响通过电离层的信号路径长度。来自低空卫星的信号比来自高空卫星的信号穿过更多的电离层，经历更大的延迟。</p>
-<h2>Loko GPS 跟踪器解决方案</h2>
-<p>Loko 等现代 GPS 跟踪器通过多系统集成来补偿电离层效应：</p>
+<section aria-labelledby="altitude-and-electrons">
+<h2 id="altitude-and-electrons">电离层高度在昼夜间如何变化</h2>
+<p>电离层是高层大气的一部分，太阳辐射在这里把电子从原子中剥离出来，留下自由电子和离子。它始于地面以上约60至70 km，可延伸到约500 km。<a href="https://scied.ucar.edu/learning-zone/atmosphere/ionosphere">UCAR的电离层指南介绍了各个分层</a>。</p>
+<div aria-label="昼夜电离层区域" class="table-wrapper" role="region" tabindex="0">
+<table>
+<caption>各电离层区域的大致高度</caption>
+<thead><tr><th scope="col">区域</th><th scope="col">大致高度</th><th scope="col">白天</th><th scope="col">夜间</th></tr></thead>
+<tbody>
+<tr><th scope="row">D</th><td>60–90 km</td><td>存在</td><td>消失</td></tr>
+<tr><th scope="row">E</th><td>90–150 km</td><td>存在</td><td>大幅减弱</td></tr>
+<tr><th scope="row">F</th><td>150–500 km</td><td>常分为F1层和F2层</td><td>只剩单一F层</td></tr>
+</tbody>
+</table>
+</div>
+<p>日落后，随着较低区域逐渐消退，剩余的电离位于更高处，主要集中在F层。各区域边界随纬度、季节和太阳活动而变化，因此这些数字只是典型范围，并非固定界限。</p>
+<h3>为什么仅凭高度无法决定GPS误差</h3>
+<p>GPS卫星在约20,200 km的高度运行，因此每个GPS信号都会穿过整个电离层。层高改变的是几何关系：倾斜的信号在何处穿过最稠密的部分，以及在其中经过的路径有多长。层更高并不必然意味着误差更大。</p>
+<p>更有用的指标是<strong>总电子含量（TEC）</strong>：即沿信号路径、横截面为1平方米的柱体中所含的电子数。其单位为TEC单位；1 TECU等于每平方米10¹⁶个电子。垂直TEC可从几个TECU到数百个TECU不等，取决于当地时间、纬度、季节、太阳活动和地磁条件。<a href="https://www.spaceweather.gov/phenomena/total-electron-content">NOAA的TEC概述解释了这些因素</a>。</p>
+<p>在GPS L1频率（1575.42 MHz）上，每个TECU会增加约0.16米的延迟。因此，仅垂直路径在校正前就可能带来从不到1米到数十米的测距误差。</p>
+</section>
+<section aria-labelledby="daily-cycle">
+<h2 id="daily-cycle">一天之中会发生哪些变化？</h2>
+<p>白天，阳光使电离不断增强。天黑后，电子与离子复合，电子密度下降，但电离层并不会消失。下表描述的是一般规律，而不是预测某地GPS精度的时间表。</p>
+<div aria-label="电离层的日变化" class="table-wrapper" role="region" tabindex="0">
+<table>
+<caption>典型的日变化及其可能的GPS影响</caption>
+<thead><tr><th scope="col">当地时间</th><th scope="col">电离层变化</th><th scope="col">可能的GPS影响</th></tr></thead>
+<tbody>
+<tr><th scope="row">清晨至午后</th><td>太阳辐射增加自由电子，电子含量逐渐升高，在午后达到峰值。</td><td>未经校正的延迟增大。GPS广播校正模型将每日峰值设在当地时间14:00。</td></tr>
+<tr><th scope="row">日落后</th><td>整体电离减弱。在磁赤道附近，F层可能抬升并变得不稳定。</td><td>即使平均延迟下降，信号的快速波动也可能中断跟踪。</td></tr>
+<tr><th scope="row">夜间</th><td>电子密度较低，主要剩下F层。</td><td>延迟通常最小。广播校正模型采用恒定的夜间值5 ns，约1.5米。</td></tr>
+<tr><th scope="row">扰动条件（任何时间）</th><td>空间天气可能打破通常的规律。</td><td>误差可能增至数十米，接收机也可能失锁。</td></tr>
+</tbody>
+</table>
+</div>
+<h3>赤道F层的傍晚抬升</h3>
+<p>电离层高度变化直接降低GPS性能的最明显例子，出现在磁赤道附近的日落之后。在那里，向东电场的短暂增强（称为“反转前增强”）会把F层抬升得更高。在这一高度，与中性气体的碰撞较少，F层底部可能变得不稳定，结果形成等离子体泡：这些电子密度降低的区域会使GPS信号产生闪烁。</p>
+<p>等离子体泡通常在当地时间19:00左右开始形成，在21:00至22:00前后最为频繁。<a href="https://angeo.copernicus.org/articles/38/611/2020/">Kepkar等人（2020）基于卫星数据描述了这一规律</a>。</p>
+<p>并不存在普遍适用的“最佳GPS时段”，而“夜间GPS总是更好”的简单规则会忽略这种傍晚效应。<a href="https://www.spaceweather.gov/impacts/space-weather-and-gps-systems">NOAA指出，赤道不稳定性在日落后不久最为严重</a>。</p>
+</section>
+<section aria-labelledby="gps-effects">
+<h2 id="gps-effects">电离层如何影响GPS测量</h2>
+<h3>1. 信号不弱也会出现测距误差</h3>
+<p>GPS根据信号传播时间估算距离。电离层会延迟测距码，使未经校正的卫星距离显得偏长。载波相位测量则受到一阶效应相反的影响，即相位超前。因此，接收机可能显示信号很强，但其测量值仍需要校正。</p>
+<p>一阶码延迟随TEC增大而增大，并与信号频率的平方成反比。正是这种频率依赖性，使双频接收机能够估算并消除大部分影响。<a href="https://gssc.esa.int/navipedia/index.php/Ionospheric_Delay">ESA Navipedia解释了电离层延迟</a>。</p>
+<h3>2. 快速波动与失锁</h3>
+<p>电子密度中细小而不均匀的斑块会造成<strong>闪烁</strong>：信号强度和相位的快速变化。强烈的闪烁可能使接收机对卫星失锁，并中断位置更新。闪烁在低纬度和高纬度地区比在中纬度地区更常见。<a href="https://www.spaceweather.gov/phenomena/ionospheric-scintillation">NOAA的闪烁指南将这种干扰与平滑的延迟区分开来</a>。</p>
+<h3>3. 靠近地平线时路径更长</h3>
+<p>靠近地平线的卫星，其信号会以更长的倾斜路径穿过电离层。在广播校正模型中，仰角5°的卫星所受延迟约为天顶卫星的三倍。因此，同一电离层对不同卫星的影响程度不同，最终的定位误差还取决于卫星在天空中的分布。</p>
+</section>
+<section aria-labelledby="reduce-errors">
+<h2 id="reduce-errors">哪些方法有助于减小GPS误差？</h2>
 <ul>
-<li><strong>Multiple Satellite Systems:</strong>对 GPS、GLONASS 和 GALILEO 的访问可提供冗余定位数据，从而在电离层扰动影响单个卫星系统时提高精度 </li>
-<li><strong>LoRa Radio Technology:</strong>即使电离层条件降低了卫星信号质量，超过 5 公里的扩展范围连接也能确保位置数据到达接收器 </li>
-<li><strong>Robust Construction:</strong>防水、防尘、防撞，确保在任何环境条件下都能可靠运行 </li>
-<li><strong>Extended Battery Life:</strong>仅 12 克的电池续航时间可长达 30 天以上，确保连续跟踪，无需频繁充电 </li>
+<li><strong>广播校正模型。</strong>单频GPS接收机可以使用Klobuchar模型，其系数由卫星广播。该模型平均可消除约一半的电离层测距误差（全球RMS）；具体到每次定位，效果可能更好也可能更差。<a href="https://gssc.esa.int/navipedia/index.php/Klobuchar_Ionospheric_Model">ESA介绍了该模型及其局限</a>。</li>
+<li><strong>双频测量。</strong>由于延迟取决于频率，组合两个频率即可消除一阶项，而一阶项占电离层效应的99.9%以上。但它无法防止强闪烁期间的失锁。</li>
+<li><strong>更多可用卫星。</strong>跟踪多个卫星系统可以提高可用性并改善几何构型，在部分卫星仰角较低或短暂失锁时很有帮助。但所有系统的信号都要穿过电离层，因此这并不能取代校正。</li>
+<li><strong>检查整个接收环境。</strong>让天线能够清楚地看到天空，并按照安装说明进行安装。建筑物、地形和反射也可能造成与空间天气无关的问题。</li>
+<li><strong>精密作业时检查观测条件。</strong>查看NOAA的空间天气信息以及接收机的质量指标，例如正在使用的卫星数量。看似有效的坐标本身并不能说明它满足您的精度要求。</li>
 </ul>
-<h2>减轻电离层影响</h2>
-<p>多种策略有助于最大限度地减少电离层对 GPS 精度的影响：</p>
+</section>
+<section aria-labelledby="loko-tracking">
+<h2 id="loko-tracking">这对Loko追踪意味着什么</h2>
+<p>追踪器有两项独立的任务：根据卫星信号计算位置，再把位置传送给您。Loko的接收机可跟踪GPS、GLONASS、Galileo和BeiDou卫星，从而提高可用性并改善几何构型。随后，Loko通过LoRa无线电链路发送位置。这条链路只是原样传送计算出的定位结果；它无法消除电离层误差，也无法补回缺失的卫星测量值。</p>
+<p>在赤道附近，傍晚偶尔出现的定位中断或跳点，可能来自电离层闪烁，而不是追踪器或无线电链路的问题。如果某次更新缺失或位置看起来不对，请同时检查卫星接收情况和追踪器到接收器之间的无线电路径。我们的<a href="/zh/gps/">GPS与LoRa指南</a>介绍了这两条链路，<a href="/zh/specifications/">Loko规格页面</a>列出了支持的卫星系统。</p>
+</section>
+<section aria-labelledby="sources" class="article-sources">
+<h2 id="sources">来源与延伸阅读</h2>
 <ul>
-<li>当精确定位至关重要时，使用多频 GPS 接收器</li>
-<li>集成多个卫星星座（GPS、GLONASS、GALILEO）以实现冗余</li>
-<li>应用 Klobuchar 等电离层校正模型或更高级的算法</li>
-<li>在规划需要高 GPS 精度的活动时监控空间天气预报</li>
-<li>避免仅仅依赖低仰角卫星，因为它们会经历更大的电离层延迟</li>
+<li><a href="https://scied.ucar.edu/learning-zone/atmosphere/ionosphere">UCAR Center for Science Education：电离层</a></li>
+<li><a href="https://www.spaceweather.gov/phenomena/ionosphere">NOAA：电离层</a></li>
+<li><a href="https://www.spaceweather.gov/phenomena/total-electron-content">NOAA：总电子含量</a></li>
+<li><a href="https://www.spaceweather.gov/impacts/space-weather-and-gps-systems">NOAA：空间天气与GPS系统</a></li>
+<li><a href="https://www.spaceweather.gov/phenomena/ionospheric-scintillation">NOAA：电离层闪烁</a></li>
+<li><a href="https://gssc.esa.int/navipedia/index.php/Ionospheric_Delay">ESA Navipedia：电离层延迟</a></li>
+<li><a href="https://gssc.esa.int/navipedia/index.php/Klobuchar_Ionospheric_Model">ESA Navipedia：Klobuchar电离层模型</a></li>
+<li><a href="https://gssc.esa.int/navipedia/index.php/GPS_Space_Segment">ESA Navipedia：GPS空间段</a></li>
+<li><a href="https://angeo.copernicus.org/articles/38/611/2020/">Kepkar et al. (2020): Occurrence climatology of equatorial plasma bubbles, Annales Geophysicae</a></li>
 </ul>
-<h2>结论</h2>
-<p>了解电离层效应可以优化导航系统，从而在大气变化的情况下实现可靠​​的性能。虽然电离层每天的高度变化给 GPS 信号质量带来了挑战，但现代接收器采用复杂的校正算法和多星座跟踪来保持准确的定位。</p>
-<p>对于 Loko GPS 跟踪器等 GPS 跟踪系统的用户来说，即使电离层条件全天波动，多卫星集成和先进信号处理的结合也能确保可靠的位置数据。这种弹性使得现代 GPS 技术能够可靠地应用于从户外休闲到商业车队管理的各种应用。</p>
+</section>
 </div>
 </article>
+<aside aria-labelledby="product-heading" class="product-cta">
+<h2 id="product-heading">了解Loko GPS追踪</h2>
+<p>了解卫星定位与直连LoRa无线电链路如何协同工作。</p>
+<a class="product-cta-link" href="/zh/lora-gps-tracker/">了解Loko GPS追踪器 →</a>
+</aside>
+<section aria-labelledby="related-heading" class="related-posts">
+<h2 id="related-heading">相关阅读</h2>
+<div class="related-posts-grid">
+<a class="related-post-card" href="/zh/how-gps-works/">GPS的工作原理 <span aria-hidden="true">→</span></a>
+<a class="related-post-card" href="/zh/blog/radio-line-of-sight/">哪些因素影响无线电视距？ <span aria-hidden="true">→</span></a>
+<a class="related-post-card" href="/zh/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/">GPS、GLONASS与Galileo <span aria-hidden="true">→</span></a>
+</div>
+</section>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/zh/">nolilab</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
-<script>
-    // Mobile Menu Toggle
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const body = document.body;
-
-    if (mobileMenuToggle) {
-      mobileMenuToggle.addEventListener('click', () => {
-        mobileMenuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        body.classList.toggle('menu-open');
-      });
-
-      // Close menu when clicking on a link
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenuToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          body.classList.remove('menu-open');
-        });
-      });
-
-      // Close menu when clicking overlay
-      document.addEventListener('click', (e) => {
-        if (body.classList.contains('menu-open') &&
-            !navLinks.contains(e.target) &&
-            !mobileMenuToggle.contains(e.target)) {
-          mobileMenuToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          body.classList.remove('menu-open');
-        }
-      });
-    }
-  </script>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/zh/">Home</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>
