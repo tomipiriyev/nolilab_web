@@ -4,6 +4,13 @@
 <head>
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <link href="/css/blog-article.css?v=20261004" rel="stylesheet"/>
+<style>
+@media (max-width: 600px) {
+  .table-wrapper .distance-table { min-width: 0; table-layout: fixed; }
+  .distance-table th, .distance-table td { padding: .75rem .6rem; }
+  .table-wrapper .distance-table tbody th { width: auto; }
+}
+</style>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Comment la distance réduit la portée d’un signal sans fil</title>
@@ -16,7 +23,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Comprendre comment la loi du carré inverse affecte la portée du signal sans fil et ce que cela signifie pour les systèmes de suivi GPS." name="description"/>
+<meta content="Découvrez comment la distance affaiblit les signaux sans fil, pourquoi la portée réelle varie et comment l’emplacement de l’antenne et les réglages LoRa influent sur la fiabilité d’un traceur GPS." name="description"/>
 <link href="https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-distance-affects-wireless-signal-range/" hreflang="es" rel="alternate"/>
@@ -33,93 +40,217 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Maison",
-      "item": "https://www.nolilab.com"
+      "name": "Accueil",
+      "item": "https://www.nolilab.com/fr/"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Blogue",
-      "item": "https://www.nolilab.com/blog/"
+      "name": "Blog",
+      "item": "https://www.nolilab.com/fr/blog/"
     },
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Comment la distance affecte la portée du signal sans fil",
-      "item": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/"
+      "name": "Comment la distance réduit la portée d’un signal sans fil",
+      "item": "https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/"
     }
-  ]
+  ],
+  "inLanguage": "fr"
+}</script>
+<meta content="article" property="og:type"/><meta content="fr_FR" property="og:locale"/>
+<meta content="Comment la distance réduit la portée d’un signal sans fil" property="og:title"/>
+<meta content="Découvrez comment la distance affaiblit les signaux sans fil, pourquoi la portée réelle varie et comment l’emplacement de l’antenne et les réglages LoRa influent sur la fiabilité d’un traceur GPS." property="og:description"/>
+<meta content="https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" property="og:image"/>
+<meta content="1536" property="og:image:width"/>
+<meta content="1024" property="og:image:height"/>
+<meta content="Fronts d’onde radio conceptuels traversant une vallée vers un récepteur éloigné" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Comment la distance réduit la portée d’un signal sans fil" name="twitter:title"/>
+<meta content="Découvrez comment la distance affaiblit les signaux sans fil, pourquoi la portée réelle varie et comment l’emplacement de l’antenne et les réglages LoRa influent sur la fiabilité d’un traceur GPS." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" name="twitter:image"/>
+<meta content="Fronts d’onde radio conceptuels traversant une vallée vers un récepteur éloigné" name="twitter:image:alt"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Comment la distance réduit la portée d’un signal sans fil",
+  "description": "Découvrez comment la distance affaiblit les signaux sans fil, pourquoi la portée réelle varie et comment l’emplacement de l’antenne et les réglages LoRa influent sur la fiabilité d’un traceur GPS.",
+  "url": "https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/",
+  "datePublished": "2026-02-07",
+  "dateModified": "2026-10-04",
+  "inLanguage": "fr",
+  "author": {
+    "@type": "Person",
+    "@id": "https://www.nolilab.com/author/tamleykha-piriyev/#person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://www.nolilab.com/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp",
+    "width": 1536,
+    "height": 1024
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/"
+  },
+  "@id": "https://www.nolilab.com/fr/blog/how-distance-affects-wireless-signal-range/#article",
+  "translationOfWork": {
+    "@id": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/#article"
+  }
 }</script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Aller à l’article</a>
 <div id="site-header"></div>
-<main class="blog-article">
+<main class="blog-article" id="main-content">
 <article>
 <a class="back-link" href="/fr/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Retour au blog
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> 7 février 2026</span>
+<span>Publié le <time datetime="2026-02-07">7 février 2026</time></span>
+<span>Mis à jour le <time datetime="2026-10-04">4 octobre 2026</time></span>
 <span><i class="far fa-user"></i> Tamleykha Piriyev</span>
 </div>
-<h1 class="article-title">Comment la distance affecte la portée du signal sans fil</h1>
+<h1 class="article-title">Comment la distance réduit la portée d’un signal sans fil</h1>
+<p class="article-deck">Un émetteur plus puissant n’est qu’une partie de l’histoire. Voici comment la distance, le terrain et la sensibilité du récepteur déterminent la fiabilité d’une liaison radio.</p>
 </div>
-<img alt="Radio Signal Range Diagram" class="article-image" height="512" src="/images/radio-wave.webp" width="512"/>
+<figure class="article-figure">
+<img alt="Fronts d’onde radio verts se propageant d’une antenne vers un récepteur éloigné à travers une vallée dégagée" class="article-image" fetchpriority="high" height="1024" sizes="(max-width: 600px) calc(100vw - 2rem), (max-width: 848px) calc(100vw - 3rem), 800px" src="/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" srcset="/images/blog-covers/how-distance-affects-wireless-signal-range-v2-thumb.webp 600w, /images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp 1536w" width="1536"/>
+<figcaption>L’énergie radio se disperse en se propageant. Cette illustration conceptuelle montre un trajet dégagé entre deux radios ; les fronts d’onde ne sont pas visibles dans la réalité et ne sont pas à l’échelle.</figcaption>
+</figure>
 <div class="article-content">
-<h2>Introduction</h2>
-<p>L'article examine comment les ondes radio se propagent dans les systèmes sans fil, en soulignant que « la loi du carré inverse » limite fondamentalement la portée de communication à mesure que la distance augmente.</p>
-<h2>Comment les signaux radio se propagent</h2>
-<p>Les émetteurs rayonnent de l'énergie de manière omnidirectionnelle, créant un front d'onde sphérique en expansion plutôt que des faisceaux focalisés. La distribution du signal augmente de façon quadratique tandis que la distance augmente de manière linéaire – la base mathématique des limitations de portée.</p>
-<h2>La loi du carré inverse</h2>
-<p>La formule de la surface de la sphère : <strong>A = 4πr²</strong></p>
-<p>Principe clé : lorsque la distance double, la zone de distribution du signal quadruple, réduisant ainsi la densité de puissance de 75 %. L'article note : « doubler la distance réduit la force du signal reçu d'un quart ».</p>
-<h2>Implications sur le système réel</h2>
-<p><strong>Trois facteurs critiques :</strong></p>
+<div class="article-summary"><p><strong>En bref :</strong> En espace libre idéal, doubler la distance laisse au récepteur un quart de la puissance reçue, soit une baisse d’environ 6 dB. En extérieur, les collines, la végétation, l’emplacement de l’antenne et les interférences peuvent compter autant que la distance elle-même. Près du sol, même la courbure de la Terre limite la portée : deux antennes à 0,5 m et 1,5 m de hauteur ont un horizon radio d’environ 8 km.</p></div>
+<p>Un traceur peut envoyer des mises à jour régulières à travers un champ dégagé, puis les perdre derrière une crête voisine. Cela ne signifie pas que sa portée nominale a soudain changé. Cela signifie que le trajet radio a changé. Pour comprendre la portée utile, il faut considérer à la fois la façon dont un signal se propage et la capacité du récepteur à le décoder encore.</p>
+<nav aria-label="Sur cette page" class="article-toc">
+<p class="toc-title">Sur cette page</p>
 <ol>
-<li><strong>Mise à l'échelle de la plage non linéaire</strong> — Quadrupler la puissance d'émission ne fait que doubler la portée effective (espace libre théorique)</li>
-<li><strong>Importance de la sensibilité du récepteur</strong> — Les améliorations du bruit de fond surpassent souvent les augmentations de puissance</li>
-<li><strong>Conception de l'antenne</strong> — Les antennes directives concentrent l'énergie, compensant ainsi les pertes par propagation</li>
+<li><a href="#distance-and-power">Que se passe-t-il quand la distance double ?</a></li>
+<li><a href="#link-margin">Pourquoi les liaisons deviennent peu fiables</a></li>
+<li><a href="#terrain-and-antennas">Terrain et emplacement des antennes</a></li>
+<li><a href="#lora-and-gps">Ce que cela signifie pour les traceurs GPS LoRa</a></li>
+<li><a href="#field-checks">Vérifier la portée sur le terrain</a></li>
 </ol>
-<h2>Pertes environnementales</h2>
-<p>Les déploiements dans le monde réel subissent une dégradation supplémentaire due aux obstructions, aux évanouissements par trajets multiples, à l'absorption atmosphérique, aux inefficacités des antennes et aux inadéquations de polarisation, dépassant souvent les prévisions théoriques.</p>
-<h2>Applications pratiques (UAV, IoT, Traceurs)</h2>
+</nav>
+<h2 id="distance-and-power">Que se passe-t-il quand la distance double ?</h2>
+<p>Imaginez une antenne idéale qui rayonne également dans toutes les directions. Sa puissance se répartit sur une sphère de surface <strong>4πr²</strong>. À deux fois cette distance, la même puissance couvre une surface quatre fois plus grande. Une antenne de réception en capte donc moins.</p>
+<p>Cette loi en inverse du carré décrit la propagation en espace libre à fréquence, puissance d’émission et gains d’antenne constants, hors du champ proche des antennes. Les antennes réelles ont des diagrammes de rayonnement directionnels ; la sphère est un modèle utile, et non l’affirmation que toute antenne rayonne également dans toutes les directions. Le modèle de référence est décrit dans la recommandation <a href="https://www.itu.int/rec/R-REC-P.525-5-202411-I/en">ITU-R P.525</a>.</p>
+<div aria-label="Comparaison de la distance et de la puissance reçue" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>Exemple calculé : puissance reçue par rapport à une liaison de 100 m en espace libre</caption>
+<thead><tr><th scope="col">Distance</th><th scope="col">Puissance relative</th><th scope="col">Variation de puissance</th></tr></thead>
+<tbody>
+<tr><th scope="row">100 m</th><td>100 %</td><td>0 dB</td></tr>
+<tr><th scope="row">200 m</th><td>25 %</td><td>−6 dB</td></tr>
+<tr><th scope="row">400 m</th><td>6,25 %</td><td>−12 dB</td></tr>
+<tr><th scope="row">800 m</th><td>1,56 %</td><td>−18 dB</td></tr>
+</tbody>
+</table>
+</div>
+<p>Ce sont des valeurs relatives, arrondies par souci de clarté, et non des performances mesurées d’un traceur. Elles n’indiquent pas où la réception s’arrêtera.</p>
+<h2 id="link-margin">Pourquoi un signal plus faible finit par faire manquer des mises à jour</h2>
+<p>Un récepteur a besoin d’un signal de qualité suffisante pour décoder un message. Sa <strong>sensibilité</strong> est la puissance reçue minimale spécifiée pour des réglages radio donnés et un taux d’erreur défini. L’écart entre la puissance reçue et ce seuil est la <strong>marge de liaison</strong>.</p>
+<p>Pour un récepteur hypothétique dont le seuil de sensibilité est de −120 dBm, un signal de −100 dBm dispose de 20 dB de marge. Un signal de −118 dBm n’en a que 2 dB. Les deux peuvent fonctionner lors d’un test calme et stable, mais le second n’a guère de réserve pour une perte supplémentaire lorsque le traceur bouge ou qu’un obstacle entre dans le trajet.</p>
+<p>C’est pourquoi la portée utile se juge mieux à la régularité de la réception des messages qu’au point le plus éloigné où un seul paquet est arrivé. Les interférences peuvent aussi empêcher le décodage même lorsque la puissance reçue semble suffisante.</p>
+<p>Augmenter la puissance d’émission peut aider, mais les gains s’amenuisent. Toutes choses égales par ailleurs, doubler la portée en espace libre exige environ quatre fois plus de puissance émise (6 dB). Sans visibilité directe dégagée, Digi estime le coût d’un doublement de portée à 12 dB ou plus, soit environ 16 fois la puissance. Le gain d’antenne et la sensibilité du récepteur entrent aussi dans le bilan de liaison, comme l’explique <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">le guide de Digi sur la portée et le gain d’antenne</a>.</p>
+<h2 id="terrain-and-antennas">Pourquoi la portée réelle diffère des estimations en champ libre</h2>
+<p>Le modèle d’espace libre ne contient ni arbres, ni bâtiments, ni réflexions sur le sol. Une installation réelle peut réunir tout cela :</p>
 <ul>
-<li>Un placement d'antenne plus élevé réduit les pertes d'obstruction</li>
-<li>Des débits de données plus faibles améliorent les rapports signal/bruit</li>
-<li>Les technologies à spectre étalé (LoRa) sacrifient la bande passante pour une portée étendue</li>
+<li><strong>Trajets obstrués :</strong> les collines, les murs et la végétation dense peuvent affaiblir une liaison, voire l’interrompre complètement.</li>
+<li><strong>Réflexions :</strong> les signaux qui rebondissent sur le sol ou sur des surfaces proches peuvent s’additionner ou s’annuler. Un petit déplacement peut modifier la réception.</li>
+<li><strong>Montage de l’antenne :</strong> l’orientation, le métal à proximité et le corps qui porte le traceur peuvent modifier l’efficacité avec laquelle son antenne émet et reçoit l’énergie.</li>
 </ul>
-<h3>Conclusion</h3>
-<p>"La distance est l'ennemi des communications radio" détermine fondamentalement les décisions techniques concernant l'optimisation des antennes, la sélection de la modulation et le placement du système.</p>
+<h3>Pourquoi le calcul en espace libre surestime la portée</h3>
+<p>Les caractéristiques de Loko indiquent une puissance d’émission maximale de 22 dBm et une sensibilité de réception de −137 dBm. Cela donne un bilan de liaison d’environ 159 dB avant gains d’antenne. À 868 MHz, l’affaiblissement en espace libre est d’environ 91 dB sur 1 km et de 117 dB sur 20 km. Pris au pied de la lettre, le modèle d’espace libre autoriserait une liaison d’environ 2 400 km.</p>
+<p>Ce chiffre n’est pas une estimation de portée. Il montre quelle part du bilan un trajet réel consomme : réflexions sur le sol, relief, végétation, corps qui porte le traceur et courbure de la Terre.</p>
+<h3>L’horizon radio</h3>
+<p>Sur de longues distances, la courbure de la Terre s’interpose entre deux antennes basses. Une estimation courante de l’horizon radio, qui tient compte de la légère courbure des ondes radio dans la basse atmosphère, est 4,12 × (√h₁ + √h₂) kilomètres, avec les deux hauteurs d’antenne en mètres. Au-delà, le sol bloque le trajet direct et les pertes augmentent fortement.</p>
+<div aria-label="Horizon radio selon la hauteur des antennes" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>Horizon radio calculé sur terrain plat</caption>
+<thead><tr><th scope="col">Hauteur du traceur</th><th scope="col">Hauteur du récepteur</th><th scope="col">Horizon radio</th></tr></thead>
+<tbody>
+<tr><th scope="row">0,5 m</th><td>1,5 m (à la main)</td><td>≈ 8 km</td></tr>
+<tr><th scope="row">0,5 m</th><td>10 m</td><td>≈ 16 km</td></tr>
+<tr><th scope="row">1 m</th><td>15 m</td><td>≈ 20 km</td></tr>
+</tbody>
+</table>
+</div>
+<p>Même sur un terrain parfaitement plat et dégagé, un traceur fixé au collier d’un chien et un récepteur tenu à hauteur de poitrine ne peuvent pas se « voir » au-delà d’environ 8 km. Une liaison de 20 km exige qu’une extrémité soit à environ 15 m au-dessus du terrain, par exemple un récepteur sur une crête ou un mât, et en pratique davantage pour garder le trajet dégagé. Une portée nominale élevée décrit un trajet surélevé et dégagé, pas deux appareils au ras du sol.</p>
+<h3>Dégagement autour du trajet</h3>
+<p>Voir l’autre antenne aide, mais la radio a aussi besoin d’un dégagement autour du trajet direct. Cette région s’appelle la <strong>zone de Fresnel</strong>. Elle est la plus large au milieu du trajet : à 868 MHz, son rayon y est d’environ 9 m sur une liaison de 1 km et d’environ 13 m sur une liaison de 2 km. Une règle empirique courante consiste à garder dégagés au moins 60 % de ce rayon, soit environ 8 m à 2 km. Lorsque les deux antennes ne sont qu’à un ou deux mètres au-dessus d’un sol plat, le sol empiète largement sur cette zone ; c’est pourquoi surélever l’une ou l’autre antenne aide souvent davantage qu’augmenter la puissance. Voir <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">l’explication de Digi sur la visibilité optique et la visibilité radio</a> et notre <a href="/fr/blog/radio-line-of-sight/">guide sur la visibilité radio</a>.</p>
+<p>Une antenne directive peut concentrer la couverture vers un récepteur fixe. Pour un traceur en mouvement, une couverture dans les directions où il se déplace réellement peut être plus utile qu’un faisceau étroit à gain élevé.</p>
+<h2 id="lora-and-gps">Ce que cela signifie pour les traceurs GPS LoRa</h2>
+<p>LoRa n’échappe pas à l’affaiblissement de propagation. Elle utilise des réglages radio capables de décoder des signaux très faibles. À bande passante fixe, augmenter le facteur d’étalement améliore la sensibilité, mais allonge chaque transmission. On échange ainsi du débit et du temps d’émission contre un meilleur bilan de liaison, comme le décrit <a href="https://www.semtech.com/uploads/technology/LoRa/lora-and-lorawan.pdf">la présentation de LoRa et LoRaWAN par Semtech</a>.</p>
+<p>Loko prend en charge les facteurs d’étalement SF7 à SF12 avec une bande passante de 125 ou 250 kHz. À bande passante égale, SF12 peut décoder des signaux environ 12,5 dB plus faibles que SF7. En espace libre, cela représente environ quatre fois la portée ; sur un trajet obstrué, où doubler la portée coûte 12 dB ou plus, c’est plutôt le double. Chaque palier de facteur d’étalement double aussi à peu près la durée d’émission d’un paquet.</p>
+<div aria-label="Temps d’émission LoRa selon le facteur d’étalement" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>Temps d’émission calculé pour un paquet de 20 octets à 125 kHz</caption>
+<thead><tr><th scope="col">Facteur d’étalement</th><th scope="col">Temps d’émission</th></tr></thead>
+<tbody>
+<tr><th scope="row">SF7</th><td>≈ 57 ms</td></tr>
+<tr><th scope="row">SF9</th><td>≈ 185 ms</td></tr>
+<tr><th scope="row">SF12</th><td>≈ 1,3 s</td></tr>
+</tbody>
+</table>
+</div>
+<p>Ces valeurs supposent un taux de codage de 4/5, un préambule de 8 symboles et un en-tête explicite avec CRC. Le paquet de 20 octets est une taille indicative pour un court message de position.</p>
+<p>Les courts messages de coordonnées se prêtent mieux à ce compromis que les gros transferts de données. Un temps d’émission plus long influe aussi sur l’énergie consommée par message et sur l’occupation du canal : le réglage le plus sensible n’est donc pas automatiquement le meilleur choix pour chaque usage. Testez le long de votre itinéraire et utilisez le facteur d’étalement le plus bas qui livre encore les mises à jour de façon fiable à l’intervalle souhaité. La <a href="/fr/lora-gps-tracker/">page du traceur GPS LoRa Loko</a> explique chaque paramètre radio.</p>
+<h3>Une position GPS et une liaison radio sont deux choses distinctes</h3>
+<p>Le récepteur GPS calcule sa position à partir des signaux diffusés par les satellites. Il n’a pas besoin d’être proche de votre récepteur portatif ; <a href="https://www.gps.gov/gps">GPS.gov décrit ce positionnement à sens unique</a>. Une liaison de communication distincte vous transmet ensuite ces coordonnées.</p>
+<p>Dans un système de suivi LoRa direct comme <a href="/fr/lora-gps-tracker/">Loko</a>, la distance et le terrain affectent la liaison entre le traceur et le récepteur. Un traceur peut toujours connaître sa position alors que ses messages ne vous parviennent pas. À l’inverse, une liaison radio fonctionnelle ne garantit pas une position GPS récente sous un ciel masqué.</p>
+<p>Si les mises à jour s’arrêtent, vérifiez l’horodatage de la dernière position reçue. Cette position indique où se trouvait le traceur au moment de la mise à jour, pas forcément où il est maintenant.</p>
+<h2 id="field-checks">Comment vérifier et améliorer la portée sur le terrain</h2>
+<ol>
+<li><strong>Commencez par une référence sur un trajet dégagé.</strong> Testez les deux appareils à proximité l’un de l’autre dans un espace dégagé, avec leurs antennes et réglages habituels. Vérifiez que des messages de position récents arrivent.</li>
+<li><strong>Utilisez un montage réaliste.</strong> Placez le traceur là où il sera réellement porté. Un test avec les deux antennes tenues en hauteur n’est pas représentatif d’un traceur proche du sol.</li>
+<li><strong>Changez de position avant de changer de puissance.</strong> Essayez un emplacement plus dégagé ou surélevez le récepteur. Comparez les résultats à la même distance.</li>
+<li><strong>Enregistrez la réception dans la durée.</strong> Comptez les mises à jour attendues et reçues à chaque point de test. Notez le terrain, l’orientation de l’antenne, les réglages et toute mesure de signal fournie par l’appareil.</li>
+<li><strong>Répétez le long de l’itinéraire prévu.</strong> Incluez les creux, les virages, la végétation et les autres points délicats probables. Choisissez une zone d’utilisation où les mises à jour arrivent de façon fiable, plutôt que de considérer un seul message reçu à longue distance comme une garantie de couverture.</li>
+</ol>
+<p>La distance explique la perte de base. C’est l’ensemble du trajet radio qui détermine si la prochaine mise à jour passe. Pour une installation fiable, accordez à l’emplacement des antennes, au terrain et aux mesures répétées sur le terrain la même attention qu’à la portée annoncée.</p>
 </div>
 </article>
 <div class="product-cta">
-<p class="product-cta-heading">Explorez le traceur Loko GPS</p>
+<p class="product-cta-heading">Découvrir le traceur GPS Loko</p>
 <div class="product-cta-links">
-<a class="product-cta-link primary" href="/fr/lora-gps-tracker/">Voir le traceur Loko GPS</a>
-<a class="product-cta-link" href="/fr/gps/">Guide technologique GPS et LoRa</a>
-<a class="product-cta-link" href="/fr/specifications/">Loko Spécifications</a>
+<a class="product-cta-link primary" href="/fr/lora-gps-tracker/">Voir le traceur GPS Loko</a>
+<a class="product-cta-link" href="/fr/gps/">Guide des technologies GPS et LoRa</a>
+<a class="product-cta-link" href="/fr/specifications/">Caractéristiques de Loko</a>
 </div>
 </div>
 <section class="related-posts">
 <h3 class="related-posts-heading">Articles connexes</h3>
 <div class="related-posts-grid">
 <a class="related-post-card" href="/fr/blog/radio-line-of-sight/">
-<h3>Ligne de visée radio</h3>
+<h3>Visibilité radio</h3>
 <span class="rp-cta">Lire la suite →</span>
 </a>
 <a class="related-post-card" href="/fr/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/">
-<h3>Un guide complet de la radio GPS : fonctionnalités, avantages et applications</h3>
+<h3>Guide complet de la radio GPS : fonctions, avantages et applications</h3>
 <span class="rp-cta">Lire la suite →</span>
 </a>
 <a class="related-post-card" href="/fr/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/">
-<h3>Loko GPS Tracker : exploration des avantages des systèmes satellites GPS, GLONASS et GALILEO</h3>
+<h3>Traceur GPS Loko : les avantages des systèmes satellitaires GPS, GLONASS et Galileo</h3>
 <span class="rp-cta">Lire la suite →</span>
 </a>
 </div>
 </section>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/fr/">nolilab</a></li><li><a href="/fr/accessories/">Accessories</a></li><li><a href="/fr/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/fr/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/fr/battery-life/">Battery Life</a></li><li><a href="/fr/blog/">Blog</a></li><li><a href="/fr/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/fr/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/fr/chirpstack/">ChirpStack</a></li><li><a href="/fr/contact/">Contact</a></li><li><a href="/fr/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/fr/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/fr/farms/">Farm GPS</a></li><li><a href="/fr/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/fr/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/fr/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/fr/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/fr/gps/">GPS & LoRa</a></li><li><a href="/fr/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/fr/hiking/">Hiking GPS</a></li><li><a href="/fr/how-gps-works/">How GPS Works</a></li><li><a href="/fr/hunting-dogs/">Hunting Dogs</a></li><li><a href="/fr/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/fr/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/fr/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/fr/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/fr/lorawan/">LoRaWAN</a></li><li><a href="/fr/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/fr/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/fr/open-source/">Open Source</a></li><li><a href="/fr/privacy/">Privacy</a></li><li><a href="/fr/search-rescue/">Search & Rescue</a></li><li><a href="/fr/setup-guides/">Setup</a></li><li><a href="/fr/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/fr/software/">Software</a></li><li><a href="/fr/specifications/">Specs</a></li><li><a href="/fr/tractive-alternative/">Tractive Alternative</a></li><li><a href="/fr/uk/">GPS Tracker UK</a></li><li><a href="/fr/uk/farms/">UK Farm GPS</a></li><li><a href="/fr/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/fr/usa/">GPS Tracker USA</a></li><li><a href="/fr/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/fr/">Home</a></li><li><a href="/fr/accessories/">Accessories</a></li><li><a href="/fr/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/fr/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/fr/battery-life/">Battery Life</a></li><li><a href="/fr/blog/">Blog</a></li><li><a href="/fr/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/fr/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/fr/chirpstack/">ChirpStack</a></li><li><a href="/fr/contact/">Contact</a></li><li><a href="/fr/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/fr/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/fr/farms/">Farm GPS</a></li><li><a href="/fr/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/fr/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/fr/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/fr/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/fr/gps/">GPS & LoRa</a></li><li><a href="/fr/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/fr/hiking/">Hiking GPS</a></li><li><a href="/fr/how-gps-works/">How GPS Works</a></li><li><a href="/fr/hunting-dogs/">Hunting Dogs</a></li><li><a href="/fr/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/fr/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/fr/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/fr/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/fr/lorawan/">LoRaWAN</a></li><li><a href="/fr/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/fr/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/fr/open-source/">Open Source</a></li><li><a href="/fr/privacy/">Privacy</a></li><li><a href="/fr/search-rescue/">Search & Rescue</a></li><li><a href="/fr/setup-guides/">Setup</a></li><li><a href="/fr/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/fr/software/">Software</a></li><li><a href="/fr/specifications/">Specs</a></li><li><a href="/fr/tractive-alternative/">Tractive Alternative</a></li><li><a href="/fr/uk/">GPS Tracker UK</a></li><li><a href="/fr/uk/farms/">UK Farm GPS</a></li><li><a href="/fr/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/fr/usa/">GPS Tracker USA</a></li><li><a href="/fr/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

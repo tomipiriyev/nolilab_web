@@ -1,0 +1,24 @@
+/* Shared cover sizing for the blog listing and article headers. */
+.blog-post .blog-post-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center;
+}
+img.article-image.blog-cover-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  border-radius: .5rem;
+  margin: 1.5rem auto;
+}
+.blog-cover-wrap {
+  width: calc(100% - 2rem);
+  max-width: 960px;
+  margin: 0 auto 2rem;
+}

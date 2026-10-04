@@ -4,6 +4,13 @@
 <head>
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <link href="/css/blog-article.css?v=20261004" rel="stylesheet"/>
+<style>
+@media (max-width: 600px) {
+  .table-wrapper .distance-table { min-width: 0; table-layout: fixed; }
+  .distance-table th, .distance-table td { padding: .75rem .6rem; }
+  .table-wrapper .distance-table tbody th { width: auto; }
+}
+</style>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Как расстояние влияет на дальность радиосигнала | nolilab</title>
@@ -16,7 +23,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Понимание того, как закон обратных квадратов влияет на дальность беспроводного сигнала и что это означает для систем слежения GPS." name="description"/>
+<meta content="Как расстояние ослабляет радиосигнал, почему реальная дальность отличается от расчётной и как размещение антенны и настройки LoRa влияют на надёжность GPS-трекера." name="description"/>
 <link href="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-distance-affects-wireless-signal-range/" hreflang="es" rel="alternate"/>
@@ -33,93 +40,217 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Дом",
-      "item": "https://www.nolilab.com"
+      "name": "Главная",
+      "item": "https://www.nolilab.com/ru/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Блог",
-      "item": "https://www.nolilab.com/blog/"
+      "item": "https://www.nolilab.com/ru/blog/"
     },
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Как расстояние влияет на диапазон беспроводного сигнала",
-      "item": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/"
+      "name": "Как расстояние влияет на дальность радиосигнала",
+      "item": "https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/"
     }
-  ]
+  ],
+  "inLanguage": "ru"
+}</script>
+<meta content="article" property="og:type"/><meta content="ru_RU" property="og:locale"/>
+<meta content="Как расстояние влияет на дальность радиосигнала" property="og:title"/>
+<meta content="Как расстояние ослабляет радиосигнал, почему реальная дальность отличается от расчётной и как размещение антенны и настройки LoRa влияют на надёжность GPS-трекера." property="og:description"/>
+<meta content="https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" property="og:image"/>
+<meta content="1536" property="og:image:width"/>
+<meta content="1024" property="og:image:height"/>
+<meta content="Концептуальные радиоволны, расходящиеся над долиной к далёкому приёмнику" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Как расстояние влияет на дальность радиосигнала" name="twitter:title"/>
+<meta content="Как расстояние ослабляет радиосигнал, почему реальная дальность отличается от расчётной и как размещение антенны и настройки LoRa влияют на надёжность GPS-трекера." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" name="twitter:image"/>
+<meta content="Концептуальные радиоволны, расходящиеся над долиной к далёкому приёмнику" name="twitter:image:alt"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как расстояние влияет на дальность радиосигнала",
+  "description": "Как расстояние ослабляет радиосигнал, почему реальная дальность отличается от расчётной и как размещение антенны и настройки LoRa влияют на надёжность GPS-трекера.",
+  "url": "https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/",
+  "datePublished": "2026-02-07",
+  "dateModified": "2026-10-04",
+  "inLanguage": "ru",
+  "author": {
+    "@type": "Person",
+    "@id": "https://www.nolilab.com/author/tamleykha-piriyev/#person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://www.nolilab.com/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp",
+    "width": 1536,
+    "height": 1024
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/"
+  },
+  "@id": "https://www.nolilab.com/ru/blog/how-distance-affects-wireless-signal-range/#article",
+  "translationOfWork": {
+    "@id": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/#article"
+  }
 }</script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Перейти к статье</a>
 <div id="site-header"></div>
-<main class="blog-article">
+<main class="blog-article" id="main-content">
 <article>
 <a class="back-link" href="/ru/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Вернуться в блог
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> 7 февраля 2026 г.</span>
-<span><i class="far fa-user"></i> Тамлейха Пириев</span>
+<span>Опубликовано <time datetime="2026-02-07">7 февраля 2026 г.</time></span>
+<span>Обновлено <time datetime="2026-10-04">4 октября 2026 г.</time></span>
+<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
 </div>
-<h1 class="article-title">Как расстояние влияет на диапазон беспроводного сигнала</h1>
+<h1 class="article-title">Как расстояние влияет на дальность радиосигнала</h1>
+<p class="article-deck">Мощный передатчик — лишь часть дела. Разбираемся, как расстояние, рельеф и чувствительность приёмника определяют надёжность радиосвязи.</p>
 </div>
-<img alt="Radio Signal Range Diagram" class="article-image" height="512" src="/images/radio-wave.webp" width="512"/>
+<figure class="article-figure">
+<img alt="Зелёные волновые фронты расходятся от антенны к далёкому приёмнику над открытой долиной" class="article-image" fetchpriority="high" height="1024" sizes="(max-width: 600px) calc(100vw - 2rem), (max-width: 848px) calc(100vw - 3rem), 800px" src="/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" srcset="/images/blog-covers/how-distance-affects-wireless-signal-range-v2-thumb.webp 600w, /images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp 1536w" width="1536"/>
+<figcaption>Энергия радиосигнала рассеивается по мере распространения. Это концептуальная иллюстрация открытой трассы между двумя радиостанциями; волновые фронты в реальности не видны и показаны не в масштабе.</figcaption>
+</figure>
 <div class="article-content">
-<h2>Введение</h2>
-<p>В статье рассматривается, как радиоволны распространяются в беспроводных системах, подчеркивая, что «закон обратных квадратов» существенно ограничивает дальность связи по мере увеличения расстояния.</p>
-<h2>Как распространяются радиосигналы</h2>
-<p>Передатчики излучают энергию во всех направлениях, создавая расширяющийся сферический волновой фронт, а не сфокусированные лучи. Распределение сигнала растет квадратично, а расстояние увеличивается линейно — математическая основа ограничений дальности действия.</p>
-<h2>Закон обратных квадратов</h2>
-<p>Формула площади поверхности сферы: <strong>А = 4πr²</strong></p>
-<p>Ключевой принцип: когда расстояние увеличивается вдвое, зона распространения сигнала увеличивается в четыре раза, что снижает плотность мощности на 75%. В статье отмечается: «удвоение расстояния снижает мощность принимаемого сигнала на четверть».</p>
-<h2>Последствия для реальной системы</h2>
-<p><strong>Три решающих фактора:</strong></p>
+<div class="article-summary"><p><strong>Коротко:</strong> В идеальном свободном пространстве при удвоении расстояния приёмник получает четверть прежней мощности — это падение примерно на 6 дБ. На местности холмы, растительность, размещение антенны и помехи могут значить не меньше, чем само расстояние. У самой земли дальность ограничивает даже кривизна Земли: у антенн на высоте 0,5 м и 1,5 м радиогоризонт составляет около 8 km.</p></div>
+<p>Трекер может регулярно передавать обновления через открытое поле, но терять их за ближайшим холмом. Это не значит, что его заявленная дальность вдруг изменилась. Изменилась радиотрасса. Чтобы понять полезную дальность, нужно учитывать и то, как распространяется сигнал, и то, может ли приёмник его ещё декодировать.</p>
+<nav aria-label="На этой странице" class="article-toc">
+<p class="toc-title">На этой странице</p>
 <ol>
-<li><strong>Нелинейное масштабирование диапазона</strong> — Увеличение мощности передачи в четыре раза только удваивает эффективную дальность (теоретическое свободное пространство)</li>
-<li><strong>Важность чувствительности приемника</strong> — Улучшение уровня шума часто превосходит увеличение мощности.</li>
-<li><strong>Конструкция антенны</strong> — Направленные антенны концентрируют энергию, противодействуя потерям на растекание.</li>
+<li><a href="#distance-and-power">Что происходит при удвоении расстояния?</a></li>
+<li><a href="#link-margin">Почему связь становится ненадёжной</a></li>
+<li><a href="#terrain-and-antennas">Рельеф и размещение антенн</a></li>
+<li><a href="#lora-and-gps">Что это значит для LoRa GPS-трекеров</a></li>
+<li><a href="#field-checks">Как проверить дальность на местности</a></li>
 </ol>
-<h2>Экологические потери</h2>
-<p>Реальные развертывания испытывают дополнительное ухудшение качества из-за препятствий, многолучевого замирания, атмосферного поглощения, неэффективности антенн и несоответствия поляризации, что часто превышает теоретические прогнозы.</p>
-<h2>Практическое применение (БПЛА, IoT, трекеры)</h2>
+</nav>
+<h2 id="distance-and-power">Что происходит при удвоении расстояния?</h2>
+<p>Представьте идеальную антенну, которая излучает одинаково во всех направлениях. Её мощность распределяется по сфере с площадью поверхности <strong>4πr²</strong>. На вдвое большем расстоянии та же мощность распределяется по вчетверо большей площади. Поэтому приёмная антенна улавливает её меньше.</p>
+<p>Этот закон обратных квадратов описывает распространение в свободном пространстве при постоянных частоте, мощности передатчика и коэффициентах усиления антенн, вне ближней зоны антенн. У реальных антенн есть диаграмма направленности; сфера — удобная модель, а не утверждение, что любая антенна излучает одинаково во всех направлениях. Эталонная модель описана в рекомендации <a href="https://www.itu.int/rec/R-REC-P.525-5-202411-I/en">ITU-R P.525</a>.</p>
+<div aria-label="Сравнение расстояния и принимаемой мощности" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>Расчётный пример: принимаемая мощность относительно линии длиной 100 м в свободном пространстве</caption>
+<thead><tr><th scope="col">Расстояние</th><th scope="col">Относительная мощность</th><th scope="col">Изменение мощности</th></tr></thead>
+<tbody>
+<tr><th scope="row">100 м</th><td>100 %</td><td>0 дБ</td></tr>
+<tr><th scope="row">200 м</th><td>25 %</td><td>−6 дБ</td></tr>
+<tr><th scope="row">400 м</th><td>6,25 %</td><td>−12 дБ</td></tr>
+<tr><th scope="row">800 м</th><td>1,56 %</td><td>−18 дБ</td></tr>
+</tbody>
+</table>
+</div>
+<p>Это относительные значения, округлённые для наглядности, а не измеренные характеристики трекера. Они не показывают, где пропадёт приём.</p>
+<h2 id="link-margin">Почему из-за слабого сигнала в итоге пропадают обновления</h2>
+<p>Чтобы декодировать сообщение, приёмнику нужен сигнал достаточного качества. Его <strong>чувствительность</strong> — это минимальная принимаемая мощность, указанная для определённых настроек радио и заданной частоты ошибок. Разница между принимаемой мощностью и этим порогом называется <strong>запасом линии</strong>.</p>
+<p>Для условного приёмника с порогом чувствительности −120 dBm сигнал −100 dBm имеет запас 20 дБ. У сигнала −118 dBm запас всего 2 дБ. Оба могут работать в спокойном и стабильном тесте, но у второго почти нет резерва на дополнительные потери, когда трекер движется или на трассе появляется препятствие.</p>
+<p>Поэтому полезную дальность лучше оценивать по стабильной доставке сообщений, а не по самой дальней точке, откуда дошёл один пакет. Помехи тоже могут мешать декодированию, даже если принимаемая мощность выглядит достаточной.</p>
+<p>Увеличение мощности передатчика может помочь, но отдача от него быстро снижается. При прочих равных, чтобы удвоить дальность в свободном пространстве, нужна примерно вчетверо большая мощность (6 дБ). Без прямой видимости, по оценке Digi, удвоение дальности стоит 12 дБ и больше — примерно в 16 раз больше мощности. Усиление антенн и чувствительность приёмника тоже входят в энергетический бюджет линии, как объясняется в <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">руководстве Digi по дальности и усилению антенн</a>.</p>
+<h2 id="terrain-and-antennas">Почему реальная дальность отличается от расчётов для открытого пространства</h2>
+<p>В модели свободного пространства нет деревьев, зданий и отражений от земли. В реальной установке всё это может быть:</p>
 <ul>
-<li>Более высокое размещение антенны снижает потери на препятствия</li>
-<li>Более низкие скорости передачи данных улучшают соотношение сигнал/шум</li>
-<li>Технологии расширения спектра (LoRa) жертвуют полосой пропускания ради увеличения дальности действия</li>
+<li><strong>Препятствия на трассе:</strong> холмы, стены и густая растительность могут ослабить связь или полностью её прервать.</li>
+<li><strong>Отражения:</strong> сигналы, отражённые от земли или близких поверхностей, могут складываться или гасить друг друга. Небольшое изменение положения может изменить качество приёма.</li>
+<li><strong>Крепление антенны:</strong> ориентация, металл поблизости и тело, на котором находится трекер, могут менять эффективность, с которой антенна излучает и принимает энергию.</li>
 </ul>
-<h3>Заключение</h3>
-<p>«Расстояние — враг радиосвязи» фундаментально определяет инженерные решения, касающиеся оптимизации антенны, выбора модуляции и размещения системы.</p>
+<h3>Почему расчёт для свободного пространства завышает дальность</h3>
+<p>В характеристиках Loko указаны максимальная мощность передатчика 22 dBm и чувствительность приёмника −137 dBm. Это энергетический бюджет линии около 159 дБ без учёта усиления антенн. На частоте 868 MHz потери в свободном пространстве составляют около 91 дБ на 1 km и 117 дБ на 20 km. Если понимать модель свободного пространства буквально, она допускает связь примерно на 2400 km.</p>
+<p>Эта цифра — не оценка дальности. Она показывает, сколько бюджета съедает реальная трасса: отражения от земли, рельеф, растительность, тело, на котором закреплён трекер, и кривизна Земли.</p>
+<h3>Радиогоризонт</h3>
+<p>На больших расстояниях между двумя низкими антеннами встаёт выпуклость Земли. Распространённая оценка радиогоризонта, учитывающая небольшое искривление радиоволн в нижних слоях атмосферы, — 4,12 × (√h₁ + √h₂) километров, где высоты обеих антенн указаны в метрах. За ним земля перекрывает прямую трассу, и потери резко растут.</p>
+<div aria-label="Радиогоризонт при разной высоте антенн" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>Расчётный радиогоризонт над ровной местностью</caption>
+<thead><tr><th scope="col">Высота трекера</th><th scope="col">Высота приёмника</th><th scope="col">Радиогоризонт</th></tr></thead>
+<tbody>
+<tr><th scope="row">0,5 м</th><td>1,5 м (в руке)</td><td>≈ 8 km</td></tr>
+<tr><th scope="row">0,5 м</th><td>10 м</td><td>≈ 16 km</td></tr>
+<tr><th scope="row">1 м</th><td>15 м</td><td>≈ 20 km</td></tr>
+</tbody>
+</table>
+</div>
+<p>Даже над идеально ровной открытой местностью трекер на ошейнике собаки и приёмник в руке на уровне груди не «видят» друг друга дальше примерно 8 km. Для связи на 20 km один из концов должен находиться примерно на 15 м над местностью, например приёмник на гребне холма или на мачте, а на практике ещё выше, чтобы трасса оставалась свободной. Заявленная большая дальность описывает поднятую открытую трассу, а не два устройства у самой земли.</p>
+<h3>Свободное пространство вокруг трассы</h3>
+<p>Видеть другую антенну полезно, но радиосигналу также нужно свободное пространство вокруг прямой линии. Эта область называется <strong>зоной Френеля</strong>. Она шире всего в середине трассы: на частоте 868 MHz её радиус там около 9 м для линии длиной 1 km и около 13 м для линии 2 km. Распространённое практическое правило — держать свободными не менее 60 % этого радиуса, то есть около 8 м на 2 km. Когда обе антенны находятся всего в метре-двух над ровной землёй, земля глубоко заходит в эту зону, поэтому подъём любой из антенн часто помогает больше, чем увеличение мощности. См. <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">объяснение Digi о визуальной и радиовидимости</a> и наше <a href="/ru/blog/radio-line-of-sight/">руководство по радиовидимости</a>.</p>
+<p>Направленная антенна может сосредоточить покрытие в сторону стационарного приёмника. Для движущегося трекера покрытие во всех направлениях, где он реально перемещается, может быть полезнее узкого луча с высоким усилением.</p>
+<h2 id="lora-and-gps">Что это значит для LoRa GPS-трекеров</h2>
+<p>LoRa не избавляет от потерь при распространении. Она использует настройки радио, позволяющие декодировать очень слабые сигналы. При фиксированной ширине полосы увеличение коэффициента расширения спектра повышает чувствительность, но удлиняет каждую передачу. Так скорость передачи и время в эфире обмениваются на больший энергетический бюджет линии, как описано в <a href="https://www.semtech.com/uploads/technology/LoRa/lora-and-lorawan.pdf">обзоре LoRa и LoRaWAN от Semtech</a>.</p>
+<p>Loko поддерживает коэффициенты расширения спектра от SF7 до SF12 при ширине полосы 125 или 250 кГц. При одинаковой полосе SF12 может декодировать сигналы примерно на 12,5 дБ слабее, чем SF7. В свободном пространстве это примерно вчетверо большая дальность; на трассе с препятствиями, где удвоение дальности требует 12 дБ и больше, — скорее вдвое. Каждый шаг вверх по коэффициенту расширения спектра также примерно вдвое увеличивает время, которое пакет занимает в эфире.</p>
+<div aria-label="Время в эфире LoRa в зависимости от коэффициента расширения спектра" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>Расчётное время в эфире для пакета 20 байт при полосе 125 кГц</caption>
+<thead><tr><th scope="col">Коэффициент расширения спектра</th><th scope="col">Время в эфире</th></tr></thead>
+<tbody>
+<tr><th scope="row">SF7</th><td>≈ 57 мс</td></tr>
+<tr><th scope="row">SF9</th><td>≈ 185 мс</td></tr>
+<tr><th scope="row">SF12</th><td>≈ 1,3 с</td></tr>
+</tbody>
+</table>
+</div>
+<p>Эти значения рассчитаны для скорости кодирования 4/5, преамбулы из 8 символов и явного заголовка с CRC. Пакет в 20 байт — условный размер короткого сообщения с координатами.</p>
+<p>Короткие сообщения с координатами подходят для такого компромисса лучше, чем передача больших объёмов данных. Более долгое время в эфире также увеличивает расход энергии на сообщение и занятость канала, поэтому самая чувствительная настройка не всегда лучший выбор. Проверьте связь по маршруту и используйте наименьший коэффициент расширения спектра, при котором обновления надёжно приходят с нужным интервалом. На <a href="/ru/lora-gps-tracker/">странице GPS-трекера Loko LoRa</a> описан каждый параметр радиосвязи.</p>
+<h3>GPS-координаты и радиосвязь — это разные вещи</h3>
+<p>GPS-приёмник вычисляет своё местоположение по сигналам, которые передают спутники. Для этого ему не нужно находиться рядом с вашим ручным приёмником; <a href="https://www.gps.gov/gps">на GPS.gov описано, как работает это одностороннее позиционирование</a>. Координаты доставляет вам отдельный канал связи.</p>
+<p>В системе прямого LoRa-отслеживания, такой как <a href="/ru/lora-gps-tracker/">Loko</a>, расстояние и рельеф влияют на линию между трекером и приёмником. Трекер может знать, где находится, даже если его сообщения до вас не доходят. И наоборот, работающая радиосвязь не гарантирует свежих GPS-координат под закрытым небом.</p>
+<p>Если обновления перестали приходить, проверьте время последней полученной позиции. Она показывает, где был трекер в момент записи обновления, а не обязательно где он сейчас.</p>
+<h2 id="field-checks">Как проверить и улучшить дальность на местности</h2>
+<ol>
+<li><strong>Начните с эталонной проверки на открытой трассе.</strong> Проверьте оба устройства рядом друг с другом на открытом месте, с их обычными антеннами и настройками. Убедитесь, что приходят свежие сообщения с координатами.</li>
+<li><strong>Крепите трекер так, как в реальной работе.</strong> Закрепите трекер там, где он будет находиться на самом деле. Тест, при котором обе антенны подняты высоко, не отражает работу трекера у самой земли.</li>
+<li><strong>Меняйте положение, прежде чем менять мощность.</strong> Попробуйте более открытое место или поднимите приёмник. Сравнивайте результаты на одинаковом расстоянии.</li>
+<li><strong>Фиксируйте доставку во времени.</strong> Подсчитывайте ожидаемые и полученные обновления в каждой точке проверки. Записывайте рельеф, ориентацию антенны, настройки и любые показатели сигнала, которые отображает устройство.</li>
+<li><strong>Повторите проверку по всему маршруту.</strong> Включите низины, повороты, растительность и другие вероятные проблемные места. Выбирайте зону работы, где обновления приходят надёжно, а не считайте одно успешное сообщение с большого расстояния гарантией покрытия.</li>
+</ol>
+<p>Расстояние объясняет базовые потери. Дойдёт ли следующее обновление, определяет вся радиотрасса. Для надёжной работы трекера уделяйте размещению антенн, рельефу и повторным полевым измерениям столько же внимания, сколько заявленной дальности.</p>
 </div>
 </article>
 <div class="product-cta">
-<p class="product-cta-heading">Ознакомьтесь с GPS-трекером Loko</p>
+<p class="product-cta-heading">Узнайте больше о GPS-трекере Loko</p>
 <div class="product-cta-links">
-<a class="product-cta-link primary" href="/ru/lora-gps-tracker/">См. GPS-трекер Loko</a>
+<a class="product-cta-link primary" href="/ru/lora-gps-tracker/">Подробнее о GPS-трекере Loko</a>
 <a class="product-cta-link" href="/ru/gps/">Руководство по технологиям GPS и LoRa</a>
-<a class="product-cta-link" href="/ru/specifications/">Технические характеристики Loko</a>
+<a class="product-cta-link" href="/ru/specifications/">Характеристики Loko</a>
 </div>
 </div>
 <section class="related-posts">
 <h3 class="related-posts-heading">Похожие статьи</h3>
 <div class="related-posts-grid">
 <a class="related-post-card" href="/ru/blog/radio-line-of-sight/">
-<h3>Радио прямой видимости</h3>
-<span class="rp-cta">Читать дальше →</span>
+<h3>Радиовидимость</h3>
+<span class="rp-cta">Читать далее →</span>
 </a>
 <a class="related-post-card" href="/ru/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/">
-<h3>Полное руководство по радио GPS: функции, преимущества и приложения</h3>
-<span class="rp-cta">Читать дальше →</span>
+<h3>Полное руководство по GPS-радио: возможности, преимущества и применение</h3>
+<span class="rp-cta">Читать далее →</span>
 </a>
 <a class="related-post-card" href="/ru/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/">
-<h3>GPS-трекер Loko: изучение преимуществ спутниковых систем GPS, GLONASS и GALILEO</h3>
-<span class="rp-cta">Читать дальше →</span>
+<h3>GPS-трекер Loko: преимущества спутниковых систем GPS, GLONASS и Galileo</h3>
+<span class="rp-cta">Читать далее →</span>
 </a>
 </div>
 </section>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ru/">nolilab</a></li><li><a href="/ru/accessories/">Accessories</a></li><li><a href="/ru/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ru/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ru/battery-life/">Battery Life</a></li><li><a href="/ru/blog/">Blog</a></li><li><a href="/ru/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/ru/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ru/chirpstack/">ChirpStack</a></li><li><a href="/ru/contact/">Contact</a></li><li><a href="/ru/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ru/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ru/farms/">Farm GPS</a></li><li><a href="/ru/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ru/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ru/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ru/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ru/gps/">GPS & LoRa</a></li><li><a href="/ru/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ru/hiking/">Hiking GPS</a></li><li><a href="/ru/how-gps-works/">How GPS Works</a></li><li><a href="/ru/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ru/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ru/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ru/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ru/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ru/lorawan/">LoRaWAN</a></li><li><a href="/ru/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ru/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ru/open-source/">Open Source</a></li><li><a href="/ru/privacy/">Privacy</a></li><li><a href="/ru/search-rescue/">Search & Rescue</a></li><li><a href="/ru/setup-guides/">Setup</a></li><li><a href="/ru/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ru/software/">Software</a></li><li><a href="/ru/specifications/">Specs</a></li><li><a href="/ru/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ru/uk/">GPS Tracker UK</a></li><li><a href="/ru/uk/farms/">UK Farm GPS</a></li><li><a href="/ru/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ru/usa/">GPS Tracker USA</a></li><li><a href="/ru/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ru/">Home</a></li><li><a href="/ru/accessories/">Accessories</a></li><li><a href="/ru/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ru/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ru/battery-life/">Battery Life</a></li><li><a href="/ru/blog/">Blog</a></li><li><a href="/ru/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/ru/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ru/chirpstack/">ChirpStack</a></li><li><a href="/ru/contact/">Contact</a></li><li><a href="/ru/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ru/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ru/farms/">Farm GPS</a></li><li><a href="/ru/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ru/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ru/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ru/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ru/gps/">GPS & LoRa</a></li><li><a href="/ru/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ru/hiking/">Hiking GPS</a></li><li><a href="/ru/how-gps-works/">How GPS Works</a></li><li><a href="/ru/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ru/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ru/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ru/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ru/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ru/lorawan/">LoRaWAN</a></li><li><a href="/ru/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ru/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ru/open-source/">Open Source</a></li><li><a href="/ru/privacy/">Privacy</a></li><li><a href="/ru/search-rescue/">Search & Rescue</a></li><li><a href="/ru/setup-guides/">Setup</a></li><li><a href="/ru/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ru/software/">Software</a></li><li><a href="/ru/specifications/">Specs</a></li><li><a href="/ru/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ru/uk/">GPS Tracker UK</a></li><li><a href="/ru/uk/farms/">UK Farm GPS</a></li><li><a href="/ru/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ru/usa/">GPS Tracker USA</a></li><li><a href="/ru/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

@@ -4,9 +4,16 @@
 <head>
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <link href="/css/blog-article.css?v=20261004" rel="stylesheet"/>
+<style>
+@media (max-width: 600px) {
+  .table-wrapper .distance-table { min-width: 0; table-layout: fixed; }
+  .distance-table th, .distance-table td { padding: .75rem .6rem; }
+  .table-wrapper .distance-table tbody th { width: auto; }
+}
+</style>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>距離が無線信号範囲に与える影響 | nolilab ブログ</title>
+<title>距離は無線信号の到達距離にどう影響するか | nolilab ブログ</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
@@ -16,7 +23,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="逆二乗則がワイヤレス信号範囲にどのような影響を与えるか、またそれが GPS トラッキング システムにとって何を意味するかを理解します。" name="description"/>
+<meta content="距離によって無線信号が弱まる仕組み、実際の通信距離がばらつく理由、そしてアンテナの配置とLoRaの設定がGPSトラッカーの信頼性にどう影響するかを解説します。" name="description"/>
 <link href="https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-distance-affects-wireless-signal-range/" hreflang="es" rel="alternate"/>
@@ -33,71 +40,195 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "家",
-      "item": "https://www.nolilab.com"
+      "name": "ホーム",
+      "item": "https://www.nolilab.com/ja/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "ブログ",
-      "item": "https://www.nolilab.com/blog/"
+      "item": "https://www.nolilab.com/ja/blog/"
     },
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "距離が無線信号範囲に与える影響",
-      "item": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/"
+      "name": "距離は無線信号の到達距離にどう影響するか",
+      "item": "https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/"
     }
-  ]
+  ],
+  "inLanguage": "ja"
+}</script>
+<meta content="article" property="og:type"/><meta content="ja_JP" property="og:locale"/>
+<meta content="距離は無線信号の到達距離にどう影響するか" property="og:title"/>
+<meta content="距離によって無線信号が弱まる仕組み、実際の通信距離がばらつく理由、そしてアンテナの配置とLoRaの設定がGPSトラッカーの信頼性にどう影響するかを解説します。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" property="og:image"/>
+<meta content="1536" property="og:image:width"/>
+<meta content="1024" property="og:image:height"/>
+<meta content="谷を越えて遠くの受信機へ広がる電波の波面（概念図）" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="距離は無線信号の到達距離にどう影響するか" name="twitter:title"/>
+<meta content="距離によって無線信号が弱まる仕組み、実際の通信距離がばらつく理由、そしてアンテナの配置とLoRaの設定がGPSトラッカーの信頼性にどう影響するかを解説します。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" name="twitter:image"/>
+<meta content="谷を越えて遠くの受信機へ広がる電波の波面（概念図）" name="twitter:image:alt"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "距離は無線信号の到達距離にどう影響するか",
+  "description": "距離によって無線信号が弱まる仕組み、実際の通信距離がばらつく理由、そしてアンテナの配置とLoRaの設定がGPSトラッカーの信頼性にどう影響するかを解説します。",
+  "url": "https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/",
+  "datePublished": "2026-02-07",
+  "dateModified": "2026-10-04",
+  "inLanguage": "ja",
+  "author": {
+    "@type": "Person",
+    "@id": "https://www.nolilab.com/author/tamleykha-piriyev/#person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://www.nolilab.com/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp",
+    "width": 1536,
+    "height": 1024
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/"
+  },
+  "@id": "https://www.nolilab.com/ja/blog/how-distance-affects-wireless-signal-range/#article",
+  "translationOfWork": {
+    "@id": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/#article"
+  }
 }</script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">記事へスキップ</a>
 <div id="site-header"></div>
-<main class="blog-article">
+<main class="blog-article" id="main-content">
 <article>
 <a class="back-link" href="/ja/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> ブログに戻る
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> 2026 年 2 月 7 日</span>
-<span><i class="far fa-user"></i> タムリーカ・ピリエフ</span>
+<span>公開日 <time datetime="2026-02-07">2026年2月7日</time></span>
+<span>更新日 <time datetime="2026-10-04">2026年10月4日</time></span>
+<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
 </div>
-<h1 class="article-title">距離が無線信号範囲に与える影響</h1>
+<h1 class="article-title">距離は無線信号の到達距離にどう影響するか</h1>
+<p class="article-deck">送信機を強力にするだけでは十分ではありません。距離、地形、受信感度が、信頼できる無線リンクをどう左右するかを解説します。</p>
 </div>
-<img alt="Radio Signal Range Diagram" class="article-image" height="512" src="/images/radio-wave.webp" width="512"/>
+<figure class="article-figure">
+<img alt="アンテナから開けた谷を越えて遠くの受信機へ広がる緑色の電波の波面" class="article-image" fetchpriority="high" height="1024" sizes="(max-width: 600px) calc(100vw - 2rem), (max-width: 848px) calc(100vw - 3rem), 800px" src="/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" srcset="/images/blog-covers/how-distance-affects-wireless-signal-range-v2-thumb.webp 600w, /images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp 1536w" width="1536"/>
+<figcaption>電波のエネルギーは進むにつれて広がります。この概念図は2台の無線機の間の開けた経路を示したものです。実際には波面は見えず、縮尺も正確ではありません。</figcaption>
+</figure>
 <div class="article-content">
-<h2>導入</h2>
-<p>この記事は、無線システム内で電波がどのように伝播するかを調査し、距離が増加するにつれて「逆二乗の法則」によって通信範囲が基本的に制限されることを強調しています。</p>
-<h2>無線信号の広がり方</h2>
-<p>トランスミッターはエネルギーを全方向に放射し、集束したビームではなく拡大する球状の波面を作成します。信号分布は二次関数的に増加し、距離は直線的に増加します。これが範囲制限の数学的根拠です。</p>
-<h2>逆二乗の法則</h2>
-<p>球の表面積の公式は次のとおりです。 <strong>A = 4πr²</strong></p>
-<p>主な原理: 距離が 2 倍になると、信号分配エリアは 4 倍になり、電力密度が 75% 減少します。この記事は、「距離が2倍になると、受信信号強度は4分の1に減少する」と述べています。</p>
-<h2>実際のシステムへの影響</h2>
-<p><strong>3 つの重要な要素:</strong></p>
+<div class="article-summary"><p><strong>要点：</strong>理想的な自由空間では、距離が2倍になると受信電力は4分の1、つまり約6 dB低下します。屋外では、丘、植生、アンテナの配置、干渉が、距離そのものと同じくらい大きく影響することがあります。地面の近くでは、地球の丸みさえ通信距離を制限します。高さ0.5 mと1.5 mのアンテナの電波水平線は約8 kmです。</p></div>
+<p>開けた野原では定期的に更新を送れていたトラッカーが、近くの尾根の陰に入ると更新を取りこぼすことがあります。通信距離の仕様が急に変わったわけではありません。変わったのは電波の経路です。実用的な通信距離を理解するには、信号がどう広がるかと、受信機がまだそれを復号できるかの両方を考える必要があります。</p>
+<nav aria-label="このページの内容" class="article-toc">
+<p class="toc-title">このページの内容</p>
 <ol>
-<li><strong>非線形レンジスケーリング</strong> — 送信電力を 4 倍にしても、有効範囲 (理論上の自由空間) は 2 倍になるだけです</li>
-<li><strong>受信感度の重要性</strong> — ノイズフロアの改善は、多くの場合、電力の増加を上回ります</li>
-<li><strong>アンテナ設計</strong> — 指向性アンテナはエネルギーを集中させ、拡散損失を抑制します</li>
+<li><a href="#distance-and-power">距離が2倍になると何が起こるか</a></li>
+<li><a href="#link-margin">リンクが不安定になる理由</a></li>
+<li><a href="#terrain-and-antennas">地形とアンテナの配置</a></li>
+<li><a href="#lora-and-gps">LoRa GPSトラッカーにとっての意味</a></li>
+<li><a href="#field-checks">現地で通信距離を確認する方法</a></li>
 </ol>
-<h2>環境損失</h2>
-<p>実際の展開では、障害物、マルチパス フェージング、大気吸収、アンテナの効率の低下、偏波の不一致によるさらなる劣化が発生し、多くの場合、理論上の予測を超えます。</p>
-<h2>実用的なアプリケーション (UAV、IoT、トラッカー)</h2>
+</nav>
+<h2 id="distance-and-power">距離が2倍になると何が起こるか</h2>
+<p>全方向に均等に電波を放射する理想的なアンテナを考えてみましょう。その電力は、表面積 <strong>4πr²</strong>の球面に広がります。半径が2倍になると、同じ電力が4倍の面積に広がります。そのため、受信アンテナが受け取る電力は少なくなります。</p>
+<p>この逆二乗の関係は、周波数、送信電力、アンテナ利得を一定とし、アンテナの近傍界から離れた自由空間での伝搬を表しています。実際のアンテナには指向性があります。球は便利なモデルであり、すべてのアンテナが全方向に均等に放射するという意味ではありません。基準となるモデルは <a href="https://www.itu.int/rec/R-REC-P.525-5-202411-I/en">ITU-R P.525</a>に記載されています。</p>
+<div aria-label="距離と受信電力の比較" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>計算例：100 mの自由空間リンクを基準とした受信電力</caption>
+<thead><tr><th scope="col">距離</th><th scope="col">相対電力</th><th scope="col">電力の変化</th></tr></thead>
+<tbody>
+<tr><th scope="row">100 m</th><td>100%</td><td>0 dB</td></tr>
+<tr><th scope="row">200 m</th><td>25%</td><td>−6 dB</td></tr>
+<tr><th scope="row">400 m</th><td>6.25%</td><td>−12 dB</td></tr>
+<tr><th scope="row">800 m</th><td>1.56%</td><td>−18 dB</td></tr>
+</tbody>
+</table>
+</div>
+<p>これらは分かりやすく丸めた相対値であり、トラッカーの実測性能ではありません。どこで受信できなくなるかを示すものでもありません。</p>
+<h2 id="link-margin">信号が弱くなると、なぜ更新が届かなくなるのか</h2>
+<p>メッセージを復号するには、受信機に十分な信号品質が必要です。受信機の<strong>感度</strong>とは、特定の無線設定と所定の誤り率に対して規定された最小受信電力のことです。受信電力とこのしきい値との差を<strong>リンクマージン</strong>と呼びます。</p>
+<p>感度のしきい値が−120 dBmの仮想的な受信機では、−100 dBmの信号には20 dBのマージンがあります。−118 dBmの信号では2 dBしかありません。静かで安定したテストではどちらも動作するかもしれませんが、後者はトラッカーが動いたり障害物が経路に入ったりしたときの追加損失にほとんど余裕がありません。</p>
+<p>そのため、実用的な通信距離は、1つのパケットが届いた最遠地点ではなく、メッセージが安定して届くかどうかで判断するのが適切です。受信電力が十分に見えても、干渉によって復号できないこともあります。</p>
+<p>送信電力を上げれば改善することはありますが、効果は次第に小さくなります。他の条件が同じなら、自由空間で通信距離を2倍にするには約4倍の送信電力（6 dB）が必要です。見通しがない場合、Digiは距離を2倍にするには12 dB以上、つまり約16倍の電力が必要だとしています。アンテナ利得と受信感度もリンクバジェットに寄与します。この点は <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digiの通信距離とアンテナ利得に関するガイド</a>で解説されています。</p>
+<h2 id="terrain-and-antennas">実際の通信距離が開けた場所での見積もりと異なる理由</h2>
+<p>自由空間モデルには、木も建物も地面での反射も含まれていません。実際の設置環境には、これらすべてがあり得ます：</p>
 <ul>
-<li>アンテナをより高い位置に配置することで障害物の損失を軽減します</li>
-<li>データレートが低いと信号対雑音比が向上します</li>
-<li>スペクトル拡散テクノロジー (LoRa) は帯域幅を犠牲にして範囲を拡張します</li>
+<li><strong>経路の遮蔽：</strong>丘、壁、密集した植生は、リンクを弱めたり完全に遮断したりすることがあります。</li>
+<li><strong>反射：</strong>地面や近くの面で反射した信号は、強め合うことも打ち消し合うこともあります。わずかな位置の変化で受信状態が変わることがあります。</li>
+<li><strong>アンテナの取り付け：</strong>アンテナの向き、近くの金属、トラッカーを身に着けている体によって、アンテナがエネルギーを送受信する効率が変わることがあります。</li>
 </ul>
-<h3>結論</h3>
-<p>「距離は無線通信の敵」という考えが、アンテナの最適化、変調の選択、システムの配置に関するエンジニアリング上の決定を根本的に推進します。</p>
+<h3>自由空間の計算が通信距離を過大評価する理由</h3>
+<p>Lokoの仕様では、最大送信電力は22 dBm、受信感度は−137 dBmです。アンテナ利得を含めない場合、リンクバジェットは約159 dBになります。868 MHzでの自由空間損失は、1 kmで約91 dB、20 kmで約117 dBです。自由空間モデルを額面どおりに受け取れば、約2,400 kmの通信が可能という計算になります。</p>
+<p>この数値は通信距離の見積もりではありません。実際の経路がリンクバジェットをどれだけ使い切るかを示しています。その内訳は、地面での反射、地形、植生、トラッカーを身に着けている体、そして地球の丸みです。</p>
+<h3>電波水平線</h3>
+<p>距離が長くなると、2本の低いアンテナの間で地球の丸みが盛り上がります。下層大気で電波がわずかに曲がることを考慮した電波水平線の一般的な概算式は 4.12 × (√h₁ + √h₂) km で、両アンテナの高さはメートル単位です。それより先では地面が直接の経路をさえぎり、損失が急激に増えます。</p>
+<div aria-label="アンテナの高さ別の電波水平線" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>平坦な地面での電波水平線（計算値）</caption>
+<thead><tr><th scope="col">トラッカーの高さ</th><th scope="col">受信機の高さ</th><th scope="col">電波水平線</th></tr></thead>
+<tbody>
+<tr><th scope="row">0.5 m</th><td>1.5 m（手持ち）</td><td>約 8 km</td></tr>
+<tr><th scope="row">0.5 m</th><td>10 m</td><td>約 16 km</td></tr>
+<tr><th scope="row">1 m</th><td>15 m</td><td>約 20 km</td></tr>
+</tbody>
+</table>
+</div>
+<p>完全に平坦で開けた土地でも、犬の首輪に付けたトラッカーと胸の高さに持った受信機は、約8 kmを超えると互いに見通せません。20 kmの通信には、一方の端を地面から約15 mの高さに置く必要があります。たとえば尾根やマストの上に置いた受信機です。実際には、経路のクリアランスを保つためにさらに高さが必要です。長距離の仕様が想定しているのは高く開けた経路であり、地面近くにある2台の機器ではありません。</p>
+<h3>経路周辺のクリアランス</h3>
+<p>相手のアンテナが見えることは役立ちますが、電波には直接の経路の周囲にもクリアランスが必要です。この周囲の領域を<strong>フレネルゾーン</strong>と呼びます。フレネルゾーンは経路の中央で最も広くなります。868 MHzでは、その半径は1 kmのリンクで約9 m、2 kmのリンクで約13 mです。一般的な目安は、その半径の少なくとも60%を空けておくことで、2 kmでは約8 mにあたります。両方のアンテナが平坦な地面から1〜2 mしかない場合、地面がこのゾーンに深く入り込みます。そのため、出力を上げるよりも、どちらかのアンテナを高くするほうが効果的なことがよくあります。詳しくは <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digiによる視覚的な見通しと電波の見通しの解説</a>、および当社の<a href="/ja/blog/radio-line-of-sight/">電波の見通しに関するガイド</a>をご覧ください。</p>
+<p>指向性アンテナは、固定された受信機の方向にカバレッジを集中できます。移動するトラッカーでは、狭い高利得ビームよりも、実際に移動する方向全体をカバーできるほうが役立つ場合があります。</p>
+<h2 id="lora-and-gps">LoRa GPSトラッカーにとっての意味</h2>
+<p>LoRaも伝搬損失を避けられるわけではありません。LoRaは、非常に弱い信号を復号できる無線設定を使います。帯域幅が一定なら、拡散率を上げると感度は向上しますが、1回の送信にかかる時間は長くなります。つまり、データレートと送信時間を犠牲にして、より大きなリンクバジェットを得ています。この点は <a href="https://www.semtech.com/uploads/technology/LoRa/lora-and-lorawan.pdf">SemtechのLoRa・LoRaWAN概要資料</a>で解説されています。</p>
+<p>Lokoは、125 kHzまたは250 kHzの帯域幅でSF7〜SF12の拡散率に対応しています。同じ帯域幅なら、SF12はSF7より約12.5 dB弱い信号を復号できます。自由空間ではおよそ4倍の通信距離に相当しますが、距離を2倍にするのに12 dB以上かかる障害物のある経路では、2倍程度にとどまります。拡散率を1段階上げるごとに、パケットの送信時間もおよそ2倍になります。</p>
+<div aria-label="拡散率別のLoRa送信時間" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>125 kHzでの20バイトパケットの送信時間（計算値）</caption>
+<thead><tr><th scope="col">拡散率</th><th scope="col">送信時間</th></tr></thead>
+<tbody>
+<tr><th scope="row">SF7</th><td>約 57 ms</td></tr>
+<tr><th scope="row">SF9</th><td>約 185 ms</td></tr>
+<tr><th scope="row">SF12</th><td>約 1.3 s</td></tr>
+</tbody>
+</table>
+</div>
+<p>これらの値は、符号化率4/5、8シンボルのプリアンブル、CRC付きの明示ヘッダーを前提としています。20バイトのパケットは、短い位置情報メッセージを想定した例示的なサイズです。</p>
+<p>短い座標メッセージは、大容量のデータ転送よりもこのトレードオフに適しています。送信時間が長くなると、1メッセージあたりの消費エネルギーやチャネルの占有にも影響するため、最も感度の高い設定がどの用途でも最適とは限りません。ルートに沿ってテストし、必要な間隔で確実に更新が届く範囲で、最も低い拡散率を使用してください。<a href="/ja/lora-gps-tracker/">LokoのLoRa GPSトラッカーのページ</a>で、各無線パラメーターを説明しています。</p>
+<h3>GPS測位と無線接続は別のもの</h3>
+<p>GPS受信機は、衛星からの放送信号をもとに自分の位置を計算します。手元の受信機の近くにある必要はありません（<a href="https://www.gps.gov/gps">GPS.govがこの一方向の測位の仕組みを説明しています</a>）。その座標をあなたに届けるのは、別の通信リンクです。</p>
+<p>LoRaで直接通信する追跡システム（たとえば <a href="/ja/lora-gps-tracker/">Loko</a>）では、距離と地形がトラッカーと受信機の間のリンクに影響します。トラッカーは自分の位置を把握していても、そのメッセージがあなたに届かないことがあります。逆に、無線接続が機能していても、空が遮られた場所で新しいGPS測位が得られるとは限りません。</p>
+<p>更新が止まったら、最後に受信した位置のタイムスタンプを確認してください。その位置は、更新が記録された時点でトラッカーがいた場所を示すものであり、現在地とは限りません。</p>
+<h2 id="field-checks">現地で通信距離を確認・改善する方法</h2>
+<ol>
+<li><strong>まず見通しのよい場所で基準を取る。</strong>開けた場所で両方のデバイスを近くに置き、通常のアンテナと設定でテストします。新しい位置情報メッセージが届くことを確認してください。</li>
+<li><strong>実際の取り付け方で試す。</strong>トラッカーは実際に携行・装着する位置に取り付けます。両方のアンテナを高く掲げたテストは、地面近くにあるトラッカーの状況を反映しません。</li>
+<li><strong>出力を変える前に位置を変える。</strong>より開けた場所を試すか、受信機を高くします。同じ距離で結果を比較してください。</li>
+<li><strong>時間をかけて受信状況を記録する。</strong>各テスト地点で、予定された更新数と実際に受信できた更新数を数えます。地形、アンテナの向き、設定、デバイスが表示する信号値を記録してください。</li>
+<li><strong>予定ルートに沿って繰り返す。</strong>くぼ地、曲がり角、植生など、問題が起こりそうな場所も含めてください。長距離で1回メッセージが届いたことをカバー範囲の保証とみなさず、更新が確実に届くエリアで運用してください。</li>
+</ol>
+<p>距離で決まるのは基本となる損失です。次の更新が届くかどうかを決めるのは、電波の経路全体です。信頼できるトラッカー運用のために、カタログ上の通信距離と同じくらい、アンテナの配置、地形、繰り返しの現地測定にも注意を払ってください。</p>
 </div>
 </article>
 <div class="product-cta">
-<p class="product-cta-heading">Loko GPS トラッカーを詳しく見る</p>
+<p class="product-cta-heading">Loko GPSトラッカーの詳細</p>
 <div class="product-cta-links">
-<a class="product-cta-link primary" href="/ja/lora-gps-tracker/">Loko GPS トラッカーを参照</a>
-<a class="product-cta-link" href="/ja/gps/">GPS および LoRa テクノロジー ガイド</a>
+<a class="product-cta-link primary" href="/ja/lora-gps-tracker/">Loko GPSトラッカーを見る</a>
+<a class="product-cta-link" href="/ja/gps/">GPS・LoRa技術ガイド</a>
 <a class="product-cta-link" href="/ja/specifications/">Lokoの仕様</a>
 </div>
 </div>
@@ -105,21 +236,21 @@
 <h3 class="related-posts-heading">関連記事</h3>
 <div class="related-posts-grid">
 <a class="related-post-card" href="/ja/blog/radio-line-of-sight/">
-<h3>無線見通し線</h3>
-<span class="rp-cta">続きを読む→</span>
+<h3>電波の見通し</h3>
+<span class="rp-cta">続きを読む →</span>
 </a>
 <a class="related-post-card" href="/ja/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/">
-<h3>GPS 無線の総合ガイド: 機能、利点、アプリケーション</h3>
-<span class="rp-cta">続きを読む→</span>
+<h3>GPS無線の総合ガイド：特長、利点、用途</h3>
+<span class="rp-cta">続きを読む →</span>
 </a>
 <a class="related-post-card" href="/ja/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/">
-<h3>Loko GPS トラッカー: GPS、GLONASS、および GALILEO 衛星システムの利点を探る</h3>
-<span class="rp-cta">続きを読む→</span>
+<h3>Loko GPSトラッカー：GPS、GLONASS、Galileo衛星システムの利点</h3>
+<span class="rp-cta">続きを読む →</span>
 </a>
 </div>
 </section>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ja/">nolilab</a></li><li><a href="/ja/accessories/">Accessories</a></li><li><a href="/ja/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ja/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ja/battery-life/">Battery Life</a></li><li><a href="/ja/blog/">Blog</a></li><li><a href="/ja/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/ja/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ja/chirpstack/">ChirpStack</a></li><li><a href="/ja/contact/">Contact</a></li><li><a href="/ja/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ja/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ja/farms/">Farm GPS</a></li><li><a href="/ja/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ja/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ja/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ja/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ja/gps/">GPS & LoRa</a></li><li><a href="/ja/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ja/hiking/">Hiking GPS</a></li><li><a href="/ja/how-gps-works/">How GPS Works</a></li><li><a href="/ja/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ja/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ja/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ja/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ja/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ja/lorawan/">LoRaWAN</a></li><li><a href="/ja/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ja/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ja/open-source/">Open Source</a></li><li><a href="/ja/privacy/">Privacy</a></li><li><a href="/ja/search-rescue/">Search & Rescue</a></li><li><a href="/ja/setup-guides/">Setup</a></li><li><a href="/ja/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ja/software/">Software</a></li><li><a href="/ja/specifications/">Specs</a></li><li><a href="/ja/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ja/uk/">GPS Tracker UK</a></li><li><a href="/ja/uk/farms/">UK Farm GPS</a></li><li><a href="/ja/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ja/usa/">GPS Tracker USA</a></li><li><a href="/ja/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ja/">Home</a></li><li><a href="/ja/accessories/">Accessories</a></li><li><a href="/ja/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ja/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ja/battery-life/">Battery Life</a></li><li><a href="/ja/blog/">Blog</a></li><li><a href="/ja/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/ja/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ja/chirpstack/">ChirpStack</a></li><li><a href="/ja/contact/">Contact</a></li><li><a href="/ja/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ja/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ja/farms/">Farm GPS</a></li><li><a href="/ja/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ja/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ja/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ja/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ja/gps/">GPS & LoRa</a></li><li><a href="/ja/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ja/hiking/">Hiking GPS</a></li><li><a href="/ja/how-gps-works/">How GPS Works</a></li><li><a href="/ja/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ja/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ja/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ja/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ja/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ja/lorawan/">LoRaWAN</a></li><li><a href="/ja/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ja/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ja/open-source/">Open Source</a></li><li><a href="/ja/privacy/">Privacy</a></li><li><a href="/ja/search-rescue/">Search & Rescue</a></li><li><a href="/ja/setup-guides/">Setup</a></li><li><a href="/ja/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ja/software/">Software</a></li><li><a href="/ja/specifications/">Specs</a></li><li><a href="/ja/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ja/uk/">GPS Tracker UK</a></li><li><a href="/ja/uk/farms/">UK Farm GPS</a></li><li><a href="/ja/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ja/usa/">GPS Tracker USA</a></li><li><a href="/ja/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

@@ -4,9 +4,16 @@
 <head>
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <link href="/css/blog-article.css?v=20261004" rel="stylesheet"/>
+<style>
+@media (max-width: 600px) {
+  .table-wrapper .distance-table { min-width: 0; table-layout: fixed; }
+  .distance-table th, .distance-table td { padding: .75rem .6rem; }
+  .table-wrapper .distance-table tbody th { width: auto; }
+}
+</style>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>距离如何影响无线信号范围 | nolilab 博客</title>
+<title>距离如何影响无线信号的通信范围 | nolilab 博客</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
@@ -16,7 +23,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="了解平方反比定律如何影响无线信号范围以及它对 GPS 跟踪系统的意义。" name="description"/>
+<meta content="了解距离如何削弱无线信号、实际通信范围为何会变化，以及天线位置和 LoRa 设置如何影响 GPS 追踪器的可靠性。" name="description"/>
 <link href="https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-distance-affects-wireless-signal-range/" hreflang="es" rel="alternate"/>
@@ -33,71 +40,195 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "家",
-      "item": "https://www.nolilab.com"
+      "name": "首页",
+      "item": "https://www.nolilab.com/zh/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "博客",
-      "item": "https://www.nolilab.com/blog/"
+      "item": "https://www.nolilab.com/zh/blog/"
     },
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "距离如何影响无线信号范围",
-      "item": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/"
+      "name": "距离如何影响无线信号的通信范围",
+      "item": "https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/"
     }
-  ]
+  ],
+  "inLanguage": "zh"
+}</script>
+<meta content="article" property="og:type"/><meta content="zh_CN" property="og:locale"/>
+<meta content="距离如何影响无线信号的通信范围" property="og:title"/>
+<meta content="了解距离如何削弱无线信号、实际通信范围为何会变化，以及天线位置和 LoRa 设置如何影响 GPS 追踪器的可靠性。" property="og:description"/>
+<meta content="https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" property="og:image"/>
+<meta content="1536" property="og:image:width"/>
+<meta content="1024" property="og:image:height"/>
+<meta content="无线电波前穿过山谷向远处接收机扩散的概念图" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="距离如何影响无线信号的通信范围" name="twitter:title"/>
+<meta content="了解距离如何削弱无线信号、实际通信范围为何会变化，以及天线位置和 LoRa 设置如何影响 GPS 追踪器的可靠性。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" name="twitter:image"/>
+<meta content="无线电波前穿过山谷向远处接收机扩散的概念图" name="twitter:image:alt"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "距离如何影响无线信号的通信范围",
+  "description": "了解距离如何削弱无线信号、实际通信范围为何会变化，以及天线位置和 LoRa 设置如何影响 GPS 追踪器的可靠性。",
+  "url": "https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/",
+  "datePublished": "2026-02-07",
+  "dateModified": "2026-10-04",
+  "inLanguage": "zh",
+  "author": {
+    "@type": "Person",
+    "@id": "https://www.nolilab.com/author/tamleykha-piriyev/#person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://www.nolilab.com/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp",
+    "width": 1536,
+    "height": 1024
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/"
+  },
+  "@id": "https://www.nolilab.com/zh/blog/how-distance-affects-wireless-signal-range/#article",
+  "translationOfWork": {
+    "@id": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/#article"
+  }
 }</script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳转到文章</a>
 <div id="site-header"></div>
-<main class="blog-article">
+<main class="blog-article" id="main-content">
 <article>
 <a class="back-link" href="/zh/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 返回博客
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> 2026 年 2 月 7 日</span>
-<span><i class="far fa-user"></i> 塔姆雷哈·皮里耶夫</span>
+<span>发布于 <time datetime="2026-02-07">2026年2月7日</time></span>
+<span>更新于 <time datetime="2026-10-04">2026年10月4日</time></span>
+<span><i class="far fa-user"></i> Tamleykha Piriyev</span>
 </div>
-<h1 class="article-title">距离如何影响无线信号范围</h1>
+<h1 class="article-title">距离如何影响无线信号的通信范围</h1>
+<p class="article-deck">更强的发射机只是其中一部分。本文介绍距离、地形和接收灵敏度如何决定一条可靠的无线电链路。</p>
 </div>
-<img alt="Radio Signal Range Diagram" class="article-image" height="512" src="/images/radio-wave.webp" width="512"/>
+<figure class="article-figure">
+<img alt="绿色无线电波前从天线出发，穿过开阔山谷扩散到远处的接收机" class="article-image" fetchpriority="high" height="1024" sizes="(max-width: 600px) calc(100vw - 2rem), (max-width: 848px) calc(100vw - 3rem), 800px" src="/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" srcset="/images/blog-covers/how-distance-affects-wireless-signal-range-v2-thumb.webp 600w, /images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp 1536w" width="1536"/>
+<figcaption>无线电能量在传播过程中不断扩散。这张概念图展示的是两台无线电设备之间的开阔路径；现实中看不到波前，图中比例也不准确。</figcaption>
+</figure>
 <div class="article-content">
-<h2>介绍</h2>
-<p>该文章研究了无线电波在无线系统中的传播方式，强调“平方反比定律”从根本上限制了随着距离增加的通信范围。</p>
-<h2>无线电信号如何传播</h2>
-<p>发射器全向辐射能量，产生扩展的球形波前而不是聚焦光束。信号分布呈二次方增长，而距离呈线性增长——这是范围限制的数学基础。</p>
-<h2>平方反比定律</h2>
-<p>球体表面积公式： <strong>A = 4πr²</strong></p>
-<p>主要原理：当距离加倍时，信号分布面积增加四倍，功率密度降低 75%。文章指出：“距离加倍会将接收信号强度降低到四分之一。”</p>
-<h2>真实系统的影响</h2>
-<p><strong>三个关键因素：</strong></p>
+<div class="article-summary"><p><strong>简要回答：</strong>在理想的自由空间中，距离加倍后，接收机收到的功率只剩四分之一，约下降 6 dB。在户外，山丘、植被、天线位置和干扰的影响可能与距离本身一样大。贴近地面时，连地球的曲率都会限制通信距离：高度分别为 0.5 米和 1.5 米的两根天线，无线电地平线约为 8 km。</p></div>
+<p>追踪器在开阔的田野上可以定期发送更新，但走到附近山脊后方时就可能丢失更新。这并不意味着它的通信距离规格突然变了，而是无线电传播路径变了。要理解实际可用的通信距离，既要考虑信号如何传播，也要考虑接收机能否仍然解码信号。</p>
+<nav aria-label="本页内容" class="article-toc">
+<p class="toc-title">本页内容</p>
 <ol>
-<li><strong>非线性范围缩放</strong> — 发射功率增加四倍只会使有效范围增加一倍（理论自由空间）</li>
-<li><strong>接收器灵敏度的重要性</strong> — 本底噪声的改善通常胜过功率的增加</li>
-<li><strong>天线设计</strong> — 定向天线集中能量，抵消传播损耗</li>
+<li><a href="#distance-and-power">距离加倍时会发生什么？</a></li>
+<li><a href="#link-margin">链路为何变得不可靠</a></li>
+<li><a href="#terrain-and-antennas">地形与天线位置</a></li>
+<li><a href="#lora-and-gps">这对 LoRa GPS 追踪器意味着什么</a></li>
+<li><a href="#field-checks">如何实地检查通信距离</a></li>
 </ol>
-<h2>环境损失</h2>
-<p>现实世界的部署会因障碍物、多径衰落、大气吸收、天线效率低下和极化失配而遭受额外的退化，通常超出理论预测。</p>
-<h2>实际应用（无人机、IoT、跟踪器）</h2>
+</nav>
+<h2 id="distance-and-power">距离加倍时会发生什么？</h2>
+<p>设想一根向各个方向均匀辐射的理想天线。它的功率分布在表面积为 <strong>4πr²</strong>的球面上。半径加倍时，同样的功率覆盖四倍的面积，因此接收天线收集到的功率更少。</p>
+<p>这种平方反比关系描述的是自由空间中的传播：频率、发射功率和天线增益保持不变，并且远离天线的近场区。实际天线具有方向性；球面只是一个有用的模型，并不意味着每根天线都向所有方向均匀辐射。参考模型见 <a href="https://www.itu.int/rec/R-REC-P.525-5-202411-I/en">ITU-R P.525</a>。</p>
+<div aria-label="距离与接收功率对比" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>计算示例：相对于 100 米自由空间链路的接收功率</caption>
+<thead><tr><th scope="col">距离</th><th scope="col">相对功率</th><th scope="col">功率变化</th></tr></thead>
+<tbody>
+<tr><th scope="row">100 米</th><td>100%</td><td>0 dB</td></tr>
+<tr><th scope="row">200 米</th><td>25%</td><td>−6 dB</td></tr>
+<tr><th scope="row">400 米</th><td>6.25%</td><td>−12 dB</td></tr>
+<tr><th scope="row">800 米</th><td>1.56%</td><td>−18 dB</td></tr>
+</tbody>
+</table>
+</div>
+<p>这些是为便于理解而四舍五入的相对值，并非追踪器的实测性能，也不能说明信号会在哪里中断。</p>
+<h2 id="link-margin">为什么信号变弱最终会导致更新丢失</h2>
+<p>接收机需要足够的信号质量才能解码消息。它的<strong>灵敏度</strong>是指在特定无线电设置和规定误码率下所要求的最小接收功率。接收功率与该阈值之间的差值称为<strong>链路余量</strong>。</p>
+<p>假设某接收机的灵敏度阈值为 −120 dBm，那么 −100 dBm 的信号有 20 dB 的余量，而 −118 dBm 的信号只有 2 dB。两者在安静、稳定的测试中可能都能工作，但当追踪器移动或有障碍物进入路径时，后者几乎没有余地承受额外损耗。</p>
+<p>因此，判断实际可用的通信距离，更应看消息能否持续送达，而不是某个数据包曾经到达过的最远点。即使接收功率看起来足够，干扰也可能导致无法解码。</p>
+<p>提高发射功率可能有帮助，但收益会递减。在其他条件不变时，要使自由空间中的通信距离加倍，大约需要四倍的发射功率（6 dB）。Digi 指出，在没有清晰视距的情况下，距离加倍需要 12 dB 或更多，相当于约 16 倍的功率。天线增益和接收灵敏度同样计入链路预算，正如 <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digi 关于通信距离与天线增益的指南</a>所述。</p>
+<h2 id="terrain-and-antennas">为什么实际通信距离与开阔环境下的估算不同</h2>
+<p>自由空间模型中没有树木、建筑物和地面反射，而实际使用环境中这些都可能存在：</p>
 <ul>
-<li>较高的天线放置位置可减少障碍损耗</li>
-<li>较低的数据速率可提高信噪比</li>
-<li>扩频技术 (LoRa) 牺牲带宽以扩大范围</li>
+<li><strong>路径受阻：</strong>山丘、墙壁和茂密的植被会削弱链路，甚至完全中断链路。</li>
+<li><strong>反射：</strong>从地面或附近表面反射的信号可能相互增强，也可能相互抵消。位置稍有变化，接收效果就可能不同。</li>
+<li><strong>天线安装：</strong>天线的方向、附近的金属以及佩戴追踪器的身体，都会改变天线发送和接收能量的效率。</li>
 </ul>
-<h3>结论</h3>
-<p>“距离是无线电通信的敌人”从根本上推动了围绕天线优化、调制选择和系统布局的工程决策。</p>
+<h3>为什么自由空间计算会高估通信距离</h3>
+<p>Loko 的规格列出最大发射功率为 22 dBm，接收灵敏度为 −137 dBm。在不计天线增益的情况下，链路预算约为 159 dB。在 868 MHz 下，自由空间损耗在 1 km 时约为 91 dB，在 20 km 时约为 117 dB。如果按字面理解，自由空间模型允许约 2,400 km 的链路。</p>
+<p>这个数字并不是通信距离的估算值。它说明了实际路径会消耗掉多少链路预算：地面反射、地形、植被、佩戴追踪器的身体，以及地球的曲率。</p>
+<h3>无线电地平线</h3>
+<p>在远距离上，地球的曲面会在两根低矮天线之间隆起。无线电地平线的常用估算公式考虑了无线电波在低层大气中的轻微弯曲，为 4.12 × (√h₁ + √h₂) km，其中两根天线的高度以米为单位。超过这一距离，地面会挡住直达路径，损耗会急剧增加。</p>
+<div aria-label="不同天线高度下的无线电地平线" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>平坦地面上的无线电地平线（计算值）</caption>
+<thead><tr><th scope="col">追踪器高度</th><th scope="col">接收机高度</th><th scope="col">无线电地平线</th></tr></thead>
+<tbody>
+<tr><th scope="row">0.5 米</th><td>1.5 米（手持）</td><td>约 8 km</td></tr>
+<tr><th scope="row">0.5 米</th><td>10 米</td><td>约 16 km</td></tr>
+<tr><th scope="row">1 米</th><td>15 米</td><td>约 20 km</td></tr>
+</tbody>
+</table>
+</div>
+<p>即使在完全平坦、开阔的地面上，狗项圈上的追踪器和手持在胸前高度的接收机，超过约 8 km 也无法相互“看见”。要实现 20 km 的链路，其中一端需要高出地面约 15 米，例如放在山脊或桅杆上的接收机；实际上还需要更高，才能保持路径畅通。远距离规格描述的是一条架高、开阔的路径，而不是两台贴近地面的设备。</p>
+<h3>路径周围的净空</h3>
+<p>能看到对方天线固然有帮助，但无线电还需要直达路径周围的净空。这一周围区域称为<strong>菲涅耳区</strong>。它在路径中点处最宽：在 868 MHz 下，1 km 链路中点处的半径约为 9 米，2 km 链路约为 13 米。常用的经验法则是至少保持该半径的 60% 无遮挡，在 2 km 时约为 8 米。当两根天线都只比平坦地面高出一两米时，地面会深入这一区域，因此抬高任一天线往往比提高功率更有效。参见 <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digi 对视觉视距与无线电视距的说明</a>以及我们的<a href="/zh/blog/radio-line-of-sight/">无线电视距指南</a>。</p>
+<p>定向天线可以把覆盖范围集中指向固定的接收机。对于移动中的追踪器，覆盖其实际移动方向的天线可能比窄波束的高增益天线更有用。</p>
+<h2 id="lora-and-gps">这对 LoRa GPS 追踪器意味着什么</h2>
+<p>LoRa 并不能避免传播损耗。它使用能够解码极弱信号的无线电设置。在带宽固定时，提高扩频因子可以改善灵敏度，但每次传输耗时更长。这是用数据速率和空中时间换取更大的链路预算，正如 <a href="https://www.semtech.com/uploads/technology/LoRa/lora-and-lorawan.pdf">Semtech 的 LoRa 与 LoRaWAN 概述</a>所述。</p>
+<p>Loko 支持 SF7 至 SF12 的扩频因子，带宽为 125 kHz 或 250 kHz。在相同带宽下，SF12 能解码的信号比 SF7 弱约 12.5 dB。在自由空间中，这大约相当于四倍的通信距离；在有障碍物的路径上，由于距离加倍需要 12 dB 或更多，增益更接近两倍。扩频因子每提高一级，数据包的空中时间也大约翻倍。</p>
+<div aria-label="不同扩频因子下的 LoRa 空中时间" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>125 kHz 下 20 字节数据包的空中时间（计算值）</caption>
+<thead><tr><th scope="col">扩频因子</th><th scope="col">空中时间</th></tr></thead>
+<tbody>
+<tr><th scope="row">SF7</th><td>约 57 毫秒</td></tr>
+<tr><th scope="row">SF9</th><td>约 185 毫秒</td></tr>
+<tr><th scope="row">SF12</th><td>约 1.3 秒</td></tr>
+</tbody>
+</table>
+</div>
+<p>以上数值假设编码率为 4/5、前导码为 8 个符号，并使用带 CRC 的显式报头。20 字节的数据包只是用来示意一条简短位置消息的大小。</p>
+<p>与大量数据传输相比，简短的坐标消息更适合这种权衡。更长的空中时间还会影响每条消息的能耗和信道占用，因此最灵敏的设置并不一定适合所有场景。请沿路线测试，并使用在所需间隔内仍能可靠送达更新的最低扩频因子。<a href="/zh/lora-gps-tracker/">Loko LoRa GPS 追踪器页面</a>介绍了每个无线电参数。</p>
+<h3>GPS 定位与无线电连接是两回事</h3>
+<p>GPS 接收机根据卫星广播的信号计算自身位置，不需要靠近你的手持接收机；<a href="https://www.gps.gov/gps">GPS.gov 介绍了这种单向定位过程</a>。这些坐标需要通过另一条独立的通信链路传送给你。</p>
+<p>在像 <a href="/zh/lora-gps-tracker/">Loko</a>这样的直连 LoRa 追踪系统中，距离和地形会影响追踪器到接收机的链路。追踪器可能仍然知道自己的位置，但它的消息无法送达你。反过来，无线电连接正常，也不能保证在天空被遮挡时获得新的 GPS 定位。</p>
+<p>如果更新停止，请查看最后一次收到的位置的时间戳。该位置表示的是记录更新时追踪器所在的地方，不一定是它现在的位置。</p>
+<h2 id="field-checks">如何实地检查并改善通信距离</h2>
+<ol>
+<li><strong>先在开阔路径上建立基准。</strong>在开阔区域把两台设备放在附近，使用平时的天线和设置进行测试，确认能收到新的位置消息。</li>
+<li><strong>采用真实的佩戴方式。</strong>把追踪器放在实际佩戴或携带的位置。两根天线都举高的测试，并不能代表贴近地面的追踪器。</li>
+<li><strong>先改变位置，再改变功率。</strong>尝试更开阔的位置，或抬高接收机。在相同距离下比较结果。</li>
+<li><strong>持续记录送达情况。</strong>统计每个测试点预期的和实际收到的更新次数。记录地形、天线方向、设置，以及设备显示的任何信号读数。</li>
+<li><strong>沿计划路线重复测试。</strong>把洼地、转弯处、植被和其他可能出问题的地点都包括在内。请选择更新能可靠送达的使用区域，而不要把一次成功的远距离消息当作覆盖范围的保证。</li>
+</ol>
+<p>距离决定了基础损耗，而下一次更新能否送达，取决于完整的无线电传播路径。要让追踪器可靠工作，请像关注标称通信距离一样，关注天线位置、地形和反复的实地测量。</p>
 </div>
 </article>
 <div class="product-cta">
-<p class="product-cta-heading">探索 Loko GPS 跟踪器</p>
+<p class="product-cta-heading">了解 Loko GPS 追踪器</p>
 <div class="product-cta-links">
-<a class="product-cta-link primary" href="/zh/lora-gps-tracker/">查看 Loko GPS 跟踪器</a>
-<a class="product-cta-link" href="/zh/gps/">GPS 和 LoRa 技术指南</a>
+<a class="product-cta-link primary" href="/zh/lora-gps-tracker/">查看 Loko GPS 追踪器</a>
+<a class="product-cta-link" href="/zh/gps/">GPS 与 LoRa 技术指南</a>
 <a class="product-cta-link" href="/zh/specifications/">Loko 规格</a>
 </div>
 </div>
@@ -106,20 +237,20 @@
 <div class="related-posts-grid">
 <a class="related-post-card" href="/zh/blog/radio-line-of-sight/">
 <h3>无线电视距</h3>
-<span class="rp-cta">阅读更多→</span>
+<span class="rp-cta">阅读更多 →</span>
 </a>
 <a class="related-post-card" href="/zh/blog/a-comprehensive-guide-to-gps-radio-features-benefits-applications/">
-<h3>GPS 无线电综合指南：特性、优点和应用</h3>
-<span class="rp-cta">阅读更多→</span>
+<h3>GPS 无线电综合指南：特点、优势与应用</h3>
+<span class="rp-cta">阅读更多 →</span>
 </a>
 <a class="related-post-card" href="/zh/blog/loko-gps-tracker-exploring-the-benefits-of-gps-glonass-and-galileo-satellite-systems/">
-<h3>Loko GPS 跟踪器：探索 GPS、GLONASS 和 GALILEO 卫星系统的优势</h3>
-<span class="rp-cta">阅读更多→</span>
+<h3>Loko GPS 追踪器：探索 GPS、GLONASS 和 Galileo 卫星系统的优势</h3>
+<span class="rp-cta">阅读更多 →</span>
 </a>
 </div>
 </section>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/zh/">nolilab</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/zh/">Home</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">Offline GPS Tracker</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script>
     // Mobile Menu Toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
