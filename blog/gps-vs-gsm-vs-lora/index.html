@@ -154,13 +154,7 @@
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-  .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
-  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
-  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md); }
-  .logo { color: var(--text-primary); text-decoration: none; font-family: var(--font-mono); font-size: 1.25rem; font-weight: 600; }
-  .nav-links { display: flex; align-items: center; gap: var(--spacing-md); flex-wrap: wrap; justify-content: flex-end; }
-  .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
-  .nav-link:hover { color: var(--text-primary); }
+  main .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
   .page-hero { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: var(--spacing-xl) 0; }
   h1 { font-size: clamp(1.85rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.03em; margin-bottom: var(--spacing-sm); }
   .subtitle { color: var(--text-secondary); font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-md); }
@@ -182,9 +176,7 @@
   .faq-item p { margin-bottom: 0; }
   a { color: var(--accent); }
   @media (max-width: 760px) {
-    .nav-container { align-items: flex-start; flex-direction: column; }
-    .nav-links { justify-content: flex-start; gap: var(--spacing-sm); }
-    .compare-table { font-size: 0.8rem; }
+    .compare-table { display: block; overflow-x: auto; font-size: 0.8rem; }
     .compare-table th, .compare-table td { padding: 0.55rem 0.65rem; }
     .faq-grid { grid-template-columns: 1fr; }
   }

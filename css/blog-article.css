@@ -78,6 +78,10 @@ figcaption { margin-top: .75rem; color: var(--text-secondary); font-size: .85rem
 .table-wrapper th, .table-wrapper td { padding: 1rem; text-align: left; vertical-align: top; border-top: 1px solid var(--border); }
 .table-wrapper thead th { background: var(--bg-secondary); }
 .table-wrapper tbody th { width: 22%; font-weight: 600; }
+/* Older posts put tables straight into .article-content with no .table-wrapper. */
+.article-content > table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; font-size: .9rem; line-height: 1.6; }
+.article-content > table th, .article-content > table td { padding: .75rem 1rem; text-align: left; vertical-align: top; border: 1px solid var(--border); }
+.article-content > table th { background: var(--bg-secondary); font-weight: 600; }
 .article-sources { border-top: 1px solid var(--border); margin-top: 2.5rem; font-size: .9rem; }
 .article-sources li { margin-bottom: .4rem; }
 .product-cta { margin: 2.5rem 0; padding: 1.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: .5rem; }
@@ -101,5 +105,6 @@ figcaption { margin-top: .75rem; color: var(--text-secondary); font-size: .85rem
   .article-content { font-size: 1rem; }
   .blog-article h2 { font-size: 1.4rem; }
   .table-wrapper table { min-width: 580px; }
+  .article-content > table { display: block; overflow-x: auto; }
   .related-posts-grid { grid-template-columns: 1fr; }
 }
