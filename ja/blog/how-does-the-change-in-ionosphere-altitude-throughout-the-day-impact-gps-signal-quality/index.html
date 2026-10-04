@@ -4,6 +4,9 @@
 <head>
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <link href="/css/blog-article.css?v=20261004" rel="stylesheet"/>
+<style>
+.article-video iframe { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; border-radius: .5rem; background: #000; }
+</style>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>電離層の日変化はGPS精度にどう影響するか</title>
@@ -68,7 +71,7 @@
   "description": "電離層の高度と電子量は昼夜でどう変わり、GPSの精度にどう影響するのか。誤差の大きさと、誤差を減らす方法を解説します。",
   "url": "https://www.nolilab.com/ja/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/",
   "datePublished": "2023-11-21",
-  "dateModified": "2026-10-03",
+  "dateModified": "2026-10-04",
   "inLanguage": "ja",
   "author": {
     "@type": "Person",
@@ -93,6 +96,18 @@
   "@id": "https://www.nolilab.com/ja/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/#article",
   "translationOfWork": {
     "@id": "https://www.nolilab.com/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/#article"
+  },
+  "video": {
+    "@type": "VideoObject",
+    "@id": "https://www.nolilab.com/ja/blog/how-does-the-change-in-ionosphere-altitude-throughout-the-day-impact-gps-signal-quality/#ionosphere-video",
+    "name": "Why Your GPS Location Drifts: The Ionosphere Explained",
+    "description": "GPS信号を宇宙から地上まで追いかけ、電離層の変化が測位精度にどう影響するかを示す75秒のアニメーション解説です。",
+    "thumbnailUrl": "https://i.ytimg.com/vi/dYK3uNMFUDg/hqdefault.jpg",
+    "uploadDate": "2026-10-04T07:04:46-07:00",
+    "duration": "PT1M15S",
+    "inLanguage": "en",
+    "embedUrl": "https://www.youtube.com/embed/dYK3uNMFUDg",
+    "url": "https://www.youtube.com/watch?v=dYK3uNMFUDg"
   }
 }
 </script>
@@ -112,9 +127,13 @@
 <div class="article-meta">
 <span>著者 <a href="/ja/author/tamleykha-piriyev/" rel="author">Tamleykha Piriyev</a></span>
 <span>公開日 <time datetime="2023-11-21">2023年11月21日</time></span>
-<span>更新日 <time datetime="2026-10-03">2026年10月3日</time></span>
+<span>更新日 <time datetime="2026-10-04">2026年10月4日</time></span>
 </div>
 </div>
+<figure class="article-figure article-video" id="ionosphere-video">
+<iframe width="817" height="460" src="https://www.youtube.com/embed/dYK3uNMFUDg" title="GPSの位置がずれる理由：電離層の解説（英語の動画）" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<figcaption><strong>動画：</strong>GPS信号を宇宙から地上まで追いかけ、電離層が信号をどう遅らせるか、そして2周波受信機や補正モデルが誤差をどう減らすかを示す75秒のアニメーション解説（英語）。<a href="https://www.youtube.com/watch?v=dYK3uNMFUDg">YouTubeで見る</a>。</figcaption>
+</figure>
 <div class="article-summary">
 <p><strong>要点：</strong>電離層は地上およそ60～500 kmに広がっています。日中はD、E、F領域がありますが、夜になるとD領域は消え、E領域は弱まり、主にF層だけが残ります。こうした変化によって、GPS信号が届くまでの時間が変わります。誤差の大きさを主に決めるのは、信号経路に沿った全電子数です。GPSのL1周波数では、補正前で1 m未満から数十mになります。夜間は一般に遅延が小さくなりますが、赤道付近では日没後にF層が上昇し、プラズマバブルに分裂して受信を妨げることがあります。</p>
 </div>
