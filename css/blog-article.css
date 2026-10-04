@@ -62,14 +62,15 @@ a:focus-visible, [tabindex]:focus-visible {
 .article-toc ol { padding-left: 1.3rem; margin: 0; }
 .article-toc li { padding: .2rem 0; }
 .article-figure { margin: 2rem 0; }
-.article-image { display: block; width: 100%; height: auto; border-radius: .5rem; }
+.article-image { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: .5rem; }
+article > .article-image { margin-bottom: 2rem; }
 figcaption { margin-top: .75rem; color: var(--text-secondary); font-size: .85rem; }
 .article-content { font-size: 1.05rem; }
 .blog-article h2 { margin: 2.5rem 0 1rem; font-size: 1.65rem; line-height: 1.3; letter-spacing: -.02em; font-weight: 600; }
 .blog-article h3 { margin: 1.75rem 0 .6rem; font-size: 1.2rem; line-height: 1.4; font-weight: 600; }
 .blog-article [id] { scroll-margin-top: 1.5rem; }
 .article-content p { margin: 0 0 1.2rem; }
-.article-content ul { padding-left: 1.4rem; }
+.article-content ul, .article-content ol { padding-left: 1.4rem; }
 .article-content li { margin-bottom: .9rem; }
 .table-wrapper { overflow-x: auto; margin: 1.5rem 0; border: 1px solid var(--border); border-radius: .5rem; }
 .table-wrapper table { width: 100%; border-collapse: collapse; font-size: .9rem; line-height: 1.6; }
@@ -84,6 +85,14 @@ figcaption { margin-top: .75rem; color: var(--text-secondary); font-size: .85rem
 .product-cta-link { display: inline-block; padding: .75rem 1rem; color: #fff; background: var(--accent); border-radius: .3rem; font-weight: 600; text-decoration: none; }
 .related-posts-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
 .related-post-card { display: flex; justify-content: space-between; gap: .5rem; padding: 1rem; border: 1px solid var(--border); border-radius: .5rem; font-size: .9rem; }
+/* Older post template: icon meta line, labelled CTA with several links, titled related cards. */
+.article-meta i { display: none; } /* fa-subset.css gives .far no font-family, so these render as empty boxes */
+.product-cta-heading { margin: 0 0 1rem; font-size: 1.2rem; font-weight: 600; }
+.product-cta-links { display: flex; flex-wrap: wrap; gap: .75rem; }
+.product-cta-links .product-cta-link:not(.primary) { color: var(--accent); background: transparent; box-shadow: inset 0 0 0 1px var(--accent); }
+.related-post-card:has(.rp-cta) { flex-direction: column; text-decoration: none; }
+.blog-article .related-post-card h3 { margin: 0 0 .6rem; font-size: .95rem; line-height: 1.45; color: var(--text-primary); }
+.rp-cta { margin-top: auto; font-size: .85rem; }
 @media (max-width: 600px) {
   .blog-article { width: calc(100% - 2rem); padding-top: 1.5rem; }
   .back-link { margin-bottom: 1rem; }
