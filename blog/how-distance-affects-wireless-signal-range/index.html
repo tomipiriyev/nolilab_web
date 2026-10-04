@@ -4,6 +4,13 @@
 <head>
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <link href="/css/blog-article.css?v=20261004" rel="stylesheet"/>
+<style>
+@media (max-width: 600px) {
+  .table-wrapper .distance-table { min-width: 0; table-layout: fixed; }
+  .distance-table th, .distance-table td { padding: .75rem .6rem; }
+  .table-wrapper .distance-table tbody th { width: auto; }
+}
+</style>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>How Distance Affects Wireless Signal Range | nolilab Blog</title>
@@ -16,7 +23,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Understanding how the inverse square law affects wireless signal range and what it means for GPS tracking systems." name="description"/>
+<meta content="Learn how distance weakens wireless signals, why real-world range varies, and how antenna placement and LoRa settings affect GPS tracker reliability." name="description"/>
 <link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/" hreflang="en" rel="alternate"/>
 <link href="https://www.nolilab.com/es/blog/how-distance-affects-wireless-signal-range/" hreflang="es" rel="alternate"/>
@@ -43,47 +50,132 @@
 
 
 
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="How Distance Affects Wireless Signal Range"/>
+<meta property="og:description" content="Learn how distance weakens wireless signals, why real-world range varies, and how antenna placement and LoRa settings affect GPS tracker reliability."/>
+<meta property="og:url" content="https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/"/>
+<meta property="og:image" content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp"/>
+<meta property="og:image:width" content="1536"/>
+<meta property="og:image:height" content="1024"/>
+<meta property="og:image:alt" content="Conceptual radio wavefronts spreading across a valley toward a distant receiver"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="How Distance Affects Wireless Signal Range"/>
+<meta name="twitter:description" content="Learn how distance weakens wireless signals, why real-world range varies, and how antenna placement and LoRa settings affect GPS tracker reliability."/>
+<meta name="twitter:image" content="https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp"/>
+<meta name="twitter:image:alt" content="Conceptual radio wavefronts spreading across a valley toward a distant receiver"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How Distance Affects Wireless Signal Range",
+  "description": "Learn how distance weakens wireless signals, why real-world range varies, and how antenna placement and LoRa settings affect GPS tracker reliability.",
+  "url": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/",
+  "datePublished": "2026-02-07",
+  "dateModified": "2026-10-04",
+  "inLanguage": "en",
+  "author": {
+    "@type": "Person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NoliLab",
+    "url": "https://www.nolilab.com/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.nolilab.com/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp",
+    "width": 1536,
+    "height": 1024
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/blog/how-distance-affects-wireless-signal-range/"
+  }
+}
+</script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to article</a>
 <div id="site-header"></div>
-<main class="blog-article">
+<main class="blog-article" id="main-content">
 <article>
 <a class="back-link" href="/blog/">
 <svg aria-hidden="true" class="fa-arrow-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="19" x2="5" y1="12" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back to Blog
     </a>
 <div class="article-header">
 <div class="article-meta">
-<span><i class="far fa-calendar"></i> February 7, 2026</span>
+<span>Published <time datetime="2026-02-07">February 7, 2026</time></span>
+<span>Updated <time datetime="2026-10-04">October 4, 2026</time></span>
 <span><i class="far fa-user"></i> Tamleykha Piriyev</span>
 </div>
 <h1 class="article-title">How Distance Affects Wireless Signal Range</h1>
+<p class="article-deck">A stronger transmitter is only part of the story. Here is how distance, terrain, and receiver sensitivity shape a reliable radio link.</p>
 </div>
-<img alt="Radio Signal Range Diagram" class="article-image" height="512" src="/images/radio-wave.webp" width="512"/>
+<figure class="article-figure">
+<img alt="Expanding green radio wavefronts spreading from an antenna toward a distant receiver across an open valley" class="article-image" fetchpriority="high" height="1024" src="/images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp" srcset="/images/blog-covers/how-distance-affects-wireless-signal-range-v2-thumb.webp 600w, /images/blog-covers/how-distance-affects-wireless-signal-range-v2.webp 1536w" sizes="(max-width: 600px) calc(100vw - 2rem), (max-width: 848px) calc(100vw - 3rem), 800px" width="1536"/>
+<figcaption>Radio energy spreads as it travels. This conceptual illustration shows an open path between two radios; the wavefronts are not visible in real life or drawn to scale.</figcaption>
+</figure>
 <div class="article-content">
-<h2>Introduction</h2>
-<p>The article examines how radio waves propagate in wireless systems, emphasizing that "the inverse square law" fundamentally constrains communication range as distance increases.</p>
-<h2>How Radio Signals Spread</h2>
-<p>Transmitters radiate energy omnidirectionally, creating an expanding spherical wavefront rather than focused beams. The signal distribution grows quadratically while distance increases linearly—the mathematical basis for range limitations.</p>
-<h2>The Inverse Square Law</h2>
-<p>The sphere surface area formula: <strong>A = 4πr²</strong></p>
-<p>Key principle: When distance doubles, signal distribution area quadruples, reducing power density by 75%. The article notes: "doubling the distance reduces received signal strength to one-quarter."</p>
-<h2>Real-System Implications</h2>
-<p><strong>Three critical factors:</strong></p>
+<div class="article-summary"><p><strong>The short answer:</strong> In ideal free space, doubling the distance leaves a receiver with one-quarter of the received power, a drop of about 6 dB. Outdoors, hills, vegetation, antenna placement, and interference can matter as much as the distance itself.</p></div>
+<p>A tracker may send regular updates across an open field, then miss them behind a nearby ridge. That does not mean its range specification suddenly changed. It means the radio path changed. To understand useful range, you need to consider both how a signal spreads and whether the receiver can still decode it.</p>
+<nav aria-label="On this page" class="article-toc">
+<p class="toc-title">On this page</p>
 <ol>
-<li><strong>Non-linear range scaling</strong> — Quadrupling transmit power only doubles effective range (theoretical free-space)</li>
-<li><strong>Receiver sensitivity importance</strong> — Noise floor improvements often outperform power increases</li>
-<li><strong>Antenna design</strong> — Directional antennas concentrate energy, counteracting spreading losses</li>
+<li><a href="#distance-and-power">What happens when distance doubles?</a></li>
+<li><a href="#link-margin">Why links become unreliable</a></li>
+<li><a href="#terrain-and-antennas">Terrain and antenna placement</a></li>
+<li><a href="#lora-and-gps">What this means for LoRa GPS trackers</a></li>
+<li><a href="#field-checks">How to check range in the field</a></li>
 </ol>
-<h2>Environmental Losses</h2>
-<p>Real-world deployments experience additional degradation from obstructions, multipath fading, atmospheric absorption, antenna inefficiencies, and polarization mismatches—often exceeding theoretical predictions.</p>
-<h2>Practical Applications (UAVs, IoT, Trackers)</h2>
+</nav>
+<h2 id="distance-and-power">What happens when distance doubles?</h2>
+<p>Imagine an ideal antenna radiating equally in every direction. Its power spreads over a sphere with surface area <strong>4πr²</strong>. At twice the radius, the same power covers four times the area. A receiving antenna therefore collects less of it.</p>
+<p>This inverse-square relationship describes free-space propagation with frequency, transmit power, and antenna gains held constant, away from the antennas' near field. Real antennas have directional patterns; the sphere is a useful model, not a claim that every antenna radiates equally in all directions. The reference model is documented in <a href="https://www.itu.int/rec/R-REC-P.525-5-202411-I/en">ITU-R P.525</a>.</p>
+<div aria-label="Distance and received power comparison" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>Calculated example: received power relative to a 100 m free-space link</caption>
+<thead><tr><th scope="col">Distance</th><th scope="col">Relative power</th><th scope="col">Power change</th></tr></thead>
+<tbody>
+<tr><th scope="row">100 m</th><td>100%</td><td>0 dB</td></tr>
+<tr><th scope="row">200 m</th><td>25%</td><td>−6 dB</td></tr>
+<tr><th scope="row">400 m</th><td>6.25%</td><td>−12 dB</td></tr>
+<tr><th scope="row">800 m</th><td>1.56%</td><td>−18 dB</td></tr>
+</tbody>
+</table>
+</div>
+<p>These are relative values, rounded for clarity, not measured tracker performance. They do not tell you where reception will stop.</p>
+<h2 id="link-margin">Why a weaker signal eventually means missed updates</h2>
+<p>A receiver needs enough signal quality to decode a message. Its <strong>sensitivity</strong> is the minimum received power specified for particular radio settings and a defined error rate. The gap between the received power and that threshold is the <strong>link margin</strong>.</p>
+<p>For a hypothetical receiver with a −120 dBm sensitivity threshold, a −100 dBm signal has 20 dB of margin. A −118 dBm signal has only 2 dB. Both may work in a quiet, steady test, but the second has little room for an additional loss when the tracker moves or an obstacle enters the path.</p>
+<p>That is why useful range is better judged by consistent message delivery than by the farthest point where one packet arrived. Interference can also prevent decoding even when the received power looks adequate.</p>
+<p>Increasing transmit power can help, but it has diminishing returns. With everything else unchanged, doubling free-space range requires roughly four times the transmitted power. Antenna gain and receiver sensitivity also contribute to the link budget, as explained in <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digi's guide to range and antenna gain</a>.</p>
+<h2 id="terrain-and-antennas">Why real-world range differs from open-air estimates</h2>
+<p>The free-space model contains no trees, buildings, or ground reflections. A working installation has all of these possibilities:</p>
 <ul>
-<li>Higher antenna placement reduces obstruction losses</li>
-<li>Lower data rates improve signal-to-noise ratios</li>
-<li>Spread-spectrum technologies (LoRa) sacrifice bandwidth for extended range</li>
+<li><strong>Blocked paths:</strong> hills, walls, and dense vegetation can weaken a link or interrupt it altogether.</li>
+<li><strong>Reflections:</strong> signals bouncing off the ground or nearby surfaces can combine constructively or destructively. A small change in position can change reception.</li>
+<li><strong>Antenna mounting:</strong> orientation, nearby metal, and the body carrying a tracker can change how efficiently its antenna sends and receives energy.</li>
 </ul>
-<h3>Conclusion</h3>
-<p>"Distance is the enemy of radio communication" fundamentally drives engineering decisions around antenna optimization, modulation selection, and system placement.</p>
+<p>Seeing the other antenna helps, but radio also needs clearance around the direct path. This surrounding region is called the <strong>Fresnel zone</strong>. Raising an antenna can improve that clearance and reduce obstruction by the ground. See <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digi's explanation of visual and radio line of sight</a> and our <a href="/blog/radio-line-of-sight/">radio line-of-sight guide</a>.</p>
+<p>A directional antenna can concentrate coverage toward a fixed receiver. For a moving tracker, coverage across the directions it actually travels may be more useful than a narrow high-gain beam.</p>
+<h2 id="lora-and-gps">What this means for LoRa GPS trackers</h2>
+<p>LoRa does not avoid propagation loss. It uses radio settings that can support decoding very weak signals. At a fixed bandwidth, increasing the spreading factor improves sensitivity, but makes each transmission take longer. That trades data rate and airtime for a stronger link budget, as described in <a href="https://www.semtech.com/uploads/technology/LoRa/lora-and-lorawan.pdf">Semtech's LoRa and LoRaWAN overview</a>.</p>
+<p>Small coordinate messages suit this tradeoff better than large data transfers. Longer airtime also affects energy used per message and channel occupancy, so the most sensitive setting is not automatically the best choice for every deployment. Use the modes supported by your device and evaluate whether updates arrive reliably at the interval you need.</p>
+<h3>A GPS fix and a radio connection are separate things</h3>
+<p>The GPS receiver calculates its position from satellite broadcasts. It does not depend on being close to your handheld receiver; <a href="https://www.gps.gov/systems/gps/index.php">GPS.gov describes this one-way positioning process</a>. A separate communication link delivers those coordinates to you.</p>
+<p>In a direct LoRa tracking system such as <a href="/lora-gps-tracker/">Loko</a>, distance and terrain affect the tracker-to-receiver link. A tracker can still know where it is while its messages fail to reach you. Conversely, a working radio connection does not guarantee a fresh GPS fix under a blocked sky.</p>
+<p>If updates stop, check the timestamp of the last received position. That location tells you where the tracker was when the update was recorded, not necessarily where it is now.</p>
+<h2 id="field-checks">How to check and improve range in the field</h2>
+<ol>
+<li><strong>Start with a clear-path baseline.</strong> Test both devices nearby in an open area using their normal antennas and settings. Confirm that fresh location messages arrive.</li>
+<li><strong>Use realistic mounting.</strong> Put the tracker where it will actually be carried. A test with both antennas held high is not representative of a tracker close to the ground.</li>
+<li><strong>Change position before changing power.</strong> Try a clearer location or raise the receiver. Compare results at the same distance.</li>
+<li><strong>Record delivery over time.</strong> Count expected and received updates at each test point. Note terrain, antenna orientation, settings, and any signal readings the device exposes.</li>
+<li><strong>Repeat along the intended route.</strong> Include dips, turns, vegetation, and other likely trouble spots. Choose an operating area with dependable updates, rather than treating a single successful long-distance message as a coverage guarantee.</li>
+</ol>
+<p>Distance explains the baseline loss. The complete radio path determines whether the next update gets through. For a reliable tracker setup, give antenna placement, terrain, and repeated field measurements the same attention as the advertised range.</p>
 </div>
 </article>
 <div class="product-cta">
