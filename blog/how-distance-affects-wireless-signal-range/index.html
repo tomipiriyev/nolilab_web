@@ -118,7 +118,7 @@
 <figcaption>Radio energy spreads as it travels. This conceptual illustration shows an open path between two radios; the wavefronts are not visible in real life or drawn to scale.</figcaption>
 </figure>
 <div class="article-content">
-<div class="article-summary"><p><strong>The short answer:</strong> In ideal free space, doubling the distance leaves a receiver with one-quarter of the received power, a drop of about 6 dB. Outdoors, hills, vegetation, antenna placement, and interference can matter as much as the distance itself.</p></div>
+<div class="article-summary"><p><strong>The short answer:</strong> In ideal free space, doubling the distance leaves a receiver with one-quarter of the received power, a drop of about 6 dB. Outdoors, hills, vegetation, antenna placement, and interference can matter as much as the distance itself. Near the ground, even the curve of the Earth limits range: antennas 0.5 m and 1.5 m high have a radio horizon of about 8 km.</p></div>
 <p>A tracker may send regular updates across an open field, then miss them behind a nearby ridge. That does not mean its range specification suddenly changed. It means the radio path changed. To understand useful range, you need to consider both how a signal spreads and whether the receiver can still decode it.</p>
 <nav aria-label="On this page" class="article-toc">
 <p class="toc-title">On this page</p>
@@ -150,7 +150,7 @@
 <p>A receiver needs enough signal quality to decode a message. Its <strong>sensitivity</strong> is the minimum received power specified for particular radio settings and a defined error rate. The gap between the received power and that threshold is the <strong>link margin</strong>.</p>
 <p>For a hypothetical receiver with a −120 dBm sensitivity threshold, a −100 dBm signal has 20 dB of margin. A −118 dBm signal has only 2 dB. Both may work in a quiet, steady test, but the second has little room for an additional loss when the tracker moves or an obstacle enters the path.</p>
 <p>That is why useful range is better judged by consistent message delivery than by the farthest point where one packet arrived. Interference can also prevent decoding even when the received power looks adequate.</p>
-<p>Increasing transmit power can help, but it has diminishing returns. With everything else unchanged, doubling free-space range requires roughly four times the transmitted power. Antenna gain and receiver sensitivity also contribute to the link budget, as explained in <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digi's guide to range and antenna gain</a>.</p>
+<p>Increasing transmit power can help, but it has diminishing returns. With everything else unchanged, doubling free-space range requires roughly four times the transmitted power (6 dB). Without a clear line of sight, Digi puts the cost of doubling range at 12 dB or more, about 16 times the power. Antenna gain and receiver sensitivity also contribute to the link budget, as explained in <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digi's guide to range and antenna gain</a>.</p>
 <h2 id="terrain-and-antennas">Why real-world range differs from open-air estimates</h2>
 <p>The free-space model contains no trees, buildings, or ground reflections. A working installation has all of these possibilities:</p>
 <ul>
@@ -158,13 +158,44 @@
 <li><strong>Reflections:</strong> signals bouncing off the ground or nearby surfaces can combine constructively or destructively. A small change in position can change reception.</li>
 <li><strong>Antenna mounting:</strong> orientation, nearby metal, and the body carrying a tracker can change how efficiently its antenna sends and receives energy.</li>
 </ul>
-<p>Seeing the other antenna helps, but radio also needs clearance around the direct path. This surrounding region is called the <strong>Fresnel zone</strong>. Raising an antenna can improve that clearance and reduce obstruction by the ground. See <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digi's explanation of visual and radio line of sight</a> and our <a href="/blog/radio-line-of-sight/">radio line-of-sight guide</a>.</p>
+<h3>Why free-space math overestimates range</h3>
+<p>Loko's specifications list a maximum transmit power of 22 dBm and a receiver sensitivity of −137 dBm. That is a link budget of about 159 dB before antenna gains. At 868 MHz, free-space loss is about 91 dB over 1 km and 117 dB over 20 km. Taken at face value, the free-space model would allow a link of roughly 2,400 km.</p>
+<p>That figure is not a range estimate. It shows how much of the budget a real path uses up: ground reflections, terrain, vegetation, the body carrying the tracker, and the curve of the Earth.</p>
+<h3>The radio horizon</h3>
+<p>Over long distances, the Earth bulges up between two low antennas. A common estimate of the radio horizon, which allows for the slight bending of radio waves in the lower atmosphere, is 4.12 × (√h₁ + √h₂) kilometers, with both antenna heights in meters. Beyond it, the ground blocks the direct path and losses rise steeply.</p>
+<div aria-label="Radio horizon for different antenna heights" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>Calculated radio horizon over flat ground</caption>
+<thead><tr><th scope="col">Tracker height</th><th scope="col">Receiver height</th><th scope="col">Radio horizon</th></tr></thead>
+<tbody>
+<tr><th scope="row">0.5 m</th><td>1.5 m (handheld)</td><td>≈ 8 km</td></tr>
+<tr><th scope="row">0.5 m</th><td>10 m</td><td>≈ 16 km</td></tr>
+<tr><th scope="row">1 m</th><td>15 m</td><td>≈ 20 km</td></tr>
+</tbody>
+</table>
+</div>
+<p>Even over perfectly flat, open ground, a tracker on a dog's collar and a receiver held at chest height cannot see each other beyond about 8 km. A 20 km link needs one end roughly 15 m above the terrain, such as a receiver on a ridge or mast, and in practice more to keep the path clear. A long-range specification describes an elevated, open path, not two devices at ground level.</p>
+<h3>Clearance around the path</h3>
+<p>Seeing the other antenna helps, but radio also needs clearance around the direct path. This surrounding region is called the <strong>Fresnel zone</strong>. It is widest at the middle of the path: at 868 MHz its radius there is about 9 m on a 1 km link and about 13 m on a 2 km link. A common rule of thumb is to keep at least 60% of that radius clear, about 8 m at 2 km. When both antennas are only a meter or two above flat ground, the ground cuts deep into that zone, which is why raising either antenna often helps more than adding power. See <a href="https://www.digi.com/support/knowledge-base/line-of-sight-los-and-high-gain-antennas">Digi's explanation of visual and radio line of sight</a> and our <a href="/blog/radio-line-of-sight/">radio line-of-sight guide</a>.</p>
 <p>A directional antenna can concentrate coverage toward a fixed receiver. For a moving tracker, coverage across the directions it actually travels may be more useful than a narrow high-gain beam.</p>
 <h2 id="lora-and-gps">What this means for LoRa GPS trackers</h2>
 <p>LoRa does not avoid propagation loss. It uses radio settings that can support decoding very weak signals. At a fixed bandwidth, increasing the spreading factor improves sensitivity, but makes each transmission take longer. That trades data rate and airtime for a stronger link budget, as described in <a href="https://www.semtech.com/uploads/technology/LoRa/lora-and-lorawan.pdf">Semtech's LoRa and LoRaWAN overview</a>.</p>
-<p>Small coordinate messages suit this tradeoff better than large data transfers. Longer airtime also affects energy used per message and channel occupancy, so the most sensitive setting is not automatically the best choice for every deployment. Use the modes supported by your device and evaluate whether updates arrive reliably at the interval you need.</p>
+<p>Loko supports spreading factors SF7 to SF12 at 125 or 250 kHz bandwidth. At the same bandwidth, SF12 can decode signals about 12.5 dB weaker than SF7. In free space that is roughly four times the range; on an obstructed path, where doubling range takes 12 dB or more, it is closer to twice. Each step up in spreading factor also roughly doubles how long a packet stays on the air.</p>
+<div aria-label="LoRa time on air by spreading factor" class="table-wrapper" role="region" tabindex="0">
+<table class="distance-table">
+<caption>Calculated time on air for a 20-byte packet at 125 kHz</caption>
+<thead><tr><th scope="col">Spreading factor</th><th scope="col">Time on air</th></tr></thead>
+<tbody>
+<tr><th scope="row">SF7</th><td>≈ 57 ms</td></tr>
+<tr><th scope="row">SF9</th><td>≈ 185 ms</td></tr>
+<tr><th scope="row">SF12</th><td>≈ 1.3 s</td></tr>
+</tbody>
+</table>
+</div>
+<p>These values assume coding rate 4/5, an 8-symbol preamble, and an explicit header with CRC. The 20-byte packet is an illustrative size for a short position message.</p>
+<p>Small coordinate messages suit this tradeoff better than large data transfers. Longer airtime also affects energy used per message and channel occupancy, so the most sensitive setting is not automatically the best choice for every deployment. Test along your route and use the lowest spreading factor that still delivers updates reliably at the interval you need. The <a href="/lora-gps-tracker/">Loko LoRa GPS tracker page</a> explains each radio parameter.</p>
 <h3>A GPS fix and a radio connection are separate things</h3>
-<p>The GPS receiver calculates its position from satellite broadcasts. It does not depend on being close to your handheld receiver; <a href="https://www.gps.gov/systems/gps/index.php">GPS.gov describes this one-way positioning process</a>. A separate communication link delivers those coordinates to you.</p>
+<p>The GPS receiver calculates its position from satellite broadcasts. It does not depend on being close to your handheld receiver; <a href="https://www.gps.gov/gps">GPS.gov describes this one-way positioning process</a>. A separate communication link delivers those coordinates to you.</p>
 <p>In a direct LoRa tracking system such as <a href="/lora-gps-tracker/">Loko</a>, distance and terrain affect the tracker-to-receiver link. A tracker can still know where it is while its messages fail to reach you. Conversely, a working radio connection does not guarantee a fresh GPS fix under a blocked sky.</p>
 <p>If updates stop, check the timestamp of the last received position. That location tells you where the tracker was when the update was recorded, not necessarily where it is now.</p>
 <h2 id="field-checks">How to check and improve range in the field</h2>
