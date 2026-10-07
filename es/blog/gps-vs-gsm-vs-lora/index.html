@@ -7,8 +7,8 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/favicon.ico" rel="icon" sizes="any"/>
-<title>GPS vs. GSM vs. LoRa: ¿qué rastrea realmente la ubicación?</title>
-<meta content="Comprenda GPS, GSM y LoRa en términos simples. GPS calcula la ubicación, GSM envía datos a través de torres y LoRa permite el seguimiento local sin conexión." name="description"/>
+<title>GPS vs. GSM vs. LoRa: cómo funciona realmente el rastreo</title>
+<meta content="Descubre cómo funcionan juntos GPS, GSM y LoRa en un rastreador. Compara el rastreo celular y por radio directa: cobertura, suscripciones y límites sin conexión." name="description"/>
 <meta content="gps vs gsm vs lora, lora gps tracker explained, gps gsm tracker, lora tracking explained" name="keywords"/>
 <meta content="nolilab" name="author"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
@@ -22,16 +22,16 @@
 <link href="https://www.nolilab.com/zh/blog/gps-vs-gsm-vs-lora/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="GPS vs. GSM vs. LoRa: ¿qué rastrea realmente la ubicación?" property="og:title"/>
-<meta content="Comprenda GPS, GSM y LoRa en términos simples. GPS calcula la ubicación, GSM envía datos a través de torres y LoRa permite el seguimiento local sin conexión." property="og:description"/>
+<meta content="GPS vs. GSM vs. LoRa: cómo funciona realmente el rastreo" property="og:title"/>
+<meta content="Descubre cómo funcionan juntos GPS, GSM y LoRa en un rastreador. Compara el rastreo celular y por radio directa: cobertura, suscripciones y límites sin conexión." property="og:description"/>
 <meta content="https://www.nolilab.com/es/blog/gps-vs-gsm-vs-lora/" property="og:url"/>
-<meta property="og:image" content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp"/>
+<meta content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="es_ES" property="og:locale"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta content="GPS vs. GSM vs. LoRa: ¿qué rastrea realmente la ubicación?" name="twitter:title"/>
-<meta content="Comprenda GPS, GSM y LoRa en términos simples. GPS calcula la ubicación, GSM envía datos a través de torres y LoRa permite el seguimiento local sin conexión." name="twitter:description"/>
-<meta name="twitter:image" content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPS vs. GSM vs. LoRa: cómo funciona realmente el rastreo" name="twitter:title"/>
+<meta content="Descubre cómo funcionan juntos GPS, GSM y LoRa en un rastreador. Compara el rastreo celular y por radio directa: cobertura, suscripciones y límites sin conexión." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp" name="twitter:image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -41,48 +41,63 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "¿GPS es lo mismo que GSM?",
+      "name": "¿Funciona el GPS sin tarjeta SIM?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. GPS es para posicionamiento; GSM es comunicación celular."
+        "text": "Sí. Un receptor GPS puede calcular su posición sin tarjeta SIM ni conexión a internet cuando recibe señales de satélite utilizables. Para enviar esa posición a otra persona se necesita un enlace de comunicación aparte."
       }
     },
     {
       "@type": "Question",
-      "name": "¿LoRa es un sistema GPS?",
+      "name": "¿GSM es lo mismo que GPS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. LoRa es una tecnología de comunicación por radio. Loko combina LoRa con GPS."
+        "text": "No. El GPS calcula una posición a partir de señales de satélite. GSM es un estándar de comunicación celular 2G que un rastreador puede usar para enviar datos. Los rastreadores celulares más recientes pueden usar otras tecnologías de red."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Por qué esto es importante para las suscripciones?",
+      "name": "¿Puede mi teléfono recibir LoRa directamente?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "La comunicación celular generalmente requiere un plan de operador pago. LoRa P2P no."
+        "text": "Un smartphone estándar no tiene una radio LoRa integrada. Un sistema de rastreo LoRa directo necesita un receptor compatible que transmita los datos de ubicación al teléfono."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Cuál es mejor para zonas remotas?",
+      "name": "¿El rastreo LoRa nunca requiere suscripción?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa es potente para el seguimiento remoto local; El satélite es mejor para mensajes de emergencia globales."
+        "text": "Un enlace LoRa directo punto a punto no requiere un plan celular. Los servicios de red, las aplicaciones o las funciones en la nube pueden tener tarifas aparte, así que revisa el producto y el paquete de servicios completos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿LoRa hace que el GPS sea más preciso?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. En un rastreador GPS con LoRa, el receptor GPS calcula las coordenadas y LoRa las transporta. El enlace de radio influye en si llega una actualización, no en la precisión de esa posición GPS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo rastrear un dispositivo LoRa desde cualquier lugar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Con una configuración directa punto a punto, necesitas un receptor compatible dentro del alcance de radio. El acceso remoto mediante gateways o un servicio conectado a internet requiere infraestructura adicional."
       }
     }
   ],
   "inLanguage": "es"
 }</script>
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "GPS frente a GSM frente a LoRa",
-  "description": "Comprenda GPS, GSM y LoRa en términos simples. GPS calcula la ubicación, GSM envía datos a través de torres y LoRa permite el seguimiento local sin conexión.",
+  "headline": "GPS vs. GSM vs. LoRa: cómo funciona realmente el rastreo",
+  "description": "Descubre cómo funcionan juntos GPS, GSM y LoRa en un rastreador. Compara el rastreo celular y por radio directa: cobertura, suscripciones y límites sin conexión.",
   "url": "https://www.nolilab.com/es/blog/gps-vs-gsm-vs-lora/",
   "datePublished": "2026-05-17",
-  "dateModified": "2026-06-06",
+  "dateModified": "2026-10-05",
   "author": {
     "@type": "Person",
     "name": "Tamleykha Piriyev",
@@ -111,8 +126,7 @@
   "translationOfWork": {
     "@id": "https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/#article"
   }
-}
-</script>
+}</script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -120,13 +134,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Hogar",
+      "name": "Inicio",
       "item": "https://www.nolilab.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "GPS frente a GSM frente a LoRa",
+      "name": "GPS vs. GSM vs. LoRa",
       "item": "https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/"
     }
   ],
@@ -186,55 +200,55 @@
 </style>
 <script defer="" src="/js/layout.js?v=20260906"></script>
 <link href="/css/blog-covers.css?v=20261004" rel="stylesheet"/>
-<meta property="og:image:alt" content="GPS frente a GSM frente a LoRa"/>
+<meta content="Posicionamiento por satélite, comunicación celular y enlaces de radio directos ilustrados juntos." property="og:image:alt"/>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <section class="page-hero">
 <div class="container">
-<h1>GPS frente a GSM frente a LoRa</h1>
-<p class="subtitle">GPS encuentra la posición. GSM o LoRa envía la posición. Esa distinción lo cambia todo.</p>
-<p>GPS, GSM y LoRa a menudo se mezclan en el marketing de rastreadores, pero no son la misma tecnología.</p>
-<p>GPS calcula la posición a partir de satélites. GSM envía datos a través de torres de telefonía móvil. LoRa envía pequeños paquetes por radio de largo alcance y baja potencia.</p>
+<h1>GPS vs. GSM vs. LoRa: cómo funciona realmente el rastreo</h1>
+<p class="subtitle">El GPS calcula una posición. Las redes celulares o la radio LoRa te hacen llegar esa posición.</p>
+<p>Un rastreador puede saber dónde está mientras tu teléfono muestra una ubicación antigua. Lo que suele faltar es la conexión entre el rastreador y tú.</p>
+<p>Para entender por qué, separa dos tareas: encontrar una ubicación y enviarla a algún sitio. El GPS se encarga de la primera. GSM y otras tecnologías celulares, o un enlace de radio LoRa, pueden encargarse de la segunda. La conexión que elijas determina dónde puedes recibir actualizaciones, qué equipo necesitas y si hace falta un plan de servicio.</p>
 </div>
 </section>
-<div class="blog-cover-wrap"><img alt="GPS frente a GSM frente a LoRa" class="article-image blog-cover-image" width="1200" height="800" loading="eager" decoding="async" src="/images/blog-covers/gps-vs-gsm-vs-lora.webp" srcset="/images/blog-covers/gps-vs-gsm-vs-lora-thumb.webp 600w, /images/blog-covers/gps-vs-gsm-vs-lora.webp 1200w" sizes="(max-width: 800px) 100vw, 800px"/></div>
+<div class="blog-cover-wrap"><img alt="Posicionamiento por satélite, comunicación celular y enlaces de radio directos ilustrados juntos." class="article-image blog-cover-image" decoding="async" height="800" loading="eager" sizes="(max-width: 800px) 100vw, 800px" src="/images/blog-covers/gps-vs-gsm-vs-lora.webp" srcset="/images/blog-covers/gps-vs-gsm-vs-lora-thumb.webp 600w, /images/blog-covers/gps-vs-gsm-vs-lora.webp 1200w" width="1200"/></div>
 <!-- SVG Diagram: GPS vs GSM vs LoRa roles -->
 <section class="content-block">
 <div class="container">
-<h2>Las tres tecnologías: lo que hace cada una</h2>
+<h2>Cómo llega una ubicación a tu teléfono</h2>
 <svg aria-label="Diagram showing GPS for positioning, GSM and LoRa for communication in GPS trackers" role="img" style="width:100%;height:auto;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;" viewbox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
 <!-- Title -->
 <text fill="#24292e" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="450" y="28">GPS Finds Position — GSM or LoRa Sends It</text>
 <!-- GPS Section -->
 <rect fill="#e8f5e9" height="270" rx="8" stroke="#238636" stroke-width="2" width="270" x="20" y="50"></rect>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="155" y="78">GPS — Positioning</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="155" y="78">GPS / GNSS — Positioning</text>
 <!-- Satellite icons -->
 <circle cx="80" cy="120" fill="#c8e6c9" r="20" stroke="#238636" stroke-width="1.5"></circle>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="80" y="117">GPS</text>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="80" y="128">31 sats</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="80" y="128">satellites</text>
 <circle cx="155" cy="110" fill="#c8e6c9" r="20" stroke="#238636" stroke-width="1.5"></circle>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="155" y="107">GLONASS</text>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="155" y="118">24 sats</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="155" y="118">satellites</text>
 <circle cx="230" cy="120" fill="#c8e6c9" r="20" stroke="#238636" stroke-width="1.5"></circle>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="230" y="117">Galileo</text>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="230" y="128">30 sats</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="230" y="128">satellites</text>
 <!-- Signal lines down -->
 <line stroke="#238636" stroke-dasharray="4,3" stroke-width="1.5" x1="80" x2="140" y1="140" y2="190"></line>
 <line stroke="#238636" stroke-dasharray="4,3" stroke-width="1.5" x1="155" x2="155" y1="130" y2="190"></line>
 <line stroke="#238636" stroke-dasharray="4,3" stroke-width="1.5" x1="230" x2="170" y1="140" y2="190"></line>
 <!-- Tracker device -->
 <rect fill="#fff" height="40" rx="6" stroke="#238636" stroke-width="2" width="110" x="100" y="190"></rect>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="155" y="215">GPS Receiver</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="155" y="215">GNSS Receiver</text>
 <!-- Output -->
 <text fill="#238636" font-family="Inter,sans-serif" font-size="10" font-weight="500" text-anchor="middle" x="155" y="255">Outputs: Lat/Lon coordinates</text>
-<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="275">Accuracy: 2–5 metres</text>
-<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="295">Works: Anywhere outdoors</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="275">Accuracy varies with conditions</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="295">Needs usable satellite signals</text>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="155" y="312">Cannot send data by itself</text>
 <!-- GSM Section -->
 <rect fill="#fff3e0" height="270" rx="8" stroke="#e65100" stroke-width="2" width="270" x="315" y="50"></rect>
-<text fill="#e65100" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="450" y="78">GSM/LTE — Communication</text>
+<text fill="#e65100" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="450" y="78">Cellular — Communication</text>
 <!-- Cell tower -->
 <rect fill="#ffe0b2" height="80" rx="4" stroke="#e65100" stroke-width="1.5" width="60" x="420" y="100"></rect>
 <text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="130">Cell</text>
@@ -253,7 +267,7 @@
 <rect fill="#fff" height="30" rx="6" stroke="#e65100" stroke-width="1.5" width="50" x="425" y="270"></rect>
 <text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="290">Phone</text>
 <!-- Requirements -->
-<text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="312">Needs: SIM card + towers + monthly fee</text>
+<text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="312">Needs: Coverage + active service</text>
 <!-- LoRa Section -->
 <rect fill="#e8f5e9" height="270" rx="8" stroke="#238636" stroke-width="2" width="270" x="610" y="50"></rect>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="745" y="78">LoRa — Communication</text>
@@ -266,7 +280,7 @@
 <text fill="#238636" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle" x="745" y="155">Loko Air</text>
 <!-- Direct arrow to receiver -->
 <line stroke="#238636" stroke-width="2.5" x1="745" x2="745" y1="170" y2="210"></line>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="745" y="195">20+ km</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="745" y="195">Radio link</text>
 <!-- Receiver -->
 <rect fill="#fff" height="40" rx="6" stroke="#238636" stroke-width="2" width="90" x="700" y="210"></rect>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle" x="745" y="235">Loko Ground</text>
@@ -275,7 +289,7 @@
 <rect fill="#fff" height="30" rx="6" stroke="#238636" stroke-width="1.5" width="50" x="720" y="270"></rect>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="745" y="290">Phone</text>
 <!-- Requirements -->
-<text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="745" y="312">Needs: Nothing — direct radio link</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="745" y="312">Needs: Compatible receiver in range</text>
 <!-- Bottom summary bar -->
 <rect fill="none" height="0" rx="4" stroke="none" width="860" x="20" y="330"></rect>
 </svg>
@@ -283,40 +297,65 @@
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Comparación rápida</h2>
+<h2>GPS, GSM y LoRa de un vistazo</h2>
 <table class="compare-table">
-<thead><tr><th>Tecnología</th><th>Role</th><th>Fortaleza</th><th>Debilidad</th></tr></thead>
+<thead><tr><th scope="col">Tecnología</th><th scope="col">Función en un rastreador</th><th scope="col">Qué necesita</th><th scope="col">Principal limitación</th></tr></thead>
 <tbody>
-<tr><td>GPS</td><td>Posicionamiento</td><td>Funciona globalmente al aire libre</td><td>No transmite la ubicación por sí solo.</td></tr>
-<tr><td>GSM/LTE</td><td>Comunicación</td><td>Amplio acceso a la nube con cobertura</td><td>Necesita SIM, torres y tarifas.</td></tr>
-<tr><td>LoRa</td><td>Comunicación</td><td>Paquetes locales de bajo consumo y largo alcance</td><td>El bajo ancho de banda y el alcance dependen del terreno.</td></tr>
+<tr><th scope="row">GPS / GNSS</th><td>Calcula coordenadas a partir de señales de satélite</td><td>Un receptor con recepción de satélite utilizable</td><td>No envía esas coordenadas a tu teléfono</td></tr>
+<tr><th scope="row">GSM / celular</th><td>Envía actualizaciones a través de una red móvil</td><td>Cobertura de red compatible y servicio activo, normalmente mediante una SIM o eSIM</td><td>Las actualizaciones dependen de la cobertura y del servicio del proveedor</td></tr>
+<tr><th scope="row">LoRa punto a punto</th><td>Envía pequeños paquetes de ubicación directamente por radio</td><td>Un receptor compatible dentro del alcance de radio</td><td>El alcance depende del terreno, las antenas y la configuración de radio</td></tr>
 </tbody>
 </table>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>GPS no es el rastreador completo</h2>
-<p>Un receptor GPS puede calcular la latitud y la longitud, pero no puede enviar mágicamente esas coordenadas a su teléfono a kilómetros de distancia.</p>
-<p>Cada rastreador en tiempo real necesita un canal de comunicación después de que GPS obtenga la posición.</p>
+<h2>El GPS encuentra la posición</h2>
+<p>Un receptor GPS escucha las señales de los satélites y usa su sincronización para calcular su posición. Para ello no necesita tarjeta SIM ni conexión de datos móviles, y no informa de su ubicación a los satélites GPS.</p>
+<p>El GPS es un sistema de navegación por satélite. GNSS es el término más amplio, que también incluye sistemas como Galileo y GLONASS. Un rastreador descrito como «rastreador GPS» puede usar varios de estos sistemas.</p>
+<p>La recepción importa. Los edificios, la vegetación densa y el terreno pueden obstruir las señales o reducir la precisión. Un enlace de comunicación que funciona no puede suplir una posición que falta: el rastreador puede entregar un mensaje correctamente sin tener una ubicación reciente que enviar. <a href="https://www.gps.gov/gps-accuracy">GPS.gov explica los factores que afectan a la precisión del posicionamiento</a>.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Por qué los rastreadores GSM tienen suscripciones</h2>
-<p>Los rastreadores GSM y LTE utilizan redes móviles, lo que significa que el dispositivo necesita un plan de operador. Esa es la causa principal de muchas tarifas mensuales del rastreador GPS.</p>
+<h2>GSM y las redes celulares envían la actualización</h2>
+<p>En un rastreador celular típico, el receptor GPS calcula una posición y luego un módem celular la envía a través de una red móvil a un servicio al que accede tu aplicación. Puedes estar lejos del rastreador y seguir viendo actualizaciones, siempre que el rastreador tenga cobertura compatible y tu teléfono pueda acceder al servicio.</p>
+<p>En sentido estricto, GSM se refiere a un estándar de red móvil 2G. Los rastreadores celulares modernos pueden usar en su lugar LTE, LTE-M o NB-IoT. Estos nombres no son intercambiables: el dispositivo debe admitir la red disponible donde lo uses. Antes de comprar un rastreador GSM antiguo, consulta los planes de soporte del operador; <a href="https://www.gsma.com/about-us/regions/europe/news/network-rationalisation-making-way-for-4g-and-5g/">la retirada de las redes 2G y 3G</a> hace que esto sea especialmente relevante.</p>
+<p>La conectividad celular suele tener un coste de servicio. Puede presentarse como una suscripción mensual, saldo prepago o un servicio incluido en el precio de compra. Una aplicación o plataforma en la nube puede añadir su propia tarifa. Lo que se paga es la conectividad y los servicios, no el acceso a las señales GPS.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Por qué Loko usa LoRa</h2>
-<p>LoRa se adapta bien al seguimiento de GPS porque las coordenadas son paquetes pequeños. Loko usa LoRa para enviar la ubicación localmente sin torres de telefonía celular ni Internet.</p>
+<h2>LoRa envía paquetes pequeños por un enlace de radio</h2>
+<p>Las actualizaciones de ubicación contienen pocos datos, así que encajan con una radio diseñada para mensajes pequeños. LoRa proporciona ese enlace de radio. En una configuración punto a punto, un rastreador envía las coordenadas directamente a un receptor compatible cercano, sin pasar por un operador celular.</p>
+<p>El receptor es imprescindible. Un teléfono estándar no puede recibir paquetes LoRa por sí solo; necesita hardware compatible que pase los datos a una aplicación. También tienes que permanecer dentro del alcance útil del enlace. Las colinas, los edificios, la vegetación, la ubicación de la antena y la configuración de radio influyen en que lleguen los paquetes.</p>
+<p><a href="https://www.semtech.com/lora/what-is-lora">Semtech describe LoRa como una tecnología de radio de bajo consumo y largo alcance</a>. Esas propiedades no garantizan una distancia ni una autonomía concretas para un rastreador terminado. Las posiciones GPS frecuentes y las transmisiones frecuentes siguen consumiendo energía.</p>
+<h3>LoRa y LoRaWAN son partes distintas de un sistema</h3>
+<p>LoRa es la tecnología de radio; LoRaWAN es un protocolo de red construido sobre ella. Un despliegue LoRaWAN utiliza gateways y un servidor de red, mientras que un enlace directo punto a punto puede funcionar entre dispositivos compatibles. Que un producto diga «LoRa» no indica por sí solo si necesita un gateway, acceso a internet o un servicio de red de pago. Consulta <a href="https://www.semtech.com/uploads/technology/LoRa/lora-and-lorawan.pdf">la descripción general de LoRa y LoRaWAN de Semtech</a> para conocer la arquitectura.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Guías Loko relacionadas</h2>
-<p>Para obtener más información, lea el <a href="/es/lora-gps-tracker/">Guía del rastreador LoRa GPS</a>, el <a href="/es/no-monthly-fee/">sin tarifa mensual Guía del rastreador GPS</a>, y el <a href="/es/blog/how-offline-gps-tracking-works/">Guía de seguimiento de GPS sin conexión</a>.</p>
+<h2>¿Qué ocurre cuando se pierde la conexión?</h2>
+<p>Imagina un rastreador en un perro que se mueve detrás de una colina. Su receptor GPS aún puede calcular una posición nueva, pero la colina puede bloquear el trayecto de radio hacia tu receptor. Tu aplicación tendrá entonces una ubicación recibida anterior, no una prueba de dónde está el perro ahora.</p>
+<p>Un rastreador celular tiene la misma separación entre posicionamiento y entrega: fuera de la cobertura de red compatible, puede conocer sus coordenadas pero no poder enviarlas. Algunos dispositivos guardan las posiciones y las suben más tarde; comprueba si el rastreador concreto admite ese comportamiento.</p>
+<p>Al leer un mapa, comprueba la marca de tiempo además del marcador. Para usarlo sin conexión, comprueba también si la aplicación puede mostrar mapas guardados. Recibir coordenadas sin internet y descargar teselas de mapa son capacidades distintas.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>¿Qué conexión se adapta a tu uso?</h2>
+<p><strong>La red celular es adecuada para rastrear en un área amplia con cobertura compatible.</strong> Puede servir para un vehículo o un activo que se desplaza mucho más allá del alcance de tu propio receptor. Comprueba la tecnología de red exacta, la cobertura, el intervalo de actualización y el coste continuo del servicio.</p>
+<p><strong>LoRa directo es adecuado para el rastreo local cuando puedes mantener un receptor al alcance.</strong> Puede servir para trabajo de campo, una granja o la recuperación de equipos sin cobertura móvil. Prueba el enlace en el terreno real: un trayecto despejado y elevado y una ruta detrás de una loma pueden dar resultados muy diferentes.</p>
+<p>Para comparar con más detalle configuraciones completas de rastreadores, lee nuestra <a href="/es/lora-vs-cellular-gps-tracker/">guía de rastreadores LoRa frente a celulares</a>. Ni la etiqueta GPS ni una cifra de alcance máximo de radio indican si un dispositivo entregará actualizaciones a lo largo de tu ruta.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Cómo combina Loko el GPS y LoRa</h2>
+<p>En la configuración punto a punto de Loko, la unidad Air obtiene su posición de las señales de satélite y envía las coordenadas por LoRa al receptor Ground. El receptor proporciona el enlace con tu teléfono. Ese trayecto de radio local no requiere una SIM celular ni una suscripción con un operador.</p>
+<p>Los mismos límites siguen aplicándose: Air necesita recepción de satélite para obtener una posición nueva, y Ground tiene que estar dentro del alcance de radio para recibirla. Planifica dónde colocar el receptor y comprueba la configuración completa antes de confiar en ella sobre el terreno.</p>
+<p>Explora la <a href="/es/lora-gps-tracker/">guía del rastreador GPS LoRa</a>, <a href="/es/specifications/">las especificaciones de Loko</a> y la <a href="/es/blog/how-offline-gps-tracking-works/">guía de rastreo sin conexión</a> para más detalles.</p>
 </div>
 </section>
 <section class="content-block">
@@ -324,20 +363,28 @@
 <h2>Preguntas frecuentes</h2>
 <div class="faq-grid">
 <div class="faq-item">
-<h3>¿GPS es lo mismo que GSM?</h3>
-<p>No. GPS es para posicionamiento; GSM es comunicación celular.</p>
+<h3>¿Funciona el GPS sin tarjeta SIM?</h3>
+<p>Sí. Un receptor GPS puede calcular su posición sin tarjeta SIM ni conexión a internet cuando recibe señales de satélite utilizables. Para enviar esa posición a otra persona se necesita un enlace de comunicación aparte.</p>
 </div>
 <div class="faq-item">
-<h3>¿LoRa es un sistema GPS?</h3>
-<p>No. LoRa es una tecnología de comunicación por radio. Loko combina LoRa con GPS.</p>
+<h3>¿GSM es lo mismo que GPS?</h3>
+<p>No. El GPS calcula una posición a partir de señales de satélite. GSM es un estándar de comunicación celular 2G que un rastreador puede usar para enviar datos. Los rastreadores celulares más recientes pueden usar otras tecnologías de red.</p>
 </div>
 <div class="faq-item">
-<h3>¿Por qué esto es importante para las suscripciones?</h3>
-<p>La comunicación celular generalmente requiere un plan de operador pago. LoRa P2P no.</p>
+<h3>¿Puede mi teléfono recibir LoRa directamente?</h3>
+<p>Un smartphone estándar no tiene una radio LoRa integrada. Un sistema de rastreo LoRa directo necesita un receptor compatible que transmita los datos de ubicación al teléfono.</p>
 </div>
 <div class="faq-item">
-<h3>¿Cuál es mejor para zonas remotas?</h3>
-<p>LoRa es potente para el seguimiento remoto local; El satélite es mejor para mensajes de emergencia globales.</p>
+<h3>¿El rastreo LoRa nunca requiere suscripción?</h3>
+<p>Un enlace LoRa directo punto a punto no requiere un plan celular. Los servicios de red, las aplicaciones o las funciones en la nube pueden tener tarifas aparte, así que revisa el producto y el paquete de servicios completos.</p>
+</div>
+<div class="faq-item">
+<h3>¿LoRa hace que el GPS sea más preciso?</h3>
+<p>No. En un rastreador GPS con LoRa, el receptor GPS calcula las coordenadas y LoRa las transporta. El enlace de radio influye en si llega una actualización, no en la precisión de esa posición GPS.</p>
+</div>
+<div class="faq-item">
+<h3>¿Puedo rastrear un dispositivo LoRa desde cualquier lugar?</h3>
+<p>Con una configuración directa punto a punto, necesitas un receptor compatible dentro del alcance de radio. El acceso remoto mediante gateways o un servicio conectado a internet requiere infraestructura adicional.</p>
 </div>
 </div>
 </div>
@@ -345,8 +392,9 @@
 <section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p><strong>Loko GPS Tracker utiliza la radio GPS más LoRa para seguimiento local sin tarjetas SIM, Internet o suscripciones mensuales.</strong></p>
-<a class="cta-btn" href="/es/#shop">Comprar Loko</a>
+<p><strong>Descubre Loko para el rastreo GPS local mediante un enlace LoRa directo.</strong></p>
+<p>Usa una unidad Air con un receptor Ground compatible, dentro del alcance de radio.</p>
+<a class="cta-btn" href="/es/#shop">Descubrir Loko</a>
 </div>
 </div>
 </section>

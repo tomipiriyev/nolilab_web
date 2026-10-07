@@ -7,8 +7,8 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/favicon.ico" rel="icon" sizes="any"/>
-<title>GPS, GSM или LoRa: что на самом деле определяет координаты</title>
-<meta content="Понимайте GPS, GSM и LoRa простыми словами. GPS рассчитывает местоположение, GSM отправляет данные через вышки, а LoRa обеспечивает локальное отслеживание в автономном режиме." name="description"/>
+<title>GPS, GSM или LoRa: как на самом деле работает отслеживание</title>
+<meta content="Как GPS, GSM и LoRa работают вместе в трекере. Сравниваем сотовое отслеживание и прямую радиосвязь: покрытие, подписки и ограничения без сети." name="description"/>
 <meta content="gps vs gsm vs lora, lora gps tracker explained, gps gsm tracker, lora tracking explained" name="keywords"/>
 <meta content="nolilab" name="author"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
@@ -22,16 +22,16 @@
 <link href="https://www.nolilab.com/zh/blog/gps-vs-gsm-vs-lora/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="GPS, GSM или LoRa: что на самом деле определяет координаты" property="og:title"/>
-<meta content="Понимайте GPS, GSM и LoRa простыми словами. GPS рассчитывает местоположение, GSM отправляет данные через вышки, а LoRa обеспечивает локальное отслеживание в автономном режиме." property="og:description"/>
+<meta content="GPS, GSM или LoRa: как на самом деле работает отслеживание" property="og:title"/>
+<meta content="Как GPS, GSM и LoRa работают вместе в трекере. Сравниваем сотовое отслеживание и прямую радиосвязь: покрытие, подписки и ограничения без сети." property="og:description"/>
 <meta content="https://www.nolilab.com/ru/blog/gps-vs-gsm-vs-lora/" property="og:url"/>
-<meta property="og:image" content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp"/>
+<meta content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="ru_RU" property="og:locale"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta content="GPS, GSM или LoRa: что на самом деле определяет координаты" name="twitter:title"/>
-<meta content="Понимайте GPS, GSM и LoRa простыми словами. GPS рассчитывает местоположение, GSM отправляет данные через вышки, а LoRa обеспечивает локальное отслеживание в автономном режиме." name="twitter:description"/>
-<meta name="twitter:image" content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPS, GSM или LoRa: как на самом деле работает отслеживание" name="twitter:title"/>
+<meta content="Как GPS, GSM и LoRa работают вместе в трекере. Сравниваем сотовое отслеживание и прямую радиосвязь: покрытие, подписки и ограничения без сети." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp" name="twitter:image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -41,51 +41,66 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "GPS — это то же самое, что GSM?",
+      "name": "Работает ли GPS без SIM-карты?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Нет. GPS предназначен для позиционирования; GSM – сотовая связь."
+        "text": "Да. GPS-приёмник может определить своё местоположение без SIM-карты и интернета, если принимает пригодные спутниковые сигналы. Чтобы передать эти координаты кому-то ещё, нужен отдельный канал связи."
       }
     },
     {
       "@type": "Question",
-      "name": "Является ли LoRa системой GPS?",
+      "name": "GSM и GPS — это одно и то же?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Нет. LoRa — это технология радиосвязи. Loko сочетает в себе LoRa и GPS."
+        "text": "Нет. GPS вычисляет координаты по спутниковым сигналам. GSM — стандарт сотовой связи 2G, через который трекер может передавать данные. Более новые сотовые трекеры могут использовать другие сетевые технологии."
       }
     },
     {
       "@type": "Question",
-      "name": "Почему это важно для подписок?",
+      "name": "Может ли мой телефон принимать LoRa напрямую?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Для сотовой связи обычно требуется платный тарифный план оператора. LoRa P2P — нет."
+        "text": "В обычном смартфоне нет встроенного радиомодуля LoRa. Для прямого отслеживания по LoRa нужен совместимый приёмник, который передаёт данные о местоположении на телефон."
       }
     },
     {
       "@type": "Question",
-      "name": "Что лучше для отдаленных районов?",
+      "name": "Отслеживание по LoRa всегда обходится без подписки?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa хорош для локального удаленного отслеживания; Спутник лучше всего подходит для глобальной передачи экстренных сообщений."
+        "text": "Прямой канал LoRa «точка-точка» не требует сотового тарифа. За сетевые сервисы, приложения или облачные функции может взиматься отдельная плата, поэтому проверяйте весь комплект продукта и услуг."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Делает ли LoRa GPS точнее?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. В трекере с GPS и LoRa GPS-приёмник вычисляет координаты, а LoRa их передаёт. Радиоканал влияет на то, дойдёт ли обновление, а не на точность самого GPS-определения."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Можно ли отслеживать устройство LoRa откуда угодно?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "При прямом подключении «точка-точка» нужен совместимый приёмник в пределах радиосвязи. Удалённый доступ через шлюзы или интернет-сервис требует дополнительной инфраструктуры."
       }
     }
   ],
   "inLanguage": "ru"
 }</script>
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "GPS против GSM против LoRa",
-  "description": "Понимайте GPS, GSM и LoRa простыми словами. GPS рассчитывает местоположение, GSM отправляет данные через вышки, а LoRa обеспечивает локальное отслеживание в автономном режиме.",
+  "headline": "GPS, GSM или LoRa: как на самом деле работает отслеживание",
+  "description": "Как GPS, GSM и LoRa работают вместе в трекере. Сравниваем сотовое отслеживание и прямую радиосвязь: покрытие, подписки и ограничения без сети.",
   "url": "https://www.nolilab.com/ru/blog/gps-vs-gsm-vs-lora/",
   "datePublished": "2026-05-17",
-  "dateModified": "2026-06-06",
+  "dateModified": "2026-10-05",
   "author": {
     "@type": "Person",
-    "name": "Тамлейха Пириев",
+    "name": "Tamleykha Piriyev",
     "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
     "sameAs": [
       "https://www.linkedin.com/in/tomi-piriyev-33593354/",
@@ -111,8 +126,7 @@
   "translationOfWork": {
     "@id": "https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/#article"
   }
-}
-</script>
+}</script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -120,13 +134,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Дом",
+      "name": "Главная",
       "item": "https://www.nolilab.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "GPS против GSM против LoRa",
+      "name": "GPS, GSM или LoRa",
       "item": "https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/"
     }
   ],
@@ -186,55 +200,55 @@
 </style>
 <script defer="" src="/js/layout.js?v=20260906"></script>
 <link href="/css/blog-covers.css?v=20261004" rel="stylesheet"/>
-<meta property="og:image:alt" content="GPS против GSM против LoRa"/>
+<meta content="Спутниковое позиционирование, сотовая связь и прямые радиоканалы на одной иллюстрации." property="og:image:alt"/>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <section class="page-hero">
 <div class="container">
-<h1>GPS против GSM против LoRa</h1>
-<p class="subtitle">GPS находит позицию. GSM или LoRa отправляют координаты. Это различие меняет все.</p>
-<p>GPS, GSM и LoRa часто смешивают в маркетинге трекеров, но это не одна и та же технология.</p>
-<p>GPS рассчитывает положение по спутникам. GSM отправляет данные через вышки сотовой связи. LoRa отправляет небольшие пакеты по радиоканалу с низким энергопотреблением на большие расстояния.</p>
+<h1>GPS, GSM или LoRa: как на самом деле работает отслеживание</h1>
+<p class="subtitle">GPS определяет координаты. Сотовые сети или радио LoRa доставляют их вам.</p>
+<p>Трекер может знать, где находится, пока ваш телефон показывает устаревшее местоположение. Чаще всего не хватает связи между трекером и вами.</p>
+<p>Чтобы понять почему, разделите две задачи: определить местоположение и отправить его. Первую решает GPS. Вторую — GSM и другие сотовые технологии или радиоканал LoRa. От выбранного канала связи зависит, где вы сможете получать обновления, какое оборудование понадобится и нужна ли абонентская плата.</p>
 </div>
 </section>
-<div class="blog-cover-wrap"><img alt="GPS против GSM против LoRa" class="article-image blog-cover-image" width="1200" height="800" loading="eager" decoding="async" src="/images/blog-covers/gps-vs-gsm-vs-lora.webp" srcset="/images/blog-covers/gps-vs-gsm-vs-lora-thumb.webp 600w, /images/blog-covers/gps-vs-gsm-vs-lora.webp 1200w" sizes="(max-width: 800px) 100vw, 800px"/></div>
+<div class="blog-cover-wrap"><img alt="Спутниковое позиционирование, сотовая связь и прямые радиоканалы на одной иллюстрации." class="article-image blog-cover-image" decoding="async" height="800" loading="eager" sizes="(max-width: 800px) 100vw, 800px" src="/images/blog-covers/gps-vs-gsm-vs-lora.webp" srcset="/images/blog-covers/gps-vs-gsm-vs-lora-thumb.webp 600w, /images/blog-covers/gps-vs-gsm-vs-lora.webp 1200w" width="1200"/></div>
 <!-- SVG Diagram: GPS vs GSM vs LoRa roles -->
 <section class="content-block">
 <div class="container">
-<h2>Три технологии: что делает каждая</h2>
+<h2>Как местоположение попадает на ваш телефон</h2>
 <svg aria-label="Diagram showing GPS for positioning, GSM and LoRa for communication in GPS trackers" role="img" style="width:100%;height:auto;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;" viewbox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
 <!-- Title -->
 <text fill="#24292e" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="450" y="28">GPS Finds Position — GSM or LoRa Sends It</text>
 <!-- GPS Section -->
 <rect fill="#e8f5e9" height="270" rx="8" stroke="#238636" stroke-width="2" width="270" x="20" y="50"></rect>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="155" y="78">GPS — Positioning</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="155" y="78">GPS / GNSS — Positioning</text>
 <!-- Satellite icons -->
 <circle cx="80" cy="120" fill="#c8e6c9" r="20" stroke="#238636" stroke-width="1.5"></circle>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="80" y="117">GPS</text>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="80" y="128">31 sats</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="80" y="128">satellites</text>
 <circle cx="155" cy="110" fill="#c8e6c9" r="20" stroke="#238636" stroke-width="1.5"></circle>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="155" y="107">GLONASS</text>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="155" y="118">24 sats</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="155" y="118">satellites</text>
 <circle cx="230" cy="120" fill="#c8e6c9" r="20" stroke="#238636" stroke-width="1.5"></circle>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="230" y="117">Galileo</text>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="230" y="128">30 sats</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="230" y="128">satellites</text>
 <!-- Signal lines down -->
 <line stroke="#238636" stroke-dasharray="4,3" stroke-width="1.5" x1="80" x2="140" y1="140" y2="190"></line>
 <line stroke="#238636" stroke-dasharray="4,3" stroke-width="1.5" x1="155" x2="155" y1="130" y2="190"></line>
 <line stroke="#238636" stroke-dasharray="4,3" stroke-width="1.5" x1="230" x2="170" y1="140" y2="190"></line>
 <!-- Tracker device -->
 <rect fill="#fff" height="40" rx="6" stroke="#238636" stroke-width="2" width="110" x="100" y="190"></rect>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="155" y="215">GPS Receiver</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="155" y="215">GNSS Receiver</text>
 <!-- Output -->
 <text fill="#238636" font-family="Inter,sans-serif" font-size="10" font-weight="500" text-anchor="middle" x="155" y="255">Outputs: Lat/Lon coordinates</text>
-<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="275">Accuracy: 2–5 metres</text>
-<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="295">Works: Anywhere outdoors</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="275">Accuracy varies with conditions</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="295">Needs usable satellite signals</text>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="155" y="312">Cannot send data by itself</text>
 <!-- GSM Section -->
 <rect fill="#fff3e0" height="270" rx="8" stroke="#e65100" stroke-width="2" width="270" x="315" y="50"></rect>
-<text fill="#e65100" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="450" y="78">GSM/LTE — Связь</text>
+<text fill="#e65100" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="450" y="78">Cellular — Communication</text>
 <!-- Cell tower -->
 <rect fill="#ffe0b2" height="80" rx="4" stroke="#e65100" stroke-width="1.5" width="60" x="420" y="100"></rect>
 <text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="130">Cell</text>
@@ -253,10 +267,10 @@
 <rect fill="#fff" height="30" rx="6" stroke="#e65100" stroke-width="1.5" width="50" x="425" y="270"></rect>
 <text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="290">Phone</text>
 <!-- Requirements -->
-<text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="312">Needs: SIM card + towers + monthly fee</text>
+<text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="312">Needs: Coverage + active service</text>
 <!-- LoRa Section -->
 <rect fill="#e8f5e9" height="270" rx="8" stroke="#238636" stroke-width="2" width="270" x="610" y="50"></rect>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="745" y="78">LoRa — Связь</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="745" y="78">LoRa — Communication</text>
 <!-- Radio waves -->
 <circle cx="745" cy="150" fill="none" opacity="0.3" r="30" stroke="#238636" stroke-width="1"></circle>
 <circle cx="745" cy="150" fill="none" opacity="0.2" r="50" stroke="#238636" stroke-width="1"></circle>
@@ -266,7 +280,7 @@
 <text fill="#238636" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle" x="745" y="155">Loko Air</text>
 <!-- Direct arrow to receiver -->
 <line stroke="#238636" stroke-width="2.5" x1="745" x2="745" y1="170" y2="210"></line>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="745" y="195">20+ km</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="745" y="195">Radio link</text>
 <!-- Receiver -->
 <rect fill="#fff" height="40" rx="6" stroke="#238636" stroke-width="2" width="90" x="700" y="210"></rect>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle" x="745" y="235">Loko Ground</text>
@@ -275,7 +289,7 @@
 <rect fill="#fff" height="30" rx="6" stroke="#238636" stroke-width="1.5" width="50" x="720" y="270"></rect>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="745" y="290">Phone</text>
 <!-- Requirements -->
-<text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="745" y="312">Needs: Nothing — direct radio link</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="745" y="312">Needs: Compatible receiver in range</text>
 <!-- Bottom summary bar -->
 <rect fill="none" height="0" rx="4" stroke="none" width="860" x="20" y="330"></rect>
 </svg>
@@ -283,40 +297,65 @@
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Быстрое сравнение</h2>
+<h2>GPS, GSM и LoRa: краткое сравнение</h2>
 <table class="compare-table">
-<thead><tr><th>Технология</th><th>Роль</th><th>Сила</th><th>Слабость</th></tr></thead>
+<thead><tr><th scope="col">Технология</th><th scope="col">Задача в трекере</th><th scope="col">Что нужно</th><th scope="col">Главное ограничение</th></tr></thead>
 <tbody>
-<tr><td>GPS</td><td>Позиционирование</td><td>Работает по всему миру на открытом воздухе</td><td>Не передает местоположение самостоятельно</td></tr>
-<tr><td>GSM/LTE</td><td>Коммуникация</td><td>Широкий доступ к облаку с покрытием</td><td>Требуются SIM-карта, вышки и плата.</td></tr>
-<tr><td>LoRa</td><td>Коммуникация</td><td>Локальные пакеты дальнего действия с низким энергопотреблением</td><td>Низкая пропускная способность и дальность действия зависят от местности</td></tr>
+<tr><th scope="row">GPS / GNSS</th><td>Вычисляет координаты по спутниковым сигналам</td><td>Приёмник с нормальным приёмом спутниковых сигналов</td><td>Не передаёт координаты на ваш телефон</td></tr>
+<tr><th scope="row">GSM / сотовая связь</th><td>Передаёт обновления через мобильную сеть</td><td>Покрытие совместимой сети и активная услуга, обычно через SIM или eSIM</td><td>Обновления зависят от покрытия и услуг оператора</td></tr>
+<tr><th scope="row">LoRa «точка-точка»</th><td>Передаёт небольшие пакеты с координатами напрямую по радио</td><td>Совместимый приёмник в пределах радиосвязи</td><td>Дальность зависит от рельефа, антенн и настроек радио</td></tr>
 </tbody>
 </table>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>GPS — это еще не весь трекер</h2>
-<p>Приемник GPS может рассчитать широту и долготу, но не может волшебным образом отправить эти координаты на ваш телефон с расстояния в несколько миль.</p>
-<p>Каждому средству отслеживания в реальном времени необходим канал связи после того, как GPS определит местоположение.</p>
+<h2>GPS определяет местоположение</h2>
+<p>GPS-приёмник принимает спутниковые сигналы и по времени их прихода вычисляет своё местоположение. Для этого ему не нужны SIM-карта или мобильный интернет, и он не сообщает своё местоположение спутникам GPS.</p>
+<p>GPS — одна из спутниковых навигационных систем. GNSS — более широкий термин, который включает и такие системы, как Galileo и ГЛОНАСС. Трекер, который называют «GPS-трекером», может использовать несколько из этих систем.</p>
+<p>Качество приёма имеет значение. Здания, густой лес и рельеф могут перекрывать сигналы или снижать точность. Работающий канал связи не восполнит отсутствие координат: трекер может успешно доставить сообщение, не имея свежего местоположения. <a href="https://www.gps.gov/gps-accuracy">На GPS.gov описаны факторы, влияющие на точность позиционирования</a>.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Почему у GSM-трекеров есть подписка</h2>
-<p>Трекеры GSM и LTE используют мобильные сети, а это значит, что устройству необходим тарифный план оператора связи. Это основная причина многих ежемесячных комиссий за использование GPS-трекера.</p>
+<h2>GSM и сотовые сети передают обновления</h2>
+<p>В типичном сотовом трекере GPS-приёмник определяет координаты, а затем сотовый модем отправляет их через мобильную сеть в сервис, к которому обращается ваше приложение. Вы можете находиться далеко от трекера и при этом видеть обновления — при условии, что трекер находится в зоне поддерживаемого покрытия, а телефон имеет доступ к сервису.</p>
+<p>Строго говоря, GSM — это стандарт мобильной сети 2G. Современные сотовые трекеры могут использовать вместо него LTE, LTE-M или NB-IoT. Эти названия не взаимозаменяемы: устройство должно поддерживать сеть, доступную там, где вы его используете. Прежде чем покупать старый GSM-трекер, уточните у оператора, как долго будет поддерживаться сеть; <a href="https://www.gsma.com/about-us/regions/europe/news/network-rationalisation-making-way-for-4g-and-5g/">отключение сетей 2G и 3G</a> делает это особенно актуальным.</p>
+<p>Сотовая связь обычно платная. Это может быть ежемесячная подписка, предоплаченный баланс или услуга, включённая в цену покупки. Приложение или облачная платформа могут взимать собственную плату. Вы платите за связь и сервисы, а не за доступ к сигналам GPS.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Почему Loko использует LoRa</h2>
-<p>LoRa хорошо сочетается с отслеживанием GPS, поскольку координаты представляют собой небольшие пакеты. Loko использует LoRa для локальной передачи местоположения без сотовых вышек или Интернета.</p>
+<h2>LoRa передаёт небольшие пакеты по радиоканалу</h2>
+<p>Обновления местоположения содержат мало данных, поэтому им подходит радио, рассчитанное на короткие сообщения. Такой радиоканал обеспечивает LoRa. В режиме «точка-точка» трекер отправляет координаты напрямую совместимому приёмнику поблизости, минуя сотового оператора.</p>
+<p>Без приёмника не обойтись. Обычный телефон не может сам принимать пакеты LoRa: нужно совместимое оборудование, которое передаст данные в приложение. Кроме того, нужно оставаться в пределах рабочей дальности канала. Холмы, здания, растительность, расположение антенны и настройки радио — всё это влияет на то, дойдут ли пакеты.</p>
+<p><a href="https://www.semtech.com/lora/what-is-lora">Semtech описывает LoRa как маломощную радиотехнологию большой дальности</a>. Эти свойства не гарантируют конкретную дальность или время работы готового трекера. Частые GPS-определения и частые передачи всё равно расходуют энергию.</p>
+<h3>LoRa и LoRaWAN — разные части системы</h3>
+<p>LoRa — это радиотехнология, а LoRaWAN — сетевой протокол на её основе. В сети LoRaWAN используются шлюзы и сетевой сервер, тогда как прямой канал «точка-точка» может работать между совместимыми устройствами. Само по себе слово «LoRa» в описании товара не говорит, нужны ли шлюз, доступ в интернет или платный сетевой сервис. Архитектура подробно описана в <a href="https://www.semtech.com/uploads/technology/LoRa/lora-and-lorawan.pdf">обзоре LoRa и LoRaWAN от Semtech</a> .</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Сопутствующие руководства по Loko</h2>
-<p>Для получения дополнительной информации прочтите <a href="/ru/lora-gps-tracker/">Руководство по LoRa GPS-трекеру</a>, <a href="/ru/no-monthly-fee/">без ежемесячной платы, руководство по GPS-трекеру</a>и <a href="/ru/blog/how-offline-gps-tracking-works/">автономное руководство по отслеживанию GPS</a>.</p>
+<h2>Что происходит, когда связь пропадает?</h2>
+<p>Представьте трекер на собаке, которая забежала за холм. Его GPS-приёмник может по-прежнему определять свежие координаты, но холм способен перекрыть радиоканал до вашего приёмника. Тогда в приложении останется ранее полученное местоположение, а не доказательство того, где собака сейчас.</p>
+<p>У сотового трекера то же разделение между определением координат и их доставкой: вне зоны покрытия поддерживаемой сети он может знать свои координаты, но не может их отправить. Некоторые устройства сохраняют точки и выгружают их позже; проверьте, поддерживает ли это конкретный трекер.</p>
+<p>Глядя на карту, проверяйте не только метку, но и время. Для работы без сети также проверьте, может ли приложение показывать сохранённые карты. Получение координат без интернета и загрузка картографических тайлов — это разные возможности.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Какой канал связи вам подходит?</h2>
+<p><strong>Сотовая связь подходит для отслеживания на большой территории с поддерживаемым покрытием.</strong> Такой вариант подходит для транспорта или техники, которые уезжают далеко за пределы досягаемости вашего приёмника. Проверьте конкретную сетевую технологию, покрытие, интервал обновления и стоимость обслуживания.</p>
+<p><strong>Прямой канал LoRa подходит для локального отслеживания, когда приёмник можно держать в зоне досягаемости.</strong> Он подходит для полевых работ, фермы или поиска оборудования без мобильной связи. Проверяйте канал на реальной местности: открытая трасса на возвышенности и маршрут за хребтом могут дать совершенно разные результаты.</p>
+<p>Чтобы подробнее сравнить готовые комплекты трекеров, прочитайте наше <a href="/ru/lora-vs-cellular-gps-tracker/">сравнение LoRa и сотовых трекеров</a>. Ни надпись GPS, ни максимальная дальность радиосвязи не говорят о том, будет ли устройство доставлять обновления на вашем маршруте.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Как Loko сочетает GPS и LoRa</h2>
+<p>В схеме Loko «точка-точка» модуль Air определяет координаты по спутниковым сигналам и отправляет их по LoRa на приёмник Ground. Приёмник обеспечивает связь с вашим телефоном. Для этого локального радиоканала не нужны SIM-карта и подписка у оператора.</p>
+<p>Ограничения остаются прежними: модулю Air нужен приём спутников для свежих координат, а Ground должен находиться в пределах радиосвязи, чтобы их получить. Продумайте размещение приёмника и проверьте весь комплект, прежде чем полагаться на него в поле.</p>
+<p>Подробнее читайте в <a href="/ru/lora-gps-tracker/">руководстве по LoRa GPS-трекерам</a>, <a href="/ru/specifications/">характеристиках Loko</a> и <a href="/ru/blog/how-offline-gps-tracking-works/">руководстве по автономному отслеживанию</a> .</p>
 </div>
 </section>
 <section class="content-block">
@@ -324,20 +363,28 @@
 <h2>Часто задаваемые вопросы</h2>
 <div class="faq-grid">
 <div class="faq-item">
-<h3>GPS — это то же самое, что GSM?</h3>
-<p>Нет. GPS предназначен для позиционирования; GSM – сотовая связь.</p>
+<h3>Работает ли GPS без SIM-карты?</h3>
+<p>Да. GPS-приёмник может определить своё местоположение без SIM-карты и интернета, если принимает пригодные спутниковые сигналы. Чтобы передать эти координаты кому-то ещё, нужен отдельный канал связи.</p>
 </div>
 <div class="faq-item">
-<h3>Является ли LoRa системой GPS?</h3>
-<p>Нет. LoRa — это технология радиосвязи. Loko сочетает в себе LoRa и GPS.</p>
+<h3>GSM и GPS — это одно и то же?</h3>
+<p>Нет. GPS вычисляет координаты по спутниковым сигналам. GSM — стандарт сотовой связи 2G, через который трекер может передавать данные. Более новые сотовые трекеры могут использовать другие сетевые технологии.</p>
 </div>
 <div class="faq-item">
-<h3>Почему это важно для подписок?</h3>
-<p>Для сотовой связи обычно требуется платный тарифный план оператора. LoRa P2P — нет.</p>
+<h3>Может ли мой телефон принимать LoRa напрямую?</h3>
+<p>В обычном смартфоне нет встроенного радиомодуля LoRa. Для прямого отслеживания по LoRa нужен совместимый приёмник, который передаёт данные о местоположении на телефон.</p>
 </div>
 <div class="faq-item">
-<h3>Что лучше для отдаленных районов?</h3>
-<p>LoRa хорош для локального удаленного отслеживания; Спутник лучше всего подходит для глобальной передачи экстренных сообщений.</p>
+<h3>Отслеживание по LoRa всегда обходится без подписки?</h3>
+<p>Прямой канал LoRa «точка-точка» не требует сотового тарифа. За сетевые сервисы, приложения или облачные функции может взиматься отдельная плата, поэтому проверяйте весь комплект продукта и услуг.</p>
+</div>
+<div class="faq-item">
+<h3>Делает ли LoRa GPS точнее?</h3>
+<p>Нет. В трекере с GPS и LoRa GPS-приёмник вычисляет координаты, а LoRa их передаёт. Радиоканал влияет на то, дойдёт ли обновление, а не на точность самого GPS-определения.</p>
+</div>
+<div class="faq-item">
+<h3>Можно ли отслеживать устройство LoRa откуда угодно?</h3>
+<p>При прямом подключении «точка-точка» нужен совместимый приёмник в пределах радиосвязи. Удалённый доступ через шлюзы или интернет-сервис требует дополнительной инфраструктуры.</p>
 </div>
 </div>
 </div>
@@ -345,8 +392,9 @@
 <section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p><strong>Loko GPS Tracker использует радиомодуль GPS и LoRa для локального отслеживания без SIM-карт, Интернета или ежемесячной подписки.</strong></p>
-<a class="cta-btn" href="/ru/#shop">Магазин Loko</a>
+<p><strong>Loko — локальное GPS-отслеживание по прямому каналу LoRa.</strong></p>
+<p>Используйте модуль Air с совместимым приёмником Ground в пределах радиосвязи.</p>
+<a class="cta-btn" href="/ru/#shop">Узнать о Loko</a>
 </div>
 </div>
 </section>

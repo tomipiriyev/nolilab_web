@@ -7,8 +7,8 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/favicon.ico" rel="icon" sizes="any"/>
-<title>GPS・GSM・LoRaの違い：位置を追跡するのはどれ？</title>
-<meta content="GPS、GSM、および LoRa を簡単に理解します。 GPS は位置を計算し、GSM はタワーを介してデータを送信し、LoRa はオフラインのローカル追跡を可能にします。" name="description"/>
+<title>GPS・GSM・LoRaの違い：位置追跡の本当の仕組み</title>
+<meta content="トラッカーの中でGPS、GSM、LoRaがどう連携するかを解説。セルラー方式と直接無線方式を、通信エリア、サブスクリプション、オフライン時の制約で比較します。" name="description"/>
 <meta content="gps vs gsm vs lora, lora gps tracker explained, gps gsm tracker, lora tracking explained" name="keywords"/>
 <meta content="nolilab" name="author"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
@@ -22,16 +22,16 @@
 <link href="https://www.nolilab.com/zh/blog/gps-vs-gsm-vs-lora/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="GPS・GSM・LoRaの違い：位置を追跡するのはどれ？" property="og:title"/>
-<meta content="GPS、GSM、および LoRa を簡単に理解します。 GPS は位置を計算し、GSM はタワーを介してデータを送信し、LoRa はオフラインのローカル追跡を可能にします。" property="og:description"/>
+<meta content="GPS・GSM・LoRaの違い：位置追跡の本当の仕組み" property="og:title"/>
+<meta content="トラッカーの中でGPS、GSM、LoRaがどう連携するかを解説。セルラー方式と直接無線方式を、通信エリア、サブスクリプション、オフライン時の制約で比較します。" property="og:description"/>
 <meta content="https://www.nolilab.com/ja/blog/gps-vs-gsm-vs-lora/" property="og:url"/>
-<meta property="og:image" content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp"/>
+<meta content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="ja_JP" property="og:locale"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta content="GPS・GSM・LoRaの違い：位置を追跡するのはどれ？" name="twitter:title"/>
-<meta content="GPS、GSM、および LoRa を簡単に理解します。 GPS は位置を計算し、GSM はタワーを介してデータを送信し、LoRa はオフラインのローカル追跡を可能にします。" name="twitter:description"/>
-<meta name="twitter:image" content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GPS・GSM・LoRaの違い：位置追跡の本当の仕組み" name="twitter:title"/>
+<meta content="トラッカーの中でGPS、GSM、LoRaがどう連携するかを解説。セルラー方式と直接無線方式を、通信エリア、サブスクリプション、オフライン時の制約で比較します。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/gps-vs-gsm-vs-lora.webp" name="twitter:image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -41,51 +41,66 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "GPSはGSMと同じですか?",
+      "name": "GPSはSIMカードなしで使えますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "いいえ、GPS は位置決め用です。 GSM はセルラー通信です。"
+        "text": "はい。GPS受信機は、利用できる衛星信号を受信できれば、SIMカードやインターネット接続なしで位置を計算できます。その位置を他の人に送るには、別の通信手段が必要です。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRa は GPS システムですか?",
+      "name": "GSMとGPSは同じものですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "いいえ、LoRa は無線通信テクノロジーです。 Loko は、LoRa と GPS を組み合わせたものです。"
+        "text": "いいえ。GPSは衛星信号から位置を計算します。GSMは2Gの携帯電話通信規格で、トラッカーがデータ送信に使うことがあります。新しいセルラー型トラッカーは別のネットワーク技術を使う場合があります。"
       }
     },
     {
       "@type": "Question",
-      "name": "これがサブスクリプションにとってなぜ重要なのでしょうか?",
+      "name": "スマートフォンでLoRaを直接受信できますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "携帯電話通信には通常、有料のキャリアプランが必要です。 LoRa P2P にはありません。"
+        "text": "一般的なスマートフォンにはLoRa無線が内蔵されていません。LoRaによる直接追跡には、位置データをスマートフォンに渡す対応受信機が必要です。"
       }
     },
     {
       "@type": "Question",
-      "name": "遠隔地に最適なのはどれですか?",
+      "name": "LoRa追跡は必ずサブスクリプション不要ですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "LoRa はローカルのリモート追跡に強力です。衛星は世界規模の緊急メッセージに最適です。"
+        "text": "LoRaのポイントツーポイント直接通信には、携帯電話の料金プランは不要です。ただし、ネットワークサービス、アプリ、クラウド機能には別料金がかかる場合があるため、製品とサービスの内容全体を確認してください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRaでGPSの精度は上がりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いいえ。GPSとLoRaを組み合わせたトラッカーでは、GPS受信機が座標を計算し、LoRaがそれを運びます。無線リンクが左右するのは更新が届くかどうかであり、GPS測位の精度ではありません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "LoRaデバイスはどこからでも追跡できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ポイントツーポイントの直接構成では、無線の届く範囲内に対応受信機が必要です。ゲートウェイやインターネット接続サービスを介した遠隔アクセスには、追加のインフラが必要です。"
       }
     }
   ],
   "inLanguage": "ja"
 }</script>
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "GPS 対 GSM 対 LoRa",
-  "description": "GPS、GSM、および LoRa を簡単に理解します。 GPS は位置を計算し、GSM はタワーを介してデータを送信し、LoRa はオフラインのローカル追跡を可能にします。",
+  "headline": "GPS・GSM・LoRaの違い：位置追跡の本当の仕組み",
+  "description": "トラッカーの中でGPS、GSM、LoRaがどう連携するかを解説。セルラー方式と直接無線方式を、通信エリア、サブスクリプション、オフライン時の制約で比較します。",
   "url": "https://www.nolilab.com/ja/blog/gps-vs-gsm-vs-lora/",
   "datePublished": "2026-05-17",
-  "dateModified": "2026-06-06",
+  "dateModified": "2026-10-05",
   "author": {
     "@type": "Person",
-    "name": "タムリーカ・ピリエフ",
+    "name": "Tamleykha Piriyev",
     "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
     "sameAs": [
       "https://www.linkedin.com/in/tomi-piriyev-33593354/",
@@ -111,8 +126,7 @@
   "translationOfWork": {
     "@id": "https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/#article"
   }
-}
-</script>
+}</script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -120,13 +134,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "家",
+      "name": "ホーム",
       "item": "https://www.nolilab.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "GPS 対 GSM 対 LoRa",
+      "name": "GPS・GSM・LoRaの違い",
       "item": "https://www.nolilab.com/blog/gps-vs-gsm-vs-lora/"
     }
   ],
@@ -186,55 +200,55 @@
 </style>
 <script defer="" src="/js/layout.js?v=20260906"></script>
 <link href="/css/blog-covers.css?v=20261004" rel="stylesheet"/>
-<meta property="og:image:alt" content="GPS 対 GSM 対 LoRa"/>
+<meta content="衛星測位、セルラー通信、直接無線リンクをまとめて描いたイラスト" property="og:image:alt"/>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
 <section class="page-hero">
 <div class="container">
-<h1>GPS 対 GSM 対 LoRa</h1>
-<p class="subtitle">GPS が位置を見つけます。 GSM または LoRa が位置を送信します。その違いがすべてを変えます。</p>
-<p>GPS、GSM、および LoRa はトラッカーのマーケティングでよく混同されますが、これらは同じテクノロジーではありません。</p>
-<p>GPS は衛星から位置を計算します。 GSM は携帯電話の塔を通じてデータを送信します。 LoRa は、長距離低電力無線によって小さなパケットを送信します。</p>
+<h1>GPS・GSM・LoRaの違い：位置追跡の本当の仕組み</h1>
+<p class="subtitle">GPSが位置を計算し、セルラーネットワークまたはLoRa無線がその位置をあなたに届けます。</p>
+<p>トラッカーは自分の位置を把握していても、スマートフォンには古い位置が表示されたままのことがあります。欠けているのは、多くの場合トラッカーとあなたをつなぐ通信です。</p>
+<p>その理由を理解するには、「位置を求めること」と「それをどこかへ送ること」という2つの役割を分けて考えます。前者を担うのがGPSです。後者はGSMなどのセルラー技術、またはLoRa無線リンクが担います。どの通信手段を選ぶかで、更新を受け取れる場所、必要な機器、サービス契約の要否が決まります。</p>
 </div>
 </section>
-<div class="blog-cover-wrap"><img alt="GPS 対 GSM 対 LoRa" class="article-image blog-cover-image" width="1200" height="800" loading="eager" decoding="async" src="/images/blog-covers/gps-vs-gsm-vs-lora.webp" srcset="/images/blog-covers/gps-vs-gsm-vs-lora-thumb.webp 600w, /images/blog-covers/gps-vs-gsm-vs-lora.webp 1200w" sizes="(max-width: 800px) 100vw, 800px"/></div>
+<div class="blog-cover-wrap"><img alt="衛星測位、セルラー通信、直接無線リンクをまとめて描いたイラスト" class="article-image blog-cover-image" decoding="async" height="800" loading="eager" sizes="(max-width: 800px) 100vw, 800px" src="/images/blog-covers/gps-vs-gsm-vs-lora.webp" srcset="/images/blog-covers/gps-vs-gsm-vs-lora-thumb.webp 600w, /images/blog-covers/gps-vs-gsm-vs-lora.webp 1200w" width="1200"/></div>
 <!-- SVG Diagram: GPS vs GSM vs LoRa roles -->
 <section class="content-block">
 <div class="container">
-<h2>3 つのテクノロジー: それぞれの機能</h2>
+<h2>位置情報がスマートフォンに届くまで</h2>
 <svg aria-label="Diagram showing GPS for positioning, GSM and LoRa for communication in GPS trackers" role="img" style="width:100%;height:auto;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;" viewbox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
 <!-- Title -->
 <text fill="#24292e" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="450" y="28">GPS Finds Position — GSM or LoRa Sends It</text>
 <!-- GPS Section -->
 <rect fill="#e8f5e9" height="270" rx="8" stroke="#238636" stroke-width="2" width="270" x="20" y="50"></rect>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="155" y="78">GPS — Positioning</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="155" y="78">GPS / GNSS — Positioning</text>
 <!-- Satellite icons -->
 <circle cx="80" cy="120" fill="#c8e6c9" r="20" stroke="#238636" stroke-width="1.5"></circle>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="80" y="117">GPS</text>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="80" y="128">31 sats</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="80" y="128">satellites</text>
 <circle cx="155" cy="110" fill="#c8e6c9" r="20" stroke="#238636" stroke-width="1.5"></circle>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="155" y="107">GLONASS</text>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="155" y="118">24 sats</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="155" y="118">satellites</text>
 <circle cx="230" cy="120" fill="#c8e6c9" r="20" stroke="#238636" stroke-width="1.5"></circle>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="230" y="117">Galileo</text>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="230" y="128">30 sats</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="230" y="128">satellites</text>
 <!-- Signal lines down -->
 <line stroke="#238636" stroke-dasharray="4,3" stroke-width="1.5" x1="80" x2="140" y1="140" y2="190"></line>
 <line stroke="#238636" stroke-dasharray="4,3" stroke-width="1.5" x1="155" x2="155" y1="130" y2="190"></line>
 <line stroke="#238636" stroke-dasharray="4,3" stroke-width="1.5" x1="230" x2="170" y1="140" y2="190"></line>
 <!-- Tracker device -->
 <rect fill="#fff" height="40" rx="6" stroke="#238636" stroke-width="2" width="110" x="100" y="190"></rect>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="155" y="215">GPS Receiver</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="155" y="215">GNSS Receiver</text>
 <!-- Output -->
 <text fill="#238636" font-family="Inter,sans-serif" font-size="10" font-weight="500" text-anchor="middle" x="155" y="255">Outputs: Lat/Lon coordinates</text>
-<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="275">Accuracy: 2–5 metres</text>
-<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="295">Works: Anywhere outdoors</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="275">Accuracy varies with conditions</text>
+<text fill="#57606a" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" x="155" y="295">Needs usable satellite signals</text>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="155" y="312">Cannot send data by itself</text>
 <!-- GSM Section -->
 <rect fill="#fff3e0" height="270" rx="8" stroke="#e65100" stroke-width="2" width="270" x="315" y="50"></rect>
-<text fill="#e65100" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="450" y="78">GSM/LTE — 通信</text>
+<text fill="#e65100" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="450" y="78">Cellular — Communication</text>
 <!-- Cell tower -->
 <rect fill="#ffe0b2" height="80" rx="4" stroke="#e65100" stroke-width="1.5" width="60" x="420" y="100"></rect>
 <text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="130">Cell</text>
@@ -253,10 +267,10 @@
 <rect fill="#fff" height="30" rx="6" stroke="#e65100" stroke-width="1.5" width="50" x="425" y="270"></rect>
 <text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="290">Phone</text>
 <!-- Requirements -->
-<text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="312">Needs: SIM card + towers + monthly fee</text>
+<text fill="#e65100" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="450" y="312">Needs: Coverage + active service</text>
 <!-- LoRa Section -->
 <rect fill="#e8f5e9" height="270" rx="8" stroke="#238636" stroke-width="2" width="270" x="610" y="50"></rect>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="745" y="78">LoRa — 通信</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="745" y="78">LoRa — Communication</text>
 <!-- Radio waves -->
 <circle cx="745" cy="150" fill="none" opacity="0.3" r="30" stroke="#238636" stroke-width="1"></circle>
 <circle cx="745" cy="150" fill="none" opacity="0.2" r="50" stroke="#238636" stroke-width="1"></circle>
@@ -266,7 +280,7 @@
 <text fill="#238636" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle" x="745" y="155">Loko Air</text>
 <!-- Direct arrow to receiver -->
 <line stroke="#238636" stroke-width="2.5" x1="745" x2="745" y1="170" y2="210"></line>
-<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="745" y="195">20+ km</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="8" font-weight="500" text-anchor="middle" x="745" y="195">Radio link</text>
 <!-- Receiver -->
 <rect fill="#fff" height="40" rx="6" stroke="#238636" stroke-width="2" width="90" x="700" y="210"></rect>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="10" font-weight="600" text-anchor="middle" x="745" y="235">Loko Ground</text>
@@ -275,7 +289,7 @@
 <rect fill="#fff" height="30" rx="6" stroke="#238636" stroke-width="1.5" width="50" x="720" y="270"></rect>
 <text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="745" y="290">Phone</text>
 <!-- Requirements -->
-<text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="745" y="312">Needs: Nothing — direct radio link</text>
+<text fill="#238636" font-family="Inter,sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="745" y="312">Needs: Compatible receiver in range</text>
 <!-- Bottom summary bar -->
 <rect fill="none" height="0" rx="4" stroke="none" width="860" x="20" y="330"></rect>
 </svg>
@@ -283,40 +297,65 @@
 </section>
 <section class="content-block">
 <div class="container">
-<h2>簡単な比較</h2>
+<h2>GPS・GSM・LoRaの比較早見表</h2>
 <table class="compare-table">
-<thead><tr><th>テクノロジー</th><th>役割</th><th>強さ</th><th>弱点</th></tr></thead>
+<thead><tr><th scope="col">技術</th><th scope="col">トラッカーでの役割</th><th scope="col">必要なもの</th><th scope="col">主な制約</th></tr></thead>
 <tbody>
-<tr><td>GPS</td><td>位置決め</td><td>屋外でも世界中で活躍</td><td>位置情報を単独で送信しない</td></tr>
-<tr><td>GSM/LTE</td><td>コミュニケーション</td><td>幅広いクラウドアクセスをカバー</td><td>SIM、タワー、料金が必要</td></tr>
-<tr><td>LoRa</td><td>コミュニケーション</td><td>長距離低電力ローカル パケット</td><td>低い帯域幅と範囲は地形に依存します</td></tr>
+<tr><th scope="row">GPS / GNSS</th><td>衛星信号から座標を計算</td><td>衛星信号を十分に受信できる受信機</td><td>座標をスマートフォンに送ることはできない</td></tr>
+<tr><th scope="row">GSM / セルラー</th><td>モバイルネットワーク経由で更新を送信</td><td>対応ネットワークの通信エリアと有効なサービス契約（通常はSIMまたはeSIM）</td><td>更新は通信エリアと事業者のサービスに左右される</td></tr>
+<tr><th scope="row">LoRaポイントツーポイント</th><td>小さな位置パケットを無線で直接送信</td><td>無線の届く範囲内にある対応受信機</td><td>到達距離は地形、アンテナ、無線設定に左右される</td></tr>
 </tbody>
 </table>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>GPS だけがトラッカーのすべてではない</h2>
-<p>GPS レシーバーは緯度と経度を計算できますが、数マイル離れた場所から魔法のようにそれらの座標を携帯電話に送信することはできません。</p>
-<p>すべてのリアルタイム トラッカーは、GPS が位置を取得した後に通信チャネルを必要とします。</p>
+<h2>GPSが位置を求める</h2>
+<p>GPS受信機は衛星信号を受信し、そのタイミングから自分の位置を計算します。そのためにSIMカードやモバイルデータ通信は不要で、自分の位置をGPS衛星に送り返すこともありません。</p>
+<p>GPSは衛星測位システムの一つです。GNSSはGalileoやGLONASSなども含む、より広い用語です。「GPSトラッカー」と呼ばれる製品でも、これらの複数のシステムを使っていることがあります。</p>
+<p>受信状態は重要です。建物、密集した樹木、地形は信号を遮ったり、精度を下げたりします。通信リンクが正常でも、欠けた位置情報を補うことはできません。送るべき新しい位置がないまま、メッセージだけが届くこともあります。<a href="https://www.gps.gov/gps-accuracy">測位精度に影響する要因はGPS.govで解説されています</a>。</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>GSM トラッカーがサブスクリプションを持っている理由</h2>
-<p>GSM および LTE トラッカーはモバイル ネットワークを使用するため、デバイスにはキャリア プランが必要です。これが、多くの GPS トラッカーの月額料金の根本的な原因です。</p>
+<h2>GSMとセルラーネットワークが更新を送る</h2>
+<p>一般的なセルラー型トラッカーでは、GPS受信機が位置を計算し、セルラーモデムがモバイルネットワーク経由でアプリからアクセスできるサービスへ送信します。トラッカーが対応エリア内にあり、スマートフォンがそのサービスにアクセスできれば、遠く離れていても更新を確認できます。</p>
+<p>厳密には、GSMは2Gの携帯電話ネットワーク規格を指します。最近のセルラー型トラッカーは、代わりにLTE、LTE-M、NB-IoTを使うことがあります。これらの名称は互換ではなく、使用する場所で利用できるネットワークにデバイスが対応している必要があります。古いGSMトラッカーを購入する前に、通信事業者のサポート予定を確認してください。<a href="https://www.gsma.com/about-us/regions/europe/news/network-rationalisation-making-way-for-4g-and-5g/">2G・3Gネットワークの停波</a>が進んでいるため、これは特に重要です。</p>
+<p>セルラー通信には通常サービス費用がかかります。月額サブスクリプション、プリペイド残高、または購入価格に含まれたサービスという形をとることがあります。アプリやクラウドプラットフォームが独自の料金を加える場合もあります。この料金は通信とサービスに対するもので、GPS信号の利用料ではありません。</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Loko が LoRa を使用する理由</h2>
-<p>LoRa は、座標が小さなパケットであるため、GPS トラッキングとよく一致します。 Loko は LoRa を使用して、携帯電話の塔やインターネットを使用せずに位置情報をローカルに送信します。</p>
+<h2>LoRaは無線リンクで小さなパケットを送る</h2>
+<p>位置情報の更新はデータ量が小さいため、小さなメッセージ向けに設計された無線に適しています。その無線リンクを提供するのがLoRaです。ポイントツーポイント構成では、トラッカーが携帯電話事業者を経由せず、近くの対応受信機へ座標を直接送ります。</p>
+<p>受信機は欠かせません。一般的なスマートフォンは単独ではLoRaパケットを受信できず、データをアプリに渡す対応ハードウェアが必要です。また、リンクの実用範囲内にいる必要があります。丘、建物、植生、アンテナの位置、無線設定のすべてが、パケットが届くかどうかに影響します。</p>
+<p><a href="https://www.semtech.com/lora/what-is-lora">SemtechはLoRaを低消費電力・長距離の無線技術と説明しています</a>。ただし、これらの特性は完成品のトラッカーの通信距離やバッテリー寿命を保証するものではありません。GPS測位や送信を頻繁に行えば、その分電力を消費します。</p>
+<h3>LoRaとLoRaWANはシステムの別の要素</h3>
+<p>LoRaは無線技術であり、LoRaWANはその上に構築されたネットワークプロトコルです。LoRaWANの運用ではゲートウェイとネットワークサーバーを使いますが、ポイントツーポイントの直接リンクは対応機器同士で動作します。製品に「LoRa」と書かれているだけでは、ゲートウェイ、インターネット接続、有料ネットワークサービスが必要かどうかは分かりません。構成については<a href="https://www.semtech.com/uploads/technology/LoRa/lora-and-lorawan.pdf">SemtechのLoRa・LoRaWAN概要資料</a>を参照してください。</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>関連する Loko ガイド</h2>
-<p>詳しい背景については、以下をお読みください。 <a href="/ja/lora-gps-tracker/">LoRa GPS トラッカー ガイド</a>、 <a href="/ja/no-monthly-fee/">月額料金無料 GPS トラッカー ガイド</a>、そして <a href="/ja/blog/how-offline-gps-tracking-works/">オフライン GPS 追跡ガイド</a>.</p>
+<h2>接続が途切れるとどうなるか</h2>
+<p>犬に付けたトラッカーが丘の向こうへ移動したとします。GPS受信機は新しい位置を計算し続けられても、丘があなたの受信機への電波の通り道を遮るかもしれません。そのときアプリにあるのは以前に受信した位置であり、犬が今どこにいるかを示すものではありません。</p>
+<p>セルラー型トラッカーにも、測位と送信の分離は同じように当てはまります。対応ネットワークの圏外では、座標は分かっていても送信できないことがあります。位置を保存して後でアップロードする機器もあるので、その製品が対応しているか確認してください。</p>
+<p>地図を見るときは、マーカーだけでなくタイムスタンプも確認してください。オフラインで使う場合は、アプリが保存済みの地図を表示できるかも確認しましょう。インターネットなしで座標を受信することと、地図タイルをダウンロードすることは別の機能です。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>用途に合う通信方式は？</h2>
+<p><strong>セルラー方式は、対応する通信エリア内の広い範囲での追跡に向いています。</strong>自分の受信機の届く範囲をはるかに超えて移動する車両や資産に向いています。具体的なネットワーク技術、通信エリア、更新間隔、継続的なサービス費用を確認してください。</p>
+<p><strong>LoRaの直接通信は、受信機を届く範囲に置いておけるローカルな追跡に向いています。</strong>フィールドワーク、農場、携帯電話の電波が届かない場所での機材回収などに向いています。実際の地形でリンクをテストしてください。見通しのよい高所の経路と尾根の裏側のルートでは、結果が大きく異なることがあります。</p>
+<p>トラッカー構成全体をより詳しく比較するには、<a href="/ja/lora-vs-cellular-gps-tracker/">LoRaとセルラーのトラッカー比較ガイド</a>をご覧ください。GPSという表示も最大無線通信距離の数値も、そのデバイスがあなたのルート上で更新を届けられるかどうかまでは教えてくれません。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>LokoはGPSとLoRaをどう組み合わせているか</h2>
+<p>Lokoのポイントツーポイント構成では、Airユニットが衛星信号から位置を取得し、LoRaでGround受信機へ座標を送ります。受信機がスマートフォンとの橋渡しをします。このローカルな無線経路には、携帯電話のSIMや通信事業者との契約は必要ありません。</p>
+<p>同じ制約はここでも当てはまります。Airは新しい位置を得るために衛星を受信する必要があり、Groundはそれを受け取るために無線の届く範囲内にある必要があります。現場で頼る前に、受信機の設置場所を計画し、構成全体を確認してください。</p>
+<p>詳しくは、<a href="/ja/lora-gps-tracker/">LoRa GPSトラッカーガイド</a>、<a href="/ja/specifications/">Lokoの仕様</a>、<a href="/ja/blog/how-offline-gps-tracking-works/">オフライン追跡ガイド</a>をご覧ください。</p>
 </div>
 </section>
 <section class="content-block">
@@ -324,20 +363,28 @@
 <h2>よくある質問</h2>
 <div class="faq-grid">
 <div class="faq-item">
-<h3>GPSはGSMと同じですか?</h3>
-<p>いいえ、GPS は位置決め用です。 GSM はセルラー通信です。</p>
+<h3>GPSはSIMカードなしで使えますか？</h3>
+<p>はい。GPS受信機は、利用できる衛星信号を受信できれば、SIMカードやインターネット接続なしで位置を計算できます。その位置を他の人に送るには、別の通信手段が必要です。</p>
 </div>
 <div class="faq-item">
-<h3>LoRa は GPS システムですか?</h3>
-<p>いいえ、LoRa は無線通信テクノロジーです。 Loko は、LoRa と GPS を組み合わせたものです。</p>
+<h3>GSMとGPSは同じものですか？</h3>
+<p>いいえ。GPSは衛星信号から位置を計算します。GSMは2Gの携帯電話通信規格で、トラッカーがデータ送信に使うことがあります。新しいセルラー型トラッカーは別のネットワーク技術を使う場合があります。</p>
 </div>
 <div class="faq-item">
-<h3>これがサブスクリプションにとってなぜ重要なのでしょうか?</h3>
-<p>携帯電話通信には通常、有料のキャリアプランが必要です。 LoRa P2P にはありません。</p>
+<h3>スマートフォンでLoRaを直接受信できますか？</h3>
+<p>一般的なスマートフォンにはLoRa無線が内蔵されていません。LoRaによる直接追跡には、位置データをスマートフォンに渡す対応受信機が必要です。</p>
 </div>
 <div class="faq-item">
-<h3>遠隔地に最適なのはどれですか?</h3>
-<p>LoRa はローカルのリモート追跡に強力です。衛星は世界規模の緊急メッセージに最適です。</p>
+<h3>LoRa追跡は必ずサブスクリプション不要ですか？</h3>
+<p>LoRaのポイントツーポイント直接通信には、携帯電話の料金プランは不要です。ただし、ネットワークサービス、アプリ、クラウド機能には別料金がかかる場合があるため、製品とサービスの内容全体を確認してください。</p>
+</div>
+<div class="faq-item">
+<h3>LoRaでGPSの精度は上がりますか？</h3>
+<p>いいえ。GPSとLoRaを組み合わせたトラッカーでは、GPS受信機が座標を計算し、LoRaがそれを運びます。無線リンクが左右するのは更新が届くかどうかであり、GPS測位の精度ではありません。</p>
+</div>
+<div class="faq-item">
+<h3>LoRaデバイスはどこからでも追跡できますか？</h3>
+<p>ポイントツーポイントの直接構成では、無線の届く範囲内に対応受信機が必要です。ゲートウェイやインターネット接続サービスを介した遠隔アクセスには、追加のインフラが必要です。</p>
 </div>
 </div>
 </div>
@@ -345,8 +392,9 @@
 <section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p><strong>Loko GPS トラッカーは、GPS と LoRa 無線を使用して、SIM カード、インターネット、月々のサブスクリプションなしでローカル追跡を行います。</strong></p>
-<a class="cta-btn" href="/ja/#shop">Loko を購入する</a>
+<p><strong>LoRaの直接リンクでローカルにGPS追跡するなら、Lokoをご覧ください。</strong></p>
+<p>Airユニットと対応するGround受信機を、無線の届く範囲内で使用します。</p>
+<a class="cta-btn" href="/ja/#shop">Lokoを見る</a>
 </div>
 </div>
 </section>
