@@ -172,10 +172,10 @@ test.describe('image loading', () => {
 });
 
 test.describe('footer', () => {
-  test('all 44 links survive the regrouping', async ({ page }) => {
+  test('all 45 links survive the regrouping', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('footer')).toBeVisible({ timeout: 5_000 });
-    await expect(page.locator('.footer-link')).toHaveCount(44);
+    await expect(page.locator('.footer-link')).toHaveCount(45);
     await expect(page.locator('.footer-group')).toHaveCount(4);
   });
 
@@ -203,6 +203,12 @@ test.describe('footer', () => {
     await expect(page.locator('.footer-group a[href="/ru/hunting-dogs/"]')).toHaveCount(1);
   });
 
+  test('the About link is translated and prefixed', async ({ page }) => {
+    await page.goto('/ja/');
+    await expect(page.locator('footer')).toBeVisible({ timeout: 5_000 });
+    await expect(page.locator('.footer-group a[href="/ja/about/"]')).toHaveText('会社概要');
+  });
+
   // The fallback is clipped rather than display:none, so Playwright still
   // calls it "visible" — what matters is that it occupies no perceivable area
   // while keeping every anchor in the DOM for non-JS crawlers.
@@ -213,7 +219,7 @@ test.describe('footer', () => {
 
     const nav = page.locator('.nav-fallback');
     await expect(nav).toHaveCount(1);
-    await expect(nav.locator('a')).toHaveCount(48);
+    await expect(nav.locator('a')).toHaveCount(49);
 
     const box = await nav.boundingBox();
     expect(box.width).toBeLessThanOrEqual(1);

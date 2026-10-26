@@ -61,7 +61,7 @@
       "name": "GPS衛星はいくつありますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "最近の集計では、米国のGPS衛星群には31基の運用中の衛星があります。地球上のどの地点でも、通常は6～12基の衛星を同時に捕捉できます。GPSデバイスが3次元測位（緯度、経度、高度）を行うには、少なくとも4基の衛星が必要です。Lokoのような最新のトラッカーは、GPS、GLONASS（ロシア、24基）、Galileo（EU、30基）という複数の衛星群を利用するため、60基以上の衛星を同時に利用でき、より迅速かつ高精度に測位できます。"
+        "text": "最近の集計では、米国のGPS衛星群には31基の運用中の衛星があります。地球上のどの地点でも、通常は6～12基の衛星を同時に捕捉できます。GPSデバイスが3次元測位（緯度、経度、高度）を行うには、少なくとも4基の衛星が必要です。Lokoのような最新のトラッカーは、GPS、GLONASS（ロシア、24基）、Galileo（EU、30基）、BeiDou（中国、30基以上）という複数の衛星群を利用するため、100基以上の衛星を同時に利用でき、より迅速かつ高精度に測位できます。"
       }
     },
     {
@@ -74,10 +74,10 @@
     },
     {
       "@type": "Question",
-      "name": "GPS、GLONASS、Galileoの違いは何ですか？",
+      "name": "GPS、GLONASS、Galileo、BeiDouの違いは何ですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPSは米国の衛星測位システム（31基）です。GLONASSはロシアの同等システム（24基）、Galileoは欧州連合のシステム（2024年時点で運用中の衛星30基）です。それぞれ異なる周波数と軌道面を使用します。Lokoのように3つすべてを同時に利用すると、捕捉できる衛星数が大幅に増え、測位精度の向上、初回測位時間の短縮、いずれかの衛星群の配置条件が悪い環境での追跡維持が可能になります。"
+        "text": "GPSは米国の衛星測位システム（31基）です。GLONASSはロシアの同等システム（24基）、Galileoは欧州連合のシステム（2024年時点で運用中の衛星30基）です。BeiDouは中国のシステムで、2020年から全世界でサービスを提供しています。それぞれ異なる周波数と軌道面を使用します。Lokoのように4つすべてを同時に利用すると、捕捉できる衛星数が大幅に増え、測位精度の向上、初回測位時間の短縮、いずれかの衛星群の配置条件が悪い環境での追跡維持が可能になります。"
       }
     },
     {
@@ -85,7 +85,7 @@
       "name": "Lokoはどのように完全オフラインで機能するのですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Lokoの信号経路では、どの段階でもインターネットを使用しません。GPS/GLONASS/Galileo衛星が無線信号を送信 → Loko Airの受信機が座標を算出 → Loko AirがLoRa無線（トランシーバーのような直接無線リンク）で座標を送信 → Loko GroundがLoRa信号を受信 → Loko GroundがBluetooth経由でスマートフォンへ座標を送信 → Lokoアプリがオフライン地図上に位置を表示します。衛星から画面まで、すべてローカル無線で完結します。"
+        "text": "Lokoの信号経路では、どの段階でもインターネットを使用しません。GPS/GLONASS/Galileo/BeiDou衛星が無線信号を送信 → Loko Airの受信機が座標を算出 → Loko AirがLoRa無線（トランシーバーのような直接無線リンク）で座標を送信 → Loko GroundがLoRa信号を受信 → Loko GroundがBluetooth経由でスマートフォンへ座標を送信 → Lokoアプリがオフライン地図上に位置を表示します。衛星から画面まで、すべてローカル無線で完結します。"
       }
     }
   ]
@@ -219,7 +219,7 @@
     size-adjust: 107.64%;
   }
 </style>
-<script defer="" src="/js/layout.js?v=20260906"></script>
+<script defer="" src="/js/layout.js?v=20261025"></script>
 </head>
 <body>
 <div id="site-header"></div>
@@ -301,7 +301,7 @@
 <div class="chain-step">
 <div class="step-num">1</div>
 <div class="step-content">
-<h3>GPS / GLONASS / Galileo衛星</h3>
+<h3>GPS / GLONASS / Galileo / BeiDou衛星</h3>
 <p>31基以上の衛星が、高度20,000 kmから無線の時刻信号を発信します。インターネットは不要です。誰でも無料で受信できる一方向の放送です。</p>
 </div>
 </div>
@@ -352,19 +352,19 @@
 </div>
 <div class="faq-item">
 <h3>GPS衛星はいくつありますか？</h3>
-<p>最近の集計では、米国のGPS衛星群には31基の運用中の衛星があります。地球上のどの地点でも、通常は6～12基の衛星を同時に捕捉できます。GPSデバイスが3次元測位（緯度、経度、高度）を行うには、少なくとも4基の衛星が必要です。Lokoのような最新のトラッカーは、GPS、GLONASS（ロシア、24基）、Galileo（EU、30基）という複数の衛星群を利用するため、60基以上の衛星を同時に利用でき、より迅速かつ高精度に測位できます。</p>
+<p>最近の集計では、米国のGPS衛星群には31基の運用中の衛星があります。地球上のどの地点でも、通常は6～12基の衛星を同時に捕捉できます。GPSデバイスが3次元測位（緯度、経度、高度）を行うには、少なくとも4基の衛星が必要です。Lokoのような最新のトラッカーは、GPS、GLONASS（ロシア、24基）、Galileo（EU、30基）、BeiDou（中国、30基以上）という複数の衛星群を利用するため、100基以上の衛星を同時に利用でき、より迅速かつ高精度に測位できます。</p>
 </div>
 <div class="faq-item">
 <h3>GPSがオフラインで機能するのに、なぜ多くのGPSトラッカーには携帯電話回線が必要なのですか？</h3>
 <p>GPSはトラッカーに現在地を伝えます。では、その位置情報はどのようにスマートフォンへ届くのでしょうか？多くのトラッカーはSIMカードとモバイルデータ通信を使って座標をクラウドサーバーへ送信し、スマートフォンはインターネット経由でそのサーバーに問い合わせます。GPS自体はオフラインですが、伝送部分には携帯電話回線が使われています。Lokoでは携帯電話回線の代わりにLoRa無線を使用します。これはインターネットを必要としない直接無線リンクです。</p>
 </div>
 <div class="faq-item">
-<h3>GPS、GLONASS、Galileoの違いは何ですか？</h3>
-<p>GPSは米国の衛星測位システム（31基）です。GLONASSはロシアの同等システム（24基）、Galileoは欧州連合のシステム（2024年時点で運用中の衛星30基）です。それぞれ異なる周波数と軌道面を使用します。Lokoのように3つすべてを同時に利用すると、捕捉できる衛星数が大幅に増え、測位精度の向上、初回測位時間の短縮、いずれかの衛星群の配置条件が悪い環境での追跡維持が可能になります。</p>
+<h3>GPS、GLONASS、Galileo、BeiDouの違いは何ですか？</h3>
+<p>GPSは米国の衛星測位システム（31基）です。GLONASSはロシアの同等システム（24基）、Galileoは欧州連合のシステム（2024年時点で運用中の衛星30基）です。BeiDouは中国のシステムで、2020年から全世界でサービスを提供しています。それぞれ異なる周波数と軌道面を使用します。Lokoのように4つすべてを同時に利用すると、捕捉できる衛星数が大幅に増え、測位精度の向上、初回測位時間の短縮、いずれかの衛星群の配置条件が悪い環境での追跡維持が可能になります。</p>
 </div>
 <div class="faq-item">
 <h3>Lokoはどのように完全オフラインで機能するのですか？</h3>
-<p>Lokoの信号経路では、どの段階でもインターネットを使用しません。GPS/GLONASS/Galileo衛星が無線信号を送信 → Loko Airの受信機が座標を算出 → Loko AirがLoRa無線（トランシーバーのような直接無線リンク）で座標を送信 → Loko GroundがLoRa信号を受信 → Loko GroundがBluetooth経由でスマートフォンへ座標を送信 → Lokoアプリがオフライン地図上に位置を表示します。衛星から画面まで、すべてローカル無線で完結します。</p>
+<p>Lokoの信号経路では、どの段階でもインターネットを使用しません。GPS/GLONASS/Galileo/BeiDou衛星が無線信号を送信 → Loko Airの受信機が座標を算出 → Loko AirがLoRa無線（トランシーバーのような直接無線リンク）で座標を送信 → Loko GroundがLoRa信号を受信 → Loko GroundがBluetooth経由でスマートフォンへ座標を送信 → Lokoアプリがオフライン地図上に位置を表示します。衛星から画面まで、すべてローカル無線で完結します。</p>
 </div>
 </div>
 </div>
@@ -381,7 +381,7 @@
 </div>
 </div>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ja/">Home</a></li><li><a href="/ja/accessories/">Accessories</a></li><li><a href="/ja/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ja/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ja/battery-life/">Battery Life</a></li><li><a href="/ja/blog/">Blog</a></li><li><a href="/ja/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/ja/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ja/chirpstack/">ChirpStack</a></li><li><a href="/ja/contact/">Contact</a></li><li><a href="/ja/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ja/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ja/farms/">Farm GPS</a></li><li><a href="/ja/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ja/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ja/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ja/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ja/gps/">GPS & LoRa</a></li><li><a href="/ja/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ja/hiking/">Hiking GPS</a></li><li><a href="/ja/how-gps-works/">How GPS Works</a></li><li><a href="/ja/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ja/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ja/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ja/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ja/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ja/lorawan/">LoRaWAN</a></li><li><a href="/ja/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ja/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ja/open-source/">Open Source</a></li><li><a href="/ja/privacy/">Privacy</a></li><li><a href="/ja/search-rescue/">Search & Rescue</a></li><li><a href="/ja/setup-guides/">Setup</a></li><li><a href="/ja/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ja/software/">Software</a></li><li><a href="/ja/specifications/">Specs</a></li><li><a href="/ja/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ja/uk/">GPS Tracker UK</a></li><li><a href="/ja/uk/farms/">UK Farm GPS</a></li><li><a href="/ja/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ja/usa/">GPS Tracker USA</a></li><li><a href="/ja/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ja/">Home</a></li><li><a href="/ja/about/">About</a></li><li><a href="/ja/accessories/">Accessories</a></li><li><a href="/ja/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ja/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ja/battery-life/">Battery Life</a></li><li><a href="/ja/blog/">Blog</a></li><li><a href="/ja/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/ja/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ja/chirpstack/">ChirpStack</a></li><li><a href="/ja/contact/">Contact</a></li><li><a href="/ja/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ja/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ja/farms/">Farm GPS</a></li><li><a href="/ja/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ja/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ja/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ja/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ja/gps/">GPS & LoRa</a></li><li><a href="/ja/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ja/hiking/">Hiking GPS</a></li><li><a href="/ja/how-gps-works/">How GPS Works</a></li><li><a href="/ja/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ja/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ja/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ja/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ja/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ja/lorawan/">LoRaWAN</a></li><li><a href="/ja/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ja/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ja/open-source/">Open Source</a></li><li><a href="/ja/privacy/">Privacy</a></li><li><a href="/ja/search-rescue/">Search & Rescue</a></li><li><a href="/ja/setup-guides/">Setup</a></li><li><a href="/ja/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ja/software/">Software</a></li><li><a href="/ja/specifications/">Specs</a></li><li><a href="/ja/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ja/uk/">GPS Tracker UK</a></li><li><a href="/ja/uk/farms/">UK Farm GPS</a></li><li><a href="/ja/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ja/usa/">GPS Tracker USA</a></li><li><a href="/ja/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>

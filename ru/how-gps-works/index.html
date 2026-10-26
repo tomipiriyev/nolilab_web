@@ -61,7 +61,7 @@
       "name": "Сколько существует спутников GPS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "По последним данным, американская группировка GPS насчитывает 31 действующий спутник. В любой точке земной поверхности обычно одновременно видны 6–12 спутников. Для определения трёхмерных координат (широты, долготы и высоты) устройствам GPS требуется не менее 4 спутников. Современные трекеры, такие как Loko, используют несколько спутниковых группировок — GPS, GLONASS (Россия, 24 спутника) и Galileo (ЕС, 30 спутников), — получая одновременный доступ к более чем 60 спутникам для более быстрого и точного определения координат."
+        "text": "По последним данным, американская группировка GPS насчитывает 31 действующий спутник. В любой точке земной поверхности обычно одновременно видны 6–12 спутников. Для определения трёхмерных координат (широты, долготы и высоты) устройствам GPS требуется не менее 4 спутников. Современные трекеры, такие как Loko, используют несколько спутниковых группировок — GPS, GLONASS (Россия, 24 спутника), Galileo (ЕС, 30 спутников) и BeiDou (Китай, более 30 спутников), — получая одновременный доступ к более чем 100 спутникам для более быстрого и точного определения координат."
       }
     },
     {
@@ -74,10 +74,10 @@
     },
     {
       "@type": "Question",
-      "name": "Чем отличаются GPS, GLONASS и Galileo?",
+      "name": "Чем отличаются GPS, GLONASS, Galileo и BeiDou?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPS — американская спутниковая навигационная система (31 спутник). GLONASS — её российский аналог (24 спутника). Galileo — система Европейского союза (30 действующих спутников по состоянию на 2024 год). Каждая система использует свои частоты и орбитальные плоскости. Одновременное использование всех трёх систем — как в Loko — значительно увеличивает количество видимых спутников, повышает точность позиционирования, сокращает время первого определения координат и позволяет продолжать отслеживание там, где геометрия одной из группировок неблагоприятна."
+        "text": "GPS — американская спутниковая навигационная система (31 спутник). GLONASS — её российский аналог (24 спутника). Galileo — система Европейского союза (30 действующих спутников по состоянию на 2024 год). BeiDou — китайская система, обеспечивающая глобальное покрытие с 2020 года. Каждая система использует свои частоты и орбитальные плоскости. Одновременное использование всех четырёх систем — как в Loko — значительно увеличивает количество видимых спутников, повышает точность позиционирования, сокращает время первого определения координат и позволяет продолжать отслеживание там, где геометрия одной из группировок неблагоприятна."
       }
     },
     {
@@ -85,7 +85,7 @@
       "name": "Как Loko работает полностью автономно?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "В цепочке передачи сигнала Loko интернет не используется ни на одном этапе: спутники GPS/GLONASS/Galileo передают радиосигналы → приёмник Loko Air вычисляет координаты → Loko Air передаёт координаты по радиоканалу LoRa (прямая радиосвязь, как у рации) → Loko Ground принимает сигнал LoRa → Loko Ground передаёт координаты на ваш телефон через Bluetooth → приложение Loko показывает местоположение на офлайн-карте. От спутника до экрана всё работает по локальной радиосвязи."
+        "text": "В цепочке передачи сигнала Loko интернет не используется ни на одном этапе: спутники GPS/GLONASS/Galileo/BeiDou передают радиосигналы → приёмник Loko Air вычисляет координаты → Loko Air передаёт координаты по радиоканалу LoRa (прямая радиосвязь, как у рации) → Loko Ground принимает сигнал LoRa → Loko Ground передаёт координаты на ваш телефон через Bluetooth → приложение Loko показывает местоположение на офлайн-карте. От спутника до экрана всё работает по локальной радиосвязи."
       }
     }
   ]
@@ -219,7 +219,7 @@
     size-adjust: 107.64%;
   }
 </style>
-<script defer="" src="/js/layout.js?v=20260906"></script>
+<script defer="" src="/js/layout.js?v=20261025"></script>
 </head>
 <body>
 <div id="site-header"></div>
@@ -301,7 +301,7 @@
 <div class="chain-step">
 <div class="step-num">1</div>
 <div class="step-content">
-<h3>Спутники GPS / GLONASS / Galileo</h3>
+<h3>Спутники GPS / GLONASS / Galileo / BeiDou</h3>
 <p>Более 31 спутника передают радиосигналы точного времени с высоты 20 000 km. Без интернета. Односторонняя передача, бесплатная для всех.</p>
 </div>
 </div>
@@ -352,19 +352,19 @@
 </div>
 <div class="faq-item">
 <h3>Сколько существует спутников GPS?</h3>
-<p>По последним данным, американская группировка GPS насчитывает 31 действующий спутник. В любой точке земной поверхности обычно одновременно видны 6–12 спутников. Для определения трёхмерных координат (широты, долготы и высоты) устройствам GPS требуется не менее 4 спутников. Современные трекеры, такие как Loko, используют несколько спутниковых группировок — GPS, GLONASS (Россия, 24 спутника) и Galileo (ЕС, 30 спутников), — получая одновременный доступ к более чем 60 спутникам для более быстрого и точного определения координат.</p>
+<p>По последним данным, американская группировка GPS насчитывает 31 действующий спутник. В любой точке земной поверхности обычно одновременно видны 6–12 спутников. Для определения трёхмерных координат (широты, долготы и высоты) устройствам GPS требуется не менее 4 спутников. Современные трекеры, такие как Loko, используют несколько спутниковых группировок — GPS, GLONASS (Россия, 24 спутника), Galileo (ЕС, 30 спутников) и BeiDou (Китай, более 30 спутников), — получая одновременный доступ к более чем 100 спутникам для более быстрого и точного определения координат.</p>
 </div>
 <div class="faq-item">
 <h3>Почему большинству GPS-трекеров нужна сотовая связь, если GPS работает автономно?</h3>
 <p>GPS сообщает трекеру, где он находится. Но как это местоположение попадает на ваш телефон? Большинство трекеров используют SIM-карту и мобильный интернет, чтобы отправлять координаты на облачный сервер, к которому затем через интернет обращается ваш телефон. Сама система GPS работает автономно, но для передачи данных используется сотовая связь. В Loko сотовую связь заменяет радиоканал LoRa — прямая радиосвязь, которой также не нужен интернет.</p>
 </div>
 <div class="faq-item">
-<h3>Чем отличаются GPS, GLONASS и Galileo?</h3>
-<p>GPS — американская спутниковая навигационная система (31 спутник). GLONASS — её российский аналог (24 спутника). Galileo — система Европейского союза (30 действующих спутников по состоянию на 2024 год). Каждая система использует свои частоты и орбитальные плоскости. Одновременное использование всех трёх систем — как в Loko — значительно увеличивает количество видимых спутников, повышает точность позиционирования, сокращает время первого определения координат и позволяет продолжать отслеживание там, где геометрия одной из группировок неблагоприятна.</p>
+<h3>Чем отличаются GPS, GLONASS, Galileo и BeiDou?</h3>
+<p>GPS — американская спутниковая навигационная система (31 спутник). GLONASS — её российский аналог (24 спутника). Galileo — система Европейского союза (30 действующих спутников по состоянию на 2024 год). BeiDou — китайская система, обеспечивающая глобальное покрытие с 2020 года. Каждая система использует свои частоты и орбитальные плоскости. Одновременное использование всех четырёх систем — как в Loko — значительно увеличивает количество видимых спутников, повышает точность позиционирования, сокращает время первого определения координат и позволяет продолжать отслеживание там, где геометрия одной из группировок неблагоприятна.</p>
 </div>
 <div class="faq-item">
 <h3>Как Loko работает полностью автономно?</h3>
-<p>В цепочке передачи сигнала Loko интернет не используется ни на одном этапе: спутники GPS/GLONASS/Galileo передают радиосигналы → приёмник Loko Air вычисляет координаты → Loko Air передаёт координаты по радиоканалу LoRa (прямая радиосвязь, как у рации) → Loko Ground принимает сигнал LoRa → Loko Ground передаёт координаты на ваш телефон через Bluetooth → приложение Loko показывает местоположение на офлайн-карте. От спутника до экрана всё работает по локальной радиосвязи.</p>
+<p>В цепочке передачи сигнала Loko интернет не используется ни на одном этапе: спутники GPS/GLONASS/Galileo/BeiDou передают радиосигналы → приёмник Loko Air вычисляет координаты → Loko Air передаёт координаты по радиоканалу LoRa (прямая радиосвязь, как у рации) → Loko Ground принимает сигнал LoRa → Loko Ground передаёт координаты на ваш телефон через Bluetooth → приложение Loko показывает местоположение на офлайн-карте. От спутника до экрана всё работает по локальной радиосвязи.</p>
 </div>
 </div>
 </div>
@@ -381,7 +381,7 @@
 </div>
 </div>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ru/">Home</a></li><li><a href="/ru/accessories/">Accessories</a></li><li><a href="/ru/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ru/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ru/battery-life/">Battery Life</a></li><li><a href="/ru/blog/">Blog</a></li><li><a href="/ru/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/ru/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ru/chirpstack/">ChirpStack</a></li><li><a href="/ru/contact/">Contact</a></li><li><a href="/ru/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ru/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ru/farms/">Farm GPS</a></li><li><a href="/ru/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ru/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ru/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ru/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ru/gps/">GPS & LoRa</a></li><li><a href="/ru/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ru/hiking/">Hiking GPS</a></li><li><a href="/ru/how-gps-works/">How GPS Works</a></li><li><a href="/ru/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ru/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ru/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ru/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ru/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ru/lorawan/">LoRaWAN</a></li><li><a href="/ru/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ru/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ru/open-source/">Open Source</a></li><li><a href="/ru/privacy/">Privacy</a></li><li><a href="/ru/search-rescue/">Search & Rescue</a></li><li><a href="/ru/setup-guides/">Setup</a></li><li><a href="/ru/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ru/software/">Software</a></li><li><a href="/ru/specifications/">Specs</a></li><li><a href="/ru/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ru/uk/">GPS Tracker UK</a></li><li><a href="/ru/uk/farms/">UK Farm GPS</a></li><li><a href="/ru/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ru/usa/">GPS Tracker USA</a></li><li><a href="/ru/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ru/">Home</a></li><li><a href="/ru/about/">About</a></li><li><a href="/ru/accessories/">Accessories</a></li><li><a href="/ru/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ru/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ru/battery-life/">Battery Life</a></li><li><a href="/ru/blog/">Blog</a></li><li><a href="/ru/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/ru/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ru/chirpstack/">ChirpStack</a></li><li><a href="/ru/contact/">Contact</a></li><li><a href="/ru/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ru/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ru/farms/">Farm GPS</a></li><li><a href="/ru/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ru/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ru/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ru/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ru/gps/">GPS & LoRa</a></li><li><a href="/ru/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ru/hiking/">Hiking GPS</a></li><li><a href="/ru/how-gps-works/">How GPS Works</a></li><li><a href="/ru/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ru/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/ru/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ru/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ru/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ru/lorawan/">LoRaWAN</a></li><li><a href="/ru/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ru/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ru/open-source/">Open Source</a></li><li><a href="/ru/privacy/">Privacy</a></li><li><a href="/ru/search-rescue/">Search & Rescue</a></li><li><a href="/ru/setup-guides/">Setup</a></li><li><a href="/ru/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ru/software/">Software</a></li><li><a href="/ru/specifications/">Specs</a></li><li><a href="/ru/tractive-alternative/">Tractive Alternative</a></li><li><a href="/ru/uk/">GPS Tracker UK</a></li><li><a href="/ru/uk/farms/">UK Farm GPS</a></li><li><a href="/ru/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/ru/usa/">GPS Tracker USA</a></li><li><a href="/ru/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>

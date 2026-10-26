@@ -61,7 +61,7 @@
       "name": "Combien y a-t-il de satellites GPS ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Selon les derniers décomptes, la constellation américaine GPS compte 31 satellites opérationnels. Où que vous soyez à la surface de la Terre, vous pouvez généralement voir 6–12 satellites simultanément. Les appareils GPS ont besoin d’au moins 4 satellites pour déterminer une position 3D (latitude, longitude et altitude). Les traceurs modernes comme Loko utilisent plusieurs constellations — GPS, GLONASS (Russie, 24 satellites) et Galileo (UE, 30 satellites) — donnant accès à 60+ satellites simultanément pour obtenir des positions plus rapidement et avec davantage de précision."
+        "text": "Selon les derniers décomptes, la constellation américaine GPS compte 31 satellites opérationnels. Où que vous soyez à la surface de la Terre, vous pouvez généralement voir 6–12 satellites simultanément. Les appareils GPS ont besoin d’au moins 4 satellites pour déterminer une position 3D (latitude, longitude et altitude). Les traceurs modernes comme Loko utilisent plusieurs constellations — GPS, GLONASS (Russie, 24 satellites), Galileo (UE, 30 satellites) et BeiDou (Chine, plus de 30 satellites) — donnant accès à plus de 100 satellites simultanément pour obtenir des positions plus rapidement et avec davantage de précision."
       }
     },
     {
@@ -74,10 +74,10 @@
     },
     {
       "@type": "Question",
-      "name": "Quelle est la différence entre GPS, GLONASS et Galileo ?",
+      "name": "Quelle est la différence entre GPS, GLONASS, Galileo et BeiDou ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPS est le système américain de navigation par satellite (31 satellites). GLONASS est son équivalent russe (24 satellites). Galileo est le système de l’Union européenne (30 satellites opérationnels en 2024). Chaque système utilise des fréquences et des plans orbitaux différents. L’utilisation simultanée des trois — comme le fait Loko — augmente considérablement le nombre de satellites visibles, améliore la précision de la position, réduit le délai de première acquisition et maintient le suivi dans les environnements où la géométrie d’une constellation peut être défavorable."
+        "text": "GPS est le système américain de navigation par satellite (31 satellites). GLONASS est son équivalent russe (24 satellites). Galileo est le système de l’Union européenne (30 satellites opérationnels en 2024). BeiDou est le système chinois, avec un service mondial depuis 2020. Chaque système utilise des fréquences et des plans orbitaux différents. L’utilisation simultanée des quatre — comme le fait Loko — augmente considérablement le nombre de satellites visibles, améliore la précision de la position, réduit le délai de première acquisition et maintient le suivi dans les environnements où la géométrie d’une constellation peut être défavorable."
       }
     },
     {
@@ -85,7 +85,7 @@
       "name": "Comment Loko fonctionne-t-il entièrement hors ligne ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "La chaîne de transmission de Loko ne fait intervenir Internet à aucune étape : les satellites GPS/GLONASS/Galileo diffusent des signaux radio → le récepteur de Loko Air calcule les coordonnées → Loko Air transmet les coordonnées par radio LoRa (une liaison radio directe, comme un talkie-walkie) → Loko Ground reçoit le signal LoRa → Loko Ground envoie les coordonnées à votre téléphone via Bluetooth → l’application Loko affiche la position sur une carte hors ligne. Du satellite à l’écran, tout passe par des liaisons radio locales."
+        "text": "La chaîne de transmission de Loko ne fait intervenir Internet à aucune étape : les satellites GPS/GLONASS/Galileo/BeiDou diffusent des signaux radio → le récepteur de Loko Air calcule les coordonnées → Loko Air transmet les coordonnées par radio LoRa (une liaison radio directe, comme un talkie-walkie) → Loko Ground reçoit le signal LoRa → Loko Ground envoie les coordonnées à votre téléphone via Bluetooth → l’application Loko affiche la position sur une carte hors ligne. Du satellite à l’écran, tout passe par des liaisons radio locales."
       }
     }
   ]
@@ -219,7 +219,7 @@
     size-adjust: 107.64%;
   }
 </style>
-<script defer="" src="/js/layout.js?v=20260906"></script>
+<script defer="" src="/js/layout.js?v=20261025"></script>
 </head>
 <body>
 <div id="site-header"></div>
@@ -301,7 +301,7 @@
 <div class="chain-step">
 <div class="step-num">1</div>
 <div class="step-content">
-<h3>Satellites GPS / GLONASS / Galileo</h3>
+<h3>Satellites GPS / GLONASS / Galileo / BeiDou</h3>
 <p>Plus de 31 satellites diffusent des signaux radio de synchronisation depuis une altitude de 20 000 km. Sans Internet. Diffusion unidirectionnelle, accessible gratuitement à tous.</p>
 </div>
 </div>
@@ -352,19 +352,19 @@
 </div>
 <div class="faq-item">
 <h3>Combien y a-t-il de satellites GPS ?</h3>
-<p>Selon les derniers décomptes, la constellation américaine GPS compte 31 satellites opérationnels. Où que vous soyez à la surface de la Terre, vous pouvez généralement voir 6–12 satellites simultanément. Les appareils GPS ont besoin d’au moins 4 satellites pour déterminer une position 3D (latitude, longitude et altitude). Les traceurs modernes comme Loko utilisent plusieurs constellations — GPS, GLONASS (Russie, 24 satellites) et Galileo (UE, 30 satellites) — donnant accès à 60+ satellites simultanément pour obtenir des positions plus rapidement et avec davantage de précision.</p>
+<p>Selon les derniers décomptes, la constellation américaine GPS compte 31 satellites opérationnels. Où que vous soyez à la surface de la Terre, vous pouvez généralement voir 6–12 satellites simultanément. Les appareils GPS ont besoin d’au moins 4 satellites pour déterminer une position 3D (latitude, longitude et altitude). Les traceurs modernes comme Loko utilisent plusieurs constellations — GPS, GLONASS (Russie, 24 satellites), Galileo (UE, 30 satellites) et BeiDou (Chine, plus de 30 satellites) — donnant accès à plus de 100 satellites simultanément pour obtenir des positions plus rapidement et avec davantage de précision.</p>
 </div>
 <div class="faq-item">
 <h3>Pourquoi la plupart des traceurs GPS ont-ils besoin d’un réseau mobile si GPS fonctionne hors ligne ?</h3>
 <p>GPS indique au traceur où il se trouve. Mais comment cette position parvient-elle à votre téléphone ? La plupart des traceurs utilisent une carte SIM et des données mobiles pour envoyer les coordonnées à un serveur cloud, que votre téléphone interroge ensuite via Internet. GPS fonctionne lui-même hors ligne, mais la couche de transmission utilise le réseau mobile. Loko remplace celui-ci par la radio LoRa — une liaison radio directe qui ne nécessite pas non plus Internet.</p>
 </div>
 <div class="faq-item">
-<h3>Quelle est la différence entre GPS, GLONASS et Galileo ?</h3>
-<p>GPS est le système américain de navigation par satellite (31 satellites). GLONASS est son équivalent russe (24 satellites). Galileo est le système de l’Union européenne (30 satellites opérationnels en 2024). Chaque système utilise des fréquences et des plans orbitaux différents. L’utilisation simultanée des trois — comme le fait Loko — augmente considérablement le nombre de satellites visibles, améliore la précision de la position, réduit le délai de première acquisition et maintient le suivi dans les environnements où la géométrie d’une constellation peut être défavorable.</p>
+<h3>Quelle est la différence entre GPS, GLONASS, Galileo et BeiDou ?</h3>
+<p>GPS est le système américain de navigation par satellite (31 satellites). GLONASS est son équivalent russe (24 satellites). Galileo est le système de l’Union européenne (30 satellites opérationnels en 2024). BeiDou est le système chinois, avec un service mondial depuis 2020. Chaque système utilise des fréquences et des plans orbitaux différents. L’utilisation simultanée des quatre — comme le fait Loko — augmente considérablement le nombre de satellites visibles, améliore la précision de la position, réduit le délai de première acquisition et maintient le suivi dans les environnements où la géométrie d’une constellation peut être défavorable.</p>
 </div>
 <div class="faq-item">
 <h3>Comment Loko fonctionne-t-il entièrement hors ligne ?</h3>
-<p>La chaîne de transmission de Loko ne fait intervenir Internet à aucune étape : les satellites GPS/GLONASS/Galileo diffusent des signaux radio → le récepteur de Loko Air calcule les coordonnées → Loko Air transmet les coordonnées par radio LoRa (une liaison radio directe, comme un talkie-walkie) → Loko Ground reçoit le signal LoRa → Loko Ground envoie les coordonnées à votre téléphone via Bluetooth → l’application Loko affiche la position sur une carte hors ligne. Du satellite à l’écran, tout passe par des liaisons radio locales.</p>
+<p>La chaîne de transmission de Loko ne fait intervenir Internet à aucune étape : les satellites GPS/GLONASS/Galileo/BeiDou diffusent des signaux radio → le récepteur de Loko Air calcule les coordonnées → Loko Air transmet les coordonnées par radio LoRa (une liaison radio directe, comme un talkie-walkie) → Loko Ground reçoit le signal LoRa → Loko Ground envoie les coordonnées à votre téléphone via Bluetooth → l’application Loko affiche la position sur une carte hors ligne. Du satellite à l’écran, tout passe par des liaisons radio locales.</p>
 </div>
 </div>
 </div>
@@ -381,7 +381,7 @@
 </div>
 </div>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/fr/">Home</a></li><li><a href="/fr/accessories/">Accessories</a></li><li><a href="/fr/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/fr/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/fr/battery-life/">Battery Life</a></li><li><a href="/fr/blog/">Blog</a></li><li><a href="/fr/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/fr/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/fr/chirpstack/">ChirpStack</a></li><li><a href="/fr/contact/">Contact</a></li><li><a href="/fr/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/fr/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/fr/farms/">Farm GPS</a></li><li><a href="/fr/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/fr/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/fr/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/fr/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/fr/gps/">GPS & LoRa</a></li><li><a href="/fr/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/fr/hiking/">Hiking GPS</a></li><li><a href="/fr/how-gps-works/">How GPS Works</a></li><li><a href="/fr/hunting-dogs/">Hunting Dogs</a></li><li><a href="/fr/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/fr/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/fr/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/fr/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/fr/lorawan/">LoRaWAN</a></li><li><a href="/fr/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/fr/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/fr/open-source/">Open Source</a></li><li><a href="/fr/privacy/">Privacy</a></li><li><a href="/fr/search-rescue/">Search & Rescue</a></li><li><a href="/fr/setup-guides/">Setup</a></li><li><a href="/fr/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/fr/software/">Software</a></li><li><a href="/fr/specifications/">Specs</a></li><li><a href="/fr/tractive-alternative/">Tractive Alternative</a></li><li><a href="/fr/uk/">GPS Tracker UK</a></li><li><a href="/fr/uk/farms/">UK Farm GPS</a></li><li><a href="/fr/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/fr/usa/">GPS Tracker USA</a></li><li><a href="/fr/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/fr/">Home</a></li><li><a href="/fr/about/">About</a></li><li><a href="/fr/accessories/">Accessories</a></li><li><a href="/fr/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/fr/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/fr/battery-life/">Battery Life</a></li><li><a href="/fr/blog/">Blog</a></li><li><a href="/fr/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/fr/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/fr/chirpstack/">ChirpStack</a></li><li><a href="/fr/contact/">Contact</a></li><li><a href="/fr/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/fr/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/fr/farms/">Farm GPS</a></li><li><a href="/fr/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/fr/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/fr/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/fr/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/fr/gps/">GPS & LoRa</a></li><li><a href="/fr/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/fr/hiking/">Hiking GPS</a></li><li><a href="/fr/how-gps-works/">How GPS Works</a></li><li><a href="/fr/hunting-dogs/">Hunting Dogs</a></li><li><a href="/fr/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/fr/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/fr/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/fr/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/fr/lorawan/">LoRaWAN</a></li><li><a href="/fr/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/fr/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/fr/open-source/">Open Source</a></li><li><a href="/fr/privacy/">Privacy</a></li><li><a href="/fr/search-rescue/">Search & Rescue</a></li><li><a href="/fr/setup-guides/">Setup</a></li><li><a href="/fr/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/fr/software/">Software</a></li><li><a href="/fr/specifications/">Specs</a></li><li><a href="/fr/tractive-alternative/">Tractive Alternative</a></li><li><a href="/fr/uk/">GPS Tracker UK</a></li><li><a href="/fr/uk/farms/">UK Farm GPS</a></li><li><a href="/fr/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/fr/usa/">GPS Tracker USA</a></li><li><a href="/fr/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>
