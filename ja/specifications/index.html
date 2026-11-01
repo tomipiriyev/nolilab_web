@@ -15,7 +15,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Loko GPS トラッカー仕様: 28.5x20.5x5.9mm、20km LoRa 範囲、12 か月バッテリー、GPS/GLONASS/Galileo/BeiDou。購読は必要ありません。" name="description"/>
+<meta content="Loko GPS トラッカー仕様: 28.5x20.5x5.9mm、20km LoRa 範囲、12 か月バッテリー、GPS/GLONASS/Galileo/QZSS。購読は必要ありません。" name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.nolilab.com/ja/specifications/" rel="canonical"/>
 <link href="https://www.nolilab.com/specifications/" hreflang="en" rel="alternate"/>
@@ -27,13 +27,13 @@
 <link href="https://www.nolilab.com/specifications/" hreflang="x-default" rel="alternate"/>
 <meta content="product" property="og:type"/>
 <meta content="Loko GPS トラッカーの技術仕様 | nolilab" property="og:title"/>
-<meta content="Loko GPS トラッカー仕様: 28.5x20.5x5.9mm、20km LoRa 範囲、12 か月バッテリー、GPS/GLONASS/Galileo/BeiDou。購読は必要ありません。" property="og:description">
+<meta content="Loko GPS トラッカー仕様: 28.5x20.5x5.9mm、20km LoRa 範囲、12 か月バッテリー、GPS/GLONASS/Galileo/QZSS。購読は必要ありません。" property="og:description">
 <meta content="https://www.nolilab.com/ja/specifications/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Loko GPS トラッカーの技術仕様 | nolilab" name="twitter:title"/>
-<meta content="Loko GPS トラッカー仕様: 28.5x20.5x5.9mm、20km LoRa 範囲、12 か月バッテリー、GPS/GLONASS/Galileo/BeiDou。購読は必要ありません。" name="twitter:description"/>
+<meta content="Loko GPS トラッカー仕様: 28.5x20.5x5.9mm、20km LoRa 範囲、12 か月バッテリー、GPS/GLONASS/Galileo/QZSS。購読は必要ありません。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
     :root {
@@ -657,7 +657,7 @@
     {
       "@type": "PropertyValue",
       "name": "GNSS",
-      "value": "GPS + GLONASS + Galileo + BeiDou"
+      "value": "GPS + GLONASS + Galileo + QZSS"
     },
     {
       "@type": "PropertyValue",
@@ -814,8 +814,8 @@
 <span class="spec-value">868 MHz / 915 MHz</span>
 </div>
 <div class="spec-item">
-<span class="spec-label">最大出力電力</span>
-<span class="spec-value">22 dBm</span>
+<span class="spec-label">出力電力</span>
+<span class="spec-value">初期設定 8 dBm（最大 22 dBm まで設定可能）</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">感度</span>
@@ -858,31 +858,31 @@
 <div class="spec-card">
 <h3>衛星システム</h3>
 <div class="spec-item">
-<span class="spec-label">星座</span>
-<span class="spec-value">GPS、GLONASS、Galileo、BeiDou</span>
+<span class="spec-label">衛星システム</span>
+<span class="spec-value">GPS、GLONASS、Galileo、QZSS</span>
 </div>
 <div class="spec-item">
-<span class="spec-label">正確さ</span>
-<span class="spec-value">2.5m CEP</span>
+<span class="spec-label">測位精度</span>
+<span class="spec-value">3.0 m CEP（SBAS使用時 2.5 m）</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">チャンネル</span>
-<span class="spec-value">72 取得</span>
+<span class="spec-value">探索 99 / 追尾 33</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">コールドスタート</span>
-<span class="spec-value">&lt; 26 秒</span>
+<span class="spec-value">35 秒（標準）</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">ホットスタート</span>
-<span class="spec-value">&lt; 1秒</span>
+<span class="spec-value">1 秒（標準）</span>
 </div>
 </div>
 <div class="spec-card">
 <h3>パフォーマンス</h3>
 <div class="spec-item">
 <span class="spec-label">追跡感度</span>
-<span class="spec-value">-167 dBm</span>
+<span class="spec-value">-165 dBm</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">最大更新レート</span>
@@ -890,11 +890,11 @@
 </div>
 <div class="spec-item">
 <span class="spec-label">最大高度</span>
-<span class="spec-value">80,000m</span>
+<span class="spec-value">18,000 m</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">最大速度</span>
-<span class="spec-value">500m/秒</span>
+<span class="spec-value">515 m/秒</span>
 </div>
 </div>
 </div>

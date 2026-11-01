@@ -15,7 +15,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Loko GPS Характеристики трекера: 28,5x20,5x5,9mm, диапазон 20km LoRa, аккумулятор на 12 месяцев, GPS/GLONASS/Galileo/BeiDou. Никакой подписки не требуется." name="description"/>
+<meta content="Loko GPS Характеристики трекера: 28,5x20,5x5,9mm, диапазон 20km LoRa, аккумулятор на 12 месяцев, GPS/GLONASS/Galileo/QZSS. Никакой подписки не требуется." name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.nolilab.com/ru/specifications/" rel="canonical"/>
 <link href="https://www.nolilab.com/specifications/" hreflang="en" rel="alternate"/>
@@ -27,13 +27,13 @@
 <link href="https://www.nolilab.com/specifications/" hreflang="x-default" rel="alternate"/>
 <meta content="product" property="og:type"/>
 <meta content="Технические характеристики GPS-трекера Loko | nolilab" property="og:title"/>
-<meta content="Loko GPS Характеристики трекера: 28,5x20,5x5,9mm, диапазон 20km LoRa, аккумулятор на 12 месяцев, GPS/GLONASS/Galileo/BeiDou. Никакой подписки не требуется." property="og:description">
+<meta content="Loko GPS Характеристики трекера: 28,5x20,5x5,9mm, диапазон 20km LoRa, аккумулятор на 12 месяцев, GPS/GLONASS/Galileo/QZSS. Никакой подписки не требуется." property="og:description">
 <meta content="https://www.nolilab.com/ru/specifications/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Технические характеристики GPS-трекера Loko | nolilab" name="twitter:title"/>
-<meta content="Loko GPS Характеристики трекера: 28,5x20,5x5,9mm, диапазон 20km LoRa, аккумулятор на 12 месяцев, GPS/GLONASS/Galileo/BeiDou. Никакой подписки не требуется." name="twitter:description"/>
+<meta content="Loko GPS Характеристики трекера: 28,5x20,5x5,9mm, диапазон 20km LoRa, аккумулятор на 12 месяцев, GPS/GLONASS/Galileo/QZSS. Никакой подписки не требуется." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
     :root {
@@ -657,7 +657,7 @@
     {
       "@type": "PropertyValue",
       "name": "ГНСС",
-      "value": "GPS + GLONASS + Galileo + BeiDou"
+      "value": "GPS + GLONASS + Galileo + QZSS"
     },
     {
       "@type": "PropertyValue",
@@ -814,8 +814,8 @@
 <span class="spec-value">868 MHz / 915 MHz</span>
 </div>
 <div class="spec-item">
-<span class="spec-label">Максимальная выходная мощность</span>
-<span class="spec-value">22 dBm</span>
+<span class="spec-label">Выходная мощность</span>
+<span class="spec-value">8 dBm по умолчанию (настраивается до 22 dBm)</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">Чувствительность</span>
@@ -858,31 +858,31 @@
 <div class="spec-card">
 <h3>Спутниковые системы</h3>
 <div class="spec-item">
-<span class="spec-label">Созвездия</span>
-<span class="spec-value">GPS, GLONASS, Galileo, BeiDou</span>
+<span class="spec-label">Спутниковые системы</span>
+<span class="spec-value">GPS, GLONASS, Galileo, QZSS</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">Точность</span>
-<span class="spec-value">2,5 млн КЭП</span>
+<span class="spec-value">3,0 м CEP (2,5 м с SBAS)</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">Каналы</span>
-<span class="spec-value">72 приобретения</span>
+<span class="spec-value">99 поиска / 33 слежения</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">Холодный старт</span>
-<span class="spec-value">&lt; 26 сек.</span>
+<span class="spec-value">35 с (типично)</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">Горячий старт</span>
-<span class="spec-value">&lt; 1 с</span>
+<span class="spec-value">1 с (типично)</span>
 </div>
 </div>
 <div class="spec-card">
 <h3>Производительность</h3>
 <div class="spec-item">
 <span class="spec-label">Чувствительность отслеживания</span>
-<span class="spec-value">-167 dBm</span>
+<span class="spec-value">-165 dBm</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">Максимальная скорость обновления</span>
@@ -890,11 +890,11 @@
 </div>
 <div class="spec-item">
 <span class="spec-label">Максимальная высота</span>
-<span class="spec-value">80 000 м</span>
+<span class="spec-value">18 000 м</span>
 </div>
 <div class="spec-item">
 <span class="spec-label">Максимальная скорость</span>
-<span class="spec-value">500 м/с</span>
+<span class="spec-value">515 м/с</span>
 </div>
 </div>
 </div>

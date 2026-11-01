@@ -378,7 +378,7 @@
 <ul>
 <li><strong>LoRa radio at the core:</strong> The fundamental choice of LoRa over cellular is responsible for the majority of the efficiency gain. At 20–40mA peak transmit current versus 200–500mA for cellular, every transmission costs a fraction of the energy.</li>
 <li><strong>Optimized deep sleep firmware:</strong> Loko Air spends the vast majority of its time in deep sleep, drawing less than 1 microamp. The microcontroller, GPS chip, and LoRa radio all enter their lowest power states between update cycles. Sleep current of 1μA means 1,000 hours of sleep on 1mAh of battery capacity.</li>
-<li><strong>Efficient GPS acquisition:</strong> Loko is configured to use assisted GPS where possible, reducing time to first fix and therefore reducing the time the GPS chip spends in high-power acquisition mode. Using all four satellite constellations (GPS + GLONASS + Galileo + BeiDou) provides more satellites overhead, speeding up fixes.</li>
+<li><strong>Efficient GPS acquisition:</strong> Loko is configured to use assisted GPS where possible, reducing time to first fix and therefore reducing the time the GPS chip spends in high-power acquisition mode. Using all three satellite constellations (GPS + GLONASS + Galileo) provides more satellites overhead, speeding up fixes.</li>
 <li><strong>Adaptive update rate:</strong> The open-source firmware can be configured to reduce update frequency when the tracker detects it is stationary (via accelerometer), further extending battery life in practice.</li>
 <li><strong>No cloud keep-alive:</strong> Cellular trackers must periodically ping cloud servers to maintain connection state, even when nothing has changed. Loko's P2P radio architecture requires no such keep-alives — the only transmissions are coordinate packets.</li>
 </ul>
@@ -392,7 +392,7 @@
 <ul>
 <li><strong>Reduce update frequency:</strong> Updating every 5 minutes instead of every 30 seconds uses dramatically less battery. For assets that move slowly (livestock, stored equipment), low update rates are often perfectly adequate.</li>
 <li><strong>Use motion-triggered updates:</strong> Many trackers support activating high-frequency updates only when movement is detected. This is ideal for tracking parked vehicles or stored equipment.</li>
-<li><strong>Optimize GPS fix time:</strong> Using a tracker that supports multiple satellite constellations (GPS + GLONASS + Galileo + BeiDou) results in faster fixes, which means less time with the GPS chip at full power.</li>
+<li><strong>Optimize GPS fix time:</strong> Using a tracker that supports multiple satellite constellations (GPS + GLONASS + Galileo) results in faster fixes, which means less time with the GPS chip at full power.</li>
 <li><strong>Avoid extreme temperatures:</strong> Lithium batteries lose significant capacity at low temperatures. Keep trackers at moderate temperatures when possible, especially in storage.</li>
 <li><strong>Charge fully before deployment:</strong> Starting a long deployment at 100% is obvious but worth stating — a partial charge compounds quickly over weeks.</li>
 <li><strong>With Loko specifically:</strong> Adjust the firmware update interval to match your use case. For slow-moving assets, an update every 2–5 minutes extends battery life into multi-month territory.</li>
