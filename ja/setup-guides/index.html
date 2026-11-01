@@ -15,7 +15,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Loko GPS Tracker の完全なセットアップ ガイド。 Loko 航空および地上ユニットを構成し、パラメーターを設定し、モバイル アプリとペアリングして、オフライン GPS 追跡を開始します。" name="description"/>
+<meta content="Loko GPS Tracker の完全なセットアップ ガイド。 Loko Air および Loko Ground ユニットを構成し、パラメーターを設定し、モバイル アプリとペアリングして、オフライン GPS 追跡を開始します。" name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.nolilab.com/ja/setup-guides/" rel="canonical"/>
 <link href="https://www.nolilab.com/setup-guides/" hreflang="en" rel="alternate"/>
@@ -27,13 +27,13 @@
 <link href="https://www.nolilab.com/setup-guides/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="Loko GPSトラッカー設定ガイド | nolilab" property="og:title"/>
-<meta content="Loko GPS Tracker の完全なセットアップ ガイド。 Loko 航空および地上ユニットを構成し、パラメーターを設定し、モバイル アプリとペアリングして、オフライン GPS 追跡を開始します。" property="og:description"/>
+<meta content="Loko GPS Tracker の完全なセットアップ ガイド。 Loko Air および Loko Ground ユニットを構成し、パラメーターを設定し、モバイル アプリとペアリングして、オフライン GPS 追跡を開始します。" property="og:description"/>
 <meta content="https://www.nolilab.com/ja/setup-guides/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Loko GPSトラッカー設定ガイド | nolilab" name="twitter:title"/>
-<meta content="Loko GPS Tracker の完全なセットアップ ガイド。 Loko 航空および地上ユニットを構成し、パラメーターを設定し、モバイル アプリとペアリングして、オフライン GPS 追跡を開始します。" name="twitter:description"/>
+<meta content="Loko GPS Tracker の完全なセットアップ ガイド。 Loko Air および Loko Ground ユニットを構成し、パラメーターを設定し、モバイル アプリとペアリングして、オフライン GPS 追跡を開始します。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
   :root {
@@ -499,13 +499,13 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Loko GPS トラッカーのセットアップ方法",
-  "description": "Loko GPS トラッカー システムの完全なセットアップ ガイド。 Loko 航空および地上ユニットを構成し、Web コンフィギュレーターを介してパラメーターを設定し、モバイル アプリとペアリングします。",
+  "description": "Loko GPS トラッカー システムの完全なセットアップ ガイド。 Loko Air および Loko Ground ユニットを構成し、Web コンフィギュレーターを介してパラメーターを設定し、モバイル アプリとペアリングします。",
   "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
   "totalTime": "PT15M",
   "supply": [
     {
       "@type": "HowToSupply",
-      "name": "Loko 航空ユニット (GPS + LoRa 送信機)"
+      "name": "Loko Air ユニット (GPS + LoRa 送信機)"
     },
     {
       "@type": "HowToSupply",
@@ -585,7 +585,7 @@
 <!-- Hero -->
 <div class="sg-hero">
 <h1>Loko GPS トラッカー — セットアップ ガイド</h1>
-<p class="hero-sub">Loko 航空および地上ユニットを最初から設定します。完全なセットアップには約 15 分かかります。</p>
+<p class="hero-sub">Loko Air および Loko Ground ユニットを最初から設定します。完全なセットアップには約 15 分かかります。</p>
 <div class="hero-actions">
 <a class="download-btn" download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">
 <i class="fa-solid fa-file-pdf"></i> ユーザーマニュアルをダウンロード (PDF)
@@ -614,7 +614,7 @@
 <p>Loko は、ドローン用のコンパクトな GPS トラッカーです。 2 つのユニットが連携して動作します。 <strong>Loko Air</strong> (空中) GPS を取得し、LoRa 無線経由で送信します。 <strong>Loko Ground</strong> (ベース ステーション) データを受信し、Bluetooth 経由で Loko モバイル アプリに転送します。</p>
 <div class="unit-cards">
 <div class="unit-card">
-<div class="unit-label">ロコエア</div>
+<div class="unit-label">loko-air</div>
 <p class="unit-desc">GPS + LoRa 送信機 — 航空機に搭載</p>
 <ul class="unit-specs">
 <li>リチウムイオン 200 mAh</li>
@@ -624,7 +624,7 @@
 </ul>
 </div>
 <div class="unit-card">
-<div class="unit-label">ロコグラウンド</div>
+<div class="unit-label">loko-ground</div>
 <p class="unit-desc">LoRa レシーバー + Bluetooth リレー - 地上に留まります</p>
 <ul class="unit-specs">
 <li>18650 リチウムイオン (ユーザー提供)</li>
@@ -645,7 +645,7 @@
 <tr><td><code>radio</code></td><td>LoRa / CHIRP — 建物、都市部の雑然とした空間、鬱蒼とした森林に侵入</td></tr>
 <tr><td><code>frequency</code></td><td>868–920 MHz (構成可能)</td></tr>
 <tr><td><code>tx_power</code></td><td>8 dBm デフォルト (設定可能)</td></tr>
-<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo</td></tr>
+<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo + QZSS</td></tr>
 <tr><td><code>range</code></td><td>+20 km 見通し距離 (対地高度 2 m);高度とともに成長する</td></tr>
 <tr><td><code>battery_life</code></td><td>最長 1 年 (起床間隔によって異なります)</td></tr>
 <tr><td><code>weight</code></td><td>14g（エアユニット）</td></tr>

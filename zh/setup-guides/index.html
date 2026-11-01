@@ -15,7 +15,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Loko GPS 跟踪器的完整设置指南。配置 Loko Air和地面装置、设置参数、与移动应用程序配对并开始离线 GPS 跟踪。" name="description"/>
+<meta content="Loko GPS 跟踪器的完整设置指南。配置 Loko Air和Loko Ground装置、设置参数、与移动应用程序配对并开始离线 GPS 跟踪。" name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.nolilab.com/zh/setup-guides/" rel="canonical"/>
 <link href="https://www.nolilab.com/setup-guides/" hreflang="en" rel="alternate"/>
@@ -27,13 +27,13 @@
 <link href="https://www.nolilab.com/setup-guides/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="Loko GPS 跟踪器设置指南 |安装说明|nolilab" property="og:title"/>
-<meta content="Loko GPS 跟踪器的完整设置指南。配置 Loko Air和地面装置、设置参数、与移动应用程序配对并开始离线 GPS 跟踪。" property="og:description"/>
+<meta content="Loko GPS 跟踪器的完整设置指南。配置 Loko Air和Loko Ground装置、设置参数、与移动应用程序配对并开始离线 GPS 跟踪。" property="og:description"/>
 <meta content="https://www.nolilab.com/zh/setup-guides/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Loko GPS 跟踪器设置指南 |安装说明|nolilab" name="twitter:title"/>
-<meta content="Loko GPS 跟踪器的完整设置指南。配置 Loko Air和地面装置、设置参数、与移动应用程序配对并开始离线 GPS 跟踪。" name="twitter:description"/>
+<meta content="Loko GPS 跟踪器的完整设置指南。配置 Loko Air和Loko Ground装置、设置参数、与移动应用程序配对并开始离线 GPS 跟踪。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
   :root {
@@ -499,13 +499,13 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "如何设置 Loko GPS 跟踪器",
-  "description": "Loko GPS 跟踪器系统的完整设置指南。配置 Loko Air和地面装置，通过网络配置器设置参数，并与移动应用程序配对。",
+  "description": "Loko GPS 跟踪器系统的完整设置指南。配置 Loko Air和Loko Ground装置，通过网络配置器设置参数，并与移动应用程序配对。",
   "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
   "totalTime": "PT15M",
   "supply": [
     {
       "@type": "HowToSupply",
-      "name": "Loko 天空端（GPS + LoRa 发射器）"
+      "name": "Loko Air 设备（GPS + LoRa 发射器）"
     },
     {
       "@type": "HowToSupply",
@@ -559,7 +559,7 @@
     {
       "@type": "HowTo",
       "position": 5,
-      "name": "插入电池并将 Loko 接地",
+      "name": "插入电池并连接 Loko Ground",
       "text": "将 18650 锂离子电池插入接地单元。通过 USB 连接到计算机，打开配置器中的“地面单元”选项卡，然后单击“连接”。"
     },
     {
@@ -585,7 +585,7 @@
 <!-- Hero -->
 <div class="sg-hero">
 <h1>Loko GPS 跟踪器 — 设置指南</h1>
-<p class="hero-sub">从头开始配置您的 Loko Air和地面设备。完整设置大约需要 15 分钟。</p>
+<p class="hero-sub">从头开始配置您的 Loko Air和Loko Ground设备。完整设置大约需要 15 分钟。</p>
 <div class="hero-actions">
 <a class="download-btn" download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">
 <i class="fa-solid fa-file-pdf"></i> 下载用户手册 (PDF)
@@ -603,7 +603,7 @@
 <li><a href="#specifications">规格</a></li>
 <li><a href="#how-it-works">它是如何运作的</a></li>
 <li><a href="#configure-air">第 1 部分 — 配置 Loko Air</a></li>
-<li><a href="#configure-ground">第 2 部分 — 配置 Loko 接地</a></li>
+<li><a href="#configure-ground">第 2 部分 — 配置 Loko Ground</a></li>
 <li><a href="#warnings">警告</a></li>
 <li><a href="#checklist">快速启动清单</a></li>
 </ol>
@@ -611,10 +611,10 @@
 <!-- Overview -->
 <section class="sg-section" id="overview">
 <h2>概述</h2>
-<p>Loko 是一款紧凑型 GPS 无人机跟踪器。两个单位协同工作： <strong>Loko Air</strong> （机载）获取 GPS 并通过 LoRa 无线电传输； <strong>Loko 接地</strong> （基站）接收数据并通过蓝牙将其转发到 Loko 移动应用程序。</p>
+<p>Loko 是一款紧凑型 GPS 无人机跟踪器。两个单位协同工作： <strong>Loko Air</strong> （机载）获取 GPS 并通过 LoRa 无线电传输； <strong>Loko Ground</strong> （基站）接收数据并通过蓝牙将其转发到 Loko 移动应用程序。</p>
 <div class="unit-cards">
 <div class="unit-card">
-<div class="unit-label">洛科航空</div>
+<div class="unit-label">loko-air</div>
 <p class="unit-desc">GPS + LoRa 发射器 — 安装在飞机上</p>
 <ul class="unit-specs">
 <li>锂离子电池 200 mAh</li>
@@ -624,7 +624,7 @@
 </ul>
 </div>
 <div class="unit-card">
-<div class="unit-label">洛科地面</div>
+<div class="unit-label">loko-ground</div>
 <p class="unit-desc">LoRa 接收器 + 蓝牙继电器 — 留在地面</p>
 <ul class="unit-specs">
 <li>18650 锂离子电池（用户提供）</li>
@@ -645,7 +645,7 @@
 <tr><td><code>radio</code></td><td>LoRa / CHIRP — 穿透建筑物、城市杂乱、茂密森林</td></tr>
 <tr><td><code>frequency</code></td><td>868–920 MHz（可配置）</td></tr>
 <tr><td><code>tx_power</code></td><td>8 dBm 默认（可配置）</td></tr>
-<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo</td></tr>
+<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo + QZSS</td></tr>
 <tr><td><code>range</code></td><td>+20 km 在 2 m AGL 处的视线；随着海拔的升高而增长</td></tr>
 <tr><td><code>battery_life</code></td><td>长达 1 年（取决于唤醒间隔）</td></tr>
 <tr><td><code>weight</code></td><td>14 克（空气单元）</td></tr>
@@ -718,7 +718,7 @@
 </section>
 <!-- Part 2: Configure Ground -->
 <section class="sg-section" id="configure-ground">
-<h2>第 2 部分 — 配置 Loko 接地</h2>
+<h2>第 2 部分 — 配置 Loko Ground</h2>
 <p>Loko Ground没有内置电池。连接前，拧下四个后部紧固件，插入 <strong>18650锂离子电池</strong> （不包括在内），然后重新组装。</p>
 <h3>2.1 打开配置器→地面单元选项卡</h3>
 <ol class="step-list" start="8">
@@ -727,7 +727,7 @@
 </ol>
 <h3>2.2 连接</h3>
 <ol class="step-list" start="10">
-<li>通过 USB 将 Loko 接地连接到计算机。</li>
+<li>通过 USB 将 Loko Ground连接到计算机。</li>
 <li>点击 <strong>连接</strong> → 授予串行访问权限 → 选择端口。</li>
 </ol>
 <h3>2.3 读取→更新→发送</h3>

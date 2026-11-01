@@ -15,7 +15,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Guía de configuración completa para el rastreador Loko GPS. Configure las unidades aéreas y terrestres Loko, establezca parámetros, empareje con la aplicación móvil e inicie el seguimiento GPS sin conexión." name="description"/>
+<meta content="Guía de configuración completa para el rastreador Loko GPS. Configure las unidades Loko Air y Loko Ground, establezca parámetros, empareje con la aplicación móvil e inicie el seguimiento GPS sin conexión." name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.nolilab.com/es/setup-guides/" rel="canonical"/>
 <link href="https://www.nolilab.com/setup-guides/" hreflang="en" rel="alternate"/>
@@ -27,13 +27,13 @@
 <link href="https://www.nolilab.com/setup-guides/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="Guía de configuración del rastreador GPS Loko | nolilab" property="og:title"/>
-<meta content="Guía de configuración completa para el rastreador Loko GPS. Configure las unidades aéreas y terrestres Loko, establezca parámetros, empareje con la aplicación móvil e inicie el seguimiento GPS sin conexión." property="og:description"/>
+<meta content="Guía de configuración completa para el rastreador Loko GPS. Configure las unidades Loko Air y Loko Ground, establezca parámetros, empareje con la aplicación móvil e inicie el seguimiento GPS sin conexión." property="og:description"/>
 <meta content="https://www.nolilab.com/es/setup-guides/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Guía de configuración del rastreador GPS Loko | nolilab" name="twitter:title"/>
-<meta content="Guía de configuración completa para el rastreador Loko GPS. Configure las unidades aéreas y terrestres Loko, establezca parámetros, empareje con la aplicación móvil e inicie el seguimiento GPS sin conexión." name="twitter:description"/>
+<meta content="Guía de configuración completa para el rastreador Loko GPS. Configure las unidades Loko Air y Loko Ground, establezca parámetros, empareje con la aplicación móvil e inicie el seguimiento GPS sin conexión." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
   :root {
@@ -499,17 +499,17 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Cómo configurar el rastreador Loko GPS",
-  "description": "Guía de configuración completa para el sistema de seguimiento Loko GPS. Configure las unidades aéreas y terrestres Loko, establezca los parámetros a través del configurador web y empareje con la aplicación móvil.",
+  "description": "Guía de configuración completa para el sistema de seguimiento Loko GPS. Configure las unidades Loko Air y Loko Ground, establezca los parámetros a través del configurador web y empareje con la aplicación móvil.",
   "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
   "totalTime": "PT15M",
   "supply": [
     {
       "@type": "HowToSupply",
-      "name": "Unidad de aire Loko (transmisor GPS + LoRa)"
+      "name": "Unidad Loko Air (transmisor GPS + LoRa)"
     },
     {
       "@type": "HowToSupply",
-      "name": "Unidad de tierra Loko (receptor LoRa)"
+      "name": "Unidad Loko Ground (receptor LoRa)"
     },
     {
       "@type": "HowToSupply",
@@ -585,7 +585,7 @@
 <!-- Hero -->
 <div class="sg-hero">
 <h1>Rastreador Loko GPS — Guía de configuración</h1>
-<p class="hero-sub">Configura tus unidades Aire y Tierra Loko desde cero. La configuración completa tarda unos 15 minutos.</p>
+<p class="hero-sub">Configura tus unidades Loko Air y Loko Ground desde cero. La configuración completa tarda unos 15 minutos.</p>
 <div class="hero-actions">
 <a class="download-btn" download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">
 <i class="fa-solid fa-file-pdf"></i> Descargar manual de usuario (PDF)
@@ -603,7 +603,7 @@
 <li><a href="#specifications">Presupuesto</a></li>
 <li><a href="#how-it-works">Cómo funciona</a></li>
 <li><a href="#configure-air">Parte 1: configurar Loko Air</a></li>
-<li><a href="#configure-ground">Parte 2: configurar la tierra Loko</a></li>
+<li><a href="#configure-ground">Parte 2: configurar Loko Ground</a></li>
 <li><a href="#warnings">Advertencias</a></li>
 <li><a href="#checklist">Lista de verificación de inicio rápido</a></li>
 </ol>
@@ -645,7 +645,7 @@
 <tr><td><code>radio</code></td><td>LoRa / CHIRP: penetra en edificios, desorden urbano y bosques densos</td></tr>
 <tr><td><code>frequency</code></td><td>868–920 MHz (configurable)</td></tr>
 <tr><td><code>tx_power</code></td><td>8 dBm predeterminado (configurable)</td></tr>
-<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo</td></tr>
+<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo + QZSS</td></tr>
 <tr><td><code>range</code></td><td>+20 línea de visión km a 2 m AGL; crece con la altitud</td></tr>
 <tr><td><code>battery_life</code></td><td>Hasta 1 año (depende del intervalo de vigilia)</td></tr>
 <tr><td><code>weight</code></td><td>14 g (unidad de aire)</td></tr>
@@ -718,7 +718,7 @@
 </section>
 <!-- Part 2: Configure Ground -->
 <section class="sg-section" id="configure-ground">
-<h2>Parte 2: configurar la tierra Loko</h2>
+<h2>Parte 2: configurar Loko Ground</h2>
 <p>Loko Ground no tiene batería incorporada. Antes de conectar, desenrosque los cuatro sujetadores traseros, inserte un <strong>Celda de iones de litio 18650</strong> (no incluido) y vuelva a ensamblar.</p>
 <h3>2.1 Abrir configurador → pestaña Unidad de Tierra</h3>
 <ol class="step-list" start="8">

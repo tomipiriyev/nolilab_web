@@ -15,7 +15,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Полное руководство по настройке GPS-трекера Loko. Настройте воздушные и наземные устройства Loko, установите параметры, выполните сопряжение с мобильным приложением и начните автономное отслеживание GPS." name="description"/>
+<meta content="Полное руководство по настройке GPS-трекера Loko. Настройте устройства Loko Air и Loko Ground, установите параметры, выполните сопряжение с мобильным приложением и начните автономное отслеживание GPS." name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.nolilab.com/ru/setup-guides/" rel="canonical"/>
 <link href="https://www.nolilab.com/setup-guides/" hreflang="en" rel="alternate"/>
@@ -27,13 +27,13 @@
 <link href="https://www.nolilab.com/setup-guides/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="Руководство по настройке GPS-трекера Loko | nolilab" property="og:title"/>
-<meta content="Полное руководство по настройке GPS-трекера Loko. Настройте воздушные и наземные устройства Loko, установите параметры, выполните сопряжение с мобильным приложением и начните автономное отслеживание GPS." property="og:description"/>
+<meta content="Полное руководство по настройке GPS-трекера Loko. Настройте устройства Loko Air и Loko Ground, установите параметры, выполните сопряжение с мобильным приложением и начните автономное отслеживание GPS." property="og:description"/>
 <meta content="https://www.nolilab.com/ru/setup-guides/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Руководство по настройке GPS-трекера Loko | nolilab" name="twitter:title"/>
-<meta content="Полное руководство по настройке GPS-трекера Loko. Настройте воздушные и наземные устройства Loko, установите параметры, выполните сопряжение с мобильным приложением и начните автономное отслеживание GPS." name="twitter:description"/>
+<meta content="Полное руководство по настройке GPS-трекера Loko. Настройте устройства Loko Air и Loko Ground, установите параметры, выполните сопряжение с мобильным приложением и начните автономное отслеживание GPS." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
   :root {
@@ -499,17 +499,17 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Как настроить GPS-трекер Loko",
-  "description": "Полное руководство по настройке системы GPS-трекера Loko. Настройте воздушные и наземные блоки Loko, задайте параметры с помощью веб-конфигуратора и выполните сопряжение с мобильным приложением.",
+  "description": "Полное руководство по настройке системы GPS-трекера Loko. Настройте блоки Loko Air и Loko Ground, задайте параметры с помощью веб-конфигуратора и выполните сопряжение с мобильным приложением.",
   "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
   "totalTime": "ПТ15М",
   "supply": [
     {
       "@type": "HowToSupply",
-      "name": "Воздушный блок Loko (передатчик GPS + LoRa)"
+      "name": "Блок Loko Air (передатчик GPS + LoRa)"
     },
     {
       "@type": "HowToSupply",
-      "name": "Наземный блок Loko (приемник LoRa)"
+      "name": "Блок Loko Ground (приемник LoRa)"
     },
     {
       "@type": "HowToSupply",
@@ -559,7 +559,7 @@
     {
       "@type": "HowToStep",
       "position": 5,
-      "name": "Вставьте батарею и подключите заземление Loko.",
+      "name": "Вставьте батарею и подключите Loko Ground.",
       "text": "Вставьте литий-ионный аккумулятор 18650 в блок заземления. Подключитесь к компьютеру по USB, откройте вкладку «Заземляющий блок» в конфигураторе и нажмите «Подключиться»."
     },
     {
@@ -585,7 +585,7 @@
 <!-- Hero -->
 <div class="sg-hero">
 <h1>Loko GPS-трекер — Руководство по установке</h1>
-<p class="hero-sub">Настройте свои воздушные и наземные устройства Loko с нуля. Полная настройка занимает около 15 минут.</p>
+<p class="hero-sub">Настройте свои устройства Loko Air и Loko Ground с нуля. Полная настройка занимает около 15 минут.</p>
 <div class="hero-actions">
 <a class="download-btn" download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">
 <i class="fa-solid fa-file-pdf"></i> Скачать руководство пользователя (PDF)
@@ -603,7 +603,7 @@
 <li><a href="#specifications">Технические характеристики</a></li>
 <li><a href="#how-it-works">Как это работает</a></li>
 <li><a href="#configure-air">Часть 1. Настройка Loko Air</a></li>
-<li><a href="#configure-ground">Часть 2. Настройка заземления Loko</a></li>
+<li><a href="#configure-ground">Часть 2. Настройка Loko Ground</a></li>
 <li><a href="#warnings">Предупреждения</a></li>
 <li><a href="#checklist">Контрольный список для быстрого старта</a></li>
 </ol>
@@ -611,10 +611,10 @@
 <!-- Overview -->
 <section class="sg-section" id="overview">
 <h2>Обзор</h2>
-<p>Loko — компактный GPS-трекер для дронов. Два подразделения работают вместе: <strong>Loko Air</strong> (с воздуха) получает GPS и передает по радио LoRa; <strong>Loko Заземление</strong> (базовая станция) получает данные и передает их в мобильное приложение Loko через Bluetooth.</p>
+<p>Loko — компактный GPS-трекер для дронов. Два подразделения работают вместе: <strong>Loko Air</strong> (с воздуха) получает GPS и передает по радио LoRa; <strong>Loko Ground</strong> (базовая станция) получает данные и передает их в мобильное приложение Loko через Bluetooth.</p>
 <div class="unit-cards">
 <div class="unit-card">
-<div class="unit-label">локо-эйр</div>
+<div class="unit-label">loko-air</div>
 <p class="unit-desc">Передатчик GPS + LoRa — устанавливается на самолет</p>
 <ul class="unit-specs">
 <li>Литий-ионный аккумулятор 200 mAh</li>
@@ -624,7 +624,7 @@
 </ul>
 </div>
 <div class="unit-card">
-<div class="unit-label">локо-граунд</div>
+<div class="unit-label">loko-ground</div>
 <p class="unit-desc">Приемник LoRa + реле Bluetooth — остается на земле</p>
 <ul class="unit-specs">
 <li>18650 Литий-ионный (предоставляется пользователем)</li>
@@ -645,7 +645,7 @@
 <tr><td><code>radio</code></td><td>LoRa/CHIRP — проникает в здания, городской беспорядок, густой лес</td></tr>
 <tr><td><code>frequency</code></td><td>868–920 MHz (настраиваемый)</td></tr>
 <tr><td><code>tx_power</code></td><td>8 dBm по умолчанию (настраиваемый)</td></tr>
-<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo</td></tr>
+<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo + QZSS</td></tr>
 <tr><td><code>range</code></td><td>+20 km к прямой видимости на высоте 2 м над уровнем земли; растет с высотой</td></tr>
 <tr><td><code>battery_life</code></td><td>До 1 года (зависит от интервала пробуждения)</td></tr>
 <tr><td><code>weight</code></td><td>14 г (Воздушный блок)</td></tr>
@@ -718,7 +718,7 @@
 </section>
 <!-- Part 2: Configure Ground -->
 <section class="sg-section" id="configure-ground">
-<h2>Часть 2. Настройка заземления Loko</h2>
+<h2>Часть 2. Настройка Loko Ground</h2>
 <p>Loko Ground не имеет встроенной батареи. Перед подключением открутите четыре задних крепления, вставьте <strong>18650 Литий-ионный аккумулятор</strong> (не входит в комплект) и соберите заново.</p>
 <h3>2.1 Открыть конфигуратор → вкладка «Наземный блок»</h3>
 <ol class="step-list" start="8">
@@ -727,7 +727,7 @@
 </ol>
 <h3>2.2 Подключение</h3>
 <ol class="step-list" start="10">
-<li>Подключите заземление Loko к компьютеру через USB.</li>
+<li>Подключите Loko Ground к компьютеру через USB.</li>
 <li>Нажмите <strong>Соединять</strong> → предоставить последовательный доступ → выбрать порт.</li>
 </ol>
 <h3>2.3 Чтение → обновление → Отправить</h3>
