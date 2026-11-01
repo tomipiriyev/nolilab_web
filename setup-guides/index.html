@@ -60,16 +60,16 @@
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
     --radius-lg: 0.75rem;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
-    --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
   }
 
   [data-theme="light"] {
     --bg-primary: #ffffff;
     --bg-secondary: #f6f8fa;
-    --text-primary: #0d1117;
-    --text-secondary: #656d76;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
     --accent: #238636;
     --accent-hover: #2ea043;
     --border: #d0d7de;
@@ -149,15 +149,17 @@
   }
 
   .sg-hero h1 {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
     font-weight: 500;
+    line-height: 1.2;
     letter-spacing: -0.02em;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     color: var(--text-primary);
   }
 
   .hero-sub {
-    font-size: 1.05rem;
+    font-size: 1.125rem;
+    line-height: 1.7;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
     max-width: 560px;
@@ -176,13 +178,13 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.7rem 1.4rem;
+    padding: 1rem 2rem;
     background: var(--accent);
     color: #ffffff;
     text-decoration: none;
     border-radius: var(--radius-md);
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     transition: background 0.2s ease, transform 0.1s ease;
   }
   .download-btn:hover { background: var(--accent-hover); transform: translateY(-1px); color: #fff; }
@@ -191,12 +193,12 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.7rem 1.4rem;
+    padding: 1rem 2rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     color: var(--text-primary);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     transition: all 0.2s ease;
   }
@@ -211,7 +213,8 @@
     margin-bottom: 2.5rem;
   }
   .toc-title {
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -219,7 +222,7 @@
     margin-bottom: 0.6rem;
   }
   .toc ol { margin: 0; padding-left: 1.25rem; }
-  .toc li { margin-bottom: 0.3rem; font-size: 0.875rem; }
+  .toc li { margin-bottom: 0.3rem; font-size: 1rem; }
   .toc a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
   .toc a:hover { color: var(--accent); }
 
@@ -232,10 +235,10 @@
   .sg-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
   .sg-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 500;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.875rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
     color: var(--text-primary);
   }
 
@@ -243,12 +246,14 @@
     color: var(--text-secondary);
     margin-bottom: 1rem;
     line-height: 1.7;
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .sg-section h3 {
-    font-size: 1rem;
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
     margin: 1.5rem 0 0.6rem;
     color: var(--text-primary);
   }
@@ -268,13 +273,14 @@
   }
   .unit-label {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
     color: var(--accent);
     margin-bottom: 0.4rem;
   }
   .unit-desc {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-primary);
     margin-bottom: 0.6rem;
   }
@@ -286,7 +292,7 @@
     padding-top: 0.6rem;
   }
   .unit-specs li {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     font-family: var(--font-mono);
     padding: 0.15rem 0;
@@ -306,7 +312,7 @@
     border-radius: var(--radius-md);
     padding: 0.4rem 0.9rem;
     font-family: var(--font-mono);
-    font-size: 0.825rem;
+    font-size: 0.9rem;
     color: var(--text-primary);
   }
   .wake-arrow { color: var(--accent); font-size: 1rem; }
@@ -321,16 +327,17 @@
   .doc-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
   .doc-table th {
     background: var(--bg-secondary);
     padding: 0.55rem 1rem;
     text-align: left;
     font-weight: 600;
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border);
   }
@@ -345,7 +352,7 @@
   .doc-table td:first-child { white-space: nowrap; }
   .doc-table code {
     font-family: var(--font-mono);
-    font-size: 0.825rem;
+    font-size: 0.9rem;
     color: var(--accent);
   }
 
@@ -358,7 +365,7 @@
     color: var(--text-secondary);
     line-height: 1.65;
     margin-bottom: 0.45rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   .step-list li strong { color: var(--text-primary); }
 
@@ -367,12 +374,11 @@
     background: var(--bg-secondary);
     border-left: 3px solid var(--accent);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    padding: 0.65rem 1rem;
+    padding: 0.75rem 1rem;
     margin: 0.75rem 0;
-    font-size: 0.825rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     line-height: 1.6;
-    font-family: var(--font-mono);
   }
   .note-box strong { color: var(--text-primary); font-family: inherit; }
 
@@ -386,12 +392,12 @@
   .warning-item {
     background: var(--bg-secondary);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 0.875rem 1rem;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
   }
   .warn-label {
     display: block;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     color: #d97706;
@@ -399,7 +405,7 @@
     font-family: var(--font-mono);
   }
   .warning-item p {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     margin: 0;
     line-height: 1.5;
@@ -408,21 +414,22 @@
   /* Checklist */
   .checklist { margin-top: 0.75rem; }
   .checklist label {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
+    display: block;
+    position: relative;
+    padding: 0.6rem 0 0.6rem 1.75rem;
     border-bottom: 1px solid var(--border);
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-secondary);
     line-height: 1.5;
     transition: color 0.2s;
   }
   .checklist label:last-child { border-bottom: none; }
   .checklist input[type="checkbox"] {
-    margin-top: 0.2rem;
-    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    margin: 0;
     width: 15px;
     height: 15px;
     accent-color: var(--accent);
@@ -445,16 +452,16 @@
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    padding: 0.9rem 1rem;
+    padding: 1.5rem;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     text-decoration: none;
     transition: border-color 0.2s ease;
   }
   .link-card:hover { border-color: var(--accent); }
   .link-card-label {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -462,16 +469,28 @@
     font-family: var(--font-mono);
   }
   .link-card-title {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     color: var(--text-primary);
   }
 
   @media (max-width: 600px) {
-    .sg-hero h1 { font-size: 1.75rem; }
+    .sg-hero h1 { font-size: 2rem; }
+    .hero-sub { font-size: 1rem; }
+    .sg-section h2 { font-size: 1.5rem; }
     .unit-cards { grid-template-columns: 1fr; }
     .wake-cycle { flex-wrap: wrap; }
   }
+
+  /* Same header details as the homepage */
+  .logo img { display: block; }
+  .language-btn span { font-family: var(--font-mono); }
+  @media (max-width: 768px) {
+    .logo { display: flex; align-items: center; min-height: 44px; }
+    .mobile-menu-toggle, .language-btn { min-height: 44px; }
+  }
+  /* Same footer logo as the homepage */
+  .footer-logo {font-size:1.25rem;font-weight:500;font-family:var(--font-mono);letter-spacing:-.02em;color:var(--text-primary);text-decoration:none}
 </style>
 <style>
   @font-face {

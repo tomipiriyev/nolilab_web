@@ -53,16 +53,16 @@
       --radius-sm: 0.25rem;
       --radius-md: 0.5rem;
       --radius-lg: 0.75rem;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
-      --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
-      --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
     }
 
     [data-theme="light"] {
       --bg-primary: #ffffff;
       --bg-secondary: #f6f8fa;
-      --text-primary: #0d1117;
-      --text-secondary: #656d76;
+      --text-primary: #24292e;
+      --text-secondary: #57606a;
       --accent: #238636;
       --accent-hover: #2ea043;
       --border: #d0d7de;
@@ -174,78 +174,81 @@
 
     /* Specifications Section */
     .specs-main {
-      padding: 2rem 0;
+      padding: 3rem 0 4rem;
     }
 
     .specs-header {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
       padding: 0 var(--spacing-md);
     }
 
     .specs-header h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: 500;
-      margin-bottom: 0.75rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
       letter-spacing: -0.02em;
       color: var(--text-primary);
     }
 
     .specs-subtitle {
-      font-size: 1rem;
+      font-size: 1.125rem;
+      line-height: 1.7;
       color: var(--text-secondary);
       max-width: 800px;
       margin: 0 auto;
     }
 
     .specs-content {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 var(--spacing-md);
+      padding: 0;
     }
 
     .spec-section {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1.25rem;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .spec-section h2 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
+      font-size: 1.75rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
       color: var(--text-primary);
     }
 
     .spec-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     .spec-card {
       background: var(--bg-primary);
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 1rem;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
     }
 
     .spec-card h3 {
-      font-size: 0.95rem;
+      font-size: 0.875rem;
       font-weight: 600;
       margin-bottom: 0.75rem;
       color: var(--accent);
       font-family: var(--font-mono);
       text-transform: uppercase;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.05em;
     }
 
     .spec-item {
       display: flex;
       justify-content: space-between;
-      padding: 0.5rem 0;
+      padding: 0.75rem 0;
       border-bottom: 1px solid var(--border);
       gap: 1rem;
     }
@@ -256,17 +259,17 @@
 
     .spec-label {
       color: var(--text-secondary);
-      font-size: 0.8rem;
-      font-weight: 500;
+      font-size: 1rem;
+      flex: 1;
     }
 
     .spec-value {
       color: var(--text-primary);
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 500;
       font-family: var(--font-mono);
       text-align: right;
-      white-space: nowrap;
+      flex: 1;
     }
 
     /* Comparison Table */
@@ -274,7 +277,7 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 1rem;
-      font-size: 0.85rem;
+      font-size: 1rem;
     }
 
     .comparison-table thead {
@@ -287,11 +290,11 @@
       font-weight: 600;
       color: var(--text-primary);
       border-bottom: 2px solid var(--accent);
-      font-size: 0.85rem;
+      font-size: 1rem;
     }
 
     .comparison-table td {
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1rem;
       border-bottom: 1px solid var(--border);
       color: var(--text-secondary);
     }
@@ -425,43 +428,46 @@
       }
 
       .specs-header h1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
+      }
+
+      .specs-subtitle {
+        font-size: 1rem;
       }
 
       .specs-main {
-        padding: 1.5rem 0;
+        padding: 2rem 0 3rem;
       }
 
       .specs-header {
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
       }
 
       .spec-section {
-        padding: 1rem;
+        padding: 1.25rem;
         margin-bottom: 1rem;
       }
 
       .spec-section h2 {
-        font-size: 1.2rem;
-        margin-bottom: 0.75rem;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
       }
 
       .spec-grid {
         grid-template-columns: 1fr;
-        gap: 0.75rem;
+        gap: 1rem;
       }
 
       .spec-card {
-        padding: 0.875rem;
+        padding: 1rem;
       }
 
       .spec-value {
-        white-space: normal;
         text-align: right;
       }
 
       .comparison-table {
-        font-size: 0.75rem;
+        font-size: 0.875rem;
       }
 
       .comparison-table th,
@@ -592,7 +598,15 @@
         min-width: auto;
       }
     }
-  </style>
+  
+    /* Same header details as the homepage */
+    .logo img { display: block; }
+    .language-btn span { font-family: var(--font-mono); }
+    @media (max-width: 768px) {
+      .logo { display: flex; align-items: center; min-height: 44px; }
+      .mobile-menu-toggle, .language-btn { min-height: 44px; }
+    }
+</style>
 <style>
   @font-face {
     font-family: 'Inter-fallback';
