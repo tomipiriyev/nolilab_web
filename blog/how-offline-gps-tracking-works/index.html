@@ -117,12 +117,12 @@
 <p>LoRa P2P occupies the optimal position for most use cases: long range, exceptional battery life, zero ongoing cost, and infrastructure-free operation.</p>
 <h2>What Is LoRa P2P and Why Does It Enable Offline Tracking?</h2>
 <p><strong>LoRa</strong> stands for Long Range. It is a radio modulation technique — specifically chirp spread spectrum (CSS) — that encodes data by continuously sweeping radio frequency across a defined band. This sweep pattern makes LoRa signals highly resistant to noise and interference, allowing them to be decoded even when the received signal is far weaker than the background noise level.</p>
-<p><strong>LoRa P2P</strong> (peer-to-peer) means the tracker communicates directly with your receiver without any infrastructure — no gateway, no server, no network. The Loko GPS tracker sends its position directly to the LokoHUB receiver connected to your phone. The LokoHUB decodes the radio signal and forwards the coordinates to the Loko app.</p>
+<p><strong>LoRa P2P</strong> (peer-to-peer) means the tracker communicates directly with your receiver without any infrastructure — no gateway, no server, no network. The Loko GPS tracker sends its position directly to the Loko Ground receiver connected to your phone. Loko Ground decodes the radio signal and forwards the coordinates to the Loko app.</p>
 <p>The entire data path is:</p>
 <ol>
 <li>GPS satellites → Loko tracker (position calculation)</li>
-<li>Loko tracker → LokoHUB receiver (via LoRa radio, up to 20km)</li>
-<li>LokoHUB → Loko app on your phone (via Bluetooth or USB)</li>
+<li>Loko tracker → Loko Ground receiver (via LoRa radio, up to 20km)</li>
+<li>Loko Ground → Loko app on your phone (via Bluetooth)</li>
 </ol>
 <p>No cell tower. No cloud server. No internet. The location data never leaves this private loop.</p>
 <h2>Why LoRa Achieves 20km Range With a 1-Year Battery</h2>
@@ -145,7 +145,7 @@
 <p>Understanding what offline trackers cannot do is as important as knowing what they can:</p>
 <ul>
 <li><strong>Range is finite.</strong> 20km is the maximum in ideal conditions. Dense forests and mountains reduce this. If the asset moves beyond radio range, you lose the signal.</li>
-<li><strong>No real-time cloud access.</strong> The tracker reports to your LokoHUB receiver, not to a server. If you want to see the location from 500km away, LoRa P2P cannot provide that. (For multi-point access, LoRaWAN with a gateway can extend reach.)</li>
+<li><strong>No real-time cloud access.</strong> The tracker reports to your Loko Ground receiver, not to a server. If you want to see the location from 500km away, LoRa P2P cannot provide that. (For multi-point access, LoRaWAN with a gateway can extend reach.)</li>
 <li><strong>Line-of-sight dependent.</strong> Like all radio, LoRa performs best with a clear path between transmitter and receiver. Terrain and buildings reduce range.</li>
 </ul>
 </div>

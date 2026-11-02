@@ -75,12 +75,12 @@
 <p>LoRa P2P ocupa la posición óptima para la mayoría de los casos de uso: largo alcance, duración excepcional de la batería, costo continuo cero y operación sin infraestructura.</p>
 <h2>¿Qué es LoRa P2P y por qué permite el seguimiento sin conexión?</h2>
 <p><strong>LoRa</strong> significa Largo Alcance. Es una técnica de modulación de radio, específicamente espectro ensanchado de chirrido (CSS), que codifica datos barriendo continuamente la frecuencia de radio a través de una banda definida. Este patrón de barrido hace que las señales LoRa sean altamente resistentes al ruido y las interferencias, lo que permite decodificarlas incluso cuando la señal recibida es mucho más débil que el nivel de ruido de fondo.</p>
-<p><strong>LoRa P2P</strong> (peer-to-peer) significa que el rastreador se comunica directamente con su receptor sin ninguna infraestructura: sin puerta de enlace, sin servidor, sin red. El rastreador Loko GPS envía su posición directamente al receptor LokoHUB conectado a su teléfono. El LokoHUB decodifica la señal de radio y envía las coordenadas a la aplicación Loko.</p>
+<p><strong>LoRa P2P</strong> (peer-to-peer) significa que el rastreador se comunica directamente con su receptor sin ninguna infraestructura: sin puerta de enlace, sin servidor, sin red. El rastreador Loko GPS envía su posición directamente al receptor Loko Ground conectado a su teléfono. Loko Ground decodifica la señal de radio y envía las coordenadas a la aplicación Loko.</p>
 <p>La ruta de datos completa es:</p>
 <ol>
 <li>Satélites GPS → Rastreador Loko (cálculo de posición)</li>
-<li>Rastreador Loko → receptor LokoHUB (a través de radio LoRa, hasta 20km)</li>
-<li>LokoHUB → Aplicación Loko en su teléfono (a través de Bluetooth o USB)</li>
+<li>Rastreador Loko → receptor Loko Ground (a través de radio LoRa, hasta 20km)</li>
+<li>Loko Ground → Aplicación Loko en su teléfono (a través de Bluetooth)</li>
 </ol>
 <p>Sin torre de telefonía móvil. Sin servidor en la nube. Sin internet. Los datos de ubicación nunca salen de este circuito privado.</p>
 <h2>Por qué LoRa alcanza el rango 20km con una batería de 1 año</h2>
@@ -103,7 +103,7 @@
 <p>Comprender lo que los rastreadores fuera de línea no pueden hacer es tan importante como saber qué pueden hacer:</p>
 <ul>
 <li><strong>El alcance es finito.</strong> 20km es el máximo en condiciones ideales. Los densos bosques y montañas reducen esto. Si el activo se mueve más allá del alcance de la radio, se pierde la señal.</li>
-<li><strong>Sin acceso a la nube en tiempo real.</strong> El rastreador informa a su receptor LokoHUB, no a un servidor. Si desea ver la ubicación desde 500km de distancia, LoRa P2P no puede proporcionarlo. (Para acceso multipunto, LoRaWAN con una puerta de enlace puede ampliar el alcance).</li>
+<li><strong>Sin acceso a la nube en tiempo real.</strong> El rastreador informa a su receptor Loko Ground, no a un servidor. Si desea ver la ubicación desde 500km de distancia, LoRa P2P no puede proporcionarlo. (Para acceso multipunto, LoRaWAN con una puerta de enlace puede ampliar el alcance).</li>
 <li><strong>Depende de la línea de visión.</strong> Como todas las radios, LoRa funciona mejor con un camino despejado entre el transmisor y el receptor. El terreno y los edificios reducen el alcance.</li>
 </ul>
 </div>

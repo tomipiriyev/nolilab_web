@@ -75,12 +75,12 @@
 <p>LoRa P2P occupe la position optimale pour la plupart des cas d'utilisation : longue portée, autonomie exceptionnelle de la batterie, coût continu nul et fonctionnement sans infrastructure.</p>
 <h2>Qu'est-ce que LoRa P2P et pourquoi permet-il le suivi hors ligne ?</h2>
 <p><strong>LoRa</strong> signifie Longue Portée. Il s’agit d’une technique de modulation radio – en particulier le spectre étalé par chirp (CSS) – qui code les données en balayant continuellement les fréquences radio sur une bande définie. Ce modèle de balayage rend les signaux LoRa très résistants au bruit et aux interférences, leur permettant d'être décodés même lorsque le signal reçu est bien plus faible que le niveau de bruit de fond.</p>
-<p><strong>LoRa P2P</strong> (peer-to-peer) signifie que le traceur communique directement avec votre récepteur sans aucune infrastructure : pas de passerelle, pas de serveur, pas de réseau. Le traceur Loko GPS envoie sa position directement au récepteur LokoHUB connecté à votre téléphone. Le LokoHUB décode le signal radio et transmet les coordonnées à l'application Loko.</p>
+<p><strong>LoRa P2P</strong> (peer-to-peer) signifie que le traceur communique directement avec votre récepteur sans aucune infrastructure : pas de passerelle, pas de serveur, pas de réseau. Le traceur Loko GPS envoie sa position directement au récepteur Loko Ground connecté à votre téléphone. Loko Ground décode le signal radio et transmet les coordonnées à l'application Loko.</p>
 <p>Le chemin complet des données est :</p>
 <ol>
 <li>Satellites GPS → traceur Loko (calcul de position)</li>
-<li>Traceur Loko → Récepteur LokoHUB (via radio LoRa, jusqu'à 20km)</li>
-<li>LokoHUB → Application Loko sur votre téléphone (via Bluetooth ou USB)</li>
+<li>Traceur Loko → Récepteur Loko Ground (via radio LoRa, jusqu'à 20km)</li>
+<li>Loko Ground → Application Loko sur votre téléphone (via Bluetooth)</li>
 </ol>
 <p>Pas de tour de téléphonie cellulaire. Pas de serveur cloud. Pas d'internet. Les données de localisation ne quittent jamais cette boucle privée.</p>
 <h2>Pourquoi le LoRa atteint une portée de 20km avec une batterie d'un an</h2>
@@ -103,7 +103,7 @@
 <p>Comprendre ce que les traceurs hors ligne ne peuvent pas faire est aussi important que savoir ce qu'ils peuvent :</p>
 <ul>
 <li><strong>La portée est limitée.</strong> 20km est le maximum dans des conditions idéales. Les forêts denses et les montagnes réduisent ce phénomène. Si l'actif se déplace au-delà de la portée radio, vous perdez le signal.</li>
-<li><strong>Pas d'accès au cloud en temps réel.</strong> Le traceur fait rapport à votre récepteur LokoHUB, pas à un serveur. Si vous souhaitez voir l'emplacement à 500km, LoRa P2P ne peut pas le fournir. (Pour un accès multipoint, LoRaWAN avec une passerelle peut étendre la portée.)</li>
+<li><strong>Pas d'accès au cloud en temps réel.</strong> Le traceur fait rapport à votre récepteur Loko Ground, pas à un serveur. Si vous souhaitez voir l'emplacement à 500km, LoRa P2P ne peut pas le fournir. (Pour un accès multipoint, LoRaWAN avec une passerelle peut étendre la portée.)</li>
 <li><strong>Dépend de la ligne de vue.</strong> Comme toutes les radios, LoRa fonctionne mieux avec un chemin clair entre l'émetteur et le récepteur. Le terrain et les bâtiments réduisent la portée.</li>
 </ul>
 </div>
