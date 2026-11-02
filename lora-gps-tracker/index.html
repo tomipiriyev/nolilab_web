@@ -101,7 +101,7 @@
       "name": "How accurate is a LoRa GPS tracker?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPS accuracy in Loko comes from the GNSS receiver, not the LoRa radio. Loko supports GPS, GLONASS, Galileo, and QZSS simultaneously, giving position accuracy of approximately 2–5 metres in open sky conditions — the same accuracy as any multi-constellation GNSS device. LoRa radio transmits this position without adding any positional error."
+        "text": "GPS accuracy in Loko comes from the GNSS receiver, not the LoRa radio. Loko supports GPS, GLONASS, and Galileo simultaneously, giving position accuracy of approximately 2–5 metres in open sky conditions — the same accuracy as any multi-constellation GNSS device. LoRa radio transmits this position without adding any positional error."
       }
     },
     {
@@ -137,7 +137,7 @@
   "@type": "Product",
   "name": "Loko GPS Tracker",
   "url": "https://www.nolilab.com/lora-gps-tracker/",
-  "description": "Compact offline GPS tracker using LoRa P2P technology. Measures 28.5 × 20.5 × 5.9 mm, weighs 14 g, and provides up to 20 km line-of-sight range with no SIM or subscription.",
+  "description": "Compact offline GPS tracker using LoRa P2P technology. Measures 30 × 22 mm, weighs 14 g, and provides up to 20 km line-of-sight range with no SIM or subscription.",
   "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
   "brand": { "@type": "Brand", "name": "nolilab" },
   "manufacturer": { "@type": "Organization", "name": "Nolilab OÜ", "url": "https://www.nolilab.com" },
@@ -150,11 +150,11 @@
     "offerCount": "2"
   },
   "additionalProperty": [
-    { "@type": "PropertyValue", "name": "Dimensions", "value": "28.5 × 20.5 × 5.9 mm" },
+    { "@type": "PropertyValue", "name": "Dimensions", "value": "30 × 22 mm" },
     { "@type": "PropertyValue", "name": "Weight", "value": "14 g" },
     { "@type": "PropertyValue", "name": "LoRa Range", "value": "Up to 20 km line-of-sight" },
     { "@type": "PropertyValue", "name": "Battery Life", "value": "Up to 1 year on a single charge" },
-    { "@type": "PropertyValue", "name": "GNSS", "value": "GPS + GLONASS + Galileo + QZSS" }
+    { "@type": "PropertyValue", "name": "GNSS", "value": "GPS + GLONASS + Galileo" }
   ]
 }
 </script>
@@ -433,7 +433,7 @@
 </div>
 <div class="stat-row">
 <span class="stat-pill"><span class="dot"></span>LoRa P2P — no gateway needed</span>
-<span class="stat-pill"><span class="dot"></span>GPS + GLONASS + Galileo + QZSS</span>
+<span class="stat-pill"><span class="dot"></span>GPS + GLONASS + Galileo</span>
 <span class="stat-pill"><span class="dot"></span>Offline maps</span>
 <span class="stat-pill"><span class="dot"></span>Multi-tracker support</span>
 </div>
@@ -454,7 +454,7 @@
 <tbody>
 <tr><td>Coverage</td><td>Direct LoRa P2P link; no tower or gateway required</td><td>The receiver must remain within radio range</td></tr>
 <tr><td>Range</td><td>Up to 20 km in open line-of-sight conditions</td><td>Hills, buildings, vegetation, and low antennas reduce range</td></tr>
-<tr><td>Size</td><td>28.5 × 20.5 × 5.9 mm and 14 g</td><td>A secure, use-specific mount is still required</td></tr>
+<tr><td>Size</td><td>30 × 22 mm and 14 g</td><td>A secure, use-specific mount is still required</td></tr>
 <tr><td>Battery</td><td>Up to one year at long reporting intervals</td><td>Frequent GPS updates shorten runtime</td></tr>
 <tr><td>Cost</td><td>$0 cellular subscription; Air-only and bundle options</td><td>Local tracking requires a compatible Loko Ground receiver</td></tr>
 </tbody>
@@ -658,14 +658,13 @@
 <p class="section-label">Position Accuracy</p>
 <h2>GPS Accuracy: What LoRa Has to Do with It (Nothing)</h2>
 <p>A common misconception: LoRa radio has no effect whatsoever on GPS position accuracy. The two systems are completely independent.</p>
-<p><strong>GPS accuracy</strong> comes entirely from the GNSS receiver in Loko Air. Loko supports four satellite constellations simultaneously:</p>
+<p><strong>GPS accuracy</strong> comes entirely from the GNSS receiver in Loko Air. Loko supports three satellite constellations simultaneously:</p>
 <ul>
 <li><strong>GPS</strong> (US) — 31 satellites</li>
 <li><strong>GLONASS</strong> (Russia) — 24 satellites</li>
 <li><strong>Galileo</strong> (EU) — 30 satellites</li>
-<li><strong>QZSS</strong> (Japan) — regional system for Asia-Oceania</li>
 </ul>
-<p>Using all four constellations simultaneously gives Loko faster position acquisition (time-to-first-fix) and better accuracy, particularly in difficult environments like canyon terrain or dense canopy where only some satellites are visible.</p>
+<p>Using all three constellations simultaneously gives Loko faster position acquisition (time-to-first-fix) and better accuracy, particularly in difficult environments like canyon terrain or dense canopy where only some satellites are visible.</p>
 <p>Typical position accuracy in open sky: <strong>2–5 metres CEP</strong> (Circular Error Probable). This is identical to any multi-constellation consumer GNSS device and is independent of which radio technology is used to transmit the position.</p>
 <p><strong>LoRa's role</strong> is purely transmission: it takes the GPS coordinate and delivers it to the receiver over long distances without error. LoRa uses forward error correction (the Coding Rate parameter) to ensure the position data arrives intact even in noisy radio environments.</p>
 </div>
@@ -821,7 +820,7 @@
 </details>
 <details class="faq-item">
 <summary class="faq-question">How accurate is a LoRa GPS tracker?</summary>
-<p class="faq-answer">GPS accuracy in Loko comes entirely from the GNSS receiver, not the LoRa radio. Loko supports GPS, GLONASS, Galileo, and QZSS simultaneously, giving position accuracy of approximately 2–5 metres CEP in open sky — the same as any multi-constellation GNSS device. LoRa radio transmits this position without introducing any positional error.</p>
+<p class="faq-answer">GPS accuracy in Loko comes entirely from the GNSS receiver, not the LoRa radio. Loko supports GPS, GLONASS, and Galileo simultaneously, giving position accuracy of approximately 2–5 metres CEP in open sky — the same as any multi-constellation GNSS device. LoRa radio transmits this position without introducing any positional error.</p>
 </details>
 <details class="faq-item">
 <summary class="faq-question">What factors affect LoRa GPS tracker range?</summary>
