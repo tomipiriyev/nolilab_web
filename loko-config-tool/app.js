@@ -3526,6 +3526,11 @@ groundReadButton.addEventListener("click", async () => {
 
 groundSendButton.addEventListener("click", async () => {
     if (!groundConnectedPort) return;
+    const groundFreqHz = parseInt(groundFreqInput.value, 10);
+    if (groundFreqInput.value !== "" && (groundFreqHz < 860000000 || groundFreqHz > 926000000)) {
+        groundSaveStatus.textContent = "Frequency must be between 860000000 and 926000000 Hz.";
+        return;
+    }
     groundSaveStatus.textContent = "Sending settings...";
     groundSendButton.disabled = true;
     groundReadButton.disabled = true;
