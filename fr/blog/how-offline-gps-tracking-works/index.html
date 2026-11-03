@@ -67,7 +67,7 @@
 <p>Différentes technologies radio sont utilisées à cet effet :</p>
 <table>
 <tr><th>Technologie</th><th>Gamme</th><th>Autonomie de la batterie</th><th>Coût mensuel</th><th>Fonctionne partout</th></tr>
-<tr><td>LoRa P2P</td><td>Jusqu'à 20 km</td><td>Jusqu'à 1 an</td><td>0 $</td><td>Oui (pas d'infra nécessaire)</td></tr>
+<tr><td>LoRa P2P</td><td>Jusqu'à 20 km</td><td>Jusqu'à 1 an à intervalles longs</td><td>0 $</td><td>Oui (pas d'infra nécessaire)</td></tr>
 <tr><td>Cellulaire (4G/LTE)</td><td>Illimité</td><td>1 à 7 jours</td><td>5 $ à 15 $</td><td>Non (nécessite une couverture cellulaire)</td></tr>
 <tr><td>Satellite (Iridium)</td><td>Mondial</td><td>Jours</td><td>50 $ à 200 $</td><td>Oui (n'importe où sur Terre)</td></tr>
 <tr><td>Bluetooth</td><td>~100 m</td><td>Semaines</td><td>0 $</td><td>Très limité</td></tr>
@@ -83,12 +83,12 @@
 <li>Loko Ground → Application Loko sur votre téléphone (via Bluetooth)</li>
 </ol>
 <p>Pas de tour de téléphonie cellulaire. Pas de serveur cloud. Pas d'internet. Les données de localisation ne quittent jamais cette boucle privée.</p>
-<h2>Pourquoi le LoRa atteint une portée de 20km avec une batterie d'un an</h2>
+<h2>Pourquoi le LoRa atteint une portée de 20km avec une batterie jusqu'à un an</h2>
 <p>Les deux avantages clés du LoRa (portée et efficacité) proviennent de la même source : la modulation à spectre étalé par chirp répartit l'énergie du signal sur une large bande passante, ce qui le rend extrêmement robuste à de très faibles niveaux de puissance.</p>
 <h3>Gamme</h3>
 <p>Une puissance de transmission LoRa typique de 14 à 22 dBm (25 à 160 mW) peut atteindre 20km en terrain découvert. Une radio cellulaire émettant avec une puissance similaire couvre à peine quelques centaines de mètres jusqu'à la tour la plus proche. La différence réside dans la modulation : le spectre étalé du LoRa code chaque bit sur des milliers de puces, donnant au récepteur suffisamment de gain de traitement du signal pour extraire les données d'un signal qui semble être du pur bruit pour les récepteurs conventionnels.</p>
 <h3>Autonomie de la batterie</h3>
-<p>Les transmissions LoRa sont extrêmement courtes : généralement 50 à 500 millisecondes par paquet. Entre les transmissions, la puce radio consomme un courant proche de zéro (mode veille). À un intervalle de mise à jour de 60 secondes, la radio est active pendant moins de 0,5 % du temps. Ce cycle de service, combiné à une batterie de 200 mAh, donne jusqu'à 1 an de fonctionnement pour le Loko. Un modem cellulaire maintenant une connexion continue draine la même batterie en quelques heures.</p>
+<p>Les transmissions LoRa sont extrêmement courtes : généralement 50 à 500 millisecondes par paquet. Entre les transmissions, la puce radio consomme un courant proche de zéro (mode veille). À un intervalle de mise à jour de 60 secondes, la radio est active pendant moins de 0,5 % du temps. Avec de longs intervalles de mise à jour, ce faible cycle de service permet à la batterie de 200 mAh du Loko de durer jusqu'à 1 an. Avec un intervalle de 1 s, elle dure environ 2 heures. Un modem cellulaire maintenant une connexion continue draine la même batterie en quelques heures.</p>
 <h2>Implications pratiques : qui a besoin d'un traceur GPS hors ligne ?</h2>
 <p>Les traceurs GPS hors ligne ne sont pas le bon outil pour toutes les situations. Ils constituent le bon outil lorsque :</p>
 <ul>

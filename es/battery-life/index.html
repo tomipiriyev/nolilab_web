@@ -61,7 +61,7 @@
       "name": "¿Cómo logra Loko hasta 1 año de duración de la batería?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Loko usa radio LoRa en lugar de celular. LoRa transmite a solo 20 a 40 miliamperios máximos, en comparación con 200 a 500 mA para celulares, aproximadamente una reducción de 10 veces en la corriente de transmisión. Combinado con modos de suspensión profunda que consumen menos de 1 microamperio entre transmisiones, el consumo de corriente promedio total de Loko es dramáticamente menor que el de cualquier rastreador celular. El resultado es de hasta 1 año con una pequeña batería recargable."
+        "text": "Loko usa radio LoRa en lugar de celular. LoRa transmite a solo 20 a 40 miliamperios máximos, en comparación con 200 a 500 mA para celulares, aproximadamente una reducción de 10 veces en la corriente de transmisión. Combinado con modos de suspensión profunda que consumen menos de 1 microamperio entre transmisiones, el consumo de corriente promedio total de Loko es dramáticamente menor que el de cualquier rastreador celular. El resultado es de hasta 1 año con una pequeña batería recargable y con intervalos de actualización largos."
       }
     },
     {
@@ -69,7 +69,7 @@
       "name": "¿Con qué frecuencia es necesario recargar Loko GPS Air?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "En intervalos de actualización normales, Loko Air necesita recargarse aproximadamente una vez al mes. En comparación con los rastreadores celulares que necesitan carga diaria o semanal, esta es una diferencia fundamental en la usabilidad, especialmente para implementaciones donde el acceso frecuente al rastreador es inconveniente, como en un collar de perro, un vehículo agrícola o un sensor implementado de forma remota."
+        "text": "Depende del intervalo de actualización: unas 2 horas con un intervalo de 1 s, hasta 12 meses con intervalos largos. Con intervalos largos, en comparación con los rastreadores celulares que necesitan carga diaria o semanal, esta es una diferencia fundamental en la usabilidad, especialmente para implementaciones donde el acceso frecuente al rastreador es inconveniente, como en un collar de perro, un vehículo agrícola o un sensor implementado de forma remota."
       }
     },
     {
@@ -77,7 +77,7 @@
       "name": "¿Puedo extender aún más la duración de la batería del Loko?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. El firmware de código abierto le permite configurar intervalos más largos entre las actualizaciones de GPS; por ejemplo, transmitir cada 5 minutos en lugar de cada 30 segundos extiende drásticamente la vida útil de la batería a varios meses. Esta compensación entre la frecuencia de actualización y la duración de la batería está completamente bajo el control del usuario."
+        "text": "Sí. El firmware de código abierto le permite configurar intervalos más largos entre las actualizaciones de GPS; por ejemplo, transmitir cada 5 minutos en lugar de cada 30 segundos extiende considerablemente la vida útil de la batería. Esta compensación entre la frecuencia de actualización y la duración de la batería está completamente bajo el control del usuario."
       }
     },
     {
@@ -241,8 +241,8 @@
 <h1>Duración de batería de un rastreador GPS: factores y comparativa</h1>
 <p class="subtitle">La red, el intervalo de actualización, la temperatura y la batería determinan cuánto dura un rastreador GPS.</p>
 <p>La duración de un rastreador GPS no depende solo del tamaño de la batería. También cambia según la red utilizada, la frecuencia con la que calcula y transmite la posición, la cobertura y la temperatura. Loko usa radio LoRa de bajo consumo y puede alcanzar hasta un año cuando se configuran intervalos de transmisión largos.</p>
-<p><strong>Los rastreadores celulares GPS duran entre 1 y 7 días.</strong> Los rastreadores LoRa GPS como Loko duran hasta 1 año. La diferencia se reduce a un único factor: cuánta energía consume el transmisor de radio.</p>
-<p>Esta página explica la física y la ingeniería detrás de la duración de la batería del rastreador GPS, muestra los datos de comparación reales y le indica exactamente cómo Loko logra hasta 1 año en un dispositivo de 14 g.</p>
+<p><strong>Los rastreadores celulares GPS duran entre 1 y 7 días.</strong> Los rastreadores LoRa GPS como Loko pueden durar hasta 1 año con intervalos de actualización largos. La diferencia se reduce a un único factor: cuánta energía consume el transmisor de radio.</p>
+<p>Esta página explica la física y la ingeniería detrás de la duración de la batería del rastreador GPS, muestra los datos de comparación reales y explica cómo Loko puede llegar a 1 año en un dispositivo de 14 g.</p>
 <div class="cta-block">
 <p><strong>¿Busca el rastreador real?</strong> Vea el hardware, las descargas de software y el flujo de configuración de LoRa GPS de Loko antes de sumergirse en los cálculos de la batería.</p>
 <a class="cta-btn" href="/es/lora-gps-tracker/">Ver Rastreador Loko GPS →</a>
@@ -292,9 +292,9 @@
 <tbody>
 <tr class="highlight-row">
 <td>Loko Air (nolilab)</td>
-<td>hasta 1 año</td>
+<td>Unas 2 horas con un intervalo de 1 s, hasta 12 meses con intervalos largos</td>
 <td>LoRa (LPWAN)</td>
-<td>~12</td>
+<td>Según el intervalo</td>
 <td>$0</td>
 </tr>
 <tr>
@@ -336,14 +336,14 @@
 </table>
 <p>*AirTag y Tile Mate utilizan balizas Bluetooth; no son rastreadores GPS y no tienen capacidad de ubicación en tiempo real independientemente de los teléfonos cercanos. La larga duración de su batería refleja el consumo de energía extremadamente bajo de Bluetooth, pero no pueden rastrear en áreas remotas.</p>
 <p>Garmin inReach Mini 2 utiliza comunicación por satélite Iridium, que ofrece cobertura global pero con una suscripción de entre 15 y 65 dólares al mes y una batería de 2 semanas en modo de seguimiento.</p>
-<p><strong>Entre los verdaderos rastreadores GPS en tiempo real, la duración de la batería de hasta 1 año del Loko no tiene comparación en este precio y tamaño.</strong></p>
+<p><strong>Entre los verdaderos rastreadores GPS en tiempo real, la duración de la batería de hasta 1 año del Loko con intervalos largos no tiene comparación en este precio y tamaño.</strong></p>
 </div>
 </div>
 <!-- The math: cellular vs LoRa power -->
 <div class="content-block">
 <div class="container">
 <h2>Las matemáticas: consumo de energía celular vs LoRa</h2>
-<p>Pongamos números concretos a esta comparación. Estas cifras se basan en mediciones típicas del mundo real realizadas con hardware de seguimiento:</p>
+<p>Pongamos números concretos a esta comparación. Son cálculos ilustrativos a partir del consumo típico, no autonomías medidas:</p>
 <div class="power-callout">
 <p><strong>Rastreador celular GPS, actualizando cada 30 segundos:</strong><br/>
       Adquisición de GPS: ~20 mA × 3 segundos = 0,0167 mAh<br/>
@@ -361,7 +361,7 @@
       Con una batería 200mAh: aproximadamente 93 días</p>
 </div>
 <p>Los números hablan por sí solos. Con el mismo intervalo de actualización y una capacidad de batería similar, un rastreador LoRa dura aproximadamente <strong>24 veces más</strong> que un rastreador celular. Este no es un caso extremo, es una consecuencia fundamental de la radiofísica.</p>
-<p>En la práctica, la capacidad de la batería del Loko está optimizada para tamaños inferiores a 14 g, lo que limita la capacidad total. En intervalos de actualización reales (que varían según el caso de uso), Loko alcanza hasta 1 año de manera constante.</p>
+<p>En la práctica, el tamaño de 14 g del Loko limita la capacidad de su batería, y la autonomía depende del intervalo de actualización: unas 2 horas con un intervalo de 1 s, hasta 12 meses con intervalos largos.</p>
 </div>
 </div>
 <!-- How Loko achieves up to 1 year -->
@@ -389,7 +389,7 @@
 <li><strong>Optimice el tiempo de reparación de GPS:</strong> El uso de un rastreador que admita múltiples constelaciones de satélites (GPS + GLONASS + Galileo) da como resultado correcciones más rápidas, lo que significa menos tiempo con el chip GPS a máxima potencia.</li>
 <li><strong>Evite temperaturas extremas:</strong> Las baterías de litio pierden una capacidad significativa a bajas temperaturas. Mantenga los rastreadores a temperaturas moderadas cuando sea posible, especialmente cuando los almacene.</li>
 <li><strong>Cargue completamente antes de la implementación:</strong> Iniciar una implementación larga al 100 % es obvio, pero vale la pena señalarlo: una carga parcial se agrava rápidamente en el transcurso de semanas.</li>
-<li><strong>Con Loko específicamente:</strong> Ajuste el intervalo de actualización del firmware para que coincida con su caso de uso. Para activos de lento movimiento, una actualización cada 2 a 5 minutos extiende la duración de la batería a varios meses.</li>
+<li><strong>Con Loko específicamente:</strong> Ajuste el intervalo de actualización del firmware para que coincida con su caso de uso. Para activos de lento movimiento, un intervalo de actualización más largo extiende la duración de la batería.</li>
 </ul>
 </div>
 </div>
@@ -403,15 +403,15 @@
 </div>
 <div class="faq-item">
 <h3>¿Cómo logra Loko hasta 1 año de duración de la batería?</h3>
-<p>Loko usa radio LoRa en lugar de celular. LoRa transmite a solo 20 a 40 miliamperios máximos, en comparación con 200 a 500 mA para celulares, aproximadamente una reducción de 10 veces en la corriente de transmisión. Combinado con modos de suspensión profunda que consumen menos de 1 microamperio entre transmisiones, el consumo de corriente promedio total de Loko es dramáticamente menor que el de cualquier rastreador celular. El resultado es de hasta 1 año con una pequeña batería recargable.</p>
+<p>Loko usa radio LoRa en lugar de celular. LoRa transmite a solo 20 a 40 miliamperios máximos, en comparación con 200 a 500 mA para celulares, aproximadamente una reducción de 10 veces en la corriente de transmisión. Combinado con modos de suspensión profunda que consumen menos de 1 microamperio entre transmisiones, el consumo de corriente promedio total de Loko es dramáticamente menor que el de cualquier rastreador celular. El resultado es de hasta 1 año con una pequeña batería recargable y con intervalos de actualización largos.</p>
 </div>
 <div class="faq-item">
 <h3>¿Con qué frecuencia es necesario recargar Loko GPS Air?</h3>
-<p>En intervalos de actualización normales, Loko Air necesita recargarse aproximadamente una vez al mes. En comparación con los rastreadores celulares que necesitan carga diaria o semanal, esta es una diferencia fundamental en la usabilidad, especialmente para implementaciones donde el acceso frecuente al rastreador es inconveniente, como en un collar de perro, un vehículo agrícola o un sensor implementado de forma remota.</p>
+<p>Depende del intervalo de actualización: unas 2 horas con un intervalo de 1 s, hasta 12 meses con intervalos largos. Con intervalos largos, en comparación con los rastreadores celulares que necesitan carga diaria o semanal, esta es una diferencia fundamental en la usabilidad, especialmente para implementaciones donde el acceso frecuente al rastreador es inconveniente, como en un collar de perro, un vehículo agrícola o un sensor implementado de forma remota.</p>
 </div>
 <div class="faq-item">
 <h3>¿Puedo extender aún más la duración de la batería del Loko?</h3>
-<p>Sí. El firmware de código abierto le permite configurar intervalos más largos entre las actualizaciones de GPS; por ejemplo, transmitir cada 5 minutos en lugar de cada 30 segundos extiende drásticamente la vida útil de la batería a varios meses. Esta compensación entre la frecuencia de actualización y la duración de la batería está completamente bajo el control del usuario.</p>
+<p>Sí. El firmware de código abierto le permite configurar intervalos más largos entre las actualizaciones de GPS; por ejemplo, transmitir cada 5 minutos en lugar de cada 30 segundos extiende considerablemente la vida útil de la batería. Esta compensación entre la frecuencia de actualización y la duración de la batería está completamente bajo el control del usuario.</p>
 </div>
 <div class="faq-item">
 <h3>¿El clima frío afecta la duración de la batería del rastreador GPS?</h3>
@@ -423,7 +423,7 @@
 <div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p>Hasta 1 año entre cargos. Menos de 14 g. Cero cuotas mensuales. La radio LoRa es la razón por la que Loko puede hacer lo que los rastreadores celulares no pueden.</p>
+<p>Hasta 1 año entre cargas con intervalos largos. 14 g. Cero cuotas mensuales. La radio LoRa es la razón por la que Loko puede hacer lo que los rastreadores celulares no pueden.</p>
 <p><strong>Rastreador Loko GPS: la batería de mayor duración de cualquier rastreador GPS en tiempo real de este tamaño y precio.</strong></p>
 <p>Explore los detalles completos del producto en <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
 <br/>

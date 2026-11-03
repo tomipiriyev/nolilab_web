@@ -109,7 +109,7 @@
 <p>Different radio technologies are used for this purpose:</p>
 <table>
 <tr><th>Technology</th><th>Range</th><th>Battery Life</th><th>Monthly Cost</th><th>Works Everywhere</th></tr>
-<tr><td>LoRa P2P</td><td>Up to 20 km</td><td>Up to 1 year</td><td>$0</td><td>Yes (no infra needed)</td></tr>
+<tr><td>LoRa P2P</td><td>Up to 20 km</td><td>Up to 1 year at long intervals</td><td>$0</td><td>Yes (no infra needed)</td></tr>
 <tr><td>Cellular (4G/LTE)</td><td>Unlimited</td><td>1–7 days</td><td>$5–$15</td><td>No (needs cell coverage)</td></tr>
 <tr><td>Satellite (Iridium)</td><td>Global</td><td>Days</td><td>$50–$200</td><td>Yes (anywhere on Earth)</td></tr>
 <tr><td>Bluetooth</td><td>~100 m</td><td>Weeks</td><td>$0</td><td>Very limited</td></tr>
@@ -125,12 +125,12 @@
 <li>Loko Ground → Loko app on your phone (via Bluetooth)</li>
 </ol>
 <p>No cell tower. No cloud server. No internet. The location data never leaves this private loop.</p>
-<h2>Why LoRa Achieves 20km Range With a 1-Year Battery</h2>
+<h2>Why LoRa Achieves 20km Range With Up to a 1-Year Battery</h2>
 <p>LoRa's two key advantages — range and efficiency — come from the same source: chirp spread spectrum modulation spreads the signal energy over a wide bandwidth, making it extremely robust at very low power levels.</p>
 <h3>Range</h3>
 <p>A typical LoRa transmission power of 14–22 dBm (25–160 mW) can reach 20km in open terrain. A cellular radio transmitting at similar power barely covers a few hundred meters to the nearest tower. The difference is modulation: LoRa's spread spectrum encodes each bit across thousands of chips, giving the receiver enough signal processing gain to extract data from a signal that appears to be pure noise to conventional receivers.</p>
 <h3>Battery Life</h3>
-<p>LoRa transmissions are extremely short — typically 50–500 milliseconds per packet. Between transmissions, the radio chip draws near-zero current (sleep mode). At a 60-second update interval, the radio is active for less than 0.5% of the time. This duty cycle, combined with a 200 mAh battery, yields up to 1 year of operation for Loko. A cellular modem maintaining a continuous connection drains the same battery in hours.</p>
+<p>LoRa transmissions are extremely short — typically 50–500 milliseconds per packet. Between transmissions, the radio chip draws near-zero current (sleep mode). At a 60-second update interval, the radio is active for less than 0.5% of the time. At long update intervals, this low duty cycle lets Loko's 200 mAh battery last up to 1 year. At a 1 s interval it lasts about 2 hours. A cellular modem maintaining a continuous connection drains the same battery in hours.</p>
 <h2>Practical Implications: Who Needs an Offline GPS Tracker?</h2>
 <p>Offline GPS trackers are not the right tool for every situation. They are the right tool when:</p>
 <ul>
