@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<link href="/css/partials.css?v=20260906" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.ico" rel="icon" sizes="any"/>
+<title>How to Range-Test a LoRa GPS Tracker in Your Terrain</title>
+<meta content="Don’t rely on a headline range figure. Test a LoRa GPS tracker with a simple stop-and-count method, a delivery-rate worksheet and the onboard log." name="description"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="https://www.nolilab.com/blog/lora-tracker-range-test/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/lora-tracker-range-test/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/lora-tracker-range-test/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="How to Range-Test a LoRa GPS Tracker in Your Terrain" property="og:title"/>
+<meta content="Don’t rely on a headline range figure. Test a LoRa GPS tracker with a simple stop-and-count method, a delivery-rate worksheet and the onboard log." property="og:description"/>
+<meta content="https://www.nolilab.com/blog/lora-tracker-range-test/" property="og:url"/>
+<meta property="og:image" content="https://www.nolilab.com/images/blog-covers/radio-line-of-sight.webp"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="en_US" property="og:locale"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta content="How to Range-Test a LoRa GPS Tracker in Your Terrain" name="twitter:title"/>
+<meta content="Don’t rely on a headline range figure. Test a LoRa GPS tracker with a simple stop-and-count method, a delivery-rate worksheet and the onboard log." name="twitter:description"/>
+<meta name="twitter:image" content="https://www.nolilab.com/images/blog-covers/radio-line-of-sight.webp"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a LoRa range test take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Allow 10 minutes per stop plus travel. Five to eight stops usually fit into an hour or two, depending on the terrain."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a good delivery rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the use. A moving dog needs more consistent updates than a downed drone, where one received position can be enough."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my range much shorter than the advertised figure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Headline figures assume open areas with line of sight. Trees, hills, buildings and a tracker mounted low all shorten the link."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need special equipment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You need the tracker, the receiver, the app, a watch and a worksheet. A computer helps you read the onboard log afterwards."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Range-Test a LoRa GPS Tracker in Your Own Terrain",
+  "description": "Don’t rely on a headline range figure. Test a LoRa GPS tracker with a simple stop-and-count method, a delivery-rate worksheet and the onboard log.",
+  "url": "https://www.nolilab.com/blog/lora-tracker-range-test/",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "author": {
+    "@type": "Person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.nolilab.com/images/nolilab-logo-2.png"
+    }
+  },
+  "image": "https://www.nolilab.com/images/blog-covers/radio-line-of-sight.webp",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/blog/lora-tracker-range-test/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "How to Range-Test a LoRa GPS Tracker in Your Own Terrain",
+      "item": "https://www.nolilab.com/blog/lora-tracker-range-test/"
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  main .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  .page-hero { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: var(--spacing-xl) 0; }
+  h1 { font-size: clamp(1.85rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.03em; margin-bottom: var(--spacing-sm); }
+  .subtitle { color: var(--text-secondary); font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-md); }
+  p { color: var(--text-secondary); margin-bottom: 0.8rem; }
+  strong, h2, h3 { color: var(--text-primary); }
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  h2 { font-family: var(--font-mono); font-size: 1.25rem; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
+  h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; font-size: 0.9rem; }
+  .compare-table th, .compare-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8rem; }
+  .compare-table td { color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.65rem 1.4rem; border-radius: var(--radius-sm); background: var(--text-primary); color: #fff; text-decoration: none; font-weight: 600; }
+  .cta-btn:hover { background: var(--accent); }
+  .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+  .faq-item p { margin-bottom: 0; }
+  a { color: var(--accent); }
+  @media (max-width: 760px) {
+    .compare-table { display: block; overflow-x: auto; font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.55rem 0.65rem; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script defer="" src="/js/layout.js?v=20261025"></script>
+<link href="/css/blog-covers.css?v=20261004" rel="stylesheet"/>
+<meta property="og:image:alt" content="Two hilltop antennas with a clear radio path above a wooded valley."/>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<h1>How to Range-Test a LoRa GPS Tracker in Your Own Terrain</h1>
+<p class="subtitle">Headline range is measured in the best case. Here is how to measure yours.</p>
+<p>A range figure on a spec sheet can’t tell you what happens in your forest or valley. Loko’s 20+ km, for example, applies in open areas with line of sight. Trees, hills and a tracker low to the ground all shorten it.</p>
+<p>The farthest single position you ever received is also a poor measure, because one lucky packet says little. A better question is what share of updates arrive at each distance. That number is your delivery rate, and this test measures it with no special equipment.</p>
+</div>
+</section>
+<div class="blog-cover-wrap"><img alt="Two hilltop antennas with a clear radio path above a wooded valley." class="article-image blog-cover-image" width="1200" height="800" loading="eager" decoding="async" src="/images/blog-covers/radio-line-of-sight.webp" srcset="/images/blog-covers/radio-line-of-sight-thumb.webp 600w, /images/blog-covers/radio-line-of-sight.webp 1200w" sizes="(max-width: 800px) 100vw, 800px"/></div>
+<section class="content-block">
+<div class="container">
+<h2>What you need</h2>
+<ul>
+<li>The tracker and receiver you plan to use, with charged batteries</li>
+<li>A helper, or a safe place to leave one unit at each stop</li>
+<li>A phone with the tracker’s app and offline maps</li>
+<li>A watch, and the worksheet below on paper or in a notes app</li>
+<li>For Loko, a computer with Chrome or Edge to read the log afterwards</li>
+</ul>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Step 1: Fix your settings</h2>
+<p>Pick one configuration and write it down, then keep it the same for the whole test. Changing the frequency, transmit power, spreading factor or update interval halfway through makes the results impossible to compare. Test with the settings you’ll really use. On Loko, LoRa output is 8 dBm by default and can be configured up to 22 dBm, within what your local rules allow.</p>
+<p>Choose a short update interval so you can gather enough samples at each stop. 30 seconds works well: ten minutes at a stop gives about 20 expected updates. Shorter intervals use more battery, so this setting is for testing and not a recommendation for daily use.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Step 2: Mount it the way you’ll use it</h2>
+<p>Height and nearby objects matter as much as distance. A tracker on a dog’s collar sits low, next to a body. A tracker on a drone in the air sees far more of the horizon. Mount the tracker in its real position and at its real height, and keep the receiver at the height you’d really hold it. If you’d also stand on a ridge to search, test that as a separate run. Our guide to <a href="/blog/radio-line-of-sight/">radio line of sight</a> explains why height matters so much.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Step 3: Stop and count</h2>
+<ol>
+<li>Choose 5 to 8 stops at growing distances, including your worst realistic spots: behind a ridge, deep in the trees, in a gully.</li>
+<li>Start close, at about 100 m, to confirm that everything works.</li>
+<li>At each stop, wait for 10 minutes. Count how many new updates arrive in the app, using their arrival times.</li>
+<li>Divide received by expected. That is the delivery rate for the stop.</li>
+<li>Keep going until the rate falls close to zero, then repeat a stop or two on the way back to see whether the result holds.</li>
+</ol>
+<p><strong>Watch for one trap.</strong> Loko’s app shows the latest point with its arrival time and has no warning for stale data. If the tracker can’t get a GPS fix within 60 seconds, it sends its last known position, so an old position can appear with a recent arrival time. Move the tracker in clear view of the sky between stops, and check that positions actually change when it moves.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Step 4: Fill in the worksheet</h2>
+<table class="compare-table">
+<thead><tr><th>Stop</th><th>Distance</th><th>Terrain and line of sight</th><th>Expected</th><th>Received</th><th>Delivery rate</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>100 m</td><td>Open, clear view</td><td>20</td><td></td><td></td></tr>
+<tr><td>2</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+<tr><td>3</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+<tr><td>4</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+<tr><td>5</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+</tbody>
+</table>
+<p>The arithmetic is simple. As an illustration only, 18 updates out of 20 is 90%, and 3 out of 20 is 15%. Measure each distance from your map, or from the log in the next step.</p>
+<p>If your receiver shows signal readings such as RSSI or SNR, note those as well. They can warn you that a link is close to failing before updates start to drop. Delivery rate is still the number that matters.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Step 5: Compare with the onboard log</h2>
+<p>A tracker with onboard storage lets you see where it was when updates failed to arrive. That separates two different problems: a GPS problem, where the tracker didn’t know its position, and a radio problem, where it knew but the update never reached you.</p>
+<p>Loko Air stores up to 3,100 GPS points and keeps logging when out of radio range, overwriting the oldest points first. After the test, connect it to the <a href="/loko-config-tool/">Loko configuration tool</a> and export the trace as .gpx or .csv. The CSV holds the record number, date, time, latitude, longitude, altitude, speed, HDOP and battery voltage. Read the log soon after your test, so that nothing you need gets overwritten.</p>
+<p>Check the time offset first by comparing one known moment on your own notes with the log. Then look at each gap in your received updates. Good log points during a gap point to the radio link. Missing points or high HDOP point to a poor GPS fix.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>How to read your results</h2>
+<p>There’s no universal pass mark, because it depends on what a missed update costs you:</p>
+<ul>
+<li><strong>A moving dog:</strong> gaps matter because the dog keeps moving. Look for the distance where delivery stays consistently high.</li>
+<li><strong>A downed drone:</strong> it isn’t moving, so one packet can be enough. A low delivery rate can still work if you’re willing to wait.</li>
+<li><strong>A slow-moving animal or vehicle:</strong> if you can tolerate longer gaps, a lower rate may be fine.</li>
+</ul>
+<p>If the numbers disappoint, change one thing at a time and retest. Raising the receiver is usually the first thing to try, since it costs nothing. More transmit power uses more battery and must stay within your local rules. Repeat the test whenever the terrain, season or mounting changes, because foliage and height can both change your results.</p>
+<p>Stay safe while you test: don’t enter private land without permission, and don’t rely on an untested tracker for anything safety-critical. For the hardware figures, see the <a href="/specifications/">Loko specifications</a>.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Frequently Asked Questions</h2>
+<div class="faq-grid">
+<div class="faq-item">
+<h3>How long does a LoRa range test take?</h3>
+<p>Allow 10 minutes per stop plus travel. Five to eight stops usually fit into an hour or two, depending on the terrain.</p>
+</div>
+<div class="faq-item">
+<h3>What is a good delivery rate?</h3>
+<p>It depends on the use. A moving dog needs more consistent updates than a downed drone, where one received position can be enough.</p>
+</div>
+<div class="faq-item">
+<h3>Why is my range much shorter than the advertised figure?</h3>
+<p>Headline figures assume open areas with line of sight. Trees, hills, buildings and a tracker mounted low all shorten the link.</p>
+</div>
+<div class="faq-item">
+<h3>Do I need special equipment?</h3>
+<p>No. You need the tracker, the receiver, the app, a watch and a worksheet. A computer helps you read the onboard log afterwards.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p><strong>Loko Air logs up to 3,100 GPS points on board, so you can compare where it went with what your receiver actually heard.</strong></p>
+<a class="cta-btn" href="/lora-gps-tracker/">See how Loko works</a>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/accessories/">Accessories</a></li><li><a href="/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/battery-life/">Battery Life</a></li><li><a href="/blog/">Blog</a></li><li><a href="/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/chirpstack/">ChirpStack</a></li><li><a href="/contact/">Contact</a></li><li><a href="/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/farms/">Farm GPS</a></li><li><a href="/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/gps/">GPS & LoRa</a></li><li><a href="/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/hiking/">Hiking GPS</a></li><li><a href="/how-gps-works/">How GPS Works</a></li><li><a href="/hunting-dogs/">Hunting Dogs</a></li><li><a href="/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/lorawan/">LoRaWAN</a></li><li><a href="/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/open-source/">Open Source</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/search-rescue/">Search & Rescue</a></li><li><a href="/setup-guides/">Setup</a></li><li><a href="/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/software/">Software</a></li><li><a href="/specifications/">Specs</a></li><li><a href="/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
