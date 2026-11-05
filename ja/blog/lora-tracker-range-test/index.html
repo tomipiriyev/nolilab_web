@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<link href="/css/partials.css?v=20260906" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.ico" rel="icon" sizes="any"/>
+<title>LoRa GPSトラッカーの到達距離をテストする方法</title>
+<meta content="カタログの距離だけに頼らず、停止とカウントの簡単な方法、到達率の記録表、内蔵ログを使ってLoRa GPSトラッカーをテストしましょう。" name="description"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="https://www.nolilab.com/ja/blog/lora-tracker-range-test/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/lora-tracker-range-test/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/lora-tracker-range-test/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/lora-tracker-range-test/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/lora-tracker-range-test/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/lora-tracker-range-test/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/lora-tracker-range-test/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/lora-tracker-range-test/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="LoRa GPSトラッカーの到達距離をテストする方法" property="og:title"/>
+<meta content="カタログの距離だけに頼らず、停止とカウントの簡単な方法、到達率の記録表、内蔵ログを使ってLoRa GPSトラッカーをテストしましょう。" property="og:description"/>
+<meta content="https://www.nolilab.com/ja/blog/lora-tracker-range-test/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/blog-covers/radio-line-of-sight.webp" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ja_JP" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="LoRa GPSトラッカーの到達距離をテストする方法" name="twitter:title"/>
+<meta content="カタログの距離だけに頼らず、停止とカウントの簡単な方法、到達率の記録表、内蔵ログを使ってLoRa GPSトラッカーをテストしましょう。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/radio-line-of-sight.webp" name="twitter:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "LoRaの距離テストにはどのくらい時間がかかりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1地点10分に移動時間を加えてください。地形にもよりますが、5〜8地点なら通常1〜2時間で終わります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "良い到達率とはどのくらいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "用途によります。動いている犬には、受信した1点で足りる場合がある墜落ドローンより安定した更新が必要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "到達距離が公称値よりかなり短いのはなぜですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "公称値は、見通しのある開けた場所を想定しています。木々、丘、建物、低い位置に取り付けたトラッカーはいずれもリンクを短くします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "特別な機材は必要ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いいえ。トラッカー、受信機、アプリ、時計、記録表があれば十分です。後で内蔵ログを読むにはパソコンがあると便利です。"
+      }
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "LoRa GPSトラッカーの到達距離を実際の地形でテストする方法",
+  "description": "カタログの距離だけに頼らず、停止とカウントの簡単な方法、到達率の記録表、内蔵ログを使ってLoRa GPSトラッカーをテストしましょう。",
+  "url": "https://www.nolilab.com/ja/blog/lora-tracker-range-test/",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "author": {
+    "@type": "Person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.nolilab.com/images/nolilab-logo-2.png"
+    }
+  },
+  "image": "https://www.nolilab.com/images/blog-covers/radio-line-of-sight.webp",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/ja/blog/lora-tracker-range-test/"
+  }
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://www.nolilab.com/ja/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "LoRa GPSトラッカーの到達距離を実際の地形でテストする方法",
+      "item": "https://www.nolilab.com/ja/blog/lora-tracker-range-test/"
+    }
+  ]
+}</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  main .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  .page-hero { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: var(--spacing-xl) 0; }
+  h1 { font-size: clamp(1.85rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.03em; margin-bottom: var(--spacing-sm); }
+  .subtitle { color: var(--text-secondary); font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-md); }
+  p { color: var(--text-secondary); margin-bottom: 0.8rem; }
+  strong, h2, h3 { color: var(--text-primary); }
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  h2 { font-family: var(--font-mono); font-size: 1.25rem; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
+  h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; font-size: 0.9rem; }
+  .compare-table th, .compare-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8rem; }
+  .compare-table td { color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.65rem 1.4rem; border-radius: var(--radius-sm); background: var(--text-primary); color: #fff; text-decoration: none; font-weight: 600; }
+  .cta-btn:hover { background: var(--accent); }
+  .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+  .faq-item p { margin-bottom: 0; }
+  a { color: var(--accent); }
+  @media (max-width: 760px) {
+    .compare-table { display: block; overflow-x: auto; font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.55rem 0.65rem; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script defer="" src="/js/layout.js?v=20261025"></script>
+<link href="/css/blog-covers.css?v=20261004" rel="stylesheet"/>
+<meta content="無線見通し線" property="og:image:alt"/>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<h1>LoRa GPSトラッカーの到達距離を実際の地形でテストする方法</h1>
+<p class="subtitle">カタログの距離は最良の条件での値です。ご自身の環境での測り方を紹介します。</p>
+<p>仕様表の距離では、ご自身の森や谷で何が起きるかはわかりません。たとえばLokoの20 km以上は、見通しのある開けた場所での値です。木々、丘、地面に近いトラッカーはいずれも距離を縮めます。</p>
+<p>受信できた最遠の1点も良い指標ではありません。偶然届いた1パケットからわかることは少ないからです。より良い問いは、各距離で更新の何割が届くかです。この数値が到達率で、このテストなら特別な機材なしで測れます。</p>
+</div>
+</section>
+<div class="blog-cover-wrap"><img alt="無線見通し線" class="article-image blog-cover-image" decoding="async" height="800" loading="eager" sizes="(max-width: 800px) 100vw, 800px" src="/images/blog-covers/radio-line-of-sight.webp" srcset="/images/blog-covers/radio-line-of-sight-thumb.webp 600w, /images/blog-covers/radio-line-of-sight.webp 1200w" width="1200"/></div>
+<section class="content-block">
+<div class="container">
+<h2>必要なもの</h2>
+<ul>
+<li>実際に使うトラッカーと受信機（充電済み）</li>
+<li>協力者、または各停止地点に片方の機器を置ける安全な場所</li>
+<li>トラッカーのアプリとオフライン地図を入れたスマートフォン</li>
+<li>時計と、下の記録表（紙またはメモアプリ）</li>
+<li>Lokoの場合、後でログを読むためのChromeまたはEdge搭載パソコン</li>
+</ul>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>ステップ1：設定を固定する</h2>
+<p>設定を一つ決めて書き留め、テスト中は変えないでください。途中で周波数、送信出力、拡散率を変えると、結果を比較できなくなります。実際に使う設定でテストしましょう。LokoのLoRa出力はデフォルトで8 dBmで、各地の規則の範囲内で最大22 dBmまで設定できます。</p>
+<p>各停止地点で十分なサンプルを集められるよう、短い更新間隔を選びます。間隔は到達距離を変えず、集まるポイント数だけを決めます。30秒が適しており、1地点10分で約20回の更新が見込めます。間隔が短いほどバッテリーを多く消費するので、これはテスト用の設定で、日常利用の推奨ではありません。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>ステップ2：実際の使い方のとおりに取り付ける</h2>
+<p>高さと周囲の物は、距離と同じくらい重要です。犬の首輪のトラッカーは低い位置で体に接しています。飛行中のドローンのトラッカーからは、はるかに広い範囲を見通せます。トラッカーは実際の位置と高さに取り付け、受信機も実際に持つ高さに保ってください。捜索時に尾根へ登るなら、別のテストとして試しましょう。高さが重要な理由は<a href="/ja/blog/radio-line-of-sight/">無線の見通し</a>のガイドで説明しています。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>ステップ3：止まって数える</h2>
+<ol>
+<li>距離を段階的に伸ばした停止地点を5〜8か所選びます。尾根の裏、森の奥、谷底など、現実的に最も厳しい場所も含めてください。</li>
+<li>まず約100 mの近距離で、すべて正常に動くことを確認します。</li>
+<li>各地点で10分間待ちます。到着時刻を見ながら、アプリに届いた新しい更新の数を数えます。</li>
+<li>受信数を予定数で割ります。これがその地点の到達率です。</li>
+<li>到達率がゼロ近くになるまで続け、帰りに1〜2か所で再度確認して、結果が再現するか確かめます。</li>
+</ol>
+<p><strong>注意点が一つあります。</strong>Lokoアプリは最新のポイントを到着時刻とともに表示しますが、古いデータの警告はありません。トラッカーが60秒以内にGPS測位できないと最後の既知の位置を送るため、古い位置が新しい到着時刻で表示されることがあります。地点間では空が開けた場所でトラッカーを動かし、動かしたときに位置が実際に変わることを確認してください。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>ステップ4：記録表に記入する</h2>
+<table class="compare-table">
+<thead><tr><th>地点</th><th>距離</th><th>地形と見通し</th><th>予定数</th><th>受信数</th><th>到達率</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>100 m</td><td>開けた場所、見通し良好</td><td>20</td><td></td><td></td></tr>
+<tr><td>2</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+<tr><td>3</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+<tr><td>4</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+<tr><td>5</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+</tbody>
+</table>
+<p>計算は簡単です。あくまで例として、20回中18回なら90%、20回中3回なら15%です。各距離は地図、または次のステップのログから測ります。</p>
+<p>Loko Groundは受信信号の強さを示すRSSIも表示するので、各地点で記録してください。更新が欠け始める前に、リンクが限界に近いことに気づける場合があります。それでも、重要なのは到達率です。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>ステップ5：内蔵ログと比較する</h2>
+<p>内蔵ストレージがあるトラッカーなら、更新が届かなかったときにどこにいたかを確認できます。これで二つの問題を切り分けられます。トラッカーが位置を把握できなかったGPSの問題と、把握していたのに更新が届かなかった無線の問題です。</p>
+<p>Loko Airは最大3,100のGPSポイントを保存し、無線の範囲外でも記録を続けます。古いポイントから上書きされます。テスト後、<a href="/loko-config-tool/">Loko設定ツール</a>に接続し、トレースを.gpxまたは.csvで書き出します。CSVにはレコード番号、日付、時刻、緯度、経度、高度、速度、HDOP、バッテリー電圧が含まれます。必要なデータが上書きされないよう、テスト後は早めにログを読み出してください。</p>
+<p>Loko Airのログの時刻はUTCなので、比較する前にメモをUTCに換算してください。次に、受信した更新の空白を一つずつ確認します。空白の間に良好なログポイントがあれば、原因は無線リンクです。ポイントが欠けている、またはHDOPが高い場合は、GPS測位の不良が原因と考えられます。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>結果の読み方</h2>
+<p>更新を逃すことの影響は用途によって違うため、共通の合格ラインはありません。</p>
+<ul>
+<li><strong>動いている犬：</strong>犬は動き続けるので、空白が問題になります。到達率が安定して高い距離を確認してください。</li>
+<li><strong>墜落したドローン：</strong>動かないので、1パケットで足りる場合があります。待てるなら到達率が低くても役立ちます。</li>
+<li><strong>ゆっくり動く動物や車両：</strong>長めの空白を許容できるなら、低めの到達率でも問題ない場合があります。</li>
+</ul>
+<p>数値が期待を下回ったら、一度に一つだけ変更して再テストします。費用がかからないので、最初に試すなら通常は受信機を高くすることです。送信出力を上げるとバッテリー消費が増え、各地の規則の範囲内に収める必要があります。葉の茂りや高さで結果は変わるので、地形、季節、取り付け方が変わったら再テストしてください。</p>
+<p>テスト中は安全に注意してください。許可なく私有地に入らず、テストしていないトラッカーを安全に関わる用途に頼らないでください。ハードウェアの数値は<a href="/ja/specifications/">Lokoの仕様</a>。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>よくある質問</h2>
+<div class="faq-grid">
+<div class="faq-item">
+<h3>LoRaの距離テストにはどのくらい時間がかかりますか？</h3>
+<p>1地点10分に移動時間を加えてください。地形にもよりますが、5〜8地点なら通常1〜2時間で終わります。</p>
+</div>
+<div class="faq-item">
+<h3>良い到達率とはどのくらいですか？</h3>
+<p>用途によります。動いている犬には、受信した1点で足りる場合がある墜落ドローンより安定した更新が必要です。</p>
+</div>
+<div class="faq-item">
+<h3>到達距離が公称値よりかなり短いのはなぜですか？</h3>
+<p>公称値は、見通しのある開けた場所を想定しています。木々、丘、建物、低い位置に取り付けたトラッカーはいずれもリンクを短くします。</p>
+</div>
+<div class="faq-item">
+<h3>特別な機材は必要ですか？</h3>
+<p>いいえ。トラッカー、受信機、アプリ、時計、記録表があれば十分です。後で内蔵ログを読むにはパソコンがあると便利です。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p><strong>Loko Airは本体に最大3,100のGPSポイントを記録するので、移動経路と受信機が実際に受信した内容を比較できます。</strong></p><a class="cta-btn" href="/ja/lora-gps-tracker/">Lokoの仕組みを見る</a></div>
+</div>
+</section>
+</main>
+<div id="site-footer"><nav aria-label="Site links" class="nav-fallback" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ja/">Home</a></li><li><a href="/ja/about/">About</a></li><li><a href="/ja/accessories/">Accessories</a></li><li><a href="/ja/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ja/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ja/battery-life/">Battery Life</a></li><li><a href="/ja/blog/">Blog</a></li><li><a href="/ja/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/ja/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ja/chirpstack/">ChirpStack</a></li><li><a href="/ja/contact/">Contact</a></li><li><a href="/ja/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ja/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ja/farms/">Farm GPS</a></li><li><a href="/ja/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ja/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ja/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ja/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ja/gps/">GPS &amp; LoRa</a></li><li><a href="/ja/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ja/hiking/">Hiking GPS</a></li><li><a href="/ja/how-gps-works/">How GPS Works</a></li><li><a href="/ja/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ja/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ja/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ja/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ja/lorawan/">LoRaWAN</a></li><li><a href="/ja/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ja/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ja/open-source/">Open Source</a></li><li><a href="/ja/privacy/">Privacy</a></li><li><a href="/ja/search-rescue/">Search &amp; Rescue</a></li><li><a href="/ja/setup-guides/">Setup</a></li><li><a href="/ja/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ja/software/">Software</a></li><li><a href="/ja/specifications/">Specs</a></li><li><a href="/ja/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/ja/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/ja/">English</a></li></ul></nav></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
