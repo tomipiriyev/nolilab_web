@@ -7,8 +7,8 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/favicon.ico" rel="icon" sizes="any"/>
-<title>无人机恢复 GPS 跟踪器 | FPV 和无人机备份跟踪</title>
-<meta content="使用 Loko 作为轻型无人机回收 GPS 跟踪器。当视频、遥测或蜂窝服务出现故障时，LoRa 无线电有助于定位坠毁的无人机。" name="description"/>
+<title>无人机回收 GPS 追踪器：坠机后找回无人机</title>
+<meta content="电池弹出或链路中断时找回丢失无人机的多层方法，以及如何把自带电池的 LoRa 追踪器设置为备用。" name="description"/>
 <meta content="drone recovery gps tracker, drone gps tracker, fpv drone tracker, lost drone tracker" name="keywords"/>
 <meta content="nolilab" name="author"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
@@ -22,15 +22,15 @@
 <link href="https://www.nolilab.com/zh/drone-recovery-gps-tracker/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/drone-recovery-gps-tracker/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="无人机恢复 GPS 跟踪器 | FPV 和无人机备份跟踪" property="og:title"/>
-<meta content="使用 Loko 作为轻型无人机回收 GPS 跟踪器。当视频、遥测或蜂窝服务出现故障时，LoRa 无线电有助于定位坠毁的无人机。" property="og:description"/>
+<meta content="无人机回收 GPS 追踪器：坠机后找回无人机" property="og:title"/>
+<meta content="电池弹出或链路中断时找回丢失无人机的多层方法，以及如何把自带电池的 LoRa 追踪器设置为备用。" property="og:description"/>
 <meta content="https://www.nolilab.com/zh/drone-recovery-gps-tracker/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="zh_CN" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="无人机恢复 GPS 跟踪器 | FPV 和无人机备份跟踪" name="twitter:title"/>
-<meta content="使用 Loko 作为轻型无人机回收 GPS 跟踪器。当视频、遥测或蜂窝服务出现故障时，LoRa 无线电有助于定位坠毁的无人机。" name="twitter:description"/>
+<meta content="无人机回收 GPS 追踪器：坠机后找回无人机" name="twitter:title"/>
+<meta content="电池弹出或链路中断时找回丢失无人机的多层方法，以及如何把自带电池的 LoRa 追踪器设置为备用。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -41,34 +41,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Loko可以用在无人机上吗？",
+      "name": "无人机电池弹出后 Loko 还能工作吗？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "是的，当尺寸、重量、安装和天线位置适合飞机时。"
+        "text": "能。Loko Air 有自己的电池和无线电，因此只要在接收器范围内，就会继续发送位置。"
       }
     },
     {
       "@type": "Question",
-      "name": "Loko 能否取代飞控遥测？",
+      "name": "Loko 能取代飞控遥测吗？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "不。它最好用作独立的备份恢复跟踪器。"
+        "text": "不能。请把它用作独立备用。"
       }
     },
     {
       "@type": "Question",
-      "name": "无人机跟踪器需要蜂窝服务吗？",
+      "name": "无人机追踪器需要蜂窝网络吗？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Loko 没有。它使用 LoRa 无线电接收器。"
+        "text": "Loko 不需要。它通过 LoRa 无线电把位置发送到您的接收器。"
       }
     },
     {
       "@type": "Question",
-      "name": "LoRa 适合无人机回收吗？",
+      "name": "Loko 会给无人机增加多少重量？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "是的。 LoRa 专为长无线电链路上的小型低功耗数据包而设计，非常适合 GPS 恢复数据。"
+        "text": "追踪器重 14 g，另加支架。"
       }
     }
   ]
@@ -80,14 +80,14 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "家",
-      "item": "https://www.nolilab.com"
+      "name": "首页",
+      "item": "https://www.nolilab.com/zh/"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "无人机恢复 GPS 跟踪器",
-      "item": "https://www.nolilab.com/drone-recovery-gps-tracker/"
+      "name": "无人机回收 GPS 追踪器",
+      "item": "https://www.nolilab.com/zh/drone-recovery-gps-tracker/"
     }
   ]
 }</script>
@@ -158,72 +158,77 @@
 <main>
 <section class="page-hero">
 <div class="container">
-<h1>无人机恢复 GPS 跟踪器</h1>
-<p class="subtitle">一款轻型备用追踪器，用于在坠机或信号丢失后寻找丢失的无人机。</p>
-<p>丢失无人机通常发生在最糟糕的时刻：电池电量低、视频链路损坏、着陆困难、高草丛、树木或飞行区域附近没有蜂窝网络覆盖。</p>
-<p>Loko为无人机飞行员提供了独立的恢复通道。跟踪器通过 LoRa 无线电发送 GPS 位置，即使在主控制链路或视频系统出现故障时也能帮助您定位飞机。</p>
+<h1>无人机回收 GPS 追踪器</h1>
+<p class="subtitle">当电池弹出、链路中断或无人机落入高草丛时如何找到它。</p>
+<p>坠机往往会让所有依靠飞行电池供电的回收工具失效：视频、遥测和蜂鸣器。如果电池弹出，无人机就会完全失联。解决办法是分层配置，并至少有一层自带电源。</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>快速比较</h2>
+<h2>多层回收方法</h2>
+<div style="overflow-x:auto;">
 <table class="compare-table">
-<thead><tr><th>恢复方法</th><th>力量</th><th>弱点</th></tr></thead>
+<thead><tr><th>方法</th><th>优势</th><th>失效情况</th></tr></thead>
 <tbody>
-<tr><td>最后一个视频帧</td><td>Imm提供线索</td><td>漂移或碰撞后通常不准确</td></tr>
-<tr><td>飞控GPS</td><td>如果遥测仍然存在，则很有用</td><td>如果电源/链路丢失则失败</td></tr>
-<tr><td>蜂鸣器</td><td>擅长近距离</td><td>在风、树木或长草中坚硬</td></tr>
-<tr><td>Loko</td><td>独立 LoRa GPS</td><td>需要接收器处于实际无线电范围内</td></tr>
+<tr><td>最后的视频帧或 OSD 位置</td><td>即时线索</td><td>无人机在之后发生漂移或翻滚</td></tr>
+<tr><td>飞控 GPS 遥测</td><td>链路保持时很精确</td><td>链路或飞行电池丢失</td></tr>
+<tr><td>自带电池的蜂鸣器</td><td>近距离效果好</td><td>风、树木或高草</td></tr>
+<tr><td>独立 LoRa GPS 追踪器（Loko）</td><td>自带电池和无线电</td><td>接收器超出范围</td></tr>
 </tbody>
 </table>
 </div>
-</section>
-<section class="content-block">
-<div class="container">
-<h2>为什么无人机需要独立的恢复跟踪</h2>
-<p>无人机的主要遥测链路不是恢复系统。它可能因距离、天线方向、电池断开、碰撞损坏或地形障碍而发生故障。</p>
-<p>独立的跟踪器可以降低一次故障同时取消所有恢复选项的可能性。</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>LoRa 为无人机飞行员提供帮助</h2>
-<p>LoRa 非常适合以低功耗长距离发送小型 GPS 数据包。无人机回收跟踪器不需要视频带宽；它只需要可靠的位置更新。</p>
-<p>开阔的场地和清晰的视线可提供最佳性能。树木、山丘和碳框架会缩小覆盖范围，因此安装位置和天线方向很重要。</p>
+<h2>把 Loko 设置为备用</h2>
+<ol>
+<li>把 Loko Air 安装在天线视野开阔的位置，并尽可能远离碳纤维。</li>
+<li>在配置工具中设置更新间隔：间隔越短，位置越新，但也越耗电。</li>
+<li>每次飞行前都要充电；它不由飞行电池供电。</li>
+<li>飞行时保持 Loko Ground 和应用运行。</li>
+<li>坠机后，走向最后位置之前，请先查看它的到达时间。</li>
+</ol>
+<p>Loko Air 重 14 g，尺寸为 30 × 22 mm。把支架计入起飞重量。</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>最佳无人机用例</h2>
-<p>Loko 对于 FPV 飞机、远程无人机、测绘飞机、研究无人机以及昂贵的建筑非常有用，在这些建筑中，恢复比增加尽可能小的重量更重要。</p>
-<p>对于蜂窝跟踪器可能没有服务的农村发射场来说，它尤其有价值。</p>
+<h2>了解 Loko 的限制</h2>
+<ul>
+<li>您必须处于 Loko Ground 的无线电范围内：视距开阔地带 20+ km，在树木、丘陵和建筑物之间短得多。</li>
+<li>如果追踪器在 60 秒内无法获得卫星定位，它会发送最后已知的位置。应用会显示每个位置的到达时间，但不会提示它已过时，因此请查看时间。</li>
+<li>超出范围时，Loko Air 会继续在设备上记录最多 3100 个位置（最旧的优先被覆盖）。手机断开连接时 Ground 会存储位置，但重新连接后应用不会将其导入。</li>
+<li>Loko 不防水，只能承受小雨。Ground 使用 18650 电池，电池不包含在内。</li>
+<li>电池续航取决于更新间隔：长间隔最长 1 年，短间隔则短得多。</li>
+</ul>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
 <h2>相关 Loko 指南</h2>
-<p>有关更多背景信息，请阅读 <a href="/zh/lora-gps-tracker/">LoRa GPS 追踪器指南</a>， 这 <a href="/zh/no-monthly-fee/">无月费 GPS 追踪器指南</a>，以及 <a href="/zh/blog/how-offline-gps-tracking-works/">离线GPS追踪指南</a>.</p>
+<p>延伸阅读：<a href="/zh/smallest-gps-tracker/">迷你 GPS 追踪器对比</a>和<a href="/zh/how-gps-works/">无互联网 GPS 指南</a>。</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>常问问题</h2>
+<h2>常见问题</h2>
 <div class="faq-grid">
 <div class="faq-item">
-<h3>Loko可以用在无人机上吗？</h3>
-<p>是的，当尺寸、重量、安装和天线位置适合飞机时。</p>
+<h3>无人机电池弹出后 Loko 还能工作吗？</h3>
+<p>能。Loko Air 有自己的电池和无线电，因此只要在接收器范围内，就会继续发送位置。</p>
 </div>
 <div class="faq-item">
-<h3>Loko 能否取代飞控遥测？</h3>
-<p>不。它最好用作独立的备份恢复跟踪器。</p>
+<h3>Loko 能取代飞控遥测吗？</h3>
+<p>不能。请把它用作独立备用。</p>
 </div>
 <div class="faq-item">
-<h3>无人机跟踪器需要蜂窝服务吗？</h3>
-<p>Loko 没有。它使用 LoRa 无线电接收器。</p>
+<h3>无人机追踪器需要蜂窝网络吗？</h3>
+<p>Loko 不需要。它通过 LoRa 无线电把位置发送到您的接收器。</p>
 </div>
 <div class="faq-item">
-<h3>LoRa 适合无人机回收吗？</h3>
-<p>是的。 LoRa 专为长无线电链路上的小型低功耗数据包而设计，非常适合 GPS 恢复数据。</p>
+<h3>Loko 会给无人机增加多少重量？</h3>
+<p>追踪器重 14 g，另加支架。</p>
 </div>
 </div>
 </div>
@@ -231,9 +236,7 @@
 <section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p><strong>Loko GPS 跟踪器使用 GPS 和 LoRa 无线电进行本地跟踪，无需 SIM 卡、互联网或按月订阅。</strong></p>
-<a class="cta-btn" href="/zh/#shop">店铺 Loko</a>
-</div>
+<p><strong>Loko 是一款自带电池的 14 g 独立回收追踪器：含追踪器和接收器 $119。</strong></p><a class="cta-btn" href="/shop/">购买 Loko</a></div>
 </div>
 </section>
 </main>
