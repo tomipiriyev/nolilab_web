@@ -7,8 +7,8 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/favicon.ico" rel="icon" sizes="any"/>
-<title>Drone Recovery GPS Tracker | FPV and UAV Backup Tracking</title>
-<meta content="Use Loko as a lightweight drone recovery GPS tracker. LoRa radio helps locate crashed drones when video, telemetry, or cellular service fails." name="description"/>
+<title>Drone Recovery GPS Tracker: Find a Drone After a Crash</title>
+<meta content="Layered ways to recover a lost drone when the battery ejects or the link drops, and how to set up a LoRa tracker with its own battery as a backup." name="description"/>
 <meta content="drone recovery gps tracker, drone gps tracker, fpv drone tracker, lost drone tracker" name="keywords"/>
 <meta content="nolilab" name="author"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
@@ -22,15 +22,15 @@
 <link href="https://www.nolilab.com/zh/drone-recovery-gps-tracker/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/drone-recovery-gps-tracker/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="Drone Recovery GPS Tracker | FPV and UAV Backup Tracking" property="og:title"/>
-<meta content="Use Loko as a lightweight drone recovery GPS tracker. LoRa radio helps locate crashed drones when video, telemetry, or cellular service fails." property="og:description"/>
+<meta content="Drone Recovery GPS Tracker: Find a Drone After a Crash" property="og:title"/>
+<meta content="Layered ways to recover a lost drone when the battery ejects or the link drops, and how to set up a LoRa tracker with its own battery as a backup." property="og:description"/>
 <meta content="https://www.nolilab.com/drone-recovery-gps-tracker/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="en_US" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Drone Recovery GPS Tracker | FPV and UAV Backup Tracking" name="twitter:title"/>
-<meta content="Use Loko as a lightweight drone recovery GPS tracker. LoRa radio helps locate crashed drones when video, telemetry, or cellular service fails." name="twitter:description"/>
+<meta content="Drone Recovery GPS Tracker: Find a Drone After a Crash" name="twitter:title"/>
+<meta content="Layered ways to recover a lost drone when the battery ejects or the link drops, and how to set up a LoRa tracker with its own battery as a backup." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -42,10 +42,10 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Can Loko be used on a drone?",
+      "name": "Does Loko keep working if the drone battery ejects?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, when the size, weight, mounting, and antenna placement are suitable for the aircraft."
+        "text": "Yes. Loko Air has its own battery and radio, so it keeps sending positions while within range of your receiver."
       }
     },
     {
@@ -53,23 +53,23 @@
       "name": "Does Loko replace flight controller telemetry?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. It is best used as an independent backup recovery tracker."
+        "text": "No. Use it as an independent backup."
       }
     },
     {
       "@type": "Question",
-      "name": "Does a drone tracker need cellular service?",
+      "name": "Does a drone tracker need cell service?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Loko does not. It uses LoRa radio to the receiver."
+        "text": "Loko does not. It sends positions by LoRa radio to your receiver."
       }
     },
     {
       "@type": "Question",
-      "name": "Is LoRa good for drone recovery?",
+      "name": "How much does Loko add to my drone?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. LoRa is designed for small low-power packets over long radio links, which fits GPS recovery data well."
+        "text": "The tracker weighs 14 g, plus the mount."
       }
     }
   ]
@@ -168,50 +168,55 @@
 <section class="page-hero">
 <div class="container">
 <h1>Drone Recovery GPS Tracker</h1>
-<p class="subtitle">A lightweight backup tracker for finding lost drones after a crash or signal loss.</p>
-<p>Losing a drone usually happens at the worst time: low battery, broken video link, rough landing, tall grass, trees, or no cellular coverage near the flight area.</p>
-<p>Loko gives drone pilots an independent recovery channel. The tracker sends GPS position over LoRa radio, helping you locate the aircraft even when the main control link or video system is down.</p>
+<p class="subtitle">How to find a drone when the battery ejects, the link drops or it lands in long grass.</p>
+<p>A crash often takes out every recovery tool that runs from the flight battery: video, telemetry and the buzzer. If the battery ejects, the drone goes silent. The answer is layers, with at least one that has its own power.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Quick Comparison</h2>
+<h2>Layered Recovery Methods</h2>
+<div style="overflow-x:auto;">
 <table class="compare-table">
-<thead><tr><th>Recovery method</th><th>Strength</th><th>Weakness</th></tr></thead>
+<thead><tr><th>Method</th><th>Strength</th><th>Fails when</th></tr></thead>
 <tbody>
-<tr><td>Last video frame</td><td>Immediate clue</td><td>Often inaccurate after drift or crash</td></tr>
-<tr><td>Flight controller GPS</td><td>Useful if telemetry remains</td><td>Fails if power/link is lost</td></tr>
-<tr><td>Buzzer</td><td>Good at close range</td><td>Hard in wind, trees, or long grass</td></tr>
-<tr><td>Loko</td><td>Independent LoRa GPS</td><td>Requires receiver within practical radio range</td></tr>
+<tr><td>Last video frame or OSD position</td><td>Immediate clue</td><td>The drone drifted or tumbled after it</td></tr>
+<tr><td>Flight controller GPS telemetry</td><td>Precise if the link stayed up</td><td>The link or flight battery is lost</td></tr>
+<tr><td>Buzzer with its own battery</td><td>Good at close range</td><td>Wind, trees or long grass</td></tr>
+<tr><td>Independent LoRa GPS tracker (Loko)</td><td>Own battery and radio</td><td>The receiver is out of range</td></tr>
 </tbody>
 </table>
 </div>
-</section>
-<section class="content-block">
-<div class="container">
-<h2>Why Drones Need Independent Recovery Tracking</h2>
-<p>A drone's main telemetry link is not a recovery system. It can fail due to distance, antenna orientation, battery disconnect, crash damage, or terrain obstruction.</p>
-<p>An independent tracker reduces the chance that one failure takes away every recovery option at once.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Where LoRa Helps Drone Pilots</h2>
-<p>LoRa is well suited to sending small GPS packets across long distances with low power. A drone recovery tracker does not need video bandwidth; it only needs reliable location updates.</p>
-<p>Open fields and clear line of sight provide the best performance. Trees, hills, and carbon frames can reduce range, so mount placement and antenna orientation matter.</p>
+<h2>Setting Up Loko as a Backup</h2>
+<ol>
+<li>Mount Loko Air where its antenna has a clear view, away from carbon fibre where possible.</li>
+<li>Set the update interval in the configurator: shorter intervals give fresher positions but use more battery.</li>
+<li>Charge it before each session; it does not run from the flight battery.</li>
+<li>Keep the Loko Ground and the app running while you fly.</li>
+<li>After a crash, check the arrival time of the last position before you walk to it.</li>
+</ol>
+<p>Loko Air weighs 14 g and measures 30 × 22 mm. Add the mount to your takeoff weight.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Best Drone Use Cases</h2>
-<p>Loko is useful for FPV planes, long-range drones, mapping aircraft, research UAVs, and expensive builds where recovery matters more than adding the smallest possible weight.</p>
-<p>It is especially valuable for rural launch sites where cellular trackers may have no service.</p>
+<h2>Know Loko's Limits</h2>
+<ul>
+<li>You must be within radio range of your Loko Ground: 20+ km in open areas with line of sight, much less among trees, hills and buildings.</li>
+<li>If the tracker cannot get a satellite fix within 60 seconds, it sends its last known position. The app shows when each position arrived but no warning that it is old, so check the time.</li>
+<li>Out of range, Loko Air keeps logging up to 3,100 positions on the device (oldest overwritten first). The Ground stores positions while your phone is disconnected, but the app does not pull them in when you reconnect.</li>
+<li>Loko is not waterproof; it withstands light rain only. The Ground runs on an 18650 battery, which is not included.</li>
+<li>Battery life depends on the update interval: up to 1 year at long intervals, much less at short ones.</li>
+</ul>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
 <h2>Related Loko Guides</h2>
-<p>For more background, read the <a href="/lora-gps-tracker/">LoRa GPS tracker guide</a>, the <a href="/no-monthly-fee/">no monthly fee GPS tracker guide</a>, and the <a href="/blog/how-offline-gps-tracking-works/">offline GPS tracking guide</a>.</p>
+<p>Read the <a href="/smallest-gps-tracker/">mini GPS tracker comparison</a> and the <a href="/how-gps-works/">guide to GPS without internet</a>.</p>
 </div>
 </section>
 <section class="content-block">
@@ -219,20 +224,20 @@
 <h2>FAQ</h2>
 <div class="faq-grid">
 <div class="faq-item">
-<h3>Can Loko be used on a drone?</h3>
-<p>Yes, when the size, weight, mounting, and antenna placement are suitable for the aircraft.</p>
+<h3>Does Loko keep working if the drone battery ejects?</h3>
+<p>Yes. Loko Air has its own battery and radio, so it keeps sending positions while within range of your receiver.</p>
 </div>
 <div class="faq-item">
 <h3>Does Loko replace flight controller telemetry?</h3>
-<p>No. It is best used as an independent backup recovery tracker.</p>
+<p>No. Use it as an independent backup.</p>
 </div>
 <div class="faq-item">
-<h3>Does a drone tracker need cellular service?</h3>
-<p>Loko does not. It uses LoRa radio to the receiver.</p>
+<h3>Does a drone tracker need cell service?</h3>
+<p>Loko does not. It sends positions by LoRa radio to your receiver.</p>
 </div>
 <div class="faq-item">
-<h3>Is LoRa good for drone recovery?</h3>
-<p>Yes. LoRa is designed for small low-power packets over long radio links, which fits GPS recovery data well.</p>
+<h3>How much does Loko add to my drone?</h3>
+<p>The tracker weighs 14 g, plus the mount.</p>
 </div>
 </div>
 </div>
@@ -240,8 +245,8 @@
 <section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p><strong>Loko GPS Tracker uses GPS plus LoRa radio for local tracking without SIM cards, internet, or monthly subscriptions.</strong></p>
-<a class="cta-btn" href="/#shop">Shop Loko</a>
+<p><strong>Loko is an independent 14 g recovery tracker with its own battery: $119 for a tracker and receiver.</strong></p>
+<a class="cta-btn" href="/shop/">Shop Loko</a>
 </div>
 </div>
 </section>
