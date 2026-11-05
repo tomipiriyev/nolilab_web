@@ -14,6 +14,11 @@
 <meta content="#ffffff" name="theme-color"/>
 <link href="https://www.nolilab.com/blog/lora-tracker-range-test/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/lora-tracker-range-test/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/lora-tracker-range-test/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/lora-tracker-range-test/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/lora-tracker-range-test/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/lora-tracker-range-test/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/lora-tracker-range-test/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/lora-tracker-range-test/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="How to Range-Test a LoRa GPS Tracker in Your Terrain" property="og:title"/>
@@ -206,8 +211,8 @@
 <section class="content-block">
 <div class="container">
 <h2>Step 1: Fix your settings</h2>
-<p>Pick one configuration and write it down, then keep it the same for the whole test. Changing the frequency, transmit power, spreading factor or update interval halfway through makes the results impossible to compare. Test with the settings you’ll really use. On Loko, LoRa output is 8 dBm by default and can be configured up to 22 dBm, within what your local rules allow.</p>
-<p>Choose a short update interval so you can gather enough samples at each stop. 30 seconds works well: ten minutes at a stop gives about 20 expected updates. Shorter intervals use more battery, so this setting is for testing and not a recommendation for daily use.</p>
+<p>Pick one configuration and write it down, then keep it the same for the whole test. Changing the frequency, transmit power or spreading factor halfway through makes the results impossible to compare. Test with the settings you’ll really use. On Loko, LoRa output is 8 dBm by default and can be configured up to 22 dBm, within what your local rules allow.</p>
+<p>Choose a short update interval so you can gather enough samples at each stop. The interval doesn’t change range; it only sets how many points you collect. 30 seconds works well: ten minutes at a stop gives about 20 expected updates. Shorter intervals use more battery, so this setting is for testing and not a recommendation for daily use.</p>
 </div>
 </section>
 <section class="content-block">
@@ -243,7 +248,7 @@
 </tbody>
 </table>
 <p>The arithmetic is simple. As an illustration only, 18 updates out of 20 is 90%, and 3 out of 20 is 15%. Measure each distance from your map, or from the log in the next step.</p>
-<p>If your receiver shows signal readings such as RSSI or SNR, note those as well. They can warn you that a link is close to failing before updates start to drop. Delivery rate is still the number that matters.</p>
+<p>Loko Ground also shows RSSI, the strength of the received signal, so note it at each stop. It can warn you that a link is close to failing before updates start to drop. Delivery rate is still the number that matters.</p>
 </div>
 </section>
 <section class="content-block">
@@ -251,7 +256,7 @@
 <h2>Step 5: Compare with the onboard log</h2>
 <p>A tracker with onboard storage lets you see where it was when updates failed to arrive. That separates two different problems: a GPS problem, where the tracker didn’t know its position, and a radio problem, where it knew but the update never reached you.</p>
 <p>Loko Air stores up to 3,100 GPS points and keeps logging when out of radio range, overwriting the oldest points first. After the test, connect it to the <a href="/loko-config-tool/">Loko configuration tool</a> and export the trace as .gpx or .csv. The CSV holds the record number, date, time, latitude, longitude, altitude, speed, HDOP and battery voltage. Read the log soon after your test, so that nothing you need gets overwritten.</p>
-<p>Check the time offset first by comparing one known moment on your own notes with the log. Then look at each gap in your received updates. Good log points during a gap point to the radio link. Missing points or high HDOP point to a poor GPS fix.</p>
+<p>Loko Air’s log times are in UTC, so convert your notes to UTC before you compare them. Then look at each gap in your received updates. Good log points during a gap point to the radio link. Missing points or high HDOP point to a poor GPS fix.</p>
 </div>
 </section>
 <section class="content-block">

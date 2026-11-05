@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+<link href="/css/partials.css?v=20260906" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.ico" rel="icon" sizes="any"/>
+<title>Meshtastic 与 LoRa GPS 追踪器：该选哪个？</title>
+<meta content="Meshtastic 构建可中继的网状网络；LoRa P2P 追踪器直接发送到一个接收器。比较距离、电池、设置，以及各自不适合的场景。" name="description"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="https://www.nolilab.com/zh/blog/meshtastic-vs-lora-gps-tracker/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/meshtastic-vs-lora-gps-tracker/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/meshtastic-vs-lora-gps-tracker/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/meshtastic-vs-lora-gps-tracker/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/meshtastic-vs-lora-gps-tracker/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/meshtastic-vs-lora-gps-tracker/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/meshtastic-vs-lora-gps-tracker/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/meshtastic-vs-lora-gps-tracker/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="Meshtastic 与 LoRa GPS 追踪器：该选哪个？" property="og:title"/>
+<meta content="Meshtastic 构建可中继的网状网络；LoRa P2P 追踪器直接发送到一个接收器。比较距离、电池、设置，以及各自不适合的场景。" property="og:description"/>
+<meta content="https://www.nolilab.com/zh/blog/meshtastic-vs-lora-gps-tracker/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/blog-covers/what-are-lora-p2p-and-lorawan.webp" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="zh_CN" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Meshtastic 与 LoRa GPS 追踪器：该选哪个？" name="twitter:title"/>
+<meta content="Meshtastic 构建可中继的网状网络；LoRa P2P 追踪器直接发送到一个接收器。比较距离、电池、设置，以及各自不适合的场景。" name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/what-are-lora-p2p-and-lorawan.webp" name="twitter:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Loko 是 Meshtastic 设备吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不是。Loko 通过 LoRa 点对点或 LoRaWAN 发送数据。它不能运行 Meshtastic、加入网状网络或中继流量。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Meshtastic 和 LoRaWAN 一样吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不一样。Meshtastic 是由对等节点相互中继组成的网状网络。LoRaWAN 是星型网络，终端设备发送到连接网络服务器的网关。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "网状网络比点对点追踪器距离更远吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "只有中继节点放在能发挥作用的位置时才会如此。每一跳仍是受地形和视距限制的 LoRa 链路。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Meshtastic 可以跳多少次？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "默认跳数限制为 3，最大为 7。"
+      }
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Meshtastic 与专用 LoRa GPS 追踪器对比",
+  "description": "Meshtastic 构建可中继的网状网络；LoRa P2P 追踪器直接发送到一个接收器。比较距离、电池、设置，以及各自不适合的场景。",
+  "url": "https://www.nolilab.com/zh/blog/meshtastic-vs-lora-gps-tracker/",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "author": {
+    "@type": "Person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.nolilab.com/images/nolilab-logo-2.png"
+    }
+  },
+  "image": "https://www.nolilab.com/images/blog-covers/what-are-lora-p2p-and-lorawan.webp",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/zh/blog/meshtastic-vs-lora-gps-tracker/"
+  }
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.nolilab.com/zh/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Meshtastic 与专用 LoRa GPS 追踪器对比",
+      "item": "https://www.nolilab.com/zh/blog/meshtastic-vs-lora-gps-tracker/"
+    }
+  ]
+}</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  main .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  .page-hero { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: var(--spacing-xl) 0; }
+  h1 { font-size: clamp(1.85rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.03em; margin-bottom: var(--spacing-sm); }
+  .subtitle { color: var(--text-secondary); font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-md); }
+  p { color: var(--text-secondary); margin-bottom: 0.8rem; }
+  strong, h2, h3 { color: var(--text-primary); }
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  h2 { font-family: var(--font-mono); font-size: 1.25rem; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
+  h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; font-size: 0.9rem; }
+  .compare-table th, .compare-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8rem; }
+  .compare-table td { color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.65rem 1.4rem; border-radius: var(--radius-sm); background: var(--text-primary); color: #fff; text-decoration: none; font-weight: 600; }
+  .cta-btn:hover { background: var(--accent); }
+  .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+  .faq-item p { margin-bottom: 0; }
+  a { color: var(--accent); }
+  @media (max-width: 760px) {
+    .compare-table { display: block; overflow-x: auto; font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.55rem 0.65rem; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script defer="" src="/js/layout.js?v=20261025"></script>
+<link href="/css/blog-covers.css?v=20261004" rel="stylesheet"/>
+<meta content="什么是 LoRa、P2P 和 LoRaWAN？" property="og:image:alt"/>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<h1>Meshtastic 与专用 LoRa GPS 追踪器对比</h1>
+<p class="subtitle">两者都使用 LoRa 无线电，都能在没有蜂窝信号时工作，但解决的问题不同。</p>
+<p>Meshtastic 是开源固件，可将 LoRa 开发板变成用于消息和位置共享的网状网络。而 Loko 这样的专用点对点追踪器只做一件事：把追踪器的位置直接发送到您随身携带的接收器。</p>
+<p>简单来说：如果人们需要互发消息，并且您能布置中继节点，请选择 Meshtastic。如果您要寻找无人机或狗这样的小目标，并希望设置尽量简单，请选择点对点追踪器。</p>
+</div>
+</section>
+<div class="blog-cover-wrap"><img alt="什么是 LoRa、P2P 和 LoRaWAN？" class="article-image blog-cover-image" decoding="async" height="800" loading="eager" sizes="(max-width: 800px) 100vw, 800px" src="/images/blog-covers/what-are-lora-p2p-and-lorawan.webp" srcset="/images/blog-covers/what-are-lora-p2p-and-lorawan-thumb.webp 600w, /images/blog-covers/what-are-lora-p2p-and-lorawan.webp 1200w" width="1200"/></div>
+<section class="content-block">
+<div class="container">
+<h2>两者如何传送位置</h2>
+<p><strong>Meshtastic 使用受管泛洪。</strong>节点收到数据包后，会将跳数限制减一并重新广播，除非它先听到其他节点已经转发。<a href="https://meshtastic.org/docs/configuration/radio/lora/" rel="noopener">默认跳数限制为 3，最大为 7</a>。因此，如果山上有节点中继，位置信息就能绕过这座山。</p>
+<p><strong>点对点追踪器只有一条链路。</strong>Loko Air 直接发送到 Loko Ground，再由后者通过蓝牙把位置传给 Loko 应用。Loko 没有中继或转发功能。如果这条唯一的无线路径被阻挡，位置就无法实时送达，但 Air 会继续记录到内置存储器。Loko 也可以通过<a href="/zh/lorawan/">LoRaWAN</a>发送，由您自己或网络提供的网关接收数据。这同样不是网状网络。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>对比一览</h2>
+<table class="compare-table">
+<thead><tr><th></th><th>Meshtastic</th><th>Loko (LoRa P2P)</th></tr></thead>
+<tbody>
+<tr><td>主要用途</td><td>网状消息和位置共享</td><td>位置追踪，无消息功能</td></tr>
+<tr><td>路径</td><td>经其他节点多跳传输</td><td>从追踪器直达接收器，或发送到 LoRaWAN 网关</td></tr>
+<tr><td>您需要什么</td><td>两个或更多兼容节点；大多数设备还需要手机应用</td><td>Loko Air、Loko Ground（不含 18650 电芯）和 Loko 应用</td></tr>
+<tr><td>如何应对地形</td><td>在高处增加中继节点</td><td>移动接收器，或将其升高以获得更好的视距</td></tr>
+<tr><td>硬件</td><td>众多厂商的多种开发板</td><td>单一产品：14 g 追踪器，30 × 22 mm</td></tr>
+<tr><td>固件</td><td>开源，可调设置很多</td><td>开源，通过浏览器配置工具设置</td></tr>
+<tr><td>空中还有谁</td><td>除非设置私有频道，否则其他节点可能共用频道</td><td>只有您自己的追踪器，每个接收器最多 30 个</td></tr>
+</tbody>
+</table>
+<p>Meshtastic 的默认频道使用<a href="https://meshtastic.org/docs/configuration/radio/channels/" rel="noopener">公开已知的密钥</a>，因此需要私密追踪的用户应设置使用随机密钥的频道。Loko 的点对点链路使用 AES-256，密钥由您设置。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>电池：角色带来的变化</h2>
+<p>中继需要耗电。随时准备转发的节点必须持续监听。Meshtastic 的<a href="https://meshtastic.org/docs/configuration/radio/device/" rel="noopener">设备角色</a>也体现了这一点。其<code>TRACKER</code>角色不转发常规流量，开启省电后会在两次位置广播之间休眠。也就是说，为续航而设置的 Meshtastic 追踪器不会充当常规中继，网状网络要靠其他节点提供。</p>
+<p>只比较电池容量无法判断续航，更新间隔的影响更大。以 Meshtastic 硬件为例，<a href="https://meshtastic.org/docs/hardware/devices/seeed-studio/sensecap/card-tracker/" rel="noopener">Seeed SenseCAP T1000-E</a>配备 700 mAh 电池。Loko Air 使用 200 mAh 电芯，1 秒间隔时约可工作 2 小时，长间隔时最长可达 12 个月。请按实际使用的间隔比较设备。Loko 的续航数字如何得出，请参阅<a href="/zh/battery-life/">电池续航页面</a>。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>距离：跳数更多不等于链路更好</h2>
+<p>两种系统都使用 LoRa，因此单跳遵循相同的物理规律。地形、天线高度和视距决定了极限。Loko 的 20+ km 适用于视距良好的开阔区域，森林和山丘会缩短距离。原因请参阅我们关于<a href="/zh/blog/how-distance-affects-wireless-signal-range/">距离如何影响信号范围</a>的指南。</p>
+<p>只有中继位于合适的位置时，网状网络才有帮助。在没有其他节点的偏远山谷，除非您自己携带并布置节点，否则无处可中继。在有活跃节点的城镇或可到达的山顶，它可以比单条链路传得远得多。任何数字未经测试都不太可靠，所以请做一次<a href="/zh/blog/lora-tracker-range-test/">实地距离测试</a>。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>应该如何选择？</h2>
+<ul>
+<li><strong>选择 Meshtastic：</strong>您的团队需要离网文字消息、想布置中继节点，或喜欢配置无线电。它也是低成本的入门方式：2026 年 11 月，<a href="https://www.seeedstudio.com/SenseCAP-Card-Tracker-T1000-E-for-Meshtastic-p-5913.html" rel="noopener">Seeed 的 T1000-E</a>标价为 39.90 美元。</li>
+<li><strong>选择点对点追踪器：</strong>您要回收无人机、跟踪狗或记录路线，并且更想要一个小型追踪器和一个接收器，而不是维护一个网络。</li>
+<li><strong>不适合选择 Loko：</strong>您需要消息功能、多跳中继或能承受浸水的设备。它不防水，只能承受小雨。</li>
+<li><strong>两者都不适合：</strong>您需要在附近没有接收器的情况下从任何地方获取位置。请改为了解<a href="/zh/gps-tracker-without-cell-service/">卫星及其他方案</a>。</li>
+</ul>
+<p>无论选择哪种，都请查阅当地无线电法规。允许使用的频率和发射功率因国家而异。</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>常见问题</h2>
+<div class="faq-grid">
+<div class="faq-item">
+<h3>Loko 是 Meshtastic 设备吗？</h3>
+<p>不是。Loko 通过 LoRa 点对点或 LoRaWAN 发送数据。它不能运行 Meshtastic、加入网状网络或中继流量。</p>
+</div>
+<div class="faq-item">
+<h3>Meshtastic 和 LoRaWAN 一样吗？</h3>
+<p>不一样。Meshtastic 是由对等节点相互中继组成的网状网络。LoRaWAN 是星型网络，终端设备发送到连接网络服务器的网关。</p>
+</div>
+<div class="faq-item">
+<h3>网状网络比点对点追踪器距离更远吗？</h3>
+<p>只有中继节点放在能发挥作用的位置时才会如此。每一跳仍是受地形和视距限制的 LoRa 链路。</p>
+</div>
+<div class="faq-item">
+<h3>Meshtastic 可以跳多少次？</h3>
+<p>默认跳数限制为 3，最大为 7。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p><strong>Loko Air 通过 LoRa 将位置直接发送到 Loko Ground，无需 SIM 卡，无需订阅，也没有需要维护的网状网络。</strong></p><a class="cta-btn" href="/zh/lora-gps-tracker/">了解 Loko 的工作原理</a></div>
+</div>
+</section>
+</main>
+<div id="site-footer"><nav aria-label="Site links" class="nav-fallback" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/zh/">Home</a></li><li><a href="/zh/about/">About</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS &amp; LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search &amp; Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/zh/">English</a></li></ul></nav></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>

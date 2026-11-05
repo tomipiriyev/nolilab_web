@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<link href="/css/partials.css?v=20260906" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.ico" rel="icon" sizes="any"/>
+<title>Meshtastic ou traceur GPS LoRa : lequel choisir ?</title>
+<meta content="Meshtastic crée un réseau maillé à relais ; un traceur LoRa P2P émet droit vers un récepteur. Comparez portée, batterie, installation et limites de chacun." name="description"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="https://www.nolilab.com/fr/blog/meshtastic-vs-lora-gps-tracker/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/meshtastic-vs-lora-gps-tracker/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/meshtastic-vs-lora-gps-tracker/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/meshtastic-vs-lora-gps-tracker/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/meshtastic-vs-lora-gps-tracker/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/meshtastic-vs-lora-gps-tracker/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/meshtastic-vs-lora-gps-tracker/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/meshtastic-vs-lora-gps-tracker/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="Meshtastic ou traceur GPS LoRa : lequel choisir ?" property="og:title"/>
+<meta content="Meshtastic crée un réseau maillé à relais ; un traceur LoRa P2P émet droit vers un récepteur. Comparez portée, batterie, installation et limites de chacun." property="og:description"/>
+<meta content="https://www.nolilab.com/fr/blog/meshtastic-vs-lora-gps-tracker/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/blog-covers/what-are-lora-p2p-and-lorawan.webp" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="fr_FR" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Meshtastic ou traceur GPS LoRa : lequel choisir ?" name="twitter:title"/>
+<meta content="Meshtastic crée un réseau maillé à relais ; un traceur LoRa P2P émet droit vers un récepteur. Comparez portée, batterie, installation et limites de chacun." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/what-are-lora-p2p-and-lorawan.webp" name="twitter:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Loko est-il un appareil Meshtastic ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Loko émet en LoRa pair à pair ou en LoRaWAN. Il ne peut pas exécuter Meshtastic, rejoindre un réseau maillé ni relayer du trafic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Meshtastic est-il la même chose que LoRaWAN ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Meshtastic est un réseau maillé de nœuds pairs qui se relaient. LoRaWAN est un réseau en étoile où les appareils émettent vers des passerelles reliées à un serveur de réseau."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Un réseau maillé offre-t-il plus de portée qu’un traceur point à point ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Seulement si les nœuds relais sont placés aux bons endroits. Chaque saut reste une liaison LoRa limitée par le relief et la ligne de vue."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de sauts Meshtastic peut-il faire ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La limite de sauts par défaut est de 3 et le maximum de 7."
+      }
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Meshtastic ou traceur GPS LoRa dédié",
+  "description": "Meshtastic crée un réseau maillé à relais ; un traceur LoRa P2P émet droit vers un récepteur. Comparez portée, batterie, installation et limites de chacun.",
+  "url": "https://www.nolilab.com/fr/blog/meshtastic-vs-lora-gps-tracker/",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "author": {
+    "@type": "Person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.nolilab.com/images/nolilab-logo-2.png"
+    }
+  },
+  "image": "https://www.nolilab.com/images/blog-covers/what-are-lora-p2p-and-lorawan.webp",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/fr/blog/meshtastic-vs-lora-gps-tracker/"
+  }
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://www.nolilab.com/fr/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Meshtastic ou traceur GPS LoRa dédié",
+      "item": "https://www.nolilab.com/fr/blog/meshtastic-vs-lora-gps-tracker/"
+    }
+  ]
+}</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  main .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  .page-hero { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: var(--spacing-xl) 0; }
+  h1 { font-size: clamp(1.85rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.03em; margin-bottom: var(--spacing-sm); }
+  .subtitle { color: var(--text-secondary); font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-md); }
+  p { color: var(--text-secondary); margin-bottom: 0.8rem; }
+  strong, h2, h3 { color: var(--text-primary); }
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  h2 { font-family: var(--font-mono); font-size: 1.25rem; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
+  h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; font-size: 0.9rem; }
+  .compare-table th, .compare-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8rem; }
+  .compare-table td { color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.65rem 1.4rem; border-radius: var(--radius-sm); background: var(--text-primary); color: #fff; text-decoration: none; font-weight: 600; }
+  .cta-btn:hover { background: var(--accent); }
+  .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+  .faq-item p { margin-bottom: 0; }
+  a { color: var(--accent); }
+  @media (max-width: 760px) {
+    .compare-table { display: block; overflow-x: auto; font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.55rem 0.65rem; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script defer="" src="/js/layout.js?v=20261025"></script>
+<link href="/css/blog-covers.css?v=20261004" rel="stylesheet"/>
+<meta content="Que sont LoRa, P2P et LoRaWAN ?" property="og:image:alt"/>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<h1>Meshtastic ou traceur GPS LoRa dédié</h1>
+<p class="subtitle">Les deux utilisent la radio LoRa et fonctionnent sans réseau mobile. Ils répondent à des besoins différents.</p>
+<p>Meshtastic est un firmware open source qui transforme des cartes LoRa en réseau maillé pour les messages et le partage de positions. Un traceur point à point dédié comme Loko ne fait qu’une chose : il envoie la position du traceur directement à un récepteur que vous avez sur vous.</p>
+<p>En bref : choisissez Meshtastic si des personnes doivent échanger des messages et si vous pouvez placer des nœuds relais. Choisissez un traceur point à point pour retrouver un petit objet ou un animal, comme un drone ou un chien, avec un minimum de configuration.</p>
+</div>
+</section>
+<div class="blog-cover-wrap"><img alt="Que sont LoRa, P2P et LoRaWAN ?" class="article-image blog-cover-image" decoding="async" height="800" loading="eager" sizes="(max-width: 800px) 100vw, 800px" src="/images/blog-covers/what-are-lora-p2p-and-lorawan.webp" srcset="/images/blog-covers/what-are-lora-p2p-and-lorawan-thumb.webp 600w, /images/blog-covers/what-are-lora-p2p-and-lorawan.webp 1200w" width="1200"/></div>
+<section class="content-block">
+<div class="container">
+<h2>Comment chacun transmet une position</h2>
+<p><strong>Meshtastic utilise l’inondation gérée.</strong> Un nœud qui reçoit un paquet réduit sa limite de sauts et le rediffuse, sauf s’il entend un autre nœud le faire d’abord. La <a href="https://meshtastic.org/docs/configuration/radio/lora/" rel="noopener">limite de sauts par défaut est de 3 et le maximum de 7</a>. Une position peut ainsi contourner une colline si un nœud placé dessus la relaie.</p>
+<p><strong>Un traceur point à point n’a qu’une seule liaison.</strong> Loko Air émet directement vers Loko Ground, qui transmet la position à l’application Loko par Bluetooth. Loko n’a aucune fonction de relais ou de répéteur. Si cette unique liaison radio est bloquée, la position n’arrive pas en direct, mais Air continue d’enregistrer dans sa mémoire interne. Loko peut aussi émettre via <a href="/fr/lorawan/">LoRaWAN</a>, où une passerelle, la vôtre ou celle d’un réseau, reçoit les données. Ce n’est pas non plus un réseau maillé.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Comparaison côte à côte</h2>
+<table class="compare-table">
+<thead><tr><th></th><th>Meshtastic</th><th>Loko (LoRa P2P)</th></tr></thead>
+<tbody>
+<tr><td>Fonction principale</td><td>Messagerie maillée, avec partage de positions</td><td>Suivi de position, sans messagerie</td></tr>
+<tr><td>Trajet</td><td>Plusieurs sauts via d’autres nœuds</td><td>Direct du traceur au récepteur, ou vers une passerelle LoRaWAN</td></tr>
+<tr><td>Ce qu’il vous faut</td><td>Au moins deux nœuds compatibles et, pour la plupart des appareils, une application mobile</td><td>Loko Air, Loko Ground (cellule 18650 non incluse) et l’application Loko</td></tr>
+<tr><td>Contourner le relief</td><td>Ajouter un relais sur un point haut</td><td>Déplacer le récepteur ou le surélever pour dégager la ligne de vue</td></tr>
+<tr><td>Matériel</td><td>De nombreuses cartes de nombreux fabricants</td><td>Un seul produit : traceur de 14 g, 30 × 22 mm</td></tr>
+<tr><td>Firmware</td><td>Open source, avec de nombreux réglages</td><td>Open source, configuré avec un outil dans le navigateur</td></tr>
+<tr><td>Qui d’autre sur les ondes</td><td>D’autres nœuds peuvent partager le canal si vous n’en configurez pas un privé</td><td>Vos propres traceurs, jusqu’à 30 par récepteur</td></tr>
+</tbody>
+</table>
+<p>Le canal par défaut de Meshtastic utilise une <a href="https://meshtastic.org/docs/configuration/radio/channels/" rel="noopener">clé connue publiquement</a>. Pour un suivi privé, configurez donc un canal avec une clé aléatoire. La liaison pair à pair de Loko utilise AES-256 avec une clé que vous définissez.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Batterie : ce que change le rôle</h2>
+<p>Relayer consomme de l’énergie. Un nœud prêt à rediffuser doit rester à l’écoute. Les <a href="https://meshtastic.org/docs/configuration/radio/device/" rel="noopener">rôles d’appareil</a> de Meshtastic en tiennent compte. Son rôle <code>TRACKER</code> ne retransmet pas le trafic courant et, avec l’économie d’énergie activée, il dort entre les envois de position. Un traceur Meshtastic réglé pour l’autonomie n’agit donc pas comme un relais habituel : le maillage doit venir d’autres nœuds.</p>
+<p>La taille de la batterie seule n’indique pas l’autonomie. L’intervalle de mise à jour compte davantage. Comme exemple de matériel Meshtastic, le <a href="https://meshtastic.org/docs/hardware/devices/seeed-studio/sensecap/card-tracker/" rel="noopener">Seeed SenseCAP T1000-E</a> a une batterie de 700 mAh. Loko Air a une cellule de 200 mAh et tient environ 2 heures à un intervalle de 1 s, ou jusqu’à 12 mois à des intervalles longs. Comparez les appareils à l’intervalle que vous utiliserez vraiment et consultez notre <a href="/fr/battery-life/">page sur l’autonomie</a> pour comprendre les chiffres de Loko.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Portée : plus de sauts ne veut pas dire une meilleure liaison</h2>
+<p>Les deux systèmes utilisent LoRa : un seul saut obéit donc à la même physique. Le relief, la hauteur de l’antenne et la ligne de vue fixent la limite. Les 20+ km de Loko valent en zone dégagée avec ligne de vue ; les forêts et les collines les réduisent. Notre guide sur <a href="/fr/blog/how-distance-affects-wireless-signal-range/">l’effet de la distance sur la portée du signal</a> explique pourquoi.</p>
+<p>Un réseau maillé n’aide que si un relais est au bon endroit. Dans une vallée isolée sans autre nœud, il n’a rien pour relayer, sauf si vous apportez et placez un nœud vous-même. En ville avec des nœuds actifs, ou sur un sommet accessible, il peut aller bien plus loin qu’une seule liaison. Aucun chiffre ne vaut grand-chose sans test : faites donc <a href="/fr/blog/lora-tracker-range-test/">un test de portée sur votre propre terrain</a>.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Lequel choisir ?</h2>
+<ul>
+<li><strong>Choisissez Meshtastic</strong> si votre groupe a besoin de messages texte hors réseau, si vous voulez placer des relais ou si vous aimez configurer des radios. C’est aussi une entrée en matière peu coûteuse : en novembre 2026, <a href="https://www.seeedstudio.com/SenseCAP-Card-Tracker-T1000-E-for-Meshtastic-p-5913.html" rel="noopener">Seeed proposait le T1000-E</a> à 39,90 $.</li>
+<li><strong>Choisissez un traceur point à point</strong> si vous récupérez un drone, suivez un chien ou enregistrez un itinéraire, et si vous préférez un petit traceur et un récepteur à un réseau à entretenir.</li>
+<li><strong>Loko n’est pas le bon choix</strong> si vous avez besoin de messagerie, de relais multi-sauts ou d’un appareil qui résiste à l’immersion. Il n’est pas étanche et supporte seulement une pluie légère.</li>
+<li><strong>Aucun des deux ne convient</strong> si vous avez besoin d’une position depuis n’importe où sans récepteur à proximité. Regardez plutôt <a href="/fr/gps-tracker-without-cell-service/">les options satellite et autres</a>.</li>
+</ul>
+<p>Vérifiez la réglementation radio locale dans les deux cas. Les fréquences et la puissance d’émission autorisées varient selon les pays.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Questions fréquentes</h2>
+<div class="faq-grid">
+<div class="faq-item">
+<h3>Loko est-il un appareil Meshtastic ?</h3>
+<p>Non. Loko émet en LoRa pair à pair ou en LoRaWAN. Il ne peut pas exécuter Meshtastic, rejoindre un réseau maillé ni relayer du trafic.</p>
+</div>
+<div class="faq-item">
+<h3>Meshtastic est-il la même chose que LoRaWAN ?</h3>
+<p>Non. Meshtastic est un réseau maillé de nœuds pairs qui se relaient. LoRaWAN est un réseau en étoile où les appareils émettent vers des passerelles reliées à un serveur de réseau.</p>
+</div>
+<div class="faq-item">
+<h3>Un réseau maillé offre-t-il plus de portée qu’un traceur point à point ?</h3>
+<p>Seulement si les nœuds relais sont placés aux bons endroits. Chaque saut reste une liaison LoRa limitée par le relief et la ligne de vue.</p>
+</div>
+<div class="faq-item">
+<h3>Combien de sauts Meshtastic peut-il faire ?</h3>
+<p>La limite de sauts par défaut est de 3 et le maximum de 7.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p><strong>Loko Air envoie sa position directement à Loko Ground par LoRa, sans SIM, sans abonnement et sans réseau maillé à entretenir.</strong></p>
+<a class="cta-btn" href="/fr/lora-gps-tracker/">Découvrir le fonctionnement de Loko</a>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer"><nav aria-label="Site links" class="nav-fallback" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/fr/">Home</a></li><li><a href="/fr/about/">About</a></li><li><a href="/fr/accessories/">Accessories</a></li><li><a href="/fr/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/fr/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/fr/battery-life/">Battery Life</a></li><li><a href="/fr/blog/">Blog</a></li><li><a href="/fr/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/fr/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/fr/chirpstack/">ChirpStack</a></li><li><a href="/fr/contact/">Contact</a></li><li><a href="/fr/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/fr/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/fr/farms/">Farm GPS</a></li><li><a href="/fr/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/fr/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/fr/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/fr/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/fr/gps/">GPS &amp; LoRa</a></li><li><a href="/fr/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/fr/hiking/">Hiking GPS</a></li><li><a href="/fr/how-gps-works/">How GPS Works</a></li><li><a href="/fr/hunting-dogs/">Hunting Dogs</a></li><li><a href="/fr/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/fr/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/fr/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/fr/lorawan/">LoRaWAN</a></li><li><a href="/fr/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/fr/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/fr/open-source/">Open Source</a></li><li><a href="/fr/privacy/">Privacy</a></li><li><a href="/fr/search-rescue/">Search &amp; Rescue</a></li><li><a href="/fr/setup-guides/">Setup</a></li><li><a href="/fr/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/fr/software/">Software</a></li><li><a href="/fr/specifications/">Specs</a></li><li><a href="/fr/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/fr/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/fr/">English</a></li></ul></nav></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>

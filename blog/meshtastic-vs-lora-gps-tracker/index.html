@@ -14,6 +14,11 @@
 <meta content="#ffffff" name="theme-color"/>
 <link href="https://www.nolilab.com/blog/meshtastic-vs-lora-gps-tracker/" rel="canonical"/>
 <link href="https://www.nolilab.com/blog/meshtastic-vs-lora-gps-tracker/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/meshtastic-vs-lora-gps-tracker/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/meshtastic-vs-lora-gps-tracker/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/meshtastic-vs-lora-gps-tracker/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/meshtastic-vs-lora-gps-tracker/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/meshtastic-vs-lora-gps-tracker/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/blog/meshtastic-vs-lora-gps-tracker/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="Meshtastic vs a LoRa GPS Tracker: Which Do You Need?" property="og:title"/>
@@ -39,7 +44,7 @@
       "name": "Is Loko a Meshtastic device?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Loko uses its own firmware and sends over LoRa peer-to-peer or LoRaWAN. It is not a mesh node."
+        "text": "No. Loko sends over LoRa peer-to-peer or LoRaWAN. It can’t run Meshtastic, join a mesh or relay traffic."
       }
     },
     {
@@ -195,7 +200,7 @@
 <div class="container">
 <h2>How each one moves a position</h2>
 <p><strong>Meshtastic uses managed flooding.</strong> A node that hears a packet lowers its hop limit and rebroadcasts it, unless it hears another node do so first. The <a href="https://meshtastic.org/docs/configuration/radio/lora/" rel="noopener">default hop limit is 3 and the maximum is 7</a>. A position can therefore travel around a hill if a node on that hill relays it.</p>
-<p><strong>A point-to-point tracker has one link.</strong> Loko Air sends directly to Loko Ground, which passes the position to the Loko app over Bluetooth. If that one radio path is blocked, the position doesn’t arrive live, though the Air keeps logging to its onboard memory. Loko can also send over <a href="/lorawan/">LoRaWAN</a>, where a gateway you or a network provide receives the data. That is still not a mesh.</p>
+<p><strong>A point-to-point tracker has one link.</strong> Loko Air sends directly to Loko Ground, which passes the position to the Loko app over Bluetooth. Loko has no relay or repeater function. If that one radio path is blocked, the position doesn’t arrive live, though the Air keeps logging to its onboard memory. Loko can also send over <a href="/lorawan/">LoRaWAN</a>, where a gateway you or a network provide receives the data. That is still not a mesh.</p>
 </div>
 </section>
 <section class="content-block">
@@ -204,7 +209,7 @@
 <table class="compare-table">
 <thead><tr><th></th><th>Meshtastic</th><th>Loko (LoRa P2P)</th></tr></thead>
 <tbody>
-<tr><td>Main job</td><td>Mesh messaging, with shared positions</td><td>Position tracking</td></tr>
+<tr><td>Main job</td><td>Mesh messaging, with shared positions</td><td>Position tracking, with no messaging</td></tr>
 <tr><td>Path</td><td>Multi-hop through other nodes</td><td>Direct from tracker to receiver, or to a LoRaWAN gateway</td></tr>
 <tr><td>What you need</td><td>Two or more compatible nodes, plus a phone app for most devices</td><td>Loko Air, Loko Ground (18650 cell not included) and the Loko app</td></tr>
 <tr><td>Getting around terrain</td><td>Add a relay on high ground</td><td>Move the receiver, or raise it for a clearer line of sight</td></tr>
@@ -213,14 +218,14 @@
 <tr><td>Who else is on air</td><td>Other nodes can share the channel unless you set up a private one</td><td>Your own trackers, up to 30 on one receiver</td></tr>
 </tbody>
 </table>
-<p>Meshtastic’s default public channel uses a widely known key, so anyone tracking privately should set up their own channel. Loko’s peer-to-peer link uses AES-256 with a key you set.</p>
+<p>Meshtastic’s default channel uses a <a href="https://meshtastic.org/docs/configuration/radio/channels/" rel="noopener">publicly known key</a>, so anyone tracking privately should set up a channel with a random key. Loko’s peer-to-peer link uses AES-256 with a key you set.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
 <h2>Battery: what the role changes</h2>
 <p>Relaying costs power. A node that stays ready to rebroadcast has to keep listening. Meshtastic’s <a href="https://meshtastic.org/docs/configuration/radio/device/" rel="noopener">device roles</a> reflect that. Its <code>TRACKER</code> role doesn’t retransmit routine traffic, and with power saving on it sleeps between position broadcasts. That means a Meshtastic tracker set up for battery life isn’t acting as a routine relay, so other nodes have to provide the mesh.</p>
-<p>Comparing battery size alone won’t tell you runtime. Update interval matters more. As one example of Meshtastic hardware, retailers list the Seeed SenseCAP T1000-E with a 700 mAh cell. Loko Air has a 200 mAh cell and lasts about 2 hours at a 1 s interval, or up to 12 months at long intervals. Compare devices at the interval you’d really use, and see our <a href="/battery-life/">battery life page</a> for how Loko’s figures work.</p>
+<p>Comparing battery size alone won’t tell you runtime. Update interval matters more. As one example of Meshtastic hardware, the <a href="https://meshtastic.org/docs/hardware/devices/seeed-studio/sensecap/card-tracker/" rel="noopener">Seeed SenseCAP T1000-E</a> has a 700 mAh battery. Loko Air has a 200 mAh cell and lasts about 2 hours at a 1 s interval, or up to 12 months at long intervals. Compare devices at the interval you’d really use, and see our <a href="/battery-life/">battery life page</a> for how Loko’s figures work.</p>
 </div>
 </section>
 <section class="content-block">
@@ -234,7 +239,7 @@
 <div class="container">
 <h2>Which should you choose?</h2>
 <ul>
-<li><strong>Choose Meshtastic</strong> if your group needs off-grid text messages, you want to place relay nodes, or you enjoy configuring radios. It’s also a low-cost way in: the T1000-E launched at about $39.90, though prices vary by store and region.</li>
+<li><strong>Choose Meshtastic</strong> if your group needs off-grid text messages, you want to place relay nodes, or you enjoy configuring radios. It’s also a low-cost way in: in November 2026, <a href="https://www.seeedstudio.com/SenseCAP-Card-Tracker-T1000-E-for-Meshtastic-p-5913.html" rel="noopener">Seeed listed the T1000-E</a> at $39.90.</li>
 <li><strong>Choose a point-to-point tracker</strong> if you’re recovering a drone, following a dog, or logging a route, and you’d rather have a small tracker and one receiver than a network to maintain.</li>
 <li><strong>Loko is the wrong choice</strong> if you need messaging, multi-hop relaying, or a device that survives being submerged. It isn’t waterproof and withstands light rain only.</li>
 <li><strong>Neither is right</strong> if you need a location from anywhere with no receiver nearby. Look at <a href="/gps-tracker-without-cell-service/">satellite and other options</a> instead.</li>
@@ -248,7 +253,7 @@
 <div class="faq-grid">
 <div class="faq-item">
 <h3>Is Loko a Meshtastic device?</h3>
-<p>No. Loko uses its own firmware and sends over LoRa peer-to-peer or LoRaWAN. It is not a mesh node.</p>
+<p>No. Loko sends over LoRa peer-to-peer or LoRaWAN. It can’t run Meshtastic, join a mesh or relay traffic.</p>
 </div>
 <div class="faq-item">
 <h3>Is Meshtastic the same as LoRaWAN?</h3>

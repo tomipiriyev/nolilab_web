@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<link href="/css/partials.css?v=20260906" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.ico" rel="icon" sizes="any"/>
+<title>Как проверить дальность GPS-трекера LoRa</title>
+<meta content="Не полагайтесь на заявленную дальность. Проверьте GPS-трекер LoRa простым методом остановок и подсчёта, с таблицей доли доставки и встроенным журналом." name="description"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="https://www.nolilab.com/ru/blog/lora-tracker-range-test/" rel="canonical"/>
+<link href="https://www.nolilab.com/blog/lora-tracker-range-test/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/es/blog/lora-tracker-range-test/" hreflang="es" rel="alternate"/>
+<link href="https://www.nolilab.com/fr/blog/lora-tracker-range-test/" hreflang="fr" rel="alternate"/>
+<link href="https://www.nolilab.com/ja/blog/lora-tracker-range-test/" hreflang="ja" rel="alternate"/>
+<link href="https://www.nolilab.com/ru/blog/lora-tracker-range-test/" hreflang="ru" rel="alternate"/>
+<link href="https://www.nolilab.com/zh/blog/lora-tracker-range-test/" hreflang="zh" rel="alternate"/>
+<link href="https://www.nolilab.com/blog/lora-tracker-range-test/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="Как проверить дальность GPS-трекера LoRa" property="og:title"/>
+<meta content="Не полагайтесь на заявленную дальность. Проверьте GPS-трекер LoRa простым методом остановок и подсчёта, с таблицей доли доставки и встроенным журналом." property="og:description"/>
+<meta content="https://www.nolilab.com/ru/blog/lora-tracker-range-test/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/blog-covers/radio-line-of-sight.webp" property="og:image"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Как проверить дальность GPS-трекера LoRa" name="twitter:title"/>
+<meta content="Не полагайтесь на заявленную дальность. Проверьте GPS-трекер LoRa простым методом остановок и подсчёта, с таблицей доли доставки и встроенным журналом." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/blog-covers/radio-line-of-sight.webp" name="twitter:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Сколько времени занимает тест дальности LoRa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Рассчитывайте на 10 минут на остановку плюс дорогу. Пять–восемь остановок обычно укладываются в один-два часа, в зависимости от местности."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Какая доля доставки считается хорошей?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Зависит от применения. Движущейся собаке нужны более стабильные обновления, чем упавшему дрону, для которого может хватить одной принятой позиции."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Почему у меня дальность намного меньше заявленной?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Заявленные цифры предполагают открытую местность с прямой видимостью. Деревья, холмы, здания и низко закреплённый трекер сокращают дальность связи."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Нужно ли специальное оборудование?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. Нужны трекер, приёмник, приложение, часы и таблица. Компьютер поможет потом прочитать встроенный журнал."
+      }
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как проверить дальность GPS-трекера LoRa на своей местности",
+  "description": "Не полагайтесь на заявленную дальность. Проверьте GPS-трекер LoRa простым методом остановок и подсчёта, с таблицей доли доставки и встроенным журналом.",
+  "url": "https://www.nolilab.com/ru/blog/lora-tracker-range-test/",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "author": {
+    "@type": "Person",
+    "name": "Tamleykha Piriyev",
+    "url": "https://www.nolilab.com/author/tamleykha-piriyev/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tomi-piriyev-33593354/",
+      "https://github.com/tomipiriyev"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "nolilab",
+    "url": "https://www.nolilab.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.nolilab.com/images/nolilab-logo-2.png"
+    }
+  },
+  "image": "https://www.nolilab.com/images/blog-covers/radio-line-of-sight.webp",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.nolilab.com/ru/blog/lora-tracker-range-test/"
+  }
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Главная",
+      "item": "https://www.nolilab.com/ru/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Как проверить дальность GPS-трекера LoRa на своей местности",
+      "item": "https://www.nolilab.com/ru/blog/lora-tracker-range-test/"
+    }
+  ]
+}</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  main .container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  .page-hero { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: var(--spacing-xl) 0; }
+  h1 { font-size: clamp(1.85rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.03em; margin-bottom: var(--spacing-sm); }
+  .subtitle { color: var(--text-secondary); font-size: 1.15rem; font-weight: 600; margin-bottom: var(--spacing-md); }
+  p { color: var(--text-secondary); margin-bottom: 0.8rem; }
+  strong, h2, h3 { color: var(--text-primary); }
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  h2 { font-family: var(--font-mono); font-size: 1.25rem; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
+  h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; font-size: 0.9rem; }
+  .compare-table th, .compare-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table th { background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8rem; }
+  .compare-table td { color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.65rem 1.4rem; border-radius: var(--radius-sm); background: var(--text-primary); color: #fff; text-decoration: none; font-weight: 600; }
+  .cta-btn:hover { background: var(--accent); }
+  .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
+  .faq-item p { margin-bottom: 0; }
+  a { color: var(--accent); }
+  @media (max-width: 760px) {
+    .compare-table { display: block; overflow-x: auto; font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.55rem 0.65rem; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script defer="" src="/js/layout.js?v=20261025"></script>
+<link href="/css/blog-covers.css?v=20261004" rel="stylesheet"/>
+<meta content="Радио прямой видимости" property="og:image:alt"/>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<h1>Как проверить дальность GPS-трекера LoRa на своей местности</h1>
+<p class="subtitle">Заявленная дальность измерена в лучших условиях. Вот как измерить вашу.</p>
+<p>Цифра дальности в характеристиках не скажет, что будет в вашем лесу или долине. Например, более 20 км у Loko относятся к открытой местности с прямой видимостью. Деревья, холмы и трекер у самой земли сокращают дальность.</p>
+<p>Самая дальняя принятая точка — тоже плохой показатель, потому что один удачный пакет мало о чём говорит. Лучше спросить, какая доля обновлений доходит на каждом расстоянии. Это и есть доля доставки, и этот тест измеряет её без специального оборудования.</p>
+</div>
+</section>
+<div class="blog-cover-wrap"><img alt="Радио прямой видимости" class="article-image blog-cover-image" decoding="async" height="800" loading="eager" sizes="(max-width: 800px) 100vw, 800px" src="/images/blog-covers/radio-line-of-sight.webp" srcset="/images/blog-covers/radio-line-of-sight-thumb.webp 600w, /images/blog-covers/radio-line-of-sight.webp 1200w" width="1200"/></div>
+<section class="content-block">
+<div class="container">
+<h2>Что понадобится</h2>
+<ul>
+<li>Трекер и приёмник, которые вы планируете использовать, с заряженными батареями</li>
+<li>Помощник или безопасное место, где можно оставить одно устройство на каждой остановке</li>
+<li>Телефон с приложением трекера и офлайн-картами</li>
+<li>Часы и таблица ниже, на бумаге или в приложении для заметок</li>
+<li>Для Loko — компьютер с Chrome или Edge, чтобы потом прочитать журнал</li>
+</ul>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Шаг 1. Зафиксируйте настройки</h2>
+<p>Выберите одну конфигурацию, запишите её и не меняйте до конца теста. Если изменить частоту, мощность передачи или коэффициент расширения спектра посреди теста, результаты нельзя будет сравнить. Проверяйте с теми настройками, которые будете использовать на самом деле. В Loko выходная мощность LoRa по умолчанию составляет 8 дБм и настраивается до 22 дБм в пределах, разрешённых местными правилами.</p>
+<p>Выберите короткий интервал обновления, чтобы набрать достаточно данных на каждой остановке. Интервал не меняет дальность: он определяет только количество собранных точек. Хорошо подходят 30 секунд: за десять минут на остановке ожидается около 20 обновлений. Короткие интервалы расходуют больше энергии, поэтому эта настройка нужна для теста и не является рекомендацией для ежедневного использования.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Шаг 2. Закрепите трекер так, как будете его использовать</h2>
+<p>Высота и ближайшие предметы важны не меньше расстояния. Трекер на ошейнике находится низко и рядом с телом собаки. Трекер на дроне в воздухе видит гораздо больше горизонта. Закрепите трекер на его реальном месте и на реальной высоте, а приёмник держите так, как будете держать на самом деле. Если при поиске вы поднимались бы на гребень, проверьте это отдельным заходом. Почему высота так важна, объясняет наше руководство о <a href="/ru/blog/radio-line-of-sight/">прямой радиовидимости</a>.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Шаг 3. Остановитесь и считайте</h2>
+<ol>
+<li>Выберите 5–8 остановок на растущем расстоянии, включая самые сложные реальные места: за гребнем, в глубине леса, в овраге.</li>
+<li>Начните близко, примерно со 100 м, чтобы убедиться, что всё работает.</li>
+<li>На каждой остановке подождите 10 минут. Посчитайте по времени прихода, сколько новых обновлений поступило в приложение.</li>
+<li>Разделите число принятых на число ожидаемых. Это доля доставки для остановки.</li>
+<li>Продолжайте, пока доля не упадёт почти до нуля, затем повторите одну-две остановки на обратном пути, чтобы проверить результат.</li>
+</ol>
+<p><strong>Остерегайтесь одной ловушки.</strong> Приложение Loko показывает последнюю точку с временем её прихода и не предупреждает об устаревших данных. Если трекер не получает GPS-координаты за 60 секунд, он отправляет последние известные, поэтому старая позиция может появиться с недавним временем прихода. Между остановками перемещайте трекер под открытым небом и проверяйте, что координаты действительно меняются при движении.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Шаг 4. Заполните таблицу</h2>
+<table class="compare-table">
+<thead><tr><th>Остановка</th><th>Расстояние</th><th>Рельеф и прямая видимость</th><th>Ожидалось</th><th>Принято</th><th>Доля доставки</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>100 m</td><td>Открытая местность, обзор свободен</td><td>20</td><td></td><td></td></tr>
+<tr><td>2</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+<tr><td>3</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+<tr><td>4</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+<tr><td>5</td><td></td><td></td><td>20</td><td></td><td></td></tr>
+</tbody>
+</table>
+<p>Расчёт прост. Исключительно для примера: 18 обновлений из 20 — это 90 %, а 3 из 20 — 15 %. Измеряйте каждое расстояние по карте или по журналу из следующего шага.</p>
+<p>Loko Ground также показывает RSSI — уровень принимаемого сигнала, поэтому записывайте его на каждой остановке. Он может предупредить, что связь близка к потере, ещё до того, как начнут пропадать обновления. Но главным показателем остаётся доля доставки.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Шаг 5. Сравните со встроенным журналом</h2>
+<p>Трекер со встроенной памятью позволяет увидеть, где он был, когда обновления не дошли. Это разделяет две разные проблемы: проблему GPS, когда трекер не знал своего положения, и проблему радиосвязи, когда он его знал, но обновление не дошло.</p>
+<p>Loko Air хранит до 3100 GPS-точек и продолжает запись вне зоны радиосвязи, перезаписывая сначала самые старые точки. После теста подключите его к <a href="/loko-config-tool/">инструменту настройки Loko</a> и экспортируйте трек в формате .gpx или .csv. CSV содержит номер записи, дату, время, широту, долготу, высоту, скорость, HDOP и напряжение батареи. Прочитайте журнал вскоре после теста, чтобы нужные данные не были перезаписаны.</p>
+<p>Время в журнале Loko Air указано в UTC, поэтому переведите свои заметки в UTC перед сравнением. Затем рассмотрите каждый пропуск в принятых обновлениях. Хорошие точки в журнале во время пропуска указывают на радиоканал. Отсутствующие точки или высокий HDOP указывают на плохое определение GPS.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Как читать результаты</h2>
+<p>Универсального проходного балла нет: всё зависит от того, чего вам стоит пропущенное обновление.</p>
+<ul>
+<li><strong>Собака в движении:</strong> пропуски важны, потому что собака продолжает двигаться. Ищите расстояние, на котором доставка стабильно высокая.</li>
+<li><strong>Упавший дрон:</strong> он не движется, поэтому может хватить одного пакета. Низкая доля доставки подойдёт, если вы готовы подождать.</li>
+<li><strong>Медленное животное или техника:</strong> если допустимы более длинные пропуски, может хватить и меньшей доли.</li>
+</ul>
+<p>Если цифры разочаровали, меняйте что-то одно и повторяйте тест. Обычно сначала стоит поднять приёмник: это ничего не стоит. Большая мощность передачи расходует больше энергии и должна оставаться в рамках местных правил. Повторяйте тест при смене местности, сезона или способа крепления: листва и высота могут изменить результаты.</p>
+<p>Соблюдайте безопасность во время теста: не заходите на частную территорию без разрешения и не полагайтесь на непроверенный трекер в вопросах безопасности. Цифры по оборудованию см. в разделе <a href="/ru/specifications/">характеристики Loko</a>.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Часто задаваемые вопросы</h2>
+<div class="faq-grid">
+<div class="faq-item">
+<h3>Сколько времени занимает тест дальности LoRa?</h3>
+<p>Рассчитывайте на 10 минут на остановку плюс дорогу. Пять–восемь остановок обычно укладываются в один-два часа, в зависимости от местности.</p>
+</div>
+<div class="faq-item">
+<h3>Какая доля доставки считается хорошей?</h3>
+<p>Зависит от применения. Движущейся собаке нужны более стабильные обновления, чем упавшему дрону, для которого может хватить одной принятой позиции.</p>
+</div>
+<div class="faq-item">
+<h3>Почему у меня дальность намного меньше заявленной?</h3>
+<p>Заявленные цифры предполагают открытую местность с прямой видимостью. Деревья, холмы, здания и низко закреплённый трекер сокращают дальность связи.</p>
+</div>
+<div class="faq-item">
+<h3>Нужно ли специальное оборудование?</h3>
+<p>Нет. Нужны трекер, приёмник, приложение, часы и таблица. Компьютер поможет потом прочитать встроенный журнал.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p><strong>Loko Air записывает до 3100 GPS-точек во встроенную память, поэтому можно сравнить его маршрут с тем, что действительно принял приёмник.</strong></p>
+<a class="cta-btn" href="/ru/lora-gps-tracker/">Узнать, как работает Loko</a>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer"><nav aria-label="Site links" class="nav-fallback" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/ru/">Home</a></li><li><a href="/ru/about/">About</a></li><li><a href="/ru/accessories/">Accessories</a></li><li><a href="/ru/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/ru/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/ru/battery-life/">Battery Life</a></li><li><a href="/ru/blog/">Blog</a></li><li><a href="/ru/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/ru/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/ru/chirpstack/">ChirpStack</a></li><li><a href="/ru/contact/">Contact</a></li><li><a href="/ru/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/ru/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/ru/farms/">Farm GPS</a></li><li><a href="/ru/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/ru/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/ru/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/ru/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/ru/gps/">GPS &amp; LoRa</a></li><li><a href="/ru/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/ru/hiking/">Hiking GPS</a></li><li><a href="/ru/how-gps-works/">How GPS Works</a></li><li><a href="/ru/hunting-dogs/">Hunting Dogs</a></li><li><a href="/ru/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/ru/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/ru/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/ru/lorawan/">LoRaWAN</a></li><li><a href="/ru/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/ru/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/ru/open-source/">Open Source</a></li><li><a href="/ru/privacy/">Privacy</a></li><li><a href="/ru/search-rescue/">Search &amp; Rescue</a></li><li><a href="/ru/setup-guides/">Setup</a></li><li><a href="/ru/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/ru/software/">Software</a></li><li><a href="/ru/specifications/">Specs</a></li><li><a href="/ru/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/ru/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/ru/">English</a></li></ul></nav></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
