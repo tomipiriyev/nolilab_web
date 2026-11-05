@@ -5,7 +5,7 @@
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>インターネットや携帯回線なしでGPSが機能する仕組み | NoliLab</title>
+<title>GPSはインターネットなしで動く？動くが、トラッカーは別</title>
 <link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
 <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
 <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
@@ -18,19 +18,19 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="GPSは衛星信号を直接受信するため、インターネットなしで機能します。それでもトラッカーに携帯電話回線が必要な場合がある理由と、オフライン追跡の仕組みをご紹介します。" name="description"/>
+<meta content="GPSはインターネットなしで動きます。変わるのは地図、初回測位、そして多くのトラッカーです。オフラインマップの準備方法と、Lokoがデータ通信なしで追跡する方法を解説します。" name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <meta content="article" property="og:type"/>
-<meta content="インターネットや携帯回線なしでGPSが機能する仕組み | NoliLab" property="og:title"/>
-<meta content="GPSは衛星信号を直接受信するため、インターネットなしで機能します。それでもトラッカーに携帯電話回線が必要な場合がある理由と、オフライン追跡の仕組みをご紹介します。" property="og:description"/>
+<meta content="GPSはインターネットなしで動く？動くが、トラッカーは別" property="og:title"/>
+<meta content="GPSはインターネットなしで動きます。変わるのは地図、初回測位、そして多くのトラッカーです。オフラインマップの準備方法と、Lokoがデータ通信なしで追跡する方法を解説します。" property="og:description"/>
 <meta content="https://www.nolilab.com/ja/how-gps-works/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
-<meta content="How GPS Works Without Internet" property="og:image:alt"/>
+<meta content="GPSがインターネットなしで動く仕組み" property="og:image:alt"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="ja_JP" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="インターネットや携帯回線なしでGPSが機能する仕組み | NoliLab" name="twitter:title"/>
-<meta content="GPSは衛星信号を直接受信するため、インターネットなしで機能します。それでもトラッカーに携帯電話回線が必要な場合がある理由と、オフライン追跡の仕組みをご紹介します。" name="twitter:description"/>
+<meta content="GPSはインターネットなしで動く？動くが、トラッカーは別" name="twitter:title"/>
+<meta content="GPSはインターネットなしで動きます。変わるのは地図、初回測位、そして多くのトラッカーです。オフラインマップの準備方法と、Lokoがデータ通信なしで追跡する方法を解説します。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
 <meta content="how GPS works, GPS without internet, GPS offline, GPS satellites explained, how GPS trackers work" name="keywords"/>
@@ -50,42 +50,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "GPSの動作にインターネットは必要ですか？",
+      "name": "GPSはインターネットなしで動きますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "いいえ。GPS衛星は一方向の無線通信で信号を常時送信しています。衛星がデバイスから何かを受信することはなく、インターネットも一切介しません。GPS受信機は、複数の衛星から受信した信号の到達時間差だけを基に位置を算出します。ただし、市販のGPSトラッカーの多くは、その位置情報をスマートフォンへ送信するために、インターネットまたは携帯電話回線を必要とします。"
+        "text": "はい。GPS受信機は衛星信号だけで位置を計算します。インターネットが必要なのは、地図の読み込み、初回測位の高速化、サーバー経由でのトラッカー位置の送信など、GPSの周辺機能だけです。"
       }
     },
     {
       "@type": "Question",
-      "name": "GPS衛星はいくつありますか？",
+      "name": "GPSは機内モードで動きますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "最近の集計では、米国のGPS衛星群には31基の運用中の衛星があります。地球上のどの地点でも、通常は6～12基の衛星を同時に捕捉できます。GPSデバイスが3次元測位（緯度、経度、高度）を行うには、少なくとも4基の衛星が必要です。Lokoのような最新のトラッカーは、GPS、GLONASS（ロシア、24基）、Galileo（EU、30基）という複数の衛星群を利用するため、60基以上の衛星を同時に利用でき、より迅速かつ高精度に測位できます。"
+        "text": "ほとんどのスマートフォンで動きます。先に地図のエリアをダウンロードしないと、白紙の地図に現在地だけが表示されます。データ通信がないと、初回測位に時間がかかる場合があります。"
       }
     },
     {
       "@type": "Question",
-      "name": "GPSがオフラインで機能するのに、なぜ多くのGPSトラッカーには携帯電話回線が必要なのですか？",
+      "name": "GPSトラッカーが圏外で動かなくなるのはなぜですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPSはトラッカーに現在地を伝えます。では、その位置情報はどのようにスマートフォンへ届くのでしょうか？多くのトラッカーはSIMカードとモバイルデータ通信を使って座標をクラウドサーバーへ送信し、スマートフォンはインターネット経由でそのサーバーに問い合わせます。GPS自体はオフラインですが、伝送部分には携帯電話回線が使われています。Lokoでは携帯電話回線の代わりにLoRa無線を使用します。これはインターネットを必要としない直接無線リンクです。"
+        "text": "ほとんどのトラッカーは、携帯ネットワークでサーバーに位置を送ります。トラッカー側に電波がないと、トラッカーのGPSが動いていても位置は届きません。"
       }
     },
     {
       "@type": "Question",
-      "name": "GPS、GLONASS、Galileoの違いは何ですか？",
+      "name": "インターネットなしで使えるGPSトラッカーはありますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GPSは米国の衛星測位システム（31基）です。GLONASSはロシアの同等システム（24基）、Galileoは欧州連合のシステム（2024年時点で運用中の衛星30基）です。それぞれ異なる周波数と軌道面を使用します。Lokoのように3つすべてを同時に利用すると、捕捉できる衛星数が大幅に増え、測位精度の向上、初回測位時間の短縮、いずれかの衛星群の配置条件が悪い環境での追跡維持が可能になります。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Lokoはどのように完全オフラインで機能するのですか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Lokoの信号経路では、どの段階でもインターネットを使用しません。GPS/GLONASS/Galileo衛星が無線信号を送信 → Loko Airの受信機が座標を算出 → Loko AirがLoRa無線（トランシーバーのような直接無線リンク）で座標を送信 → Loko GroundがLoRa信号を受信 → Loko GroundがBluetooth経由でスマートフォンへ座標を送信 → Lokoアプリがオフライン地図上に位置を表示します。衛星から画面まで、すべてローカル無線で完結します。"
+        "text": "はい。Lokoなどの無線トラッカーは、SIMもサーバーも使わず、手元の受信機へ直接位置を送ります。その代わり、無線の範囲内にいる必要があります。"
       }
     }
   ]
@@ -98,13 +90,13 @@
       "@type": "ListItem",
       "position": 1,
       "name": "ホーム",
-      "item": "https://www.nolilab.com"
+      "item": "https://www.nolilab.com/ja/"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "インターネットなしでGPSが機能する仕組み",
-      "item": "https://www.nolilab.com/how-gps-works/"
+      "name": "GPSがインターネットなしで動く仕組み",
+      "item": "https://www.nolilab.com/ja/how-gps-works/"
     }
   ]
 }</script>
@@ -227,144 +219,128 @@
 <!-- Hero -->
 <div class="page-hero">
 <div class="container">
-<h1>インターネットや携帯電話回線なしでGPSが機能する仕組み</h1>
-<p class="subtitle">GPS受信機は衛星信号から位置を算出するため、GPS自体にはWi-Fi、モバイルデータ通信、SIMカードのいずれも必要ありません。</p>
-<p><strong>GPSは、衛星が時刻情報と軌道データを受信機へ直接送信するため、インターネットなしで機能します。</strong> 受信機は複数の衛星からの信号を比較して、自身の位置を算出します。インターネット接続が必要になるのは、デバイスがオンライン地図やクラウドストレージを利用する場合、または携帯電話回線を使って位置情報を別の場所へ送信する場合だけです。</p>
-<p>混同されやすいのは、 <strong>市販のGPSトラッカーの多くが、位置情報をスマートフォンへ届けるために実際にはインターネットを必要とする</strong> —からです。しかし、これはメーカーによる選択であり、GPS自体の要件ではありません。この違いを理解することが、Loko GPS Trackerが携帯電話の圏外でも、Wi-Fiやデータプランなしで完全に機能する理由を理解する鍵となります。</p>
-<div class="cta-block">
-<p><strong>最初から最後までオフラインで使えるGPSトラッカーをお探しですか？</strong> どのように <a href="/ja/gps-tracker-without-internet/">インターネット不要のGPSトラッカー</a> が、モバイルデータ通信の代わりにローカルのLoRa無線でGPS位置情報を送信する仕組みをご覧ください。</p>
-<a class="cta-btn" href="/ja/lora-gps-tracker/">オフラインGPSトラッカーを見る →</a>
+<h1>GPSはインターネットなしで動く？動くが、トラッカーは別</h1>
+<p class="subtitle">GPS自体にWi-Fi、モバイルデータ、SIMカードは不要です。ただし、地図、初回測位、多くのトラッカーは事情が異なります。</p>
+<p><strong>GPSはインターネットなしで動きます。</strong>衛星が信号を送信し、スマートフォンやトラッカーがそこから自分の位置を割り出します。何も送り返さず、データ接続も関わりません。</p>
+<p>オフラインで不具合が出やすいのは、GPSの周辺です。画面の地図、初回測位の速さ、そして多くのトラッカーでは位置が手元に届く経路です。このページではそれぞれを説明し、スマートフォンでオフラインマップを準備する方法と、Lokoが経路全体をオフラインに保つ仕組みと限界を解説します。</p>
 </div>
 </div>
-</div>
-<!-- GPS satellites explained simply -->
+<!-- Phone -->
 <div class="content-block">
 <div class="container">
-<h2>GPS衛星をわかりやすく解説</h2>
-<p>全地球測位システム（GPS）は、米国宇宙軍が運用する衛星群です。最も基本的な仕組みは次のとおりです。</p>
+<h2>インターネットなしのスマートフォンのGPS</h2>
+<p>スマートフォンのGPSは、機内モードや圏外でも動き続けます。変わるのは次の3点です：</p>
 <ul>
-<li><strong>31基の衛星が地球を周回しています</strong> 高度約20,200 kmの中軌道を周回します</li>
-<li>各衛星には極めて高精度な原子時計が搭載されており、 <strong>無線信号を継続的に送信します</strong> 。その信号には、衛星のID、現在の軌道上の位置、正確なタイムスタンプが含まれます</li>
-<li>これらの信号は光速で地表へ向かって伝わります</li>
-<li>地上のGPS受信機は、複数の衛星からの信号を同時に受信します</li>
-<li>受信機は、各信号が <strong>到達するまでにかかった時間</strong>を測定し、各衛星までの距離を算出します</li>
-<li>少なくとも4基の衛星までの距離が分かれば、受信機は三辺測量と呼ばれる方法で正確な3次元位置（緯度、経度、高度）を算出できます</li>
+<li><strong>地図が白紙になることがある。</strong>多くの地図アプリは地図タイルをインターネットで読み込みます。接続がないと、事前にエリアをダウンロードしていない限り、何もないグリッドに青い点だけが表示されます。</li>
+<li><strong>初回測位が遅くなることがある。</strong>データ通信があると、スマートフォンは衛星情報をダウンロードして初回測位を速めます。通信がない場合は衛星自体からその情報を受信するため、特に電源を切っていたり大きく移動したりした後は時間がかかります。</li>
+<li><strong>検索と一部の経路案内が止まる。</strong>検索、リアルタイムの交通情報、一部の経路タイプには、アプリによって接続が必要です。</li>
 </ul>
-<p>重要なのは、 <strong>このプロセス全体が一方向であることです</strong>。衛星が送信し、受信機が受信します。受信機が衛星へ何かを送り返すことはありません。衛星はデバイスの存在すら認識しません。どの段階にもインターネット接続は関与しません。</p>
-<p>GPSは、都市の中心部でも人里離れた山中でも同じように機能します。衛星にとって場所は関係ありません。ただ信号を送信し続けています。</p>
 </div>
 </div>
-<!-- Why GPS itself needs no internet -->
+<!-- Offline maps -->
 <div class="content-block">
 <div class="container">
-<h2>GPS自体にインターネットが不要な理由</h2>
-<p>GPSは、エンドユーザーにとって基本的に受信専用の受動型システムです。衛星から受信機までの信号経路には、大気中を伝わる電波しか介しません。ネットワーク接続も、サーバーも、データプランも不要です。</p>
-<p>車載GPSナビゲーションは、何十年も前からオフラインで機能しています。Garmin eTrexのような登山用GPS専用機も、以前から携帯電話回線なしで機能しています。航空ナビゲーションシステムも、インターネット接続なしで位置を算出します。これらはすべて同じGPS衛星信号を利用しており、インターネットは必要ありません。</p>
-<p>GPS規格では、民間向け信号帯（L1、1575.42 MHz）に暗号化やアクセス制御をあえて採用していません。地球上のどこにいても、対応する受信機さえあれば誰でも無料で受信できるよう、意図的に設計されています。</p>
-<p>GPS受信チップの価格は数ドルです。消費電力もわずかです。そして、宇宙から届く電波だけで正確な位置座標を算出します — サブスクリプションも、接続も、クラウドも必要ありません。</p>
-</div>
-</div>
-<!-- What DOES need internet -->
-<div class="content-block">
-<div class="container">
-<h2>インターネットが必要なのは何か：市販のGPSトラッカーの大半</h2>
-<p>では、GPS自体はオフラインなのに、なぜほとんどのGPSトラッカーにはモバイルデータ通信プランが必要なのでしょうか？</p>
-<p>その答えは、問題のもう一つの部分にあります： <strong>トラッカーからスマートフォンへ位置情報を届けること</strong>.</p>
-<p>GPSはトラッカーに現在地を伝えます。しかし、野外や犬の首輪、ドローンに取り付けられたトラッカーは、ユーザーから物理的に離れています。そのGPS座標を端末へ送信する仕組みが必要です。ほとんどのメーカーがインターネットへの依存を持ち込むのは、この送信部分です。</p>
-<p>一般的なモバイル通信式GPSトラッカーの仕組み：</p>
+<h2>オフラインマップのダウンロード方法</h2>
+<p><strong>Google マップ（AndroidとiPhone）</strong></p>
 <ol>
-<li>GPSチップが座標を算出します（オフラインで動作し、インターネットは不要）</li>
-<li>内蔵SIMカードがモバイルネットワークに接続します（データ通信プランが必要）</li>
-<li>座標がメーカーのクラウドサーバーへアップロードされます（インターネットが必要）</li>
-<li>スマートフォンアプリがインターネット経由でクラウドサーバーに問い合わせます（インターネットが必要）</li>
-<li>アプリが地図上に位置を表示します</li>
+<li>インターネットに接続した状態でGoogle マップを開きます（シークレットモードは不可）。</li>
+<li>プロフィール写真をタップし、次の順に選択します：<strong>オフラインマップ</strong>、<strong>自分の地図を選択</strong>。</li>
+<li>エリアを調整して次をタップします：<strong>ダウンロード</strong>。</li>
 </ol>
-<p>手順2、3、4はいずれもインターネット基盤を必要とします。モバイル通信圏外になると、手順1の後で一連の仕組みが機能しなくなります。遠隔地でモバイル通信式GPSトラッカーが使えなくなるのは、GPSが停止するからではなく、送信部分の接続が失われるためです。また、このSIMカードがあるため、ほとんどのペット用トラッカーには月額プランが必要です。一方、 <a href="/ja/dog-gps-tracker-no-subscription/">サブスクリプション不要の犬用トラッカー</a> では、別の方法で座標を届ける必要があります。</p>
-<p><strong>これは技術上の必然ではなく、システム設計上の選択です。</strong> インターネットを使わずにGPS座標を送信する方法もあります。</p>
+<p>Google マップのオフラインマップには有効期限があり、更新が必要です。期限が近づくと、アプリはWi-Fi接続時に自動更新を試みます。Googleによると、公共交通機関、自転車、徒歩の経路案内はオフラインでは使えません。</p>
+<p><strong>Appleマップ（iPhone、iOS 17以降）</strong></p>
+<ol>
+<li>検索欄の横にあるプロフィール写真またはイニシャルをタップします。</li>
+<li>次の順にタップします：<strong>オフラインマップ</strong>、<strong>追加</strong>。おすすめの地図を選ぶか、場所を入力します。</li>
+<li>エリアのサイズを変更して次をタップします：<strong>ダウンロード</strong>。</li>
+</ol>
+<p>Appleによると、オフラインマップは車、徒歩、自転車、公共交通機関の詳細な経路案内に対応しますが、一部の地域でのみ利用できます。</p>
+<p><strong>出かける前に試す：</strong>自宅で機内モードをオンにし、地図アプリを開いて、ダウンロードしたエリアを拡大します。地図の詳細と現在地が表示されれば準備完了です。</p>
 </div>
 </div>
-<!-- How LoRa replaces cellular -->
+<!-- How GPS works, briefly -->
 <div class="content-block">
 <div class="container">
-<h2>LoRaが座標送信でモバイル通信を代替する仕組み</h2>
-<p>LoRa（Long Range）無線は、モバイル通信基盤を一切使わずにGPS座標データを長距離伝送できる代替技術です。</p>
-<p>LoRaは免許不要のISM無線周波数帯（欧州では868 MHz、北米では915 MHz）を使用し、GPS座標を含む小さなデータパケットを端末間で直接送信します。概念的にはトランシーバーに似たポイント・ツー・ポイント無線ですが、通信距離ははるかに長く、消費電力は大幅に少なくなっています。</p>
-<p>14 dBmで送信するLoRa無線は、開けた地形なら15～20km離れた場所までGPS座標パケットを安定して送信できます。受信機はインターネット、携帯電話基地局、その他のインフラに接続する必要がありません。無線の通信範囲内にあれば十分です。</p>
-<p>これこそがLokoの仕組みです。Loko Airトラッカーが算出したGPS座標は、LoRa経由で手元のLoko Ground受信機へ送信され、インターネットを完全に迂回します。送信部分もGPS受信部分と同じくオフラインです。モバイル通信式の犬用首輪と比較検討している場合は、 <a href="/ja/tractive-alternative/">オフグリッドで使えるTractive代替製品</a> との通信エリア、通信距離、料金の違いをご覧ください。</p>
+<h2>GPSにインターネットが不要な理由</h2>
+<p>gps.govの最新の集計によると、米国のGPS衛星群には31基の運用衛星があり、高度約20,200 kmを周回しています。各衛星は自身の位置と時刻を送信します。受信機は4基以上の衛星を受信すれば、信号の到達時間から自分の位置を計算できます。</p>
+<p>この仕組みは一方通行です。衛星が送信し、受信機が聞くだけで、受信機から送り返すことはありません。カーナビやハイキング用GPSが携帯プランなしで使えてきたのはそのためです。</p>
 </div>
 </div>
-<!-- The full offline chain -->
+<!-- Why trackers need data -->
 <div class="content-block">
 <div class="container">
-<h2>完全オフラインの経路：衛星から画面まで</h2>
-<p>Lokoシステムの信号経路全体は次のとおりです — すべての手順がローカル無線で完結し、インターネットを一切使用しない点にご注目ください：</p>
+<h2>多くのGPSトラッカーにデータ通信が必要な理由</h2>
+<p>トラッカーは自分の位置を知っています。難しいのは、その位置をあなたに届けることです。多くのトラッカーの流れは次のとおりです：</p>
+<ol>
+<li>GPSチップが位置を割り出します（インターネット不要）。</li>
+<li>内蔵SIMが携帯ネットワークで送信します（電波とプランが必要）。</li>
+<li>メーカーのサーバーが保存します（インターネットが必要）。</li>
+<li>スマートフォンアプリがサーバーから取得します（インターネットが必要）。</li>
+</ol>
+<p>トラッカー側で携帯電波が途切れると、GPSが動いていても手順2で経路が切れます。ペット用や資産管理用トラッカーの多くに月額プランが付くのもそのためです。</p>
+</div>
+</div>
+<!-- Loko chain -->
+<div class="content-block">
+<div class="container">
+<h2>Lokoがすべてをオフラインに保つ仕組み</h2>
+<p>Lokoは、携帯ネットワークとサーバーを、手元の受信機への直接の無線リンクに置き換えます：</p>
 <div class="chain-step">
 <div class="step-num">1</div>
 <div class="step-content">
-<h3>GPS / GLONASS / Galileo衛星</h3>
-<p>31基以上の衛星が、高度20,000 kmから無線の時刻信号を発信します。インターネットは不要です。誰でも無料で受信できる一方向の放送です。</p>
+<h3>衛星</h3>
+<p>GPS、GLONASS、Galileo衛星が信号を送信します。</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">2</div>
 <div class="step-content">
-<h3>Loko Air GPS受信機</h3>
-<p>14g未満のトラッカーが複数の衛星コンステレーションから信号を受信し、正確な座標を算出します。処理はすべて端末内で行われ、ネットワークは不要です。</p>
+<h3>Loko Air</h3>
+<p>14 gのトラッカーが位置を割り出します。</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">3</div>
 <div class="step-content">
-<h3>LoRa無線送信</h3>
-<p>Loko AirがLoRa無線で座標パケットを送信します。最大20kmの直接的なポイント・ツー・ポイント通信です。SIMカードも、モバイルネットワークも、インターネットも必要ありません。</p>
+<h3>LoRa無線</h3>
+<p>Loko Airは位置をLoko Groundへ直接送ります。見通しのよい開けた場所で20 km以上で、木々、丘、建物の中では短くなります。</p>
 </div>
 </div>
 <div class="chain-step">
 <div class="step-num">4</div>
 <div class="step-content">
-<h3>Loko Ground受信機</h3>
-<p>LoRaパケットを受信し、座標を復号します。持ち歩けるポケットサイズの端末です。ここでもインターネットは不要です。</p>
+<h3>Loko Groundとスマートフォン</h3>
+<p>GroundがBluetoothでLokoアプリへ位置を渡し、アプリがオフラインマップに表示します。</p>
 </div>
 </div>
-<div class="chain-step">
-<div class="step-num">5</div>
-<div class="step-content">
-<h3>Bluetoothでスマートフォンへ</h3>
-<p>Loko GroundがBluetooth経由でスマートフォンへ座標を送信します。ローカルな近距離無線通信のため、インターネットは必要ありません。</p>
-</div>
-</div>
-<div class="chain-step">
-<div class="step-num">6</div>
-<div class="step-content">
-<h3>Lokoアプリ — オフライン地図</h3>
-<p>Lokoアプリが、端末にあらかじめダウンロードしたオフライン地図上に位置を表示します。リアルタイムの位置を、インターネットなしで確認できます。衛星から画面まで、すべてローカルで完結します。</p>
-</div>
-</div>
+<p><strong>限界：</strong></p>
+<ul>
+<li>トラッカーの無線範囲内にいる必要があります。範囲外ではLoko Airが本体に最大3100件の位置を記録し続けますが、リアルタイムでは見られません。</li>
+<li>60秒以内に測位できない場合、トラッカーは最後に判明した位置を送ります。アプリには各位置の受信時刻が表示されますが、古い位置だという警告は出ないため、時刻を確認してください。</li>
+<li>Groundはスマートフォンとの接続が切れている間も位置を保存しますが、再接続してもアプリには取り込まれません。</li>
+<li>電波が切れる前に、アプリで地図のエリアをオフラインで使えるようにしておきます。</li>
+</ul>
 </div>
 </div>
 <!-- FAQ -->
 <div class="content-block">
 <div class="container">
-<h2>GPSの仕組み：よくある質問</h2>
+<h2>インターネットなしのGPS：よくある質問</h2>
 <div class="faq-item">
-<h3>GPSの動作にインターネットは必要ですか？</h3>
-<p>いいえ。GPS衛星は一方向の無線通信で信号を常時送信しています。衛星がデバイスから何かを受信することはなく、インターネットも一切介しません。GPS受信機は、複数の衛星から受信した信号の到達時間差だけを基に位置を算出します。ただし、市販のGPSトラッカーの多くは、その位置情報をスマートフォンへ送信するために、インターネットまたは携帯電話回線を必要とします。</p>
+<h3>GPSはインターネットなしで動きますか？</h3>
+<p>はい。GPS受信機は衛星信号だけで位置を計算します。インターネットが必要なのは、地図の読み込み、初回測位の高速化、サーバー経由でのトラッカー位置の送信など、GPSの周辺機能だけです。</p>
 </div>
 <div class="faq-item">
-<h3>GPS衛星はいくつありますか？</h3>
-<p>最近の集計では、米国のGPS衛星群には31基の運用中の衛星があります。地球上のどの地点でも、通常は6～12基の衛星を同時に捕捉できます。GPSデバイスが3次元測位（緯度、経度、高度）を行うには、少なくとも4基の衛星が必要です。Lokoのような最新のトラッカーは、GPS、GLONASS（ロシア、24基）、Galileo（EU、30基）という複数の衛星群を利用するため、60基以上の衛星を同時に利用でき、より迅速かつ高精度に測位できます。</p>
+<h3>GPSは機内モードで動きますか？</h3>
+<p>ほとんどのスマートフォンで動きます。先に地図のエリアをダウンロードしないと、白紙の地図に現在地だけが表示されます。データ通信がないと、初回測位に時間がかかる場合があります。</p>
 </div>
 <div class="faq-item">
-<h3>GPSがオフラインで機能するのに、なぜ多くのGPSトラッカーには携帯電話回線が必要なのですか？</h3>
-<p>GPSはトラッカーに現在地を伝えます。では、その位置情報はどのようにスマートフォンへ届くのでしょうか？多くのトラッカーはSIMカードとモバイルデータ通信を使って座標をクラウドサーバーへ送信し、スマートフォンはインターネット経由でそのサーバーに問い合わせます。GPS自体はオフラインですが、伝送部分には携帯電話回線が使われています。Lokoでは携帯電話回線の代わりにLoRa無線を使用します。これはインターネットを必要としない直接無線リンクです。</p>
+<h3>GPSトラッカーが圏外で動かなくなるのはなぜですか？</h3>
+<p>ほとんどのトラッカーは、携帯ネットワークでサーバーに位置を送ります。トラッカー側に電波がないと、トラッカーのGPSが動いていても位置は届きません。</p>
 </div>
 <div class="faq-item">
-<h3>GPS、GLONASS、Galileoの違いは何ですか？</h3>
-<p>GPSは米国の衛星測位システム（31基）です。GLONASSはロシアの同等システム（24基）、Galileoは欧州連合のシステム（2024年時点で運用中の衛星30基）です。それぞれ異なる周波数と軌道面を使用します。Lokoのように3つすべてを同時に利用すると、捕捉できる衛星数が大幅に増え、測位精度の向上、初回測位時間の短縮、いずれかの衛星群の配置条件が悪い環境での追跡維持が可能になります。</p>
-</div>
-<div class="faq-item">
-<h3>Lokoはどのように完全オフラインで機能するのですか？</h3>
-<p>Lokoの信号経路では、どの段階でもインターネットを使用しません。GPS/GLONASS/Galileo衛星が無線信号を送信 → Loko Airの受信機が座標を算出 → Loko AirがLoRa無線（トランシーバーのような直接無線リンク）で座標を送信 → Loko GroundがLoRa信号を受信 → Loko GroundがBluetooth経由でスマートフォンへ座標を送信 → Lokoアプリがオフライン地図上に位置を表示します。衛星から画面まで、すべてローカル無線で完結します。</p>
+<h3>インターネットなしで使えるGPSトラッカーはありますか？</h3>
+<p>はい。Lokoなどの無線トラッカーは、SIMもサーバーも使わず、手元の受信機へ直接位置を送ります。その代わり、無線の範囲内にいる必要があります。</p>
 </div>
 </div>
 </div>
@@ -372,12 +348,7 @@
 <div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p>GPSはもともとオフラインで動作します。Lokoなら、衛星から画面まで追跡経路の残りもすべてオフラインとなり、インターネットは一切必要ありません。</p>
-<p><strong>Loko GPSトラッカー：完全オフラインの追跡システム。</strong></p>
-<p>製品の詳しい情報はこちら： <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
-<br/>
-<a class="cta-btn" href="/shop/">Lokoを購入 →</a>
-</div>
+<p>GPSはもともとオフラインで動きます。<strong>Lokoは残りの経路もオフラインに保ちます</strong>。SIMもサブスクリプションも不要です。</p><a class="cta-btn" href="/ja/gps-tracker-without-internet/">オフラインGPSトラッカーを見る →</a></div>
 </div>
 </div>
 </main>
