@@ -352,19 +352,63 @@ input[type="checkbox"]:focus {
     font-size: 0.92rem;
 }
 
-.switch-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.mode-options {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-self: start;
+    gap: 6px;
+    padding: 5px;
+    border-radius: 16px;
+    background: #f0eee9;
 }
 
-.mode-name {
+.mode-option {
+    position: relative;
+    display: inline-flex;
+}
+
+.mode-option[hidden] {
+    display: none;
+}
+
+/* The invisible radio covers its pill, so the pill is the click target. */
+.mode-option input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.mode-option input:disabled {
+    cursor: not-allowed;
+}
+
+.mode-option span {
+    padding: 9px 16px;
+    border-radius: 12px;
     color: var(--muted);
-    font-weight: 600;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
 }
 
-.mode-name.active {
+.mode-option input:checked+span {
+    background: white;
     color: var(--dark);
+    box-shadow: 0 4px 14px rgba(38, 38, 38, 0.08);
+}
+
+.mode-option input:focus-visible+span {
+    outline: 2px solid rgba(196, 138, 74, 0.35);
+    outline-offset: 2px;
+}
+
+.mode-option input:disabled+span {
+    cursor: not-allowed;
+    opacity: 0.55;
 }
 
 .toggle {
@@ -491,7 +535,9 @@ input[type="checkbox"]:focus {
 
 .tab-strip {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    /* Two tabs, or three when the firmware has Meshtastic mode */
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
     gap: 8px;
     padding: 6px;
     border-radius: 18px;
@@ -517,12 +563,48 @@ input[type="checkbox"]:focus {
     box-shadow: none;
 }
 
+.tab[hidden] {
+    display: none;
+}
+
+.mesh-note,
+.mesh-warning {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 0.92rem;
+}
+
+.mesh-note {
+    background: rgba(196, 138, 74, 0.12);
+    color: #7a4f1d;
+}
+
+.mesh-warning {
+    background: rgba(220, 38, 38, 0.08);
+    border: 1px solid rgba(220, 38, 38, 0.25);
+    color: #991b1b;
+    font-weight: 600;
+}
+
+.mesh-note[hidden],
+.mesh-warning[hidden] {
+    display: none;
+}
+
+#meshNodeId {
+    background: rgba(217, 220, 227, 0.4);
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+}
+
 .panel {
     padding: 28px 2px 8px;
 }
 
 .field+.field,
 .two-column+.field,
+.field+.two-column,
 .trace-box {
     margin-top: 22px;
 }
@@ -1130,6 +1212,10 @@ button:disabled:hover {
     .main-tab-strip,
     .two-column {
         grid-template-columns: 1fr;
+    }
+
+    .tab-strip {
+        grid-auto-flow: row;
     }
 
     /* device tabs stay side by side — only two of them, and they're short */

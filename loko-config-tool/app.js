@@ -33,8 +33,23 @@ const mainTabs = [...document.querySelectorAll(".main-tab")];
 const mainPanels = [...document.querySelectorAll(".main-panel")];
 const deviceTabs = [...document.querySelectorAll(".device-tab")];
 const devicePanels = [...document.querySelectorAll(".device-panel")];
-const modeToggle = document.getElementById("operatingModeToggle");
-const modeNames = [...document.querySelectorAll(".mode-name")];
+const radioModeInputs = [...document.querySelectorAll("input[name=\"radioMode\"]")];
+const meshtasticModeOption = document.getElementById("meshtasticModeOption");
+const meshtasticTab = document.querySelector(".settings-card .tab[data-tab=\"meshtastic\"]");
+const meshRegionSelect = document.getElementById("meshRegion");
+const meshPresetSelect = document.getElementById("meshPreset");
+const meshFrequencyOutput = document.getElementById("meshFrequency");
+const meshFrequencyCopy = document.getElementById("meshFrequencyCopy");
+const meshFrequencyNote = document.getElementById("meshFrequencyNote");
+const meshChannelInput = document.getElementById("meshChannel");
+const meshHopsSelect = document.getElementById("meshHops");
+const meshPowerRange = document.getElementById("meshPowerRange");
+const meshPowerValue = document.getElementById("meshPowerValue");
+const meshPowerNote = document.getElementById("meshPowerNote");
+const meshKeyInput = document.getElementById("meshKey");
+const meshKeyStatus = document.getElementById("meshKeyStatus");
+const meshKeyWarning = document.getElementById("meshKeyWarning");
+const meshNodeIdInput = document.getElementById("meshNodeId");
 const connectButton = document.getElementById("connectButton");
 const connectButtonLabel = document.getElementById("connectButtonLabel");
 const connectionLabel = document.getElementById("connectionLabel");
@@ -158,11 +173,57 @@ const NUMERIC_CONFIG_FIELDS = [
     "save_trace_every_n",
     "send_data_every_n",
     "is_lorawan_mode",
+    "is_meshtastic_mode",
+    "meshtastic_frequency_hz",
+    "meshtastic_hop_limit",
     "is_p2p_encrypted",
     "is_debug_output",
     "gnss_mode",
     "is_extended_packet"
 ];
+// Meshtastic region bands, copied from `regions[]` in meshtastic/firmware
+// src/mesh/RadioInterface.cpp at the latest stable release, v2.7.26.54e0d8d
+// (freq_start, freq_end and spacing in MHz, power_limit in dBm). Only the
+// regions that overlap the Loko Air's 860–926 MHz band are listed: the 433 MHz,
+// CN 470 MHz and 2.4 GHz regions are left out.
+const MESHTASTIC_REGIONS = [
+    { code: "US", freqStart: 902.0, freqEnd: 928.0, spacing: 0, powerLimit: 30 },
+    { code: "EU_868", freqStart: 869.4, freqEnd: 869.65, spacing: 0, powerLimit: 27 },
+    { code: "JP", freqStart: 920.5, freqEnd: 923.5, spacing: 0, powerLimit: 13 },
+    { code: "ANZ", freqStart: 915.0, freqEnd: 928.0, spacing: 0, powerLimit: 30 },
+    { code: "RU", freqStart: 868.7, freqEnd: 869.2, spacing: 0, powerLimit: 20 },
+    { code: "KR", freqStart: 920.0, freqEnd: 923.0, spacing: 0, powerLimit: 23 },
+    { code: "TW", freqStart: 920.0, freqEnd: 925.0, spacing: 0, powerLimit: 27 },
+    { code: "IN", freqStart: 865.0, freqEnd: 867.0, spacing: 0, powerLimit: 30 },
+    { code: "NZ_865", freqStart: 864.0, freqEnd: 868.0, spacing: 0, powerLimit: 36 },
+    { code: "TH", freqStart: 920.0, freqEnd: 925.0, spacing: 0, powerLimit: 27 },
+    { code: "UA_868", freqStart: 868.0, freqEnd: 868.6, spacing: 0, powerLimit: 14 },
+    { code: "MY_919", freqStart: 919.0, freqEnd: 924.0, spacing: 0, powerLimit: 27 },
+    { code: "SG_923", freqStart: 917.0, freqEnd: 925.0, spacing: 0, powerLimit: 20 },
+    { code: "PH_868", freqStart: 868.0, freqEnd: 869.4, spacing: 0, powerLimit: 14 },
+    { code: "PH_915", freqStart: 915.0, freqEnd: 918.0, spacing: 0, powerLimit: 24 },
+    { code: "KZ_863", freqStart: 863.0, freqEnd: 868.0, spacing: 0, powerLimit: 30 },
+    { code: "NP_865", freqStart: 865.0, freqEnd: 868.0, spacing: 0, powerLimit: 30 },
+    { code: "BR_902", freqStart: 902.0, freqEnd: 907.5, spacing: 0, powerLimit: 30 }
+];
+// Preset names as the Air firmware prints them (Meshtastic's display names),
+// with the bandwidth from modemPresetToParams() in src/mesh/MeshRadio.h.
+const MESHTASTIC_PRESETS = [
+    { name: "LongFast", bandwidthKHz: 250 },
+    { name: "LongSlow", bandwidthKHz: 125 },
+    { name: "LongMod", bandwidthKHz: 125 },
+    { name: "LongTurbo", bandwidthKHz: 500 },
+    { name: "MediumSlow", bandwidthKHz: 250 },
+    { name: "MediumFast", bandwidthKHz: 250 },
+    { name: "ShortSlow", bandwidthKHz: 250 },
+    { name: "ShortFast", bandwidthKHz: 250 },
+    { name: "ShortTurbo", bandwidthKHz: 500 }
+];
+const MESHTASTIC_DEFAULT_REGION = "EU_868";
+const MESHTASTIC_DEFAULT_PRESET = "LongFast";
+const MESHTASTIC_DEFAULT_HOP_LIMIT = 3;
+const MESHTASTIC_DEFAULT_KEY_BASE64 = "AQ==";
+const MESHTASTIC_CHANNEL_NAME_MAX_LENGTH = 11;
 
 let connectedPort = null;
 let reader = null;
@@ -497,6 +558,336 @@ function sanitizeHexFieldInput(input, maxLength) {
     }
 }
 
+// ── Meshtastic mode ──────────────────────────────────────────────────────────
+
+function findMeshtasticRegion(code) {
+    return MESHTASTIC_REGIONS.find((region) => region.code === code) || null;
+}
+
+function findMeshtasticPreset(name) {
+    const normalized = String(name || "").trim().toLowerCase();
+    return MESHTASTIC_PRESETS.find((preset) => preset.name.toLowerCase() === normalized) || null;
+}
+
+// djb2, as hash() in Meshtastic's RadioInterface.cpp (uint32 arithmetic).
+function meshtasticChannelHash(name) {
+    let hash = 5381;
+    for (const byte of encoder.encode(name)) {
+        hash = (Math.imul(hash, 33) + byte) >>> 0;
+    }
+    return hash;
+}
+
+// Mirrors RadioInterface::applyModemConfig() for a node whose frequency slot is
+// left at 0: the slot is the hash of the channel name (the preset name when the
+// name is empty) modulo the number of slots that fit in the region. The slot
+// count is computed in float32, as the firmware does, so floor() sees the same
+// value. The centre frequency is computed in whole Hz.
+function computeMeshtasticFrequency(regionCode, presetName, channelName) {
+    const region = findMeshtasticRegion(regionCode);
+    const preset = findMeshtasticPreset(presetName);
+    if (!region || !preset) {
+        return { error: "unknown", region, preset };
+    }
+
+    const f32 = Math.fround;
+    const spanMHz = f32(f32(region.freqEnd) - f32(region.freqStart));
+    const bandwidthMHz = f32(preset.bandwidthKHz / 1000);
+    // Meshtastic falls back to LongFast when the preset is wider than the region.
+    if (spanMHz < bandwidthMHz) {
+        return { error: "too-narrow", region, preset };
+    }
+
+    const slotCount = Math.floor(f32(spanMHz / f32(f32(region.spacing) + bandwidthMHz)));
+    const effectiveChannelName = channelName || preset.name;
+    const slot = meshtasticChannelHash(effectiveChannelName) % slotCount;
+    const frequencyHz = Math.round(region.freqStart * 1000000) +
+        (preset.bandwidthKHz * 500) +
+        (slot * preset.bandwidthKHz * 1000);
+
+    return { region, preset, channelName: effectiveChannelName, slot, slotCount, frequencyHz };
+}
+
+function formatMegahertz(hz) {
+    return `${(hz / 1000000).toFixed(4).replace(/0+$/, "").replace(/\.$/, "")} MHz`;
+}
+
+function sanitizeMeshtasticChannelName(raw) {
+    // The firmware takes printable ASCII without spaces.
+    return String(raw || "").replace(/[^\x21-\x7e]/g, "").slice(0, MESHTASTIC_CHANNEL_NAME_MAX_LENGTH);
+}
+
+function bytesToHex(bytes) {
+    return [...bytes].map((byte) => byte.toString(16).padStart(2, "0")).join("").toUpperCase();
+}
+
+function bytesToBase64(bytes) {
+    return btoa(String.fromCharCode(...bytes));
+}
+
+// Meshtastic apps show a channel key in base64: "AQ==" (the 1-byte value 1)
+// is the default key, "AA==" no encryption, 16 or 32 bytes an AES key.
+function parseMeshtasticKey(text) {
+    const value = String(text || "").trim();
+    if (!value) {
+        return { empty: true };
+    }
+
+    const base64 = value.replace(/-/g, "+").replace(/_/g, "/").replace(/=+$/, "");
+    if (!/^[A-Za-z0-9+/]+$/.test(base64) || base64.length % 4 === 1) {
+        return { error: "The channel key is not valid base64." };
+    }
+
+    const bytes = Uint8Array.from(atob(base64.padEnd(Math.ceil(base64.length / 4) * 4, "=")), (char) => char.charCodeAt(0));
+    if (![1, 16, 32].includes(bytes.length)) {
+        return { error: `The channel key is ${bytes.length} bytes long. Meshtastic keys are 1, 16 or 32 bytes.` };
+    }
+
+    return { bytes };
+}
+
+// `info` prints the key as default | none | simpleN | aes128 | aes256. Only the
+// 1-byte keys can be shown again; an AES key stays on the device.
+function meshtasticKeyBytesFromInfo(kind) {
+    if (kind === "none") {
+        return Uint8Array.of(0);
+    }
+
+    if (kind === "default") {
+        return Uint8Array.of(1);
+    }
+
+    const simple = /^simple(\d+)$/.exec(kind || "");
+    if (simple && Number(simple[1]) <= 254) {
+        return Uint8Array.of(Number(simple[1]) + 1);
+    }
+
+    return null;
+}
+
+function meshtasticKeyKindFromBytes(bytes) {
+    if (bytes.length === 1) {
+        return bytes[0] === 0 ? "none" : bytes[0] === 1 ? "default" : `simple${bytes[0] - 1}`;
+    }
+
+    return bytes.length === 16 ? "aes128" : "aes256";
+}
+
+function describeMeshtasticKey(kind) {
+    if (kind === "none") {
+        return "no encryption";
+    }
+
+    if (kind === "default") {
+        return "the default key";
+    }
+
+    if (/^simple\d+$/.test(kind || "")) {
+        return `simple key ${kind.slice(6)}`;
+    }
+
+    return kind === "aes128" ? "an AES-128 key" : kind === "aes256" ? "an AES-256 key" : "an unknown key";
+}
+
+// The default key and the "simple" keys derived from it are published in the
+// Meshtastic source, and "none" sends positions in the clear.
+function describePublicMeshtasticKeyRisk(kind) {
+    if (kind === "default") {
+        return "Default key: anyone with Meshtastic can read this tracker's position. Paste the key of a private channel to keep it to your own nodes.";
+    }
+
+    if (kind === "none") {
+        return "No encryption: anyone with Meshtastic can read this tracker's position.";
+    }
+
+    if (/^simple\d+$/.test(kind || "")) {
+        return `Simple key ${kind.slice(6)} is derived from the public default key: anyone with Meshtastic can read this tracker's position.`;
+    }
+
+    return "";
+}
+
+function isMeshtasticSupported() {
+    return deviceConfig.is_meshtastic_mode !== null && deviceConfig.is_meshtastic_mode !== undefined;
+}
+
+function getMeshtasticFrequencyFromControls() {
+    return computeMeshtasticFrequency(meshRegionSelect.value, meshPresetSelect.value, meshChannelInput.value);
+}
+
+function syncMeshtasticFrequencyUi() {
+    const result = getMeshtasticFrequencyFromControls();
+    const notes = [];
+
+    if (result.error) {
+        meshFrequencyOutput.value = "—";
+        meshFrequencyCopy.textContent = "";
+        if (result.error === "too-narrow") {
+            notes.push(
+                `${result.region.code} is ${formatMegahertz((result.region.freqEnd - result.region.freqStart) * 1000000)} wide, ` +
+                `too narrow for ${result.preset.name} (${result.preset.bandwidthKHz} kHz). ` +
+                "Meshtastic nodes fall back to LongFast there, so pick another preset."
+            );
+        }
+    } else {
+        meshFrequencyOutput.value = formatMegahertz(result.frequencyHz);
+        meshFrequencyCopy.textContent =
+            `Slot ${result.slot + 1} of ${result.slotCount}, picked from the channel name "${result.channelName}" ` +
+            "the way Meshtastic nodes pick it when their frequency slot is left at 0.";
+
+        const minHz = Number(frequencyRange.min) * 1000000;
+        const maxHz = Number(frequencyRange.max) * 1000000;
+        if (result.frequencyHz < minHz || result.frequencyHz > maxHz) {
+            notes.push(`${formatMegahertz(result.frequencyHz)} is outside the Loko Air's ${frequencyRange.min}–${frequencyRange.max} MHz range.`);
+        }
+
+        const deviceHz = deviceConfig.meshtastic_frequency_hz;
+        if (deviceHz !== null && deviceHz !== undefined && deviceHz !== result.frequencyHz) {
+            notes.push(`The tracker is set to ${formatMegahertz(deviceHz)}. Saving sets it to ${formatMegahertz(result.frequencyHz)}.`);
+        }
+    }
+
+    meshFrequencyNote.textContent = notes.join(" ");
+    meshFrequencyNote.hidden = notes.length === 0;
+}
+
+function syncMeshtasticPowerNote() {
+    const region = findMeshtasticRegion(meshRegionSelect.value);
+    const power = Number(powerRange.value);
+    const overLimit = region && power > region.powerLimit;
+    meshPowerNote.textContent = overLimit
+        ? `Meshtastic allows at most ${region.powerLimit} dBm in ${region.code}. Set ${region.powerLimit} dBm or less.`
+        : "";
+    meshPowerNote.hidden = !overLimit;
+}
+
+function syncMeshtasticKeyUi() {
+    const deviceKind = deviceConfig.meshtastic_key;
+    const entered = parseMeshtasticKey(meshKeyInput.value);
+    let statusText = "";
+    let effectiveKind = null;
+
+    if (entered.error) {
+        statusText = entered.error;
+    } else if (entered.bytes) {
+        effectiveKind = meshtasticKeyKindFromBytes(entered.bytes);
+    } else if (deviceKind) {
+        effectiveKind = deviceKind;
+    }
+
+    if (!entered.error && deviceKind) {
+        const deviceBytes = meshtasticKeyBytesFromInfo(deviceKind);
+        statusText = deviceBytes
+            ? `On the tracker: ${describeMeshtasticKey(deviceKind)} (${bytesToBase64(deviceBytes)}).`
+            : `On the tracker: ${describeMeshtasticKey(deviceKind)}, which stays hidden.`;
+    }
+
+    meshKeyStatus.textContent = statusText;
+    // Only touch the live region when the warning changes, so screen readers
+    // do not repeat it on every keystroke.
+    const warning = describePublicMeshtasticKeyRisk(effectiveKind);
+    if (meshKeyWarning.textContent !== warning) {
+        meshKeyWarning.textContent = warning;
+    }
+    meshKeyWarning.hidden = !warning;
+}
+
+function syncMeshtasticUi() {
+    const preset = findMeshtasticPreset(meshPresetSelect.value);
+    meshChannelInput.placeholder = preset ? preset.name : "";
+    syncMeshtasticFrequencyUi();
+    syncMeshtasticPowerNote();
+    syncMeshtasticKeyUi();
+}
+
+// The tracker stores a frequency, not a region, so the region is worked out
+// from the frequency it reports. The selected region wins when it fits, since
+// several regions share a band (TW and TH, for one).
+function inferMeshtasticRegion(frequencyHz, presetName, channelName) {
+    const matches = MESHTASTIC_REGIONS.filter((region) =>
+        computeMeshtasticFrequency(region.code, presetName, channelName).frequencyHz === frequencyHz);
+
+    if (matches.some((region) => region.code === meshRegionSelect.value)) {
+        return meshRegionSelect.value;
+    }
+
+    return matches.length > 0 ? matches[0].code : null;
+}
+
+function applyMeshtasticConfigToControls() {
+    if (deviceConfig.meshtastic_node_id !== null) {
+        meshNodeIdInput.value = deviceConfig.meshtastic_node_id;
+    }
+
+    const preset = findMeshtasticPreset(deviceConfig.meshtastic_preset);
+    if (preset) {
+        meshPresetSelect.value = preset.name;
+    }
+
+    if (deviceConfig.meshtastic_channel !== null) {
+        meshChannelInput.value = deviceConfig.meshtastic_channel;
+    }
+
+    if (deviceConfig.meshtastic_hop_limit !== null) {
+        meshHopsSelect.value = String(clampInteger(deviceConfig.meshtastic_hop_limit, 0, 7));
+    }
+
+    if (deviceConfig.meshtastic_key !== null) {
+        const keyBytes = meshtasticKeyBytesFromInfo(deviceConfig.meshtastic_key);
+        meshKeyInput.value = keyBytes ? bytesToBase64(keyBytes) : "";
+        meshKeyInput.placeholder = keyBytes
+            ? MESHTASTIC_DEFAULT_KEY_BASE64
+            : `The current ${describeMeshtasticKey(deviceConfig.meshtastic_key).replace(/^an /, "")} is hidden. Enter a new key to change it, or leave the field empty to keep it.`;
+    }
+
+    if (preset && deviceConfig.meshtastic_frequency_hz !== null && deviceConfig.meshtastic_channel !== null) {
+        const region = inferMeshtasticRegion(deviceConfig.meshtastic_frequency_hz, preset.name, deviceConfig.meshtastic_channel);
+        if (region) {
+            meshRegionSelect.value = region;
+        }
+    }
+
+    syncMeshtasticUi();
+}
+
+function syncMeshtasticSupportUi() {
+    const supported = isMeshtasticSupported();
+    meshtasticModeOption.hidden = !supported;
+    meshtasticTab.hidden = !supported;
+
+    if (!supported && getRadioMode() === "meshtastic") {
+        setRadioMode("p2p");
+    }
+}
+
+function getMeshtasticSaveProblem() {
+    const frequency = getMeshtasticFrequencyFromControls();
+    if (frequency.error === "too-narrow") {
+        return `${frequency.preset.name} does not fit in ${frequency.region.code}. Pick another Meshtastic preset.`;
+    }
+
+    if (frequency.error) {
+        return "Pick a Meshtastic region and preset.";
+    }
+
+    const key = parseMeshtasticKey(meshKeyInput.value);
+    if (key.error) {
+        return key.error;
+    }
+
+    return null;
+}
+
+function populateMeshtasticSelects() {
+    meshRegionSelect.replaceChildren(...MESHTASTIC_REGIONS.map((region) =>
+        new Option(`${region.code} (${region.freqStart}–${region.freqEnd} MHz)`, region.code)));
+    meshPresetSelect.replaceChildren(...MESHTASTIC_PRESETS.map((preset) => new Option(preset.name, preset.name)));
+    meshRegionSelect.value = MESHTASTIC_DEFAULT_REGION;
+    meshPresetSelect.value = MESHTASTIC_DEFAULT_PRESET;
+    meshKeyInput.value = MESHTASTIC_DEFAULT_KEY_BASE64;
+    meshKeyInput.placeholder = MESHTASTIC_DEFAULT_KEY_BASE64;
+}
+
 function createEmptyDeviceConfig() {
     return {
         id_1: null,
@@ -507,6 +898,13 @@ function createEmptyDeviceConfig() {
         save_trace_every_n: null,
         send_data_every_n: null,
         is_lorawan_mode: null,
+        is_meshtastic_mode: null,
+        meshtastic_node_id: null,
+        meshtastic_frequency_hz: null,
+        meshtastic_preset: null,
+        meshtastic_channel: null,
+        meshtastic_hop_limit: null,
+        meshtastic_key: null,
         is_p2p_encrypted: null,
         is_debug_output: null,
         gnss_mode: null,
@@ -526,6 +924,14 @@ function parseNumericConfigField(buffer, fieldName) {
 
 function parseStringConfigField(buffer, fieldName) {
     const pattern = new RegExp(`(?:\\.)?${fieldName}\\s*=\\s*([^\\r\\n]+)`);
+    const match = buffer.match(pattern);
+    return match ? match[1].trim() : null;
+}
+
+// Stays on the field's own line, so an empty value (`.meshtastic_channel =`)
+// reads as "" instead of running on into the next line.
+function parseLineConfigField(buffer, fieldName) {
+    const pattern = new RegExp(`\\.${fieldName}[ \\t]*=[ \\t]*([^\\r\\n]*)`);
     const match = buffer.match(pattern);
     return match ? match[1].trim() : null;
 }
@@ -1966,10 +2372,6 @@ function syncConfigFieldToControl(field, value) {
         case "is_extended_packet":
             extendedPacketToggle.checked = Boolean(value);
             break;
-        case "is_lorawan_mode":
-            modeToggle.checked = Boolean(value);
-            syncModeToggle();
-            break;
         case "gnss_mode":
             gnssModeSelect.value = String(clampInteger(value, 0, GNSS_MODE_MAX));
             break;
@@ -2022,6 +2424,24 @@ function parseDeviceConfig(buffer) {
         deviceConfig.sleep_window = sleepWindow;
         syncConfigFieldToControl("sleep_window", sleepWindow);
     }
+
+    ["meshtastic_node_id", "meshtastic_preset", "meshtastic_channel", "meshtastic_key"].forEach((field) => {
+        const value = parseLineConfigField(buffer, field);
+        if (value !== null) {
+            deviceConfig[field] = value;
+        }
+    });
+
+    // Firmware without Meshtastic mode prints no `.is_meshtastic_mode`; the
+    // option is hidden again once such an `info` dump has been read in full.
+    if (isMeshtasticSupported()) {
+        syncMeshtasticSupportUi();
+        applyMeshtasticConfigToControls();
+    }
+
+    if (deviceConfig.is_lorawan_mode !== null || isMeshtasticSupported()) {
+        setRadioMode(deviceConfig.is_meshtastic_mode ? "meshtastic" : deviceConfig.is_lorawan_mode ? "lorawan" : "p2p");
+    }
 }
 
 function paintRange(input) {
@@ -2037,6 +2457,11 @@ function syncOutputs() {
     powerValue.value = `${powerRange.value} dBm`;
     paintRange(frequencyRange);
     paintRange(powerRange);
+    // The Meshtastic panel's TX power is a second view of the same `set tx` value.
+    meshPowerRange.value = powerRange.value;
+    meshPowerValue.value = powerValue.value;
+    paintRange(meshPowerRange);
+    syncMeshtasticPowerNote();
     updateTimingSummary();
 }
 
@@ -2109,13 +2534,25 @@ function initFirmwareUpdater() {
     }
 }
 
+// P2P, LoRaWAN and Meshtastic are exclusive radio modes on the Air.
+function getRadioMode() {
+    const checked = radioModeInputs.find((input) => input.checked);
+    return checked ? checked.value : "p2p";
+}
+
+function setRadioMode(mode) {
+    radioModeInputs.forEach((input) => {
+        input.checked = input.value === mode;
+    });
+    syncRadioModeUi();
+}
+
 function syncModeTabsAvailability() {
-    const lorawan = modeToggle.checked;
+    const mode = getRadioMode();
     const connected = Boolean(connectedPort);
 
     configTabs.forEach((tab) => {
-        const tabName = tab.dataset.tab;
-        const shouldDisable = !connected || ((!lorawan && tabName === "lorawan") || (lorawan && tabName === "p2p"));
+        const shouldDisable = !connected || tab.dataset.tab !== mode;
 
         tab.disabled = shouldDisable;
         tab.classList.toggle("is-disabled", shouldDisable);
@@ -2123,25 +2560,9 @@ function syncModeTabsAvailability() {
     });
 }
 
-function syncModeToggle() {
-    const lorawan = modeToggle.checked;
-    modeNames[0].classList.toggle("active", !lorawan);
-    modeNames[1].classList.toggle("active", lorawan);
+function syncRadioModeUi() {
     syncModeTabsAvailability();
-    activateTab(lorawan ? "lorawan" : "p2p");
-}
-
-function syncModeFromTab(tabName) {
-    if (tabName === "p2p") {
-        modeToggle.checked = false;
-    }
-
-    if (tabName === "lorawan") {
-        modeToggle.checked = true;
-    }
-
-    modeNames[0].classList.toggle("active", !modeToggle.checked);
-    modeNames[1].classList.toggle("active", modeToggle.checked);
+    activateTab(getRadioMode());
 }
 
 function setConnectionState(connected, hint) {
@@ -2268,7 +2689,9 @@ function buildSaveCommands() {
     const region = loraWanRegionSelect.value;
     const p2pEncrypted = Number(p2pEncryptedToggle.checked);
     const isExtendedPacket = Number(extendedPacketToggle.checked);
-    const lorawanMode = Number(modeToggle.checked);
+    const radioMode = getRadioMode();
+    const lorawanMode = Number(radioMode === "lorawan");
+    const meshtasticMode = Number(radioMode === "meshtastic");
 
     const commands = [];
     const updatedConfigFields = {};
@@ -2343,7 +2766,7 @@ function buildSaveCommands() {
     let appKey = "";
     let devEuiChanged = false;
     let appEuiChanged = false;
-    if (modeToggle.checked) {
+    if (lorawanMode) {
         devEui = devEuiInput.value.trim().toUpperCase();
         appEui = appEuiInput.value.trim().toUpperCase();
         appKey = appKeyInput.value.trim();
@@ -2376,6 +2799,52 @@ function buildSaveCommands() {
     } else if (lorawanModeChanged) {
         commands.push(`enable lorawan mode ${lorawanMode}`);
         updatedConfigFields.is_lorawan_mode = lorawanMode;
+    }
+
+    // Older firmware has no Meshtastic commands at all.
+    if (isMeshtasticSupported()) {
+        if (meshtasticMode) {
+            const frequency = getMeshtasticFrequencyFromControls();
+            if (differsFromConfig("meshtastic_frequency_hz", frequency.frequencyHz)) {
+                commands.push(`set mesh-freq ${frequency.frequencyHz}`);
+                updatedConfigFields.meshtastic_frequency_hz = frequency.frequencyHz;
+            }
+
+            const presetName = frequency.preset.name;
+            if (differsFromConfig("meshtastic_preset", presetName, normalizeConfigString)) {
+                commands.push(`set mesh-preset ${presetName}`);
+                updatedConfigFields.meshtastic_preset = presetName;
+            }
+
+            // Case sensitive, and empty means "use the preset name".
+            const channelName = sanitizeMeshtasticChannelName(meshChannelInput.value);
+            if (differsFromConfig("meshtastic_channel", channelName)) {
+                commands.push(channelName ? `set mesh-channel ${channelName}` : "set mesh-channel");
+                updatedConfigFields.meshtastic_channel = channelName;
+            }
+
+            const hopLimit = Number(meshHopsSelect.value);
+            if (differsFromConfig("meshtastic_hop_limit", hopLimit)) {
+                commands.push(`set mesh-hops ${hopLimit}`);
+                updatedConfigFields.meshtastic_hop_limit = hopLimit;
+            }
+
+            // An AES key on the device is never printed, so a key typed over it is
+            // always sent; a 1-byte key is only sent when it changes.
+            const key = parseMeshtasticKey(meshKeyInput.value);
+            if (key.bytes) {
+                const deviceKeyBytes = meshtasticKeyBytesFromInfo(deviceConfig.meshtastic_key);
+                if (!deviceKeyBytes || bytesToHex(deviceKeyBytes) !== bytesToHex(key.bytes)) {
+                    commands.push(`set mesh-key ${bytesToHex(key.bytes)}`);
+                    updatedConfigFields.meshtastic_key = meshtasticKeyKindFromBytes(key.bytes);
+                }
+            }
+        }
+
+        if (differsFromConfig("is_meshtastic_mode", meshtasticMode)) {
+            commands.push(`enable meshtastic mode ${meshtasticMode}`);
+            updatedConfigFields.is_meshtastic_mode = meshtasticMode;
+        }
     }
 
     if (commands.length === 0) {
@@ -2609,6 +3078,10 @@ async function requestDeviceInfo({ timeoutMs = DEVICE_INFO_TIMEOUT_MS, alertOnTi
 
         const statusText = resolveDeviceInfoStatus(deviceInfoState.buffer);
         if (statusText) {
+            // The whole dump is in: only now is a missing `.is_meshtastic_mode`
+            // proof of firmware without Meshtastic mode.
+            syncMeshtasticSupportUi();
+            syncMeshtasticUi();
             setConnectionState(true, statusText);
             return true;
         }
@@ -2728,8 +3201,14 @@ function resetForm() {
     devEuiInput.value = "";
     appEuiInput.value = "";
     appKeyInput.value = "";
-    modeToggle.checked = false;
-    syncModeToggle();
+    meshRegionSelect.value = MESHTASTIC_DEFAULT_REGION;
+    meshPresetSelect.value = MESHTASTIC_DEFAULT_PRESET;
+    meshChannelInput.value = "";
+    meshHopsSelect.value = String(MESHTASTIC_DEFAULT_HOP_LIMIT);
+    meshKeyInput.value = MESHTASTIC_DEFAULT_KEY_BASE64;
+    meshKeyInput.placeholder = MESHTASTIC_DEFAULT_KEY_BASE64;
+    setRadioMode("p2p");
+    syncMeshtasticUi();
     syncOutputs();
     syncP2pEncryptionKeyUi();
     syncSleepWindowUi();
@@ -2738,6 +3217,20 @@ function resetForm() {
 
 frequencyRange.addEventListener("input", syncOutputs);
 powerRange.addEventListener("input", syncOutputs);
+meshPowerRange.addEventListener("input", () => {
+    powerRange.value = meshPowerRange.value;
+    syncOutputs();
+});
+meshRegionSelect.addEventListener("change", syncMeshtasticUi);
+meshPresetSelect.addEventListener("change", syncMeshtasticUi);
+meshChannelInput.addEventListener("input", () => {
+    const sanitized = sanitizeMeshtasticChannelName(meshChannelInput.value);
+    if (sanitized !== meshChannelInput.value) {
+        meshChannelInput.value = sanitized;
+    }
+    syncMeshtasticFrequencyUi();
+});
+meshKeyInput.addEventListener("input", syncMeshtasticKeyUi);
 wakeUpPeriodInput.addEventListener("input", () => { updateTimingSummary(); updateBatteryEstimate(); });
 wakeUpPeriodInput.addEventListener("change", () => {
     getWakeUpPeriodSeconds();
@@ -3024,23 +3517,13 @@ configTabs.forEach((tab) => {
             return;
         }
 
-        if (tab.dataset.tab === "p2p") {
-            modeToggle.checked = false;
-            syncModeToggle();
-            return;
-        }
-
-        if (tab.dataset.tab === "lorawan") {
-            modeToggle.checked = true;
-            syncModeToggle();
-            return;
-        }
-
-        syncModeFromTab(tab.dataset.tab);
+        setRadioMode(tab.dataset.tab);
     });
 });
 
-modeToggle.addEventListener("change", syncModeToggle);
+radioModeInputs.forEach((input) => {
+    input.addEventListener("change", syncRadioModeUi);
+});
 
 connectButton.addEventListener("click", async () => {
     if (connectedPort) {
@@ -3074,6 +3557,14 @@ saveButton.addEventListener("click", async () => {
     if (getSleepWindowValue() === null) {
         saveStatus.textContent = "Sleep window needs a valid start and end time (HH:MM UTC), and they must differ.";
         return;
+    }
+
+    if (getRadioMode() === "meshtastic") {
+        const meshtasticProblem = getMeshtasticSaveProblem();
+        if (meshtasticProblem) {
+            saveStatus.textContent = meshtasticProblem;
+            return;
+        }
     }
 
     const { commands, updatedConfigFields } = buildSaveCommands();
@@ -3181,8 +3672,10 @@ if ("serial" in navigator) {
     }).catch(() => { });
 }
 
+populateMeshtasticSelects();
+syncMeshtasticUi();
 syncOutputs();
-syncModeToggle();
+syncRadioModeUi();
 syncIdFormatUi();
 syncP2pEncryptionKeyUi();
 syncSleepWindowUi();

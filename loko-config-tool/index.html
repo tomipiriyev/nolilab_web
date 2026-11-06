@@ -53,7 +53,7 @@
 }
 </script>
 <link href="/css/leaflet-1.9.4.css" rel="stylesheet"/>
-<link href="styles.css?v=20260913a" rel="stylesheet"/>
+<link href="styles.css?v=20261106" rel="stylesheet"/>
 <style>
   /* ── Site design tokens (light theme, matches nolilab site chrome) ── */
   :root {
@@ -376,8 +376,9 @@
   .mode-fields-row { gap: 10px; }
   .mode-summary { font-size: 0.75rem; padding: 7px 10px; border-radius: 10px; }
   .mode-header { font-size: 0.8rem; }
-  .switch-row { gap: 8px; }
-  .mode-name { font-size: 0.82rem; }
+  .mode-options { gap: 4px; padding: 4px; border-radius: 12px; }
+  .mode-option span { padding: 6px 12px; font-size: 0.82rem; border-radius: 9px; }
+  .mesh-note, .mesh-warning { font-size: 0.74rem; padding: 7px 10px; border-radius: 10px; }
   .mode-switch-group { gap: 6px; }
   .inline-input-group { gap: 6px; }
 
@@ -387,7 +388,8 @@
   .panel { padding: 14px 2px 4px; }
 
   .field + .field,
-  .two-column + .field { margin-top: 12px; }
+  .two-column + .field,
+  .field + .two-column { margin-top: 12px; }
   .field label, .mode-header { font-size: 0.78rem; }
   .field-copy { font-size: 0.74rem; margin-top: 6px; }
   .field-head output { font-size: 0.82rem; }
@@ -605,14 +607,11 @@
 </div>
 </div>
 <div class="mode-switch-group">
-<div class="mode-header">Transmit Mode</div>
-<div class="switch-row">
-<span class="mode-name active">P2P Mode</span>
-<label class="toggle">
-<input aria-label="Switch between P2P and LoRaWAN" id="operatingModeToggle" type="checkbox"/>
-<span class="toggle-track"></span>
-</label>
-<span class="mode-name">LoRaWAN Mode</span>
+<div class="mode-header" id="radioModeLabel">Transmit Mode</div>
+<div aria-labelledby="radioModeLabel" class="mode-options" role="radiogroup">
+<label class="mode-option"><input checked="" name="radioMode" type="radio" value="p2p"/><span>P2P</span></label>
+<label class="mode-option"><input name="radioMode" type="radio" value="lorawan"/><span>LoRaWAN</span></label>
+<label class="mode-option" hidden="" id="meshtasticModeOption"><input name="radioMode" type="radio" value="meshtastic"/><span>Meshtastic</span></label>
 </div>
 </div>
 </section>
@@ -620,6 +619,7 @@
 <div aria-label="Configuration sections" class="tab-strip" role="tablist">
 <button aria-selected="true" class="tab is-active" data-tab="p2p" role="tab" type="button">P2P Mode</button>
 <button aria-selected="false" class="tab" data-tab="lorawan" role="tab" type="button">LoRaWAN Mode</button>
+<button aria-selected="false" class="tab" data-tab="meshtastic" hidden="" role="tab" type="button">Meshtastic Mode</button>
 </div>
 <div class="panel is-active" data-panel="p2p">
 <div class="field">
@@ -708,6 +708,71 @@
 <div class="field">
 <label for="appKey">AppKey</label>
 <input autocomplete="off" id="appKey" inputmode="text" maxlength="32" placeholder="The current key is hidden. Please enter a new key to update it, or leave the field empty to retain the existing key." spellcheck="false" type="text" value=""/>
+</div>
+</div>
+<div class="panel" data-panel="meshtastic" hidden="">
+<div class="two-column">
+<div class="field">
+<label for="meshRegion">Region</label>
+<select id="meshRegion"></select>
+</div>
+<div class="field">
+<label for="meshPreset">Preset</label>
+<select id="meshPreset"></select>
+</div>
+</div>
+<div class="field">
+<div class="field-head">
+<label for="meshFrequency">Frequency</label>
+<output id="meshFrequency"></output>
+</div>
+<p class="field-copy" id="meshFrequencyCopy"></p>
+<p class="mesh-note" hidden="" id="meshFrequencyNote"></p>
+</div>
+<div class="two-column">
+<div class="field">
+<label for="meshChannel">Channel Name</label>
+<input autocomplete="off" id="meshChannel" maxlength="11" placeholder="LongFast" spellcheck="false" type="text" value=""/>
+<p class="field-copy">Case sensitive, up to 11 characters, no spaces. Leave it empty to use the preset name, as Meshtastic does.</p>
+</div>
+<div class="field">
+<label for="meshHops">Hop Limit</label>
+<select id="meshHops">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option selected="" value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+</select>
+<p class="field-copy">How many times Meshtastic nodes relay each position. At 0, only nodes in direct range receive it.</p>
+</div>
+</div>
+<div class="field">
+<div class="field-head">
+<label for="meshPowerRange">TX Power</label>
+<output for="meshPowerRange" id="meshPowerValue">14 dBm</output>
+</div>
+<input id="meshPowerRange" max="22" min="2" type="range" value="14"/>
+<p class="field-copy">The same setting as the P2P TX power.</p>
+<p class="mesh-note" hidden="" id="meshPowerNote"></p>
+</div>
+<div class="field p2p-key-block">
+<label for="meshKey">Channel Key</label>
+<input autocomplete="off" id="meshKey" maxlength="64" spellcheck="false" type="text" value=""/>
+<p class="field-copy">Paste the key in the base64 form the Meshtastic app shows for the channel: AQ== is the default key, AA== is no encryption, or a 16- or 32-byte AES key.</p>
+<p class="field-copy" id="meshKeyStatus"></p>
+<p aria-live="polite" class="mesh-warning" hidden="" id="meshKeyWarning"></p>
+</div>
+<div class="field">
+<label for="meshNodeId">Node ID</label>
+<input id="meshNodeId" readonly="" spellcheck="false" type="text" value=""/>
+<p class="field-copy">Fixed by the tracker's chip. Meshtastic apps list the tracker as "Loko" followed by the last four characters of this ID.</p>
+</div>
+<div class="field">
+<p class="field-copy">In this mode the tracker only transmits. It does not relay or receive Meshtastic messages.</p>
 </div>
 </div>
 <footer class="actions">
@@ -980,7 +1045,7 @@
 </main>
 <div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/accessories/">Accessories</a></li><li><a href="/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/battery-life/">Battery Life</a></li><li><a href="/blog/">Blog</a></li><li><a href="/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/chirpstack/">ChirpStack</a></li><li><a href="/contact/">Contact</a></li><li><a href="/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/farms/">Farm GPS</a></li><li><a href="/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/gps/">GPS & LoRa</a></li><li><a href="/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/hiking/">Hiking GPS</a></li><li><a href="/how-gps-works/">How GPS Works</a></li><li><a href="/hunting-dogs/">Hunting Dogs</a></li><li><a href="/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/lorawan/">LoRaWAN</a></li><li><a href="/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/open-source/">Open Source</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/search-rescue/">Search & Rescue</a></li><li><a href="/setup-guides/">Setup</a></li><li><a href="/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/software/">Software</a></li><li><a href="/specifications/">Specs</a></li><li><a href="/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script src="/js/leaflet-1.9.4.min.js"></script>
-<script src="app.js?v=20261102a"></script>
+<script src="app.js?v=20261106"></script>
 <script>
   // Hide compat banner in supported browsers
   if ('serial' in navigator) {
