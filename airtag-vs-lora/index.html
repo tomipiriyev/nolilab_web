@@ -5,7 +5,7 @@
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>AirTag vs LoRa GPS Tracker: Range and Coverage | Loko</title>
+<title>AirTag Range vs LoRa GPS Tracker: Three Distances | Loko</title>
 <link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
 <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
 <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
@@ -18,19 +18,19 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Compare AirTag vs a real GPS tracker. Loko GPS Tracker uses GPS and LoRa radio, works without nearby iPhones, supports Android, and tracks up to 20km offline." name="description"/>
+<meta content="AirTag has three ranges: Bluetooth, Precision Finding and the Find My network. Independent test figures, where AirTag fails, and where Loko's LoRa radio fits." name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <meta content="article" property="og:type"/>
-<meta content="AirTag vs LoRa GPS Tracker: Range and Coverage | Loko" property="og:title"/>
-<meta content="Compare AirTag vs a real GPS tracker. Loko GPS Tracker uses GPS and LoRa radio, works without nearby iPhones, supports Android, and tracks up to 20km offline." property="og:description"/>
+<meta content="AirTag Range vs LoRa GPS Tracker: Three Distances | Loko" property="og:title"/>
+<meta content="AirTag has three ranges: Bluetooth, Precision Finding and the Find My network. Independent test figures, where AirTag fails, and where Loko's LoRa radio fits." property="og:description"/>
 <meta content="https://www.nolilab.com/airtag-vs-lora/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
-<meta content="AirTag vs LoRa GPS Tracker Comparison" property="og:image:alt"/>
+<meta content="AirTag range vs LoRa GPS tracker" property="og:image:alt"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="en_US" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="AirTag vs LoRa GPS Tracker: Range and Coverage | Loko" name="twitter:title"/>
-<meta content="Compare AirTag vs a real GPS tracker. Loko GPS Tracker uses GPS and LoRa radio, works without nearby iPhones, supports Android, and tracks up to 20km offline." name="twitter:description"/>
+<meta content="AirTag Range vs LoRa GPS Tracker: Three Distances | Loko" name="twitter:title"/>
+<meta content="AirTag has three ranges: Bluetooth, Precision Finding and the Find My network. Independent test figures, where AirTag fails, and where Loko's LoRa radio fits." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
 <meta content="AirTag vs GPS tracker, AirTag vs LoRa, AirTag alternative, GPS tracker without iPhone, AirTag range limitation" name="keywords"/>
@@ -53,18 +53,10 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is the main difference between AirTag and a LoRa GPS tracker?",
+      "name": "What is the range of an AirTag?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AirTag uses Bluetooth and Apple's crowdsourced Find My network — it depends on nearby iPhones to relay its location. A LoRa GPS tracker like Loko uses actual GPS satellites and a dedicated long-range radio link. Loko works in remote areas with zero phones or people nearby; AirTag does not."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can AirTag work in remote areas or forests?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. AirTag relies on other iPhone users walking within Bluetooth range (~10m) of the tag. In a remote forest, mountain trail, or rural farm, there may be nobody around for miles. In these environments, AirTag effectively stops working. Loko GPS Tracker works anywhere GPS satellites are visible — no people required."
+        "text": "There are three ranges, and Apple gives no figure in metres for any of them. Direct Bluetooth from your own iPhone and Precision Finding only work close by; in a single test by Stiftung Warentest (March 2026), the second-generation AirTag reached about 60 m over Bluetooth outdoors and about 25 m with Precision Finding. The Find My network has no fixed range: it works wherever another Apple device passes close enough to hear the AirTag."
       }
     },
     {
@@ -72,23 +64,39 @@
       "name": "Does AirTag have GPS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. AirTag does not contain a GPS chip. It uses Bluetooth Low Energy to communicate with nearby iPhones, which then use their own GPS to report the approximate location. This is fundamentally different from a true GPS tracker that calculates its own coordinates directly from satellite signals."
+        "text": "No. An AirTag sends a Bluetooth signal. A nearby Apple device that hears it sends its own location to iCloud, and that is what you see in Find My."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the effective range of AirTag vs Loko?",
+      "name": "Can an AirTag work in remote areas or forests?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AirTag's direct Precision Finding range is about 30–100 meters using Ultra Wideband. Its crowdsourced Find My range is theoretically unlimited — but only works when other iPhones happen to pass by. Loko has a direct radio range of up to 20km in open terrain, completely independently of other people's devices."
+        "text": "Only within range of your own iPhone. Beyond that, its location updates only when another Apple device passes close by, which may not happen in remote areas. Find My then shows the last place a device heard it."
       }
     },
     {
       "@type": "Question",
-      "name": "Which is better for tracking pets, luggage, or outdoor gear?",
+      "name": "Is AirTag Precision Finding available in Japan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It depends on where you are. AirTag is excellent in dense urban environments where there are always iPhone users nearby. For pets in remote areas, hiking gear, or anything that might end up in a low-traffic location, a LoRa GPS tracker like Loko is far more reliable because it does not depend on other people's devices."
+        "text": "Apple states that because of regulations the expanded Precision Finding range of the second-generation AirTag is not available in Japan, and that Precision Finding on Apple Watch cannot be used there."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the range of Loko?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "20+ km in open areas with a clear line of sight between the Loko Air tracker and the Loko Ground receiver. Trees, hills and buildings shorten it. Loko does not use other people's phones, so it only reports to a receiver within radio range."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which is better for pets, luggage or outdoor gear?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For luggage and everyday items in towns, an AirTag is cheaper and the Find My network covers you. For pets, livestock or gear in places where few phones pass by, Loko sends its own GPS position straight to the receiver you carry. Loko is not waterproof, so it does not suit anything that goes in water."
       }
     }
   ]
@@ -274,159 +282,197 @@
 <!-- Hero -->
 <div class="page-hero">
 <div class="container">
-<h1>AirTag vs LoRa GPS Tracker: Honest Comparison</h1>
-<p class="subtitle">Two Very Different Technologies Solving the Same Problem — Very Differently</p>
-<p>Apple AirTag is one of the most popular item trackers in the world. At $29 with no monthly fee, it looks like an unbeatable deal. But AirTag is not a GPS tracker — and that distinction matters enormously in the real world.</p>
-<p><strong>AirTag is a Bluetooth beacon that relies on other people's iPhones to work.</strong> In a city, that is usually fine. On a hiking trail, a remote farm, or anywhere that does not have heavy iPhone foot traffic, AirTag can fail completely.</p>
-<p>LoRa GPS trackers like Loko work differently: they use real GPS satellites for positioning and a dedicated long-range radio link for transmission. No crowdsourcing, no dependency on other devices, no dead zones.</p>
-<p>This page gives you the honest comparison.</p>
+<h1>AirTag Range vs a LoRa GPS Tracker</h1>
+<p class="subtitle">Three Kinds of AirTag Distance, and Where a Local-Radio Tracker Fits</p>
+<p>"How far does an AirTag reach?" has three answers, because an AirTag can be found in three different ways: directly over Bluetooth from your own iPhone, with Precision Finding, and through Apple's Find My network. Each works over a different distance, and <strong>Apple gives no figure in metres for any of them.</strong></p>
+<p>This page explains the three distances, gives the figures from two independent tests, shows where an AirTag stops being useful, and explains where a local-radio tracker like Loko fits. It also says plainly where Loko is the wrong choice.</p>
 <div class="cta-block">
-<p><strong>Need an AirTag alternative for remote areas?</strong> Loko uses real GPS and direct LoRa radio instead of nearby phones.</p>
+<p><strong>Need to follow something where no phones pass by?</strong> Loko sends its own GPS position over LoRa radio to a receiver you carry.</p>
 <a class="cta-btn" href="/lora-gps-tracker/">See Loko GPS Tracker →</a>
 </div>
 </div>
 </div>
-<!-- How AirTag works -->
+<!-- Three distances -->
 <div class="content-block">
 <div class="container">
-<h2>How AirTag Works — And Why It Fails in Remote Areas</h2>
-<p>AirTag contains a Bluetooth Low Energy (BLE) radio and an Ultra Wideband (UWB) chip for precise nearby direction-finding. It does not contain GPS. Here is how it actually gets its location to you:</p>
+<h2>The Three Kinds of AirTag Distance</h2>
+<p>An AirTag has no GPS. It sends out a Bluetooth signal, and an Apple device that picks it up works out where the AirTag is. The three ways of finding it differ in which device hears it and how close that device has to be.</p>
 <ol>
-<li>The AirTag broadcasts a rotating Bluetooth signal</li>
-<li>Any nearby iPhone running iOS 14.5+ silently detects that signal</li>
-<li>That iPhone uses its own GPS to record where it detected the AirTag</li>
-<li>That location is anonymously uploaded to Apple's servers</li>
-<li>You can see the last detected location in the Find My app</li>
+<li><strong>Direct Bluetooth from your own iPhone.</strong> When your iPhone is close enough to hear the AirTag, Find My can play its sound and show it as nearby. Apple says the second-generation AirTag has an upgraded Bluetooth chip that "expands the range", but gives no distance.</li>
+<li><strong>Precision Finding.</strong> At closer range, Ultra Wideband in a compatible iPhone shows an arrow and a distance to the AirTag. Apple says the second-generation AirTag can be found this way from "up to 50 percent farther away than the previous generation". Again, there is no metre figure. The expanded range needs an iPhone Air or iPhone 15 or later (not iPhone 16e), and Apple says availability varies by region.</li>
+<li><strong>The Find My network.</strong> When you are out of range, any nearby iPhone, iPad or Mac in the Find My network that hears the AirTag sends its location to iCloud, anonymously and encrypted, and you see it in the Find My app. This has no fixed range: it covers wherever Apple devices happen to pass close to the AirTag, and nowhere else.</li>
 </ol>
-<p>This architecture — called crowdsourced location — works brilliantly in places with high iPhone density. In a busy airport, a shopping mall, or a city neighbourhood, there are iPhones everywhere and your AirTag's location is updated frequently.</p>
-<p>The fatal flaw appears the moment you leave civilization. In a forest, a mountain valley, a rural field, or any area without regular iPhone foot traffic, your AirTag can go hours or days without being detected. If your dog runs into a remote forest, your AirTag will show the last location it was detected — which might be your driveway.</p>
-<p><strong>AirTag also only works with Apple devices.</strong> Android users cannot use AirTag or the Find My network at all. The crowdsourced network only includes iPhones — Samsung, Google Pixel, and other Android users do not participate.</p>
+<p><strong>Japan:</strong> on its Japanese newsroom page, Apple states that because of regulations the expanded Precision Finding range is not available in Japan, and that Precision Finding on Apple Watch cannot be used there.</p>
 </div>
 </div>
-<!-- How LoRa GPS works -->
+<!-- Test figures -->
 <div class="content-block">
 <div class="container">
-<h2>How LoRa GPS Works — Direct, Independent, Everywhere</h2>
-<p>A LoRa GPS tracker like Loko uses a completely different architecture that requires no infrastructure and no other people's devices.</p>
-<p>The signal chain is entirely self-contained:</p>
-<ol>
-<li>The Loko Air tracker receives GPS signals directly from satellites orbiting Earth</li>
-<li>It calculates its own precise coordinates (latitude, longitude, altitude)</li>
-<li>It transmits those coordinates via LoRa radio directly to your Loko Ground receiver</li>
-<li>Loko Ground sends the data to your phone via Bluetooth</li>
-<li>The Loko app shows your asset's location on an offline map</li>
-</ol>
-<p>At no point in this chain is the internet involved. There is no cloud server, no SIM card, no cellular network, and no dependency on other people's phones. The direct LoRa radio link between Loko Air and Loko Ground works up to <strong>20km in open terrain</strong>.</p>
-<p>This means Loko works identically whether you are in central London or on a remote Himalayan trail. The only requirement is that GPS satellites are visible — which they are, essentially everywhere on the planet's surface.</p>
-</div>
-</div>
-<!-- Big comparison table -->
-<div class="content-block">
-<div class="container">
-<h2>Full Comparison: AirTag vs Loko LoRa GPS</h2>
+<h2>What Independent Tests Measured</h2>
+<p>Because Apple publishes no distances, the only figures come from testers. These are single tests with one set of devices and conditions. Treat them as examples, not guarantees.</p>
 <table class="compare-table">
 <thead>
 <tr>
-<th>Feature</th>
-<th>Apple AirTag</th>
-<th>Loko (LoRa GPS)</th>
+<th>Test</th>
+<th>AirTag (1st gen)</th>
+<th>AirTag (2nd gen)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Technology</td>
-<td>Bluetooth + UWB, crowdsourced</td>
-<td>GPS + LoRa radio, direct P2P</td>
+<td>Stiftung Warentest, Bluetooth range outdoors</td>
+<td>about 40 m</td>
+<td>about 60 m</td>
 </tr>
 <tr>
-<td>Has real GPS chip</td>
-<td class="no">No</td>
-<td class="yes">Yes</td>
+<td>Stiftung Warentest, Precision Finding</td>
+<td>about 10 m</td>
+<td>about 25 m</td>
 </tr>
 <tr>
-<td>Works in remote areas</td>
-<td class="no">No — needs nearby iPhones</td>
-<td class="yes">Yes — works anywhere</td>
+<td>Macwelt, carried by a walker on a hiking path</td>
+<td>52 m</td>
+<td>110 m</td>
 </tr>
 <tr>
-<td>Direct radio range</td>
-<td>~100m Bluetooth</td>
-<td>Up to 20km LoRa</td>
-</tr>
-<tr>
-<td>Monthly cost</td>
-<td class="yes">$0</td>
-<td class="yes">$0</td>
-</tr>
-<tr>
-<td>Works without nearby phones</td>
-<td class="no">No</td>
-<td class="yes">Yes</td>
-</tr>
-<tr>
-<td>Real-time updates</td>
-<td>Depends on network density</td>
-<td class="yes">Yes, direct radio</td>
-</tr>
-<tr>
-<td>Works with Android</td>
-<td class="no">No</td>
-<td class="yes">Yes (iOS &amp; Android)</td>
-</tr>
-<tr>
-<td>Weight</td>
-<td>11g</td>
-<td>Under 14g</td>
-</tr>
-<tr>
-<td>Battery life</td>
-<td>~1 year (CR2032)</td>
-<td>up to 1 year</td>
-</tr>
-<tr>
-<td>GPS constellation support</td>
-<td>N/A (no GPS)</td>
-<td>GPS, GLONASS, Galileo</td>
-</tr>
-<tr>
-<td>Open source hardware</td>
-<td class="no">No</td>
-<td class="yes">Yes</td>
+<td>Macwelt, AirTag in a back pocket</td>
+<td>3.5–4 m</td>
+<td>14 m (test stopped there: the room was too small)</td>
 </tr>
 </tbody>
 </table>
+<p>Sources: Stiftung Warentest, "Apple AirTag 2. Gen im Schnelltest", test.de, 19 March 2026. Macwelt, "Praxistest: So weit funkt der AirTag 2", Halyna Kubiv, 22 February 2026. Macwelt does not say whether its figures are for Bluetooth or Precision Finding.</p>
 </div>
 </div>
-<!-- When AirTag wins vs when Loko wins -->
+<!-- Where AirTag fails -->
 <div class="content-block">
 <div class="container">
-<h2>When AirTag Wins vs When Loko Wins</h2>
+<h2>Where an AirTag Fails</h2>
+<ul>
+<li><strong>Where no Apple devices pass by.</strong> Out of your own range, an AirTag's location only updates when someone else's Apple device comes close enough to hear it. On a remote trail, a farm or in a forest, that can mean no new location for a long time. Find My then shows the last place a device heard it, which may be far from where the item is now.</li>
+<li><strong>Without an iPhone or iPad.</strong> Setting up and finding an AirTag needs an Apple account and an iPhone or iPad. Android phones can alert you to an unknown AirTag travelling with you, but they cannot find yours.</li>
+<li><strong>Behind walls and bodies.</strong> In Macwelt's test, range dropped from 110 m in the open to 14 m or less with the AirTag in a back pocket.</li>
+<li><strong>Precision Finding in Japan.</strong> The expanded range is not available there.</li>
+</ul>
+<p>Android has its own crowdsourced system. In April 2024 Google launched its Find My Device network, built on "over a billion Android devices", with Bluetooth tags from Chipolo and Pebblebee. AirTag does not use it, and as a crowdsourced network it also relies on phones passing near the tag.</p>
+</div>
+</div>
+<!-- Where Loko fits -->
+<div class="content-block">
+<div class="container">
+<h2>Where a Local-Radio Tracker Like Loko Fits</h2>
+<p>Loko works without anyone else's phone. You carry the receiver yourself:</p>
+<ol>
+<li>The Loko Air tracker (14 g, 30 × 22 mm) gets its own position from GPS satellites.</li>
+<li>It sends that position over LoRa radio, peer to peer, to the Loko Ground receiver you carry.</li>
+<li>Loko Ground passes it to the Loko <a href="/software/" style="color: var(--accent); font-weight: 500;">app</a> on your phone over Bluetooth.</li>
+</ol>
+<p>There is no SIM card, no subscription and no network of other people's devices. The range between tracker and receiver is <strong>20+ km in open areas with a clear line of sight</strong>. Trees, hills and buildings shorten it, so test it where you plan to use it. One Loko Ground can follow up to 30 trackers.</p>
+<p>Two things to know before you rely on it:</p>
+<ul>
+<li>If the tracker cannot get a satellite fix within 60 seconds, it sends its last known position. The app shows the time each position arrived but no warning that it is old, so check the time before you walk to a point.</li>
+<li>The tracker keeps a log of up to 3,100 positions, so the route it took while out of range is not lost.</li>
+</ul>
+</div>
+</div>
+<!-- Comparison table -->
+<div class="content-block">
+<div class="container">
+<h2>AirTag vs Loko at a Glance</h2>
+<table class="compare-table">
+<thead>
+<tr>
+<th>Feature</th>
+<th>Apple AirTag (2nd gen)</th>
+<th>Loko</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>How it knows where it is</td>
+<td>It doesn't: a nearby Apple device reports its own location</td>
+<td>Own GPS fix</td>
+</tr>
+<tr>
+<td>How the location reaches you</td>
+<td>Your iPhone directly, or the Find My network through iCloud</td>
+<td>LoRa radio to Loko Ground, then Bluetooth to your phone</td>
+</tr>
+<tr>
+<td>Range figure from the maker</td>
+<td>None in metres</td>
+<td>20+ km in open areas, line of sight</td>
+</tr>
+<tr>
+<td>Needs other people's devices nearby</td>
+<td>Yes, once you are out of range</td>
+<td class="yes">No</td>
+</tr>
+<tr>
+<td>Phone</td>
+<td>iPhone or iPad</td>
+<td>iOS or Android</td>
+</tr>
+<tr>
+<td>Weight</td>
+<td>11.8 g</td>
+<td>14 g</td>
+</tr>
+<tr>
+<td>Water resistance</td>
+<td class="yes">IP67 (1 m for up to 30 minutes)</td>
+<td class="no">Not waterproof; light rain only</td>
+</tr>
+<tr>
+<td>Battery</td>
+<td>User-replaceable CR2032 coin cell</td>
+<td>Depends on update interval: up to 1 year at long intervals, much less at short ones</td>
+</tr>
+<tr>
+<td>Subscription</td>
+<td class="yes">None</td>
+<td class="yes">None</td>
+</tr>
+<tr>
+<td>Price</td>
+<td>$29, or $99 for four</td>
+<td>$119 (tracker + receiver); extra tracker $59</td>
+</tr>
+</tbody>
+</table>
+<p>Sources: Apple's AirTag (2nd generation) tech specs and its 26 January 2026 newsroom announcement (US prices), and the Loko <a href="/specifications/" style="color: var(--accent); font-weight: 500;">specifications</a>. Checked 6 November 2026.</p>
+</div>
+</div>
+<!-- Wrong choice -->
+<div class="content-block">
+<div class="container">
+<h2>Where Loko Is the Wrong Choice</h2>
+<ul>
+<li><strong>Keys, bags and luggage in towns and airports.</strong> Here the Find My network is everywhere, you carry nothing extra, and an AirTag costs $29.</li>
+<li><strong>Anything that gets wet.</strong> Loko is not waterproof and handles light rain only. An AirTag is rated IP67.</li>
+<li><strong>Things that may end up far beyond your receiver.</strong> Loko only reports to a Loko Ground within radio range. If the tracker is stolen and driven away, there is no network to pick it up.</li>
+<li><strong>Fast updates for a long time.</strong> The "up to 1 year" battery figure applies to long update intervals. At short intervals, the battery runs down much faster.</li>
+</ul>
 <div class="verdict-grid">
 <div class="verdict-card">
-<h3>AirTag is better when:</h3>
+<h3>An AirTag suits you when:</h3>
 <ul>
-<li>You are in a dense urban area with heavy iPhone traffic</li>
-<li>You want the cheapest possible hardware ($29)</li>
-<li>You are already deep in the Apple ecosystem</li>
-<li>You need ultra-precise close-range direction finding (&lt;10m)</li>
-<li>You are tracking luggage at a major airport</li>
-<li>Long-term passive tracking is acceptable (not real-time)</li>
+<li>You use an iPhone</li>
+<li>The item stays where people with Apple devices pass by</li>
+<li>You want the cheapest tag and nothing extra to carry</li>
+<li>The item might get wet</li>
 </ul>
 </div>
 <div class="verdict-card">
-<h3>Loko LoRa GPS is better when:</h3>
+<h3>Loko suits you when:</h3>
 <ul>
-<li>You are in a remote area, forest, or farm</li>
-<li>You need real-time location updates, not crowdsourced history</li>
-<li>You use an Android phone or a mix of iOS and Android</li>
-<li>You need actual 20km direct radio range</li>
-<li>You are tracking pets, livestock, or drones outdoors</li>
-<li>You need the tracker to work with zero people around</li>
+<li>You are where few or no phones pass by</li>
+<li>You want positions from the tracker's own GPS, sent straight to you</li>
+<li>You use Android, or a mix of phones</li>
+<li>You are following pets, livestock or drones outdoors and can carry the receiver</li>
 </ul>
 </div>
 </div>
-<p>The honest summary: AirTag is a clever Bluetooth beacon dressed up as a tracker. For urban use cases where iPhones are everywhere, it works surprisingly well. For any outdoor or remote use case, it is fundamentally unsuited to the task.</p>
-<p>Loko is a true GPS tracker. It knows its exact coordinates independent of any other devices, and it transmits those coordinates over a 20km radio link directly to you. No crowdsourcing, no cloud, no compromise.</p>
 </div>
 </div>
 <!-- FAQ -->
@@ -434,24 +480,28 @@
 <div class="container">
 <h2>AirTag vs LoRa GPS Tracker: FAQ</h2>
 <div class="faq-item">
-<h3>What is the main difference between AirTag and a LoRa GPS tracker?</h3>
-<p>AirTag uses Bluetooth and Apple's crowdsourced Find My network — it depends on nearby iPhones to relay its location. A LoRa GPS tracker like Loko uses actual GPS satellites and a dedicated long-range radio link. Loko works in remote areas with zero phones or people nearby; AirTag does not.</p>
-</div>
-<div class="faq-item">
-<h3>Can AirTag work in remote areas or forests?</h3>
-<p>No. AirTag relies on other iPhone users walking within Bluetooth range (~10m) of the tag. In a remote forest, mountain trail, or rural farm, there may be nobody around for miles. In these environments, AirTag effectively stops working. Loko GPS Tracker works anywhere GPS satellites are visible — no people required.</p>
+<h3>What is the range of an AirTag?</h3>
+<p>There are three ranges, and Apple gives no figure in metres for any of them. Direct Bluetooth from your own iPhone and Precision Finding only work close by; in a single test by Stiftung Warentest (March 2026), the second-generation AirTag reached about 60 m over Bluetooth outdoors and about 25 m with Precision Finding. The Find My network has no fixed range: it works wherever another Apple device passes close enough to hear the AirTag.</p>
 </div>
 <div class="faq-item">
 <h3>Does AirTag have GPS?</h3>
-<p>No. AirTag does not contain a GPS chip. It uses Bluetooth Low Energy to communicate with nearby iPhones, which then use their own GPS to report the approximate location. This is fundamentally different from a true GPS tracker that calculates its own coordinates directly from satellite signals.</p>
+<p>No. An AirTag sends a Bluetooth signal. A nearby Apple device that hears it sends its own location to iCloud, and that is what you see in Find My.</p>
 </div>
 <div class="faq-item">
-<h3>What is the effective range of AirTag vs Loko?</h3>
-<p>AirTag's direct Precision Finding range is about 30–100 meters using Ultra Wideband. Its crowdsourced Find My range is theoretically unlimited — but only works when other iPhones happen to pass by. Loko has a direct radio range of up to 20km in open terrain, completely independently of other people's devices.</p>
+<h3>Can an AirTag work in remote areas or forests?</h3>
+<p>Only within range of your own iPhone. Beyond that, its location updates only when another Apple device passes close by, which may not happen in remote areas. Find My then shows the last place a device heard it.</p>
 </div>
 <div class="faq-item">
-<h3>Which is better for tracking pets, luggage, or outdoor gear?</h3>
-<p>It depends on where you are. AirTag is excellent in dense urban environments where there are always iPhone users nearby. For pets in remote areas, hiking gear, or anything that might end up in a low-traffic location, a LoRa GPS tracker like Loko is far more reliable because it does not depend on other people's devices.</p>
+<h3>Is AirTag Precision Finding available in Japan?</h3>
+<p>Apple states that because of regulations the expanded Precision Finding range of the second-generation AirTag is not available in Japan, and that Precision Finding on Apple Watch cannot be used there.</p>
+</div>
+<div class="faq-item">
+<h3>What is the range of Loko?</h3>
+<p>20+ km in open areas with a clear line of sight between the Loko Air tracker and the Loko Ground receiver. Trees, hills and buildings shorten it. Loko does not use other people's phones, so it only reports to a receiver within radio range.</p>
+</div>
+<div class="faq-item">
+<h3>Which is better for pets, luggage or outdoor gear?</h3>
+<p>For luggage and everyday items in towns, an AirTag is cheaper and the Find My network covers you. For pets, livestock or gear in places where few phones pass by, Loko sends its own GPS position straight to the receiver you carry. Loko is not waterproof, so it does not suit anything that goes in water.</p>
 </div>
 </div>
 </div>
@@ -459,10 +509,8 @@
 <div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p>AirTag is a good Bluetooth beacon. Loko is a real GPS tracker. If you need reliable location in the real world — outdoors, remote, without depending on other people's phones — there is a clear choice.</p>
-<p><strong>Loko GPS Tracker: real GPS, 20km range, no monthly fees, works everywhere.</strong></p>
-<p>Explore the full product details at <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
-<br/>
+<p>An AirTag is found by the Apple devices around it. Loko sends its own GPS position to a receiver you carry, with no SIM and no subscription.</p>
+<p><strong>Loko costs $119 for a tracker and receiver.</strong></p>
 <a class="cta-btn" href="/#shop">Shop Loko →</a>
 </div>
 </div>
