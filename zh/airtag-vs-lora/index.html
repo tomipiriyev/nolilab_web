@@ -5,7 +5,7 @@
 <link href="/css/partials.css?v=20260906" rel="stylesheet"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
-<title>AirTag 与 LoRa GPS 追踪器对比：距离与覆盖</title>
+<title>AirTag 距离与 LoRa GPS 追踪器：三种距离 | Loko</title>
 <link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
 <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
 <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
@@ -18,19 +18,19 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="对比 AirTag 与真正的 GPS 追踪器。Loko GPS Tracker 使用 GPS 和 LoRa 无线电，无需附近有 iPhone，支持 Android，并可离线追踪最远 20km。" name="description"/>
+<meta content="AirTag 有三种距离：蓝牙、精确查找和“查找”网络。本文给出独立测试数据，说明 AirTag 在哪里失效，以及 Loko 的 LoRa 无线电适合哪些场景。" name="description"/>
 <meta content="#ffffff" name="theme-color"/>
 <meta content="article" property="og:type"/>
-<meta content="AirTag 与 LoRa GPS 追踪器对比：距离与覆盖" property="og:title"/>
-<meta content="对比 AirTag 与真正的 GPS 追踪器。Loko GPS Tracker 使用 GPS 和 LoRa 无线电，无需附近有 iPhone，支持 Android，并可离线追踪最远 20km。" property="og:description"/>
+<meta content="AirTag 距离与 LoRa GPS 追踪器：三种距离 | Loko" property="og:title"/>
+<meta content="AirTag 有三种距离：蓝牙、精确查找和“查找”网络。本文给出独立测试数据，说明 AirTag 在哪里失效，以及 Loko 的 LoRa 无线电适合哪些场景。" property="og:description"/>
 <meta content="https://www.nolilab.com/zh/airtag-vs-lora/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
-<meta content="AirTag vs LoRa GPS Tracker Comparison" property="og:image:alt"/>
+<meta content="AirTag 距离与 LoRa GPS 追踪器" property="og:image:alt"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="zh_CN" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="AirTag 与 LoRa GPS 追踪器对比：距离与覆盖" name="twitter:title"/>
-<meta content="对比 AirTag 与真正的 GPS 追踪器。Loko GPS Tracker 使用 GPS 和 LoRa 无线电，无需附近有 iPhone，支持 Android，并可离线追踪最远 20km。" name="twitter:description"/>
+<meta content="AirTag 距离与 LoRa GPS 追踪器：三种距离 | Loko" name="twitter:title"/>
+<meta content="AirTag 有三种距离：蓝牙、精确查找和“查找”网络。本文给出独立测试数据，说明 AirTag 在哪里失效，以及 Loko 的 LoRa 无线电适合哪些场景。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <meta content="@nolilab" name="twitter:site"/>
 <meta content="AirTag vs GPS tracker, AirTag vs LoRa, AirTag alternative, GPS tracker without iPhone, AirTag range limitation" name="keywords"/>
@@ -50,18 +50,10 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "AirTag 与 LoRa GPS 追踪器的主要区别是什么？",
+      "name": "AirTag 的距离是多少？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AirTag 使用 Bluetooth 和 Apple 的众包 Find My 网络——它依赖附近的 iPhone 中继其位置。Loko 这类 LoRa GPS 追踪器则使用真正的 GPS 卫星和专用远距离无线电链路。即使偏远地区附近完全没有手机或人员，Loko 仍可工作，而 AirTag 不行。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "AirTag 能在偏远地区或森林中使用吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "不能。AirTag 依靠其他 iPhone 用户进入标签的 Bluetooth 范围（约 10 米）内。在偏远森林、山间小径或乡村农场，方圆数英里内可能都没有人。在这些环境中，AirTag 实际上会停止工作。只要能看到 GPS 卫星，Loko GPS Tracker 就能工作——无需附近有人。"
+        "text": "距离有三种，Apple 对其中任何一种都没有给出以米为单位的数字。你自己的 iPhone 直接通过蓝牙连接和精确查找都只在近距离有效；在 Stiftung Warentest 的一次测试中（2026 年 3 月），第二代 AirTag 在户外通过蓝牙达到约 60 m，使用精确查找约 25 m。“查找”网络没有固定距离：只要有其他 Apple 设备经过、距离近到能接收到 AirTag 的信号，它就能工作。"
       }
     },
     {
@@ -69,23 +61,39 @@
       "name": "AirTag 有 GPS 吗？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "没有。AirTag 不含 GPS 芯片。它通过 Bluetooth Low Energy 与附近的 iPhone 通信，再由这些 iPhone 使用自身的 GPS 报告大致位置。这与直接根据卫星信号计算自身坐标的真正 GPS 追踪器有本质区别。"
+        "text": "没有。AirTag 发出蓝牙信号。附近接收到信号的 Apple 设备会把自己的位置发送到 iCloud，你在“查找”中看到的就是这个位置。"
       }
     },
     {
       "@type": "Question",
-      "name": "AirTag 与 Loko 的实际有效范围分别是多少？",
+      "name": "AirTag 能在偏远地区或森林中使用吗？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AirTag 使用 Ultra Wideband 时，直接“精确查找”范围约为 30–100 米。理论上，其众包 Find My 范围不受限制——但前提是恰好有其他 iPhone 经过。Loko 在开阔地带的直接无线电范围最远可达 20km，完全不依赖他人的设备。"
+        "text": "只能在你自己的 iPhone 的范围内使用。超出这个范围，只有当其他 Apple 设备从附近经过时位置才会更新，而在偏远地区这可能不会发生。此时“查找”会显示最后一次有设备接收到它的地点。"
       }
     },
     {
       "@type": "Question",
-      "name": "追踪宠物、行李或户外装备时，哪一种更好？",
+      "name": "AirTag 的精确查找在日本可以使用吗？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "这取决于使用地点。在附近始终有 iPhone 用户的高密度城市环境中，AirTag 表现出色。对于偏远地区的宠物、徒步装备，或任何可能到达人流稀少地点的物品，Loko 这类 LoRa GPS 追踪器可靠得多，因为它不依赖他人的设备。"
+        "text": "Apple 表示，由于法规原因，第二代 AirTag 精确查找的扩展距离在日本不可用，而且在日本无法使用 Apple Watch 上的精确查找。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Loko 的距离是多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "在开阔地带、Loko Air 追踪器与 Loko Ground 接收器之间视线无遮挡时可达 20 km 以上。树木、山丘和建筑物会缩短距离。Loko 不使用他人的手机，因此只会向无线电范围内的接收器报告位置。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "宠物、行李或户外装备，哪个更合适？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "对于城镇中的行李和日常物品，AirTag 更便宜，“查找”网络也能覆盖。对于宠物、牲畜或在很少有手机经过的地方使用的装备，Loko 会把自己的 GPS 位置直接发送到你随身携带的接收器。Loko 不防水，因此不适合会进水的物品。"
       }
     }
   ]
@@ -273,184 +281,224 @@
 <!-- Hero -->
 <div class="page-hero">
 <div class="container">
-<h1>AirTag 与 LoRa GPS 追踪器：客观对比</h1>
-<p class="subtitle">两种截然不同的技术，以截然不同的方式解决同一个问题</p>
-<p>Apple AirTag 是全球最受欢迎的物品追踪器之一。售价仅为 $29，且没有月费，看起来几乎无可匹敌。但 AirTag 并不是 GPS 追踪器——这一差别在现实使用中至关重要。</p>
-<p><strong>AirTag 是一种依靠他人 iPhone 工作的 Bluetooth 信标。</strong> 在城市中，这通常没有问题。但在徒步小径、偏远农场或任何没有大量 iPhone 用户经过的地方，AirTag 可能完全失效。</p>
-<p>Loko 这类 LoRa GPS 追踪器的工作方式不同：它们使用真正的 GPS 卫星定位，并通过专用远距离无线电链路传输。无需众包、不依赖其他设备，也没有信号盲区。</p>
-<p>本页面为你提供客观对比。</p>
+<h1>AirTag 距离与 LoRa GPS 追踪器对比</h1>
+<p class="subtitle">AirTag 的三种距离，以及本地无线电追踪器适合的场景</p>
+<p>“AirTag 能传多远？”有三个答案，因为 AirTag 可以通过三种不同的方式找到：用你自己的 iPhone 直接通过蓝牙查找、使用精确查找，以及通过 Apple 的“查找”网络。每种方式的有效距离都不同，而且<strong>Apple 对其中任何一种都没有给出以米为单位的数字。</strong></p>
+<p>本页解释这三种距离，给出两项独立测试的数据，说明 AirTag 在哪里不再有用，以及像 Loko 这样的本地无线电追踪器适合哪些场景。本页也会直接说明 Loko 在哪些情况下不是合适的选择。</p>
 <div class="cta-block">
-<p><strong>需要一款适用于偏远地区的 AirTag 替代产品？</strong> Loko 使用真正的 GPS 和直接 LoRa 无线电链路，而不是依赖附近的手机。</p>
-<a class="cta-btn" href="/zh/lora-gps-tracker/">查看 Loko GPS 追踪器 →</a>
+<p><strong>需要在没有手机经过的地方追踪物品？</strong>Loko 通过 LoRa 无线电把自己的 GPS 位置发送到你随身携带的接收器。</p><a class="cta-btn" href="/zh/lora-gps-tracker/">查看 Loko GPS 追踪器 →</a></div>
 </div>
 </div>
-</div>
-<!-- How AirTag works -->
+<!-- Three distances -->
 <div class="content-block">
 <div class="container">
-<h2>AirTag 如何工作——以及它为何会在偏远地区失效</h2>
-<p>AirTag 内置 Bluetooth Low Energy（BLE）无线电和用于近距离精确测向的 Ultra Wideband（UWB）芯片，但不含 GPS。它实际通过以下方式将位置传给你：</p>
+<h2>AirTag 的三种距离</h2>
+<p>AirTag 没有 GPS。它发出蓝牙信号，接收到信号的 Apple 设备会推算出 AirTag 的位置。三种查找方式的区别在于由哪台设备接收信号，以及该设备需要离得多近。</p>
 <ol>
-<li>AirTag 广播不断轮换的 Bluetooth 信号</li>
-<li>附近任何运行 iOS 14.5+ 的 iPhone 都会在后台检测该信号</li>
-<li>该 iPhone 使用自身的 GPS 记录检测到 AirTag 的位置</li>
-<li>该位置以匿名方式上传至 Apple 的服务器</li>
-<li>你可以在 Find My 应用中查看最后一次检测到的位置</li>
+<li><strong>你自己的 iPhone 直接通过蓝牙连接。</strong>当你的 iPhone 近到能接收到 AirTag 的信号时，“查找”可以让它播放声音并显示它就在附近。Apple 表示，第二代 AirTag 采用了升级的蓝牙芯片，“扩大了范围”，但没有给出具体距离。</li>
+<li><strong>精确查找。</strong>在更近的距离，兼容 iPhone 中的超宽带技术会显示指向 AirTag 的箭头和距离。Apple 表示，第二代 AirTag 用这种方式可以“比上一代远至多 50%”的距离被找到。这里同样没有以米为单位的数字。扩展距离需要 iPhone Air 或 iPhone 15 及更新机型（不包括 iPhone 16e），Apple 还表示可用性因地区而异。</li>
+<li><strong>“查找”网络。</strong>当你不在范围内时，“查找”网络中任何接收到 AirTag 信号的 iPhone、iPad 或 Mac 都会以匿名、加密的方式把它的位置发送到 iCloud，你可以在“查找”App 中看到。这种方式没有固定距离：它只覆盖恰好有 Apple 设备从 AirTag 附近经过的地方，其他地方都不覆盖。</li>
 </ol>
-<p>这种被称为众包定位的架构，在 iPhone 密度高的地方效果出色。在繁忙的机场、购物中心或城市社区，iPhone 随处可见，因此 AirTag 的位置会频繁更新。</p>
-<p>但一旦离开人口密集区，致命缺陷便会显现。在森林、山谷、乡间田野或任何没有 iPhone 用户经常经过的区域，你的 AirTag 可能数小时甚至数天都不会被检测到。如果你的狗跑进偏远森林，AirTag 显示的将是最后一次被检测到的位置——可能还是你家门前的车道。</p>
-<p><strong>AirTag 也只能与 Apple 设备配合使用。</strong> Android 用户完全无法使用 AirTag 或 Find My 网络。该众包网络只包含 iPhone——Samsung、Google Pixel 及其他 Android 用户均不参与其中。</p>
+<p><strong>日本：</strong>Apple 在其日文新闻稿页面中表示，由于法规原因，精确查找的扩展距离在日本不可用，而且在日本无法使用 Apple Watch 上的精确查找。</p>
 </div>
 </div>
-<!-- How LoRa GPS works -->
+<!-- Test figures -->
 <div class="content-block">
 <div class="container">
-<h2>LoRa GPS 的工作原理——直接、独立、无处不达</h2>
-<p>Loko 这类 LoRa GPS 追踪器采用完全不同的架构，无需任何基础设施，也不依赖他人的设备。</p>
-<p>整个信号链完全独立运行：</p>
-<ol>
-<li>Loko Air 追踪器直接接收来自绕地球运行卫星的 GPS 信号</li>
-<li>它自行计算精确坐标（纬度、经度、海拔）</li>
-<li>它通过 LoRa 无线电将这些坐标直接发送至你的 Loko Ground 接收器</li>
-<li>Loko Ground 通过 Bluetooth 将数据发送到你的手机</li>
-<li>Loko 应用可在离线地图上显示您资产的位置</li>
-</ol>
-<p>整个链路全程无需互联网。无需云服务器、SIM 卡或蜂窝网络，也不依赖他人的手机。Loko Air 与 Loko Ground 之间的 LoRa 直连无线链路最远可达 <strong>开阔地带最远 20km</strong>.</p>
-<p>这意味着，无论您身处伦敦市中心还是偏远的喜马拉雅山径，Loko 的工作方式都完全相同。唯一的要求是能够看到 GPS 卫星——而地球表面几乎任何地方都能满足这一条件。</p>
-</div>
-</div>
-<!-- Big comparison table -->
-<div class="content-block">
-<div class="container">
-<h2>完整对比：AirTag 与 Loko LoRa GPS</h2>
+<h2>独立测试的测量结果</h2>
+<p>由于 Apple 不公布距离，唯一的数据来自测试者。这些都是使用一套设备、在一种条件下进行的单次测试。请把它们当作示例，而不是保证。</p>
 <table class="compare-table">
 <thead>
 <tr>
-<th>功能</th>
-<th>Apple AirTag</th>
-<th>Loko（LoRa GPS）</th>
+<th>测试</th>
+<th>AirTag（第一代）</th>
+<th>AirTag（第二代）</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>技术</td>
-<td>Bluetooth + UWB，众包定位</td>
-<td>GPS + LoRa 无线电，直连 P2P</td>
+<td>Stiftung Warentest，户外蓝牙距离</td>
+<td>约 40 m</td>
+<td>约 60 m</td>
 </tr>
 <tr>
-<td>配备真正的 GPS 芯片</td>
-<td class="no">否</td>
-<td class="yes">是</td>
+<td>Stiftung Warentest，精确查找</td>
+<td>约 10 m</td>
+<td>约 25 m</td>
 </tr>
 <tr>
-<td>可在偏远地区使用</td>
-<td class="no">否——需要附近有 iPhone</td>
-<td class="yes">是——随处可用</td>
+<td>Macwelt，由行人在徒步小道上携带</td>
+<td>52 m</td>
+<td>110 m</td>
 </tr>
 <tr>
-<td>无线电直连范围</td>
-<td>约 100m Bluetooth</td>
-<td>LoRa 最远可达 20km</td>
-</tr>
-<tr>
-<td>每月费用</td>
-<td class="yes">$0</td>
-<td class="yes">$0</td>
-</tr>
-<tr>
-<td>附近没有手机也能工作</td>
-<td class="no">否</td>
-<td class="yes">是</td>
-</tr>
-<tr>
-<td>实时更新</td>
-<td>取决于网络密度</td>
-<td class="yes">是，通过无线电直连</td>
-</tr>
-<tr>
-<td>支持 Android</td>
-<td class="no">否</td>
-<td class="yes">是（iOS 和 Android）</td>
-</tr>
-<tr>
-<td>重量</td>
-<td>11g</td>
-<td>低于 14g</td>
-</tr>
-<tr>
-<td>电池续航</td>
-<td>约 1 年（CR2032）</td>
-<td>最长 1 年</td>
-</tr>
-<tr>
-<td>支持的 GPS 星座</td>
-<td>不适用（无 GPS）</td>
-<td>GPS、GLONASS、Galileo</td>
-</tr>
-<tr>
-<td>开源硬件</td>
-<td class="no">否</td>
-<td class="yes">是</td>
+<td>Macwelt，AirTag 放在后裤袋中</td>
+<td>3.5–4 m</td>
+<td>14 m（测试到此为止：房间太小）</td>
 </tr>
 </tbody>
 </table>
+<p>来源：Stiftung Warentest，《Apple AirTag 2. Gen im Schnelltest》，test.de，2026 年 3 月 19 日。Macwelt，《Praxistest: So weit funkt der AirTag 2》，Halyna Kubiv，2026 年 2 月 22 日。Macwelt 没有说明其数据是蓝牙距离还是精确查找距离。</p>
 </div>
 </div>
-<!-- When AirTag wins vs when Loko wins -->
+<!-- Where AirTag fails -->
 <div class="content-block">
 <div class="container">
-<h2>何时 AirTag 更胜一筹，何时 Loko 更胜一筹</h2>
+<h2>AirTag 失效的地方</h2>
+<ul>
+<li><strong>没有 Apple 设备经过的地方。</strong>超出你自己的范围后，只有当别人的 Apple 设备靠近到能接收到 AirTag 的信号时，它的位置才会更新。在偏远的小道、农场或森林中，这可能意味着很长时间都没有新位置。此时“查找”会显示最后一次有设备接收到它的地点，而那里可能离物品现在的位置很远。</li>
+<li><strong>没有 iPhone 或 iPad 时。</strong>设置和查找 AirTag 需要 Apple 账户以及 iPhone 或 iPad。Android 手机可以提醒你有陌生的 AirTag 在跟随你移动，但无法查找你自己的 AirTag。</li>
+<li><strong>墙壁和人体的另一侧。</strong>在 Macwelt 的测试中，距离从开阔地带的 110 m 降到了 AirTag 放在后裤袋中时的 14 m 或更短。</li>
+<li><strong>日本的精确查找。</strong>扩展距离在日本不可用。</li>
+</ul>
+<p>Android 有自己的众包系统。2024 年 4 月，Google 推出了“查找我的设备”网络，它建立在“超过十亿台 Android 设备”之上，支持 Chipolo 和 Pebblebee 的蓝牙标签。AirTag 不使用这个网络；而且作为众包网络，它同样依赖从标签附近经过的手机。</p>
+</div>
+</div>
+<!-- Where Loko fits -->
+<div class="content-block">
+<div class="container">
+<h2>像 Loko 这样的本地无线电追踪器适合哪些场景</h2>
+<p>Loko 不依赖任何他人的手机。接收器由你自己携带：</p>
+<ol>
+<li>Loko Air 追踪器（14 g，30 × 22 mm）通过 GPS 卫星获取自己的位置。</li>
+<li>它通过 LoRa 无线电以点对点方式，把这个位置发送到你随身携带的 Loko Ground 接收器。</li>
+<li>Loko Ground 通过蓝牙把位置传给你手机上的<a href="/zh/software/" style="color: var(--accent); font-weight: 500;">Loko App</a>。</li>
+</ol>
+<p>没有 SIM 卡，没有订阅，也没有由他人设备组成的网络。追踪器与接收器之间的距离为<strong>开阔地带视线无遮挡时 20 km 以上</strong>。树木、山丘和建筑物会缩短距离，因此请在你打算使用的地方进行测试。一台 Loko Ground 最多可追踪 30 个追踪器。</p>
+<p>依赖它之前需要了解的两点：</p>
+<ul>
+<li>如果追踪器在 60 秒内无法获得卫星定位，它会发送最后已知的位置。App 会显示每个位置到达的时间，但不会提示该位置已经过时，所以在前往某个地点之前请先查看时间。</li>
+<li>追踪器最多可记录 3,100 个位置，因此超出范围期间走过的路线不会丢失。</li>
+</ul>
+</div>
+</div>
+<!-- Comparison table -->
+<div class="content-block">
+<div class="container">
+<h2>AirTag 与 Loko 一览</h2>
+<table class="compare-table">
+<thead>
+<tr>
+<th>功能</th>
+<th>Apple AirTag（第二代）</th>
+<th>Loko</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>它如何知道自己的位置</td>
+<td>它不知道：由附近的 Apple 设备报告自己的位置</td>
+<td>自带 GPS 定位</td>
+</tr>
+<tr>
+<td>位置如何传到你手中</td>
+<td>直接连接你的 iPhone，或经由 iCloud 通过“查找”网络</td>
+<td>通过 LoRa 无线电发送到 Loko Ground，再通过蓝牙发送到你的手机</td>
+</tr>
+<tr>
+<td>厂商公布的距离</td>
+<td>无以米为单位的数字</td>
+<td>开阔地带视线无遮挡时 20 km 以上</td>
+</tr>
+<tr>
+<td>需要附近有他人的设备</td>
+<td>需要，一旦你超出范围</td>
+<td class="yes">不需要</td>
+</tr>
+<tr>
+<td>手机</td>
+<td>iPhone 或 iPad</td>
+<td>iOS 或 Android</td>
+</tr>
+<tr>
+<td>重量</td>
+<td>11.8 g</td>
+<td>14 g</td>
+</tr>
+<tr>
+<td>防水性能</td>
+<td class="yes">IP67（1 m 水深最长 30 分钟）</td>
+<td class="no">不防水；仅能应对小雨</td>
+</tr>
+<tr>
+<td>电池</td>
+<td>用户可自行更换的 CR2032 纽扣电池</td>
+<td>取决于更新间隔：间隔较长时最长 1 年，间隔较短时远少于此</td>
+</tr>
+<tr>
+<td>订阅</td>
+<td class="yes">无</td>
+<td class="yes">无</td>
+</tr>
+<tr>
+<td>价格</td>
+<td>$29，四件装 $99</td>
+<td>$119（追踪器 + 接收器）；额外追踪器 $59</td>
+</tr>
+</tbody>
+</table>
+<p>来源：Apple 的 AirTag（第二代）技术规格及其 2026 年 1 月 26 日的新闻稿（美国价格），以及 Loko 的<a href="/zh/specifications/" style="color: var(--accent); font-weight: 500;">规格</a>。查阅于 2026 年 11 月 6 日。</p>
+</div>
+</div>
+<!-- Wrong choice -->
+<div class="content-block">
+<div class="container">
+<h2>Loko 不适合的情况</h2>
+<ul>
+<li><strong>城镇和机场中的钥匙、包和行李。</strong>在这些地方，“查找”网络无处不在，你无需额外携带任何东西，而 AirTag 售价 $29。</li>
+<li><strong>任何会被弄湿的物品。</strong>Loko 不防水，只能应对小雨。AirTag 的防护等级为 IP67。</li>
+<li><strong>可能远远超出接收器范围的物品。</strong>Loko 只会向无线电范围内的 Loko Ground 报告位置。如果追踪器被盗并被开车带走，没有任何网络能接收到它。</li>
+<li><strong>长时间的高频更新。</strong>“最长 1 年”的电池续航适用于较长的更新间隔。更新间隔较短时，电池耗尽得快得多。</li>
+</ul>
 <div class="verdict-grid">
 <div class="verdict-card">
-<h3>以下情况更适合 AirTag：</h3>
+<h3>以下情况适合 AirTag：</h3>
 <ul>
-<li>您身处 iPhone 流量较大的高密度城区</li>
-<li>您想要尽可能便宜的硬件（$29）</li>
-<li>您已经深度融入 Apple 生态系统</li>
-<li>您需要超精准的近距离方向查找（&lt;10m）</li>
-<li>您要在大型机场追踪行李</li>
-<li>您可以接受长期被动追踪（非实时）</li>
+<li>你使用 iPhone</li>
+<li>物品始终位于有 Apple 设备用户经过的地方</li>
+<li>你想要最便宜的标签，不想额外携带任何东西</li>
+<li>物品可能会被弄湿</li>
 </ul>
 </div>
 <div class="verdict-card">
-<h3>以下情况更适合 Loko LoRa GPS：</h3>
+<h3>以下情况适合 Loko：</h3>
 <ul>
-<li>您身处偏远地区、森林或农场</li>
-<li>您需要实时位置更新，而非众包历史记录</li>
-<li>您使用 Android 手机，或同时使用 iOS 和 Android</li>
-<li>您需要真正的 20km 无线电直连范围</li>
-<li>您要在户外追踪宠物、牲畜或无人机</li>
-<li>您需要追踪器在周围无人时也能工作</li>
+<li>你所在的地方很少或根本没有手机经过</li>
+<li>你希望由追踪器自带的 GPS 获取位置，并直接发送给你</li>
+<li>你使用 Android，或混用不同的手机</li>
+<li>你在户外追踪宠物、牲畜或无人机，并且可以随身携带接收器</li>
 </ul>
 </div>
 </div>
-<p>坦率地说：AirTag 是一款披着追踪器外衣的巧妙 Bluetooth 信标。在 iPhone 随处可见的城市环境中，它的表现出乎意料地好。但对于任何户外或偏远地区的使用场景，它从根本上就不适合这项任务。</p>
-<p>Loko 是一款真正的 GPS 追踪器。它无需依赖任何其他设备即可获知自身的精确坐标，并通过 20km 无线链路将坐标直接发送给您。无需众包、无需云端、毫不妥协。</p>
 </div>
 </div>
 <!-- FAQ -->
 <div class="content-block">
 <div class="container">
-<h2>AirTag 与 LoRa GPS 追踪器对比：常见问题</h2>
+<h2>AirTag 与 LoRa GPS 追踪器：常见问题</h2>
 <div class="faq-item">
-<h3>AirTag 与 LoRa GPS 追踪器的主要区别是什么？</h3>
-<p>AirTag 使用 Bluetooth 和 Apple 的众包 Find My 网络——它依赖附近的 iPhone 中继其位置。Loko 这类 LoRa GPS 追踪器则使用真正的 GPS 卫星和专用远距离无线电链路。即使偏远地区附近完全没有手机或人员，Loko 仍可工作，而 AirTag 不行。</p>
-</div>
-<div class="faq-item">
-<h3>AirTag 能在偏远地区或森林中使用吗？</h3>
-<p>不能。AirTag 依靠其他 iPhone 用户进入标签的 Bluetooth 范围（约 10 米）内。在偏远森林、山间小径或乡村农场，方圆数英里内可能都没有人。在这些环境中，AirTag 实际上会停止工作。只要能看到 GPS 卫星，Loko GPS Tracker 就能工作——无需附近有人。</p>
+<h3>AirTag 的距离是多少？</h3>
+<p>距离有三种，Apple 对其中任何一种都没有给出以米为单位的数字。你自己的 iPhone 直接通过蓝牙连接和精确查找都只在近距离有效；在 Stiftung Warentest 的一次测试中（2026 年 3 月），第二代 AirTag 在户外通过蓝牙达到约 60 m，使用精确查找约 25 m。“查找”网络没有固定距离：只要有其他 Apple 设备经过、距离近到能接收到 AirTag 的信号，它就能工作。</p>
 </div>
 <div class="faq-item">
 <h3>AirTag 有 GPS 吗？</h3>
-<p>没有。AirTag 不含 GPS 芯片。它通过 Bluetooth Low Energy 与附近的 iPhone 通信，再由这些 iPhone 使用自身的 GPS 报告大致位置。这与直接根据卫星信号计算自身坐标的真正 GPS 追踪器有本质区别。</p>
+<p>没有。AirTag 发出蓝牙信号。附近接收到信号的 Apple 设备会把自己的位置发送到 iCloud，你在“查找”中看到的就是这个位置。</p>
 </div>
 <div class="faq-item">
-<h3>AirTag 与 Loko 的实际有效范围分别是多少？</h3>
-<p>AirTag 使用 Ultra Wideband 时，直接“精确查找”范围约为 30–100 米。理论上，其众包 Find My 范围不受限制——但前提是恰好有其他 iPhone 经过。Loko 在开阔地带的直接无线电范围最远可达 20km，完全不依赖他人的设备。</p>
+<h3>AirTag 能在偏远地区或森林中使用吗？</h3>
+<p>只能在你自己的 iPhone 的范围内使用。超出这个范围，只有当其他 Apple 设备从附近经过时位置才会更新，而在偏远地区这可能不会发生。此时“查找”会显示最后一次有设备接收到它的地点。</p>
 </div>
 <div class="faq-item">
-<h3>追踪宠物、行李或户外装备时，哪一种更好？</h3>
-<p>这取决于使用地点。在附近始终有 iPhone 用户的高密度城市环境中，AirTag 表现出色。对于偏远地区的宠物、徒步装备，或任何可能到达人流稀少地点的物品，Loko 这类 LoRa GPS 追踪器可靠得多，因为它不依赖他人的设备。</p>
+<h3>AirTag 的精确查找在日本可以使用吗？</h3>
+<p>Apple 表示，由于法规原因，第二代 AirTag 精确查找的扩展距离在日本不可用，而且在日本无法使用 Apple Watch 上的精确查找。</p>
+</div>
+<div class="faq-item">
+<h3>Loko 的距离是多少？</h3>
+<p>在开阔地带、Loko Air 追踪器与 Loko Ground 接收器之间视线无遮挡时可达 20 km 以上。树木、山丘和建筑物会缩短距离。Loko 不使用他人的手机，因此只会向无线电范围内的接收器报告位置。</p>
+</div>
+<div class="faq-item">
+<h3>宠物、行李或户外装备，哪个更合适？</h3>
+<p>对于城镇中的行李和日常物品，AirTag 更便宜，“查找”网络也能覆盖。对于宠物、牲畜或在很少有手机经过的地方使用的装备，Loko 会把自己的 GPS 位置直接发送到你随身携带的接收器。Loko 不防水，因此不适合会进水的物品。</p>
 </div>
 </div>
 </div>
@@ -458,16 +506,12 @@
 <div class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p>AirTag 是一款不错的 Bluetooth 信标。Loko 则是一款真正的 GPS 追踪器。如果您需要在真实环境中可靠定位——无论户外、偏远地区，还是不依赖他人的手机——选择显而易见。</p>
-<p><strong>Loko GPS 追踪器：真正的 GPS、20km 范围、无月费、随处可用。</strong></p>
-<p>前往以下页面了解完整产品详情： <a href="https://www.nolilab.com" style="color: var(--accent); font-weight: 500;">nolilab.com</a></p>
-<br/>
-<a class="cta-btn" href="/zh/#shop">购买 Loko →</a>
-</div>
+<p>AirTag 由周围的 Apple 设备找到。Loko 把自己的 GPS 位置发送到你随身携带的接收器，无需 SIM 卡，也无需订阅。</p>
+<p><strong>Loko 一套追踪器加接收器售价 $119。</strong></p><a class="cta-btn" href="/zh/#shop">购买 Loko →</a></div>
 </div>
 </div>
 </main>
-<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/zh/">Home</a></li><li><a href="/zh/about/">About</a></li><li><a href="/zh/accessories/">Accessories</a></li><li><a href="/zh/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/zh/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/zh/battery-life/">Battery Life</a></li><li><a href="/zh/blog/">Blog</a></li><li><a href="/zh/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/zh/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/zh/chirpstack/">ChirpStack</a></li><li><a href="/zh/contact/">Contact</a></li><li><a href="/zh/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/zh/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/zh/farms/">Farm GPS</a></li><li><a href="/zh/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/zh/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/zh/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/zh/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/zh/gps/">GPS & LoRa</a></li><li><a href="/zh/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/zh/hiking/">Hiking GPS</a></li><li><a href="/zh/how-gps-works/">How GPS Works</a></li><li><a href="/zh/hunting-dogs/">Hunting Dogs</a></li><li><a href="/zh/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/zh/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/zh/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/zh/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/zh/lorawan/">LoRaWAN</a></li><li><a href="/zh/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/zh/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/zh/open-source/">Open Source</a></li><li><a href="/zh/privacy/">Privacy</a></li><li><a href="/zh/search-rescue/">Search & Rescue</a></li><li><a href="/zh/setup-guides/">Setup</a></li><li><a href="/zh/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/zh/software/">Software</a></li><li><a href="/zh/specifications/">Specs</a></li><li><a href="/zh/tractive-alternative/">Tractive Alternative</a></li><li><a href="/zh/uk/">GPS Tracker UK</a></li><li><a href="/zh/uk/farms/">UK Farm GPS</a></li><li><a href="/zh/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/zh/usa/">GPS Tracker USA</a></li><li><a href="/zh/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<div id="site-footer"><nav aria-label="Site links" class="nav-fallback" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/accessories/">Accessories</a></li><li><a href="/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/battery-life/">Battery Life</a></li><li><a href="/blog/">Blog</a></li><li><a href="/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/chirpstack/">ChirpStack</a></li><li><a href="/contact/">Contact</a></li><li><a href="/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/farms/">Farm GPS</a></li><li><a href="/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/gps/">GPS &amp; LoRa</a></li><li><a href="/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/hiking/">Hiking GPS</a></li><li><a href="/how-gps-works/">How GPS Works</a></li><li><a href="/hunting-dogs/">Hunting Dogs</a></li><li><a href="/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/lorawan/">LoRaWAN</a></li><li><a href="/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/open-source/">Open Source</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/search-rescue/">Search &amp; Rescue</a></li><li><a href="/setup-guides/">Setup</a></li><li><a href="/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/software/">Software</a></li><li><a href="/specifications/">Specs</a></li><li><a href="/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
 <script defer="" src="/js/analytics.js"></script>
 </body>
 </html>
