@@ -468,6 +468,10 @@
   .fw-flash-btn-green:hover:not(:disabled) { background: #15803d !important; border-color: #15803d !important; }
   .fw-flash-btn-green:disabled { background: #16a34a !important; border-color: #16a34a !important; opacity: 0.45 !important; }
   .fw-version-badge { font-size: 0.72rem; font-weight: 500; background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 20px; }
+  .fw-version-badge.is-experimental { background: #fee2e2; color: #991b1b; }
+  .fw-source-options { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .fw-experimental-label { color: #dc2626; font-weight: 700; }
+  .fw-experimental-note { color: #dc2626; font-size: 0.85em; }
 </style>
 <script defer="" src="/js/layout.js?v=20261025"></script>
 
@@ -887,8 +891,11 @@
 <span class="fw-version-badge" id="fw-version-badge">v2.1.11 available</span>
 </div>
 <div class="field" style="margin-top:4px; margin-bottom:10px;">
+<div class="fw-source-options">
 <label class="fw-source-label"><input checked="" id="fw-source-bundled" name="airFwSource" type="radio"/> Latest (v2.1.11)</label>
-<label class="fw-source-label" style="margin-left:14px;"><input id="fw-source-custom" name="airFwSource" type="radio"/> Custom .bin</label>
+<label class="fw-source-label"><input id="fw-source-experimental" name="airFwSource" type="radio"/> <span class="fw-experimental-label">Experimental</span> <span class="fw-experimental-note">(Meshtastic connectivity)</span></label>
+<label class="fw-source-label"><input id="fw-source-custom" name="airFwSource" type="radio"/> Custom .bin</label>
+</div>
 <input accept=".bin,.hex" id="fw-custom-file" style="display:none; margin-top:8px;" type="file"/>
 </div>
 <button class="dark-button fw-flash-btn-green" disabled="" id="fw-flash-btn" style="width:100%" type="button">Flash Firmware</button>
@@ -1064,6 +1071,12 @@ const _STM32_FLASH_BASE = 0x08008000;
 const _STM32_FLASH_PAGE_SIZE = 2048;
 const _STM32_SRAM_BASE = 0x20000000;
 const _STM32_SRAM_END = 0x30000000;
+// Air firmware the Flash panel can download. Experimental is the Meshtastic
+// test build: it still reports v2.1.11 but is not that release.
+const _AIR_FIRMWARE_SOURCES = {
+  bundled: { url: '/air_firmware/loko_v2.1.11.hex', filename: 'loko_v2.1.11.hex', badge: 'v2.1.11 available', experimental: false },
+  experimental: { url: '/air_firmware/loko_v2.1.11-meshtastic-exp1.hex', filename: 'loko_v2.1.11-meshtastic-exp1.hex', badge: 'experimental', experimental: true },
+};
 
 async function _parseHexFile(content) {
   return new Promise((resolve) => {
@@ -1175,6 +1188,7 @@ class FirmwareUpdater {
       verificationBadge: document.getElementById('fw-verification-badge'),
       logContainer: document.getElementById('fw-log-container'),
       sourceBundled: document.getElementById('fw-source-bundled'),
+      sourceExperimental: document.getElementById('fw-source-experimental'),
       sourceCustom: document.getElementById('fw-source-custom'),
       customFile: document.getElementById('fw-custom-file'),
       versionBadge: document.getElementById('fw-version-badge'),
@@ -1194,14 +1208,17 @@ class FirmwareUpdater {
     if (this.elements.sourceCustom) {
       this.elements.sourceCustom.addEventListener('change', () => {
         this.elements.customFile.style.display = 'block';
-        if (this.elements.versionBadge) this.elements.versionBadge.textContent = 'custom .bin';
+        this.setVersionBadge('custom .bin', false);
       });
-      this.elements.sourceBundled.addEventListener('change', () => {
+      const useDownloadedFirmware = () => {
         this.elements.customFile.style.display = 'none';
         this.elements.customFile.value = '';
         this.firmwareData = null;
-        if (this.elements.versionBadge) this.elements.versionBadge.textContent = 'v2.1.11 available';
-      });
+        const source = this.selectedFirmwareSource();
+        this.setVersionBadge(source.badge, source.experimental);
+      };
+      this.elements.sourceBundled.addEventListener('change', useDownloadedFirmware);
+      if (this.elements.sourceExperimental) this.elements.sourceExperimental.addEventListener('change', useDownloadedFirmware);
       this.elements.customFile.addEventListener('change', this.handleFileSelect);
     }
     this.updateUI();
@@ -1328,12 +1345,25 @@ class FirmwareUpdater {
     else this.log('Please drop a .bin or .hex file', 'error');
   }
 
+  selectedFirmwareSource() {
+    return this.elements.sourceExperimental && this.elements.sourceExperimental.checked
+      ? _AIR_FIRMWARE_SOURCES.experimental
+      : _AIR_FIRMWARE_SOURCES.bundled;
+  }
+
+  setVersionBadge(text, experimental) {
+    if (!this.elements.versionBadge) return;
+    this.elements.versionBadge.textContent = text;
+    this.elements.versionBadge.classList.toggle('is-experimental', experimental);
+  }
+
   downloadLatestFirmware() {
+    const source = this.selectedFirmwareSource();
     const a = document.createElement('a');
-    a.href = '/air_firmware/loko_v2.1.11.hex';
-    a.download = 'loko_v2.1.11.hex';
+    a.href = source.url;
+    a.download = source.filename;
     a.click();
-    this.log('Downloading loko_v2.1.11.hex...');
+    this.log(`Downloading ${source.filename}...`);
   }
 
   async loadFirmware(file) {
@@ -1420,8 +1450,9 @@ class FirmwareUpdater {
   async fetchFirmware() {
     this.elements.downloadContainer.style.display = 'block';
     this.updateDownloadProgress(0, 'Downloading firmware...');
-    this.log('Downloading loko_v2.1.11.hex...');
-    const response = await fetch('/air_firmware/loko_v2.1.11.hex');
+    const source = this.selectedFirmwareSource();
+    this.log(`Downloading ${source.filename}...`);
+    const response = await fetch(source.url);
     if (!response.ok) throw new Error(`Firmware download failed: HTTP ${response.status}`);
     const contentLength = response.headers.get('Content-Length');
     const total = contentLength ? parseInt(contentLength) : 0;

@@ -434,3 +434,61 @@ test('Meshtastic mode stays hidden on firmware without it', async ({ page }) => 
   await page.locator('#saveButton').click();
   expect(await savedCommands(page)).toEqual(['set gnss mode 2', 'reset']);
 });
+
+// ── Air firmware sources ─────────────────────────────────────────────────────
+
+test('Air firmware: Experimental downloads the Meshtastic build, Latest stays on v2.1.11', async ({ page }) => {
+  await page.goto('/loko-config-tool/?map3d=0');
+  await page.getByRole('tab', { name: 'Firmware Update' }).click();
+  await expect(page.locator('#fw-log-container')).toContainText('Ready');
+
+  const badge = page.locator('#fw-version-badge');
+  await expect(badge).toHaveText('v2.1.11 available');
+
+  const requested = [];
+  page.on('request', (request) => {
+    const { pathname } = new URL(request.url());
+    if (pathname.startsWith('/air_firmware/')) requested.push(pathname);
+  });
+
+  // Runs the panel's own download + parse for whichever source is selected.
+  const fetchSelectedFirmware = () => page.evaluate(async () => {
+    const updater = new window.FirmwareUpdater();
+    updater.cacheElements();
+    await updater.fetchFirmware();
+    const data = updater.firmwareData;
+    const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
+    return {
+      base: updater.firmwareBaseAddress,
+      size: data.length,
+      stack: view.getUint32(0, true),
+      reset: view.getUint32(4, true),
+      lastWord: view.getUint32(data.length - 4, true),
+    };
+  });
+
+  await page.getByRole('radio', { name: /Experimental/ }).check();
+  await expect(page.getByText('(Meshtastic connectivity)')).toBeVisible();
+  await expect(badge).toHaveText('experimental');
+  await expect(badge).toHaveClass(/is-experimental/);
+
+  const experimental = await fetchSelectedFirmware();
+  expect(requested).toEqual(['/air_firmware/loko_v2.1.11-meshtastic-exp1.hex']);
+  expect(experimental.base).toBe(0x08008000);
+  expect(experimental.size).toBe(0x08025B20 - 0x08008000);
+  expect(experimental.stack).toBe(0x20010000);
+  expect(experimental.reset).toBeGreaterThan(experimental.base);
+  expect(experimental.reset).toBeLessThan(experimental.base + experimental.size);
+  // The bootloader's "no CRC" marker, as in the public release hex.
+  expect(experimental.lastWord).toBe(0x12345678);
+
+  requested.length = 0;
+  await page.getByRole('radio', { name: 'Latest (v2.1.11)' }).check();
+  await expect(badge).toHaveText('v2.1.11 available');
+  await expect(badge).not.toHaveClass(/is-experimental/);
+
+  const latest = await fetchSelectedFirmware();
+  expect(requested).toEqual(['/air_firmware/loko_v2.1.11.hex']);
+  expect(latest.base).toBe(0x08008000);
+  expect(latest.stack).toBe(0x20010000);
+});
