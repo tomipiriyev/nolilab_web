@@ -853,6 +853,29 @@
 <span aria-live="polite" class="save-status" id="groundSaveStatus"></span>
 </footer>
 </section>
+<section class="card workspace-card" id="groundMonitorCard">
+<div class="fw-row" style="margin-bottom:6px;">
+<span class="fw-label">Serial Monitor</span>
+<span class="fw-status-dot" id="groundMonitorDot"></span>
+</div>
+<p class="field-copy">Live serial output from the Ground Unit at 115200 baud. Everything the device prints appears here while connected — including messages sent outside of Read and Send.</p><div class="serial-terminal serial-terminal-tall">
+<div class="serial-terminal-bar">
+<span>Serial Output</span>
+<span class="serial-terminal-bar-actions">
+<label class="serial-terminal-toggle"><input checked="" id="groundTermAutoscroll" type="checkbox"/> Autoscroll</label>
+<label class="serial-terminal-toggle"><input id="groundTermTimestamps" type="checkbox"/> Timestamps</label>
+<button id="groundTermClearBtn" type="button">Clear</button>
+</span>
+</div>
+<div class="serial-terminal-output" id="groundTermOutput">
+<span class="term-line term-muted">Waiting for connection…</span>
+</div>
+<form class="serial-terminal-input" id="groundTermForm">
+<span class="serial-terminal-prompt">&gt;</span>
+<input autocomplete="off" disabled="" id="groundTermInput" placeholder="Type a command and press Enter (e.g. info)" spellcheck="false" type="text"/>
+<button class="serial-terminal-export" disabled="" id="groundTermExportBtn" type="button">↓ Export Log</button>
+</form>
+</div></section>
 </div>
 </div>
 <div class="main-panel" data-main-panel="firmware-updater" hidden="">
@@ -923,7 +946,6 @@
 </div>
 </div>
 <div class="device-panel" data-device-panel="fw-ground" hidden="">
-<div class="status-mirror" data-mirror="ground"></div>
 <section class="card workspace-card" id="groundFwCard">
 <div class="fw-row" style="margin-bottom:6px;">
 <span class="fw-label">Firmware Update</span>
@@ -937,7 +959,7 @@
 <li>Press and <strong>hold the IO button</strong>.</li>
 <li>While holding both IO and Power, press the <strong>EN (RESET)</strong> button once.</li>
 <li><strong>Release the IO button</strong> (keep holding Power).</li>
-<li>Press <strong>Flash Firmware</strong> below and select the serial port. You don't need the <strong>Connect</strong> button for this.</li>
+<li>Press <strong>Flash Firmware</strong> below and select the serial port.</li>
 <li>When the progress bar reaches <strong>100%</strong>, release the Power button.</li>
 <li>Press the <strong>EN (RESET)</strong> button once. Done.</li>
 </ol>
@@ -959,29 +981,7 @@
 </div>
 <p class="field-copy" style="margin-top:8px;">If flashing does not start, hold the <strong>BOOT</strong> button on the Ground Unit while clicking Flash Firmware.</p>
 </section>
-<section class="card workspace-card" id="groundMonitorCard">
-<div class="fw-row" style="margin-bottom:6px;">
-<span class="fw-label">Serial Monitor</span>
-<span class="fw-status-dot" id="groundMonitorDot"></span>
 </div>
-<p class="field-copy">Live serial output from the Ground Unit at 115200 baud. Everything the device prints appears here while connected — including messages sent outside of Read and Send.</p><div class="serial-terminal serial-terminal-tall">
-<div class="serial-terminal-bar">
-<span>Serial Output</span>
-<span class="serial-terminal-bar-actions">
-<label class="serial-terminal-toggle"><input checked="" id="groundTermAutoscroll" type="checkbox"/> Autoscroll</label>
-<label class="serial-terminal-toggle"><input id="groundTermTimestamps" type="checkbox"/> Timestamps</label>
-<button id="groundTermClearBtn" type="button">Clear</button>
-</span>
-</div>
-<div class="serial-terminal-output" id="groundTermOutput">
-<span class="term-line term-muted">Waiting for connection…</span>
-</div>
-<form class="serial-terminal-input" id="groundTermForm">
-<span class="serial-terminal-prompt">&gt;</span>
-<input autocomplete="off" disabled="" id="groundTermInput" placeholder="Type a command and press Enter (e.g. info)" spellcheck="false" type="text"/>
-<button class="serial-terminal-export" disabled="" id="groundTermExportBtn" type="button">↓ Export Log</button>
-</form>
-</div></section></div>
 </div><div class="main-panel" data-main-panel="gnss-trace" hidden="">
 <div class="status-mirror" data-mirror="air"></div>
 <section class="card gnss-trace-card">
