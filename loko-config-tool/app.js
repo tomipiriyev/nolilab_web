@@ -3966,7 +3966,7 @@ async function requestGroundDeviceInfo() {
         if (!groundConnectedPort) return;
         if (/Did not receive OK/i.test(error.message || "")) {
             await groundDisconnectPort();
-            window.alert("No response from Ground Unit… Make sure a Loko Ground Unit is connected.");
+            window.alert("No response from Ground Unit. Make sure it is switched on and running normally.\n\nUpdating firmware? You don't need Connect for that: put the unit in flash mode and press Flash Firmware.");
             return;
         }
         setGroundConnectionState(true, `Connected, info read failed: ${error.message || "unknown error"}`);
