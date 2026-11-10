@@ -7,8 +7,8 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/favicon.ico" rel="icon" sizes="any"/>
-<title>Traceur GPS sans Internet | Suivi GPS hors ligne | Loko</title>
-<meta content="Loko est un traceur GPS hors ligne qui fonctionne sans Internet, Wi-Fi ni données mobiles. Le GPS et la radio LoRa envoient la position à votre récepteur, sans abonnement." name="description"/>
+<title>Traceur GPS hors ligne : ce que « hors ligne » veut vraiment dire | Loko</title>
+<meta content="Quatre types de traceur GPS hors ligne comparés : enregistreur de données, radio LoRa, satellite et balise Bluetooth. Cinq questions pour choisir, un exemple de coût sur 3 ans et les limites de Loko." name="description"/>
 <meta content="gps tracker without internet, offline gps tracker, gps tracker without cell service, gps tracker no internet, gps tracker no cell service USA, offline gps tracker for rural America, gps tracker without phone signal" name="keywords"/>
 <meta content="nolilab" name="author"/>
 <meta content="index, follow, max-snippet:-1, max-image-preview:large" name="robots"/>
@@ -22,15 +22,15 @@
 <link href="https://www.nolilab.com/zh/gps-tracker-without-internet/" hreflang="zh" rel="alternate"/>
 <link href="https://www.nolilab.com/gps-tracker-without-internet/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="Traceur GPS sans Internet | Suivi GPS hors ligne | Loko" property="og:title"/>
-<meta content="Loko est un traceur GPS hors ligne qui fonctionne sans Internet, Wi-Fi ni données mobiles. Le GPS et la radio LoRa envoient la position à votre récepteur, sans abonnement." property="og:description"/>
+<meta content="Traceur GPS hors ligne : ce que « hors ligne » veut vraiment dire | Loko" property="og:title"/>
+<meta content="Quatre types de traceur GPS hors ligne comparés : enregistreur de données, radio LoRa, satellite et balise Bluetooth. Cinq questions pour choisir, un exemple de coût sur 3 ans et les limites de Loko." property="og:description"/>
 <meta content="https://www.nolilab.com/fr/gps-tracker-without-internet/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="fr_FR" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Traceur GPS sans Internet | Suivi GPS hors ligne | Loko" name="twitter:title"/>
-<meta content="Loko est un traceur GPS hors ligne qui fonctionne sans Internet, Wi-Fi ni données mobiles. Le GPS et la radio LoRa envoient la position à votre récepteur, sans abonnement." name="twitter:description"/>
+<meta content="Traceur GPS hors ligne : ce que « hors ligne » veut vraiment dire | Loko" name="twitter:title"/>
+<meta content="Quatre types de traceur GPS hors ligne comparés : enregistreur de données, radio LoRa, satellite et balise Bluetooth. Cinq questions pour choisir, un exemple de coût sur 3 ans et les limites de Loko." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -41,34 +41,58 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "GPS peut-il fonctionner sans Internet ?",
+      "name": "Le GPS fonctionne-t-il sans internet ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. Les satellites GPS fonctionnent sans Internet. Seuls les applications ou les traceurs qui dépendent du transfert de données via le cloud ont besoin d’Internet."
+        "text": "Oui. Un récepteur GPS calcule sa position uniquement à partir des signaux satellites. Internet ne compte que pour la façon dont la position vous est transmise et affichée."
       }
     },
     {
       "@type": "Question",
-      "name": "Loko peut-il afficher la position si mon téléphone n’a aucun signal ?",
+      "name": "Que signifie un traceur GPS hors ligne ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. Loko Ground reçoit le signal du traceur via LoRa et se connecte à votre téléphone par Bluetooth."
+        "text": "Cela signifie que le traceur n'utilise ni données mobiles ni Wi-Fi. Un enregistreur de données conserve le parcours jusqu'à ce que vous le récupériez, un traceur radio local comme Loko l'envoie à votre propre récepteur, et un traceur satellite l'envoie via un réseau de satellites."
       }
     },
     {
       "@type": "Question",
-      "name": "Loko a-t-il besoin du Wi-Fi ?",
+      "name": "Loko peut-il afficher la position si mon téléphone n'a pas de réseau ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Non. Le suivi P2P de Loko ne nécessite pas de Wi-Fi."
+        "text": "Oui. Loko Air envoie sa position par radio LoRa à Loko Ground, qui se connecte à votre téléphone en Bluetooth. Aucun des deux n'a besoin de données mobiles."
       }
     },
     {
       "@type": "Question",
-      "name": "Est-ce la même chose qu’un traceur satellite ?",
+      "name": "Quelle est la portée de Loko ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Non. Loko est un traceur GPS local utilisant la radio LoRa, et non un appareil de messagerie satellite."
+        "text": "Plus de 20 km en terrain dégagé avec visibilité directe. Les collines, les bâtiments, les arbres denses et une antenne basse la réduisent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que se passe-t-il quand Loko est hors de portée ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loko Air continue d'enregistrer jusqu'à 3 100 points. S'il reste 60 secondes sans position GPS, il envoie sa dernière position connue, et l'application ne vous signale pas que la position est ancienne."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Loko nécessite-t-il un abonnement ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Il n'y a ni carte SIM ni abonnement. Le pack Air + Ground coûte $119, et un Loko Air supplémentaire $59."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Loko est-il un traceur satellite ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Loko est un traceur radio LoRa local. Il n'envoie pas votre position à l'autre bout du monde et n'a pas de messagerie SOS."
       }
     }
   ]
@@ -86,7 +110,7 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Traceur GPS sans Internet",
+      "name": "Traceur GPS sans internet",
       "item": "https://www.nolilab.com/gps-tracker-without-internet/"
     }
   ]
@@ -142,6 +166,8 @@
   .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
   .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); background: var(--bg-primary); }
   .faq-item p { margin-bottom: 0; }
+  .content-block ul { padding-left: 1.25rem; color: var(--text-secondary); }
+  .content-block li { margin-bottom: 0.5rem; }
   a { color: var(--accent); }
   @media (max-width: 760px) {
     .nav-container { align-items: flex-start; flex-direction: column; }
@@ -158,69 +184,102 @@
 <main>
 <section class="page-hero">
 <div class="container">
-<h1>Traceur GPS sans Internet</h1>
-<p class="subtitle">Suivez la position là où les téléphones n’ont aucun signal de données et où les traceurs cloud cessent de s’actualiser.</p>
-<p><strong>Un traceur GPS peut calculer sa position sans Internet, car il reçoit directement les signaux des satellites de navigation.</strong> Ce qui varie, c’est la manière dont le traceur vous transmet cette position : les traceurs cloud utilisent les données cellulaires, tandis que les traceurs hors ligne utilisent une connexion locale telle que la radio LoRa.</p>
-<p>Loko est conçu pour le suivi hors ligne. Le traceur reçoit la position satellite et l’envoie par radio LoRa à votre récepteur portable, afin que les mises à jour de position puissent continuer dans les lieux sans Wi-Fi, sans données mobiles et sans connexion au cloud.</p>
+<h1>Traceur GPS hors ligne : ce que « hors ligne » veut vraiment dire</h1>
+<p class="subtitle">Quatre types de traceur fonctionnent sans internet sur le traceur, mais chacun vous transmet la position différemment.</p>
+<p><strong>Un récepteur GPS calcule sa position uniquement à partir des signaux satellites, sans internet.</strong> La vraie question est de savoir comment cette position vous parvient. Un enregistreur de données la garde jusqu'à ce que vous récupériez l'appareil. Un traceur radio local l'envoie à un récepteur que vous portez. Un traceur satellite l'envoie vers un réseau de satellites, et vous la consultez en ligne. Une balise Bluetooth n'a pas de GPS du tout : ce sont les téléphones à proximité qui signalent où ils l'ont détectée.</p>
+<p>Loko est un traceur radio local. Le traceur Loko Air envoie sa position GPS par radio LoRa à un récepteur Loko Ground, qui la transmet à l'application Loko sur votre téléphone en Bluetooth. Pas besoin de carte SIM, d'abonnement ni de données mobiles.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Comparatif rapide</h2>
+<h2>Quatre types de traceur hors ligne comparés</h2>
 <table class="compare-table">
-<thead><tr><th>Exigence</th><th>Traceur GPS cloud</th><th>Traceur hors ligne Loko</th></tr></thead>
+<thead><tr><th></th><th>Enregistreur de données GPS</th><th>Radio LoRa locale (Loko)</th><th>Traceur satellite</th><th>Balise Bluetooth</th></tr></thead>
 <tbody>
-<tr><td>Internet sur le traceur</td><td>Généralement via LTE</td><td>Non</td></tr>
-<tr><td>Internet sur le téléphone</td><td>Généralement requis</td><td>Non pour le suivi local</td></tr>
-<tr><td>Utilisation en forêt isolée</td><td>Seulement si un réseau cellulaire est disponible</td><td>Conçu pour cela</td></tr>
-<tr><td>Suivi local privé</td><td>Limité</td><td>Oui</td></tr>
-<tr><td>Frais récurrents</td><td>Courants</td><td>Sans abonnement</td></tr>
+<tr><td>Exemple</td><td>Columbus V-900</td><td>Loko Air + Loko Ground</td><td>SPOT Trace</td><td>Apple AirTag</td></tr>
+<tr><td>D'où vient la position</td><td>GPS dans l'appareil</td><td>GPS dans le traceur</td><td>GPS dans l'appareil</td><td>Pas de GPS ; les appareils Apple à proximité signalent la balise</td></tr>
+<tr><td>Comment elle vous parvient</td><td>Elle ne vous parvient pas avant que vous récupériez l'appareil et lisiez la carte mémoire</td><td>Radio LoRa vers votre Loko Ground, puis Bluetooth vers votre téléphone</td><td>Réseau satellite, puis un compte web ou une application</td><td>Le réseau Localiser d'Apple, via les iPhone et autres appareils Apple qui passent</td></tr>
+<tr><td>Position en direct ?</td><td>Non, le parcours se lit après coup</td><td>Oui, à portée radio</td><td>Oui, à l'intervalle de mise à jour du forfait</td><td>Seulement quand un appareil Apple passe à proximité</td></tr>
+<tr><td>Portée</td><td>Sans objet</td><td>Plus de 20 km en terrain dégagé avec visibilité directe ; moins en relief, en forêt et entre les bâtiments</td><td>Partout où le réseau satellite couvre</td><td>Dépend des endroits où passent des personnes avec des appareils Apple</td></tr>
+<tr><td>Internet nécessaire pour la voir</td><td>Non</td><td>Non</td><td>Oui, sur le téléphone ou l'ordinateur utilisé pour la consulter</td><td>Oui, Localiser a besoin du réseau</td></tr>
+<tr><td>Abonnement</td><td>Non</td><td>Non</td><td>Oui</td><td>Non</td></tr>
+</tbody>
+</table>
+<p style="margin-top: var(--spacing-sm);">Sources : pages produit du Columbus V-900 sur cbgps.com (la carte mémoire et le mode SPY sont des affirmations du fabricant), la page produit du SPOT Trace sur findmespot.com, et la page et la boutique Apple de l'AirTag (2e génération). Vérifié le 10 novembre 2026.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Les quatre types en pratique</h2>
+<h3>Enregistreur de données GPS</h3>
+<p>Un enregistreur note par où il est passé et conserve le parcours jusqu'à ce que vous le lisiez. Le Columbus V-900 enregistre les parcours sur une carte microSD. Son fabricant indique qu'un mode « SPY », qui réveille l'enregistreur à intervalles pour enregistrer puis le remet en veille, tient jusqu'à 30 jours (mesuré avec un intervalle de 15 minutes). Un enregistreur ne vous aide pas à retrouver ce que vous avez perdu, car vous ne voyez le parcours qu'une fois l'appareil de retour entre vos mains.</p>
+<h3>Traceur radio LoRa local</h3>
+<p>Un traceur LoRa envoie sa position à un récepteur qui vous appartient. Rien ne passe par un réseau téléphonique ni par un service cloud, donc il continue de fonctionner là où il n'y a aucune couverture. La limite est la portée radio : le traceur doit rester à portée de votre récepteur. C'est ainsi que fonctionne Loko.</p>
+<h3>Traceur satellite</h3>
+<p>Un traceur satellite envoie sa position à un réseau de satellites : il peut donc transmettre depuis des endroits sans couverture téléphonique et sans récepteur à proximité. Vous payez un forfait, et la personne qui consulte la position a toujours besoin d'une connexion internet.</p>
+<h3>Balise Bluetooth</h3>
+<p>Une balise Bluetooth comme l'AirTag n'a pas de GPS. Sa position vient des appareils Apple qui passent, la détectent et signalent où ils l'ont vue. En ville, cela fonctionne bien. Sur un sentier isolé sans personne autour, la balise cesse de se signaler. Pour une comparaison plus complète, voir <a href="/fr/airtag-vs-lora/">AirTag ou traceur LoRa</a>.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Cinq questions pour choisir</h2>
+<table class="compare-table">
+<thead><tr><th>Question</th><th>Si votre réponse est…</th><th>À regarder</th></tr></thead>
+<tbody>
+<tr><td>1. Avez-vous besoin de la position en direct, ou un parcours consulté après coup suffit-il ?</td><td>Après coup, cela suffit</td><td>Enregistreur de données GPS</td></tr>
+<tr><td>2. Le chien, drone, animal ou matériel suivi restera-t-il à quelques kilomètres de vous ?</td><td>Oui, et vous êtes à proximité avec un récepteur</td><td>Radio LoRa locale</td></tr>
+<tr><td>3. Quelqu'un de loin doit-il voir la position, ou pourrait-elle se retrouver n'importe où ?</td><td>Oui</td><td>Traceur satellite</td></tr>
+<tr><td>4. L'objet se perd-il surtout en ville, là où passent des personnes avec un iPhone ?</td><td>Oui, et vous utilisez un iPhone</td><td>Balise Bluetooth</td></tr>
+<tr><td>5. Accepteriez-vous de payer un abonnement mensuel ?</td><td>Non</td><td>Enregistreur, radio LoRa ou balise Bluetooth</td></tr>
 </tbody>
 </table>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Comment choisir un traceur GPS hors ligne</h2>
-<p>Commencez par déterminer la distance de récupération et la personne qui portera le récepteur. Comparez ensuite la taille du traceur, l’intervalle de mise à jour, la disponibilité des cartes, les hypothèses d’autonomie et le type de liaison radio.</p>
+<h2>Coût indicatif sur 3 ans</h2>
+<p>Il s'agit d'une illustration à partir des prix catalogue relevés le 10 novembre 2026, pas d'un devis. Les prix changent, et la livraison, les taxes et les accessoires ne sont pas inclus.</p>
 <table class="compare-table">
-<thead><tr><th>Question de l’acheteur</th><th>Réponse de Loko</th></tr></thead>
+<thead><tr><th>Traceur</th><th>Matériel</th><th>Service sur 3 ans</th><th>Total indicatif</th></tr></thead>
 <tbody>
-<tr><td>Quel matériel est nécessaire ?</td><td>Un traceur Loko Air et un récepteur Loko Ground compatible</td></tr>
-<tr><td>De quoi le téléphone a-t-il besoin ?</td><td>De Bluetooth et de l’application Loko ; les cartes peuvent être téléchargées pour une utilisation hors ligne</td></tr>
-<tr><td>Quelle est la taille du traceur ?</td><td>30 × 22 mm ; 14 g</td></tr>
-<tr><td>Quelle est la portée maximale annoncée ?</td><td>Jusqu’à 20 km en terrain dégagé avec visibilité directe</td></tr>
-<tr><td>Quel service continu est requis ?</td><td>Aucun abonnement mobile ou satellite pour le suivi LoRa P2P</td></tr>
+<tr><td>Loko (pack Air + Ground)</td><td>$119 ; la batterie 18650 du Ground n'est pas incluse</td><td>$0, sans abonnement</td><td>$119 plus une batterie 18650</td></tr>
+<tr><td>SPOT Trace, forfait Basic avec engagement</td><td>$129.99 au prix catalogue ($79.99 en promotion lors de notre vérification)</td><td>$29.95 d'activation + 36 × $11.95 = $460.15</td><td>$590.14 au prix catalogue ($540.14 au prix soldé)</td></tr>
+<tr><td>Apple AirTag</td><td>$29</td><td>$0</td><td>$29, mais il faut un iPhone ou un iPad et il ne fonctionne qu'à proximité d'appareils Apple</td></tr>
+<tr><td>Enregistreur Columbus V-900</td><td>Le site du fabricant n'indique pas de prix</td><td>$0</td><td>Non indiqué</td></tr>
 </tbody>
 </table>
-<p>Consultez <a href="/shop/">les options matérielles Loko actuelles</a>, puis vérifiez la fréquence de mise à jour et les détails de la radio régionale dans les <a href="/fr/specifications/">caractéristiques techniques</a>.</p>
+<p style="margin-top: var(--spacing-sm);">Le forfait Basic avec engagement de SPOT dure 12 mois et se renouvelle automatiquement. Les mises à jour plus rapides « Extreme Tracking » sont en supplément. Un Loko Air supplémentaire coûte $59.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Ce que signifie le suivi GPS hors ligne</h2>
-<p>Le suivi GPS hors ligne signifie que l’appareil peut calculer et partager sa position sans dépendre d’Internet. GPS fournit les coordonnées. Une liaison radio locale transmet ces coordonnées à la personne qui effectue le suivi.</p>
-<p>Cela diffère des cartes hors ligne. Celles-ci permettent à votre téléphone d’afficher le terrain sans données mobiles. Loko apporte l’élément manquant : une liaison radio entre l’objet suivi et vous.</p>
+<h2>Ce que fait Loko hors de portée</h2>
+<p>La liaison de Loko est locale : Loko Air → radio LoRa → Loko Ground → Bluetooth → l'application Loko. Comptez plus de 20 km en terrain dégagé avec visibilité directe. Les collines, les bâtiments, les arbres denses et une antenne basse la réduisent. Un Loko Ground peut suivre jusqu'à 30 traceurs.</p>
+<ul>
+<li><strong>Le traceur perd sa position GPS.</strong> Après 60 secondes sans position, Loko Air envoie sa dernière position connue. L'application ne signale pas que la position est ancienne : un point qui ne bouge plus n'indique donc pas forcément où se trouve le traceur maintenant.</li>
+<li><strong>Le traceur sort de la portée radio.</strong> Loko Air continue d'enregistrer ses positions, jusqu'à 3 100 points.</li>
+<li><strong>Votre téléphone se déconnecte de Loko Ground.</strong> Le Ground continue d'enregistrer les positions qu'il reçoit. Quand le téléphone se reconnecte, l'application ne charge pas ces positions enregistrées, donc le trou ne se comble pas sur la carte.</li>
+</ul>
+<p>L'autonomie dépend de l'intervalle de mise à jour. Les intervalles courts vident la batterie bien plus vite que les longs.</p>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
-<h2>Meilleurs endroits pour utiliser un traceur GPS sans Internet</h2>
-<p>Le suivi hors ligne est idéal en forêt, dans les exploitations agricoles, sur les sentiers de montagne, les terrains de vol de drones, les propriétés rurales, les chantiers, les zones de recherche et partout où le réseau mobile est faible. C’est également dans ces endroits que les balises Bluetooth cessent d’émettre, car un AirTag ne se met à jour que lorsqu’un iPhone à proximité relaie sa position ; les propriétaires de chiens ont généralement besoin d’un véritable GPS <a href="/fr/airtag-alternative-for-dogs/">alternative au AirTag pour les chiens</a>.</p>
-<p>La portée réelle dépend du terrain, du positionnement de l’antenne et de la visibilité directe. Les terrains dégagés offrent les meilleures performances. Les collines, les bâtiments, la végétation dense et une antenne placée trop bas réduisent la portée.</p>
-</div>
-</section>
-<section class="content-block">
-<div class="container">
-<h2>Limites à connaître</h2>
-<p>Loko n’est pas une messagerie satellite et ne transmet pas à lui seul votre position à quelqu’un situé à l’autre bout du monde. Il s’agit d’un système local de suivi radio longue portée.</p>
-<p>Pour les communications d’urgence bien au-delà de la portée radio locale, un communicateur satellite est la catégorie adaptée ; découvrez en quoi une <a href="/fr/garmin-inreach-alternative/">solution radio locale alternative au Garmin inReach</a> diffère. Pour la récupération locale et le suivi d’équipements sans Internet, Loko est mieux adapté.</p>
+<h2>Quand Loko n'est pas le bon choix</h2>
+<ul>
+<li><strong>Le traceur risque de finir très loin de votre récepteur.</strong> S'il est emporté en voiture ou sort de la portée, aucun réseau ne le capte. Un traceur satellite couvre ce cas.</li>
+<li><strong>Quelqu'un au loin doit vous suivre, ou vous avez besoin de messages SOS.</strong> Loko n'envoie pas votre position à l'autre bout du monde. C'est le rôle d'un communicateur satellite ; voyez en quoi diffère une <a href="/fr/garmin-inreach-alternative/">alternative radio locale au Garmin inReach</a>.</li>
+<li><strong>Il va être mouillé.</strong> Loko n'est pas étanche et ne supporte qu'une pluie légère.</li>
+<li><strong>Objets du quotidien en ville.</strong> Pour des clés et des sacs là où des iPhone passent toute la journée, un AirTag à $29 est plus simple.</li>
+<li><strong>Vous voulez seulement garder une trace de vos déplacements.</strong> Un enregistreur de données le fait sans récepteur.</li>
+</ul>
 </div>
 </section>
 <section class="content-block">
 <div class="container">
 <h2>Guides Loko associés</h2>
-<p>Pour en savoir plus, consultez le <a href="/fr/gps-tracker-without-cell-service/">guide du traceur GPS sans réseau mobile</a>, le <a href="/fr/lora-gps-tracker/">guide du traceur LoRa GPS</a>, le <a href="/fr/no-monthly-fee/">guide du traceur GPS sans frais mensuels</a>, ainsi que le <a href="/fr/blog/how-offline-gps-tracking-works/">guide du suivi GPS hors ligne</a>.</p>
+<p>Pour en savoir plus, lisez le <a href="/fr/gps-tracker-without-cell-service/">guide du traceur GPS sans réseau mobile</a>, le <a href="/fr/lora-gps-tracker/">guide du traceur GPS LoRa</a>, le <a href="/fr/no-monthly-fee/">guide du traceur GPS sans abonnement mensuel</a> et le <a href="/fr/blog/how-offline-gps-tracking-works/">guide du suivi GPS hors ligne</a>. Les propriétaires de chiens peuvent comparer une <a href="/fr/airtag-alternative-for-dogs/">alternative à l'AirTag avec vrai GPS pour chiens</a>. Tous les détails figurent dans les <a href="/fr/specifications/">spécifications techniques</a>.</p>
 </div>
 </section>
 <section class="content-block">
@@ -228,20 +287,32 @@
 <h2>FAQ</h2>
 <div class="faq-grid">
 <div class="faq-item">
-<h3>GPS peut-il fonctionner sans Internet ?</h3>
-<p>Oui. Les satellites GPS fonctionnent sans Internet. Seuls les applications ou les traceurs qui dépendent du transfert de données via le cloud ont besoin d’Internet.</p>
+<h3>Le GPS fonctionne-t-il sans internet ?</h3>
+<p>Oui. Un récepteur GPS calcule sa position uniquement à partir des signaux satellites. Internet ne compte que pour la façon dont la position vous est transmise et affichée.</p>
 </div>
 <div class="faq-item">
-<h3>Loko peut-il afficher la position si mon téléphone n’a aucun signal ?</h3>
-<p>Oui. Loko Ground reçoit le signal du traceur via LoRa et se connecte à votre téléphone par Bluetooth.</p>
+<h3>Que signifie un traceur GPS hors ligne ?</h3>
+<p>Cela signifie que le traceur n'utilise ni données mobiles ni Wi-Fi. Un enregistreur de données conserve le parcours jusqu'à ce que vous le récupériez, un traceur radio local comme Loko l'envoie à votre propre récepteur, et un traceur satellite l'envoie via un réseau de satellites.</p>
 </div>
 <div class="faq-item">
-<h3>Loko a-t-il besoin du Wi-Fi ?</h3>
-<p>Non. Le suivi P2P de Loko ne nécessite pas de Wi-Fi.</p>
+<h3>Loko peut-il afficher la position si mon téléphone n'a pas de réseau ?</h3>
+<p>Oui. Loko Air envoie sa position par radio LoRa à Loko Ground, qui se connecte à votre téléphone en Bluetooth. Aucun des deux n'a besoin de données mobiles.</p>
 </div>
 <div class="faq-item">
-<h3>Est-ce la même chose qu’un traceur satellite ?</h3>
-<p>Non. Loko est un traceur GPS local utilisant la radio LoRa, et non un appareil de messagerie satellite.</p>
+<h3>Quelle est la portée de Loko ?</h3>
+<p>Plus de 20 km en terrain dégagé avec visibilité directe. Les collines, les bâtiments, les arbres denses et une antenne basse la réduisent.</p>
+</div>
+<div class="faq-item">
+<h3>Que se passe-t-il quand Loko est hors de portée ?</h3>
+<p>Loko Air continue d'enregistrer jusqu'à 3 100 points. S'il reste 60 secondes sans position GPS, il envoie sa dernière position connue, et l'application ne vous signale pas que la position est ancienne.</p>
+</div>
+<div class="faq-item">
+<h3>Loko nécessite-t-il un abonnement ?</h3>
+<p>Non. Il n'y a ni carte SIM ni abonnement. Le pack Air + Ground coûte $119, et un Loko Air supplémentaire $59.</p>
+</div>
+<div class="faq-item">
+<h3>Loko est-il un traceur satellite ?</h3>
+<p>Non. Loko est un traceur radio LoRa local. Il n'envoie pas votre position à l'autre bout du monde et n'a pas de messagerie SOS.</p>
 </div>
 </div>
 </div>
@@ -249,7 +320,7 @@
 <section class="content-block" style="border-bottom: 0; padding-bottom: var(--spacing-xl);">
 <div class="container">
 <div class="cta-block">
-<p><strong>Le traceur GPS Loko utilise GPS et la radio LoRa pour assurer un suivi local sans carte SIM, Internet ni abonnement mensuel.</strong></p>
+<p><strong>Loko utilise le GPS et la radio LoRa pour suivre localement, sans carte SIM, internet ni abonnement. Pack Air + Ground $119 ; Loko Air supplémentaire $59.</strong></p>
 <a class="cta-btn" href="/shop/">Acheter Loko</a>
 </div>
 </div>
