@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<link href="/css/partials.css?v=20260906" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5" name="viewport"/>
+<title>868 vs 915 MHz: Which LoRa Frequency to Use, and How to Set It on Loko | nolilab</title>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link href="https://cdnjs.cloudflare.com" rel="dns-prefetch"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="/css/fa-subset.css" rel="stylesheet"/>
+<meta content="868 or 915 MHz? See the common LoRa bands by region, why the choice barely changes range, how duty-cycle limits work, and how to set Loko's frequency." name="description"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="article" property="og:type"/>
+<meta content="868 vs 915 MHz: Which LoRa Frequency to Use, and How to Set It on Loko | nolilab" property="og:title"/>
+<meta content="868 or 915 MHz? See the common LoRa bands by region, why the choice barely changes range, how duty-cycle limits work, and how to set Loko's frequency." property="og:description"/>
+<meta content="https://www.nolilab.com/lora-frequency/" property="og:url"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
+<meta content="Loko GPS Tracker" property="og:image:alt"/>
+<meta content="nolilab" property="og:site_name"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="868 vs 915 MHz: Which LoRa Frequency to Use, and How to Set It on Loko | nolilab" name="twitter:title"/>
+<meta content="868 or 915 MHz? See the common LoRa bands by region, why the choice barely changes range, how duty-cycle limits work, and how to set Loko's frequency." name="twitter:description"/>
+<meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
+<meta content="@nolilab" name="twitter:site"/>
+<meta content="LoRa frequency, 868 vs 915 MHz, LoRa band by country, 868 MHz duty cycle, Loko frequency setup" name="keywords"/>
+<meta content="nolilab" name="author"/>
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+<link href="https://www.nolilab.com/lora-frequency/" rel="canonical"/>
+<link href="https://www.nolilab.com/lora-frequency/" hreflang="en" rel="alternate"/>
+<link href="https://www.nolilab.com/lora-frequency/" hreflang="x-default" rel="alternate"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does 915 MHz reach further than 868 MHz?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not in any way you would notice. In free space the difference in path loss between 868 and 915 MHz is about 0.5 dB. Line of sight, antenna height and obstacles matter far more. Loko's range is 20+ km in open areas with line of sight, and we do not publish separate figures for each frequency."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a licence to use Loko?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We cannot tell you whether your use is permitted. Licence-exempt bands come with conditions on frequency, power and how often you transmit, and the rules also cover the equipment itself. Loko holds no certification. Check with your national regulator before you use it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which frequency should I use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use a band your country allows for this kind of device. Common examples are 863–870 MHz in Europe and the UK, 902–928 MHz in the United States, 915–928 MHz in Australia and 920.5–928.1 MHz in Japan, each with its own conditions. Loko can be set anywhere from 860 to 926 MHz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can trackers on one Loko Ground use different frequencies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Loko Air and the Loko Ground must be set to exactly the same frequency and matching IDs, or the Ground will not receive anything. More than one Ground can receive the same Air if each Ground is set to the same frequency and ID."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the update interval change the range?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The update interval changes how often the tracker transmits and how fast the battery drains, not how far each transmission reaches. In Europe, how often you transmit is also limited by the duty-cycle rule of the sub-band you choose."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.nolilab.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "LoRa Frequency: 868 vs 915 MHz",
+      "item": "https://www.nolilab.com/lora-frequency/"
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --text-primary: #24292e;
+    --text-secondary: #57606a;
+    --accent: #238636;
+    --accent-hover: #2ea043;
+    --border: #d0d7de;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 var(--spacing-sm); }
+  header { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border); }
+  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-sm); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.25rem; font-weight: 500; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--spacing-lg); align-items: center; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.875rem; transition: color 0.2s ease; }
+  .nav-link:hover { color: var(--text-primary); }
+  .language-selector { margin-left: var(--spacing-sm); }
+  .language-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s ease; }
+  .language-btn:hover { border-color: var(--accent); }
+  .current-lang { font-weight: 600; }
+  .language-dropdown { position: absolute; top: calc(100% + 0.5rem); right: 0; background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 1000; }
+  .language-selector:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .language-option { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; color: var(--text-primary); text-decoration: none; transition: background 0.2s ease; border-bottom: 1px solid var(--border); }
+  .language-option:last-child { border-bottom: none; }
+  .language-option:hover { background: var(--bg-secondary); }
+  .lang-code { font-weight: 600; font-size: 0.875rem; }
+  .lang-name { font-size: 0.875rem; color: var(--text-secondary); }
+  .mobile-menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1001; margin-left: auto; }
+  .mobile-menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+  .page-hero { padding: var(--spacing-xl) 0 var(--spacing-lg); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .page-hero h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.2; }
+  .page-hero .subtitle { font-size: 1.125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .page-hero p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+  .page-hero strong { color: var(--text-primary); }
+
+  .content-block { padding: var(--spacing-lg) 0; border-bottom: 1px solid var(--border); }
+  .content-block:last-child { border-bottom: none; }
+  .content-block h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: var(--spacing-sm); font-family: var(--font-mono); }
+  .content-block p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--text-primary); font-weight: 600; }
+  .content-block ul, .content-block ol { margin: 0.5rem 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .content-block li { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--spacing-sm) 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .compare-table thead { background: var(--bg-secondary); border-bottom: 2px solid var(--border); }
+  .compare-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.8125rem; }
+  .compare-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 500; color: var(--text-primary); }
+  .yes { color: var(--accent); font-weight: 700; }
+  .no { color: #cf222e; font-weight: 700; }
+
+  .cta-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-lg) var(--spacing-xl); text-align: center; margin: var(--spacing-sm) 0 0; }
+  .cta-block p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .cta-block strong { color: var(--text-primary); }
+  .cta-btn { display: inline-flex; padding: 0.65rem 1.5rem; background: var(--text-primary); color: #fff; text-decoration: none; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease; }
+  .cta-btn:hover { background: var(--accent); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-primary); }
+  .faq-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+  @media (max-width: 768px) {
+    .nav-container { flex-direction: row; justify-content: space-between; }
+    .mobile-menu-toggle { display: flex; }
+    .nav-links { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); flex-direction: column; gap: 0; padding: 80px 1.5rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.2); transition: left 0.3s ease; z-index: 1000; overflow-y: auto; border-right: 1px solid var(--border); }
+    .nav-links.active { left: 0; }
+    .nav-link { width: 100%; padding: 1.5rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 1rem; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; }
+    body.menu-open { overflow: hidden; }
+    .compare-table { font-size: 0.8rem; }
+    .compare-table th, .compare-table td { padding: 0.5rem 0.6rem; }
+    .cta-block { padding: var(--spacing-lg) var(--spacing-sm); }
+  }
+</style>
+<style>
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.64%;
+  }
+</style>
+<script defer="" src="/js/layout.js?v=20261110"></script>
+
+
+
+
+
+<style>
+  .faq-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--spacing-sm); }
+  .faq-item { border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--spacing-md); background:var(--bg-primary); }
+  .faq-item h3 { font-size:0.9375rem; font-weight:600; color:var(--text-primary); margin-bottom:0.5rem; }
+  .faq-item p { margin-bottom:0; }
+  .notice { border-left:3px solid #cf222e; background:var(--bg-secondary); padding:var(--spacing-sm) var(--spacing-md); border-radius:var(--radius-sm); }
+  .updated { font-size:0.8125rem; color:var(--text-secondary); }
+  @media (max-width:760px) { .compare-table{font-size:0.8rem;} .compare-table th,.compare-table td{padding:0.55rem 0.65rem;} .faq-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<div class="page-hero">
+<div class="container">
+<h1>868 vs 915 MHz: Which LoRa Frequency to Use</h1>
+<p class="subtitle">And how to set it on Loko</p>
+<p>Most LoRa trackers ship locked to one regional band. Loko does not: you set its frequency yourself, anywhere from 860 to 926 MHz. That makes the choice of band yours, and it has to suit the rules where you use the tracker.</p>
+<p>This page shows the common bands by region, why 868 versus 915 MHz makes almost no difference to range, how Europe's duty-cycle limits work, and how to set the frequency on Loko.</p>
+<p class="updated">Updated 11 November 2026. Band rules checked on the regulators' own documents on that date.</p>
+</div>
+</div>
+<section class="content-block">
+<div class="container">
+<p class="notice"><strong>Loko holds no certification.</strong> Licence-exempt bands come with conditions on frequency, power and how often you transmit, and the rules also cover the equipment itself. This page is general information, not legal advice. Check with your national regulator before you use Loko.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Common LoRa Bands by Region</h2>
+<div style="overflow-x:auto;">
+<table class="compare-table">
+<thead>
+<tr><th>Region</th><th>Band</th><th>Rules</th><th>Main conditions</th></tr>
+</thead>
+<tbody>
+<tr><td>Europe (CEPT)</td><td>863–870 MHz</td><td>ERC Recommendation 70-03, Annex 1 (February 2025 edition)</td><td>Split into sub-bands. Most allow 25 mW e.r.p. with a 0.1% or 1% duty cycle (or listen-before-talk); 869.4–869.65 MHz allows 500 mW at 10%.</td></tr>
+<tr><td>United Kingdom</td><td>863–870 MHz</td><td>Ofcom IR 2030</td><td>Sets the conditions for licence-exempt short range devices. Suppliers must make sure equipment meets UK law before it is sold or used.</td></tr>
+<tr><td>United States</td><td>902–928 MHz</td><td>FCC Part 15 (including §15.247)</td><td>Limits on power, with bandwidth or frequency-hopping requirements.</td></tr>
+<tr><td>Australia</td><td>915–928 MHz</td><td>LIPD Class Licence 2025 (from 1 October 2025)</td><td>3 mW EIRP for any device; up to 1 W for digital modulation or frequency hopping that meets extra conditions.</td></tr>
+<tr><td>Japan</td><td>920.5–928.1 MHz</td><td>MIC rules for specified low-power radio stations (特定小電力無線局)</td><td>No licence needed, but only with certified (技適-marked) equipment. Medium-power devices: 20 mW, with carrier sense and limits on transmit time.</td></tr>
+</tbody>
+</table>
+</div>
+<p>Sources: <a href="https://docdb.cept.org/download/4635" rel="noopener">ERC Recommendation 70-03</a>, <a href="https://www.ofcom.org.uk/spectrum/radio-equipment/short-range-devices" rel="noopener">Ofcom short-range devices</a>, <a href="https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247" rel="noopener">47 CFR §15.247</a>, <a href="https://www.legislation.gov.au/F2025L01047/asmade/2025-09-05/text/original/pdf" rel="noopener">LIPD Class Licence 2025</a>, <a href="https://www.tele.soumu.go.jp/j/adm/system/ml/920mhz/index.htm" rel="noopener">MIC 920 MHz band</a>. Rules change, and other countries have their own; your national regulator has the final word.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Does 868 vs 915 MHz Change Range?</h2>
+<p>Hardly. In free space, path loss grows with frequency, and the difference between 868 and 915 MHz works out to 20 × log<sub>10</sub>(915 ÷ 868) ≈ 0.5 dB. That is too small to notice in the field.</p>
+<p>What changes range is everything else: line of sight, how high the antennas are, and what stands between the tracker and the receiver. Loko's range is 20+ km in open areas with line of sight, and much less among trees, hills and buildings. Changing the update interval does not change the range.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>How Europe's Duty-Cycle Limits Cap Your Update Interval</h2>
+<p>In most of the European 863–870 MHz sub-bands, a device may only be on air for a small share of the time:</p>
+<ul>
+<li><strong>1% duty cycle:</strong> at most 36 seconds of transmitting per hour.</li>
+<li><strong>0.1% duty cycle:</strong> at most 3.6 seconds per hour.</li>
+<li><strong>10% (869.4–869.65 MHz only):</strong> at most 6 minutes per hour.</li>
+</ul>
+<p>How long each transmission lasts depends on the spreading factor, bandwidth and packet size. Loko's direct (P2P) mode uses spreading factor 12, the LoRa setting with the longest time on air, at 125 kHz bandwidth. We have not published its packet size, so we cannot give a minimum interval for Loko.</p>
+<p><strong>Illustrative example, not Loko's figures:</strong> if one transmission took 0.1 seconds on air, a 1% sub-band would allow up to 360 transmissions an hour (one every 10 seconds), and a 0.1% sub-band up to 36 (one every 100 seconds). A longer transmission means a longer minimum interval.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>How to Set the Frequency on Loko</h2>
+<ol>
+<li>Open the <a href="/loko-config-tool/">Loko configurator</a> in Chrome or Edge. Firefox and Safari do not support the Web Serial connection it needs.</li>
+<li>Connect the Loko Air by USB-C and click <strong>Connect</strong>. On the Configuration tab, set <strong>frequency</strong> (860–926 MHz) and the pairing IDs <strong>id1</strong> and <strong>id2</strong>, then click <strong>Save Changes</strong>.</li>
+<li>Connect the Loko Ground and open the <strong>Ground Unit</strong> tab. Click <strong>Read</strong>, set <strong>frequency_hz</strong> to the same frequency in hertz (for example 868000000 for 868 MHz) and <strong>id2</strong> to match the Air, then click <strong>Send</strong>.</li>
+<li>Repeat step 2 for every Air you want on that Ground. Each one must use the same frequency and matching IDs.</li>
+</ol>
+<p>More than one Ground can receive the same Air if each Ground is set to the same frequency and ID. The Loko Air's transmit power (tx_power) defaults to 8 dBm and can be changed in the configurator; if you change it, keep within your band's power limit. Full steps are in the <a href="/setup-guides/">setup guide</a>.</p>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Where Loko Can't Go</h2>
+<p>Loko works only between 860 and 926 MHz. It cannot use:</p>
+<ul>
+<li>bands below 860 MHz, such as 433 MHz or the LoRaWAN plans CN470-510 (470–510 MHz) and CN779-787 (779–787 MHz);</li>
+<li>anything above 926 MHz, including the top of the 902–928 MHz and 915–928 MHz bands.</li>
+</ul>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Common Mistakes</h2>
+<ul>
+<li><strong>Air and Ground on different settings:</strong> if the frequency or IDs don't match exactly, the Ground receives nothing.</li>
+<li><strong>Wrong units on the Ground:</strong> the Ground's field is in hertz, so 868 MHz is entered as 868000000.</li>
+<li><strong>Bringing your home settings abroad:</strong> a US or Australian frequency is not a European band, and the reverse is also true. Check before you travel.</li>
+<li><strong>Short intervals in a duty-cycled band:</strong> in Europe, transmitting very often can exceed the sub-band's duty cycle.</li>
+<li><strong>Assuming licence-exempt means no rules:</strong> frequency, power, duty cycle and the equipment itself are all covered.</li>
+</ul>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>FAQ</h2>
+<div class="faq-grid">
+<div class="faq-item">
+<h3>Does 915 MHz reach further than 868 MHz?</h3>
+<p>Not in any way you would notice. In free space the difference in path loss between 868 and 915 MHz is about 0.5 dB. Line of sight, antenna height and obstacles matter far more. Loko's range is 20+ km in open areas with line of sight, and we do not publish separate figures for each frequency.</p>
+</div>
+<div class="faq-item">
+<h3>Do I need a licence to use Loko?</h3>
+<p>We cannot tell you whether your use is permitted. Licence-exempt bands come with conditions on frequency, power and how often you transmit, and the rules also cover the equipment itself. Loko holds no certification. Check with your national regulator before you use it.</p>
+</div>
+<div class="faq-item">
+<h3>Which frequency should I use?</h3>
+<p>Use a band your country allows for this kind of device. Common examples are 863–870 MHz in Europe and the UK, 902–928 MHz in the United States, 915–928 MHz in Australia and 920.5–928.1 MHz in Japan, each with its own conditions. Loko can be set anywhere from 860 to 926 MHz.</p>
+</div>
+<div class="faq-item">
+<h3>Can trackers on one Loko Ground use different frequencies?</h3>
+<p>No. The Loko Air and the Loko Ground must be set to exactly the same frequency and matching IDs, or the Ground will not receive anything. More than one Ground can receive the same Air if each Ground is set to the same frequency and ID.</p>
+</div>
+<div class="faq-item">
+<h3>Does the update interval change the range?</h3>
+<p>No. The update interval changes how often the tracker transmits and how fast the battery drains, not how far each transmission reaches. In Europe, how often you transmit is also limited by the duty-cycle rule of the sub-band you choose.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="content-block">
+<div class="container">
+<h2>Related Guides</h2>
+<p>Read the <a href="/setup-guides/">Loko setup guide</a>, the <a href="/specifications/">Loko specifications</a> and the <a href="/lora-gps-tracker/">LoRa GPS tracker overview</a>.</p>
+</div>
+</section>
+<section class="content-block" style="border-bottom: none; padding-bottom: var(--spacing-xl);">
+<div class="container">
+<div class="cta-block">
+<p><strong>One tracker, any frequency from 860 to 926 MHz, set by you.</strong></p>
+<a class="cta-btn" href="/#shop">Shop Loko →</a>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer"><nav class="nav-fallback" aria-label="Site links" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0"><ul><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/accessories/">Accessories</a></li><li><a href="/airtag-alternative-for-dogs/">AirTag Dog Alternative</a></li><li><a href="/airtag-vs-lora/">AirTag vs LoRa</a></li><li><a href="/battery-life/">Battery Life</a></li><li><a href="/blog/">Blog</a></li><li><a href="/blog/how-offline-gps-tracking-works/">How Offline Tracking Works</a></li><li><a href="/blog/lora-gps-tracker-for-dogs/">GPS for Dogs</a></li><li><a href="/chirpstack/">ChirpStack</a></li><li><a href="/contact/">Contact</a></li><li><a href="/dog-gps-tracker-no-subscription/">Dog GPS No Fee</a></li><li><a href="/drone-recovery-gps-tracker/">Drone Recovery GPS</a></li><li><a href="/farms/">Farm GPS</a></li><li><a href="/garmin-inreach-alternative/">inReach Alternative</a></li><li><a href="/gps-tracker-for-remote-areas/">Remote Area GPS</a></li><li><a href="/gps-tracker-no-sim-card/">No SIM GPS</a></li><li><a href="/gps-tracker-without-internet/">No Internet GPS</a></li><li><a href="/gps/">GPS & LoRa</a></li><li><a href="/hiking-gps-tracker-no-cell-service/">No Cell Hiking GPS</a></li><li><a href="/hiking/">Hiking GPS</a></li><li><a href="/how-gps-works/">How GPS Works</a></li><li><a href="/hunting-dogs/">Hunting Dogs</a></li><li><a href="/livestock-gps-tracker/">Livestock GPS</a></li><li><a href="/loko-vstractive/">Loko vs Tractive</a></li><li><a href="/lora-gps-tracker/">LoRa GPS</a></li><li><a href="/lora-vs-cellular-gps-tracker/">LoRa vs Cellular</a></li><li><a href="/lorawan/">LoRaWAN</a></li><li><a href="/no-monthly-fee/">No Monthly Fee</a></li><li><a href="/off-grid-gps-tracker/">Off-Grid GPS</a></li><li><a href="/open-source/">Open Source</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/search-rescue/">Search & Rescue</a></li><li><a href="/setup-guides/">Setup</a></li><li><a href="/smallest-gps-tracker/">Smallest Tracker</a></li><li><a href="/software/">Software</a></li><li><a href="/specifications/">Specs</a></li><li><a href="/tractive-alternative/">Tractive Alternative</a></li><li><a href="/uk/">GPS Tracker UK</a></li><li><a href="/uk/farms/">UK Farm GPS</a></li><li><a href="/uk/hunting-dogs/">UK Hunting Dog GPS</a></li><li><a href="/usa/">GPS Tracker USA</a></li><li><a href="/wildlife-gps-tracker/">Wildlife GPS</a></li></ul><ul><li><a href="/es/">Spanish</a></li><li><a href="/fr/">French</a></li><li><a href="/ja/">Japanese</a></li><li><a href="/ru/">Russian</a></li><li><a href="/zh/">Chinese (Simplified)</a></li><li><a href="/">English</a></li></ul></nav></div>
+<script defer="" src="/js/analytics.js"></script>
+</body>
+</html>
