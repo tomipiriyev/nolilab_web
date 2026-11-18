@@ -494,6 +494,19 @@
   .bullet-list li strong { color: var(--text-primary); }
   .doc-table td.wrap, .doc-table td:first-child.wrap { white-space: normal; }
   @media (max-width: 640px) { .unit-cards { grid-template-columns: 1fr; } }
+
+  /* iPhone frame for app screenshots */
+  .phone-figure { display: flex; gap: 2rem; align-items: center; margin: 1.5rem 0; }
+  .phone-figure figcaption { flex: 1; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+  .phone-figure figcaption strong { color: var(--text-primary); }
+  .phone-figure .phone-legend { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .phone-figure .phone-legend li { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.3rem 0; }
+  .phone-num { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #e11d48; color: #fff; font-size: 0.8rem; font-weight: 600; }
+  .iphone { flex: none; display: block; width: 250px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.18)); }
+  @media (max-width: 640px) {
+    .phone-figure { flex-direction: column; align-items: center; gap: 1rem; }
+    .iphone { width: 230px; }
+  }
 </style>
 <style>
   @font-face {
@@ -701,6 +714,10 @@
 <li>Нажмите <strong>Connect</strong> рядом с <strong>LOKO</strong>. LED Loko Ground загорится <strong>постоянным синим</strong>, когда устройство подключится к телефону.</li>
 <li>Нажмите на карту, чтобы закрыть меню.</li>
 </ol>
+<figure class="phone-figure">
+<img alt="Меню приложения Loko: Bluetooth, LoRaWAN, Geo-Fences, Offline Maps, Archive, Logs, Map Style, Language и Settings" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-menu-iphone.webp" width="762"/>
+<figcaption>Меню приложения Loko. Нажмите здесь <strong>Bluetooth</strong>, затем <strong>Scan</strong>, чтобы найти Loko Ground. В этом же меню — ваши трекеры (DEVICES), Geo-Fences, Offline Maps, Archive, Map Style, Language и Settings.</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Проверка:</span> Постоянный синий означает, что Loko Ground подключён к телефону. Это не значит, что позиция от Loko Air уже получена.</div>
 </section>
 <!-- Step 4: Turn on Loko Air outdoors -->
@@ -723,6 +740,18 @@
 <li>Дождитесь круглого маркера с <strong>ID1</strong> трекера. По умолчанию он красный и появляется, когда приложение получает позицию от Loko Air.</li>
 <li>Нажмите на маркер, чтобы увидеть данные трекера: позицию, заряд, время последней позиции и расстояние до вас.</li>
 </ol>
+<figure class="phone-figure">
+<img alt="Главная карта приложения Loko с пронумерованными элементами: меню, компас, ползунок масштаба, моё местоположение и ваша позиция" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-main-map-iphone.webp" width="762"/>
+<figcaption><strong>Главная карта</strong>
+<ul class="phone-legend">
+<li><span class="phone-num">1</span><span><strong>Меню:</strong> ваши трекеры и все функции приложения.</span></li>
+<li><span class="phone-num">2</span><span><strong>Компас:</strong> нажмите, чтобы повернуть карту севером вверх.</span></li>
+<li><span class="phone-num">3</span><span><strong>Ползунок масштаба:</strong> вверх — приблизить, вниз — отдалить. Можно также сводить и разводить пальцы.</span></li>
+<li><span class="phone-num">4</span><span><strong>Моё местоположение:</strong> переносит карту к вам и следует за вами.</span></li>
+<li><span class="phone-num">5</span><span><strong>Ваша позиция:</strong> синяя точка — ваш телефон, конус показывает, куда он направлен.</span></li>
+</ul>
+</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Проверка:</span> Маркер с ID1 подтверждает, что позиция прошла от Loko Air через Loko Ground в приложение.</div>
 <div class="note-box"><span class="note-label">Совет:</span> Прежде чем уйти из зоны интернета, скачайте карты своего района: меню → <strong>Offline Maps</strong> → <strong>+ Download New Zone</strong>. Отслеживание работает без интернета, но карта показывает только скачанные районы. Офлайн выберите в <strong>Map Style</strong> стиль, соответствующий скачанному источнику карты.</div>
 </section>

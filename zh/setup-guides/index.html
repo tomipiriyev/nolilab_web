@@ -494,6 +494,19 @@
   .bullet-list li strong { color: var(--text-primary); }
   .doc-table td.wrap, .doc-table td:first-child.wrap { white-space: normal; }
   @media (max-width: 640px) { .unit-cards { grid-template-columns: 1fr; } }
+
+  /* iPhone frame for app screenshots */
+  .phone-figure { display: flex; gap: 2rem; align-items: center; margin: 1.5rem 0; }
+  .phone-figure figcaption { flex: 1; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+  .phone-figure figcaption strong { color: var(--text-primary); }
+  .phone-figure .phone-legend { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .phone-figure .phone-legend li { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.3rem 0; }
+  .phone-num { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #e11d48; color: #fff; font-size: 0.8rem; font-weight: 600; }
+  .iphone { flex: none; display: block; width: 250px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.18)); }
+  @media (max-width: 640px) {
+    .phone-figure { flex-direction: column; align-items: center; gap: 1rem; }
+    .iphone { width: 230px; }
+  }
 </style>
 <style>
   @font-face {
@@ -701,6 +714,10 @@
 <li>点按 <strong>LOKO</strong> 旁边的 <strong>Connect</strong>。连接到手机后,Loko Ground 的 LED 变为<strong>蓝色常亮</strong>。</li>
 <li>点按地图关闭菜单。</li>
 </ol>
+<figure class="phone-figure">
+<img alt="Loko 应用菜单:Bluetooth、LoRaWAN、Geo-Fences、Offline Maps、Archive、Logs、Map Style、Language 和 Settings" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-menu-iphone.webp" width="762"/>
+<figcaption>Loko 应用菜单。在这里点按 <strong>Bluetooth</strong>,再点按 <strong>Scan</strong>,即可找到 Loko Ground。该菜单还包含追踪器列表(DEVICES)、Geo-Fences、Offline Maps、Archive、Map Style、Language 和 Settings。</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">确认:</span> 蓝色常亮表示 Loko Ground 已连接到手机,并不表示已收到来自 Loko Air 的位置。</div>
 </section>
 <!-- Step 4: Turn on Loko Air outdoors -->
@@ -723,6 +740,18 @@
 <li>等待地图上出现带有追踪器 <strong>ID1</strong> 的圆形标记。默认为红色,应用收到 Loko Air 的位置后出现。</li>
 <li>点按标记查看追踪器详情:位置、电量、最后位置的时间以及与您的距离。</li>
 </ol>
+<figure class="phone-figure">
+<img alt="带编号控件的 Loko 应用主地图:菜单、指南针、缩放滑块、我的位置和您的位置" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-main-map-iphone.webp" width="762"/>
+<figcaption><strong>主地图</strong>
+<ul class="phone-legend">
+<li><span class="phone-num">1</span><span><strong>菜单:</strong>您的追踪器和应用的全部功能。</span></li>
+<li><span class="phone-num">2</span><span><strong>指南针:</strong>点按可将地图转回正北朝上。</span></li>
+<li><span class="phone-num">3</span><span><strong>缩放滑块:</strong>向上拖动放大,向下拖动缩小。也可以双指缩放地图。</span></li>
+<li><span class="phone-num">4</span><span><strong>我的位置:</strong>将地图移到您的位置并持续跟随。</span></li>
+<li><span class="phone-num">5</span><span><strong>您的位置:</strong>蓝点是您的手机,扇形表示手机朝向。</span></li>
+</ul>
+</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">确认:</span> ID1 标记表示位置已从 Loko Air 经 Loko Ground 传到应用。</div>
 <div class="note-box"><span class="note-label">提示:</span> 离开网络覆盖范围前,请下载所在区域的地图:菜单 → <strong>Offline Maps</strong> → <strong>+ Download New Zone</strong>。追踪无需网络,但地图只显示已下载的区域。离线时,请在 <strong>Map Style</strong> 中选择与所下载地图源相匹配的样式。</div>
 </section>

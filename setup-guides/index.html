@@ -501,6 +501,19 @@
   .bullet-list li strong { color: var(--text-primary); }
   .doc-table td.wrap, .doc-table td:first-child.wrap { white-space: normal; }
   @media (max-width: 640px) { .unit-cards { grid-template-columns: 1fr; } }
+
+  /* iPhone frame for app screenshots */
+  .phone-figure { display: flex; gap: 2rem; align-items: center; margin: 1.5rem 0; }
+  .phone-figure figcaption { flex: 1; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+  .phone-figure figcaption strong { color: var(--text-primary); }
+  .phone-figure .phone-legend { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .phone-figure .phone-legend li { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.3rem 0; }
+  .phone-num { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #e11d48; color: #fff; font-size: 0.8rem; font-weight: 600; }
+  .iphone { flex: none; display: block; width: 250px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.18)); }
+  @media (max-width: 640px) {
+    .phone-figure { flex-direction: column; align-items: center; gap: 1rem; }
+    .iphone { width: 230px; }
+  }
 </style>
 <style>
   @font-face {
@@ -713,6 +726,10 @@
 <li>Tap <strong>Connect</strong> next to <strong>LOKO</strong>. The Loko Ground LED turns <strong>solid blue</strong> when it connects to your phone.</li>
 <li>Tap the map to close the menu.</li>
 </ol>
+<figure class="phone-figure">
+<img alt="Loko app menu with Bluetooth, LoRaWAN, Geo-Fences, Offline Maps, Archive, Logs, Map Style, Language and Settings" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-menu-iphone.webp" width="762"/>
+<figcaption>The Loko app menu. Tap <strong>Bluetooth</strong> here, then <strong>Scan</strong>, to find Loko Ground. The same menu holds your trackers (DEVICES), Geo-Fences, Offline Maps, Archive, Map Style, Language and Settings.</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Check:</span> Solid blue means Loko Ground is connected to your phone. It does not mean a position from Loko Air has arrived yet.</div>
 </section>
 <!-- Step 4: Turn on Loko Air outdoors -->
@@ -735,6 +752,18 @@
 <li>Wait for a round marker with the tracker's <strong>ID1</strong> on it. It is red by default, and it appears when the app receives a position from Loko Air.</li>
 <li>Tap the marker to see the tracker's details: position, battery, time of the last position and distance from you.</li>
 </ol>
+<figure class="phone-figure">
+<img alt="Loko app main map with numbered controls: menu, compass, zoom slider, my location and your position" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-main-map-iphone.webp" width="762"/>
+<figcaption><strong>The main map</strong>
+<ul class="phone-legend">
+<li><span class="phone-num">1</span><span><strong>Menu:</strong> your trackers and all app features.</span></li>
+<li><span class="phone-num">2</span><span><strong>Compass:</strong> tap it to turn the map so north points up.</span></li>
+<li><span class="phone-num">3</span><span><strong>Zoom slider:</strong> drag up to zoom in, down to zoom out. You can also pinch the map.</span></li>
+<li><span class="phone-num">4</span><span><strong>My location:</strong> moves the map to your position and keeps following you.</span></li>
+<li><span class="phone-num">5</span><span><strong>Your position:</strong> the blue dot is your phone; the cone shows where it faces.</span></li>
+</ul>
+</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Check:</span> The ID1 marker confirms that a position travelled from Loko Air through Loko Ground to the app.</div>
 <div class="note-box"><span class="note-label">Tip:</span> Before you go out of internet coverage, download maps of your area: menu → <strong>Offline Maps</strong> → <strong>+ Download New Zone</strong>. Tracking works without internet, but the map only shows areas you have downloaded. Offline, select the <strong>Map Style</strong> that matches the map source you downloaded.</div>
 </section>

@@ -494,6 +494,19 @@
   .bullet-list li strong { color: var(--text-primary); }
   .doc-table td.wrap, .doc-table td:first-child.wrap { white-space: normal; }
   @media (max-width: 640px) { .unit-cards { grid-template-columns: 1fr; } }
+
+  /* iPhone frame for app screenshots */
+  .phone-figure { display: flex; gap: 2rem; align-items: center; margin: 1.5rem 0; }
+  .phone-figure figcaption { flex: 1; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+  .phone-figure figcaption strong { color: var(--text-primary); }
+  .phone-figure .phone-legend { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .phone-figure .phone-legend li { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.3rem 0; }
+  .phone-num { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #e11d48; color: #fff; font-size: 0.8rem; font-weight: 600; }
+  .iphone { flex: none; display: block; width: 250px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.18)); }
+  @media (max-width: 640px) {
+    .phone-figure { flex-direction: column; align-items: center; gap: 1rem; }
+    .iphone { width: 230px; }
+  }
 </style>
 <style>
   @font-face {
@@ -701,6 +714,10 @@
 <li>Touchez <strong>Connect</strong> à côté de <strong>LOKO</strong>. La LED de Loko Ground devient <strong>bleu fixe</strong> une fois connecté à votre téléphone.</li>
 <li>Touchez la carte pour fermer le menu.</li>
 </ol>
+<figure class="phone-figure">
+<img alt="Menu de l'application Loko avec Bluetooth, LoRaWAN, Geo-Fences, Offline Maps, Archive, Logs, Map Style, Language et Settings" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-menu-iphone.webp" width="762"/>
+<figcaption>Le menu de l'application Loko. Touchez ici <strong>Bluetooth</strong>, puis <strong>Scan</strong>, pour trouver Loko Ground. Le même menu contient vos traceurs (DEVICES), Geo-Fences, Offline Maps, Archive, Map Style, Language et Settings.</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Vérification :</span> Bleu fixe signifie que Loko Ground est connecté à votre téléphone. Cela ne signifie pas qu'une position de Loko Air est déjà arrivée.</div>
 </section>
 <!-- Step 4: Turn on Loko Air outdoors -->
@@ -723,6 +740,18 @@
 <li>Attendez qu'un marqueur rond portant l'<strong>ID1</strong> du traceur apparaisse. Il est rouge par défaut et apparaît quand l'application reçoit une position de Loko Air.</li>
 <li>Touchez le marqueur pour voir les détails du traceur : position, batterie, heure de la dernière position et distance par rapport à vous.</li>
 </ol>
+<figure class="phone-figure">
+<img alt="Carte principale de l'application Loko avec commandes numérotées : menu, boussole, curseur de zoom, ma position et votre position" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-main-map-iphone.webp" width="762"/>
+<figcaption><strong>La carte principale</strong>
+<ul class="phone-legend">
+<li><span class="phone-num">1</span><span><strong>Menu :</strong> vos traceurs et toutes les fonctions de l'application.</span></li>
+<li><span class="phone-num">2</span><span><strong>Boussole :</strong> touchez-la pour remettre le nord en haut.</span></li>
+<li><span class="phone-num">3</span><span><strong>Curseur de zoom :</strong> faites-le glisser vers le haut pour zoomer, vers le bas pour dézoomer. Vous pouvez aussi pincer la carte.</span></li>
+<li><span class="phone-num">4</span><span><strong>Ma position :</strong> centre la carte sur vous et vous suit.</span></li>
+<li><span class="phone-num">5</span><span><strong>Votre position :</strong> le point bleu est votre téléphone ; le cône montre son orientation.</span></li>
+</ul>
+</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Vérification :</span> Le marqueur ID1 confirme qu'une position est allée de Loko Air à l'application en passant par Loko Ground.</div>
 <div class="note-box"><span class="note-label">Astuce :</span> Avant de quitter la couverture internet, téléchargez les cartes de votre zone : menu → <strong>Offline Maps</strong> → <strong>+ Download New Zone</strong>. Le suivi fonctionne sans internet, mais la carte n'affiche que les zones téléchargées. Hors ligne, choisissez dans <strong>Map Style</strong> le style correspondant à la source de carte téléchargée.</div>
 </section>

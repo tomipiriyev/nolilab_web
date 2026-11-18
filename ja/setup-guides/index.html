@@ -494,6 +494,19 @@
   .bullet-list li strong { color: var(--text-primary); }
   .doc-table td.wrap, .doc-table td:first-child.wrap { white-space: normal; }
   @media (max-width: 640px) { .unit-cards { grid-template-columns: 1fr; } }
+
+  /* iPhone frame for app screenshots */
+  .phone-figure { display: flex; gap: 2rem; align-items: center; margin: 1.5rem 0; }
+  .phone-figure figcaption { flex: 1; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+  .phone-figure figcaption strong { color: var(--text-primary); }
+  .phone-figure .phone-legend { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .phone-figure .phone-legend li { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.3rem 0; }
+  .phone-num { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #e11d48; color: #fff; font-size: 0.8rem; font-weight: 600; }
+  .iphone { flex: none; display: block; width: 250px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.18)); }
+  @media (max-width: 640px) {
+    .phone-figure { flex-direction: column; align-items: center; gap: 1rem; }
+    .iphone { width: 230px; }
+  }
 </style>
 <style>
   @font-face {
@@ -701,6 +714,10 @@
 <li><strong>LOKO</strong> の横の <strong>Connect</strong> をタップします。スマートフォンに接続されると Loko Ground の LED が<strong>青く点灯</strong>したままになります。</li>
 <li>地図をタップしてメニューを閉じます。</li>
 </ol>
+<figure class="phone-figure">
+<img alt="Loko アプリのメニュー:Bluetooth、LoRaWAN、Geo-Fences、Offline Maps、Archive、Logs、Map Style、Language、Settings" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-menu-iphone.webp" width="762"/>
+<figcaption>Loko アプリのメニュー。ここで <strong>Bluetooth</strong>、次に <strong>Scan</strong> をタップして Loko Ground を探します。このメニューにはトラッカー一覧(DEVICES)、Geo-Fences、Offline Maps、Archive、Map Style、Language、Settings もあります。</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">確認:</span> 青の点灯は Loko Ground がスマートフォンに接続されたことを示します。Loko Air からの位置がまだ届いたことを意味するわけではありません。</div>
 </section>
 <!-- Step 4: Turn on Loko Air outdoors -->
@@ -723,6 +740,18 @@
 <li>トラッカーの <strong>ID1</strong> が書かれた丸いマーカーが表示されるのを待ちます。初期設定では赤で、アプリが Loko Air の位置を受信すると表示されます。</li>
 <li>マーカーをタップすると、位置、バッテリー、最後の位置の時刻、自分からの距離などの詳細が表示されます。</li>
 </ol>
+<figure class="phone-figure">
+<img alt="番号付きの操作部がある Loko アプリのメイン地図:メニュー、コンパス、ズームスライダー、現在地、あなたの位置" class="iphone" decoding="async" height="1575" loading="lazy" src="/images/setup-guide/loko-app-main-map-iphone.webp" width="762"/>
+<figcaption><strong>メイン地図</strong>
+<ul class="phone-legend">
+<li><span class="phone-num">1</span><span><strong>メニュー:</strong>トラッカーとアプリのすべての機能。</span></li>
+<li><span class="phone-num">2</span><span><strong>コンパス:</strong>タップすると北が上になるよう地図を回転します。</span></li>
+<li><span class="phone-num">3</span><span><strong>ズームスライダー:</strong>上にドラッグで拡大、下で縮小。ピンチ操作も使えます。</span></li>
+<li><span class="phone-num">4</span><span><strong>現在地:</strong>地図を自分の位置に移動し、追従します。</span></li>
+<li><span class="phone-num">5</span><span><strong>あなたの位置:</strong>青い点がスマートフォン、扇形が向いている方向です。</span></li>
+</ul>
+</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">確認:</span> ID1 のマーカーは、位置が Loko Air から Loko Ground を経由してアプリに届いたことを示します。</div>
 <div class="note-box"><span class="note-label">ヒント:</span> インターネットの圏外に出る前に、その地域の地図をダウンロードしておきましょう:メニュー → <strong>Offline Maps</strong> → <strong>+ Download New Zone</strong>。追跡はインターネットなしで動作しますが、地図はダウンロード済みの範囲しか表示されません。オフライン時は、ダウンロードした地図ソースに合った <strong>Map Style</strong> を選んでください。</div>
 </section>
