@@ -15,7 +15,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Loko GPS Tracker の完全なセットアップ ガイド。 Loko Air および Loko Ground ユニットを構成し、パラメーターを設定し、モバイル アプリとペアリングして、オフライン GPS 追跡を開始します。" name="description"/>
+<meta content="Loko GPS トラッカーのセットアップガイド:Loko Ground の準備、両ユニットの充電、Bluetooth での Loko アプリ接続、Loko Air の電源オン、地図での最初の位置確認。LED ガイド、トラブルシューティング、ファームウェア更新も掲載。" name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.nolilab.com/ja/setup-guides/" rel="canonical"/>
 <link href="https://www.nolilab.com/setup-guides/" hreflang="en" rel="alternate"/>
@@ -27,13 +27,13 @@
 <link href="https://www.nolilab.com/setup-guides/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="Loko GPSトラッカー設定ガイド | nolilab" property="og:title"/>
-<meta content="Loko GPS Tracker の完全なセットアップ ガイド。 Loko Air および Loko Ground ユニットを構成し、パラメーターを設定し、モバイル アプリとペアリングして、オフライン GPS 追跡を開始します。" property="og:description"/>
+<meta content="Loko GPS トラッカーのセットアップガイド:Loko Ground の準備、両ユニットの充電、Bluetooth での Loko アプリ接続、Loko Air の電源オン、地図での最初の位置確認。LED ガイド、トラブルシューティング、ファームウェア更新も掲載。" property="og:description"/>
 <meta content="https://www.nolilab.com/ja/setup-guides/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Loko GPSトラッカー設定ガイド | nolilab" name="twitter:title"/>
-<meta content="Loko GPS Tracker の完全なセットアップ ガイド。 Loko Air および Loko Ground ユニットを構成し、パラメーターを設定し、モバイル アプリとペアリングして、オフライン GPS 追跡を開始します。" name="twitter:description"/>
+<meta content="Loko GPS トラッカーのセットアップガイド:Loko Ground の準備、両ユニットの充電、Bluetooth での Loko アプリ接続、Loko Air の電源オン、地図での最初の位置確認。LED ガイド、トラブルシューティング、ファームウェア更新も掲載。" name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
   :root {
@@ -484,6 +484,16 @@
   }
   /* Same footer logo as the homepage */
   .footer-logo {font-size:1.25rem;font-weight:500;font-family:var(--font-mono);letter-spacing:-.02em;color:var(--text-primary);text-decoration:none}
+
+  /* Rev 1.1 guide additions */
+  .note-box.warn { border-left-color: #d97706; }
+  .note-box.check { border-left-color: #2563eb; }
+  .note-label { display: inline-block; font-weight: 600; color: var(--text-primary); margin-right: 0.25rem; }
+  .bullet-list { margin: 0.75rem 0 0.75rem 1.5rem; padding: 0; }
+  .bullet-list li { color: var(--text-secondary); line-height: 1.65; margin-bottom: 0.45rem; font-size: 1rem; }
+  .bullet-list li strong { color: var(--text-primary); }
+  .doc-table td.wrap, .doc-table td:first-child.wrap { white-space: normal; }
+  @media (max-width: 640px) { .unit-cards { grid-template-columns: 1fr; } }
 </style>
 <style>
   @font-face {
@@ -495,87 +505,80 @@
     size-adjust: 107.64%;
   }
 </style>
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Loko GPS トラッカーのセットアップ方法",
-  "description": "Loko GPS トラッカー システムの完全なセットアップ ガイド。 Loko Air および Loko Ground ユニットを構成し、Web コンフィギュレーターを介してパラメーターを設定し、モバイル アプリとペアリングします。",
+  "description": "Loko GPS トラッカーのセットアップガイド:Loko Ground の準備、両ユニットの充電、Bluetooth での Loko アプリ接続、Loko Air の電源オン、地図での最初の位置確認。LED ガイド、トラブルシューティング、ファームウェア更新も掲載。",
   "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
   "totalTime": "PT15M",
   "supply": [
     {
       "@type": "HowToSupply",
-      "name": "Loko Air ユニット (GPS + LoRa 送信機)"
+      "name": "Loko Air トラッカー"
     },
     {
       "@type": "HowToSupply",
-      "name": "Loko Groundユニット (LoRa 受信機)"
+      "name": "Loko Ground 受信機"
     },
     {
       "@type": "HowToSupply",
-      "name": "地上ユニット用 18650 リチウムイオン電池 (ユーザー提供)"
+      "name": "Loko Ground 用 Li-ion 18650 凸型バッテリー(別売)"
     },
     {
       "@type": "HowToSupply",
-      "name": "USB Type-Cケーブル"
+      "name": "5 V USB 充電器と USB-C ケーブル"
     }
   ],
   "tool": [
     {
       "@type": "HowToTool",
-      "name": "Chrome または Edge ブラウザ (Web シリアル API が必要)"
+      "name": "プラスドライバー(+)"
     },
     {
       "@type": "HowToTool",
-      "name": "Loko アプリ (iOS または Android)"
+      "name": "Loko アプリ(iOS 15 以降または Android 11 以降)"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Chrome または Edge が使えるパソコンと USB-C データケーブル(ファームウェア更新用)"
     }
   ],
   "step": [
     {
       "@type": "HowToStep",
       "position": 1,
-      "name": "Webコンフィギュレーターを開く",
-      "text": "Chrome または Edge を開いて、nolilab.com/loko-config-tool/ に移動します。",
-      "url": "https://www.nolilab.com/loko-config-tool/"
+      "name": "Loko Ground を準備する",
+      "text": "背面の 4 本のネジを外し、マイナス側をアンテナに向けて 18650 バッテリーを入れ、nolilab.com/loko-config-tool/ でファームウェアを更新してカバーを閉じます。"
     },
     {
       "@type": "HowToStep",
       "position": 2,
-      "name": "Loko Air を USB 経由で接続する",
-      "text": "Loko Air を USB Type-C 経由でコンピューターに接続します。 [構成] タブで [接続] をクリックし、ブラウザにシリアル アクセスを許可します。"
+      "name": "両方のユニットを充電する",
+      "text": "5 V USB-C 充電器で Loko Air と Loko Ground を充電します。満充電になると Loko Air の赤い LED が点灯したままになります。"
     },
     {
       "@type": "HowToStep",
       "position": 3,
-      "name": "航空ユニットのパラメータを設定して保存する",
-      "text": "transfer_mode、frequency、id1、id2、wake_up_period、gnss_mode、および tx_power を設定します。 「変更を保存」をクリックします。"
+      "name": "Loko Ground をスマートフォンに接続する",
+      "text": "LED が青く点滅するまで Loko Ground の電源を入れます。Loko アプリでメニューを開き、Bluetooth、Scan、LOKO の横の Connect の順にタップします。LED が青く点灯します。"
     },
     {
       "@type": "HowToStep",
       "position": 4,
-      "name": "Loko Airの電源を入れる",
-      "text": "USBを取り外します。 LED が赤色に点滅するまで電源ボタンを押し続けます (ユニットがアクティブになります)。"
+      "name": "屋外で Loko Air の電源を入れる",
+      "text": "空がよく見える屋外で、赤く点灯した LED が消えるまで Loko Air のボタンを約 4 秒間長押しします。"
     },
     {
       "@type": "HowToStep",
       "position": 5,
-      "name": "バッテリーを挿入し、Loko Ground を接続します。",
-      "text": "18650 リチウムイオン電池を地上ユニットに挿入します。 USB 経由でコンピュータに接続し、コンフィギュレータで [地上ユニット] タブを開き、[接続] をクリックします。"
-    },
-    {
-      "@type": "HowToStep",
-      "position": 6,
-      "name": "地上ユニットの設定を一致させて送信します",
-      "text": "「読み取り」をクリックして現在の設定をロードします。 id2 とfrequency_hz を航空ユニットと一致するように設定します。 「送信」をクリックして、USB を取り外します。"
-    },
-    {
-      "@type": "HowToStep",
-      "position": 7,
-      "name": "Ground ユニットの電源を入れてアプリとペアリングする",
-      "text": "LEDが青色に点灯するまで電源ボタンを押し続けます。 Loko アプリを開き、[設定] に移動して、地上ユニットを選択します。 GPS の修正を待ちます — 場所が地図上に表示されます。"
+      "name": "地図でトラッカーを見つける",
+      "text": "トラッカーの ID1 が書かれた丸いマーカーを待ちます。タップすると位置、バッテリー、最後の位置の時刻、距離が表示されます。"
     }
   ]
-}</script>
+}
+</script>
 <script defer="" src="/js/layout.js?v=20261110"></script>
 </head>
 <body>
@@ -585,7 +588,7 @@
 <!-- Hero -->
 <div class="sg-hero">
 <h1>Loko GPS トラッカー — セットアップ ガイド</h1>
-<p class="hero-sub">Loko Air および Loko Ground ユニットを最初から設定します。完全なセットアップには約 15 分かかります。</p>
+<p class="hero-sub">最初の位置を地図に表示するまで:Loko Ground を準備し、両方のユニットを充電し、スマートフォンに接続して Loko Air の電源を入れます。所要時間は約 15 分です。</p>
 <div class="hero-actions">
 <a class="download-btn" download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">
 <i class="fa-solid fa-file-pdf"></i> ユーザーマニュアルをダウンロード (PDF)
@@ -597,13 +600,18 @@
 </div>
 <!-- TOC -->
 <nav aria-label="Page contents" class="toc">
-<p class="toc-title">このページでは</p>
+<p class="toc-title">このページの内容</p>
 <ol>
 <li><a href="#overview">概要</a></li>
-<li><a href="#specifications">仕様</a></li>
-<li><a href="#how-it-works">仕組み</a></li>
-<li><a href="#configure-air">パート 1 — Loko Air の構成</a></li>
-<li><a href="#configure-ground">パート 2 — Loko Ground の構成</a></li>
+<li><a href="#before-you-start">始める前に</a></li>
+<li><a href="#prepare-ground">ステップ 1 — Loko Ground を準備する</a></li>
+<li><a href="#charge">ステップ 2 — 両方のユニットを充電する</a></li>
+<li><a href="#connect-phone">ステップ 3 — Loko Ground をスマートフォンに接続する</a></li>
+<li><a href="#power-on-air">ステップ 4 — 屋外で Loko Air の電源を入れる</a></li>
+<li><a href="#find-tracker">ステップ 5 — 地図でトラッカーを見つける</a></li>
+<li><a href="#led-guide">LED ガイド</a></li>
+<li><a href="#troubleshooting">トラブルシューティング</a></li>
+<li><a href="#firmware">ファームウェアを更新する</a></li>
 <li><a href="#warnings">警告</a></li>
 <li><a href="#checklist">クイックスタートチェックリスト</a></li>
 </ol>
@@ -611,182 +619,222 @@
 <!-- Overview -->
 <section class="sg-section" id="overview">
 <h2>概要</h2>
-<p>Loko は、ドローン用のコンパクトな GPS トラッカーです。 2 つのユニットが連携して動作します。 <strong>Loko Air</strong> (空中) GPS を取得し、LoRa 無線経由で送信します。 <strong>Loko Ground</strong> (ベース ステーション) データを受信し、Bluetooth 経由で Loko モバイル アプリに転送します。</p>
+<p>Loko はオフラインで使える GPS トラッカーです。<strong>Loko Air</strong> が自分の位置を測位し、LoRa 無線で送信します。<strong>Loko Ground</strong> がその位置を受信して Bluetooth でスマートフォンに転送し、<strong>Loko アプリ</strong>が地図上に表示します。SIM カード、アカウント、サブスクリプションは不要です。</p>
+<div class="wake-cycle">
+<div class="wake-step">Loko Air</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">LoRa 無線</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">Loko Ground</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">Bluetooth</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">Loko アプリ</div>
+</div>
 <div class="unit-cards">
 <div class="unit-card">
-<div class="unit-label">loko-air</div>
-<p class="unit-desc">GPS + LoRa 送信機 — 航空機に搭載</p>
+<div class="unit-label">Loko Air</div>
+<p class="unit-desc">トラッカー:位置を測位して送信</p>
 <ul class="unit-specs">
-<li>リチウムイオン 200 mAh</li>
-<li>14g</li>
-<li>最長 1 年間のバッテリー寿命</li>
-<li>USB Type-C充電</li>
+<li>Li-ion 200 mAh、充電式</li>
+<li>30 × 22 mm、14 g</li>
+<li>USB-C 充電、5 V</li>
 </ul>
 </div>
 <div class="unit-card">
-<div class="unit-label">loko-ground</div>
-<p class="unit-desc">LoRa レシーバー + Bluetooth リレー - 地上に留まります</p>
+<div class="unit-label">Loko Ground</div>
+<p class="unit-desc">受信機:Loko Air の位置を受信してアプリに転送</p>
 <ul class="unit-specs">
-<li>18650 リチウムイオン (ユーザー提供)</li>
-<li>箱には含まれていません</li>
+<li>Li-ion 18650 凸型(別売)</li>
+<li>容量は問いません</li>
+<li>USB-C 充電、5 V</li>
 </ul>
 </div>
 </div>
+<div class="note-box"><span class="note-label">注:</span> Loko は初期設定のままで使えます。送信間隔、GNSS モード、無線設定、トラッカー ID の変更や軌跡のエクスポートについては、<a download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">ユーザーマニュアル全文(PDF、英語)</a>をご覧ください。</div>
 </section>
-<!-- Specifications -->
-<section class="sg-section" id="specifications">
-<h2>仕様</h2>
-<div class="table-wrap">
-<table class="doc-table">
-<thead>
-<tr><th>パラメータ</th><th>価値</th></tr>
-</thead>
-<tbody>
-<tr><td><code>radio</code></td><td>LoRa / CHIRP — 建物、都市部の雑然とした空間、鬱蒼とした森林に侵入</td></tr>
-<tr><td><code>frequency</code></td><td>860–926 MHz (構成可能)</td></tr>
-<tr><td><code>tx_power</code></td><td>8 dBm デフォルト (設定可能)</td></tr>
-<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo</td></tr>
-<tr><td><code>range</code></td><td>+20 km 見通し距離 (対地高度 2 m);高度とともに成長する</td></tr>
-<tr><td><code>battery_life</code></td><td>最長 1 年 (起床間隔によって異なります)</td></tr>
-<tr><td><code>weight</code></td><td>14g（エアユニット）</td></tr>
-<tr><td><code>charge</code></td><td>5V USB Type-Cのみ</td></tr>
-<tr><td><code>temperature</code></td><td>–10 °C ～ +60 °C 動作時（充電時 0 °C ～ 40 °C）</td></tr>
-</tbody>
-</table>
-</div>
-<p>を使用します。 <a href="/ja/specifications/">バッテリー寿命の計算機</a> ウェイク間隔の実行時間を推定します。</p>
+<!-- Before you start -->
+<section class="sg-section" id="before-you-start">
+<h2>始める前に</h2>
+<ul class="bullet-list">
+<li>スマートフォンの <strong>Loko アプリ</strong>:iOS 15 以降の iPhone、または Android 11 以降。<a href="/ja/software/">ソフトウェアページ</a>からダウンロードできます。</li>
+<li>Loko Ground 用の <strong>Li-ion 18650 凸型バッテリー</strong>。容量は問いません。容量が大きいほど 1 回の充電で長く動作します。</li>
+<li>Loko Ground 背面の 4 本のネジ用の <strong>プラスドライバー(+)</strong>。</li>
+<li>充電用の <strong>5 V USB 充電器</strong>(スマートフォン用で可)と <strong>USB-C ケーブル</strong>。</li>
+<li>ファームウェア更新用:<strong>Chrome または Edge</strong> が使えるパソコンと <strong>USB-C データケーブル</strong>。充電専用ケーブルではデータを転送できません。</li>
+</ul>
 </section>
-<!-- How It Works -->
-<section class="sg-section" id="how-it-works">
-<h2>仕組み</h2>
-<p>ウェイク サイクルごとに航空ユニットがウェイクし、GPS 修正を取得し、地上ユニットに座標を送信した後、次のサイクルまでスリープします。利用可能な衛星修正がない場合は、最後に知られた座標が送信されます。 GPS トラック ログは内部フラッシュにも書き込まれ、USB 経由でダウンロードできます。</p>
-<div class="wake-cycle">
-<div class="wake-step">ウェイク</div>
-<span class="wake-arrow">→</span>
-<div class="wake-step">GPSの修正</div>
-<span class="wake-arrow">→</span>
-<div class="wake-step">地上への送信</div>
-<span class="wake-arrow">→</span>
-<div class="wake-step">寝る</div>
-</div>
-<p>複数の航空ユニットが単一の地上ユニットに同時にペアリングできます。</p>
-</section>
-<!-- Part 1: Configure Air -->
-<section class="sg-section" id="configure-air">
-<h2>パート 1 — Loko Air の構成</h2>
-<p>ソフトウェアをインストールする必要はありません。 Chromium ベースのブラウザで Web コンフィギュレータを使用します。</p>
-<div class="note-box">Firefox と Safari はサポートされていません。Web シリアル API はありません。</div>
-<h3>1.1 コンフィギュレータを開く</h3>
-<ol class="step-list">
-<li>開ける <strong>クロム</strong> または <strong>角</strong>.</li>
-<li>に行く <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a></li>
+<!-- Step 1: Prepare Loko Ground -->
+<section class="sg-section" id="prepare-ground">
+<h2>ステップ 1 — Loko Ground を準備する</h2>
+<ol class="step-list" start="1">
+<li>プラスドライバー(+)で Loko Ground 背面の 4 本のネジを外し、背面カバーを取り外します。</li>
 </ol>
-<div class="note-box">4 つのタブ: <strong>構成</strong> — デバイスパラメータを設定します。 <strong>GNSS トレース</strong> — Air ユニットから GPS ログを読み取り、マップ上で視覚化し、.gpx / .csv をエクスポートします。 <strong>地上ユニット</strong> — 地上ユニットを設定します。 <strong>ファームウェアのアップデート</strong> — 最新のファームウェアをフラッシュします。</div>
-<h3>1.2 接続する</h3>
+<div class="note-box warn"><span class="note-label">警告:</span> 入れる前にバッテリーの向きを確認してください。極性が逆だと基板の保護チップが損傷するおそれがあります。</div>
+<ol class="step-list" start="2">
+<li>Li-ion 18650 凸型バッテリーを入れます。<strong>マイナス(−)</strong>側をアンテナ側に、<strong>プラス(+)</strong>側を反対側に向けます。</li>
+</ol>
 <ol class="step-list" start="3">
-<li>Loko Air をコンピューターに接続します。 <strong>USBタイプC</strong>.</li>
-<li>クリック <strong>接続する</strong> [構成] タブで。</li>
-<li>プロンプトが表示されたらブラウザにシリアル アクセスを許可し、正しいポートを選択します。</li>
+<li>カバーを外したまま Loko Ground のファームウェアを更新します。<a href="#firmware-ground">Loko Ground のファームウェアを更新する</a>の手順に従い、終わったら手順 4 に戻ります。</li>
 </ol>
-<div class="note-box">ポートが表示されない場合は、Type-C ケーブルを裏返します。ピンの向きが重要です。</div>
-<h3>1.3 パラメータを設定 → 変更を保存</h3>
-<div class="table-wrap">
-<table class="doc-table">
-<thead>
-<tr><th>パラメータ</th><th>説明</th></tr>
-</thead>
-<tbody>
-<tr><td><code>transmit_mode</code></td><td>P2P 直接空中↔地上用 (標準)。ネットワークサーバー統合用の LoRaWAN。</td></tr>
-<tr><td><code>frequency</code></td><td>860–926 MHz。地上ユニットと正確に一致する必要があります。</td></tr>
-<tr><td><code>id1</code></td><td>2桁のペアリングコード。航空ユニットと地上ユニットの両方で一致する必要があります。</td></tr>
-<tr><td><code>id2</code></td><td>2 桁の地上ユニット ID。地上ユニットの設定と一致する必要があります。</td></tr>
-<tr><td><code>wake_up_period</code></td><td>航空ユニットが起動する頻度。単位: 秒/分/時間。短い = バッテリーの消耗が早くなります。</td></tr>
-<tr><td><code>send_mult</code></td><td>N 番目のウェイク サイクルごとに送信します (1 = サイクルごと、0 = 無効)。</td></tr>
-<tr><td><code>save_mult</code></td><td>N 回目のウェイク サイクルごとに GNSS トレースをログに記録します (0 = ログ記録を無効にします)。</td></tr>
-<tr><td><code>gnss_mode</code></td><td>動作プロファイル: 通常 |フィットネス |航空 |バルーン |静止型。デフォルト: 通常。ドローンには Aviation または Balloon を使用します。</td></tr>
-<tr><td><code>tx_power</code></td><td>dBmの無線出力。高い = 航続距離が長くなり、バッテリーの消耗も多くなります。デフォルト: 8 dBm。</td></tr>
-<tr><td><code>p2p_encryption</code></td><td>オプション。 AES-256 の 64 文字の 16 進キー (32 バイト)。有効な場合は地上ユニットと一致する必要があります。</td></tr>
-</tbody>
-</table>
-</div>
-<h3>1.4 電源を入れる</h3>
-<ol class="step-list" start="6">
-<li>USBを取り外します。</li>
-<li>LEDが点灯するまで電源ボタンを押し続けます <strong>赤く点滅</strong> → ユニットはアクティブです。</li>
+<ol class="step-list" start="4">
+<li>背面カバーを戻し、4 本のネジを締めます。</li>
 </ol>
-<div class="note-box">赤色の LED が点灯 = 送信間のスリープ モード。通常の動作。</div>
 </section>
-<!-- Part 2: Configure Ground -->
-<section class="sg-section" id="configure-ground">
-<h2>パート 2 — Loko Ground の構成</h2>
-<p>Loko Groundにはバッテリーが内蔵されていません。接続する前に、後部の 4 つの留め具を外し、 <strong>18650 リチウムイオン電池</strong> (付属しません)、再度組み立てます。</p>
-<h3>2.1 コンフィギュレータを開く→地上ユニットタブ</h3>
-<ol class="step-list" start="8">
-<li>に行く <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a> Chrome または Edge で。</li>
-<li>をクリックします。 <strong>地上ユニット</strong> タブ。</li>
+<!-- Step 2: Charge both units -->
+<section class="sg-section" id="charge">
+<h2>ステップ 2 — 両方のユニットを充電する</h2>
+<ol class="step-list" start="5">
+<li>USB-C ケーブルで Loko Air を 5 V USB 充電器に接続します。充電は自動的に始まります。満充電になると赤い LED が点灯したままになります。</li>
+<li>Loko Ground も同じ方法で充電します。Loko Ground には充電表示がありません。</li>
 </ol>
-<h3>2.2 接続する</h3>
-<ol class="step-list" start="10">
-<li>Loko Ground を USB 経由でコンピューターに接続します。</li>
-<li>クリック <strong>接続する</strong> → シリアルアクセスを許可 → ポートを選択します。</li>
+<div class="note-box"><span class="note-label">注:</span> 電源が入った状態で Loko Air を充電すると、満充電になるまで LED が 5 秒ごとに短く点滅します。これは正常です。</div>
+</section>
+<!-- Step 3: Connect Loko Ground to your phone -->
+<section class="sg-section" id="connect-phone">
+<h2>ステップ 3 — Loko Ground をスマートフォンに接続する</h2>
+<ol class="step-list" start="7">
+<li>Loko Ground の電源を入れます:<strong>Power</strong> を長押しします。LED が緑、赤、青の順に点灯して消えます。LED が消えたらボタンを離します。その後 LED が<strong>青く点滅</strong>し、接続できる状態になります。</li>
+<li>Loko アプリを開き、求められた権限を許可します。<strong>位置情報</strong>は自分の位置の表示に使います。<strong>Bluetooth</strong>(Android では<strong>付近のデバイス</strong>)はアプリが Loko Ground を見つけるために使います。アプリを閉じている間もジオフェンス通知やチャイムを受け取るには<strong>通知</strong>を許可してください。</li>
+<li>左上のメニューアイコン(☰)をタップします。メニューが開きます。</li>
+<li><strong>Bluetooth</strong> をタップし、次に <strong>Scan</strong> をタップします。</li>
+<li><strong>LOKO</strong> の横の <strong>Connect</strong> をタップします。スマートフォンに接続されると Loko Ground の LED が<strong>青く点灯</strong>したままになります。</li>
+<li>地図をタップしてメニューを閉じます。</li>
 </ol>
-<h3>2.3 読み取り→更新→送信</h3>
-<ol class="step-list" start="12">
-<li>クリック <strong>読む</strong> 現在の設定をロードします。</li>
-<li>航空ユニットの構成に合わせて以下のパラメータを設定します。</li>
-<li>クリック <strong>送信</strong>、USBを取り外します。</li>
+<div class="note-box check"><span class="note-label">確認:</span> 青の点灯は Loko Ground がスマートフォンに接続されたことを示します。Loko Air からの位置がまだ届いたことを意味するわけではありません。</div>
+</section>
+<!-- Step 4: Turn on Loko Air outdoors -->
+<section class="sg-section" id="power-on-air">
+<h2>ステップ 4 — 屋外で Loko Air の電源を入れる</h2>
+<ol class="step-list" start="13">
+<li>Loko Air を屋外の、空がよく見える場所に持って行きます。</li>
+<li>Loko Air のボタンを約 4 秒間、<strong>赤く点灯</strong>している LED が消えるまで長押しします。ボタンを離します。Loko Air の電源が入り、最初の位置を探します。初回は時間がかかることがあります。</li>
 </ol>
+<ul class="bullet-list">
+<li><strong>Loko Air の電源を切る:</strong>点滅している赤い LED が消えるまで、ボタンを約 4 秒間長押しします。</li>
+<li><strong>電源が入っているか確認する:</strong>ボタンを 1〜2 秒短く押します。LED が点滅すれば電源オン、点灯したままなら電源オフです。3 秒未満の押下では状態は変わりません。</li>
+<li><strong>Loko Ground の電源を切る:</strong>LED が赤になるまで Power を長押しし、離します。</li>
+</ul>
+</section>
+<!-- Step 5: Find your tracker on the map -->
+<section class="sg-section" id="find-tracker">
+<h2>ステップ 5 — 地図でトラッカーを見つける</h2>
+<ol class="step-list" start="15">
+<li>トラッカーの <strong>ID1</strong> が書かれた丸いマーカーが表示されるのを待ちます。初期設定では赤で、アプリが Loko Air の位置を受信すると表示されます。</li>
+<li>マーカーをタップすると、位置、バッテリー、最後の位置の時刻、自分からの距離などの詳細が表示されます。</li>
+</ol>
+<div class="note-box check"><span class="note-label">確認:</span> ID1 のマーカーは、位置が Loko Air から Loko Ground を経由してアプリに届いたことを示します。</div>
+<div class="note-box"><span class="note-label">ヒント:</span> インターネットの圏外に出る前に、その地域の地図をダウンロードしておきましょう:メニュー → <strong>Offline Maps</strong> → <strong>+ Download New Zone</strong>。追跡はインターネットなしで動作しますが、地図はダウンロード済みの範囲しか表示されません。オフライン時は、ダウンロードした地図ソースに合った <strong>Map Style</strong> を選んでください。</div>
+</section>
+<!-- LED guide -->
+<section class="sg-section" id="led-guide">
+<h2>LED ガイド</h2>
 <div class="table-wrap">
 <table class="doc-table">
 <thead>
-<tr><th>パラメータ</th><th>説明</th></tr>
+<tr><th>デバイス</th><th>状況</th><th>LED</th><th>意味</th></tr>
 </thead>
 <tbody>
-<tr><td><code>id2</code></td><td>2桁の識別子。 Air ユニットに設定された id2 と一致する必要があります。</td></tr>
-<tr><td><code>frequency_hz</code></td><td>周波数 (Hz) (例: 868000000)。航空ユニットと正確に一致する必要があります。</td></tr>
-<tr><td><code>p2p_key</code></td><td>Air ユニットで暗号化が有効になっている場合のみ。同じ 64 文字の 16 進キー。</td></tr>
+<tr><td class="wrap">Loko Air</td><td>充電中</td><td>赤、点灯</td><td>満充電です。</td></tr>
+<tr><td class="wrap">Loko Air</td><td>電源オンで充電中</td><td>赤、5 秒ごとに短く点滅</td><td>電源オンで充電中です。正常です。</td></tr>
+<tr><td class="wrap">Loko Air</td><td>電源を入れるためボタンを押し続けている</td><td>赤く点灯した後消える</td><td>電源が入りました。ボタンを離してください。</td></tr>
+<tr><td class="wrap">Loko Air</td><td>電源を切るためボタンを押し続けている</td><td>赤く点滅した後消える</td><td>電源が切れました。ボタンを離してください。</td></tr>
+<tr><td class="wrap">Loko Air</td><td>短く押した後(1〜2 秒)</td><td>赤、点滅</td><td>Loko Air は電源オンです。</td></tr>
+<tr><td class="wrap">Loko Air</td><td>短く押した後(1〜2 秒)</td><td>赤、点灯</td><td>Loko Air は電源オフです。</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>電源を入れるため Power を押し続けている</td><td>緑、赤、青の後に消灯</td><td>起動中です。LED が消えたらボタンを離してください。</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>起動後</td><td>青、点滅</td><td>電源オンで Loko アプリに接続できます。</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>アプリで Connect をタップした後</td><td>青、点灯</td><td>Bluetooth でスマートフォンに接続されています。</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>電源を切るため Power を押し続けている</td><td>赤</td><td>ボタンを離すと電源が切れます。</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>充電中</td><td>消灯</td><td>Loko Ground には充電表示がありません。</td></tr>
 </tbody>
 </table>
 </div>
-<h3>2.4 電源を入れてペアリングする</h3>
-<ol class="step-list" start="15">
-<li>LEDが点灯するまで電源ボタンを押し続けてください。 <strong>青一色</strong> → ペアリングの準備ができました。</li>
-<li>Loko アプリを開く → Bluetooth 権限を付与 → <strong>設定</strong> → 地上ユニットを選択します。</li>
-<li>メイン画面に戻ります。 GPS の修正を待ちます。場所が地図上に表示されます。</li>
+</section>
+<!-- Troubleshooting -->
+<section class="sg-section" id="troubleshooting">
+<h2>トラブルシューティング</h2>
+<p>各行の最初の項目から確認してください。後の項目ほど時間がかかります。</p>
+<div class="table-wrap">
+<table class="doc-table">
+<thead>
+<tr><th>症状</th><th>確認すること</th></tr>
+</thead>
+<tbody>
+<tr><td class="wrap">Bluetooth のスキャンに Loko Ground が表示されない</td><td>1. Loko Ground の電源が入っている:LED が青く点滅している。<br/>2. スマートフォンの Bluetooth がオンになっている。<br/>3. Loko アプリに Bluetooth(Android では付近のデバイス)の使用が許可されている。<br/>4. Loko Ground が充電されている。充電表示がないため、不明な場合は充電してください。</td></tr>
+<tr><td class="wrap">Loko Ground は接続済み(青の点灯)だが、Loko Air が地図に表示されない</td><td>1. Loko Air の電源が入っている:短く押すと LED が点滅する。<br/>2. Loko Air が空のよく見える屋外にある。最初の位置は時間がかかることがある。<br/>3. 送信までに十分な時間が経っている:Loko Air は N 回の起動ごとに送信し(Send Mult)、Send Mult は 0 ではない。<br/>4. 現在 Daily Sleep Window が有効になっていない(時刻は UTC)。<br/>5. Transmit Mode が P2P になっている。<br/>6. 周波数、ID2、暗号化キーが両方のユニットで一致している。</td></tr>
+<tr><td class="wrap">オフライン時に地図が空白になる</td><td>1. オフラインになる前にこの地域をダウンロードした。<br/>2. Map Style がダウンロードした地図ソースと一致している。<br/>3. ダウンロード後にタイル不足の表示が出た場合は、同じ地域をもう一度ダウンロードする。</td></tr>
+<tr><td class="wrap">アプリを閉じているとジオフェンス通知が届かない</td><td>Loko アプリの通知が許可されている。</td></tr>
+<tr><td class="wrap">USB ポートの一覧に Loko Air または Loko Ground が表示されない</td><td>1. 充電専用ではなく USB-C データケーブルを使っている。<br/>2. Chrome または Edge を使っている。<br/>3. Loko Ground の電源を入れてから接続している。</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Update firmware -->
+<section class="sg-section" id="firmware">
+<h2>ファームウェアを更新する</h2>
+<p>Loko Air と Loko Ground は常に最新のファームウェアにしてください。Chrome または Edge が使えるパソコン、USB-C データケーブル、<a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a> の Loko Configuration Tool が必要です。インストールは不要です。</p>
+<h3 id="firmware-air">Loko Air のファームウェアを更新する</h3>
+<ol class="step-list" start="1">
+<li>Loko Configuration Tool を開きます:<a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a></li>
+<li>USB-C データケーブルで Loko Air をパソコンに接続します。</li>
+<li><strong>Firmware Update</strong>、次に <strong>Loko Air</strong> をクリックします。</li>
+<li><strong>Connect</strong> をクリックし、表示されたウィンドウで Loko Air のポートを選びます。</li>
+<li><strong>Flash</strong> で <strong>Latest</strong> を選び、<strong>Flash Firmware</strong> をクリックします。</li>
+<li>進捗バーが 100% になり <strong>Flash complete</strong> と表示されるまで待ちます。それまで Loko Air を外さないでください。</li>
+<li>Loko Air を外して再度接続し、再起動します。</li>
 </ol>
-<div class="note-box">複数の航空ユニットがサポートされています。マップのピンをタップすると、デバイスの詳細が表示されます。</div>
+<h3 id="firmware-ground">Loko Ground のファームウェアを更新する</h3>
+<p>始める前に背面カバー(ネジ 4 本)を外し、Li-ion 18650 凸型バッテリーを入れておきます。基板上の 3 つのボタンを使います:<strong>Power</strong>(大きいボタン)、<strong>IO</strong>、<strong>EN (RESET)</strong>。</p>
+<ol class="step-list" start="1">
+<li>USB-C データケーブルで Loko Ground をパソコンに接続します。</li>
+<li>Loko Configuration Tool を開きます:<a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a></li>
+<li><strong>Firmware Update</strong>、次に <strong>Loko Ground</strong> をクリックします。</li>
+<li><strong>Power</strong>(大きいボタン)を押し続けます。手順 9 まで押したままにします。</li>
+<li>Power を押したまま <strong>IO</strong> を押し続けます。</li>
+<li>IO と Power を押したまま、<strong>EN (RESET)</strong> を 1 回押します。</li>
+<li>IO を離します。Power は押したままにします。</li>
+<li><strong>Flash Firmware</strong> をクリックし、表示されたウィンドウでシリアルポートを選びます。</li>
+<li>進捗バーが 100% になり <strong>Done</strong> と表示されたら、Power を離します。</li>
+<li><strong>EN (RESET)</strong> を 1 回押します。</li>
+<li>背面カバーを戻し、4 本のネジを締めます。</li>
+</ol>
+<div class="note-box check"><span class="note-label">確認:</span> 進捗バーが 100% で Done と表示され、EN (RESET) を押したら更新は完了です。</div>
 </section>
 <!-- Warnings -->
 <section class="sg-section" id="warnings">
 <h2>警告</h2>
 <div class="warnings-grid">
 <div class="warning-item">
-<span class="warn-label">防水</span>
-<p>防水ではありませんが、小雨には耐えます。水没させないでください。 AirユニットのUSBポートには必ずキャップをしてください。</p>
+<span class="warn-label">バッテリー</span>
+<p>18650 を入れる前に極性を確認してください:マイナス(−)をアンテナ側に。極性が逆だと基板が損傷するおそれがあります。</p>
 </div>
 <div class="warning-item">
-<span class="warn-label">火</span>
-<p>裸火や極端な熱にさらさないでください。</p>
+<span class="warn-label">防水</span>
+<p>防水ではありませんが、小雨には耐えます。水に沈めないでください。Loko Air の USB ポートは必ずキャップで閉じてください。</p>
 </div>
 <div class="warning-item">
 <span class="warn-label">温度</span>
-<p>–10 °C ～ +60 °C の範囲内で動作します。充電は 0 °C ～ 40 °C の範囲内でのみ行ってください。</p>
+<p>−10 °C〜+60 °C の範囲で使用してください。</p>
 </div>
 <div class="warning-item">
 <span class="warn-label">電圧</span>
-<p>5Vのみで充電してください。電圧が高くなるとデバイスが破壊されます。</p>
+<p>充電は 5 V のみ。それ以上の電圧ではデバイスが壊れます。</p>
+</div>
+<div class="warning-item">
+<span class="warn-label">火気</span>
+<p>炎や高温にさらさないでください。</p>
 </div>
 <div class="warning-item">
 <span class="warn-label">RF</span>
-<p>金属などで囲まないでください。強力な電磁波源から遠ざけてください。</p>
+<p>金属で覆わないでください。強い電磁波源から離してください。使用地域で周波数と送信出力が許可されていることを確認してください。</p>
 </div>
 <div class="warning-item">
 <span class="warn-label">アンテナ</span>
-<p>アンテナは地面からできるだけ高く、上向きに取り付けてください。</p>
+<p>アンテナは上向きに、地面からできるだけ高い位置に取り付けてください。</p>
 </div>
 <div class="warning-item">
 <span class="warn-label">目の安全</span>
-<p>アンテナの先端を子供や動物の目に近づけないでください。</p>
+<p>アンテナの先端を子どもや動物の目に近づけないでください。</p>
 </div>
 </div>
 </section>
@@ -794,13 +842,15 @@
 <section class="sg-section" id="checklist">
 <h2>クイックスタートチェックリスト</h2>
 <div class="checklist" id="sg-checklist">
-<label><input type="checkbox"/> 開ける <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a> Chrome または Edge の場合</label>
-<label><input type="checkbox"/> 「構成」タブ → 航空ユニットを接続 → すべてのパラメータを設定 → 変更を保存</label>
-<label><input type="checkbox"/> 地上ユニットタブ → 地上ユニットを接続 → 一致 <code>id2</code> + <code>frequency_hz</code> →送信</label>
-<label><input type="checkbox"/> Air ユニットの電源を入れる - LED が赤く点滅</label>
-<label><input type="checkbox"/> 地上ユニットの電源オン — LED が青色に点灯</label>
-<label><input type="checkbox"/> Lokoアプリ→設定→地上ユニットをペアリング</label>
-<label><input type="checkbox"/> GPS の修正を待ちます — 場所が地図上に表示されます</label>
+<label><input type="checkbox"/> スマートフォンに Loko アプリをインストール済み</label>
+<label><input type="checkbox"/> 背面カバーを外し、18650 バッテリーを装着:マイナス(−)をアンテナ側に</label>
+<label><input type="checkbox"/> <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a> で Loko Ground のファームウェアを更新し、カバーを閉じた</label>
+<label><input type="checkbox"/> 5 V USB-C 充電器で両方のユニットを充電済み</label>
+<label><input type="checkbox"/> Loko Ground の電源オン:LED が青く点滅</label>
+<label><input type="checkbox"/> Loko アプリ → ☰ → Bluetooth → Scan → LOKO の横の Connect:LED が青く点灯</label>
+<label><input type="checkbox"/> 屋外で Loko Air の電源オン:赤く点灯した LED が消えるまでボタンを約 4 秒長押し</label>
+<label><input type="checkbox"/> トラッカーの ID1 が書かれた丸いマーカーが地図に表示された</label>
+<label><input type="checkbox"/> その地域のオフライン地図をダウンロード済み</label>
 </div>
 </section>
 <!-- Links -->

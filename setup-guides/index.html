@@ -15,7 +15,7 @@
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="/css/fa-subset.css" rel="stylesheet"/>
-<meta content="Complete setup guide for the Loko GPS Tracker. Configure Loko Air &amp; Ground units, set parameters, pair with the mobile app, and start offline GPS tracking." name="description"/>
+<meta content="Loko GPS tracker setup guide: prepare Loko Ground, charge both units, connect the Loko app over Bluetooth, turn on Loko Air and see your first position on the map. LED guide, troubleshooting and firmware updates." name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.nolilab.com/setup-guides/" rel="canonical"/>
 <link href="https://www.nolilab.com/setup-guides/" hreflang="en" rel="alternate"/>
@@ -34,13 +34,13 @@
 
 <meta content="article" property="og:type"/>
 <meta content="Loko GPS Tracker Setup Guide | Installation Instructions | nolilab" property="og:title"/>
-<meta content="Complete setup guide for the Loko GPS Tracker. Configure Loko Air &amp; Ground units, set parameters, pair with the mobile app, and start offline GPS tracking." property="og:description"/>
+<meta content="Loko GPS tracker setup guide: prepare Loko Ground, charge both units, connect the Loko app over Bluetooth, turn on Loko Air and see your first position on the map. LED guide, troubleshooting and firmware updates." property="og:description"/>
 <meta content="https://www.nolilab.com/setup-guides/" property="og:url"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" property="og:image"/>
 <meta content="nolilab" property="og:site_name"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Loko GPS Tracker Setup Guide | Installation Instructions | nolilab" name="twitter:title"/>
-<meta content="Complete setup guide for the Loko GPS Tracker. Configure Loko Air &amp; Ground units, set parameters, pair with the mobile app, and start offline GPS tracking." name="twitter:description"/>
+<meta content="Loko GPS tracker setup guide: prepare Loko Ground, charge both units, connect the Loko app over Bluetooth, turn on Loko Air and see your first position on the map. LED guide, troubleshooting and firmware updates." name="twitter:description"/>
 <meta content="https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png" name="twitter:image"/>
 <style>
   :root {
@@ -491,6 +491,16 @@
   }
   /* Same footer logo as the homepage */
   .footer-logo {font-size:1.25rem;font-weight:500;font-family:var(--font-mono);letter-spacing:-.02em;color:var(--text-primary);text-decoration:none}
+
+  /* Rev 1.1 guide additions */
+  .note-box.warn { border-left-color: #d97706; }
+  .note-box.check { border-left-color: #2563eb; }
+  .note-label { display: inline-block; font-weight: 600; color: var(--text-primary); margin-right: 0.25rem; }
+  .bullet-list { margin: 0.75rem 0 0.75rem 1.5rem; padding: 0; }
+  .bullet-list li { color: var(--text-secondary); line-height: 1.65; margin-bottom: 0.45rem; font-size: 1rem; }
+  .bullet-list li strong { color: var(--text-primary); }
+  .doc-table td.wrap, .doc-table td:first-child.wrap { white-space: normal; }
+  @media (max-width: 640px) { .unit-cards { grid-template-columns: 1fr; } }
 </style>
 <style>
   @font-face {
@@ -507,55 +517,71 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "How to Set Up the Loko GPS Tracker",
-  "description": "Complete setup guide for the Loko GPS tracker system. Configure Loko Air and Ground units, set parameters via the web configurator, and pair with the mobile app.",
+  "description": "Loko GPS tracker setup guide: prepare Loko Ground, charge both units, connect the Loko app over Bluetooth, turn on Loko Air and see your first position on the map. LED guide, troubleshooting and firmware updates.",
   "image": "https://www.nolilab.com/images/optimized/loko-gps-tracker-red-transparent.png",
   "totalTime": "PT15M",
   "supply": [
-    { "@type": "HowToSupply", "name": "Loko Air Unit (GPS + LoRa transmitter)" },
-    { "@type": "HowToSupply", "name": "Loko Ground Unit (LoRa receiver)" },
-    { "@type": "HowToSupply", "name": "18650 Li-ion cell for Ground unit (user-supplied)" },
-    { "@type": "HowToSupply", "name": "USB Type-C cable" }
+    {
+      "@type": "HowToSupply",
+      "name": "Loko Air tracker"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Loko Ground receiver"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Li-ion 18650 button-top battery for Loko Ground (user-supplied)"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "5 V USB charger and USB-C cable"
+    }
   ],
   "tool": [
-    { "@type": "HowToTool", "name": "Chrome or Edge browser (Web Serial API required)" },
-    { "@type": "HowToTool", "name": "Loko app (iOS or Android)" }
+    {
+      "@type": "HowToTool",
+      "name": "+ (cross-tip) screwdriver"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Loko app (iOS 15+ or Android 11+)"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Computer with Chrome or Edge and a USB-C data cable (firmware update)"
+    }
   ],
   "step": [
     {
-      "@type": "HowToStep", "position": 1,
-      "name": "Open the web configurator",
-      "text": "Open Chrome or Edge and go to nolilab.com/loko-config-tool/",
-      "url": "https://www.nolilab.com/loko-config-tool/"
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Prepare Loko Ground",
+      "text": "Remove the 4 back screws, insert the 18650 battery with the negative end toward the antenna, update the firmware at nolilab.com/loko-config-tool/, and close the cover."
     },
     {
-      "@type": "HowToStep", "position": 2,
-      "name": "Connect Loko Air via USB",
-      "text": "Connect Loko Air to the computer via USB Type-C. Click Connect on the Configuration tab and grant browser serial access."
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Charge both units",
+      "text": "Charge Loko Air and Loko Ground with a 5 V USB-C charger. Loko Air's red LED lights solid when full."
     },
     {
-      "@type": "HowToStep", "position": 3,
-      "name": "Set Air unit parameters and save",
-      "text": "Configure transmit_mode, frequency, id1, id2, wake_up_period, gnss_mode, and tx_power. Click Save Changes."
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Connect Loko Ground to your phone",
+      "text": "Turn on Loko Ground until the LED blinks blue. In the Loko app open the menu, tap Bluetooth, Scan, then Connect next to LOKO. The LED turns solid blue."
     },
     {
-      "@type": "HowToStep", "position": 4,
-      "name": "Power on Loko Air",
-      "text": "Disconnect USB. Hold the power button until the LED blinks red — unit is active."
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Turn on Loko Air outdoors",
+      "text": "Outdoors with a clear view of the sky, hold the Loko Air button for about 4 seconds until the solid red LED goes out."
     },
     {
-      "@type": "HowToStep", "position": 5,
-      "name": "Insert battery and connect Loko Ground",
-      "text": "Insert an 18650 Li-ion cell into the Ground unit. Connect to computer via USB, open the Ground Unit tab in the configurator, and click Connect."
-    },
-    {
-      "@type": "HowToStep", "position": 6,
-      "name": "Match Ground unit settings and send",
-      "text": "Click Read to load current settings. Set id2 and frequency_hz to match the Air unit. Click Send, then disconnect USB."
-    },
-    {
-      "@type": "HowToStep", "position": 7,
-      "name": "Power on Ground unit and pair with app",
-      "text": "Hold power button until LED is solid blue. Open the Loko app, go to Settings, and select the Ground unit. Wait for GPS fix — location appears on map."
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Find your tracker on the map",
+      "text": "Wait for a round marker with the tracker's ID1. Tap it to see position, battery, time of the last position and distance."
     }
   ]
 }
@@ -574,7 +600,7 @@
 <!-- Hero -->
 <div class="sg-hero">
 <h1>Loko GPS Tracker — Setup Guide</h1>
-<p class="hero-sub">Configure your Loko Air &amp; Ground units from scratch. Full setup takes about 15 minutes.</p>
+<p class="hero-sub">Get your first position on the map: prepare Loko Ground, charge both units, connect your phone and turn on Loko Air. It takes about 15 minutes.</p>
 <div class="hero-actions">
 <a class="download-btn" download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">
 <i class="fa-solid fa-file-pdf"></i> Download User Manual (PDF)
@@ -589,10 +615,15 @@
 <p class="toc-title">On this page</p>
 <ol>
 <li><a href="#overview">Overview</a></li>
-<li><a href="#specifications">Specifications</a></li>
-<li><a href="#how-it-works">How It Works</a></li>
-<li><a href="#configure-air">Part 1 — Configure Loko Air</a></li>
-<li><a href="#configure-ground">Part 2 — Configure Loko Ground</a></li>
+<li><a href="#before-you-start">Before you start</a></li>
+<li><a href="#prepare-ground">Step 1 — Prepare Loko Ground</a></li>
+<li><a href="#charge">Step 2 — Charge both units</a></li>
+<li><a href="#connect-phone">Step 3 — Connect Loko Ground to your phone</a></li>
+<li><a href="#power-on-air">Step 4 — Turn on Loko Air outdoors</a></li>
+<li><a href="#find-tracker">Step 5 — Find your tracker on the map</a></li>
+<li><a href="#led-guide">LED guide</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#firmware">Update firmware</a></li>
 <li><a href="#warnings">Warnings</a></li>
 <li><a href="#checklist">Quick-Start Checklist</a></li>
 </ol>
@@ -600,178 +631,218 @@
 <!-- Overview -->
 <section class="sg-section" id="overview">
 <h2>Overview</h2>
-<p>Loko is a compact GPS tracker for drones. Two units work together: <strong>Loko Air</strong> (airborne) acquires GPS and transmits via LoRa radio; <strong>Loko Ground</strong> (base station) receives data and forwards it to the Loko mobile app over Bluetooth.</p>
+<p>Loko is an offline GPS tracker. <strong>Loko Air</strong> finds its position and sends it over LoRa radio. <strong>Loko Ground</strong> receives the position and forwards it to your phone over Bluetooth, and the <strong>Loko app</strong> shows it on the map. No SIM card, account or subscription is needed.</p>
+<div class="wake-cycle">
+<div class="wake-step">Loko Air</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">LoRa radio</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">Loko Ground</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">Bluetooth</div>
+<span class="wake-arrow">→</span>
+<div class="wake-step">Loko app</div>
+</div>
 <div class="unit-cards">
 <div class="unit-card">
-<div class="unit-label">loko-air</div>
-<p class="unit-desc">GPS + LoRa transmitter — mounts on aircraft</p>
+<div class="unit-label">Loko Air</div>
+<p class="unit-desc">Tracker: finds its position and sends it</p>
 <ul class="unit-specs">
-<li>Li-ion 200 mAh</li>
-<li>14 g</li>
-<li>Up to 1 year battery life</li>
-<li>USB Type-C charging</li>
+<li>Li-ion 200 mAh, rechargeable</li>
+<li>30 × 22 mm, 14 g</li>
+<li>USB-C charging, 5 V</li>
 </ul>
 </div>
 <div class="unit-card">
-<div class="unit-label">loko-ground</div>
-<p class="unit-desc">LoRa receiver + Bluetooth relay — stays on ground</p>
+<div class="unit-label">Loko Ground</div>
+<p class="unit-desc">Receiver: gets positions from Loko Air and forwards them to the app</p>
 <ul class="unit-specs">
-<li>18650 Li-ion (user-supplied)</li>
-<li>Not included in box</li>
+<li>Li-ion 18650 button-top (not included)</li>
+<li>Any capacity works</li>
+<li>USB-C charging, 5 V</li>
 </ul>
 </div>
 </div>
+<div class="note-box"><span class="note-label">Note:</span> Loko works with its default settings. To change timing, GNSS mode, radio settings or tracker IDs, or to export tracks, see the <a download="LOKO_User_Manual.pdf" href="/LOKO_User_Manual.pdf">full user manual (PDF)</a>.</div>
 </section>
-<!-- Specifications -->
-<section class="sg-section" id="specifications">
-<h2>Specifications</h2>
-<div class="table-wrap">
-<table class="doc-table">
-<thead>
-<tr><th>Parameter</th><th>Value</th></tr>
-</thead>
-<tbody>
-<tr><td><code>radio</code></td><td>LoRa / CHIRP — penetrates buildings, urban clutter, dense forest</td></tr>
-<tr><td><code>frequency</code></td><td>860–926 MHz (configurable)</td></tr>
-<tr><td><code>tx_power</code></td><td>8 dBm default (configurable)</td></tr>
-<tr><td><code>gnss</code></td><td>GPS + GLONASS + Galileo</td></tr>
-<tr><td><code>range</code></td><td>+20 km line-of-sight at 2 m AGL; grows with altitude</td></tr>
-<tr><td><code>battery_life</code></td><td>Up to 1 year (depends on wake interval)</td></tr>
-<tr><td><code>weight</code></td><td>14 g (Air unit)</td></tr>
-<tr><td><code>charge</code></td><td>5V USB Type-C only</td></tr>
-<tr><td><code>temperature</code></td><td>–10 °C to +60 °C operating (charge at 0 °C – 40 °C)</td></tr>
-</tbody>
-</table>
-</div>
-<p>Use the <a href="/specifications/">battery life calculator</a> to estimate run time for your wake interval.</p>
+<!-- Before you start -->
+<section class="sg-section" id="before-you-start">
+<h2>Before you start</h2>
+<ul class="bullet-list">
+<li>The <strong>Loko app</strong> on your phone: iPhone with iOS 15 or later, or Android 11 or later. Download it from the <a href="/software/">software page</a>.</li>
+<li>A <strong>Li-ion 18650 button-top battery</strong> for Loko Ground. Any capacity works; a higher capacity runs longer on one charge.</li>
+<li>A <strong>+ (cross-tip) screwdriver</strong> for the 4 screws on the back of Loko Ground.</li>
+<li>A <strong>5 V USB charger</strong> (any phone charger) and a <strong>USB-C cable</strong> for charging.</li>
+<li>For the firmware update: a computer with <strong>Chrome or Edge</strong> and a <strong>USB-C data cable</strong>. A charge-only cable cannot transfer data.</li>
+</ul>
 </section>
-<!-- How It Works -->
-<section class="sg-section" id="how-it-works">
-<h2>How It Works</h2>
-<p>Each wake cycle the Air unit wakes, acquires a GPS fix, transmits coordinates to the Ground unit, then sleeps until the next cycle. If no satellite fix is available, last known coordinates are transmitted. The GPS track log is also written to internal flash and can be downloaded via USB.</p>
-<div class="wake-cycle">
-<div class="wake-step">Wake</div>
-<span class="wake-arrow">→</span>
-<div class="wake-step">GPS fix</div>
-<span class="wake-arrow">→</span>
-<div class="wake-step">Transmit to Ground</div>
-<span class="wake-arrow">→</span>
-<div class="wake-step">Sleep</div>
-</div>
-<p>Multiple Air units can pair to a single Ground unit simultaneously.</p>
-</section>
-<!-- Part 1: Configure Air -->
-<section class="sg-section" id="configure-air">
-<h2>Part 1 — Configure Loko Air</h2>
-<p>No software to install. Use the web configurator in a Chromium-based browser.</p>
-<div class="note-box">Firefox and Safari are not supported — no Web Serial API.</div>
-<h3>1.1 Open configurator</h3>
-<ol class="step-list">
-<li>Open <strong>Chrome</strong> or <strong>Edge</strong>.</li>
-<li>Go to <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a></li>
+<!-- Step 1: Prepare Loko Ground -->
+<section class="sg-section" id="prepare-ground">
+<h2>Step 1 — Prepare Loko Ground</h2>
+<ol class="step-list" start="1">
+<li>Remove the 4 screws on the back of Loko Ground with the + (cross-tip) screwdriver, then lift off the back cover.</li>
 </ol>
-<div class="note-box">Four tabs: <strong>Configuration</strong> — set device parameters. <strong>GNSS Trace</strong> — read GPS log from Air unit, visualise on map, export .gpx / .csv. <strong>Ground Unit</strong> — configure Ground unit. <strong>Firmware Update</strong> — flash latest firmware.</div>
-<h3>1.2 Connect</h3>
+<div class="note-box warn"><span class="note-label">Warning:</span> Check the battery orientation before you insert it. Reversed polarity can damage the protection chip on the circuit board.</div>
+<ol class="step-list" start="2">
+<li>Insert the Li-ion 18650 button-top battery. The <strong>negative (−)</strong> end goes toward the antenna, and the <strong>positive (+)</strong> end goes at the opposite end.</li>
+</ol>
 <ol class="step-list" start="3">
-<li>Connect Loko Air to the computer via <strong>USB Type-C</strong>.</li>
-<li>Click <strong>Connect</strong> on the Configuration tab.</li>
-<li>Grant browser serial access when prompted → select the correct port.</li>
+<li>Update the Loko Ground firmware while the cover is off. Follow <a href="#firmware-ground">Update Loko Ground firmware</a>, then come back to step 4.</li>
 </ol>
-<div class="note-box">If the port does not appear, flip the Type-C cable — pin orientation matters.</div>
-<h3>1.3 Set parameters → Save Changes</h3>
-<div class="table-wrap">
-<table class="doc-table">
-<thead>
-<tr><th>Parameter</th><th>Description</th></tr>
-</thead>
-<tbody>
-<tr><td><code>transmit_mode</code></td><td>P2P for direct Air↔Ground (standard). LoRaWAN for network-server integrations.</td></tr>
-<tr><td><code>frequency</code></td><td>860–926 MHz. Must match Ground unit exactly.</td></tr>
-<tr><td><code>id1</code></td><td>2-digit pairing code. Must match on both Air and Ground units.</td></tr>
-<tr><td><code>id2</code></td><td>2-digit Ground unit identifier. Must match Ground unit setting.</td></tr>
-<tr><td><code>wake_up_period</code></td><td>How often the Air unit wakes. Units: s / min / h. Shorter = faster battery drain.</td></tr>
-<tr><td><code>send_mult</code></td><td>Transmit on every Nth wake cycle (1 = every cycle, 0 = disable).</td></tr>
-<tr><td><code>save_mult</code></td><td>Log GNSS trace every Nth wake cycle (0 = disable logging).</td></tr>
-<tr><td><code>gnss_mode</code></td><td>Movement profile: Normal | Fitness | Aviation | Balloon | Stationary. Default: Normal. Use Aviation or Balloon for drones.</td></tr>
-<tr><td><code>tx_power</code></td><td>Radio output in dBm. Higher = more range, more battery drain. Default: 8 dBm.</td></tr>
-<tr><td><code>p2p_encryption</code></td><td>Optional. 64-char HEX key (32 bytes) for AES-256. Must match Ground unit if enabled.</td></tr>
-</tbody>
-</table>
-</div>
-<h3>1.4 Power on</h3>
-<ol class="step-list" start="6">
-<li>Disconnect USB.</li>
-<li>Hold power button until LED <strong>blinks red</strong> → unit is active.</li>
+<ol class="step-list" start="4">
+<li>Put the back cover back on and tighten the 4 screws.</li>
 </ol>
-<div class="note-box">Solid red LED = sleep mode between transmissions. Normal behaviour.</div>
 </section>
-<!-- Part 2: Configure Ground -->
-<section class="sg-section" id="configure-ground">
-<h2>Part 2 — Configure Loko Ground</h2>
-<p>Loko Ground has no built-in battery. Before connecting, unscrew the four rear fasteners, insert an <strong>18650 Li-ion cell</strong> (not included), and reassemble.</p>
-<h3>2.1 Open configurator → Ground Unit tab</h3>
-<ol class="step-list" start="8">
-<li>Go to <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a> in Chrome or Edge.</li>
-<li>Click the <strong>Ground Unit</strong> tab.</li>
+<!-- Step 2: Charge both units -->
+<section class="sg-section" id="charge">
+<h2>Step 2 — Charge both units</h2>
+<ol class="step-list" start="5">
+<li>Connect Loko Air to a 5 V USB charger with a USB-C cable. Charging starts automatically. When the battery is full, the red LED lights solid.</li>
+<li>Charge Loko Ground the same way. Loko Ground has no charging indicator.</li>
 </ol>
-<h3>2.2 Connect</h3>
-<ol class="step-list" start="10">
-<li>Connect Loko Ground to the computer via USB.</li>
-<li>Click <strong>Connect</strong> → grant serial access → select port.</li>
+<div class="note-box"><span class="note-label">Note:</span> If Loko Air is switched on while it charges, the LED gives a short blink every 5 seconds until the battery is full. This is normal.</div>
+</section>
+<!-- Step 3: Connect Loko Ground to your phone -->
+<section class="sg-section" id="connect-phone">
+<h2>Step 3 — Connect Loko Ground to your phone</h2>
+<ol class="step-list" start="7">
+<li>Turn on Loko Ground: press and hold <strong>Power</strong>. The LED lights green, then red, then blue, and then goes out. Release the button when the LED goes out. The LED then starts <strong>blinking blue</strong>: Loko Ground is ready to connect.</li>
+<li>Open the Loko app and allow the permissions it asks for. <strong>Location</strong> shows your own position. <strong>Bluetooth</strong> (called <strong>Nearby devices</strong> on Android) lets the app find Loko Ground. Allow <strong>Notifications</strong> if you want geofence alerts and chimes while the app is closed.</li>
+<li>Tap the menu icon (☰) in the top-left corner. The menu opens.</li>
+<li>Tap <strong>Bluetooth</strong>, then tap <strong>Scan</strong>.</li>
+<li>Tap <strong>Connect</strong> next to <strong>LOKO</strong>. The Loko Ground LED turns <strong>solid blue</strong> when it connects to your phone.</li>
+<li>Tap the map to close the menu.</li>
 </ol>
-<h3>2.3 Read → update → Send</h3>
-<ol class="step-list" start="12">
-<li>Click <strong>Read</strong> to load current settings.</li>
-<li>Set the parameters below to match the Air unit configuration.</li>
-<li>Click <strong>Send</strong>, then disconnect USB.</li>
+<div class="note-box check"><span class="note-label">Check:</span> Solid blue means Loko Ground is connected to your phone. It does not mean a position from Loko Air has arrived yet.</div>
+</section>
+<!-- Step 4: Turn on Loko Air outdoors -->
+<section class="sg-section" id="power-on-air">
+<h2>Step 4 — Turn on Loko Air outdoors</h2>
+<ol class="step-list" start="13">
+<li>Take Loko Air outside, to a place with a clear view of the sky.</li>
+<li>Press and hold the Loko Air button for about 4 seconds, until the <strong>solid red</strong> LED goes out. Release the button. Loko Air is now on and looks for its first position, which can take longer the first time.</li>
 </ol>
+<ul class="bullet-list">
+<li><strong>Turn off Loko Air:</strong> press and hold the button for about 4 seconds, until the blinking red LED goes out.</li>
+<li><strong>Check whether it is on:</strong> press the button briefly, for 1–2 seconds. If the LED blinks, Loko Air is on. If it lights solid, Loko Air is off. A press shorter than 3 seconds does not change the state.</li>
+<li><strong>Turn off Loko Ground:</strong> press and hold Power until the LED turns red, then release it.</li>
+</ul>
+</section>
+<!-- Step 5: Find your tracker on the map -->
+<section class="sg-section" id="find-tracker">
+<h2>Step 5 — Find your tracker on the map</h2>
+<ol class="step-list" start="15">
+<li>Wait for a round marker with the tracker's <strong>ID1</strong> on it. It is red by default, and it appears when the app receives a position from Loko Air.</li>
+<li>Tap the marker to see the tracker's details: position, battery, time of the last position and distance from you.</li>
+</ol>
+<div class="note-box check"><span class="note-label">Check:</span> The ID1 marker confirms that a position travelled from Loko Air through Loko Ground to the app.</div>
+<div class="note-box"><span class="note-label">Tip:</span> Before you go out of internet coverage, download maps of your area: menu → <strong>Offline Maps</strong> → <strong>+ Download New Zone</strong>. Tracking works without internet, but the map only shows areas you have downloaded. Offline, select the <strong>Map Style</strong> that matches the map source you downloaded.</div>
+</section>
+<!-- LED guide -->
+<section class="sg-section" id="led-guide">
+<h2>LED guide</h2>
 <div class="table-wrap">
 <table class="doc-table">
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>Device</th><th>When you see it</th><th>LED</th><th>Meaning</th></tr>
 </thead>
 <tbody>
-<tr><td><code>id2</code></td><td>2-digit identifier. Must match id2 set on the Air unit.</td></tr>
-<tr><td><code>frequency_hz</code></td><td>Frequency in Hz (e.g. 868000000). Must match Air unit exactly.</td></tr>
-<tr><td><code>p2p_key</code></td><td>Only if encryption is enabled on Air unit. Same 64-char HEX key.</td></tr>
+<tr><td class="wrap">Loko Air</td><td>While charging</td><td>Red, solid</td><td>The battery is full.</td></tr>
+<tr><td class="wrap">Loko Air</td><td>While charging, switched on</td><td>Red, one short blink every 5 s</td><td>On and still charging. This is normal.</td></tr>
+<tr><td class="wrap">Loko Air</td><td>Holding the button to turn on</td><td>Red, solid, then goes out</td><td>Loko Air has turned on. Release the button.</td></tr>
+<tr><td class="wrap">Loko Air</td><td>Holding the button to turn off</td><td>Red, blinking, then goes out</td><td>Loko Air has turned off. Release the button.</td></tr>
+<tr><td class="wrap">Loko Air</td><td>After a short press (1–2 s)</td><td>Red, blinking</td><td>Loko Air is on.</td></tr>
+<tr><td class="wrap">Loko Air</td><td>After a short press (1–2 s)</td><td>Red, solid</td><td>Loko Air is off.</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>Holding Power to turn on</td><td>Green, red, blue, then off</td><td>Starting. Release the button when the LED goes out.</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>After it has started</td><td>Blue, blinking</td><td>On and ready to connect to the Loko app.</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>After you tap Connect in the app</td><td>Blue, solid</td><td>Connected to your phone over Bluetooth.</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>Holding Power to turn off</td><td>Red</td><td>Release the button; Loko Ground turns off.</td></tr>
+<tr><td class="wrap">Loko Ground</td><td>While charging</td><td>No light</td><td>Loko Ground has no charging indicator.</td></tr>
 </tbody>
 </table>
 </div>
-<h3>2.4 Power on and pair</h3>
-<ol class="step-list" start="15">
-<li>Hold power button until LED is <strong>solid blue</strong> → ready to pair.</li>
-<li>Open Loko app → grant Bluetooth permissions → <strong>Settings</strong> → select Ground unit.</li>
-<li>Return to main screen. Wait for GPS fix. Location appears on map.</li>
+</section>
+<!-- Troubleshooting -->
+<section class="sg-section" id="troubleshooting">
+<h2>Troubleshooting</h2>
+<p>Start with the first check in each row; the later checks take longer.</p>
+<div class="table-wrap">
+<table class="doc-table">
+<thead>
+<tr><th>What you see</th><th>What to check</th></tr>
+</thead>
+<tbody>
+<tr><td class="wrap">Loko Ground does not appear in the Bluetooth scan</td><td>1. Loko Ground is on: its LED blinks blue.<br/>2. Bluetooth is on in your phone.<br/>3. The Loko app is allowed to use Bluetooth (Nearby devices on Android).<br/>4. Loko Ground is charged. It has no charging indicator, so charge it if unsure.</td></tr>
+<tr><td class="wrap">Loko Ground is connected (solid blue) but Loko Air is not on the map</td><td>1. Loko Air is on: a short press makes its LED blink.<br/>2. Loko Air is outdoors with a clear view of the sky; the first position can take longer.<br/>3. Enough time has passed for a send: Loko Air sends on every N-th wake-up (Send Mult), and Send Mult is not 0.<br/>4. The Daily Sleep Window is not active right now (times are UTC).<br/>5. Transmit Mode is P2P.<br/>6. Frequency, ID2 and the encryption key match on both units.</td></tr>
+<tr><td class="wrap">The map is blank when you are offline</td><td>1. You downloaded this area before going offline.<br/>2. Map Style matches the map source you downloaded.<br/>3. If the app reported missing tiles after the download, download the same area again.</td></tr>
+<tr><td class="wrap">Geofence alerts do not arrive while the app is closed</td><td>Notifications are allowed for the Loko app.</td></tr>
+<tr><td class="wrap">Loko Air or Loko Ground is missing from the USB port list</td><td>1. The cable is a USB-C data cable, not a charge-only cable.<br/>2. You are using Chrome or Edge.<br/>3. Loko Ground is switched on before you connect it.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Update firmware -->
+<section class="sg-section" id="firmware">
+<h2>Update firmware</h2>
+<p>Keep Loko Air and Loko Ground on the latest firmware. You need a computer with Chrome or Edge, a USB-C data cable and the Loko Configuration Tool at <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a>. Nothing to install.</p>
+<h3 id="firmware-air">Update Loko Air firmware</h3>
+<ol class="step-list" start="1">
+<li>Open the Loko Configuration Tool: <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a></li>
+<li>Connect Loko Air to the computer with the USB-C data cable.</li>
+<li>Click <strong>Firmware Update</strong>, then <strong>Loko Air</strong>.</li>
+<li>Click <strong>Connect</strong>, then select the Loko Air port in the window that opens.</li>
+<li>Under <strong>Flash</strong>, select <strong>Latest</strong>, then click <strong>Flash Firmware</strong>.</li>
+<li>Wait until the progress bar reaches 100% and the tool shows <strong>Flash complete</strong>. Do not unplug Loko Air before that.</li>
+<li>Unplug Loko Air and plug it back in to restart it.</li>
 </ol>
-<div class="note-box">Multiple Air units supported. Tap a map pin to see device details.</div>
+<h3 id="firmware-ground">Update Loko Ground firmware</h3>
+<p>Before you start, take off the back cover (4 screws) and install the Li-ion 18650 button-top battery. You will use three buttons on the board: <strong>Power</strong> (the big button), <strong>IO</strong> and <strong>EN (RESET)</strong>.</p>
+<ol class="step-list" start="1">
+<li>Connect Loko Ground to the computer with the USB-C data cable.</li>
+<li>Open the Loko Configuration Tool: <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a></li>
+<li>Click <strong>Firmware Update</strong>, then <strong>Loko Ground</strong>.</li>
+<li>Press and hold <strong>Power</strong> (the big button). Keep holding it until step 9.</li>
+<li>While you hold Power, press and hold <strong>IO</strong>.</li>
+<li>While you hold both IO and Power, press <strong>EN (RESET)</strong> once.</li>
+<li>Release IO. Keep holding Power.</li>
+<li>Click <strong>Flash Firmware</strong>, then select the serial port in the window that opens.</li>
+<li>When the progress bar reaches 100% and shows <strong>Done</strong>, release Power.</li>
+<li>Press <strong>EN (RESET)</strong> once.</li>
+<li>Put the back cover back on and tighten the 4 screws.</li>
+</ol>
+<div class="note-box check"><span class="note-label">Check:</span> The update is complete when the progress bar showed Done at 100% and you pressed EN (RESET).</div>
 </section>
 <!-- Warnings -->
 <section class="sg-section" id="warnings">
 <h2>Warnings</h2>
 <div class="warnings-grid">
 <div class="warning-item">
+<span class="warn-label">BATTERY</span>
+<p>Check the 18650 polarity before you insert it: negative (−) toward the antenna. Reversed polarity can damage the circuit board.</p>
+</div>
+<div class="warning-item">
 <span class="warn-label">WATERPROOF</span>
 <p>Not waterproof, but withstands light rain. Do not submerge it. Always cap the USB port on the Air unit.</p>
+</div>
+<div class="warning-item">
+<span class="warn-label">TEMPERATURE</span>
+<p>Operate within −10 °C to +60 °C.</p>
+</div>
+<div class="warning-item">
+<span class="warn-label">VOLTAGE</span>
+<p>Charge at 5 V only. Higher voltages will destroy the device.</p>
 </div>
 <div class="warning-item">
 <span class="warn-label">FIRE</span>
 <p>Do not expose to open flame or extreme heat.</p>
 </div>
 <div class="warning-item">
-<span class="warn-label">TEMPERATURE</span>
-<p>Operate within –10 °C to +60 °C. Charge only at 0 °C – 40 °C.</p>
-</div>
-<div class="warning-item">
-<span class="warn-label">VOLTAGE</span>
-<p>Charge at 5V only. Higher voltages will destroy the device.</p>
-</div>
-<div class="warning-item">
 <span class="warn-label">RF</span>
-<p>Do not enclose in metal. Keep away from strong EM sources.</p>
+<p>Do not enclose in metal. Keep away from strong EM sources. Make sure your frequency and TX power are allowed where you use Loko.</p>
 </div>
 <div class="warning-item">
 <span class="warn-label">ANTENNA</span>
-<p>Mount antenna pointing upward, as high from the ground as possible.</p>
+<p>Mount the antenna pointing upward, as high from the ground as possible.</p>
 </div>
 <div class="warning-item">
 <span class="warn-label">EYE SAFETY</span>
@@ -783,13 +854,15 @@
 <section class="sg-section" id="checklist">
 <h2>Quick-Start Checklist</h2>
 <div class="checklist" id="sg-checklist">
-<label><input type="checkbox"/> Open <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a> in Chrome or Edge</label>
-<label><input type="checkbox"/> Configuration tab → connect Air unit → set all parameters → Save Changes</label>
-<label><input type="checkbox"/> Ground Unit tab → connect Ground unit → match <code>id2</code> + <code>frequency_hz</code> → Send</label>
-<label><input type="checkbox"/> Power on Air unit — LED blinks red</label>
-<label><input type="checkbox"/> Power on Ground unit — LED solid blue</label>
-<label><input type="checkbox"/> Loko app → Settings → pair Ground unit</label>
-<label><input type="checkbox"/> Wait for GPS fix — location appears on map</label>
+<label><input type="checkbox"/> Loko app installed on your phone</label>
+<label><input type="checkbox"/> Back cover off, 18650 battery in: negative (−) toward the antenna</label>
+<label><input type="checkbox"/> Loko Ground firmware updated at <a href="/loko-config-tool/">nolilab.com/loko-config-tool/</a>, cover back on</label>
+<label><input type="checkbox"/> Both units charged with a 5 V USB-C charger</label>
+<label><input type="checkbox"/> Loko Ground on: LED blinks blue</label>
+<label><input type="checkbox"/> Loko app → ☰ → Bluetooth → Scan → Connect next to LOKO: LED solid blue</label>
+<label><input type="checkbox"/> Loko Air on outdoors: hold the button about 4 s until the solid red LED goes out</label>
+<label><input type="checkbox"/> Round marker with the tracker's ID1 appears on the map</label>
+<label><input type="checkbox"/> Offline maps downloaded for your area</label>
 </div>
 </section>
 <!-- Links -->
