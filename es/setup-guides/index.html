@@ -494,6 +494,27 @@
   .bullet-list li strong { color: var(--text-primary); }
   .doc-table td.wrap, .doc-table td:first-child.wrap { white-space: normal; }
   @media (max-width: 640px) { .unit-cards { grid-template-columns: 1fr; } }
+
+  /* iPhone frame for app screenshots */
+  .phone-figure { display: flex; gap: 2rem; align-items: center; margin: 1.5rem 0; }
+  .phone-figure figcaption { flex: 1; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+  .phone-figure figcaption strong { color: var(--text-primary); }
+  .phone-figure .phone-legend { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .phone-figure .phone-legend li { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.3rem 0; }
+  .phone-num { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #e11d48; color: #fff; font-size: 0.8rem; font-weight: 600; }
+  .iphone { flex: none; position: relative; width: 240px; padding: 10px; border-radius: 44px; background: #1d1d1f; box-shadow: inset 0 0 0 2px #3a3a3c, 0 0 0 1px #8e8e93, 0 18px 40px rgba(0,0,0,0.18); }
+  .iphone::before { content: ""; position: absolute; left: -3px; top: 96px; width: 3px; height: 56px; border-radius: 2px 0 0 2px; background: #8e8e93; }
+  .iphone::after { content: ""; position: absolute; right: -3px; top: 120px; width: 3px; height: 72px; border-radius: 0 2px 2px 0; background: #8e8e93; }
+  .iphone-screen { position: relative; overflow: hidden; border-radius: 34px; background: var(--status-bg, #f3f1e7); padding-bottom: 18px; }
+  .iphone-status { flex: none; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px 0 26px; font-size: 11px; font-weight: 600; color: var(--status-fg, #111); }
+  .iphone-status .sig { letter-spacing: 1px; font-size: 9px; }
+  .iphone-island { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 68px; height: 20px; border-radius: 12px; background: #000; z-index: 2; }
+  .iphone-screen img { display: block; width: 100%; height: auto; }
+  .iphone-home { position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); width: 84px; height: 4px; border-radius: 2px; background: var(--status-fg, #111); opacity: 0.55; }
+  @media (max-width: 640px) {
+    .phone-figure { flex-direction: column; align-items: center; gap: 1rem; }
+    .iphone { width: 220px; }
+  }
 </style>
 <style>
   @font-face {
@@ -701,6 +722,17 @@
 <li>Toca <strong>Connect</strong> junto a <strong>LOKO</strong>. El LED de Loko Ground queda <strong>azul fijo</strong> cuando se conecta a tu teléfono.</li>
 <li>Toca el mapa para cerrar el menú.</li>
 </ol>
+<figure class="phone-figure">
+<div class="iphone" style="--status-bg:#1f2224;--status-fg:#f5f5f5">
+<div class="iphone-screen">
+<div class="iphone-island"></div>
+<div class="iphone-status" aria-hidden="true"><span>9:41</span><span class="sig">&#9679;&#9679;&#9679; &#9646;</span></div>
+<img alt="Menú de la app Loko con Bluetooth, LoRaWAN, Geo-Fences, Offline Maps, Archive, Logs, Map Style, Language y Settings" decoding="async" height="1434" loading="lazy" src="/images/setup-guide/loko-app-menu.webp" width="702"/>
+<div class="iphone-home"></div>
+</div>
+</div>
+<figcaption>El menú de la app Loko. Toca aquí <strong>Bluetooth</strong> y luego <strong>Scan</strong> para encontrar Loko Ground. El mismo menú contiene tus rastreadores (DEVICES), Geo-Fences, Offline Maps, Archive, Map Style, Language y Settings.</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Comprobación:</span> Azul fijo significa que Loko Ground está conectado a tu teléfono. No significa que ya haya llegado una posición de Loko Air.</div>
 </section>
 <!-- Step 4: Turn on Loko Air outdoors -->
@@ -723,6 +755,25 @@
 <li>Espera a que aparezca un marcador redondo con el <strong>ID1</strong> del rastreador. Es rojo por defecto y aparece cuando la app recibe una posición de Loko Air.</li>
 <li>Toca el marcador para ver los detalles del rastreador: posición, batería, hora de la última posición y distancia hasta ti.</li>
 </ol>
+<figure class="phone-figure">
+<div class="iphone" style="--status-bg:#f3f1e7;--status-fg:#111">
+<div class="iphone-screen">
+<div class="iphone-island"></div>
+<div class="iphone-status" aria-hidden="true"><span>9:41</span><span class="sig">&#9679;&#9679;&#9679; &#9646;</span></div>
+<img alt="Mapa principal de la app Loko con controles numerados: menú, brújula, control de zoom, mi ubicación y tu posición" decoding="async" height="1434" loading="lazy" src="/images/setup-guide/loko-app-main-map.webp" width="702"/>
+<div class="iphone-home"></div>
+</div>
+</div>
+<figcaption><strong>El mapa principal</strong>
+<ul class="phone-legend">
+<li><span class="phone-num">1</span><span><strong>Menú:</strong> tus rastreadores y todas las funciones de la app.</span></li>
+<li><span class="phone-num">2</span><span><strong>Brújula:</strong> tócala para girar el mapa con el norte hacia arriba.</span></li>
+<li><span class="phone-num">3</span><span><strong>Control de zoom:</strong> arrástralo hacia arriba para acercar y hacia abajo para alejar. También puedes pellizcar el mapa.</span></li>
+<li><span class="phone-num">4</span><span><strong>Mi ubicación:</strong> centra el mapa en tu posición y te sigue.</span></li>
+<li><span class="phone-num">5</span><span><strong>Tu posición:</strong> el punto azul es tu teléfono; el cono indica hacia dónde apunta.</span></li>
+</ul>
+</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Comprobación:</span> El marcador con el ID1 confirma que una posición ha viajado de Loko Air, a través de Loko Ground, hasta la app.</div>
 <div class="note-box"><span class="note-label">Consejo:</span> Antes de salir de la cobertura de internet, descarga los mapas de tu zona: menú → <strong>Offline Maps</strong> → <strong>+ Download New Zone</strong>. El seguimiento funciona sin internet, pero el mapa solo muestra las zonas descargadas. Sin conexión, elige en <strong>Map Style</strong> el estilo que corresponde a la fuente de mapa descargada.</div>
 </section>

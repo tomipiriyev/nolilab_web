@@ -494,6 +494,27 @@
   .bullet-list li strong { color: var(--text-primary); }
   .doc-table td.wrap, .doc-table td:first-child.wrap { white-space: normal; }
   @media (max-width: 640px) { .unit-cards { grid-template-columns: 1fr; } }
+
+  /* iPhone frame for app screenshots */
+  .phone-figure { display: flex; gap: 2rem; align-items: center; margin: 1.5rem 0; }
+  .phone-figure figcaption { flex: 1; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+  .phone-figure figcaption strong { color: var(--text-primary); }
+  .phone-figure .phone-legend { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .phone-figure .phone-legend li { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.3rem 0; }
+  .phone-num { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #e11d48; color: #fff; font-size: 0.8rem; font-weight: 600; }
+  .iphone { flex: none; position: relative; width: 240px; padding: 10px; border-radius: 44px; background: #1d1d1f; box-shadow: inset 0 0 0 2px #3a3a3c, 0 0 0 1px #8e8e93, 0 18px 40px rgba(0,0,0,0.18); }
+  .iphone::before { content: ""; position: absolute; left: -3px; top: 96px; width: 3px; height: 56px; border-radius: 2px 0 0 2px; background: #8e8e93; }
+  .iphone::after { content: ""; position: absolute; right: -3px; top: 120px; width: 3px; height: 72px; border-radius: 0 2px 2px 0; background: #8e8e93; }
+  .iphone-screen { position: relative; overflow: hidden; border-radius: 34px; background: var(--status-bg, #f3f1e7); padding-bottom: 18px; }
+  .iphone-status { flex: none; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px 0 26px; font-size: 11px; font-weight: 600; color: var(--status-fg, #111); }
+  .iphone-status .sig { letter-spacing: 1px; font-size: 9px; }
+  .iphone-island { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 68px; height: 20px; border-radius: 12px; background: #000; z-index: 2; }
+  .iphone-screen img { display: block; width: 100%; height: auto; }
+  .iphone-home { position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); width: 84px; height: 4px; border-radius: 2px; background: var(--status-fg, #111); opacity: 0.55; }
+  @media (max-width: 640px) {
+    .phone-figure { flex-direction: column; align-items: center; gap: 1rem; }
+    .iphone { width: 220px; }
+  }
 </style>
 <style>
   @font-face {
@@ -701,6 +722,17 @@
 <li>Нажмите <strong>Connect</strong> рядом с <strong>LOKO</strong>. LED Loko Ground загорится <strong>постоянным синим</strong>, когда устройство подключится к телефону.</li>
 <li>Нажмите на карту, чтобы закрыть меню.</li>
 </ol>
+<figure class="phone-figure">
+<div class="iphone" style="--status-bg:#1f2224;--status-fg:#f5f5f5">
+<div class="iphone-screen">
+<div class="iphone-island"></div>
+<div class="iphone-status" aria-hidden="true"><span>9:41</span><span class="sig">&#9679;&#9679;&#9679; &#9646;</span></div>
+<img alt="Меню приложения Loko: Bluetooth, LoRaWAN, Geo-Fences, Offline Maps, Archive, Logs, Map Style, Language и Settings" decoding="async" height="1434" loading="lazy" src="/images/setup-guide/loko-app-menu.webp" width="702"/>
+<div class="iphone-home"></div>
+</div>
+</div>
+<figcaption>Меню приложения Loko. Нажмите здесь <strong>Bluetooth</strong>, затем <strong>Scan</strong>, чтобы найти Loko Ground. В этом же меню — ваши трекеры (DEVICES), Geo-Fences, Offline Maps, Archive, Map Style, Language и Settings.</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Проверка:</span> Постоянный синий означает, что Loko Ground подключён к телефону. Это не значит, что позиция от Loko Air уже получена.</div>
 </section>
 <!-- Step 4: Turn on Loko Air outdoors -->
@@ -723,6 +755,25 @@
 <li>Дождитесь круглого маркера с <strong>ID1</strong> трекера. По умолчанию он красный и появляется, когда приложение получает позицию от Loko Air.</li>
 <li>Нажмите на маркер, чтобы увидеть данные трекера: позицию, заряд, время последней позиции и расстояние до вас.</li>
 </ol>
+<figure class="phone-figure">
+<div class="iphone" style="--status-bg:#f3f1e7;--status-fg:#111">
+<div class="iphone-screen">
+<div class="iphone-island"></div>
+<div class="iphone-status" aria-hidden="true"><span>9:41</span><span class="sig">&#9679;&#9679;&#9679; &#9646;</span></div>
+<img alt="Главная карта приложения Loko с пронумерованными элементами: меню, компас, ползунок масштаба, моё местоположение и ваша позиция" decoding="async" height="1434" loading="lazy" src="/images/setup-guide/loko-app-main-map.webp" width="702"/>
+<div class="iphone-home"></div>
+</div>
+</div>
+<figcaption><strong>Главная карта</strong>
+<ul class="phone-legend">
+<li><span class="phone-num">1</span><span><strong>Меню:</strong> ваши трекеры и все функции приложения.</span></li>
+<li><span class="phone-num">2</span><span><strong>Компас:</strong> нажмите, чтобы повернуть карту севером вверх.</span></li>
+<li><span class="phone-num">3</span><span><strong>Ползунок масштаба:</strong> вверх — приблизить, вниз — отдалить. Можно также сводить и разводить пальцы.</span></li>
+<li><span class="phone-num">4</span><span><strong>Моё местоположение:</strong> переносит карту к вам и следует за вами.</span></li>
+<li><span class="phone-num">5</span><span><strong>Ваша позиция:</strong> синяя точка — ваш телефон, конус показывает, куда он направлен.</span></li>
+</ul>
+</figcaption>
+</figure>
 <div class="note-box check"><span class="note-label">Проверка:</span> Маркер с ID1 подтверждает, что позиция прошла от Loko Air через Loko Ground в приложение.</div>
 <div class="note-box"><span class="note-label">Совет:</span> Прежде чем уйти из зоны интернета, скачайте карты своего района: меню → <strong>Offline Maps</strong> → <strong>+ Download New Zone</strong>. Отслеживание работает без интернета, но карта показывает только скачанные районы. Офлайн выберите в <strong>Map Style</strong> стиль, соответствующий скачанному источнику карты.</div>
 </section>
